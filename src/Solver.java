@@ -27,6 +27,8 @@ public class Solver {
 
             //Calls method to solve the image
             solve(imgFile, filePath);
+
+            loadImage();
         } catch (Exception e){
             System.out.println("File does not exist");
             loadImage();
@@ -39,6 +41,7 @@ public class Solver {
     public void solve(BufferedImage imgFile, String filePath) {
         //Creating the start and end nodes
         MazeNode start, end;
+        long numNodes = 0;
 
         //Set of all internal maze nodes
         Set<MazeNode> nodes = new HashSet<>();
@@ -55,31 +58,39 @@ public class Solver {
                     if (height == 0 && colour != 0) {
                         start = new MazeNode(width, height);
                         imgFile.setRGB(width, height, 845909); //Mark the start green
+                        numNodes++;
 
                         //marking the end
                     } else if (height == imgFile.getHeight() - 1 && colour == 255) {
                         end = new MazeNode(width, height);
                         imgFile.setRGB(width, height, 16711680); //Mark the end red
+                        numNodes++;
 
                         //MARKING NODES
                         //marking dead end nodes
                     } else if (isDeadEnd(imgFile, width, height)) {
                         nodes.add(new MazeNode(width, height));
-                        imgFile.setRGB(width, height, 3476712); //Mark the nodes blue
+                        //imgFile.setRGB(width, height, 3476712); //Mark the nodes blue
+                        numNodes++;
 
                         //Marking nodes at junctions
                     } else if (isJunction(imgFile, width, height)) {
                         nodes.add(new MazeNode(width, height));
-                        imgFile.setRGB(width, height, 3476712);
+                        //imgFile.setRGB(width, height, 3476712);
+                        numNodes++;
 
                     //Marking pixels on corner junctions
                     } else if (getAdjacentWhite(imgFile, width, height) == 2 && !directOpposite(imgFile, width, height)) {
                         nodes.add(new MazeNode(width, height));
-                        imgFile.setRGB(width, height, 3476712);
+                        //imgFile.setRGB(width, height, 3476712);
+                        numNodes++;
                     }
                 }
             }
         }
+
+        System.out.println("Node count: " + numNodes);
+        System.out.println("Nodes size: " + nodes.size());
 
         //Calls the method to save the image
         saveImage(imgFile, filePath);
@@ -190,6 +201,8 @@ public class Solver {
         for (int i = 0; i < filePathArr.length; i++) {
             if (filePathArr[i].equals(".")) {
                 finalPath.append(" solved.");
+            } else if (filePathArr[i].equals("/")) {
+                finalPath.append("/Solved/");
             } else {
                 finalPath.append(filePathArr[i]);
             }
