@@ -13,7 +13,7 @@ import java.util.Scanner;
  * It will attempt to solve it and output a solved image file.
  */
 
-public class solver {
+public class Solver {
     /**
      * Loads the image file
      */
@@ -28,11 +28,26 @@ public class solver {
             imgFile = ImageIO.read(new File(filePath));
             System.out.println("Image loaded");
 
-            //Calls the method to save the image
-            saveImage(imgFile, filePath);
+            //Calls method to solve the image
+            solve(imgFile, filePath);
         } catch (Exception e){
             System.out.println("File does not exist");
             loadImage();
+        }
+    }
+
+    /**
+     * Solves the maze
+     */
+    public void solve(BufferedImage imgFile, String filePath) {
+        //Calls the method to save the image
+        saveImage(imgFile, filePath);
+
+        //Performing a one pass over the maze to find all the nodes
+        for (int width = 0; width < imgFile.getWidth(); width++) {
+            for (int height = 0; height < imgFile.getHeight(); height++) {
+                //Marking the start and endpoints of the maze
+            }
         }
     }
 
@@ -81,7 +96,7 @@ public class solver {
 
     // Main
     public static void main(String[] arguments) {
-        solver slvr = new solver();
+        Solver slvr = new Solver();
         slvr.loadImage();
     }
 }
