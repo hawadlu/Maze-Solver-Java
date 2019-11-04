@@ -40,15 +40,31 @@ public class Solver {
      * Solves the maze
      */
     public void solve(BufferedImage imgFile, String filePath) {
-        //Calls the method to save the image
-        saveImage(imgFile, filePath);
+        //Creating the start and end nodes
+        MazeNode start, end;
+
 
         //Performing a one pass over the maze to find all the nodes
-        for (int width = 0; width < imgFile.getWidth(); width++) {
-            for (int height = 0; height < imgFile.getHeight(); height++) {
-                //Marking the start and endpoints of the maze
+        for (int height = 0; height < imgFile.getWidth(); height++) {
+            for (int width = 0; width < imgFile.getHeight(); width++) {
+                //Gets the 0-255 value for red. Colour is either white or black so can use R, G or B.
+                int colour  = imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
+
+                //Marking the start
+                if (height == 0 && colour == 255) {
+                    start = new MazeNode(width, height);
+                    imgFile.setRGB(width, height, 845909); //Mark the start green
+
+                //marking the end
+                } else if (height == imgFile.getHeight() - 1 && colour == 255) {
+                    end = new MazeNode(width, height);
+                    imgFile.setRGB(width, height, 16711680);
+                }
             }
         }
+
+        //Calls the method to save the image
+        saveImage(imgFile, filePath);
     }
 
 
