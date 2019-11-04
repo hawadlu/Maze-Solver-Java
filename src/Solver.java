@@ -1,11 +1,8 @@
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Scanner;
 
 /**
@@ -43,28 +40,133 @@ public class Solver {
         //Creating the start and end nodes
         MazeNode start, end;
 
+        //Set of all internal maze nodes
+        Set<MazeNode> nodes = new HashSet<>();
 
         //Performing a one pass over the maze to find all the nodes
         for (int height = 0; height < imgFile.getWidth(); height++) {
             for (int width = 0; width < imgFile.getHeight(); width++) {
                 //Gets the 0-255 value for red. Colour is either white or black so can use R, G or B.
-                int colour  = imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
+                int colour = getColour(imgFile, width, height);
 
-                //Marking the start
-                if (height == 0 && colour == 255) {
-                    start = new MazeNode(width, height);
-                    imgFile.setRGB(width, height, 845909); //Mark the start green
+                //Don't make a node unless the square is white
+                if (getColour(imgFile, width, height) != 0) {
+                    //Marking the start
+                    if (height == 0 && colour != 0) {
+                        start = new MazeNode(width, height);
+                        imgFile.setRGB(width, height, 845909); //Mark the start green
 
-                //marking the end
-                } else if (height == imgFile.getHeight() - 1 && colour == 255) {
-                    end = new MazeNode(width, height);
-                    imgFile.setRGB(width, height, 16711680);
+                        //marking the end
+                    } else if (height == imgFile.getHeight() - 1 && colour == 255) {
+                        end = new MazeNode(width, height);
+                        imgFile.setRGB(width, height, 16711680); //Mark the end red
+
+                        //MARKING NODES
+                        //marking dead end nodes
+                    } else if (isDeadEnd(imgFile, width, height)) {
+                        nodes.add(new MazeNode(width, height));
+                        imgFile.setRGB(width, height, 3476712); //Mark the nodes blue
+
+                        //Marking nodes at junctions
+                    } else if (isJunction(imgFile, width, height)) {
+                        nodes.add(new MazeNode(width, height));
+                        imgFile.setRGB(width, height, 3476712);
+
+                    //Marking pixels on corner junctions
+                    } else if (getAdjacentWhite(imgFile, width, height) == 2 && !directOpposite(imgFile, width, height)) {
+                        nodes.add(new MazeNode(width, height));
+                        imgFile.setRGB(width, height, 3476712);
+                    }
                 }
             }
         }
 
         //Calls the method to save the image
         saveImage(imgFile, filePath);
+    }
+
+    /**
+     * Gets the colour of the specified square
+     */
+    public int getColour(BufferedImage imgFile, int width, int height) {
+        return imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
+    }
+
+    /**
+     * Returns true if two opposite squares are white
+     */
+
+    private boolean directOpposite(BufferedImage imgFile, int width, int height) {
+        if (getColour(imgFile, width - 1, height) != 0 && getColour(imgFile, width + 1, height) != 0) {
+            return true;
+        } else if (getColour(imgFile, width, height - 1) != 0 && getColour(imgFile, width, height + 1) != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Gets and returns the number of adjacent white squares
+     */
+    public int getAdjacentWhite(BufferedImage imgFile, int width, int height) {
+        int adjacent = 0;
+        //checking each of the surrounding squares
+        if (getColour(imgFile, width - 1, height) != 0) {
+            adjacent++;
+        }
+        if (getColour(imgFile, width + 1, height) != 0) {
+            adjacent++;
+        }
+        if (getColour(imgFile, width, height - 1) != 0) {
+            adjacent++;
+        }
+        if (getColour(imgFile, width, height + 1) != 0) {
+            adjacent++;
+        }
+
+        return adjacent;
+    }
+
+    /**
+     * Checks to see if this part of the maze is a junction
+     * Returns true if it is.
+     */
+    private boolean isJunction(BufferedImage imgFile, int width, int height) {
+        int whiteSides = getAdjacentWhite(imgFile, width, height);
+
+        if (whiteSides > 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks to see if this part of the maze is a dead end.
+     * Returns true if it is.
+     */
+    private boolean isDeadEnd(BufferedImage imgFile, int width, int height) {
+        int blackSides = 0;
+
+        //checking each of the surrounding squares
+        if (getColour(imgFile, width - 1, height) == 0) {
+            blackSides++;
+        }
+        if (getColour(imgFile, width + 1, height) == 0) {
+            blackSides++;
+        }
+        if (getColour(imgFile, width, height - 1) == 0) {
+            blackSides++;
+        }
+        if (getColour(imgFile, width, height + 1) == 0) {
+            blackSides++;
+        }
+
+        if (blackSides > 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
