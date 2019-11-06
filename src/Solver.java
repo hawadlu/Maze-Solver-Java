@@ -65,8 +65,14 @@ public class Solver {
 
                 //Don't make a node unless the square is white
                 if (getColour(imgFile, width, height) != 0) {
+                    if (height == 0 && getColour(imgFile, width, height) != 0) {
+                        nodes[height][width] = new MazeNode(width, height);
+                        numNodes++;
+                    } else if(height == imgFile.getHeight() - 1 && getColour(imgFile, width, height) != 0) {
+                        nodes[height][width] = new MazeNode(width, height);
+                        numNodes++;
                         //marking dead end nodes
-                    if (isDeadEnd(imgFile, width, height)) {
+                    } else if (isDeadEnd(imgFile, width, height)) {
                         nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
 
@@ -123,9 +129,11 @@ public class Solver {
             }
         }
 
+        System.out.println("Found all neighbours");
+
         //Create a DFS object
-        DFS dfs = new DFS(nodes[0][xStart], nodes[0][xEnd]);
-        ArrayList<MazeNode> path = dfs.solve();
+        //DFS dfs = new DFS(nodes[0][xStart], nodes[0][xEnd]);
+        //ArrayList<MazeNode> path = dfs.solve();
 
         //Draw the start and end nodes
         drawImage(imgFile, start, end, nodes, numNodes);
@@ -138,8 +146,8 @@ public class Solver {
      * This method draws the solved maze and returns it
      */
     private void drawImage(BufferedImage imgFile, MazeNode start, MazeNode end, MazeNode[][] nodes, long numNodes) {
-        imgFile.setRGB(start.getX(), start.getY(), 65280);
-        imgFile.setRGB(end.getX(), end.getY(), 16711680);
+        //imgFile.setRGB(start.getX(), start.getY(), 65280);
+        //imgFile.setRGB(end.getX(), end.getY(), 16711680);
 
         int progress = 0; //used for printing the progress
         for (int height = 0; height < imgFile.getHeight(); height++) {
@@ -229,16 +237,23 @@ public class Solver {
     public int getAdjacentWhite(BufferedImage imgFile, int width, int height) {
         int adjacent = 0;
         //checking each of the surrounding squares
-        if (getColour(imgFile, width - 1, height) != 0) {
+        //Looking left
+        if ((width - 1 > -1) && (getColour(imgFile, width - 1, height) != 0)) {
             adjacent++;
         }
-        if (getColour(imgFile, width + 1, height) != 0) {
+
+        //Looking right
+        if ((width + 1 < imgFile.getWidth()) && (getColour(imgFile, width + 1, height) != 0)) {
             adjacent++;
         }
-        if (getColour(imgFile, width, height - 1) != 0) {
+
+        //Looking up
+        if ((height - 1 > -1) && (getColour(imgFile, width, height - 1) != 0)) {
             adjacent++;
         }
-        if (getColour(imgFile, width, height + 1) != 0) {
+
+        //Looking down
+        if ((height + 1 < imgFile.getHeight()) && (getColour(imgFile, width, height + 1) != 0)) {
             adjacent++;
         }
 
@@ -267,16 +282,16 @@ public class Solver {
         int blackSides = 0;
 
         //checking each of the surrounding squares
-        if (getColour(imgFile, width - 1, height) == 0) {
+        if ((width - 1 > -1) && (getColour(imgFile, width - 1, height) == 0)) {
             blackSides++;
         }
-        if (getColour(imgFile, width + 1, height) == 0) {
+        if ((width + 1 < imgFile.getWidth()) && (getColour(imgFile, width + 1, height) == 0)) {
             blackSides++;
         }
-        if (getColour(imgFile, width, height - 1) == 0) {
+        if ((height - 1 > -1) && (getColour(imgFile, width, height - 1) == 0)) {
             blackSides++;
         }
-        if (getColour(imgFile, width, height + 1) == 0) {
+        if ((height + 1 < imgFile.getHeight()) && (getColour(imgFile, width, height + 1) == 0)) {
             blackSides++;
         }
 
