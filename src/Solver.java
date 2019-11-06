@@ -65,27 +65,8 @@ public class Solver {
 
                 //Don't make a node unless the square is white
                 if (getColour(imgFile, width, height) != 0) {
-                    //Marking the start
-                    if (height == 0 && colour != 0) {
-                        start.setX(width);
-                        start.setY(height);
-                        imgFile.setRGB(width, height, 845909); //Mark the start green
-                        numNodes++;
-
-                        nodes[height][width] = start; //Mark node at this position
-
-                        //marking the end
-                    } else if (height == imgFile.getHeight() - 1 && colour == 255) {
-                        end.setX(width);
-                        end.setY(height);
-                        imgFile.setRGB(width, height, 16711680); //Mark the end red
-                        numNodes++;
-
-                        nodes[height][width] = end; //Mark node at this position
-
-                        //MARKING NODES
                         //marking dead end nodes
-                    } else if (isDeadEnd(imgFile, width, height)) {
+                    if (isDeadEnd(imgFile, width, height)) {
                         nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
 
@@ -110,14 +91,24 @@ public class Solver {
             }
         }
 
+        //Calculate the x position of the start and end
+        int xStart = 0, xEnd = 0;
+        for (int width = 0; width < nodes[0].length; width++) {
+            if (nodes[0][width] != null) {
+                xStart = width;
+            }
+        }
+        for (int width = 0; width < nodes[nodes.length - 1].length; width++) {
+            if (nodes[0][width] != null) {
+                xEnd = width;
+            }
+        }
+
         System.out.println("Node count: " + numNodes);
         System.out.println("Nodes size: " + nodes.length);
         System.out.println("Finding neighbours");
 
         //Finding each nodes neighbours
-//        findNeighbours(start, nodes, imgFile);
-//        findNeighbours(end, nodes, imgFile);
-
         int progress = 0;
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
@@ -132,6 +123,9 @@ public class Solver {
             }
         }
 
+        //Create a DFS object
+        DFS dfs = new DFS(nodes[0][xStart], nodes[0][xEnd]);
+        ArrayList<MazeNode> path = dfs.solve();
 
         //Draw the start and end nodes
         drawImage(imgFile, start, end, nodes, numNodes);
