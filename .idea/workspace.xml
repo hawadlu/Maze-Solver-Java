@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
-    </list>
+    <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="130" column="70" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
+            <state relative-caret-position="277">
+              <caret line="123" column="61" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,16 +181,15 @@
       <updated>1572815226149</updated>
       <workItem from="1572815228118" duration="15311000" />
       <workItem from="1573028849623" duration="4620000" />
-      <workItem from="1573067715918" duration="6977000" />
+      <workItem from="1573067715918" duration="7247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11661000" />
+    <option name="totallyTimeSpent" value="11931000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="34" width="1920" height="977" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2683706" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -294,8 +290,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="130" column="70" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
+        <state relative-caret-position="277">
+          <caret line="123" column="61" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
