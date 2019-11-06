@@ -36,6 +36,7 @@ public class Solver {
 
             //Checking for large images
             while (true) {
+                System.out.println("Hi");
                 if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(4000, 2)) {
                     String answer = getUserInput("This image is very large. You may run into memory issues. \n" +
                             "Do you wan to continue? y/n ");
@@ -48,6 +49,8 @@ public class Solver {
                     } else {
                         System.out.println("Invalid input. Try again!.");
                     }
+                } else {
+                    break;
                 }
             }
 
@@ -138,22 +141,64 @@ public class Solver {
 
         System.out.println("Solving");
 
+        //Asking the user which method they would like to use to solve the maze
+        String searchType = "";
+        while (true) {
+            String answer = getUserInput("Press 1 for DFS \n" +
+                    "Press 2 for BFS ");
+            if (answer.equals("1")) {
+                DFS dfs = solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
+                System.out.println("Drawing image");
+
+                //Draw
+                imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
+                searchType = "DFS";
+                break;
+            } else if (answer.equals("2")) {
+                BFS bfs = solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
+                System.out.println("Drawing image");
+
+                //Draw
+                imgFile = drawImage(imgFile, bfs.getPath(), nodes[0][xStart]);
+                searchType = "BFS";
+                break;
+            } else {
+                System.out.println("Invalid input!");
+            }
+        }
+
+        //Calls the method to save the image
+        saveImage(imgFile, filePath, searchType);
+    }
+
+    /**
+     * Solves the maze depth first
+     */
+    private DFS solveDFS(BufferedImage imgFile, MazeNode start, MazeNode destination) {
         //Create a DFS object
         DFS dfs = new DFS();
-        dfs.solve(nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+        dfs.solve(start, destination);
 
         for (MazeNode node: dfs.getPath()) {
             imgFile.setRGB(node.getX(), node.getY(), 325352);
         }
+        return dfs;
+    }
 
-        System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
-        System.out.println("Drawing image");
+    /**
+     * Solves the maze breadth first
+     */
+    private BFS solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+        //Create a DFS object
+        BFS bfs = new BFS();
+        bfs.solve(start, destination);
 
-        //Draw
-        imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
-
-        //Calls the method to save the image
-        saveImage(imgFile, filePath, "DFS");
+        for (MazeNode node: bfs.getPath()) {
+            imgFile.setRGB(node.getX(), node.getY(), 325352);
+        }
+        return bfs;
     }
 
     /**
