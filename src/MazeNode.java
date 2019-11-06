@@ -30,6 +30,13 @@ public class MazeNode {
     }
 
     /**
+     * Set the x and y values
+     */
+    public void setX(int x) { xPos = x; }
+
+    public void setY(int y) { yPos = y; }
+
+    /**
      * Get and set the neighbours
      */
     public void addNeighbour(MazeNode neighbour) {

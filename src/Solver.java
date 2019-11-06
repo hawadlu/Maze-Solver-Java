@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Scanner;
@@ -15,15 +17,22 @@ public class Solver {
      * Loads the image file
      */
     public void loadImage() {
-        BufferedImage imgFile;
+        BufferedImage in;
 
         //Getting the filename
         String filePath = getUserInput("Please enter the file name: ");
 
         //Checking if the file exists
         try {
-            imgFile = ImageIO.read(new File(filePath));
+            in = ImageIO.read(new File(filePath));
             System.out.println("Image loaded");
+
+            BufferedImage imgFile = new BufferedImage(
+                    in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
+
+            Graphics2D g = imgFile.createGraphics();
+            g.drawImage(in, 0, 0, null);
+            g.dispose();
 
             //Calls method to solve the image
             solve(imgFile, filePath);
@@ -39,12 +48,14 @@ public class Solver {
      * Solves the maze
      */
     public void solve(BufferedImage imgFile, String filePath) {
-        //Creating the start and end nodes
-        MazeNode start, end;
         long numNodes = 0;
 
-        //Set of all internal maze nodes
-        Set<MazeNode> nodes = new HashSet<>();
+        //initialise the start and end
+        MazeNode start = new MazeNode(0,0);
+        MazeNode end = new MazeNode(0, 0);
+
+        //Array of all internal maze nodes
+        MazeNode[][] nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
 
         //Performing a one pass over the maze to find all the nodes
         for (int height = 0; height < imgFile.getWidth(); height++) {
@@ -56,45 +67,93 @@ public class Solver {
                 if (getColour(imgFile, width, height) != 0) {
                     //Marking the start
                     if (height == 0 && colour != 0) {
-                        start = new MazeNode(width, height);
+                        start.setX(width);
+                        start.setY(height);
                         imgFile.setRGB(width, height, 845909); //Mark the start green
                         numNodes++;
 
+                        nodes[height][width] = start; //Mark node at this position
+
                         //marking the end
                     } else if (height == imgFile.getHeight() - 1 && colour == 255) {
-                        end = new MazeNode(width, height);
+                        end.setX(width);
+                        end.setY(height);
                         imgFile.setRGB(width, height, 16711680); //Mark the end red
                         numNodes++;
+
+                        nodes[height][width] = end; //Mark node at this position
 
                         //MARKING NODES
                         //marking dead end nodes
                     } else if (isDeadEnd(imgFile, width, height)) {
-                        nodes.add(new MazeNode(width, height));
-                        //imgFile.setRGB(width, height, 3476712); //Mark the nodes blue
+                        nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
 
                         //Marking nodes at junctions
                     } else if (isJunction(imgFile, width, height)) {
-                        nodes.add(new MazeNode(width, height));
-                        //imgFile.setRGB(width, height, 3476712);
+                        nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
 
-                    //Marking pixels on corner junctions
+                        //Marking pixels on corner junctions
                     } else if (getAdjacentWhite(imgFile, width, height) == 2 && !directOpposite(imgFile, width, height)) {
-                        nodes.add(new MazeNode(width, height));
-                        //imgFile.setRGB(width, height, 3476712);
+                        nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
+                    } else {
+                        //Mark no node at this position
+                        nodes[height][width] = null; //Mark node at this position
+                    }
+                }
+            }
+
+            if (height % 50 == 0) {
+                System.out.println("Processed line: " + height + " of: " + imgFile.getHeight());
+            }
+        }
+
+        System.out.println("Node count: " + numNodes);
+        System.out.println("Nodes size: " + nodes.length);
+        System.out.println("Finding neighbours");
+
+        //Finding each nodes neighbours
+        //findNeighbours(start, nodes);
+
+        //Draw the start and end nodes
+        imgFile.setRGB(start.getX(), start.getY(), 65280);
+        imgFile.setRGB(end.getX(), end.getY(), 16711680);
+
+        //Drawing the nodes onto the picture
+        int progress = 0; //used for printing the progress
+        for (int height = 0; height < imgFile.getHeight(); height++) {
+            for (int width = 0; width < imgFile.getWidth(); width++) {
+                if (nodes[height][width] != null) {
+                    progress++;
+                    imgFile.setRGB(nodes[height][width].getX(), nodes[height][width].getY(), 255);
+                    if (progress % 50 == 0) {
+                        System.out.println("Drawn " + progress + " out of " + nodes.length + " nodes.");
                     }
                 }
             }
         }
 
-        System.out.println("Node count: " + numNodes);
-        System.out.println("Nodes size: " + nodes.size());
-
         //Calls the method to save the image
         saveImage(imgFile, filePath);
     }
+
+    /**
+     * This method takes and node and finds all of it neighbours
+     * It then adds the neighbours to the neighbours set of the node.
+     */
+//    private void findNeighbours(MazeNode node, MazeNode[][] nodePositions) {
+//        int shift = 1; //how far away to look
+//        boolean foundNeighbour = false;
+//        //Looking to the left for a neighbour
+//        while (!foundNeighbour) {
+//            //Neighbour found
+//            if (nodePositions[node.getY()][node.getX()]) {
+//
+//            }
+//        }
+//    }
 
     /**
      * Gets the colour of the specified square
@@ -231,4 +290,3 @@ public class Solver {
         slvr.loadImage();
     }
 }
-
