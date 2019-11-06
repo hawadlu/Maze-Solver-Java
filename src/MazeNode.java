@@ -9,6 +9,7 @@ public class MazeNode {
     int xPos;
     int yPos;
     Set<MazeNode> neighbours = new HashSet<>();
+    Boolean isVisted = false;
 
     /**
      * Make a new node
@@ -46,6 +47,14 @@ public class MazeNode {
     public Set<MazeNode> getNeighbours() {
         return neighbours;
     }
+
+    /**
+     * Visit and un-visit
+     */
+    public boolean isVisted() {return isVisted; }
+    public void visit() { isVisted = true; }
+    public void unVisit() { isVisted = false; }
+
 
     /**
      * toString

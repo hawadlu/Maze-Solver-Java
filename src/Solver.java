@@ -50,10 +50,6 @@ public class Solver {
     public void solve(BufferedImage imgFile, String filePath) {
         long numNodes = 0;
 
-        //initialise the start and end
-        MazeNode start = new MazeNode(0, 0);
-        MazeNode end = new MazeNode(0, 0);
-
         //Array of all internal maze nodes
         MazeNode[][] nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
 
@@ -65,10 +61,10 @@ public class Solver {
 
                 //Don't make a node unless the square is white
                 if (getColour(imgFile, width, height) != 0) {
-                    if (height == 0 && getColour(imgFile, width, height) != 0) {
+                    if (height == 0 && colour != 0) {
                         nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
-                    } else if(height == imgFile.getHeight() - 1 && getColour(imgFile, width, height) != 0) {
+                    } else if(height == imgFile.getHeight() - 1 && colour != 0) {
                         nodes[height][width] = new MazeNode(width, height);
                         numNodes++;
                         //marking dead end nodes
@@ -132,11 +128,12 @@ public class Solver {
         System.out.println("Found all neighbours");
 
         //Create a DFS object
-        //DFS dfs = new DFS(nodes[0][xStart], nodes[0][xEnd]);
-        //ArrayList<MazeNode> path = dfs.solve();
+        DFS dfs = new DFS();
+        dfs.solve(nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
 
-        //Draw the start and end nodes
-        drawImage(imgFile, start, end, nodes, numNodes);
+        for (MazeNode node: dfs.getPath()) {
+            imgFile.setRGB(node.getX(), node.getY(), 325352);
+        }
 
         //Calls the method to save the image
         saveImage(imgFile, filePath);

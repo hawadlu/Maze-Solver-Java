@@ -9,23 +9,41 @@ public class DFS {
     ArrayList<MazeNode> path = new ArrayList<>(); //The path
     Set<MazeNode> visited = new HashSet<>(); //Set of visited nodes
 
-    //Start and end nodes
-    MazeNode start, end;
-
     /**
      * Constructor
      */
-    public DFS(MazeNode start, MazeNode end) {
-        start = start;
-        end = end;
+    public DFS() {
     }
 
     /**
      * Solves the maze node
      */
-     public ArrayList<MazeNode> solve() {
-         Queue<MazeNode> toDo = new ArrayDeque<>(); //The nodes to be processed
-         toDo.offer(start);
-        return null;
+     public boolean solve(MazeNode next, MazeNode destination) {
+        if (next.equals(destination)) {
+            path.add(next);
+            return true;
+        }
+
+        //Going through the neighbours
+         for (MazeNode nextNode: next.getNeighbours()) {
+             if (!nextNode.isVisted()) {
+                 nextNode.visit();
+
+                 if (solve(nextNode, destination)) {
+                     path.add(nextNode);
+                     System.out.println("True");
+                     return true;
+                 }
+             }
+         }
+         return false;
+     }
+
+    /**
+     * Get the path
+     */
+    public ArrayList<MazeNode> getPath() {
+        return path;
     }
+
 }
