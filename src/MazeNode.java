@@ -47,4 +47,11 @@ public class MazeNode {
         return neighbours;
     }
 
+    /**
+     * toString
+     */
+    public String toString() {
+        return "x: " + getX() + " y:" + getY() + " num neighbours: " + neighbours.size();
+    }
+
 }

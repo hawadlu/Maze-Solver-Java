@@ -38,8 +38,8 @@ public class Solver {
             solve(imgFile, filePath);
 
             loadImage();
-        } catch (Exception e){
-            System.out.println("File does not exist");
+        } catch (Exception e) {
+            System.out.println("Program aborted: " + e);
             loadImage();
         }
     }
@@ -51,7 +51,7 @@ public class Solver {
         long numNodes = 0;
 
         //initialise the start and end
-        MazeNode start = new MazeNode(0,0);
+        MazeNode start = new MazeNode(0, 0);
         MazeNode end = new MazeNode(0, 0);
 
         //Array of all internal maze nodes
@@ -115,13 +115,38 @@ public class Solver {
         System.out.println("Finding neighbours");
 
         //Finding each nodes neighbours
-        //findNeighbours(start, nodes);
+//        findNeighbours(start, nodes, imgFile);
+//        findNeighbours(end, nodes, imgFile);
+
+        int progress = 0;
+        for (int height = 0; height < imgFile.getHeight(); height++) {
+            for (int width = 0; width < imgFile.getWidth(); width++) {
+                if (nodes[height][width] != null) {
+                    progress++;
+                    findNeighbours(nodes[height][width], nodes, imgFile);
+                    System.out.println(nodes[height][width]);
+                    if (progress % 50 == 0) {
+                        System.out.println("Processed neighbours for " + progress + " out of " + numNodes + " nodes.");
+                    }
+                }
+            }
+        }
+
 
         //Draw the start and end nodes
+        drawImage(imgFile, start, end, nodes, numNodes);
+
+        //Calls the method to save the image
+        saveImage(imgFile, filePath);
+    }
+
+    /**
+     * This method draws the solved maze and returns it
+     */
+    private void drawImage(BufferedImage imgFile, MazeNode start, MazeNode end, MazeNode[][] nodes, long numNodes) {
         imgFile.setRGB(start.getX(), start.getY(), 65280);
         imgFile.setRGB(end.getX(), end.getY(), 16711680);
 
-        //Drawing the nodes onto the picture
         int progress = 0; //used for printing the progress
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
@@ -129,34 +154,63 @@ public class Solver {
                     progress++;
                     imgFile.setRGB(nodes[height][width].getX(), nodes[height][width].getY(), 255);
                     if (progress % 50 == 0) {
-                        System.out.println("Drawn " + progress + " out of " + nodes.length + " nodes.");
+                        System.out.println("Drawn " + progress + " out of " + numNodes + " nodes.");
                     }
                 }
             }
         }
-
-        //Calls the method to save the image
-        saveImage(imgFile, filePath);
     }
 
     /**
      * This method takes and node and finds all of it neighbours
      * It then adds the neighbours to the neighbours set of the node.
      */
-//    private void findNeighbours(MazeNode node, MazeNode[][] nodePositions) {
-//        int shift = 1; //how far away to look
-//        boolean foundNeighbour = false;
-//        //Looking to the left for a neighbour
-//        while (!foundNeighbour) {
-//            //Neighbour found
-//            if (nodePositions[node.getY()][node.getX()]) {
-//
-//            }
-//        }
-//    }
+    private void findNeighbours(MazeNode node, MazeNode[][] nodes, BufferedImage imgFile) {
+        //Looking down for a neighbour
+        for (int shift = 1; node.getY() + shift < nodes.length; shift++) {
+            if (nodes[node.getY() + shift][node.getX()] != null) {
+                node.addNeighbour(nodes[node.getY() + shift][node.getX()]);
+                break;
+
+            //wall
+            } else if (getColour(imgFile, node.getX(), node.getY() + shift) == 0) {
+                break;
+            }
+        }
+
+        //Looking up for a neighbour
+        for (int shift = 1; node.getY() - shift > -1; shift++) {
+            if (nodes[node.getY() - shift][node.getX()] != null) {
+                node.addNeighbour(nodes[node.getY() - shift][node.getX()]);
+                break;
+            } else if (getColour(imgFile, node.getX(), node.getY() - shift) == 0) {
+                break;
+            }
+        }
+
+        //Looking right for a neighbour
+        for (int shift = 1; node.getX() + shift < nodes[node.getY()].length; shift++) {
+            if (nodes[node.getY()][node.getX() + shift] != null) {
+                node.addNeighbour(nodes[node.getY()][node.getX() + shift]);
+                break;
+            } else if (getColour(imgFile, node.getX() + shift, node.getY()) == 0) {
+                break;
+            }
+        }
+
+        //Looking left for a neighbour
+        for (int shift = 1; node.getX() - shift > -1; shift++) {
+            if (nodes[node.getY()][node.getX() - shift] != null) {
+                node.addNeighbour(nodes[node.getY()][node.getX() - shift]);
+                break;
+            } else if (getColour(imgFile, node.getX() - shift, node.getY()) == 0) {
+                break;
+            }
+        }
+    }
 
     /**
-     * Gets the colour of the specified square
+     * Gets the colour of the specified square (red)
      */
     public int getColour(BufferedImage imgFile, int width, int height) {
         return imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
