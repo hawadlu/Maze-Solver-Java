@@ -50,6 +50,8 @@ public class Solver {
         //Array of all internal maze nodes
         MazeNode[][] nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
 
+        System.out.println("Finding nodes");
+
         //Performing a one pass over the maze to find all the nodes
         for (int height = 0; height < imgFile.getWidth(); height++) {
             for (int width = 0; width < imgFile.getHeight(); width++) {
@@ -84,10 +86,6 @@ public class Solver {
                     }
                 }
             }
-
-            if (height % 50 == 0) {
-                System.out.println("Processed line: " + height + " of: " + imgFile.getHeight());
-            }
         }
 
         //Calculate the x position of the start and end
@@ -108,20 +106,15 @@ public class Solver {
         System.out.println("Finding neighbours");
 
         //Finding each nodes neighbours
-        int progress = 0;
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
                 if (nodes[height][width] != null) {
-                    progress++;
                     findNeighbours(nodes[height][width], nodes, imgFile);
-                    if (progress % 50 == 0) {
-                        System.out.println("Processed neighbours for " + progress + " out of " + numNodes + " nodes.");
-                    }
                 }
             }
         }
 
-        System.out.println("Found all neighbours");
+        System.out.println("Solving");
 
         //Create a DFS object
         DFS dfs = new DFS();
@@ -131,7 +124,8 @@ public class Solver {
             imgFile.setRGB(node.getX(), node.getY(), 325352);
         }
 
-        System.out.println("Found path");
+        System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
+        System.out.println("Drawing image");
 
         //Draw
         imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
@@ -147,7 +141,6 @@ public class Solver {
         //Colour the entry
         imgFile.setRGB(entry.getX(), entry.getY(), Color.RED.getRGB());
 
-        int progress = 0; //used for printing the progress
         while (nodes.size() > 1) {
             MazeNode start = nodes.remove(0);
             MazeNode end = nodes.get(0);

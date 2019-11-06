@@ -25,8 +25,6 @@ public class DFS {
          start.visit();
          toProcess.push(start);
 
-         System.out.println("Solving");
-
          while (!toProcess.isEmpty()) {
              parent = toProcess.peek();
              parent.visit(); //set visited
@@ -48,6 +46,7 @@ public class DFS {
              if (parent != null) {
                  path.add(parent);
                  parent = parent.getParent();
+                 pathSize++;
              } else {
                  break;
              }
@@ -59,6 +58,13 @@ public class DFS {
      */
     public ArrayList<MazeNode> getPath() {
         return path;
+    }
+
+    /**
+     * Return the size of the path
+     */
+    public int getPathSize(){
+        return pathSize;
     }
 
 }
