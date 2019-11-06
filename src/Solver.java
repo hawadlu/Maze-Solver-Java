@@ -2,7 +2,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.lang.management.ManagementFactory;
 import java.util.*;
+import java.lang.management.MemoryMXBean;
 
 /**
  * This program loads a png image of a maze.
@@ -22,7 +26,6 @@ public class Solver {
         //Checking if the file exists
         try {
             in = ImageIO.read(new File(filePath));
-            System.out.println("Image loaded");
 
             BufferedImage imgFile = new BufferedImage(
                     in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -31,12 +34,31 @@ public class Solver {
             g.drawImage(in, 0, 0, null);
             g.dispose();
 
+            //Checking for large images
+            while (true) {
+                if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(4000, 2)) {
+                    String answer = getUserInput("This image is very large. You may run into memory issues. \n" +
+                            "Do you wan to continue? y/n ");
+                    if (answer.equals("y")) {
+                        break;
+                    } else if (answer.equals("n")) {
+                        System.out.println("Returning to image selection");
+                        loadImage();
+                        break;
+                    } else {
+                        System.out.println("Invalid input. Try again!.");
+                    }
+                }
+            }
+
             //Calls method to solve the image
             solve(imgFile, filePath);
 
             loadImage();
         } catch (Exception e) {
             System.out.println("Program aborted: " + e);
+            MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+            System.out.println("Objs pending finalisation: " + memoryMXBean.getObjectPendingFinalizationCount());
             loadImage();
         }
     }
@@ -233,6 +255,7 @@ public class Solver {
                 break;
             }
         }
+
     }
 
     /**
