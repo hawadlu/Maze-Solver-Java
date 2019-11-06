@@ -2,10 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This program loads a png image of a maze.
@@ -100,8 +97,8 @@ public class Solver {
                 xStart = width;
             }
         }
-        for (int width = 0; width < nodes[nodes.length - 1].length; width++) {
-            if (nodes[0][width] != null) {
+        for (int width = 0; width < nodes[0].length; width++) {
+            if (nodes[nodes.length - 1][width] != null) {
                 xEnd = width;
             }
         }
@@ -117,7 +114,6 @@ public class Solver {
                 if (nodes[height][width] != null) {
                     progress++;
                     findNeighbours(nodes[height][width], nodes, imgFile);
-                    System.out.println(nodes[height][width]);
                     if (progress % 50 == 0) {
                         System.out.println("Processed neighbours for " + progress + " out of " + numNodes + " nodes.");
                     }
@@ -135,29 +131,67 @@ public class Solver {
             imgFile.setRGB(node.getX(), node.getY(), 325352);
         }
 
+        System.out.println("Found path");
+
+        //Draw
+        imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
+
         //Calls the method to save the image
-        saveImage(imgFile, filePath);
+        saveImage(imgFile, filePath, "DFS");
     }
 
     /**
      * This method draws the solved maze and returns it
      */
-    private void drawImage(BufferedImage imgFile, MazeNode start, MazeNode end, MazeNode[][] nodes, long numNodes) {
-        //imgFile.setRGB(start.getX(), start.getY(), 65280);
-        //imgFile.setRGB(end.getX(), end.getY(), 16711680);
+    private BufferedImage drawImage(BufferedImage imgFile, ArrayList<MazeNode> nodes, MazeNode entry) {
+        //Colour the entry
+        imgFile.setRGB(entry.getX(), entry.getY(), Color.RED.getRGB());
 
         int progress = 0; //used for printing the progress
-        for (int height = 0; height < imgFile.getHeight(); height++) {
-            for (int width = 0; width < imgFile.getWidth(); width++) {
-                if (nodes[height][width] != null) {
-                    progress++;
-                    imgFile.setRGB(nodes[height][width].getX(), nodes[height][width].getY(), 255);
-                    if (progress % 50 == 0) {
-                        System.out.println("Drawn " + progress + " out of " + numNodes + " nodes.");
-                    }
+        while (nodes.size() > 1) {
+            MazeNode start = nodes.remove(0);
+            MazeNode end = nodes.get(0);
+            int y, x;
+
+            imgFile.setRGB(start.getX(), start.getY(), Color.RED.getRGB());
+            imgFile.setRGB(end.getX(), end.getY(), Color.RED.getRGB());
+
+            //Drawing down
+            if (start.getY() < end.getY()) {
+                y = start.getY();
+                while (y < end.getY()) {
+                    imgFile.setRGB(start.getX(), y, Color.RED.getRGB());
+                    y += 1;
+                }
+
+                //Drawing up
+            } else if (start.getY() > end.getY()) {
+                y = start.getY();
+                while (y > end.getY()) {
+                    imgFile.setRGB(start.getX(), y, Color.RED.getRGB());
+                    y-=1;
+                }
+
+                //Drawing right
+            } else if (start.getX() < end.getX()) {
+                x = start.getX();
+                while (x < end.getX()) {
+                    imgFile.setRGB(x, start.getY(), Color.RED.getRGB());
+                    x+=1;
+                }
+
+                //Drawing left
+            } else if (start.getX() > end.getX()) {
+                x = start.getX();
+                while (x > end.getX()) {
+                    imgFile.setRGB(x, start.getY(), Color.RED.getRGB());
+                    x-=1;
                 }
             }
+            y = 0;
         }
+
+        return imgFile;
     }
 
     /**
@@ -313,13 +347,13 @@ public class Solver {
     /**
      * Strips the image type then adds the 'solved' suffix
      */
-    public String insertSuffix(String filePath) {
+    public String insertSuffix(String filePath, String searchType) {
         StringBuilder finalPath = new StringBuilder();
         String[] filePathArr = filePath.split("");
 
         for (int i = 0; i < filePathArr.length; i++) {
             if (filePathArr[i].equals(".")) {
-                finalPath.append(" solved.");
+                finalPath.append(" solved " + searchType + ".");
             } else if (filePathArr[i].equals("/")) {
                 finalPath.append("/Solved/");
             } else {
@@ -332,10 +366,9 @@ public class Solver {
     /**
      * Saves solved images in the images folder
      */
-    public void saveImage(BufferedImage img, String filePath) {
+    public void saveImage(BufferedImage img, String filePath, String searchType) {
         //Saving the image
-        String fileName = insertSuffix(filePath);
-        //System.out.println("Dir status: " + Files.exists(Paths.get(filePath)));
+        String fileName = insertSuffix(filePath, searchType);
         try {
             ImageIO.write(img, "png", new File(fileName));
             System.out.println("Image saved as " + fileName);

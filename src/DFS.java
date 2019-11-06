@@ -20,7 +20,6 @@ public class DFS {
      */
      public boolean solve(MazeNode next, MazeNode destination) {
         if (next.equals(destination)) {
-            path.add(next);
             return true;
         }
 
@@ -31,7 +30,6 @@ public class DFS {
 
                  if (solve(nextNode, destination)) {
                      path.add(nextNode);
-                     System.out.println("True");
                      return true;
                  }
              }
