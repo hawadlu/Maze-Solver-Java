@@ -16,25 +16,42 @@ public class DFS {
     }
 
     /**
-     * Solves the maze node
+     * Solves the maze node.
+     * Uses iteration to avoid stack overflow error
      */
-     public boolean solve(MazeNode next, MazeNode destination) {
-        if (next.equals(destination)) {
-            return true;
-        }
+     public void solve(MazeNode start, MazeNode destination) {
+         MazeNode parent = null;
+         Stack<MazeNode> toProcess = new Stack<>();
+         start.visit();
+         toProcess.push(start);
 
-        //Going through the neighbours
-         for (MazeNode nextNode: next.getNeighbours()) {
-             if (!nextNode.isVisted()) {
-                 nextNode.visit();
+         System.out.println("Solving");
 
-                 if (solve(nextNode, destination)) {
-                     path.add(nextNode);
-                     return true;
+         while (!toProcess.isEmpty()) {
+             parent = toProcess.peek();
+             parent.visit(); //set visited
+             if (parent.equals(destination)) {
+                 break;
+             } else {
+
+                 //Add all children
+                 for (MazeNode node : toProcess.pop().getNeighbours()) {
+                     if (!node.isVisted()) {
+                         node.setParent(parent);
+                         toProcess.push(node);
+                     }
                  }
              }
          }
-         return false;
+
+         while (true) {
+             if (parent != null) {
+                 path.add(parent);
+                 parent = parent.getParent();
+             } else {
+                 break;
+             }
+         }
      }
 
     /**

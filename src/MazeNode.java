@@ -10,6 +10,7 @@ public class MazeNode {
     int yPos;
     Set<MazeNode> neighbours = new HashSet<>();
     Boolean isVisted = false;
+    MazeNode parent = null; //Used to track which node this was visited from
 
     /**
      * Make a new node
@@ -54,6 +55,17 @@ public class MazeNode {
     public boolean isVisted() {return isVisted; }
     public void visit() { isVisted = true; }
     public void unVisit() { isVisted = false; }
+
+    /**
+     * Set and get the parent
+     */
+    public void setParent(MazeNode node) {
+        parent = node;
+    }
+
+    public MazeNode getParent() {
+        return parent;
+    }
 
 
     /**
