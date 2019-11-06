@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -5,7 +6,7 @@ import java.util.Set;
  * This class contains each node in the maze. It has fields to store the position and neighbours.
  */
 
-public class MazeNode {
+public class MazeNode implements Serializable {
     int xPos;
     int yPos;
     Set<MazeNode> neighbours = new HashSet<>();
