@@ -46,29 +46,7 @@ public class Dijkstra {
 
             }
         }
-//        MazeNode parent = null;
-//        Queue<MazeNode> toProcess = new ArrayDeque<>();
-//        start.visit();
-//        toProcess.offer(start);
-//
-//
-//        while (!toProcess.isEmpty()) {
-//            parent = toProcess.peek();
-//            parent.visit(); //set visited
-//            if (parent.equals(destination)) {
-//                break;
-//            } else {
-//
-//                //Add all children
-//                for (MazeNode node : toProcess.poll().getNeighbours()) {
-//                    if (!node.isVisted()) {
-//                        node.setParent(parent);
-//                        toProcess.offer(node);
-//                    }
-//                }
-//            }
-//        }
-//
+
         while (true) {
             if (parent != null) {
                 path.add(parent);
@@ -96,8 +74,9 @@ public class Dijkstra {
 
     /**
      * Calculates the cost of moving between two nodes
+     * Factors the distance between nodes (current and destination) and distance of the destination node to the start.
      */
-    public double calculateCost(MazeNode start, MazeNode destination) {
-        return Math.sqrt(Math.pow(start.getX() + destination.getX(), 2) + Math.pow(start.getY() + destination.getY(), 2));
+    public double calculateCost(MazeNode current, MazeNode destination) {
+        return Math.sqrt(Math.pow(current.getX() + destination.getX(), 2) + Math.pow(current.getY() + destination.getY(), 2)) + destination.getY();
     }
 }

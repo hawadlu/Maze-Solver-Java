@@ -145,7 +145,8 @@ public class Solver {
         while (true) {
             String answer = getUserInput("Press 1 for DFS \n" +
                     "Press 2 for BFS \n" +
-                    "Press 3 for Dijkstra ");
+                    "Press 3 for Dijkstra \n" +
+                    "Press 4 for AStar ");
             if (answer.equals("1")) {
                 if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
                     System.out.println("Maze to large for DFS. Using Dijkstra instead.");
@@ -197,6 +198,15 @@ public class Solver {
                 imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
                 searchType = "Dijkstra";
                 break;
+            } else if (answer.equals("4")) {
+                AStar aStar = solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
+                System.out.println("Drawing image");
+
+                //Draw
+                imgFile = drawImage(imgFile, aStar.getPath(), nodes[0][xStart]);
+                searchType = "AStar";
+                break;
             } else {
                 System.out.println("Invalid input!");
             }
@@ -236,7 +246,7 @@ public class Solver {
     }
 
     /**
-     * Solves the maze using the Dijkstra algorith
+     * Solves the maze using the Dijkstra algorithm
      */
     private Dijkstra solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination) {
         //Create a DFS object
@@ -247,6 +257,20 @@ public class Solver {
             imgFile.setRGB(node.getX(), node.getY(), 325352);
         }
         return dijkstra;
+    }
+
+    /**
+     * Solves the maze using the AStar algorithm
+     */
+    private AStar solveAStar(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+        //Create a DFS object
+        AStar aStar = new AStar();
+        aStar.solve(start, destination);
+
+        for (MazeNode node: aStar.getPath()) {
+            imgFile.setRGB(node.getX(), node.getY(), 325352);
+        }
+        return aStar;
     }
 
     /**
