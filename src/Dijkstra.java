@@ -74,8 +74,9 @@ public class Dijkstra {
 
     /**
      * Calculates the cost of moving between two nodes
+     * Factors the distance between nodes (current and destination) and distance of the destination node to the start.
      */
-    public double calculateCost(MazeNode start, MazeNode destination) {
-        return Math.sqrt(Math.pow(start.getX() + destination.getX(), 2) + Math.pow(start.getY() + destination.getY(), 2));
+    public double calculateCost(MazeNode current, MazeNode destination) {
+        return Math.sqrt(Math.pow(current.getX() + destination.getX(), 2) + Math.pow(current.getY() + destination.getY(), 2)) + destination.getY();
     }
 }
