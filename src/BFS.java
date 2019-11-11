@@ -1,13 +1,12 @@
 import java.util.*;
 
 /**
- * This class solves the maze bredth first.
+ * This class solves the maze breadth first.
  * It takes a start node, end node and and returns a path between them
  */
-public class BFS {
-    int pathSize = 0;
-    ArrayList<MazeNode> path = new ArrayList<>(); //The path
-    Set<MazeNode> visited = new HashSet<>(); //Set of visited nodes
+class BFS {
+    private int pathSize = 0;
+    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
 
     /**
      * Constructor
@@ -34,8 +33,8 @@ public class BFS {
             } else {
 
                 //Add all children
-                for (MazeNode node : toProcess.poll().getNeighbours()) {
-                    if (!node.isVisted()) {
+                for (MazeNode node : Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    if (!node.isVisited()) {
                         node.setParent(parent);
                         toProcess.offer(node);
                     }

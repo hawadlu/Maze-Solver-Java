@@ -2,23 +2,19 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.lang.management.ManagementFactory;
 import java.util.*;
-import java.lang.management.MemoryMXBean;
 
 /**
  * This program loads a png image of a maze.
  * It will attempt to solve it and output a solved image file.
  */
 
-public class Solver {
+class Solver {
     /**
      * Loads the image file
      */
-    public void loadImage() {
-        BufferedImage in = null;
+    private void loadImage() {
+        BufferedImage in;
 
         //Getting the filename
         String filePath = getUserInput("Please enter the file name: ");
@@ -59,8 +55,6 @@ public class Solver {
             loadImage();
         } catch (Exception e) {
             System.out.println("Program aborted: " + e);
-            MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
-            System.out.println("Objs pending finalisation: " + memoryMXBean.getObjectPendingFinalizationCount());
             loadImage();
         }
     }
@@ -68,7 +62,7 @@ public class Solver {
     /**
      * Solves the maze
      */
-    public void solve(BufferedImage imgFile, String filePath) {
+    private void solve(BufferedImage imgFile, String filePath) {
         long numNodes = 0;
 
         //Array of all internal maze nodes
@@ -141,142 +135,113 @@ public class Solver {
         System.out.println("Solving");
 
         //Asking the user which method they would like to use to solve the maze
-        String searchType = "";
+        label:
         while (true) {
             String answer = getUserInput("Press 1 for DFS \n" +
                     "Press 2 for BFS \n" +
                     "Press 3 for Dijkstra \n" +
                     "Press 4 for AStar ");
-            if (answer.equals("1")) {
-                if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
-                    System.out.println("Maze to large for DFS. Using Dijkstra instead.");
-                    Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                    System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
-                    System.out.println("Drawing image");
+            switch (answer) {
+                case "1":
+                    if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
+                        System.out.println("Maze to large for DFS. Using AStar instead.");
+                        solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                    } else {
+                        solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
-                    //Draw
-                    imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
-                    searchType = "Dijkstra";
-                } else {
-                    DFS dfs = solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                    System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
-                    System.out.println("Drawing image");
+                    }
+                    break label;
+                case "2":
+                    //Moving to faster algorithm if required
+                    if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(3000, 2)) {
+                        System.out.println("Maze to large for BFS. Using AStar instead.");
+                        solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
-                    //Draw
-                    imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
-                    searchType = "DFS";
-                }
-                break;
-            } else if (answer.equals("2")) {
-                //Moving to faster algorithm if required
-                if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(4000, 2)) {
-                    System.out.println("Maze to large for BFS. Using Dijkstra instead.");
-                    Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                    System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
-                    System.out.println("Drawing image");
+                    } else {
+                        solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                    }
+                    break label;
+                case "3":
+                    solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
-                    //Draw
-                    imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
-                    searchType = "Dijkstra";
-                } else {
+                    break label;
+                case "4":
+                    solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
-                    BFS bfs = solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                    System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
-                    System.out.println("Drawing image");
-
-                    //Draw
-                    imgFile = drawImage(imgFile, bfs.getPath(), nodes[0][xStart]);
-                    searchType = "BFS";
-                }
-                break;
-            } else if (answer.equals("3")) {
-                Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
-                System.out.println("Drawing image");
-
-                //Draw
-                imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
-                searchType = "Dijkstra";
-                break;
-            } else if (answer.equals("4")) {
-                AStar aStar = solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
-                System.out.println("Drawing image");
-
-                //Draw
-                imgFile = drawImage(imgFile, aStar.getPath(), nodes[0][xStart]);
-                searchType = "AStar";
-                break;
-            } else {
-                System.out.println("Invalid input!");
+                    break label;
+                default:
+                    System.out.println("Invalid input!");
+                    break;
             }
         }
-
-        //Calls the method to save the image
-        saveImage(imgFile, filePath, searchType);
     }
 
     /**
      * Solves the maze depth first
      */
-    private DFS solveDFS(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+    private void solveDFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
         //Create a DFS object
         DFS dfs = new DFS();
         dfs.solve(start, destination);
 
-        for (MazeNode node: dfs.getPath()) {
-            imgFile.setRGB(node.getX(), node.getY(), 325352);
-        }
-        return dfs;
+        System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
+        System.out.println("Drawing image");
+
+        //Draw
+        drawImage(imgFile, dfs.getPath(), start, filePath, "DFS");
     }
 
     /**
      * Solves the maze breadth first
      */
-    private BFS solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+    private void solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
 
         //Create a BFS object
         BFS bfs = new BFS();
         bfs.solve(start, destination);
 
-        for (MazeNode node: bfs.getPath()) {
-            imgFile.setRGB(node.getX(), node.getY(), 325352);
-        }
-        return bfs;
+        System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
+        System.out.println("Drawing image");
+
+        //Draw
+        drawImage(imgFile, bfs.getPath(), start, filePath, "BFS");
     }
 
     /**
      * Solves the maze using the Dijkstra algorithm
      */
-    private Dijkstra solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+    private void solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
         //Create a DFS object
         Dijkstra dijkstra = new Dijkstra();
         dijkstra.solve(start, destination);
 
-        for (MazeNode node: dijkstra.getPath()) {
-            imgFile.setRGB(node.getX(), node.getY(), 325352);
-        }
-        return dijkstra;
+        System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
+        System.out.println("Drawing image");
+
+
+        //Draw
+        drawImage(imgFile, dijkstra.getPath(), start, filePath, "Dijkstra");
     }
 
     /**
      * Solves the maze using the AStar algorithm
      */
-    private AStar solveAStar(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+    private void solveAStar(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
         //Create a DFS object
         AStar aStar = new AStar();
         aStar.solve(start, destination);
 
-        for (MazeNode node: aStar.getPath()) {
-            imgFile.setRGB(node.getX(), node.getY(), 325352);
-        }
-        return aStar;
+        System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
+        System.out.println("Drawing image");
+
+        //Draw
+        drawImage(imgFile, aStar.getPath(), start, filePath, "AStar");
     }
 
     /**
      * This method draws the solved maze and returns it
      */
-    private BufferedImage drawImage(BufferedImage imgFile, ArrayList<MazeNode> nodes, MazeNode entry) {
+    private void drawImage(BufferedImage imgFile, ArrayList<MazeNode> nodes, MazeNode entry, String filePath, String searchType) {
         //Colour the entry
         imgFile.setRGB(entry.getX(), entry.getY(), Color.RED.getRGB());
 
@@ -320,10 +285,9 @@ public class Solver {
                     x-=1;
                 }
             }
-            y = 0;
         }
 
-        return imgFile;
+        saveImage(imgFile, filePath, searchType);
     }
 
     /**
@@ -378,7 +342,7 @@ public class Solver {
     /**
      * Gets the colour of the specified square (red)
      */
-    public int getColour(BufferedImage imgFile, int width, int height) {
+    private int getColour(BufferedImage imgFile, int width, int height) {
         return imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
     }
 
@@ -387,18 +351,14 @@ public class Solver {
      */
 
     private boolean directOpposite(BufferedImage imgFile, int width, int height) {
-        if (getColour(imgFile, width - 1, height) != 0 && getColour(imgFile, width + 1, height) != 0) {
-            return true;
-        } else if (getColour(imgFile, width, height - 1) != 0 && getColour(imgFile, width, height + 1) != 0) {
-            return true;
-        }
-        return false;
+        return (getColour(imgFile, width - 1, height) != 0 && getColour(imgFile, width + 1, height) != 0) ||
+                (getColour(imgFile, width, height - 1) != 0 && getColour(imgFile, width, height + 1) != 0);
     }
 
     /**
      * Gets and returns the number of adjacent white squares
      */
-    public int getAdjacentWhite(BufferedImage imgFile, int width, int height) {
+    private int getAdjacentWhite(BufferedImage imgFile, int width, int height) {
         int adjacent = 0;
         //checking each of the surrounding squares
         //Looking left
@@ -431,11 +391,7 @@ public class Solver {
     private boolean isJunction(BufferedImage imgFile, int width, int height) {
         int whiteSides = getAdjacentWhite(imgFile, width, height);
 
-        if (whiteSides > 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return whiteSides > 2;
     }
 
     /**
@@ -459,18 +415,14 @@ public class Solver {
             blackSides++;
         }
 
-        if (blackSides > 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return blackSides > 2;
     }
 
 
     /**
      * Gets user input and returns a string
      */
-    public String getUserInput(String question) {
+    private String getUserInput(String question) {
         Scanner userInput = new Scanner(System.in); //Scans the user input
         System.out.print(question);
 
@@ -480,17 +432,17 @@ public class Solver {
     /**
      * Strips the image type then adds the 'solved' suffix
      */
-    public String insertSuffix(String filePath, String searchType) {
+    private String insertSuffix(String filePath, String searchType) {
         StringBuilder finalPath = new StringBuilder();
         String[] filePathArr = filePath.split("");
 
-        for (int i = 0; i < filePathArr.length; i++) {
-            if (filePathArr[i].equals(".")) {
-                finalPath.append(" solved " + searchType + ".");
-            } else if (filePathArr[i].equals("/")) {
+        for (String s : filePathArr) {
+            if (s.equals(".")) {
+                finalPath.append(" solved ").append(searchType).append(".");
+            } else if (s.equals("/")) {
                 finalPath.append("/Solved/");
             } else {
-                finalPath.append(filePathArr[i]);
+                finalPath.append(s);
             }
         }
         return finalPath.toString();
@@ -499,7 +451,7 @@ public class Solver {
     /**
      * Saves solved images in the images folder
      */
-    public void saveImage(BufferedImage img, String filePath, String searchType) {
+    private void saveImage(BufferedImage img, String filePath, String searchType) {
         //Saving the image
         String fileName = insertSuffix(filePath, searchType);
         try {
@@ -512,7 +464,7 @@ public class Solver {
 
     // Main
     public static void main(String[] arguments) {
-        Solver slvr = new Solver();
-        slvr.loadImage();
+        Solver solver = new Solver();
+        solver.loadImage();
     }
 }
