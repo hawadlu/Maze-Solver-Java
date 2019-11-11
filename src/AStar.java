@@ -4,10 +4,9 @@ import java.util.*;
  * This class implements an AStar type search
  */
 
-public class AStar {
-    int pathSize = 0;
-    ArrayList<MazeNode> path = new ArrayList<>(); //The path
-    Set<MazeNode> visited = new HashSet<>(); //Set of visited nodes
+class AStar {
+    private int pathSize = 0;
+    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
 
     /**
      * Constructor
@@ -35,7 +34,7 @@ public class AStar {
             } else {
 
                 //Add the children
-                for (MazeNode node: toProcess.poll().getNeighbours()) {
+                for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
                     double cost = parent.getCost() + calculateCost(parent, node, destination);
                     if (cost < node.getCost()) {
                         node.setCost(cost);
@@ -76,7 +75,7 @@ public class AStar {
      * Calculates the cost of moving between two nodes
      * Factors in the current cost and the distance to the start and the distance to go
      */
-    public double calculateCost(MazeNode start, MazeNode destination, MazeNode end) {
+    private double calculateCost(MazeNode start, MazeNode destination, MazeNode end) {
         return Math.sqrt(Math.pow(start.getX() + destination.getX(), 2) + Math.pow(start.getY() + destination.getY(), 2)) + (end.getY() - destination.getY()) + destination.getY();
     }
 }

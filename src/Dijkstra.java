@@ -4,10 +4,9 @@ import java.util.*;
  * This class implements a Dijkstra type search
  */
 
-public class Dijkstra {
-    int pathSize = 0;
-    ArrayList<MazeNode> path = new ArrayList<>(); //The path
-    Set<MazeNode> visited = new HashSet<>(); //Set of visited nodes
+class Dijkstra {
+    private int pathSize = 0;
+    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
 
     /**
      * Constructor
@@ -35,7 +34,7 @@ public class Dijkstra {
             } else {
 
                 //Add the children
-                for (MazeNode node: toProcess.poll().getNeighbours()) {
+                for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
                     double cost = parent.getCost() + calculateCost(parent, node);
                     if (cost < node.getCost()) {
                         node.setCost(cost);
@@ -76,7 +75,7 @@ public class Dijkstra {
      * Calculates the cost of moving between two nodes
      * Factors the distance between nodes (current and destination) and distance of the destination node to the start.
      */
-    public double calculateCost(MazeNode current, MazeNode destination) {
+    private double calculateCost(MazeNode current, MazeNode destination) {
         return Math.sqrt(Math.pow(current.getX() + destination.getX(), 2) + Math.pow(current.getY() + destination.getY(), 2)) + destination.getY();
     }
 }

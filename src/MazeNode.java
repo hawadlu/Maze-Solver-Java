@@ -1,5 +1,3 @@
-import java.io.Serializable;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,12 +6,12 @@ import java.util.Set;
  */
 
 public class MazeNode implements Comparable<MazeNode>{
-    int xPos;
-    int yPos;
-    double cost = Double.POSITIVE_INFINITY;
-    Set<MazeNode> neighbours = new HashSet<>();
-    Boolean isVisited = false;
-    MazeNode parent = null; //Used to track which node this was visited from
+    private final int xPos;
+    private final int yPos;
+    private double cost = Double.POSITIVE_INFINITY;
+    private final Set<MazeNode> neighbours = new HashSet<>();
+    private Boolean isVisited = false;
+    private MazeNode parent = null; //Used to track which node this was visited from
 
     /**
      * Make a new node
@@ -35,13 +33,6 @@ public class MazeNode implements Comparable<MazeNode>{
     }
 
     /**
-     * Set the x and y values
-     */
-    public void setX(int x) { xPos = x; }
-
-    public void setY(int y) { yPos = y; }
-
-    /**
      * Get and set the neighbours
      */
     public void addNeighbour(MazeNode neighbour) {
@@ -55,7 +46,7 @@ public class MazeNode implements Comparable<MazeNode>{
     /**
      * Visit and un-visit
      */
-    public boolean isVisted() {return isVisited; }
+    public boolean isVisited() {return isVisited; }
     public void visit() { isVisited = true; }
     //public void unVisit() { isVisited = false; }
 
