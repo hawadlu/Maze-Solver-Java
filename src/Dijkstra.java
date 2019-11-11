@@ -46,29 +46,7 @@ public class Dijkstra {
 
             }
         }
-//        MazeNode parent = null;
-//        Queue<MazeNode> toProcess = new ArrayDeque<>();
-//        start.visit();
-//        toProcess.offer(start);
-//
-//
-//        while (!toProcess.isEmpty()) {
-//            parent = toProcess.peek();
-//            parent.visit(); //set visited
-//            if (parent.equals(destination)) {
-//                break;
-//            } else {
-//
-//                //Add all children
-//                for (MazeNode node : toProcess.poll().getNeighbours()) {
-//                    if (!node.isVisted()) {
-//                        node.setParent(parent);
-//                        toProcess.offer(node);
-//                    }
-//                }
-//            }
-//        }
-//
+
         while (true) {
             if (parent != null) {
                 path.add(parent);
