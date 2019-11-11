@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -6,11 +7,12 @@ import java.util.Set;
  * This class contains each node in the maze. It has fields to store the position and neighbours.
  */
 
-public class MazeNode implements Serializable {
+public class MazeNode implements Comparable<MazeNode>{
     int xPos;
     int yPos;
+    double cost = Double.POSITIVE_INFINITY;
     Set<MazeNode> neighbours = new HashSet<>();
-    Boolean isVisted = false;
+    Boolean isVisited = false;
     MazeNode parent = null; //Used to track which node this was visited from
 
     /**
@@ -53,12 +55,12 @@ public class MazeNode implements Serializable {
     /**
      * Visit and un-visit
      */
-    public boolean isVisted() {return isVisted; }
-    public void visit() { isVisted = true; }
-    public void unVisit() { isVisted = false; }
+    public boolean isVisted() {return isVisited; }
+    public void visit() { isVisited = true; }
+    //public void unVisit() { isVisited = false; }
 
     /**
-     * Set and get the parent
+     * Get and set the parent
      */
     public void setParent(MazeNode node) {
         parent = node;
@@ -68,12 +70,29 @@ public class MazeNode implements Serializable {
         return parent;
     }
 
+    /**
+     * Get and set the cost
+     */
+    public double getCost() { return cost; }
+    public void  setCost(double newCost) { cost = newCost; }
+
 
     /**
      * toString
      */
     public String toString() {
         return "x: " + getX() + " y:" + getY() + " num neighbours: " + neighbours.size();
+    }
+
+    /**
+     * Comparator
+     */
+    public int compareTo(MazeNode nextNode) {
+        if (this.getCost() > nextNode.getCost()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
 }

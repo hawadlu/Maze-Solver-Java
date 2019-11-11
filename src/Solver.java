@@ -18,7 +18,7 @@ public class Solver {
      * Loads the image file
      */
     public void loadImage() {
-        BufferedImage in;
+        BufferedImage in = null;
 
         //Getting the filename
         String filePath = getUserInput("Please enter the file name: ");
@@ -36,10 +36,9 @@ public class Solver {
 
             //Checking for large images
             while (true) {
-                System.out.println("Hi");
                 if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(4000, 2)) {
                     String answer = getUserInput("This image is very large. You may run into memory issues. \n" +
-                            "Do you wan to continue? y/n ");
+                            "Do you want to continue? y/n ");
                     if (answer.equals("y")) {
                         break;
                     } else if (answer.equals("n")) {
@@ -78,8 +77,8 @@ public class Solver {
         System.out.println("Finding nodes");
 
         //Performing a one pass over the maze to find all the nodes
-        for (int height = 0; height < imgFile.getWidth(); height++) {
-            for (int width = 0; width < imgFile.getHeight(); width++) {
+        for (int height = 0; height < imgFile.getHeight(); height++) {
+            for (int width = 0; width < imgFile.getWidth(); width++) {
                 //Gets the 0-255 value for red. Colour is either white or black so can use R, G or B.
                 int colour = getColour(imgFile, width, height);
 
@@ -145,24 +144,58 @@ public class Solver {
         String searchType = "";
         while (true) {
             String answer = getUserInput("Press 1 for DFS \n" +
-                    "Press 2 for BFS ");
+                    "Press 2 for BFS \n" +
+                    "Press 3 for Dijkstra ");
             if (answer.equals("1")) {
-                DFS dfs = solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
-                System.out.println("Drawing image");
+                if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
+                    System.out.println("Maze to large for DFS. Using Dijkstra instead.");
+                    Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                    System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
+                    System.out.println("Drawing image");
 
-                //Draw
-                imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
-                searchType = "DFS";
+                    //Draw
+                    imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
+                    searchType = "Dijkstra";
+                } else {
+                    DFS dfs = solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                    System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
+                    System.out.println("Drawing image");
+
+                    //Draw
+                    imgFile = drawImage(imgFile, dfs.getPath(), nodes[0][xStart]);
+                    searchType = "DFS";
+                }
                 break;
             } else if (answer.equals("2")) {
-                BFS bfs = solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
-                System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
+                //Moving to faster algorithm if required
+                if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(4000, 2)) {
+                    System.out.println("Maze to large for BFS. Using Dijkstra instead.");
+                    Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                    System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
+                    System.out.println("Drawing image");
+
+                    //Draw
+                    imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
+                    searchType = "Dijkstra";
+                } else {
+
+                    BFS bfs = solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                    System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
+                    System.out.println("Drawing image");
+
+                    //Draw
+                    imgFile = drawImage(imgFile, bfs.getPath(), nodes[0][xStart]);
+                    searchType = "BFS";
+                }
+                break;
+            } else if (answer.equals("3")) {
+                Dijkstra dijkstra = solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd]);
+                System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
                 System.out.println("Drawing image");
 
                 //Draw
-                imgFile = drawImage(imgFile, bfs.getPath(), nodes[0][xStart]);
-                searchType = "BFS";
+                imgFile = drawImage(imgFile, dijkstra.getPath(), nodes[0][xStart]);
+                searchType = "Dijkstra";
                 break;
             } else {
                 System.out.println("Invalid input!");
@@ -191,7 +224,8 @@ public class Solver {
      * Solves the maze breadth first
      */
     private BFS solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination) {
-        //Create a DFS object
+
+        //Create a BFS object
         BFS bfs = new BFS();
         bfs.solve(start, destination);
 
@@ -199,6 +233,20 @@ public class Solver {
             imgFile.setRGB(node.getX(), node.getY(), 325352);
         }
         return bfs;
+    }
+
+    /**
+     * Solves the maze using the Dijkstra algorith
+     */
+    private Dijkstra solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination) {
+        //Create a DFS object
+        Dijkstra dijkstra = new Dijkstra();
+        dijkstra.solve(start, destination);
+
+        for (MazeNode node: dijkstra.getPath()) {
+            imgFile.setRGB(node.getX(), node.getY(), 325352);
+        }
+        return dijkstra;
     }
 
     /**
