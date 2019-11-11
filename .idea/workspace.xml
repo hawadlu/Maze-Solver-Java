@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/EightK Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/EightK.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/FourK Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/FourK.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Huge Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Large Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Large.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Medium Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Medium.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/SixK Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/SixK.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Small Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/Small.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/TenK Imperfect.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/TenK.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/BMP FIles (remove)/huge.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dijkstra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="169" column="56" selection-start-line="169" selection-start-column="55" selection-end-line="169" selection-end-column="56" />
+            <state relative-caret-position="154">
+              <caret line="148" column="38" selection-start-line="148" selection-start-column="38" selection-end-line="148" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,11 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Dijkstra.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="413">
+              <caret line="78" column="70" selection-start-line="78" selection-start-column="70" selection-end-line="78" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AStar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
             </state>
           </provider>
         </entry>
@@ -69,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MazeNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="366">
+              <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="91" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -122,6 +117,7 @@
         <option value="$PROJECT_DIR$/src/MazeNode.java" />
         <option value="$PROJECT_DIR$/src/Solver.java" />
         <option value="$PROJECT_DIR$/src/Dijkstra.java" />
+        <option value="$PROJECT_DIR$/src/AStar.java" />
       </list>
     </option>
   </component>
@@ -166,6 +162,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15429688" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
@@ -209,16 +206,15 @@
       <workItem from="1572815228118" duration="15311000" />
       <workItem from="1573028849623" duration="4620000" />
       <workItem from="1573067715918" duration="7247000" />
-      <workItem from="1573436346464" duration="194000" />
+      <workItem from="1573436346464" duration="1907000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14312000" />
+    <option name="totallyTimeSpent" value="16025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13631523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -240,7 +236,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3299435" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -295,13 +291,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MazeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DFS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -322,18 +311,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="169" column="56" selection-start-line="169" selection-start-column="55" selection-end-line="169" selection-end-column="56" />
+        <state relative-caret-position="154">
+          <caret line="148" column="38" selection-start-line="148" selection-start-column="38" selection-end-line="148" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/MazeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="91" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Dijkstra.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="413">
+          <caret line="78" column="70" selection-start-line="78" selection-start-column="70" selection-end-line="78" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AStar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
         </state>
       </provider>
     </entry>
