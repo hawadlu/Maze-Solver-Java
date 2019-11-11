@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -452,6 +453,13 @@ class Solver {
      * Saves solved images in the images folder
      */
     private void saveImage(BufferedImage img, String filePath, String searchType) {
+        //Checking if the folder exists
+        if (!new File("/Images/Solved").isDirectory()) {
+            new File("Images/Solved").mkdir();
+        }
+
+
+
         //Saving the image
         String fileName = insertSuffix(filePath, searchType);
         try {
