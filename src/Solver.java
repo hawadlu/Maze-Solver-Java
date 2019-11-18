@@ -66,6 +66,11 @@ class Solver {
     private void solve(BufferedImage imgFile, String filePath) {
         long numNodes = 0;
 
+        //Time tracking variables
+        long startTime, endTime;
+        float midTime;
+        startTime = System.currentTimeMillis();
+
         //Array of all internal maze nodes
         MazeNode[][] nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
 
@@ -133,7 +138,11 @@ class Solver {
             }
         }
 
-        System.out.println("Solving");
+        //Save the current time and reset.
+        midTime = (System.currentTimeMillis() - startTime) /1000F;
+        startTime = (System.currentTimeMillis());
+
+                System.out.println("Solving");
 
         //Asking the user which method they would like to use to solve the maze
         label:
@@ -175,6 +184,10 @@ class Solver {
                     break;
             }
         }
+
+        //Print the time at the end
+        float seconds = ((System.currentTimeMillis() - startTime) / 1000F) + midTime;
+        System.out.println("Time spent solving: " + seconds + "s");
     }
 
     /**
