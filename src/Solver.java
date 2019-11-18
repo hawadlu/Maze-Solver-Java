@@ -139,8 +139,7 @@ class Solver {
         }
 
         //Save the current time and reset.
-        midTime = (System.currentTimeMillis() - startTime) /1000F;
-        startTime = (System.currentTimeMillis());
+        midTime = (System.currentTimeMillis() - startTime) / 1000F;
 
                 System.out.println("Solving");
 
@@ -153,6 +152,7 @@ class Solver {
                     "Press 4 for AStar ");
             switch (answer) {
                 case "1":
+                    startTime = System.currentTimeMillis();
                     if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
                         System.out.println("Maze to large for DFS. Using AStar instead.");
                         solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
@@ -162,6 +162,7 @@ class Solver {
                     }
                     break label;
                 case "2":
+                    startTime = System.currentTimeMillis();
                     //Moving to faster algorithm if required
                     if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(3000, 2)) {
                         System.out.println("Maze to large for BFS. Using AStar instead.");
@@ -172,10 +173,12 @@ class Solver {
                     }
                     break label;
                 case "3":
+                    startTime = System.currentTimeMillis();
                     solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
                     break label;
                 case "4":
+                    startTime = System.currentTimeMillis();
                     solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
 
                     break label;
