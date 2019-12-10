@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Images/King Prawn With Cashew Nuts.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +30,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
+            <state relative-caret-position="489">
               <caret line="186" column="26" selection-start-line="186" selection-start-column="26" selection-end-line="186" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -193,17 +191,17 @@
       <workItem from="1573067715918" duration="7247000" />
       <workItem from="1573436346464" duration="8581000" />
       <workItem from="1574047440557" duration="2232000" />
-      <workItem from="1575933412676" duration="1674000" />
+      <workItem from="1575933412676" duration="2134000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26605000" />
+    <option name="totallyTimeSpent" value="27065000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1893" height="974" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14046462" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14046462" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -213,7 +211,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299435" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32993197" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32993197" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -283,7 +281,7 @@
     <entry file="file://$PROJECT_DIR$/src/LTOnly.java" />
     <entry file="file://$PROJECT_DIR$/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="489">
           <caret line="186" column="26" selection-start-line="186" selection-start-column="26" selection-end-line="186" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
