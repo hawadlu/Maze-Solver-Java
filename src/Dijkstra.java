@@ -35,11 +35,13 @@ class Dijkstra {
 
                 //Add the children
                 for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-                    double cost = parent.getCost() + calculateCost(parent, node);
-                    if (cost < node.getCost()) {
-                        node.setCost(cost);
-                        node.setParent(parent);
-                        toProcess.offer(node);
+                    if (!node.isVisited()) {
+                        double cost = parent.getCost() + calculateCost(parent, node);
+                        if (cost < node.getCost()) {
+                            node.setCost(cost);
+                            node.setParent(parent);
+                            toProcess.offer(node);
+                        }
                     }
                 }
 

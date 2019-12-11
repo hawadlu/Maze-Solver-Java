@@ -2,7 +2,7 @@ import java.util.*;
 
 /**
  * This class solves the maze depth first.
- * It takes a start node, end node and and returns a path between them
+ * It ttakes a start node, end node and and returns a path between them
  */
 class DFS {
     private int pathSize = 0;
