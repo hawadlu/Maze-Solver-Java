@@ -21,7 +21,7 @@ class AStar {
     public void solve(MazeNode start, MazeNode destination) {
         MazeNode parent = null;
         PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
-        start.setCost(0);
+        start.setPathCost(0);
         toProcess.offer(start);
 
 
@@ -35,13 +35,15 @@ class AStar {
 
                 //Add the children
                 for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-                    if (!node.isVisited()) {
-                        double cost = parent.getCost() + calculateCost(parent, node, destination);
-                        if (cost < node.getCost()) {
-                            node.setCost(cost);
-                            node.setParent(parent);
-                            toProcess.offer(node);
-                        }
+                    //Set the estimated heuristic cost of visiting this node
+                    if (node != destination && node.getHeuristicCost() == 0) { node.setHeuristicCost(calculateCost(node, destination)); }
+
+                    //Calculate the cost in terms of euclidean distance of moving from the parent to this node
+                    double cost = parent.getPathCost() + calculateCost(parent, node);
+                    if (cost < node.getPathCost()) {
+                        node.setPathCost(cost);
+                        node.setParent(parent);
+                        toProcess.offer(node);
                     }
                 }
 
@@ -74,10 +76,11 @@ class AStar {
     }
 
     /**
-     * Calculates the cost of moving between two nodes
-     * Factors in the current cost and the distance to the start and the distance to go
+     * Calculates the euclidean distance between two nodes
      */
-    private double calculateCost(MazeNode start, MazeNode destination, MazeNode end) {
-        return Math.sqrt(Math.pow(start.getX() + destination.getX(), 2) + Math.pow(start.getY() + destination.getY(), 2)) + (end.getY() - destination.getY()) + destination.getY();
+    private double calculateCost(MazeNode current, MazeNode other) {
+        double yDist = Math.abs(current.getY() - other.getY());
+        double xDist = Math.abs(current.getX() - other.getX());
+        return Math.sqrt(Math.pow(yDist, 2) + Math.pow(xDist, 2));
     }
 }

@@ -21,7 +21,7 @@ class Dijkstra {
     public void solve(MazeNode start, MazeNode destination) {
         MazeNode parent = null;
         PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
-        start.setCost(0);
+        start.setPathCost(0);
         toProcess.offer(start);
 
 
@@ -35,13 +35,11 @@ class Dijkstra {
 
                 //Add the children
                 for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-                    if (!node.isVisited()) {
-                        double cost = parent.getCost() + calculateCost(parent, node);
-                        if (cost < node.getCost()) {
-                            node.setCost(cost);
-                            node.setParent(parent);
-                            toProcess.offer(node);
-                        }
+                    double cost = parent.getPathCost() + calculateCost(parent, node);
+                    if (cost < node.getPathCost()) {
+                        node.setPathCost(cost);
+                        node.setParent(parent);
+                        toProcess.offer(node);
                     }
                 }
 
@@ -77,7 +75,12 @@ class Dijkstra {
      * Calculates the cost of moving between two nodes
      * Factors the distance between nodes (current and destination) and distance of the destination node to the start.
      */
-    private double calculateCost(MazeNode current, MazeNode destination) {
-        return Math.sqrt(Math.pow(current.getX() + destination.getX(), 2) + Math.pow(current.getY() + destination.getY(), 2)) + destination.getY();
+    /**
+     * Calculates the euclidean distance between two nodes
+     */
+    private double calculateCost(MazeNode current, MazeNode other) {
+        double yDist = Math.abs(current.getY() - other.getY());
+        double xDist = Math.abs(current.getX() - other.getX());
+        return Math.sqrt(Math.pow(yDist, 2) + Math.pow(xDist, 2));
     }
 }

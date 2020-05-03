@@ -8,7 +8,8 @@ import java.util.Set;
 public class MazeNode implements Comparable<MazeNode>{
     private final int xPos;
     private final int yPos;
-    private double cost = Double.POSITIVE_INFINITY;
+    private double pathCost = Double.POSITIVE_INFINITY;
+    private double heuristicCost = 0.0; //Estimated cost from this node to the end
     private final Set<MazeNode> neighbours = new HashSet<>();
     private Boolean isVisited = false;
     private MazeNode parent = null; //Used to track which node this was visited from
@@ -64,8 +65,15 @@ public class MazeNode implements Comparable<MazeNode>{
     /**
      * Get and set the cost
      */
-    public double getCost() { return cost; }
-    public void  setCost(double newCost) { cost = newCost; }
+    public double getPathCost() { return pathCost; }
+
+    public double getHeuristicCost() {
+        return heuristicCost;
+    }
+
+    public void setPathCost(double newCost) { pathCost = newCost; }
+    public void setHeuristicCost(double newCost) { heuristicCost = newCost; }
+
 
 
     /**
@@ -79,11 +87,7 @@ public class MazeNode implements Comparable<MazeNode>{
      * Comparator
      */
     public int compareTo(MazeNode nextNode) {
-        if (this.getCost() > nextNode.getCost()) {
-            return 1;
-        } else {
-            return -1;
-        }
+        return Double.compare(this.pathCost + this.heuristicCost, nextNode.pathCost + nextNode.heuristicCost);
     }
 
 }
