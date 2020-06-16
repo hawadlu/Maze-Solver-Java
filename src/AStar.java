@@ -34,21 +34,21 @@ class AStar {
             } else {
 
                 //Add the children
-                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-                    //Get the node
-                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-
-                    //Set the estimated heuristic cost of visiting this node
-                    if (node != destination && node.getHeuristicCost() == 0) { node.setHeuristicCost(calculateCost(node, destination)); }
-
-                    //Calculate the cost in terms of euclidean distance of moving from the parent to this node
-                    double cost = parent.getPathCost() + calculateCost(parent, node);
-                    if (cost < node.getPathCost()) {
-                        node.setPathCost(cost);
-                        node.setParent(parent);
-                        toProcess.offer(node);
-                    }
-                }
+//                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+//                    //Get the node
+//                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+//
+//                    //Set the estimated heuristic cost of visiting this node
+//                    if (node != destination && node.getHeuristicCost() == 0) { node.setHeuristicCost(calculateCost(node, destination)); }
+//
+//                    //Calculate the cost in terms of euclidean distance of moving from the parent to this node
+//                    double cost = parent.getPathCost() + calculateCost(parent, node);
+//                    if (cost < node.getPathCost()) {
+//                        node.setPathCost(cost);
+//                        node.setParent(parent);
+//                        toProcess.offer(node);
+//                    }
+//                }
 
             }
         }

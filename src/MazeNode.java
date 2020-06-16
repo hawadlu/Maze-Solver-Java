@@ -11,7 +11,7 @@ public class MazeNode implements Comparable<MazeNode>{
     private final int yPos;
     private double pathCost = Double.POSITIVE_INFINITY;
     private double heuristicCost = 0.0; //Estimated cost from this node to the end
-    private final Set<Coordinates> neighbours = new HashSet<>();//Set that stores the x any y of neighbours
+    //private final Set<Coordinates> neighbours = new HashSet<>();//Set that stores the x any y of neighbours
     private Boolean isVisited = false;
     private MazeNode parent = null; //Used to track which node this was visited from
 
@@ -37,13 +37,13 @@ public class MazeNode implements Comparable<MazeNode>{
     /**
      * Get and set the neighbours
      */
-    public void addNeighbour(Coordinates newCoords) {
-        neighbours.add(newCoords);
-    }
-
-    public Set<Coordinates> getNeighbours() {
-        return neighbours;
-    }
+//    public void addNeighbour(Coordinates newCoords) {
+//        neighbours.add(newCoords);
+//    }
+//
+//    public Set<Coordinates> getNeighbours() {
+//        return neighbours;
+//    }
 
     /**
      * Visit and un-visit
@@ -81,7 +81,7 @@ public class MazeNode implements Comparable<MazeNode>{
      * toString
      */
     public String toString() {
-        return "x: " + getX() + " y:" + getY() + " num neighbours: " + neighbours.size();
+        return "x: " + getX() + " y:" + getY() + " num neighbours: ";
     }
 
     /**

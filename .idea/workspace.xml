@@ -7,15 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1d1e02b-592b-469b-a224-9b3bc3e721be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/InstrumentationAgent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/AStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/AStar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/BFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/BFS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/DFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/DFS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/MazeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/MazeNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/solver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AStar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BFS.java" afterDir="false" />
@@ -75,11 +67,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15429688" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -89,14 +82,37 @@
       <recent name="$PROJECT_DIR$/src/Images" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Run Solver" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.Run">
+    <configuration name="Run w Var Dump" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Solver" />
+      <module name="Maze Solver (Java)" />
+      <option name="VM_PARAMETERS" value="-XX:+HeapDumpOnOutOfMemoryError" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Solver" />
       <module name="Maze Solver (Java)" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Node JS" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="Profile" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
+      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSProfilingRunConfigurationExtension">
+        <profiling do-profile="true" />
+      </EXTENSION>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Run w Var Dump" />
+      <item itemvalue="Application.Run" />
+      <item itemvalue="Node.js.Profile" />
+      <item itemvalue="Node.js.Node JS" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -126,6 +142,7 @@
       <workItem from="1588931316271" duration="644000" />
       <workItem from="1588971257166" duration="9000" />
       <workItem from="1592276379915" duration="4087000" />
+      <workItem from="1592342581207" duration="4835000" />
     </task>
     <servers />
   </component>
@@ -163,14 +180,18 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="668" y="184" key="#Run_Solver_With_Recording/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292540055" />
-    <state x="448" y="227" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592292552712">
+    <state x="448" y="226" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592342821911">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="448" y="227" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292552712" />
+    <state x="448" y="226" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592342821911" />
     <state x="771" y="277" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1592291210188">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="771" y="277" key="#com.intellij.ide.macro.MacrosDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592291210188" />
+    <state x="721" y="361" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1592342819883">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="721" y="361" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592342819883" />
     <state x="747" y="275" key="#xdebugger.evaluate" timestamp="1592286034550">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -179,46 +200,50 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="843" y="297" key="EnvironmentVariablesDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292398499" />
-    <state width="1830" height="280" key="GridCell.Tab.0.bottom" timestamp="1592292038852">
+    <state x="772" y="316" key="FileChooserDialogImpl" timestamp="1592295830922">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="280" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292038852" />
-    <state width="1830" height="280" key="GridCell.Tab.0.center" timestamp="1592292038851">
+    <state x="772" y="316" key="FileChooserDialogImpl/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592295830922" />
+    <state width="1830" height="280" key="GridCell.Tab.0.bottom" timestamp="1592347447749">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="280" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292038851" />
-    <state width="1830" height="280" key="GridCell.Tab.0.left" timestamp="1592292038851">
+    <state width="1830" height="280" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592347447749" />
+    <state width="1830" height="280" key="GridCell.Tab.0.center" timestamp="1592347447748">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="280" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292038851" />
-    <state width="1830" height="280" key="GridCell.Tab.0.right" timestamp="1592292038852">
+    <state width="1830" height="280" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592347447748" />
+    <state width="1830" height="280" key="GridCell.Tab.0.left" timestamp="1592347447747">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="280" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292038852" />
-    <state width="1830" height="347" key="GridCell.Tab.1.bottom" timestamp="1592289831841">
+    <state width="1830" height="280" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592347447747" />
+    <state width="1830" height="280" key="GridCell.Tab.0.right" timestamp="1592347447748">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592289831841" />
-    <state width="1830" height="347" key="GridCell.Tab.1.center" timestamp="1592289831839">
+    <state width="1830" height="280" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592347447748" />
+    <state width="1830" height="347" key="GridCell.Tab.1.bottom" timestamp="1592346286496">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592289831839" />
-    <state width="1830" height="347" key="GridCell.Tab.1.left" timestamp="1592289831838">
+    <state width="1830" height="347" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592346286496" />
+    <state width="1830" height="347" key="GridCell.Tab.1.center" timestamp="1592346286494">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592289831838" />
-    <state width="1830" height="347" key="GridCell.Tab.1.right" timestamp="1592289831840">
+    <state width="1830" height="347" key="GridCell.Tab.1.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592346286494" />
+    <state width="1830" height="347" key="GridCell.Tab.1.left" timestamp="1592346286493">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592289831840" />
+    <state width="1830" height="347" key="GridCell.Tab.1.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592346286493" />
+    <state width="1830" height="347" key="GridCell.Tab.1.right" timestamp="1592346286495">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1830" height="347" key="GridCell.Tab.1.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592346286495" />
     <state x="613" y="266" width="749" height="598" key="NewModule_or_Project.wizard" timestamp="1588560556276">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="613" y="266" width="749" height="598" key="NewModule_or_Project.wizard/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1588560556276" />
-    <state x="472" y="146" key="SettingsEditor" timestamp="1592292336503">
+    <state x="472" y="146" key="SettingsEditor" timestamp="1592295869762">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="472" y="146" key="SettingsEditor/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592292336503" />
+    <state x="472" y="146" key="SettingsEditor/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1592295869762" />
     <state x="663" y="397" key="com.intellij.ide.util.TipDialog" timestamp="1588971257153">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -233,8 +258,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solver.java</url>
-          <line>265</line>
-          <option name="timeStamp" value="22" />
+          <line>63</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
