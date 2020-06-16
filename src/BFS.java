@@ -18,7 +18,7 @@ class BFS {
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(MazeNode start, MazeNode destination) {
+    public void solve(MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         MazeNode parent = null;
         Queue<MazeNode> toProcess = new ArrayDeque<>();
         start.visit();
@@ -33,7 +33,10 @@ class BFS {
             } else {
 
                 //Add all children
-                for (MazeNode node : Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    //Get the node
+
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
                     if (!node.isVisited()) {
                         node.setParent(parent);
                         toProcess.offer(node);

@@ -18,7 +18,7 @@ class AStar {
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(MazeNode start, MazeNode destination) {
+    public void solve(MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         MazeNode parent = null;
         PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
         start.setPathCost(0);
@@ -34,7 +34,10 @@ class AStar {
             } else {
 
                 //Add the children
-                for (MazeNode node: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    //Get the node
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+
                     //Set the estimated heuristic cost of visiting this node
                     if (node != destination && node.getHeuristicCost() == 0) { node.setHeuristicCost(calculateCost(node, destination)); }
 

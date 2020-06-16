@@ -2,7 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Path;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -63,7 +63,7 @@ class Solver {
     /**
      * Solves the maze
      */
-    private void solve(BufferedImage imgFile, String filePath) {
+    private void solve(BufferedImage imgFile, String filePath) throws IOException, IllegalAccessException {
         long numNodes = 0;
 
         //Time tracking variables
@@ -71,8 +71,10 @@ class Solver {
         float midTime;
         startTime = System.currentTimeMillis();
 
-        //Array of all internal maze nodes
-        MazeNode[][] nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
+        //HashMap<Coordinates, MazeNode> nodes = new MazeNode[imgFile.getHeight()][imgFile.getWidth()]; //A boolean indicator to tell if there is a node at pos x,y
+
+        //Map containing the positions of each node
+        HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
 
         System.out.println("Finding nodes");
 
@@ -85,58 +87,77 @@ class Solver {
                 //Don't make a node unless the square is white
                 if (getColour(imgFile, width, height) != 0) {
                     if (height == 0 && colour != 0) {
-                        nodes[height][width] = new MazeNode(width, height);
+                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
                         numNodes++;
+
+                        //Find the neighbours
+                        findNeighbours(nodes, new Coordinates(width, height), imgFile);
+
                     } else if(height == imgFile.getHeight() - 1 && colour != 0) {
-                        nodes[height][width] = new MazeNode(width, height);
+                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
                         numNodes++;
+
+                        //Find the neighbours
+                        findNeighbours(nodes, new Coordinates(width, height), imgFile);
+
                         //marking dead end nodes
                     } else if (isDeadEnd(imgFile, width, height)) {
-                        nodes[height][width] = new MazeNode(width, height);
+                        //todo, look into not storing these
+
+
+                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
                         numNodes++;
+
+                        //Find the neighbours
+                        findNeighbours(nodes, new Coordinates(width, height), imgFile);
 
                         //Marking nodes at junctions
                     } else if (isJunction(imgFile, width, height)) {
-                        nodes[height][width] = new MazeNode(width, height);
+                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
                         numNodes++;
+
+                        //Find the neighbours
+                        findNeighbours(nodes, new Coordinates(width, height), imgFile);
 
                         //Marking pixels on corner junctions
                     } else if (getAdjacentWhite(imgFile, width, height) == 2 && !directOpposite(imgFile, width, height)) {
-                        nodes[height][width] = new MazeNode(width, height);
+                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
                         numNodes++;
-                    } else {
-                        //Mark no node at this position
-                        nodes[height][width] = null; //Mark node at this position
+
+                        //Find the neighbours
+                        findNeighbours(nodes, new Coordinates(width, height), imgFile);
                     }
                 }
             }
         }
 
+        System.out.println("Found all nodes");
+
         //Calculate the x position of the start and end
         int xStart = 0, xEnd = 0;
-        for (int width = 0; width < nodes[0].length; width++) {
-            if (nodes[0][width] != null) {
-                xStart = width;
-            }
+        for (int width = 0; width < imgFile.getWidth(); width++) {
+            if (nodes.containsKey(new Coordinates(width, 0))) xStart = width;
         }
-        for (int width = 0; width < nodes[0].length; width++) {
-            if (nodes[nodes.length - 1][width] != null) {
-                xEnd = width;
-            }
+        for (int width = 0; width < imgFile.getWidth(); width++) {
+            if (nodes.containsKey(new Coordinates(width, imgFile.getHeight() - 1))) xEnd = width;
         }
 
+        System.out.println("Start at: " + xStart + ", " + 0);
+        System.out.println("End at: " + xEnd + ", " + (imgFile.getHeight() - 1));
         System.out.println("Node count: " + numNodes);
-        System.out.println("Nodes size: " + nodes.length);
+        System.out.println("Approximately " + (float) numNodes / (imgFile.getHeight() * imgFile.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
 
         //Finding each nodes neighbours
-        for (int height = 0; height < imgFile.getHeight(); height++) {
-            for (int width = 0; width < imgFile.getWidth(); width++) {
-                if (nodes[height][width] != null) {
-                    findNeighbours(nodes[height][width], nodes, imgFile);
-                }
-            }
-        }
+//        for (int height = 0; height < imgFile.getHeight(); height++) {
+//            for (int width = 0; width < imgFile.getWidth(); width++) {
+//                if (nodes[height][width] != null) {
+//                    findNeighbours(nodes[height][width], nodes, imgFile);
+//                }
+//            }
+//        }
+
+
 
         //Save the current time and reset.
         midTime = (System.currentTimeMillis() - startTime) / 1000F;
@@ -155,9 +176,9 @@ class Solver {
                     startTime = System.currentTimeMillis();
                     if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(6000, 2)) {
                         System.out.println("Maze to large for DFS. Using AStar instead.");
-                        solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                        solveAStar(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
                     } else {
-                        solveDFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                        solveDFS(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
 
                     }
                     break label;
@@ -166,20 +187,20 @@ class Solver {
                     //Moving to faster algorithm if required
                     if (imgFile.getWidth() * imgFile.getHeight() > Math.pow(3000, 2)) {
                         System.out.println("Maze to large for BFS. Using AStar instead.");
-                        solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                        solveAStar(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
 
                     } else {
-                        solveBFS(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                        solveBFS(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
                     }
                     break label;
                 case "3":
                     startTime = System.currentTimeMillis();
-                    solveDijkstra(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                    solveDijkstra(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
 
                     break label;
                 case "4":
                     startTime = System.currentTimeMillis();
-                    solveAStar(imgFile, nodes[0][xStart], nodes[imgFile.getHeight() - 1][xEnd], filePath);
+                    solveAStar(imgFile, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgFile.getHeight() - 1)), filePath, nodes);
 
                     break label;
                 default:
@@ -196,10 +217,10 @@ class Solver {
     /**
      * Solves the maze depth first
      */
-    private void solveDFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
+    private void solveDFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         DFS dfs = new DFS();
-        dfs.solve(start, destination);
+        dfs.solve(start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
         System.out.println("Drawing image");
@@ -211,11 +232,11 @@ class Solver {
     /**
      * Solves the maze breadth first
      */
-    private void solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
+    private void solveBFS(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath, HashMap<Coordinates, MazeNode> nodes) {
 
         //Create a BFS object
         BFS bfs = new BFS();
-        bfs.solve(start, destination);
+        bfs.solve(start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
         System.out.println("Drawing image");
@@ -227,10 +248,10 @@ class Solver {
     /**
      * Solves the maze using the Dijkstra algorithm
      */
-    private void solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
+    private void solveDijkstra(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         Dijkstra dijkstra = new Dijkstra();
-        dijkstra.solve(start, destination);
+        dijkstra.solve(start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
         System.out.println("Drawing image");
@@ -243,10 +264,10 @@ class Solver {
     /**
      * Solves the maze using the AStar algorithm
      */
-    private void solveAStar(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath) {
+    private void solveAStar(BufferedImage imgFile, MazeNode start, MazeNode destination, String filePath, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         AStar aStar = new AStar();
-        aStar.solve(start, destination);
+        aStar.solve(start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
         System.out.println("Drawing image");
@@ -308,52 +329,37 @@ class Solver {
     }
 
     /**
-     * This method takes and node and finds all of it neighbours
-     * It then adds the neighbours to the neighbours set of the node.
+     * This method takes a set of Coordinates of a known node and looks for neighbours.
+     * The program goes left to right, top to bottom, so this will search to the left and top of the position
      */
-    private void findNeighbours(MazeNode node, MazeNode[][] nodes, BufferedImage imgFile) {
-        //Looking down for a neighbour
-        for (int shift = 1; node.getY() + shift < nodes.length; shift++) {
-            if (nodes[node.getY() + shift][node.getX()] != null) {
-                node.addNeighbour(nodes[node.getY() + shift][node.getX()]);
+    private void findNeighbours(HashMap<Coordinates, MazeNode> nodes, Coordinates currentLocation, BufferedImage imgFile) {
+        //Look up until a node or a black square is encountered
+        for (int y = currentLocation.y - 1; y > -1; y--) {
+            //Break if a black pixel is detected
+            if (getColour(imgFile, currentLocation.x, y) == 0) {
                 break;
-
-            //wall
-            } else if (getColour(imgFile, node.getX(), node.getY() + shift) == 0) {
-                break;
-            }
-        }
-
-        //Looking up for a neighbour
-        for (int shift = 1; node.getY() - shift > -1; shift++) {
-            if (nodes[node.getY() - shift][node.getX()] != null) {
-                node.addNeighbour(nodes[node.getY() - shift][node.getX()]);
-                break;
-            } else if (getColour(imgFile, node.getX(), node.getY() - shift) == 0) {
+                //Break if a node is located
+            } else if (nodes.containsKey(new Coordinates(currentLocation.x, y))) {
+                //If a node is found, mark them as neighbours
+                nodes.get(currentLocation).addNeighbour(new Coordinates(currentLocation.x, y));
+                nodes.get(new Coordinates(currentLocation.x, y)).addNeighbour(currentLocation);
                 break;
             }
         }
 
-        //Looking right for a neighbour
-        for (int shift = 1; node.getX() + shift < nodes[node.getY()].length; shift++) {
-            if (nodes[node.getY()][node.getX() + shift] != null) {
-                node.addNeighbour(nodes[node.getY()][node.getX() + shift]);
+        //Look up left a node or a black square is encountered
+        for (int x = currentLocation.x - 1; x > -1; x--) {
+            //Break if a black pixel is detected
+            if (getColour(imgFile, x, currentLocation.y) == 0) {
                 break;
-            } else if (getColour(imgFile, node.getX() + shift, node.getY()) == 0) {
-                break;
-            }
-        }
-
-        //Looking left for a neighbour
-        for (int shift = 1; node.getX() - shift > -1; shift++) {
-            if (nodes[node.getY()][node.getX() - shift] != null) {
-                node.addNeighbour(nodes[node.getY()][node.getX() - shift]);
-                break;
-            } else if (getColour(imgFile, node.getX() - shift, node.getY()) == 0) {
+                //Break if a node is located
+            } else if (nodes.containsKey(new Coordinates(x, currentLocation.y))) {
+                //If a node is found, mark them as neighbours
+                nodes.get(currentLocation).addNeighbour(new Coordinates(x, currentLocation.y));
+                nodes.get(new Coordinates(x, currentLocation.y)).addNeighbour(currentLocation);
                 break;
             }
         }
-
     }
 
     /**
@@ -473,8 +479,6 @@ class Solver {
         if (!new File("/Images/Solved").isDirectory()) {
             new File("Images/Solved").mkdir();
         }
-
-
 
         //Saving the image
         String fileName = insertSuffix(filePath, searchType);

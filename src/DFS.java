@@ -18,7 +18,7 @@ class DFS {
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(MazeNode start, MazeNode destination) {
+    public void solve(MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         MazeNode parent = null;
         Stack<MazeNode> toProcess = new Stack<>();
         start.visit();
@@ -32,7 +32,9 @@ class DFS {
             } else {
 
                 //Add all children
-                for (MazeNode node : toProcess.pop().getNeighbours()) {
+                for (Coordinates location: Objects.requireNonNull(toProcess.pop()).getNeighbours()) {
+                    //Get the node
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
                     if (!node.isVisited()) {
                         node.setParent(parent);
                         toProcess.push(node);

@@ -3,6 +3,7 @@ import java.util.Set;
 
 /**
  * This class contains each node in the maze. It has fields to store the position and neighbours.
+ * The maximum size of this object is somewhere in the region of 114 bytes
  */
 
 public class MazeNode implements Comparable<MazeNode>{
@@ -10,7 +11,7 @@ public class MazeNode implements Comparable<MazeNode>{
     private final int yPos;
     private double pathCost = Double.POSITIVE_INFINITY;
     private double heuristicCost = 0.0; //Estimated cost from this node to the end
-    private final Set<MazeNode> neighbours = new HashSet<>();
+    private final Set<Coordinates> neighbours = new HashSet<>();//Set that stores the x any y of neighbours
     private Boolean isVisited = false;
     private MazeNode parent = null; //Used to track which node this was visited from
 
@@ -36,11 +37,11 @@ public class MazeNode implements Comparable<MazeNode>{
     /**
      * Get and set the neighbours
      */
-    public void addNeighbour(MazeNode neighbour) {
-        neighbours.add(neighbour);
+    public void addNeighbour(Coordinates newCoords) {
+        neighbours.add(newCoords);
     }
 
-    public Set<MazeNode> getNeighbours() {
+    public Set<Coordinates> getNeighbours() {
         return neighbours;
     }
 
