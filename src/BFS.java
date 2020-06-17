@@ -33,15 +33,15 @@ class BFS {
             } else {
 
                 //Add all children
-//                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-//                    //Get the node
-//
-//                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-//                    if (!node.isVisited()) {
-//                        node.setParent(parent);
-//                        toProcess.offer(node);
-//                    }
-//                }
+                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    //Get the node
+
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+                    if (!node.isVisited()) {
+                        node.setParent(parent);
+                        toProcess.offer(node);
+                    }
+                }
             }
         }
 

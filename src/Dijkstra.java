@@ -35,16 +35,16 @@ class Dijkstra {
             } else {
 
                 //Add the children
-//                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-//                    //Get the node
-//                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-//                    double cost = parent.getPathCost() + calculateCost(parent, node);
-//                    if (cost < node.getPathCost()) {
-//                        node.setPathCost(cost);
-//                        node.setParent(parent);
-//                        toProcess.offer(node);
-//                    }
-//                }
+                for (Coordinates location : Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    //Get the node
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+                    double cost = parent.getPathCost() + calculateCost(parent, node);
+                    if (cost < node.getPathCost()) {
+                        node.setPathCost(cost);
+                        node.setParent(parent);
+                        toProcess.offer(node);
+                    }
+                }
 
             }
         }
@@ -59,6 +59,7 @@ class Dijkstra {
             }
         }
     }
+
 
     /**
      * Get the path

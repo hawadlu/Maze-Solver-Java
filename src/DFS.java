@@ -31,15 +31,15 @@ class DFS {
                 break;
             } else {
 
-//                //Add all children
-//                for (Coordinates location: Objects.requireNonNull(toProcess.pop()).getNeighbours()) {
-//                    //Get the node
-//                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-//                    if (!node.isVisited()) {
-//                        node.setParent(parent);
-//                        toProcess.push(node);
-//                    }
-//                }
+                //Add all children
+                for (Coordinates location: Objects.requireNonNull(toProcess.pop()).getNeighbours()) {
+                    //Get the node
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+                    if (!node.isVisited()) {
+                        node.setParent(parent);
+                        toProcess.push(node);
+                    }
+                }
             }
         }
 

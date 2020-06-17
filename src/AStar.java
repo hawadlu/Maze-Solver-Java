@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -18,38 +23,80 @@ class AStar {
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+        System.out.println("Solve started");
         MazeNode parent = null;
         PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
         start.setPathCost(0);
         toProcess.offer(start);
 
+        //Choose how the maze should run based on how many nodes have been added
+        if (nodes.size() > 2) {
+            while (!toProcess.isEmpty()) {
+                parent = toProcess.peek();
+                parent.visit();
 
-        while (!toProcess.isEmpty()) {
-            parent = toProcess.peek();
-            parent.visit();
+                if (parent.equals(destination)) {
+                    break;
+                } else {
 
-            if (parent.equals(destination)) {
-                break;
-            } else {
+                    //Add the children
+                    for (Coordinates location : Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                        //Get the node
+                        MazeNode node = nodes.get(new Coordinates(location.x, location.y));
 
-                //Add the children
-//                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
-//                    //Get the node
-//                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-//
-//                    //Set the estimated heuristic cost of visiting this node
-//                    if (node != destination && node.getHeuristicCost() == 0) { node.setHeuristicCost(calculateCost(node, destination)); }
-//
-//                    //Calculate the cost in terms of euclidean distance of moving from the parent to this node
-//                    double cost = parent.getPathCost() + calculateCost(parent, node);
-//                    if (cost < node.getPathCost()) {
-//                        node.setPathCost(cost);
-//                        node.setParent(parent);
-//                        toProcess.offer(node);
-//                    }
-//                }
+                        //Set the estimated heuristic cost of visiting this node
+                        if (node != destination && node.getHeuristicCost() == 0) {
+                            node.setHeuristicCost(calculateCost(node, destination));
+                        }
 
+                        //Calculate the cost in terms of euclidean distance of moving from the parent to this node
+                        double cost = parent.getPathCost() + calculateCost(parent, node);
+                        if (cost < node.getPathCost()) {
+                            node.setPathCost(cost);
+                            node.setParent(parent);
+                            toProcess.offer(node);
+                        }
+                    }
+
+                }
+            }
+        } else {
+            //Nodes are being found on the fly
+            while (!toProcess.isEmpty()) {
+                parent = toProcess.peek();
+                parent.visit();
+
+                if (parent.equals(destination)) {
+                    break;
+                } else {
+
+                    //Add the children
+                    for (Coordinates location : Objects.requireNonNull(toProcess.poll()).getNeighbours(imgObj, nodes)) {
+                        //Get the node
+                        MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+
+                        //If there is no node here, make one
+                        if (node == null) {
+                            node = new MazeNode(location.x, location.y);
+                            nodes.put(new Coordinates(location.x, location.y), node);
+                        }
+
+                        //Set the estimated heuristic cost of visiting this node
+                        if (node != destination && node.getHeuristicCost() == 0) {
+                            node.setHeuristicCost(calculateCost(node, destination));
+                        }
+
+                        //Calculate the cost in terms of euclidean distance of moving from the parent to this node
+                        double cost = parent.getPathCost() + calculateCost(parent, node);
+                        if (cost < node.getPathCost()) {
+                            node.setPathCost(cost);
+                            node.setParent(parent);
+                            toProcess.offer(node);
+                        }
+                    }
+
+                }
             }
         }
 
@@ -62,7 +109,10 @@ class AStar {
                 break;
             }
         }
+        System.out.println("Traced path from destination to start.");
     }
+
+
 
     /**
      * Get the path
