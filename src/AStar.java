@@ -67,7 +67,9 @@ class AStar {
                 } else {
 
                     //Add the children
-                    for (Coordinates location : Objects.requireNonNull(toProcess.poll()).getNeighbours(imgObj, nodes)) {
+                    MazeNode current = toProcess.poll();
+                    for (Coordinates location : ImageManipulation.findNeighboursForSingleSolveTime(imgObj, nodes, current.getX(), current.getY())) {
+                    //for (Coordinates location : Objects.requireNonNull(toProcess.poll()).getNeighbours(imgObj, nodes)) {
                         //Get the node
                         MazeNode node = nodes.get(new Coordinates(location.x, location.y));
 

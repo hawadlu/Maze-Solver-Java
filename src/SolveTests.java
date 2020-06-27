@@ -22,10 +22,11 @@ public class SolveTests {
     //Test the smaller mazes
     @Test
     public void test01() {
-        tiny();
-        small();
-        medium();
-        large();
+        //tiny();
+        //small();
+        //medium();
+        //large();
+        huge();
         oneK();
     }
 
@@ -37,6 +38,7 @@ public class SolveTests {
         longs();
         fourK();
         sixK();
+        eightK();
         tenK();
     }
 
@@ -90,6 +92,22 @@ public class SolveTests {
             for (int i = 1; i < 5; i++) {
                 String[] args = new String[]{(standardDir + imageFile), "n", "1", String.valueOf(i)};
                 Solver.main(args);
+            }
+        }
+    }
+
+    public void huge() {
+        ArrayList<String> files = getFiles(standardDir, "huge");
+
+        //Go through each images
+        for (String imageFile: files) {
+            //Exclude uneven
+            if (!imageFile.contains("Uneven")) {
+                //go through each possible way of solving it
+                for (int i = 1; i < 5; i++) {
+                    String[] args = new String[]{(standardDir + imageFile), "n", "1", String.valueOf(i)};
+                    Solver.main(args);
+                }
             }
         }
     }
@@ -190,11 +208,8 @@ public class SolveTests {
 
         //Go through each images
         for (String imageFile: files) {
-            //go through each possible way of solving it
-            for (int i = 1; i < 5; i++) {
-                String[] args = new String[]{(standardDir + imageFile), "y", "2", String.valueOf(i)};
-                Solver.main(args);
-            }
+            String[] args = new String[]{(standardDir + imageFile), "y", "2", "4"};
+            Solver.main(args);
         }
     }
 
