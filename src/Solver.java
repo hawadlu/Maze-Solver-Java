@@ -173,7 +173,9 @@ class Solver {
                 }
             }
         }
-        System.out.println("Found all nodes");
+
+        //Save the current time and reset.
+        midTime = (System.currentTimeMillis() - startTime) / 1000F;
 
         //Calculate the x position of the start and end
         int xStart = 0, xEnd = 0;
@@ -184,17 +186,20 @@ class Solver {
             if (imgObj.isWhite(width, imgObj.getHeight() - 1)) xEnd = width;
         }
 
+        //If the nodes are to be initialised while solving add the start and end now
+        if (!lookForNeighbours) {
+            //Put the start and end in the map
+            nodes.put(new Coordinates(xStart, 0), new MazeNode(xStart, 0));
+            nodes.put(new Coordinates(xEnd, imgObj.getHeight() - 1), new MazeNode(xEnd, imgObj.getHeight() - 1));
+        }
+
+        System.out.println("Found all nodes");
         System.out.println("Start at: " + xStart + ", " + 0);
         System.out.println("End at: " + xEnd + ", " + (imgObj.getHeight() - 1));
         System.out.println("Node count: " + numNodes);
         System.out.println("Approximately " + (float) numNodes / (imgObj.getHeight() * imgObj.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
-
-
-        //Save the current time and reset.
-        midTime = (System.currentTimeMillis() - startTime) / 1000F;
-
-                System.out.println("Solving");
+        System.out.println("Solving");
 
         //Asking the user which method they would like to use to solve the maze
         label:
