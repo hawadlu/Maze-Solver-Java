@@ -352,35 +352,10 @@ public class ImageManipulation {
     }
 
     /**
-     * Strips the image type then adds the 'solved' suffix
-     */
-    private static String insertSuffix(String filePath, String searchType) {
-        StringBuilder finalPath = new StringBuilder();
-        String[] filePathArr = filePath.split("");
-
-        for (String s : filePathArr) {
-            if (s.equals(".")) {
-                finalPath.append(" solved ").append(searchType).append(".");
-            } else if (s.equals("/")) {
-                finalPath.append("/Solved/");
-            } else {
-                finalPath.append(s);
-            }
-        }
-        return finalPath.toString();
-    }
-
-    /**
      * Saves solved images in the images folder
      */
-    private static void saveImage(BufferedImage img, String filePath, String searchType) {
-        //Checking if the folder exists
-        if (!new File("/Images/Solved").isDirectory()) {
-            new File("Images/Solved").mkdir();
-        }
-
+    public static void saveImage(BufferedImage img, String fileName) {
         //Saving the image
-        String fileName = insertSuffix(filePath, searchType);
         try {
             ImageIO.write(img, "png", new File(fileName));
             System.out.println("Image saved as " + fileName);

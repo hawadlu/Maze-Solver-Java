@@ -263,7 +263,7 @@ public class GUI implements ItemListener {
         button.addActionListener(e -> {
             try {
                 BufferedImage solvedImg = Solver.solve(image, selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
-                loadSaveGui(solvedImg);
+                loadSaveGui(solvedImg, selectAlgorithm.getSelectedItem().toString());
             } catch (IOException | IllegalAccessException ioException) {
                 ioException.printStackTrace();
             }
@@ -305,7 +305,7 @@ public class GUI implements ItemListener {
         gui.repaint();
     }
 
-    private void loadSaveGui(BufferedImage image) {
+    private void loadSaveGui(BufferedImage image, String algorithmUsed) {
         final boolean shouldFill = true;
         final boolean shouldWeightX = true;
         final boolean RIGHT_TO_LEFT = false;
@@ -431,42 +431,36 @@ public class GUI implements ItemListener {
         c.gridy = 2;
         primaryGui.add(button, c);
 
-        button = new JButton("Solve");
+        button = new JButton("Save");
+        button.addActionListener(e -> saveImage(image, algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
         c.anchor = GridBagConstraints.PAGE_END; //bottom of space
         c.insets = new Insets(10,0,0,0);  //top padding
         c.gridx = 0;
-        c.gridwidth = 2;
+        c.gridwidth = 6;
         c.gridy = 3;
-        primaryGui.add(button, c);
-
-        button = new JButton("Minimum Spanning Tree");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;       //aligned with button 2
-        c.gridwidth = 2;
-        c.gridy = 3;       //third row
-        primaryGui.add(button, c);
-
-        button = new JButton("Articulation Points");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 4;       //aligned with button 2
-        c.gridwidth = 2;
-        c.gridy = 3;       //third row
         primaryGui.add(button, c);
 
         System.out.println("Repainting primary");
         gui.revalidate();
         gui.repaint();
+    }
+
+    private void saveImage(BufferedImage image, String searchType) {
+        JFileChooser save =new JFileChooser();
+        int ret = save.showSaveDialog(primaryGui);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            String fileName = save.getSelectedFile().getName();
+            String directory = save.getCurrentDirectory().toString();
+            System.out.println(fileName);
+            System.out.println(directory);
+            System.out.println("Concat: " + directory + "/" + fileName);
+            ImageManipulation.saveImage(image, directory + "/" + fileName);
+        } else if (ret == JFileChooser.CANCEL_OPTION) {
+            System.out.println("You pressed cancel");
+        }
     }
 
     @Override
