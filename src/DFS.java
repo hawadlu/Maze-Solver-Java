@@ -2,17 +2,13 @@ import java.util.*;
 
 /**
  * This class solves the maze depth first.
- * It ttakes a start node, end node and and returns a path between them
+ * It takes a start node, end node and and returns a path between them
  */
-class DFS {
-    private int pathSize = 0;
-    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
-
+class DFS extends Algorithms{
     /**
      * Constructor
      */
-    public DFS() {
-    }
+    public DFS() {}
 
     /**
      * Solves the maze node.
@@ -43,29 +39,7 @@ class DFS {
             }
         }
 
-        while (true) {
-            if (parent != null) {
-                path.add(parent);
-                parent = parent.getParent();
-                pathSize++;
-            } else {
-                break;
-            }
-        }
+        //retrace from the parent to the start
+        backtrack(parent);
     }
-
-    /**
-     * Get the path
-     */
-    public ArrayList<MazeNode> getPath() {
-        return path;
-    }
-
-    /**
-     * Return the size of the path
-     */
-    public int getPathSize(){
-        return pathSize;
-    }
-
 }

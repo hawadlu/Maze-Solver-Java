@@ -22,10 +22,10 @@ public class SolveTests {
     //Test the smaller mazes
     @Test
     public void test01() {
-        //tiny();
-        //small();
-        //medium();
-        //large();
+        tiny();
+        small();
+        medium();
+        large();
         huge();
         oneK();
     }

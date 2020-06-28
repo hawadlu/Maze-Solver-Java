@@ -4,15 +4,11 @@ import java.util.*;
  * This class solves the maze breadth first.
  * It takes a start node, end node and and returns a path between them
  */
-class BFS {
-    private int pathSize = 0;
-    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
-
+class BFS extends Algorithms{
     /**
      * Constructor
      */
-    public BFS() {
-    }
+    public BFS() {}
 
     /**
      * Solves the maze node.
@@ -45,29 +41,7 @@ class BFS {
             }
         }
 
-        while (true) {
-            if (parent != null) {
-                path.add(parent);
-                parent = parent.getParent();
-                pathSize++;
-            } else {
-                break;
-            }
-        }
+        //retrace from the parent to the start
+        backtrack(parent);
     }
-
-    /**
-     * Get the path
-     */
-    public ArrayList<MazeNode> getPath() {
-        return path;
-    }
-
-    /**
-     * Return the size of the path
-     */
-    public int getPathSize(){
-        return pathSize;
-    }
-
 }

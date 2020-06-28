@@ -4,15 +4,11 @@ import java.util.*;
  * This class implements an AStar type search
  */
 
-class AStar {
-    private int pathSize = 0;
-    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
-
+class AStar extends Algorithms{
     /**
      * Constructor
      */
-    public AStar() {
-    }
+    public AStar() {}
 
     /**
      * Solves the maze node.
@@ -21,9 +17,7 @@ class AStar {
     public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         System.out.println("Solve started");
         MazeNode parent = null;
-        PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
-        start.setPathCost(0);
-        toProcess.offer(start);
+        PriorityQueue<MazeNode> toProcess = setupQueueWithCost(start);
 
         //Choose how the maze should run based on how many nodes have been added
         if (nodes.size() > 2) {
@@ -45,13 +39,7 @@ class AStar {
                             node.setHeuristicCost(calculateCost(node, destination));
                         }
 
-                        //Calculate the cost in terms of euclidean distance of moving from the parent to this node
-                        double cost = parent.getPathCost() + calculateCost(parent, node);
-                        if (cost < node.getPathCost()) {
-                            node.setPathCost(cost);
-                            node.setParent(parent);
-                            toProcess.offer(node);
-                        }
+                        compareCost(parent, toProcess, node);
                     }
 
                 }
@@ -85,52 +73,15 @@ class AStar {
                         }
 
                         //Calculate the cost in terms of euclidean distance of moving from the parent to this node
-                        double cost = parent.getPathCost() + calculateCost(parent, node);
-                        if (cost < node.getPathCost()) {
-                            node.setPathCost(cost);
-                            node.setParent(parent);
-                            toProcess.offer(node);
-                        }
+                        compareCost(parent, toProcess, node);
                     }
 
                 }
             }
         }
 
-        while (true) {
-            if (parent != null) {
-                path.add(parent);
-                parent = parent.getParent();
-                pathSize++;
-            } else {
-                break;
-            }
-        }
+        //trace the path back to the start
+        backtrack(parent);
         System.out.println("Traced path from destination to start.");
-    }
-
-
-
-    /**
-     * Get the path
-     */
-    public ArrayList<MazeNode> getPath() {
-        return path;
-    }
-
-    /**
-     * Return the size of the path
-     */
-    public int getPathSize(){
-        return pathSize;
-    }
-
-    /**
-     * Calculates the euclidean distance between two nodes
-     */
-    private double calculateCost(MazeNode current, MazeNode other) {
-        double yDist = Math.abs(current.getY() - other.getY());
-        double xDist = Math.abs(current.getX() - other.getX());
-        return Math.sqrt(Math.pow(yDist, 2) + Math.pow(xDist, 2));
     }
 }

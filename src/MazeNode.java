@@ -76,6 +76,7 @@ public class MazeNode implements Comparable<MazeNode>{
     }
 
     public void setPathCost(double newCost) { pathCost = newCost; }
+
     public void setHeuristicCost(double newCost) { heuristicCost = newCost; }
 
 
@@ -92,18 +93,5 @@ public class MazeNode implements Comparable<MazeNode>{
      */
     public int compareTo(MazeNode nextNode) {
         return Double.compare(this.pathCost + this.heuristicCost, nextNode.pathCost + nextNode.heuristicCost);
-    }
-
-
-    /**
-     * Returns true if two opposite squares are white
-     */
-
-    private boolean directOpposite(ImageFile imjObj, int width, int height) {
-        if (width > 0 && width < imjObj.getWidth() && height > 0 && height < imjObj.getHeight()) {
-            return (imjObj.isWhite(width - 1, height) && imjObj.isWhite(width + 1, height)) ||
-                    (imjObj.isWhite(width, height - 1) && imjObj.isWhite(width, height + 1));
-        }
-        return false;
     }
 }
