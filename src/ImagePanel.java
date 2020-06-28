@@ -25,22 +25,25 @@ public class ImagePanel extends JPanel {
         }
     }
 
+    public ImagePanel(BufferedImage image, int width, int height) {
+        this.image = image;
+        this.panelWidth = width;
+        this.panelHeight = height;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         //g.drawImage(image, 50, 50, WIDTH - 100, HEIGHT - 100, this);
 
-        //Scale the image
-        int newWidth = panelWidth - 100;
-        int newHeight = panelHeight - 100;
-        BufferedImage resized = new BufferedImage(newWidth, newHeight, image.getType());
+        BufferedImage resized = new BufferedImage(panelWidth, panelHeight, image.getType());
         Graphics2D g2 = resized.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2.drawImage(image, 0, 0, newWidth, newHeight, 0, 0, image.getWidth(),
+        g2.drawImage(image, 0, 0, panelWidth, panelHeight, 0, 0, image.getWidth(),
                 image.getHeight(), null);
         g2.dispose();
 
-        g.drawImage(resized, 50, 50, this); // see javadoc for more info on the parameters
+        g.drawImage(resized, 0, 0, this);
     }
 }

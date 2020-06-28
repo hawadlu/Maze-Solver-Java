@@ -16,7 +16,7 @@ public class ImageManipulation {
     /**
      * This method draws the solved maze and returns it
      */
-    public static void drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, String filePath, String searchType) {
+    public static BufferedImage drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
         BufferedImage save = new BufferedImage(imgObj.getWidth(), imgObj.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -73,8 +73,7 @@ public class ImageManipulation {
                 }
             }
         }
-
-        saveImage(save, filePath, searchType);
+        return save;
     }
 
 

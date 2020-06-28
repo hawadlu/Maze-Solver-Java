@@ -21,14 +21,11 @@ class Solver {
     /**
      * Solves the maze
      */
-    private void solve(ImageFile imgObj, String filePath, boolean lookForNeighbours, boolean commadLine, String solveArg) throws IOException, IllegalAccessException {
+    public static BufferedImage solve(File image, Object algorithm, Object searchType) throws IOException, IllegalAccessException {
+        //Load the image object
+        ImageFile imgObj = new ImageFile(ImageIO.read(image));
+
         long numNodes = 0;
-
-        //Time tracking variables
-        long startTime;
-        float midTime;
-        startTime = System.currentTimeMillis();
-
 
         //Map containing the positions of each node
         HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
@@ -36,13 +33,10 @@ class Solver {
         System.out.println("Finding nodes");
 
         //Only load this if it is requested
-        if (lookForNeighbours) {
+        if (searchType.equals("Search for neighbours during loading")) {
             nodes = ImageManipulation.findNeighboursForAll(imgObj);
             numNodes = nodes.size();
         }
-
-        //Save the current time and reset.
-        midTime = (System.currentTimeMillis() - startTime) / 1000F;
 
         //Calculate the x position of the start and end
         int xStart = 0, xEnd = 0;
@@ -54,7 +48,7 @@ class Solver {
         }
 
         //If the nodes are to be initialised while solving add the start and end now
-        if (!lookForNeighbours) {
+        if (!searchType.equals("Search for neighbours during loading")) {
             //Put the start and end in the map
             nodes.put(new Coordinates(xStart, 0), new MazeNode(xStart, 0));
             nodes.put(new Coordinates(xEnd, imgObj.getHeight() - 1), new MazeNode(xEnd, imgObj.getHeight() - 1));
@@ -68,59 +62,17 @@ class Solver {
         System.out.println("Finding neighbours");
         System.out.println("Solving");
 
-        //Asking the user which method they would like to use to solve the maze
-        label:
-        while (true) {
-            String answer;
-            if (commadLine) {
-                answer = solveArg;
-            } else {
-                answer = getUserInput("Press 1 for DFS \n" +
-                        "Press 2 for BFS \n" +
-                        "Press 3 for Dijkstra \n" +
-                        "Press 4 for AStar ");
-            }
-            switch (answer) {
-                case "1":
-                    startTime = System.currentTimeMillis();
-                    if (imgObj.getWidth() * imgObj.getHeight() > Math.pow(6000, 2)) {
-                        System.out.println("Maze to large for DFS. Using AStar instead.");
-                        SolveMethods.solveAStar(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-                    } else {
-                        SolveMethods.solveDFS(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-
-                    }
-                    break label;
-                case "2":
-                    startTime = System.currentTimeMillis();
-                    //Moving to faster algorithm if required
-                    if (imgObj.getWidth() * imgObj.getHeight() > Math.pow(999, 2)) {
-                        System.out.println("Maze to large for BFS. Using AStar instead.");
-                        SolveMethods.solveAStar(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-
-                    } else {
-                        SolveMethods.solveBFS(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-                    }
-                    break label;
-                case "3":
-                    startTime = System.currentTimeMillis();
-                    SolveMethods.solveDijkstra(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-
-                    break label;
-                case "4":
-                    startTime = System.currentTimeMillis();
-                    SolveMethods.solveAStar(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), filePath, nodes);
-
-                    break label;
-                default:
-                    System.out.println("Invalid input!");
-                    break;
-            }
+        //Determine the method that should be used to solve the maze
+        //todo implement automatic switching for larger mazes
+        if (algorithm.equals("Depth First")) {
+            return SolveMethods.solveDFS(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), nodes);
+        } else if (algorithm.equals("Breadth First")) {
+            return SolveMethods.solveBFS(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), nodes);
+        } else if (algorithm.equals("Dijkstra")) {
+            return SolveMethods.solveDijkstra(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), nodes);
+        } else {
+            return SolveMethods.solveAStar(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), nodes);
         }
-
-        //Print the time at the end
-        float seconds = ((System.currentTimeMillis() - startTime) / 1000F) + midTime;
-        System.out.println("Time spent solving: " + seconds + "s");
     }
 
     /**

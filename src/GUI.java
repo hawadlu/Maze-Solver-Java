@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
@@ -15,7 +17,7 @@ public class GUI implements ItemListener {
     JFrame gui = new JFrame("Maze Solver");
     JMenuBar topBar = new JMenuBar();
     JPanel primaryGui = new JPanel();
-    int WIDTH = 600, HEIGHT = 600;
+    int WIDTH = 1000, HEIGHT = 1000;
 
     /**
      * Constructor that loads the gui
@@ -81,8 +83,8 @@ public class GUI implements ItemListener {
         primaryGui.removeAll();
         //Setup constraints
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
-        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.gridwidth = WIDTH;
+        constraints.anchor = GridBagConstraints.LINE_START;
         constraints.fill= GridBagConstraints.HORIZONTAL;
 
         //Setup JPanel
@@ -97,6 +99,7 @@ public class GUI implements ItemListener {
         generateButton.addActionListener(e -> generateMaze());
 
         System.out.println("Repainting primary");
+        primaryGui.setBackground(Color.PINK);
         primaryGui.revalidate();
         primaryGui.repaint();
         gui.revalidate();
@@ -146,49 +149,133 @@ public class GUI implements ItemListener {
             c.fill = GridBagConstraints.HORIZONTAL;
         }
 
-        button = new JButton("Button 1");
+        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
+        JComboBox selectAlgorithm = new JComboBox(algorithms);
+        selectAlgorithm.setSelectedIndex(3);
         if (shouldWeightX) {
             c.weightx = 0.5;
         }
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        primaryGui.add(button, c);
+        primaryGui.add(selectAlgorithm, c);
 
-        button = new JButton("Button 2");
+        //todo, display a dialogue box explaining the tradeoffs
+        String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
+        JComboBox selectSearch = new JComboBox(searchType);
+        selectSearch.setSelectedIndex(0);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 0;
-        primaryGui.add(button, c);
+        primaryGui.add(selectSearch, c);
 
-        button = new JButton("Button 3");
+
+        String[] file = image.getAbsolutePath().split("/");
+        JLabel fileName = new JLabel("File name: " + file[file.length - 1]);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 2;
         c.gridy = 0;
-        primaryGui.add(button, c);
+        primaryGui.add(fileName, c);
 
+        //The Image
+        JPanel displayImg = new ImagePanel(image, 750, 750);
+        displayImg.setBackground(Color.magenta);
+        displayImg.setSize(750, 750);
 
-        JPanel displayImg = new ImagePanel(image, WIDTH, HEIGHT);
-        displayImg.setBackground(Color.DARK_GRAY);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 500;      //make this component tall
+        c.ipady = 750;
         c.weightx = 0.0;
         c.gridwidth = 3;
         c.gridx = 0;
         c.gridy = 1;
         primaryGui.add(displayImg, c);
 
-        button = new JButton("Solve");
+
+        button = new JButton("▲");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
         c.anchor = GridBagConstraints.PAGE_END; //bottom of space
         c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 0;       //aligned with button 2
-        c.gridwidth = 1;   //2 columns wide
-        c.gridy = 2;       //third row
+        c.gridx = 0;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("▼");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 1;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("+");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 2;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("-");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 3;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("<");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 4;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton(">");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 5;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("Solve");
+        button.addActionListener(e -> {
+            try {
+                BufferedImage solvedImg = Solver.solve(image, selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
+                loadSaveGui(solvedImg);
+            } catch (IOException | IllegalAccessException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 3;
         primaryGui.add(button, c);
 
         button = new JButton("Minimum Spanning Tree");
@@ -197,9 +284,9 @@ public class GUI implements ItemListener {
         c.weighty = 1.0;   //request any extra vertical space
         c.anchor = GridBagConstraints.PAGE_END; //bottom of space
         c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 1;       //aligned with button 2
-        c.gridwidth = 1;
-        c.gridy = 2;       //third row
+        c.gridx = 2;       //aligned with button 2
+        c.gridwidth = 2;
+        c.gridy = 3;       //third row
         primaryGui.add(button, c);
 
         button = new JButton("Articulation Points");
@@ -208,9 +295,173 @@ public class GUI implements ItemListener {
         c.weighty = 1.0;   //request any extra vertical space
         c.anchor = GridBagConstraints.PAGE_END; //bottom of space
         c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;       //aligned with button 2
+        c.gridx = 4;       //aligned with button 2
+        c.gridwidth = 2;
+        c.gridy = 3;       //third row
+        primaryGui.add(button, c);
+
+        System.out.println("Repainting primary");
+        gui.revalidate();
+        gui.repaint();
+    }
+
+    private void loadSaveGui(BufferedImage image) {
+        final boolean shouldFill = true;
+        final boolean shouldWeightX = true;
+        final boolean RIGHT_TO_LEFT = false;
+        primaryGui.removeAll();
+        if (RIGHT_TO_LEFT) {
+            primaryGui.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        }
+
+        JButton button;
+        primaryGui.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        if (shouldFill) {
+            //natural height, maximum width
+            c.fill = GridBagConstraints.HORIZONTAL;
+        }
+
+        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
+        JComboBox selectAlgorithm = new JComboBox(algorithms);
+        selectAlgorithm.setSelectedIndex(3);
+        if (shouldWeightX) {
+            c.weightx = 0.5;
+        }
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        primaryGui.add(selectAlgorithm, c);
+
+        //todo, display a dialogue box explaining the tradeoffs
+        String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
+        JComboBox selectSearch = new JComboBox(searchType);
+        selectSearch.setSelectedIndex(0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        primaryGui.add(selectSearch, c);
+
+
+        JLabel fileName = new JLabel("File name: ");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        primaryGui.add(fileName, c);
+
+        //The Image
+        JPanel displayImg = new ImagePanel(image, 750, 750);
+        displayImg.setBackground(Color.magenta);
+        displayImg.setSize(750, 750);
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 750;
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+        primaryGui.add(displayImg, c);
+
+
+        button = new JButton("▲");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 0;
         c.gridwidth = 1;
-        c.gridy = 2;       //third row
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("▼");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 1;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("+");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 2;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("-");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 3;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("<");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 4;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton(">");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 5;
+        c.gridwidth = 1;
+        c.gridy = 2;
+        primaryGui.add(button, c);
+
+        button = new JButton("Solve");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 3;
+        primaryGui.add(button, c);
+
+        button = new JButton("Minimum Spanning Tree");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 2;       //aligned with button 2
+        c.gridwidth = 2;
+        c.gridy = 3;       //third row
+        primaryGui.add(button, c);
+
+        button = new JButton("Articulation Points");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 4;       //aligned with button 2
+        c.gridwidth = 2;
+        c.gridy = 3;       //third row
         primaryGui.add(button, c);
 
         System.out.println("Repainting primary");
