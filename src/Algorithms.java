@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+/**
+ * Class containing common method implementations and variables used between the various solve algorithms
+ */
+public class Algorithms {
+    public int pathSize = 0;
+    public final ArrayList<MazeNode> path = new ArrayList<>(); //The path
+
+
+    /**
+     * Get the path
+     */
+    public ArrayList<MazeNode> getPath() {
+        return path;
+    }
+
+    /**
+     * Return the size of the path
+     */
+    public int getPathSize(){
+        return pathSize;
+    }
+
+    /**
+     * Setup a priority queue
+     * @param start the node to put in first
+     * @return the new queue
+     */
+    public PriorityQueue<MazeNode> setupQueueWithCost(MazeNode start) {
+        PriorityQueue<MazeNode> toProcess = new PriorityQueue<>();
+        start.setPathCost(0);
+        toProcess.offer(start);
+        return toProcess;
+    }
+
+    /**
+     * Trace the path from the parent back to the start
+     * @param parent the node at the end
+     */
+    public void backtrack(MazeNode parent) {
+        while (true) {
+            if (parent != null) {
+                path.add(parent);
+                parent = parent.getParent();
+                pathSize++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Calculates the euclidean distance between two nodes
+     */
+    public double calculateCost(MazeNode current, MazeNode other) {
+        double yDist = Math.abs(current.getY() - other.getY());
+        double xDist = Math.abs(current.getX() - other.getX());
+        return Math.sqrt(Math.pow(yDist, 2) + Math.pow(xDist, 2));
+    }
+
+    /**
+     * Compare the cost of two nodes to decide what should happen
+     * @param parent Parent of the current node
+     * @param toProcess the priority queue
+     * @param node the current node
+     */
+    public void compareCost(MazeNode parent, PriorityQueue<MazeNode> toProcess, MazeNode node) {
+        //The cost function calculates the euclidean distance between this node and the start.
+        double cost = parent.getPathCost() + calculateCost(parent, node);
+        if (cost < node.getPathCost()) {
+            node.setPathCost(cost);
+            node.setParent(parent);
+            toProcess.offer(node);
+        }
+    }
+}

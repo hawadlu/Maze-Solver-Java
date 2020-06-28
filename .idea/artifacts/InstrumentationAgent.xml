@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InstrumentationAgent">
+    <output-path>$PROJECT_DIR$/out/artifacts/InstrumentationAgent</output-path>
+    <root id="archive" name="InstrumentationAgent.jar">
+      <element id="file-copy" path="$PROJECT_DIR$/src/Instrumentation/InstrumentationAgent.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/Instrumentation/MANIFEST.MF" />
+    </root>
+  </artifact>
+</component>

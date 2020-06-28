@@ -4,21 +4,17 @@ import java.util.*;
  * This class solves the maze breadth first.
  * It takes a start node, end node and and returns a path between them
  */
-class BFS {
-    private int pathSize = 0;
-    private final ArrayList<MazeNode> path = new ArrayList<>(); //The path
-
+class BFS extends Algorithms{
     /**
      * Constructor
      */
-    public BFS() {
-    }
+    public BFS() {}
 
     /**
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(MazeNode start, MazeNode destination) {
+    public void solve(MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         MazeNode parent = null;
         Queue<MazeNode> toProcess = new ArrayDeque<>();
         start.visit();
@@ -33,7 +29,10 @@ class BFS {
             } else {
 
                 //Add all children
-                for (MazeNode node : Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                for (Coordinates location: Objects.requireNonNull(toProcess.poll()).getNeighbours()) {
+                    //Get the node
+
+                    MazeNode node = nodes.get(new Coordinates(location.x, location.y));
                     if (!node.isVisited()) {
                         node.setParent(parent);
                         toProcess.offer(node);
@@ -42,29 +41,7 @@ class BFS {
             }
         }
 
-        while (true) {
-            if (parent != null) {
-                path.add(parent);
-                parent = parent.getParent();
-                pathSize++;
-            } else {
-                break;
-            }
-        }
+        //retrace from the parent to the start
+        backtrack(parent);
     }
-
-    /**
-     * Get the path
-     */
-    public ArrayList<MazeNode> getPath() {
-        return path;
-    }
-
-    /**
-     * Return the size of the path
-     */
-    public int getPathSize(){
-        return pathSize;
-    }
-
 }
