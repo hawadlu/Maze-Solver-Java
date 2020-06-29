@@ -1,14 +1,13 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
+
+//todo, clean this code up
 
 /**
  * Class that controls the gui of the program.
@@ -35,6 +34,14 @@ public class GUI implements ItemListener {
         gui.getContentPane().add(BorderLayout.NORTH, topBar);
         gui.getContentPane().add(BorderLayout.CENTER, primaryGui);
         gui.setVisible(true);
+    }
+
+    /**
+     * Display an error message popup
+     * @param message the message
+     */
+    public static void displayError(JPanel parentComponent, String message) {
+        JOptionPane.showMessageDialog(parentComponent, message);
     }
 
     /**
@@ -95,7 +102,13 @@ public class GUI implements ItemListener {
         primaryGui.add(generateButton, constraints);
 
         //Make the buttons do stuff when they are clicked
-        solveButton.addActionListener(e -> loadImage());
+        solveButton.addActionListener(e -> {
+            try {
+                loadImage();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         generateButton.addActionListener(e -> generateMaze());
 
         System.out.println("Repainting primary");
@@ -111,12 +124,11 @@ public class GUI implements ItemListener {
         System.out.println("Generate maze");
     }
 
-    //todo implement me
 
     /**
      * Get the file that the user wants to use and then call the relevant load and solve methods
      */
-    private void loadImage() {
+    private void loadImage() throws IOException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -126,13 +138,13 @@ public class GUI implements ItemListener {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
 
-            loadSolveOptionsGui(fileIn);
+            loadSolveOptionsGui(ImageIO.read(fileIn), fileIn, null);
         } else {
             throw new Error("Failed to open file");
         }
     }
 
-    private void loadSolveOptionsGui(File image) {
+    private void loadSolveOptionsGui(BufferedImage image, File fileIn, ImagePanel imgPanel) throws IOException {
         final boolean shouldFill = true;
         final boolean shouldWeightX = true;
         final boolean RIGHT_TO_LEFT = false;
@@ -171,7 +183,7 @@ public class GUI implements ItemListener {
         primaryGui.add(selectSearch, c);
 
 
-        String[] file = image.getAbsolutePath().split("/");
+        String[] file = fileIn.getAbsolutePath().split("/");
         JLabel fileName = new JLabel("File name: " + file[file.length - 1]);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
@@ -180,7 +192,8 @@ public class GUI implements ItemListener {
         primaryGui.add(fileName, c);
 
         //The Image
-        JPanel displayImg = new ImagePanel(image, 750, 750);
+        if (imgPanel == null) imgPanel = new ImagePanel(image, 750, 750);
+        JPanel displayImg = imgPanel;
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
 
@@ -194,6 +207,14 @@ public class GUI implements ItemListener {
 
 
         button = new JButton("▲");
+        ImagePanel finalImgPanel3 = imgPanel;
+        button.addActionListener(e -> {
+            try {
+                loadSolveOptionsGui(finalImgPanel3.panUp(primaryGui), fileIn, finalImgPanel3);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -205,6 +226,16 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("▼");
+        ImagePanel finalImgPanel4 = imgPanel;
+        button.addActionListener(e -> {
+            try {
+                if (finalImgPanel4.panDown(primaryGui) != null) {
+                    loadSolveOptionsGui(finalImgPanel4.getModified(), fileIn, finalImgPanel4);
+                }
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -216,6 +247,14 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("+");
+        ImagePanel finalImgPanel = imgPanel;
+        button.addActionListener(e -> {
+            try {
+                loadSolveOptionsGui(finalImgPanel.zoomIn(), fileIn, finalImgPanel);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -227,6 +266,13 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("-");
+        button.addActionListener(e -> {
+            try {
+                loadSolveOptionsGui(finalImgPanel.zoomOut(), fileIn, finalImgPanel);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -238,6 +284,14 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("<");
+        ImagePanel finalImgPanel2 = imgPanel;
+        button.addActionListener(e -> {
+            try {
+                loadSolveOptionsGui(finalImgPanel2.panLeft(), fileIn, finalImgPanel2);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -249,6 +303,14 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton(">");
+        ImagePanel finalImgPanel1 = imgPanel;
+        button.addActionListener(e -> {
+            try {
+                loadSolveOptionsGui(finalImgPanel1.panRight(), fileIn, finalImgPanel1);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -352,7 +414,8 @@ public class GUI implements ItemListener {
         primaryGui.add(fileName, c);
 
         //The Image
-        JPanel displayImg = new ImagePanel(image, 750, 750);
+        ImagePanel imgPanel = new ImagePanel(image, 750, 750);
+        JPanel displayImg = imgPanel;
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
 
@@ -366,6 +429,7 @@ public class GUI implements ItemListener {
 
 
         button = new JButton("▲");
+        button.addActionListener(e -> loadSaveGui(imgPanel.panUp(primaryGui), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -377,6 +441,7 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("▼");
+        button.addActionListener(e -> loadSaveGui(imgPanel.panDown(primaryGui), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -388,6 +453,7 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("+");
+        button.addActionListener(e -> loadSaveGui(imgPanel.zoomIn(), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -399,6 +465,7 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("-");
+        button.addActionListener(e -> loadSaveGui(imgPanel.zoomOut(), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -410,6 +477,7 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton("<");
+        button.addActionListener(e -> loadSaveGui(imgPanel.panLeft(), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space
@@ -421,6 +489,7 @@ public class GUI implements ItemListener {
         primaryGui.add(button, c);
 
         button = new JButton(">");
+        button.addActionListener(e -> loadSaveGui(imgPanel.panRight(), algorithmUsed));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;       //reset to default
         c.weighty = 1.0;   //request any extra vertical space

@@ -21,9 +21,9 @@ class Solver {
     /**
      * Solves the maze
      */
-    public static BufferedImage solve(File image, Object algorithm, Object searchType) throws IOException, IllegalAccessException {
+    public static BufferedImage solve(BufferedImage image, Object algorithm, Object searchType) throws IOException, IllegalAccessException {
         //Load the image object
-        ImageFile imgObj = new ImageFile(ImageIO.read(image));
+        ImageFile imgObj = new ImageFile(image);
 
         long numNodes = 0;
 
