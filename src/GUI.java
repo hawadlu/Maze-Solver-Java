@@ -206,6 +206,13 @@ public class GUI implements ItemListener {
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame.setSize(400, 300);
                         frame.setVisible(true);
+
+                        while (!this.isInterrupted()) {
+                            //Don't do anything here
+                        }
+                        frame.setVisible(false);
+                        System.out.println("Stopping spinner thread");
+                        stop();
                     }
                 };
 
@@ -219,14 +226,16 @@ public class GUI implements ItemListener {
                             illegalAccessException.printStackTrace();
                         }
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
-                        System.out.println("Stopping thread");
-                        notify();
+                        try {
+                            spinner.interrupt();
+                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     }
                 };
                 solver.start();
                 spinner.start();
-                wait();
-                loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
             } catch (Exception error) {
                 error.printStackTrace();
             }
