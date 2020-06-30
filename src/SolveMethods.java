@@ -11,7 +11,7 @@ public class SolveMethods {
     public static BufferedImage solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         DFS dfs = new DFS();
-        dfs.solve(start, destination, nodes);
+        dfs.solve(imgObj, start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
         System.out.println("Drawing image");
@@ -27,7 +27,7 @@ public class SolveMethods {
 
         //Create a BFS object
         BFS bfs = new BFS();
-        bfs.solve(start, destination, nodes);
+        bfs.solve(imgObj, start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
         System.out.println("Drawing image");
@@ -42,7 +42,7 @@ public class SolveMethods {
     public static BufferedImage solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         Dijkstra dijkstra = new Dijkstra();
-        dijkstra.solve(start, destination, nodes);
+        dijkstra.solve(imgObj, start, destination, nodes);
 
         System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
         System.out.println("Drawing image");
