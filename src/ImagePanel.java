@@ -60,7 +60,7 @@ public class ImagePanel extends JPanel {
 
         //Only crop if the image is large enough
         if (toCrop.getWidth() < 40) {
-            GUI.displayError(parentComponent, "Cannot zoom in any further");
+            GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             return;
         }
         modified = toCrop.getSubimage(10, 10, toCrop.getWidth() - 20, toCrop.getHeight() - 20);
@@ -75,7 +75,7 @@ public class ImagePanel extends JPanel {
      */
     public void zoomOut() {
         if (modified == null || modified.getHeight() == image.getHeight() && modified.getWidth() == image.getWidth()) {
-            GUI.displayError(parentComponent, "Cannot zoom out any further");
+            GUI.displayMessage(parentComponent, "Cannot zoom out any further");
             return;
         }
         //Deal with the cases where the image is at the far left or right
@@ -107,7 +107,7 @@ public class ImagePanel extends JPanel {
      */
     public void panRight() {
         if (modified == null || currentX + modified.getWidth() == image.getWidth()) {
-            GUI.displayError(parentComponent, "Cannot pan right any further");
+            GUI.displayMessage(parentComponent, "Cannot pan right any further");
             return;
         }
         currentX += 10;
@@ -119,7 +119,7 @@ public class ImagePanel extends JPanel {
      */
     public void panLeft() {
         if (modified == null || currentX == 0) {
-            GUI.displayError(parentComponent, "Cannot pan left any further");
+            GUI.displayMessage(parentComponent, "Cannot pan left any further");
             return;
         }
         currentX -= 10;
@@ -131,10 +131,10 @@ public class ImagePanel extends JPanel {
      */
     public void panUp() {
         if (modified == null) {
-            GUI.displayError(parentComponent, "You need to zoom in first");
+            GUI.displayMessage(parentComponent, "You need to zoom in first");
             return;
         } else if (currentY == 0) {
-            GUI.displayError(parentComponent, "Cannot pan up any further");
+            GUI.displayMessage(parentComponent, "Cannot pan up any further");
             return;
         }
         currentY -= 10;
@@ -146,10 +146,10 @@ public class ImagePanel extends JPanel {
      */
     public void panDown() {
         if (modified == null) {
-            GUI.displayError(parentComponent, "You need to zoom in first");
+            GUI.displayMessage(parentComponent, "You need to zoom in first");
             return;
         } else if (currentY + modified.getHeight() == image.getHeight()) {
-            GUI.displayError(parentComponent, "Cannot pan down any further");
+            GUI.displayMessage(parentComponent, "Cannot pan down any further");
             return;
         }
         currentY += 10;
@@ -169,7 +169,15 @@ public class ImagePanel extends JPanel {
     /**
      * @return the original image
      */
-    public BufferedImage getOrignalImage() {
+    public BufferedImage getOriginalImage() {
         return image;
+    }
+
+    /**
+     * If the maze has been solved, put the solved image here
+     * @param solvedImg the solved maze
+     */
+    public void setImage(BufferedImage solvedImg) {
+        image = solvedImg;
     }
 }

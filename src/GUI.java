@@ -18,7 +18,7 @@ public class GUI implements ItemListener {
     JPanel primaryGui = new JPanel();
     int WIDTH = 1000, HEIGHT = 1000;
     ImagePanel imgPanel = null;
-    SixByThree sixByThree = null;
+    CustomGrid customGrid = null;
 
     /**
      * Constructor that loads the gui
@@ -42,7 +42,7 @@ public class GUI implements ItemListener {
      * Display an error message popup
      * @param message the message
      */
-    public static void displayError(JPanel parentComponent, String message) {
+    public static void displayMessage(JPanel parentComponent, String message) {
         JOptionPane.showMessageDialog(parentComponent, message);
     }
 
@@ -147,7 +147,7 @@ public class GUI implements ItemListener {
     }
 
     private void loadSolveOptionsGui(File fileIn) throws IOException {
-        if (sixByThree == null) sixByThree = new SixByThree();
+        if (customGrid == null) customGrid = new CustomGrid();
 
         //Set the size
         int panelHeight = 750;
@@ -155,42 +155,85 @@ public class GUI implements ItemListener {
         int elementHeight = 50;
         Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
         Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
-        sixByThree.setSize(panelWidth, panelHeight);
+        customGrid.setSize(panelWidth, panelHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
         JComboBox selectAlgorithm = new JComboBox(algorithms);
         selectAlgorithm.setPreferredSize(panelThirds);
         selectAlgorithm.setSelectedIndex(3);
 
-        sixByThree.addElement(selectAlgorithm, 0, 0, 2);
+        customGrid.addElement(selectAlgorithm, 0, 0, 2);
 
         //todo, display a dialogue box explaining the tradeoffs
         String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
         JComboBox selectSearch = new JComboBox(searchType);
         selectSearch.setSelectedIndex(0);
-        sixByThree.setFill(GridBagConstraints.HORIZONTAL);
+        customGrid.setFill(GridBagConstraints.HORIZONTAL);
         selectSearch.setPreferredSize(panelThirds);
-        sixByThree.addElement(selectSearch, 2, 0, 2);
+        customGrid.addElement(selectSearch, 2, 0, 2);
 
 
         String[] file = fileIn.getAbsolutePath().split("/");
         JLabel fileName = new JLabel("File name: " + file[file.length - 1]);
         fileName.setPreferredSize(panelThirds);
-        sixByThree.addElement(fileName, 4, 0, 2);
+        customGrid.addElement(fileName, 4, 0, 2);
 
+        //Display the image
+        displayImage(fileIn, 0, 1, 6);
+
+        makeImageControlButtons(fileIn, panelSixths);
+
+        JButton generic = new JButton("Solve");
+        generic.addActionListener(e -> {
+            try {
+                BufferedImage solvedImg = Solver.solve(imgPanel.getOriginalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
+                imgPanel.setImage(solvedImg); //Save the solved image
+                loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
+            } catch (IOException | IllegalAccessException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        generic.setPreferredSize(panelThirds);
+        customGrid.addElement(generic, 0, 3, 2);
+
+        generic = new JButton("Minimum Spanning Tree");
+        generic.setPreferredSize(panelThirds);
+        customGrid.addElement(generic,2, 3, 2);
+
+        generic = new JButton("Articulation Points");
+        generic.setPreferredSize(panelThirds);
+        customGrid.addElement(generic, 4, 3, 2);
+
+        System.out.println("Repainting primary");
+        gui.revalidate();
+        gui.repaint();
+    }
+
+    /**
+     * Displays the image
+     * @param fileIn the file containing the image
+     * @throws IOException happens when there's a problem
+     */
+    private void displayImage(File fileIn, int gridX, int gridY, int gridWidth) throws IOException {
         //The Image
         if (imgPanel == null) imgPanel = new ImagePanel(ImageIO.read(fileIn), 750, 750, primaryGui);
         JPanel displayImg = imgPanel;
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
 
-        //todo, may need to reset sixByThree after ipady is set to 750
-        sixByThree.setIpadY(750);
-        sixByThree.setIpadX(750);
-        sixByThree.addElement(displayImg, 0, 1, 6);
-        sixByThree.setIpadY(0);
-        sixByThree.setIpadX(0);
+        customGrid.setIpadY(750);
+        customGrid.setIpadX(750);
+        customGrid.addElement(displayImg, gridX, gridY, gridWidth);
+        customGrid.setIpadY(0);
+        customGrid.setIpadX(0);
+    }
 
+    /**
+     * Make teh control buttons for the images
+     * @param fileIn the file, used for making the image if required
+     * @param panelSixths the size of each sixth of the grid in the x direction
+     */
+    private void makeImageControlButtons(File fileIn, Dimension panelSixths) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
         generic.addActionListener(e -> {
@@ -202,7 +245,7 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 0, 2, 1);
+        customGrid.addElement(generic, 0, 2, 1);
 
         generic = new JButton("▼");
         generic.addActionListener(e -> {
@@ -214,7 +257,7 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 1, 2, 1);
+        customGrid.addElement(generic, 1, 2, 1);
 
         generic = new JButton("+");
         generic.addActionListener(e -> {
@@ -226,7 +269,7 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 2, 2, 1);
+        customGrid.addElement(generic, 2, 2, 1);
 
         generic = new JButton("-");
         generic.addActionListener(e -> {
@@ -238,7 +281,7 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 3, 2, 1);
+        customGrid.addElement(generic, 3, 2, 1);
 
         generic = new JButton("<");
         generic.addActionListener(e -> {
@@ -250,7 +293,7 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 4, 2, 1);
+        customGrid.addElement(generic, 4, 2, 1);
 
         generic = new JButton(">");
         generic.addActionListener(e -> {
@@ -262,211 +305,66 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelSixths);
-        sixByThree.addElement(generic, 5, 2, 1);
+        customGrid.addElement(generic, 5, 2, 1);
+    }
 
+    /**
+     * Gui that allows the user the save an image
+     * @param algorithmUsed the algorithm that was used to solve the maze
+     * @param fileIn file containing the image
+     * @throws IOException something bad happened
+     */
+    private void loadSaveGui(String algorithmUsed, File fileIn) throws IOException {
+        customGrid = new CustomGrid();
+        Dimension panelHalves = new Dimension(750 / 2, 50);
 
-        generic = new JButton("Solve");
-        generic.addActionListener(e -> {
+        //Small title
+        JLabel fileName = new JLabel("Solved using " + algorithmUsed);
+        //todo use the values already defined in loadSolveOptionsGui
+        fileName.setPreferredSize(new Dimension(750, 50));
+        customGrid.addElement(fileName, 0, 0, 2);
+
+        //The Image
+        displayImage(fileIn, 0, 1, 2);
+
+        //todo reset image panel on save and solve
+        JButton save = new JButton("Save");
+        save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
+        save.setPreferredSize(panelHalves);
+        customGrid.addElement(save, 0, 2, 1);
+
+        JButton diffImg = new JButton("Use a different image");
+        diffImg.addActionListener(e -> {
             try {
-                BufferedImage solvedImg = Solver.solve(imgPanel.getOrignalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
-                imgPanel = new ImagePanel(solvedImg, 750, 750, primaryGui);
-                loadSaveGui(selectAlgorithm.getSelectedItem().toString());
-            } catch (IOException | IllegalAccessException ioException) {
+                //reset the image panel
+                imgPanel = null;
+                loadSolveOptionsGui(fileIn);
+            } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         });
-        generic.setPreferredSize(panelThirds);
-        sixByThree.addElement(generic, 0, 3, 2);
+        diffImg.setPreferredSize(panelHalves);
+        customGrid.addElement(diffImg, 1, 2, 1);
 
-        generic = new JButton("Minimum Spanning Tree");
-        generic.setPreferredSize(panelThirds);
-        sixByThree.addElement(generic,2, 3, 2);
-
-        generic = new JButton("Articulation Points");
-        generic.setPreferredSize(panelThirds);
-        sixByThree.addElement(generic, 4, 3, 2);
 
         System.out.println("Repainting primary");
         gui.revalidate();
         gui.repaint();
     }
 
-    private void loadSaveGui(String algorithmUsed) {
-        final boolean shouldFill = true;
-        final boolean shouldWeightX = true;
-        final boolean RIGHT_TO_LEFT = false;
-        primaryGui.removeAll();
-        if (RIGHT_TO_LEFT) {
-            primaryGui.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
-
-        JButton button;
-        primaryGui.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        if (shouldFill) {
-            //natural height, maximum width
-            c.fill = GridBagConstraints.HORIZONTAL;
-        }
-
-        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
-        JComboBox selectAlgorithm = new JComboBox(algorithms);
-        selectAlgorithm.setSelectedIndex(3);
-        if (shouldWeightX) {
-            c.weightx = 0.5;
-        }
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        primaryGui.add(selectAlgorithm, c);
-
-        //todo, display a dialogue box explaining the tradeoffs
-        String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
-        JComboBox selectSearch = new JComboBox(searchType);
-        selectSearch.setSelectedIndex(0);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
-        primaryGui.add(selectSearch, c);
-
-
-        JLabel fileName = new JLabel("File name: ");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 0;
-        primaryGui.add(fileName, c);
-
-        JPanel displayImg = imgPanel;
-        displayImg.setBackground(Color.magenta);
-        displayImg.setSize(750, 750);
-
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 750;
-        c.weightx = 0.0;
-        c.gridwidth = 3;
-        c.gridx = 0;
-        c.gridy = 1;
-        primaryGui.add(displayImg, c);
-
-
-        button = new JButton("▲");
-        button.addActionListener(e -> {
-                imgPanel.panUp();
-                loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 0;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton("▼");
-        button.addActionListener(e -> {
-            imgPanel.panDown();
-            loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 1;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton("+");
-        button.addActionListener(e -> {
-            imgPanel.zoomIn();
-            loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton("-");
-        button.addActionListener(e -> {
-            imgPanel.zoomOut();
-            loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 3;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton("<");
-        button.addActionListener(e -> {
-            imgPanel.panLeft();
-            loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 4;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton(">");
-        button.addActionListener(e -> {
-            imgPanel.panRight();
-            loadSaveGui(algorithmUsed);
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 5;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
-
-        button = new JButton("Save");
-        button.addActionListener(e -> saveImage(imgPanel.getOrignalImage()));
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 0;
-        c.gridwidth = 6;
-        c.gridy = 3;
-        primaryGui.add(button, c);
-
-        System.out.println("Repainting primary");
-        gui.revalidate();
-        gui.repaint();
-    }
-
+    /**
+     * Save the image in a place of the users choice
+     * @param image the image to save
+     */
     private void saveImage(BufferedImage image) {
         JFileChooser save =new JFileChooser();
         int ret = save.showSaveDialog(primaryGui);
         if (ret == JFileChooser.APPROVE_OPTION) {
             String fileName = save.getSelectedFile().getName();
             String directory = save.getCurrentDirectory().toString();
-            System.out.println(fileName);
-            System.out.println(directory);
-            System.out.println("Concat: " + directory + "/" + fileName);
-            ImageManipulation.saveImage(image, directory + "/" + fileName);
+            String filePath = directory + "/" + fileName;
+            ImageManipulation.saveImage(image, filePath);
+            displayMessage(primaryGui, "Imaged as: " + filePath);
         } else if (ret == JFileChooser.CANCEL_OPTION) {
             System.out.println("You pressed cancel");
         }
@@ -478,17 +376,17 @@ public class GUI implements ItemListener {
     }
 
     /**
-     * Class that deals with six by three grids
+     * Class that allows me to easily make custom grids
      */
     //todo make it so that this does not use a global variable
-    class SixByThree {
+    class CustomGrid {
         GridBagConstraints c = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
 
         /**
          * Setup the grid
          */
-        SixByThree() {
+        CustomGrid() {
             primaryGui.removeAll();
             primaryGui.setLayout(new GridBagLayout());
             c.fill = GridBagConstraints.CENTER;
