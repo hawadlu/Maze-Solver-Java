@@ -198,19 +198,19 @@ public class GUI implements ItemListener {
                 Thread spinner = new Thread() {
                     public void run() {
                         //Spinning wheel
-                        JFrame frame = new JFrame("Test");
+                        JFrame spinnerFrame = new JFrame("Solve");
 
                         ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                        frame.add(new JLabel("loading... ", loading, JLabel.CENTER));
+                        spinnerFrame.add(new JLabel("Solving, please wait... ", loading, JLabel.CENTER));
 
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.setSize(400, 300);
-                        frame.setVisible(true);
+                        spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        spinnerFrame.setSize(300, 150);
+                        spinnerFrame.setVisible(true);
 
                         while (!this.isInterrupted()) {
                             //Don't do anything here
                         }
-                        frame.setVisible(false);
+                        spinnerFrame.setVisible(false);
                         System.out.println("Stopping spinner thread");
                         stop();
                     }
@@ -219,7 +219,7 @@ public class GUI implements ItemListener {
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
-                            solvedImg[0] =Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem());
+                            solvedImg[0] =Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         } catch (IllegalAccessException illegalAccessException) {
@@ -495,6 +495,20 @@ public class GUI implements ItemListener {
          */
         public void setSize(int width, int height) {
             primaryGui.setSize(width, height);
+        }
+
+        /**
+         * Turn off interactions
+         */
+        public void disable(){
+            primaryGui.setEnabled(false);
+        }
+
+        /**
+         * Turn on interactions
+         */
+        public void enable() {
+            primaryGui.setEnabled(true);
         }
     }
 }

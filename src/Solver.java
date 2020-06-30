@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,7 +22,7 @@ class Solver {
     /**
      * Solves the maze
      */
-    public static BufferedImage solve(BufferedImage image, Object algorithm, Object searchType) throws IOException, IllegalAccessException {
+    public static BufferedImage solve(BufferedImage image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
         //Load the image object
         ImageFile imgObj = new ImageFile(image);
 
@@ -31,6 +32,11 @@ class Solver {
         HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
 
         System.out.println("Finding nodes");
+
+        //Validate the parameters
+        ArrayList<Object> parameters = validateParameters(imgObj, algorithm, searchType, parentComponent);
+        algorithm = parameters.get(0);
+        searchType = parameters.get(1);
 
         //Only load this if it is requested
         if (searchType.equals("Search for neighbours during loading")) {
@@ -73,6 +79,41 @@ class Solver {
         } else {
             return SolveMethods.solveAStar(imgObj, nodes.get(new Coordinates(xStart, 0)), nodes.get(new Coordinates(xEnd, imgObj.getHeight() - 1)), nodes);
         }
+    }
+
+    /**
+     * This method looks at the parameters that the user has entered and checks if they are vaible for solving the maze.
+     * @param imgObj the image to solve
+     * @param algorithm the algorithm to use
+     * @param searchType the method for finding neighbours
+     * @return
+     */
+    private static ArrayList<Object> validateParameters(ImageFile imgObj, Object algorithm, Object searchType, JPanel parentComponent) {
+        //Determine the correct algorithm
+        double imgSize = imgObj.getHeight() * imgObj.getWidth();
+        //Really big mazes have to use astar
+        if (imgSize > 64000000 && !algorithm.equals("AStar")) {
+            GUI.displayMessage(parentComponent, "This maze is too large for " + algorithm + ". Using AStar instead.");
+            algorithm = "AStar";
+        } else if (algorithm.equals("Breadth First") && imgSize > 16000000) {
+            GUI.displayMessage(parentComponent, "This maze is too large for " + algorithm + ". Using AStar instead.");
+            algorithm = "AStar";
+        } else if (imgSize > 36000000 && algorithm.equals("Depth First")) {
+            GUI.displayMessage(parentComponent, "This maze is too large for " + algorithm + ". Using AStar instead.");
+            algorithm = "AStar";
+        }
+
+        //Determine the correct neighbour method
+        if (imgSize > 36000000 && searchType.equals("Search for neighbours during loading")) {
+            searchType = "Search for neighbours during solving";
+            GUI.displayMessage(parentComponent, "Looking for neighbours during loading is too memory intensive.\n" +
+                    " Looking for neighbours during solving instead.");
+        }
+
+        ArrayList<Object> toReturn = new ArrayList<>();
+        toReturn.add(algorithm);
+        toReturn.add(searchType);
+        return toReturn;
     }
 
     /**
