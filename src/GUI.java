@@ -7,18 +7,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-//todo, clean this code up
-
 /**
  * Class that controls the gui of the program.
  */
 public class GUI implements ItemListener {
     JFrame gui = new JFrame("Maze Solver");
-    JMenuBar topBar = new JMenuBar();
-    JPanel primaryGui = new JPanel();
     int WIDTH = 1000, HEIGHT = 1000;
     ImagePanel imgPanel = null;
     CustomGrid customGrid = null;
+
+    JPanel primaryGui = new JPanel();
+    JMenuBar topBar = new JMenuBar();
 
     /**
      * Constructor that loads the gui
@@ -212,7 +211,7 @@ public class GUI implements ItemListener {
                         }
                         spinnerFrame.setVisible(false);
                         System.out.println("Stopping spinner thread");
-                        stop();
+                        interrupt();
                     }
                 };
 
