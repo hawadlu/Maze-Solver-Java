@@ -53,8 +53,8 @@ public class GUI implements ItemListener {
         //Create the buttons
         topBar = new JMenuBar();
         topBar.setBackground(Color.YELLOW);
-        Button solveTab = new Button("Solve");
-        Button generateTab = new Button("Generate");
+        Button solveTab = new Button("Solve a Maze");
+        Button generateTab = new Button("Generate a Maze");
         Button gameTab = new Button("Game");
         topBar.add(solveTab);
         topBar.add(generateTab);
@@ -324,35 +324,49 @@ public class GUI implements ItemListener {
      */
     private void loadSaveGui(String algorithmUsed, File fileIn) throws IOException {
         customGrid = new CustomGrid();
-        Dimension panelHalves = new Dimension(750 / 2, 50);
+        Dimension panelThirds = new Dimension(750 / 3, 50);
 
         //Small title
         JLabel fileName = new JLabel("Solved using " + algorithmUsed);
         //todo use the values already defined in loadSolveOptionsGui
         fileName.setPreferredSize(new Dimension(750, 50));
-        customGrid.addElement(fileName, 0, 0, 2);
+        customGrid.addElement(fileName, 0, 0, 6);
 
         //The Image
-        displayImage(fileIn, 0, 1, 2);
+        displayImage(fileIn, 0, 1, 6);
 
         //todo reset image panel on save and solve
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
-        save.setPreferredSize(panelHalves);
+        save.setPreferredSize(panelThirds);
         customGrid.addElement(save, 0, 2, 1);
+
+        JButton reset = new JButton("Reset Maze");
+        reset.addActionListener(e -> {
+            try {
+                customGrid = null;
+                imgPanel.setImage(ImageIO.read(fileIn));
+                loadSolveOptionsGui(fileIn);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        reset.setPreferredSize(panelThirds);
+        customGrid.addElement(reset, 1, 2, 1);
 
         JButton diffImg = new JButton("Use a different image");
         diffImg.addActionListener(e -> {
             try {
                 //reset the image panel
                 imgPanel = null;
-                loadSolveOptionsGui(fileIn);
+                customGrid = null;
+                loadImage();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         });
-        diffImg.setPreferredSize(panelHalves);
-        customGrid.addElement(diffImg, 1, 2, 1);
+        diffImg.setPreferredSize(panelThirds);
+        customGrid.addElement(diffImg, 2, 2, 1);
 
 
         System.out.println("Repainting primary");
