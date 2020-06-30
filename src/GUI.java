@@ -18,6 +18,8 @@ public class GUI implements ItemListener {
     JPanel primaryGui = new JPanel();
     int WIDTH = 1000, HEIGHT = 1000;
     ImagePanel imgPanel = null;
+    SixByThree sixByThree = null;
+
     /**
      * Constructor that loads the gui
      */
@@ -145,51 +147,36 @@ public class GUI implements ItemListener {
     }
 
     private void loadSolveOptionsGui(File fileIn) throws IOException {
-        final boolean shouldFill = true;
-        final boolean shouldWeightX = true;
-        final boolean RIGHT_TO_LEFT = false;
-        primaryGui.removeAll();
-        if (RIGHT_TO_LEFT) {
-            primaryGui.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
+        if (sixByThree == null) sixByThree = new SixByThree();
 
-        JButton button;
-        primaryGui.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        if (shouldFill) {
-            //natural height, maximum width
-            c.fill = GridBagConstraints.HORIZONTAL;
-        }
+        //Set the size
+        int panelHeight = 750;
+        int panelWidth = 750;
+        int elementHeight = 50;
+        Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
+        Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
+        sixByThree.setSize(panelWidth, panelHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
         JComboBox selectAlgorithm = new JComboBox(algorithms);
+        selectAlgorithm.setPreferredSize(panelThirds);
         selectAlgorithm.setSelectedIndex(3);
-        if (shouldWeightX) {
-            c.weightx = 0.5;
-        }
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        primaryGui.add(selectAlgorithm, c);
+
+        sixByThree.addElement(selectAlgorithm, 0, 0, 2);
 
         //todo, display a dialogue box explaining the tradeoffs
         String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
         JComboBox selectSearch = new JComboBox(searchType);
         selectSearch.setSelectedIndex(0);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
-        primaryGui.add(selectSearch, c);
+        sixByThree.setFill(GridBagConstraints.HORIZONTAL);
+        selectSearch.setPreferredSize(panelThirds);
+        sixByThree.addElement(selectSearch, 2, 0, 2);
 
 
         String[] file = fileIn.getAbsolutePath().split("/");
         JLabel fileName = new JLabel("File name: " + file[file.length - 1]);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 0;
-        primaryGui.add(fileName, c);
+        fileName.setPreferredSize(panelThirds);
+        sixByThree.addElement(fileName, 4, 0, 2);
 
         //The Image
         if (imgPanel == null) imgPanel = new ImagePanel(ImageIO.read(fileIn), 750, 750, primaryGui);
@@ -197,18 +184,16 @@ public class GUI implements ItemListener {
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 750;
-        c.weightx = 0.0;
-        c.gridwidth = 3;
-        c.gridx = 0;
-        c.gridy = 1;
-        primaryGui.add(displayImg, c);
+        //todo, may need to reset sixByThree after ipady is set to 750
+        sixByThree.setIpadY(750);
+        sixByThree.setIpadX(750);
+        sixByThree.addElement(displayImg, 0, 1, 6);
+        sixByThree.setIpadY(0);
+        sixByThree.setIpadX(0);
 
-
-        button = new JButton("▲");
-        ImagePanel finalImgPanel3 = imgPanel;
-        button.addActionListener(e -> {
+        //Generic because it is reused several times
+        JButton generic = new JButton("▲");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.panUp();
                 loadSolveOptionsGui(fileIn);
@@ -216,18 +201,11 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 0;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 0, 2, 1);
 
-        button = new JButton("▼");
-        button.addActionListener(e -> {
+        generic = new JButton("▼");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.panDown();
                 loadSolveOptionsGui(fileIn);
@@ -235,18 +213,11 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 1;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 1, 2, 1);
 
-        button = new JButton("+");
-        button.addActionListener(e -> {
+        generic = new JButton("+");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.zoomIn();
                 loadSolveOptionsGui(fileIn);
@@ -254,18 +225,11 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 2, 2, 1);
 
-        button = new JButton("-");
-        button.addActionListener(e -> {
+        generic = new JButton("-");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.zoomOut();
                 loadSolveOptionsGui(fileIn);
@@ -273,19 +237,11 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 3;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 3, 2, 1);
 
-        button = new JButton("<");
-        ImagePanel finalImgPanel2 = imgPanel;
-        button.addActionListener(e -> {
+        generic = new JButton("<");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.panLeft();
                 loadSolveOptionsGui(fileIn);
@@ -293,18 +249,11 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 4;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 4, 2, 1);
 
-        button = new JButton(">");
-        button.addActionListener(e -> {
+        generic = new JButton(">");
+        generic.addActionListener(e -> {
             try {
                 imgPanel.panRight();
                 loadSolveOptionsGui(fileIn);
@@ -312,57 +261,30 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 5;
-        c.gridwidth = 1;
-        c.gridy = 2;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelSixths);
+        sixByThree.addElement(generic, 5, 2, 1);
 
-        button = new JButton("Solve");
-        button.addActionListener(e -> {
+
+        generic = new JButton("Solve");
+        generic.addActionListener(e -> {
             try {
-                BufferedImage solvedImg = Solver.solve(imgPanel.getImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
+                BufferedImage solvedImg = Solver.solve(imgPanel.getOrignalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
                 imgPanel = new ImagePanel(solvedImg, 750, 750, primaryGui);
                 loadSaveGui(selectAlgorithm.getSelectedItem().toString());
             } catch (IOException | IllegalAccessException ioException) {
                 ioException.printStackTrace();
             }
         });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 0;
-        c.gridwidth = 2;
-        c.gridy = 3;
-        primaryGui.add(button, c);
+        generic.setPreferredSize(panelThirds);
+        sixByThree.addElement(generic, 0, 3, 2);
 
-        button = new JButton("Minimum Spanning Tree");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 2;       //aligned with button 2
-        c.gridwidth = 2;
-        c.gridy = 3;       //third row
-        primaryGui.add(button, c);
+        generic = new JButton("Minimum Spanning Tree");
+        generic.setPreferredSize(panelThirds);
+        sixByThree.addElement(generic,2, 3, 2);
 
-        button = new JButton("Articulation Points");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;       //reset to default
-        c.weighty = 1.0;   //request any extra vertical space
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        c.insets = new Insets(10,0,0,0);  //top padding
-        c.gridx = 4;       //aligned with button 2
-        c.gridwidth = 2;
-        c.gridy = 3;       //third row
-        primaryGui.add(button, c);
+        generic = new JButton("Articulation Points");
+        generic.setPreferredSize(panelThirds);
+        sixByThree.addElement(generic, 4, 3, 2);
 
         System.out.println("Repainting primary");
         gui.revalidate();
@@ -553,5 +475,67 @@ public class GUI implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
 
+    }
+
+    /**
+     * Class that deals with six by three grids
+     */
+    //todo make it so that this does not use a global variable
+    class SixByThree {
+        GridBagConstraints c = new GridBagConstraints();
+        GridBagLayout layout = new GridBagLayout();
+
+        /**
+         * Setup the grid
+         */
+        SixByThree() {
+            primaryGui.removeAll();
+            primaryGui.setLayout(new GridBagLayout());
+            c.fill = GridBagConstraints.CENTER;
+            layout.setConstraints(primaryGui, c);
+            System.out.println("Primary width is: " + primaryGui.getWidth());
+        }
+
+        /**
+         * @param padY, set the y padding
+         */
+        public void setIpadY(int padY) {
+            c.ipady = padY;
+        }
+
+        /**
+         * @param padX, set the x padding
+         */
+        public void setIpadX(int padX) {
+            c.ipadx = padX;
+        }
+
+        /**
+         * Add an element
+         * @param component the component
+         * @param gridX the grid position x
+         * @param gridY the grid position y
+         * @param width the width of this element
+         */
+        public void addElement(JComponent component, int gridX, int gridY, int width){
+            c.gridx = gridX;
+            c.gridy = gridY;
+            c.gridwidth = width;
+            primaryGui.add(component, c);
+        }
+
+        /**
+         * @param fill int value for grid fill
+         */
+        public void setFill(int fill) {
+            c.fill = fill;
+        }
+
+        /**
+         * Set the size of the grid
+         */
+        public void setSize(int width, int height) {
+            primaryGui.setSize(width, height);
+        }
     }
 }

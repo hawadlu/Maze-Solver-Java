@@ -17,8 +17,8 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(BufferedImage image, int width, int height, JPanel parentComponent) {
         this.image = image;
-        this.panelWidth = width;
-        this.panelHeight = height;
+        this.panelWidth = width + 10;
+        this.panelHeight = height + 10;
         this.parentComponent = parentComponent;
     }
 
