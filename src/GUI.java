@@ -194,11 +194,41 @@ public class GUI implements ItemListener {
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
             try {
-                BufferedImage solvedImg = Solver.solve(imgPanel.getOriginalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem());
-                imgPanel.setImage(solvedImg); //Save the solved image
+                final BufferedImage[] solvedImg = {null};
+                Thread spinner = new Thread() {
+                    public void run() {
+                        //Spinning wheel
+                        JFrame frame = new JFrame("Test");
+
+                        ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
+                        frame.add(new JLabel("loading... ", loading, JLabel.CENTER));
+
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setSize(400, 300);
+                        frame.setVisible(true);
+                    }
+                };
+
+                Thread solver = new Thread() {
+                    public synchronized void run() {
+                        try {
+                            solvedImg[0] =Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem());
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        } catch (IllegalAccessException illegalAccessException) {
+                            illegalAccessException.printStackTrace();
+                        }
+                        imgPanel.setImage(solvedImg[0]); //Save the solved image
+                        System.out.println("Stopping thread");
+                        notify();
+                    }
+                };
+                solver.start();
+                spinner.start();
+                wait();
                 loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
-            } catch (IOException | IllegalAccessException ioException) {
-                ioException.printStackTrace();
+            } catch (Exception error) {
+                error.printStackTrace();
             }
         });
         generic.setPreferredSize(panelThirds);
