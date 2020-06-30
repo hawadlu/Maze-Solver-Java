@@ -61,7 +61,10 @@ public class GUI implements ItemListener {
         topBar.add(gameTab);
 
         //Set onclick listeners
-        solveTab.addActionListener(e -> showSolveGui());
+        solveTab.addActionListener(e -> {
+            imgPanel = null;
+            showSolveGui();
+        });
         generateTab.addActionListener(e -> showGenerateGui());
         gameTab.addActionListener(e -> showGameGui());
 
@@ -146,6 +149,11 @@ public class GUI implements ItemListener {
         }
     }
 
+    /**
+     * Loads the options for solving a maze
+     * @param fileIn the file
+     * @throws IOException whoops, something broke
+     */
     private void loadSolveOptionsGui(File fileIn) throws IOException {
         if (customGrid == null) customGrid = new CustomGrid();
 
