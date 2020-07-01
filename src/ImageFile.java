@@ -113,7 +113,8 @@ public class ImageFile {
         boolean[][] toReturn = new boolean[imgFile.getHeight()][imgFile.getWidth()];
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
-                toReturn[height][width] = getColour(imgFile, width, height) != 0;
+                //Allow any combination of rgb values < 100 to be counted as black
+                toReturn[height][width] = getColour(imgFile, width, height) > 100;
             }
         }
         height = toReturn.length;
@@ -123,10 +124,11 @@ public class ImageFile {
     }
 
     /**
-     * Gets the colour of the specified square (red)
+     * Return the combined colour value of the specified square
      */
     private int getColour(BufferedImage imgFile, int width, int height) {
-        return imgFile.getRGB(width, height) & 0x00ff0000 >> 16;
+        Color col = new Color(imgFile.getRGB(width, height));
+        return col.getRed() + col.getBlue() + col.getGreen();
     }
 
     /**
