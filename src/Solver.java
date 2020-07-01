@@ -117,6 +117,16 @@ class Solver {
     }
 
     /**
+     * Generate maze
+     * @param width maze width
+     * @param height maze height
+     * @param perfect should the maze be perfect?
+     */
+    public static BufferedImage generateMaze(String width, String height, boolean perfect) {
+        return null;
+    }
+
+    /**
      * Gets user input and returns a string
      */
     private String getUserInput(String question) {

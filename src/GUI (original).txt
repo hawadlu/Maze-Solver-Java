@@ -1,3 +1,4 @@
+//todo delete this file
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+//todo add a title to relevant screens
 
 /**
  * Class that controls the gui of the program.
@@ -30,7 +33,7 @@ public class GUI implements ItemListener {
         gui.setBackground(Color.RED);
 
         loadTopBar();
-        loadSolveGui();
+        loadImageGui();
 
         //Adding Components to the gui.
         gui.getContentPane().add(BorderLayout.NORTH, topBar);
@@ -63,77 +66,45 @@ public class GUI implements ItemListener {
         //Set onclick listeners
         solveTab.addActionListener(e -> {
             imgPanel = null;
-            try {
-                loadSolveOptionsGui(null);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            loadImageGui();
         });
-        generateTab.addActionListener(e -> showGenerateGui());
-        gameTab.addActionListener(e -> showGameGui());
+        generateTab.addActionListener(e -> loadGenerateGui(1));
+        gameTab.addActionListener(e -> loadGameGui());
 
         return topBar;
     }
 
     //todo implement me
-    private void showGameGui() {
+    private void loadGameGui() {
         System.out.println("Show game gui");
-    }
 
-    //todo implement me
-    private void showGenerateGui() {
-        System.out.println("Show generate gui");
-    }
+        customGrid = new CustomGrid();
 
-    /**
-     * Load the gui required for solving
-     * @return
-     */
-    private void loadSolveGui() {
-        primaryGui.removeAll();
-        //Setup constraints
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridwidth = WIDTH;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.fill= GridBagConstraints.HORIZONTAL;
+        //Set the size
+        int panelHeight = 750;
+        int panelWidth = 750;
+        int elementHeight = 50;
+        Dimension panelHalves = new Dimension(panelWidth / 2, elementHeight);
 
-        //Setup JPanel
-        primaryGui.setLayout(new GridBagLayout());
-        Button solveButton = new Button("Load Image");
-        Button generateButton = new Button("Generate Maze");
-        primaryGui.add(solveButton, constraints);
-        primaryGui.add(generateButton, constraints);
-
-        //Make the buttons do stuff when they are clicked
-        solveButton.addActionListener(e -> {
-            try {
-                //Get the file and load the options Gui
-                loadSolveOptionsGui(UIFileChooser());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-        generateButton.addActionListener(e -> {
-            loadGenerateOptionsGUI();
-            try {
-                loadSaveGui("Generated Maze", null);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
+        JLabel title = new JLabel();
+        title.setPreferredSize(new Dimension(750, elementHeight));
+        customGrid.addElement(title, 0, 0, 6);
 
         System.out.println("Repainting primary");
-        primaryGui.setBackground(Color.PINK);
-        primaryGui.revalidate();
-        primaryGui.repaint();
         gui.revalidate();
         gui.repaint();
     }
 
+    //todo implement me
+    private void playGame(){}
+
+    //todo implement me
+
     /**
-     * Shows all the options for generating a maze
+     * Generate a maze
+     * @param nextMethod tell the program which method to load after this
      */
-    private void loadGenerateOptionsGUI() {
+    private void loadGenerateGui(int nextMethod) {
         System.out.println("Show generate gui");
         customGrid = new CustomGrid();
 
@@ -181,12 +152,13 @@ public class GUI implements ItemListener {
         //todo add a spinner wheel while the maze generating
         submit.addActionListener(e -> {
             //Generate the maze
-            Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
+            generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
 
             //Go to the save menu
             try {
-                //todo make the image properly generate
                 imgPanel = new ImagePanel(ImageIO.read(new File("Images/Tiny.png")), 750, 750, primaryGui); //todo remove and replace with the generated image
+                if (nextMethod == 1) loadGameGui();
+                else loadSaveGui("Generated Maze. Width: " + widthIn.getText() + " Height: " + heightIn.getText() + " Perfect: " + perfectChecked.get(), null, 2);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -199,18 +171,59 @@ public class GUI implements ItemListener {
     }
 
     /**
-     * Load the game GUI
+     * Load the gui required for getting images
+     */
+    private void loadImageGui() {
+        //todo deal with the user clicking the cancel button when using the UI file picker
+        primaryGui.removeAll();
+        //Setup constraints
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridwidth = WIDTH;
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.fill= GridBagConstraints.HORIZONTAL;
+
+        //Setup JPanel
+        primaryGui.setLayout(new GridBagLayout());
+        Button solveButton = new Button("Load Image");
+        Button generateButton = new Button("Generate Maze");
+        primaryGui.add(solveButton, constraints);
+        primaryGui.add(generateButton, constraints);
+
+        //Make the buttons do stuff when they are clicked
+        solveButton.addActionListener(e -> {
+            try {
+                showUIFilePicker(1);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        generateButton.addActionListener(e -> loadGenerateGui(1));
+
+        System.out.println("Repainting primary");
+        primaryGui.setBackground(Color.PINK);
+        primaryGui.revalidate();
+        primaryGui.repaint();
+        gui.revalidate();
+        gui.repaint();
+    }
+
+    /**
+     * This generates the maze and saves it in the imgPanel
+     * @param width the width of the maze
+     * @param height the height of the maze
+     * @param perfect, make a perfect maze?
      */
     //todo implement me
-    private void loadGameGui() {
+    private void generateMaze(String width, String height, boolean perfect) {
+        System.out.println("Generating maze");
     }
 
 
     /**
-     * Get and return the file that the user wants
-     * @return the file
+     * Get the file that the user wants to use and then call the relevant load and solve methods
+     * @param nextMethod tells the program what to do now that the image is loaded
      */
-    private File UIFileChooser() throws IOException {
+    private void showUIFilePicker(int nextMethod) throws IOException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -219,9 +232,10 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return fileIn;
+
+            if (nextMethod == 1) loadGameGui();
+            else loadSolveOptionsGui(fileIn);
         } else {
-            //todo deal with this
             throw new Error("Failed to open file");
         }
     }
@@ -305,7 +319,7 @@ public class GUI implements ItemListener {
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
                         try {
                             spinner.interrupt();
-                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
+                            loadSaveGui("Solved using: " + selectAlgorithm.getSelectedItem().toString(), fileIn, 1);
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -353,7 +367,7 @@ public class GUI implements ItemListener {
     }
 
     /**
-     * Make teh control buttons for the images
+     * Make the control buttons for the images
      * @param fileIn the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
@@ -434,17 +448,17 @@ public class GUI implements ItemListener {
 
     /**
      * Gui that allows the user the save an image
-     * @param algorithmUsed the algorithm that was used to solve the maze
+     * @param extraInfo the algorithm that was used to solve the maze
      * @param fileIn file containing the image
+     * @param resetMethod tells the program where this method was loaded from
      * @throws IOException something bad happened
      */
-    //fixme make this display the solved image
-    private void loadSaveGui(String algorithmUsed, File fileIn) throws IOException {
+    private void loadSaveGui(String extraInfo, File fileIn, int resetMethod) throws IOException {
         customGrid = new CustomGrid();
         Dimension panelThirds = new Dimension(750 / 3, 50);
 
         //Small title
-        JLabel fileName = new JLabel("Solved using " + algorithmUsed);
+        JLabel fileName = new JLabel(extraInfo);
         //todo use the values already defined in loadSolveOptionsGui
         fileName.setPreferredSize(new Dimension(750, 50));
         customGrid.addElement(fileName, 0, 0, 6);
@@ -461,9 +475,13 @@ public class GUI implements ItemListener {
         JButton reset = new JButton("Reset Maze");
         reset.addActionListener(e -> {
             try {
-                customGrid = null;
-                imgPanel.setImage(ImageIO.read(fileIn));
-                loadSolveOptionsGui(fileIn);
+                if (resetMethod == 0) {
+                    customGrid = null;
+                    imgPanel.setImage(ImageIO.read(fileIn));
+                    loadSolveOptionsGui(fileIn);
+                } else {
+                    loadGenerateGui(1);
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -473,10 +491,14 @@ public class GUI implements ItemListener {
 
         JButton diffImg = new JButton("Use a different image");
         diffImg.addActionListener(e -> {
-            //reset the image panel
-            imgPanel = null;
-            customGrid = null;
-            loadSolveGui();
+            try {
+                //reset the image panel
+                imgPanel = null;
+                customGrid = null;
+                showUIFilePicker(1);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
         diffImg.setPreferredSize(panelThirds);
         customGrid.addElement(diffImg, 2, 2, 1);
@@ -513,7 +535,6 @@ public class GUI implements ItemListener {
     /**
      * Class that allows me to easily make custom grids
      */
-    //todo make it so that this does not use a global variable
     class CustomGrid {
         GridBagConstraints c = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
