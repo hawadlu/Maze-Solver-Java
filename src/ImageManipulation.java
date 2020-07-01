@@ -89,13 +89,7 @@ public class ImageManipulation {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 //Don't make a node unless the square is white
                 if (imgObj.isWhite(width, height)) {
-                    if (height == 0) {
-                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
-
-                        //Find the neighbours
-                        ImageManipulation.findNeighboursForSingleOnLoad(nodes, new Coordinates(width, height), imgObj);
-
-                    } else if (height == imgObj.getHeight() - 1) {
+                    if (height == 0 || height == imgObj.getHeight() - 1 || width == 0 || width == imgObj.getWidth() - 1) {
                         nodes.put(new Coordinates(width, height), new MazeNode(width, height));
 
                         //Find the neighbours
