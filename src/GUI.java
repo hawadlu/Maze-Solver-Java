@@ -6,6 +6,7 @@ import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -63,13 +64,9 @@ public class GUI implements ItemListener {
         //Set onclick listeners
         solveTab.addActionListener(e -> {
             imgPanel = null;
-            try {
-                loadSolveOptionsGui(null);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            loadSolveGui();
         });
-        generateTab.addActionListener(e -> showGenerateGui());
+        generateTab.addActionListener(e -> loadGenerateOptionsGUI(null));
         gameTab.addActionListener(e -> showGameGui());
 
         return topBar;
@@ -78,11 +75,6 @@ public class GUI implements ItemListener {
     //todo implement me
     private void showGameGui() {
         System.out.println("Show game gui");
-    }
-
-    //todo implement me
-    private void showGenerateGui() {
-        System.out.println("Show generate gui");
     }
 
     /**
@@ -113,14 +105,7 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        generateButton.addActionListener(e -> {
-            loadGenerateOptionsGUI();
-            try {
-                loadSaveGui("Generated Maze", null);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
+        generateButton.addActionListener(e -> loadGenerateOptionsGUI("loadSolveOptionsGui"));
 
         System.out.println("Repainting primary");
         primaryGui.setBackground(Color.PINK);
@@ -133,7 +118,8 @@ public class GUI implements ItemListener {
     /**
      * Shows all the options for generating a maze
      */
-    private void loadGenerateOptionsGUI() {
+    private void loadGenerateOptionsGUI(String nextMethod) {
+        AtomicBoolean repaint = new AtomicBoolean(false);
         System.out.println("Show generate gui");
         customGrid = new CustomGrid();
 
@@ -181,12 +167,20 @@ public class GUI implements ItemListener {
         //todo add a spinner wheel while the maze generating
         submit.addActionListener(e -> {
             //Generate the maze
-            Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
+              Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
 
             //Go to the save menu
             try {
                 //todo make the image properly generate
                 imgPanel = new ImagePanel(ImageIO.read(new File("Images/Tiny.png")), 750, 750, primaryGui); //todo remove and replace with the generated image
+
+                if (nextMethod.equals("loadSolveOptionsGui")) {
+                    try {
+                        loadSolveOptionsGui(null);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -232,7 +226,7 @@ public class GUI implements ItemListener {
      * @throws IOException whoops, something broke
      */
     private void loadSolveOptionsGui(File fileIn) throws IOException {
-        if (customGrid == null) customGrid = new CustomGrid();
+        customGrid = new CustomGrid();
 
         //Set the size
         int panelHeight = 750;
@@ -296,7 +290,7 @@ public class GUI implements ItemListener {
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
-                            solvedImg[0] =Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
+                            solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         } catch (IllegalAccessException illegalAccessException) {
@@ -353,7 +347,7 @@ public class GUI implements ItemListener {
     }
 
     /**
-     * Make teh control buttons for the images
+     * Make the control buttons for the images
      * @param fileIn the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
@@ -583,6 +577,25 @@ public class GUI implements ItemListener {
          */
         public void enable() {
             primaryGui.setEnabled(true);
+        }
+    }
+
+    class Worker extends Thread{
+        private CountDownLatch latch;
+
+        Worker (CountDownLatch latch, String name) {
+            super(name);
+            this.latch = latch;
+        }
+
+        @Override
+        public void run() {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            latch.countDown();
         }
     }
 }
