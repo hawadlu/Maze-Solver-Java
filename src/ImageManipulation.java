@@ -16,7 +16,7 @@ public class ImageManipulation {
     /**
      * This method draws the solved maze and returns it
      */
-    public static void drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, String filePath, String searchType) {
+    public static BufferedImage drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
         BufferedImage save = new BufferedImage(imgObj.getWidth(), imgObj.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -73,8 +73,7 @@ public class ImageManipulation {
                 }
             }
         }
-
-        saveImage(save, filePath, searchType);
+        return save;
     }
 
 
@@ -90,13 +89,7 @@ public class ImageManipulation {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 //Don't make a node unless the square is white
                 if (imgObj.isWhite(width, height)) {
-                    if (height == 0) {
-                        nodes.put(new Coordinates(width, height), new MazeNode(width, height));
-
-                        //Find the neighbours
-                        ImageManipulation.findNeighboursForSingleOnLoad(nodes, new Coordinates(width, height), imgObj);
-
-                    } else if (height == imgObj.getHeight() - 1) {
+                    if (height == 0 || height == imgObj.getHeight() - 1 || width == 0 || width == imgObj.getWidth() - 1) {
                         nodes.put(new Coordinates(width, height), new MazeNode(width, height));
 
                         //Find the neighbours
@@ -353,35 +346,10 @@ public class ImageManipulation {
     }
 
     /**
-     * Strips the image type then adds the 'solved' suffix
-     */
-    private static String insertSuffix(String filePath, String searchType) {
-        StringBuilder finalPath = new StringBuilder();
-        String[] filePathArr = filePath.split("");
-
-        for (String s : filePathArr) {
-            if (s.equals(".")) {
-                finalPath.append(" solved ").append(searchType).append(".");
-            } else if (s.equals("/")) {
-                finalPath.append("/Solved/");
-            } else {
-                finalPath.append(s);
-            }
-        }
-        return finalPath.toString();
-    }
-
-    /**
      * Saves solved images in the images folder
      */
-    private static void saveImage(BufferedImage img, String filePath, String searchType) {
-        //Checking if the folder exists
-        if (!new File("/Images/Solved").isDirectory()) {
-            new File("Images/Solved").mkdir();
-        }
-
+    public static void saveImage(BufferedImage img, String fileName) {
         //Saving the image
-        String fileName = insertSuffix(filePath, searchType);
         try {
             ImageIO.write(img, "png", new File(fileName));
             System.out.println("Image saved as " + fileName);
