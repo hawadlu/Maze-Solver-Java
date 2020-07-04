@@ -278,7 +278,7 @@ public class GUI implements ItemListener {
      * Get and return the file that the user wants
      * @return the file
      */
-    private File UIFileChooser() throws IOException {
+    private ImageFile UIFileChooser() throws IOException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -287,7 +287,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return fileIn;
+            return new ImageFile(ImageIO.read(fileIn));
         } else {
             //todo deal with this
             throw new Error("Failed to open file");
@@ -299,7 +299,7 @@ public class GUI implements ItemListener {
      * @param fileIn the file
      * @throws IOException whoops, something broke
      */
-    private void loadSolveOptionsGui(File fileIn) throws IOException {
+    private void loadSolveOptionsGui(ImageFile fileIn) throws IOException {
         customGrid = new CustomGrid();
 
         //Set the size
@@ -410,9 +410,9 @@ public class GUI implements ItemListener {
      * @param fileIn the file containing the image
      * @throws IOException happens when there's a problem
      */
-    private void displayImage(File fileIn, int gridX, int gridY, int gridWidth) throws IOException {
+    private void displayImage(ImageFile fileIn, int gridX, int gridY, int gridWidth) throws IOException {
         //The Image
-        if (imgPanel == null) imgPanel = new ImagePanel(ImageIO.read(fileIn), 750, 750, primaryGui);
+        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
         JPanel displayImg = imgPanel;
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);

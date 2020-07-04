@@ -10,6 +10,7 @@ public class ImageFile {
     private boolean[][] imgArray;
     private int width;
     private int height;
+    private String path;
 
     ImageFile(BufferedImage imageIn) {
         imgArray = makeImgArray(imageIn);
@@ -19,14 +20,23 @@ public class ImageFile {
      * Loads the image file. This can take command line arguments for the filepath, solve method, neighbour method and continuing for large imgs.
      * The order is file, large img (y/n), neighbour method(1/2), solve method (1 - 4)
      */
-    public BufferedImage loadImage(File fileArg, String largeArg, String neighbourArg, String solveArg) {
+    public ImageFile loadImage(File fileArg, String largeArg, String neighbourArg, String solveArg) {
         BufferedImage in;
 
         //Checking if the file exists
         try {
             in = ImageIO.read(fileArg);
 
+            path = fileArg.getAbsolutePath();
+
             BufferedImage imgFile = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
+
+            //Check that the image colour is acceptable
+            checkImageColour(imgFile);
+
+            //Check that the maze is valid
+            //todo implement this
+            //checkMazeValidity(imgFile);
 
             Graphics2D g = imgFile.createGraphics();
             g.drawImage(in, 0, 0, null);
@@ -41,12 +51,37 @@ public class ImageFile {
             System.out.println("Img height: " + imgObj.getHeight());
             System.out.println("Img width: " + imgObj.getWidth());
             System.out.println("Approximately " + imgObj.getHeight() * imgObj.getWidth() * 0.15 + " nodes");
-            return in;
+            return this;
         } catch (Exception e) {
             System.out.println("Program aborted: " + e);
         }
         //todo deal with this
         return null;
+    }
+
+    /**
+     * Check that the maze is valid. I.E. there is only one entry and one exit.
+     * White pixels do not meet diagonally unless there is anther white pixel between them
+     * @param imgFile
+     */
+    //todo implement me
+    private void checkMazeValidity(BufferedImage imgFile) {
+        throw new Error("Invalid maze");
+    }
+
+    /**
+     * Make sure that the luminosity of the each pixel is somewhere between 0 - 20 and 235 - 255
+     * @param imgFile the image to check
+     */
+    private void checkImageColour(BufferedImage imgFile) {
+        for (int height = 0; height < imgFile.getHeight(); height++) {
+            for (int width = 0; width < imgFile.getWidth(); width++) {
+                int colour = getColour(imgFile, width, height);
+                if (colour > 20 && colour < 235) {
+                    throw new Error("Invalid colour at x " + width + " y " + height);
+                }
+            }
+        }
     }
 
     /**
@@ -147,4 +182,24 @@ public class ImageFile {
 
     public int getHeight() {return this.height;}
     public int getWidth() {return this.width;}
+
+    public String getAbsolutePath() {
+        return this.path;
+    }
+
+    /**
+     * Make an image using the inout array
+     * @return a buffered image
+     */
+    //todo make sure this works
+    public BufferedImage makeImage() {
+        BufferedImage toRet = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        for (int height = 0; height < toRet.getHeight(); height ++) {
+            for (int width = 0; width < toRet.getWidth(); width++) {
+                if (!imgArray[height][width]) toRet.setRGB(width, height, Color.BLACK.getRGB());
+                else toRet.setRGB(width, height, Color.WHITE.getRGB());
+            }
+        }
+        return toRet;
+    }
 }

@@ -22,6 +22,13 @@ public class ImagePanel extends JPanel {
         this.parentComponent = parentComponent;
     }
 
+    public ImagePanel(ImageFile fileIn, int width, int height, JPanel primaryGui) {
+        this.image = fileIn.;
+        this.panelWidth = width + 10;
+        this.panelHeight = height + 10;
+        this.parentComponent = parentComponent;
+    }
+
     /**
      * @return the modified image
      */
