@@ -67,14 +67,9 @@ public class GUI implements ItemListener {
             loadSolveGui();
         });
         generateTab.addActionListener(e -> loadGenerateOptionsGUI(null));
-        gameTab.addActionListener(e -> showGameGui());
+        gameTab.addActionListener(e -> loadGameGui());
 
         return topBar;
-    }
-
-    //todo implement me
-    private void showGameGui() {
-        System.out.println("Show game gui");
     }
 
     /**
@@ -119,7 +114,6 @@ public class GUI implements ItemListener {
      * Shows all the options for generating a maze
      */
     private void loadGenerateOptionsGUI(String nextMethod) {
-        AtomicBoolean repaint = new AtomicBoolean(false);
         System.out.println("Show generate gui");
         customGrid = new CustomGrid();
 
@@ -197,6 +191,86 @@ public class GUI implements ItemListener {
      */
     //todo implement me
     private void loadGameGui() {
+        System.out.println("Generating maze");
+        primaryGui.removeAll();
+        //Setup constraints
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridwidth = WIDTH;
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.fill= GridBagConstraints.HORIZONTAL;
+
+        //Setup JPanel
+        primaryGui.setLayout(new GridBagLayout());
+        Button solveButton = new Button("Load Image");
+        Button generateButton = new Button("Generate Maze");
+        primaryGui.add(solveButton, constraints);
+        primaryGui.add(generateButton, constraints);
+
+        //Make the buttons do stuff when they are clicked
+        solveButton.addActionListener(e -> {
+            try {
+                //Get the file and load the options Gui
+                playGameGui(UIFileChooser());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        //todo update load generate options to handle this
+        generateButton.addActionListener(e -> loadGenerateOptionsGUI("playGameGui"));
+
+        System.out.println("Repainting primary");
+        primaryGui.setBackground(Color.PINK);
+        primaryGui.revalidate();
+        primaryGui.repaint();
+        gui.revalidate();
+        gui.repaint();
+    }
+
+    /**
+     * The gui that displays the game
+     * @param fileIn the image file
+     */
+    private void playGameGui(File fileIn) {
+        customGrid = new CustomGrid();
+
+        //Set the size
+        //todo look at making these globals
+        int panelHeight = 750;
+        int panelWidth = 750;
+        int elementHeight = 50;
+        Dimension panelWhole = new Dimension(panelWidth, elementHeight);
+        Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
+        Dimension panelHalves = new Dimension(panelWidth / 2, elementHeight);
+
+        customGrid.setSize(panelWidth, panelHeight);
+
+        //Create the title
+        String titleText = "Maze Race";
+        JLabel title = new JLabel();
+        title.setPreferredSize(panelWhole);
+
+        Font labelFont = title.getFont();
+
+        int stringWidth = title.getFontMetrics(labelFont).stringWidth(titleText);
+        int componentWidth = title.getWidth();
+
+        // Find out how much the font can grow in width.
+        double widthRatio = (double)componentWidth / (double)stringWidth;
+
+        int newFontSize = (int)(labelFont.getSize() * widthRatio);
+        int componentHeight = title.getHeight();
+
+        // Pick a new font size so it will not be larger than the height of label.
+        int fontSizeToUse = Math.min(newFontSize, componentHeight);
+
+        // Set the label's font size to the newly determined size.
+        title.setFont(new Font(labelFont.getName(), Font.PLAIN, fontSizeToUse));
+
+        customGrid.addElement(title, 0, 0, 6);
+
+        System.out.println("Repainting primary");
+        gui.revalidate();
+        gui.repaint();
     }
 
 
@@ -251,9 +325,13 @@ public class GUI implements ItemListener {
         selectSearch.setPreferredSize(panelThirds);
         customGrid.addElement(selectSearch, 2, 0, 2);
 
-
-        String[] file = fileIn.getAbsolutePath().split("/");
-        JLabel fileName = new JLabel("File name: " + file[file.length - 1]);
+        JLabel fileName;
+        if (fileIn != null) {
+            String[] file = fileIn.getAbsolutePath().split("/");
+            fileName = new JLabel("File name: " + file[file.length - 1]);
+        } else {
+            fileName = new JLabel("No file selected");
+        }
         fileName.setPreferredSize(panelThirds);
         customGrid.addElement(fileName, 4, 0, 2);
 
