@@ -13,6 +13,7 @@ public class ImageFile {
     private int width;
     private int height;
     private String path;
+    byte[][] solved = null;
 
     ImageFile(BufferedImage imageIn, String filePath) {
         imgArray = makeImgArray(imageIn);
@@ -173,8 +174,15 @@ public class ImageFile {
         BufferedImage toRet = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         for (int height = 0; height < toRet.getHeight(); height ++) {
             for (int width = 0; width < toRet.getWidth(); width++) {
-                if (!imgArray[height][width]) toRet.setRGB(width, height, Color.BLACK.getRGB());
-                else toRet.setRGB(width, height, Color.WHITE.getRGB());
+                //Check if the maze has been solved
+                if (solved != null) {
+                    if (solved[height][width] == 0) toRet.setRGB(width, height, Color.BLACK.getRGB());
+                    else if (solved[height][width] == 1) toRet.setRGB(width, height, Color.white.getRGB());
+                    else toRet.setRGB(width, height, Color.red.getRGB());
+                } else {
+                    if (!imgArray[height][width]) toRet.setRGB(width, height, Color.BLACK.getRGB());
+                    else toRet.setRGB(width, height, Color.WHITE.getRGB());
+                }
             }
         }
         return toRet;
@@ -198,13 +206,19 @@ public class ImageFile {
         g.drawImage(resized, 0, 0, imgObserver);
     }
 
+    public void initSolvedArr() {
+         solved = new byte[width][height];
+    }
+
     /**
      * Change the colour of image
+     * 0 is black, 1 is white, 2 is red
      * @param x the xPos
      * @param y the yPos
-     * @param rgb the colour
+     * @param col the colour
      */
-    public void setRGB(int x, int y, int rgb) {
+    public void setRGB(int x, int y, byte col) {
+        solved[y][x] = col;
     }
 
     /**

@@ -18,33 +18,34 @@ public class ImageManipulation {
      */
     //todo change so that the red line can be painted
     public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
+        imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 if (imgObj.isWhite(width, height)) {
-                    imgObj.setRGB(width, height, Color.WHITE.getRGB());
+                    imgObj.setRGB(width, height, (byte) 1);
                 } else {
-                    imgObj.setRGB(width, height, Color.BLACK.getRGB());
+                    imgObj.setRGB(width, height, (byte) 0);
                 }
             }
         }
 
         //Colour the entry
-        imgObj.setRGB(entry.getX(), entry.getY(), Color.RED.getRGB());
+        imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
 
         while (nodes.size() > 1) {
             MazeNode start = nodes.remove(0);
             MazeNode end = nodes.get(0);
             int y, x;
 
-            imgObj.setRGB(start.getX(), start.getY(), Color.RED.getRGB());
-            imgObj.setRGB(end.getX(), end.getY(), Color.RED.getRGB());
+            imgObj.setRGB(start.getX(), start.getY(), (byte) 2);
+            imgObj.setRGB(end.getX(), end.getY(), (byte) 2);
 
             //Drawing down
             if (start.getY() < end.getY()) {
                 y = start.getY() + 1;
                 while (y < end.getY()) {
-                    imgObj.setRGB(start.getX(), y, Color.RED.getRGB());
+                    imgObj.setRGB(start.getX(), y, (byte) 2);
                     y += 1;
                 }
 
@@ -52,7 +53,7 @@ public class ImageManipulation {
             } else if (start.getY() > end.getY()) {
                 y = start.getY();
                 while (y > end.getY()) {
-                    imgObj.setRGB(start.getX(), y, Color.RED.getRGB());
+                    imgObj.setRGB(start.getX(), y, (byte) 2);
                     y-=1;
                 }
 
@@ -60,7 +61,7 @@ public class ImageManipulation {
             } else if (start.getX() < end.getX()) {
                 x = start.getX();
                 while (x < end.getX()) {
-                    imgObj.setRGB(x, start.getY(), Color.RED.getRGB());
+                    imgObj.setRGB(x, start.getY(), (byte) 2);
                     x+=1;
                 }
 
@@ -68,7 +69,7 @@ public class ImageManipulation {
             } else if (start.getX() > end.getX()) {
                 x = start.getX();
                 while (x > end.getX()) {
-                    imgObj.setRGB(x, start.getY(), Color.RED.getRGB());
+                    imgObj.setRGB(x, start.getY(), (byte) 2);
                     x-=1;
                 }
             }
