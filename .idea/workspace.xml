@@ -13,7 +13,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageManipulation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +208,7 @@
       <workItem from="1593727716149" duration="1564000" />
       <workItem from="1593729325189" duration="608000" />
       <workItem from="1593835530458" duration="273000" />
+      <workItem from="1593905763420" duration="3179000" />
     </task>
     <servers />
   </component>
@@ -373,18 +377,13 @@
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ImagePanel.java</url>
-          <line>127</line>
-          <option name="timeStamp" value="115" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI.java</url>
-          <line>233</line>
+          <line>229</line>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ImageFile.java</url>
-          <line>76</line>
+          <line>90</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
       </breakpoints>

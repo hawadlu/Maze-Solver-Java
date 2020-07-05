@@ -164,19 +164,15 @@ public class GUI implements ItemListener {
               Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
 
             //Go to the save menu
-            try {
-                //todo make the image properly generate
-                imgPanel = new ImagePanel(ImageIO.read(new File("Images/Tiny.png")), 750, 750, primaryGui); //todo remove and replace with the generated image
+            //todo make the image properly generate
+            imgPanel = new ImagePanel(null, 750, 750 ,primaryGui); //todo replace with the generated maze
 
-                if (nextMethod.equals("loadSolveOptionsGui")) {
-                    try {
-                        loadSolveOptionsGui(null);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+            if (nextMethod.equals("loadSolveOptionsGui")) {
+                try {
+                    loadSolveOptionsGui(null);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
         });
         customGrid.addElement(submit, 0, 3, 2);
@@ -230,7 +226,7 @@ public class GUI implements ItemListener {
      * The gui that displays the game
      * @param fileIn the image file
      */
-    private void playGameGui(File fileIn) {
+    private void playGameGui(ImageFile fileIn) {
         customGrid = new CustomGrid();
 
         //Set the size
@@ -343,7 +339,7 @@ public class GUI implements ItemListener {
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
             try {
-                final BufferedImage[] solvedImg = {null};
+                final ImageFile[] solvedImg = {null};
                 Thread spinner = new Thread() {
                     public void run() {
                         //Spinning wheel
@@ -429,7 +425,7 @@ public class GUI implements ItemListener {
      * @param fileIn the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
-    private void makeImageControlButtons(File fileIn, Dimension panelSixths) {
+    private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
         generic.addActionListener(e -> {
@@ -511,7 +507,7 @@ public class GUI implements ItemListener {
      * @throws IOException something bad happened
      */
     //fixme make this display the solved image
-    private void loadSaveGui(String algorithmUsed, File fileIn) throws IOException {
+    private void loadSaveGui(String algorithmUsed, ImageFile fileIn) throws IOException {
         customGrid = new CustomGrid();
         Dimension panelThirds = new Dimension(750 / 3, 50);
 
@@ -534,7 +530,7 @@ public class GUI implements ItemListener {
         reset.addActionListener(e -> {
             try {
                 customGrid = null;
-                imgPanel.setImage(ImageIO.read(fileIn));
+                imgPanel.setImage(UIFileChooser());
                 loadSolveOptionsGui(fileIn);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
@@ -563,7 +559,7 @@ public class GUI implements ItemListener {
      * Save the image in a place of the users choice
      * @param image the image to save
      */
-    private void saveImage(BufferedImage image) {
+    private void saveImage(ImageFile image) {
         JFileChooser save =new JFileChooser();
         int ret = save.showSaveDialog(primaryGui);
         if (ret == JFileChooser.APPROVE_OPTION) {

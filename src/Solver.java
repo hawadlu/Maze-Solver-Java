@@ -22,10 +22,7 @@ class Solver {
     /**
      * Solves the maze
      */
-    public static BufferedImage solve(BufferedImage image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
-        //Load the image object
-        ImageFile imgObj = new ImageFile(image);
-
+    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
         long numNodes = 0;
 
         //Map containing the positions of each node
@@ -34,13 +31,13 @@ class Solver {
         System.out.println("Finding nodes");
 
         //Validate the parameters
-        ArrayList<Object> parameters = validateParameters(imgObj, algorithm, searchType, parentComponent);
+        ArrayList<Object> parameters = validateParameters(image, algorithm, searchType, parentComponent);
         algorithm = parameters.get(0);
         searchType = parameters.get(1);
 
         //Only load this if it is requested
         if (searchType.equals("Search for neighbours during loading")) {
-            nodes = ImageManipulation.findNeighboursForAll(imgObj);
+            nodes = ImageManipulation.findNeighboursForAll(image);
             numNodes = nodes.size();
         }
 
@@ -48,30 +45,30 @@ class Solver {
         ArrayList<Coordinates> entries = new ArrayList<>();
 
         //Look at the top row.
-        for (int width = 0; width < imgObj.getWidth(); width++) {
-            if (entries.size() != 2 && imgObj.isWhite(width, 0)) {
+        for (int width = 0; width < image.getWidth(); width++) {
+            if (entries.size() != 2 && image.isWhite(width, 0)) {
                 entries.add(new Coordinates(width, 0));
             }
         }
 
         //Look at the bottom row
-        for (int width = 0; width < imgObj.getWidth(); width++) {
-            if (entries.size() != 2 && imgObj.isWhite(width, imgObj.getHeight() - 1)) {
-                entries.add(new Coordinates(width, imgObj.getHeight() - 1));
+        for (int width = 0; width < image.getWidth(); width++) {
+            if (entries.size() != 2 && image.isWhite(width, image.getHeight() - 1)) {
+                entries.add(new Coordinates(width, image.getHeight() - 1));
             }
         }
 
         //Look at the left side
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            if (entries.size() != 2 && imgObj.isWhite(0, height)) {
+        for (int height = 0; height < image.getHeight(); height++) {
+            if (entries.size() != 2 && image.isWhite(0, height)) {
                 entries.add(new Coordinates(0, height));
             }
         }
 
         //Look at the right side
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            if (entries.size() != 2 && imgObj.isWhite(imgObj.getWidth() - 1, height)) {
-                entries.add(new Coordinates(imgObj.getWidth() - 1, height));
+        for (int height = 0; height < image.getHeight(); height++) {
+            if (entries.size() != 2 && image.isWhite(image.getWidth() - 1, height)) {
+                entries.add(new Coordinates(image.getWidth() - 1, height));
             }
         }
 
@@ -84,22 +81,22 @@ class Solver {
 
         System.out.println("Found all nodes");
         System.out.println("Start at: " + entries.get(0).x + ", " + 0);
-        System.out.println("End at: " + entries.get(1).x + ", " + (imgObj.getHeight() - 1));
+        System.out.println("End at: " + entries.get(1).x + ", " + (image.getHeight() - 1));
         System.out.println("Node count: " + numNodes);
-        System.out.println("Approximately " + (float) numNodes / (imgObj.getHeight() * imgObj.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
+        System.out.println("Approximately " + (float) numNodes / (image.getHeight() * image.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
         System.out.println("Solving");
 
         //Determine the method that should be used to solve the maze
         //todo implement automatic switching for larger mazes
         if (algorithm.equals("Depth First")) {
-            return SolveMethods.solveDFS(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveDFS(image, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
         } else if (algorithm.equals("Breadth First")) {
-            return SolveMethods.solveBFS(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveBFS(image, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
         } else if (algorithm.equals("Dijkstra")) {
-            return SolveMethods.solveDijkstra(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveDijkstra(image, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
         } else {
-            return SolveMethods.solveAStar(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveAStar(image, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
         }
     }
 

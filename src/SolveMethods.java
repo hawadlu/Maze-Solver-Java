@@ -8,7 +8,7 @@ public class SolveMethods {
     /**
      * Solves the maze depth first
      */
-    public static BufferedImage solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         DFS dfs = new DFS();
         dfs.solve(imgObj, start, destination, nodes);
@@ -23,7 +23,7 @@ public class SolveMethods {
     /**
      * Solves the maze breadth first
      */
-    public static BufferedImage solveBFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveBFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
 
         //Create a BFS object
         BFS bfs = new BFS();
@@ -39,7 +39,7 @@ public class SolveMethods {
     /**
      * Solves the maze using the Dijkstra algorithm
      */
-    public static BufferedImage solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         //Create a DFS object
         Dijkstra dijkstra = new Dijkstra();
         dijkstra.solve(imgObj, start, destination, nodes);
@@ -55,7 +55,7 @@ public class SolveMethods {
     /**
      * Solves the maze using the AStar algorithm
      */
-    public static BufferedImage solveAStar(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveAStar(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
         //Create an AStar object
         AStar aStar = new AStar();
         aStar.solve(imgObj, start, destination, nodes);

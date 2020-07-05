@@ -6,8 +6,8 @@ import java.awt.image.BufferedImage;
  * Class for displaying images
  */
 public class ImagePanel extends JPanel {
-    private BufferedImage image;
-    private BufferedImage modified = null;
+    private ImageFile image;
+    private ImageFile modified = null;
     int panelWidth;
     int panelHeight;
     int zoom = 0;
@@ -15,15 +15,8 @@ public class ImagePanel extends JPanel {
     int currentY = 0;
     JPanel parentComponent;
 
-    public ImagePanel(BufferedImage image, int width, int height, JPanel parentComponent) {
+    public ImagePanel(ImageFile image, int width, int height, JPanel parentComponent) {
         this.image = image;
-        this.panelWidth = width + 10;
-        this.panelHeight = height + 10;
-        this.parentComponent = parentComponent;
-    }
-
-    public ImagePanel(ImageFile fileIn, int width, int height, JPanel primaryGui) {
-        this.image = fileIn.;
         this.panelWidth = width + 10;
         this.panelHeight = height + 10;
         this.parentComponent = parentComponent;
@@ -32,45 +25,39 @@ public class ImagePanel extends JPanel {
     /**
      * @return the modified image
      */
-    public BufferedImage getModified() { return modified; }
+    public ImageFile getModified() { return modified; }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //g.drawImage(image, 50, 50, WIDTH - 100, HEIGHT - 100, this);
-        BufferedImage toPaint;
+        ImageFile toPaint;
         if (modified != null) toPaint = modified;
         else toPaint = image;
-
-        //todo, scale images proportionally so that they are not always square
-        BufferedImage resized = new BufferedImage(panelWidth, panelHeight, toPaint.getType());
-        Graphics2D g2 = resized.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2.drawImage(toPaint, 0, 0, panelWidth, panelHeight, 0, 0, toPaint.getWidth(), toPaint.getHeight(), null);
-        g2.dispose();
-
-        g.drawImage(resized, 0, 0, this);
+        toPaint.draw(panelWidth, panelHeight, g, toPaint, this);
     }
 
     //todo, make these methods more resilient
     /**
      * Zoom in by 10px
      */
+    //todo make sure this works
     public void zoomIn() {
         System.out.println("Zooming in");
-        BufferedImage toCrop;
+        ImageFile toCrop;
         if (modified != null) {
-            toCrop = modified;
+            if (modified.getWidth() < 40) {
+                GUI.displayMessage(parentComponent, "Cannot zoom in any further");
+            } else {
+                modified = new ImageFile(modified, currentX, currentY, modified.getWidth() - 20, modified.getWidth() - 20);
+            }
         } else{
-            toCrop = image;
+            if (modified.getWidth() < 40) {
+                GUI.displayMessage(parentComponent, "Cannot zoom in any further");
+            } else {
+                modified = new ImageFile(modified, currentX, currentY, modified.getWidth() - 20, modified.getWidth() - 20);
+            }
         }
 
-        //Only crop if the image is large enough
-        if (toCrop.getWidth() < 40) {
-            GUI.displayMessage(parentComponent, "Cannot zoom in any further");
-            return;
-        }
-        modified = toCrop.getSubimage(10, 10, toCrop.getWidth() - 20, toCrop.getHeight() - 20);
         zoom +=10;
         currentX += 10;
         currentY += 10;
@@ -106,7 +93,7 @@ public class ImagePanel extends JPanel {
         System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
         System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
 
-        modified = image.getSubimage(currentX, currentY, modified.getWidth() + 20, modified.getHeight() + 20);
+        modified = new ImageFile(modified, currentX, currentY, modified.getWidth() + 20, modified.getHeight() + 20);
     }
 
     /**
@@ -118,7 +105,7 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentX += 10;
-        modified = image.getSubimage(currentX, currentY, modified.getWidth(), modified.getHeight());
+        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
     }
 
     /**
@@ -130,7 +117,7 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentX -= 10;
-        modified = image.getSubimage(currentX, currentY, modified.getWidth(), modified.getHeight());
+        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
     }
 
     /**
@@ -145,7 +132,7 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentY -= 10;
-        modified = image.getSubimage(currentX, currentY, modified.getWidth(), modified.getHeight());
+        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
     }
 
     /**
@@ -162,13 +149,13 @@ public class ImagePanel extends JPanel {
         currentY += 10;
         System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
         System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
-        modified = image.getSubimage(currentX, currentY, modified.getWidth(), modified.getHeight());
+        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
     }
 
     /**
      * @return the current state of the image (modified)
      */
-    public BufferedImage getImage() {
+    public ImageFile getImage() {
         if (modified != null) return modified;
         return image;
     }
@@ -176,7 +163,7 @@ public class ImagePanel extends JPanel {
     /**
      * @return the original image
      */
-    public BufferedImage getOriginalImage() {
+    public ImageFile getOriginalImage() {
         return image;
     }
 
@@ -184,7 +171,7 @@ public class ImagePanel extends JPanel {
      * If the maze has been solved, put the solved image here
      * @param solvedImg the solved maze
      */
-    public void setImage(BufferedImage solvedImg) {
+    public void setImage(ImageFile solvedImg) {
         image = solvedImg;
     }
 }

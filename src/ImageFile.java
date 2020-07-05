@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 
 /**
@@ -14,6 +15,19 @@ public class ImageFile {
 
     ImageFile(BufferedImage imageIn) {
         imgArray = makeImgArray(imageIn);
+    }
+
+    /**
+     * Make this a subset of another image
+     * @param imageIn the image to crop
+     * @param startX start pos
+     * @param startY start pos
+     * @param width new width
+     * @param height new height
+     */
+    ImageFile(ImageFile imageIn, int startX, int startY, int width, int height) {
+        //todo implment me
+
     }
 
     /**
@@ -201,5 +215,32 @@ public class ImageFile {
             }
         }
         return toRet;
+    }
+
+    /**
+     * Draw the image
+     */
+    //todo test me
+    public void draw(int panelWidth, int panelHeight, Graphics g, ImageFile imageFile, ImageObserver imgObserver) {
+        //First make an image
+        BufferedImage toPaint = imageFile.makeImage();
+
+        //todo, scale images proportionally so that they are not always square
+        BufferedImage resized = new BufferedImage(panelWidth, panelHeight, toPaint.getType());
+        Graphics2D g2 = resized.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g2.drawImage(toPaint, 0, 0, panelWidth, panelHeight, 0, 0, toPaint.getWidth(), toPaint.getHeight(), null);
+        g2.dispose();
+
+        g.drawImage(resized, 0, 0, imgObserver);
+    }
+
+    /**
+     * Change the colour of image
+     * @param x the xPos
+     * @param y the yPos
+     * @param rgb the colour
+     */
+    public void setRGB(int x, int y, int rgb) {
     }
 }
