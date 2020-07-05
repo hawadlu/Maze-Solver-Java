@@ -47,7 +47,7 @@ public class ImagePanel extends JPanel {
             if (modified.getWidth() < 40) {
                 GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             } else {
-                int endY = modified.imgArray.length - currentX - 10;
+                int endY = modified.imgArray.length - currentY - 10;
                 int endX = modified.imgArray[0].length - currentX - 10;
                 modified = new ImageFile(modified, currentX + 10, currentY + 10, modified.getWidth() - 20, modified.getWidth() - 20, endX, endY);
             }
@@ -55,7 +55,7 @@ public class ImagePanel extends JPanel {
             if (image.getWidth() < 40) {
                 GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             } else {
-                int endY = image.imgArray.length - currentX - 10;
+                int endY = image.imgArray.length - currentY - 10;
                 int endX = image.imgArray[0].length - currentX - 10;
                 modified = new ImageFile(image, currentX + 10, currentY + 10, image.getWidth() - 20, image.getWidth() - 20, endX, endY);
             }
@@ -144,7 +144,7 @@ public class ImagePanel extends JPanel {
         }
         currentY -= 10;
         int endY = modified.imgArray.length - currentY;
-        int endX = modified.imgArray[0].length;
+        int endX = modified.imgArray[0].length + currentX;
         modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 
@@ -163,7 +163,7 @@ public class ImagePanel extends JPanel {
         System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
         System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
         int endY = modified.imgArray.length + currentY;
-        int endX = modified.imgArray[0].length;
+        int endX = modified.imgArray[0].length + currentX;
         modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 

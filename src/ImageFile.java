@@ -214,10 +214,14 @@ public class ImageFile {
      * @return new array
      */
     private boolean[][] getSubset(int startX, int startY, int endX, int endY) {
-        boolean[][] toReturn = new boolean[imgArray.length - (2 * startY)][imgArray[0].length - (2 * startY)];
+        boolean[][] toReturn = new boolean[endY - startY][endX - startX];
         for (int i = startY; i < endY; i++) {
             for (int j = startX; j < endX; j++) {
-                toReturn[i - startY][j - startX] = imgArray[i][j];
+                try {
+                    toReturn[i - startY][j - startX] = imgArray[i][j];
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                }
             }
         }
         return toReturn;
