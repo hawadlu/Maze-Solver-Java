@@ -283,7 +283,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return new ImageFile(ImageIO.read(fileIn));
+            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath());
         } else {
             //todo deal with this
             throw new Error("Failed to open file");
@@ -292,10 +292,10 @@ public class GUI implements ItemListener {
 
     /**
      * Loads the options for solving a maze
-     * @param fileIn the file
+     * @param imageFile the file
      * @throws IOException whoops, something broke
      */
-    private void loadSolveOptionsGui(ImageFile fileIn) throws IOException {
+    public void loadSolveOptionsGui(ImageFile imageFile) throws IOException {
         customGrid = new CustomGrid();
 
         //Set the size
@@ -322,8 +322,8 @@ public class GUI implements ItemListener {
         customGrid.addElement(selectSearch, 2, 0, 2);
 
         JLabel fileName;
-        if (fileIn != null) {
-            String[] file = fileIn.getAbsolutePath().split("/");
+        if (imageFile != null) {
+            String[] file = imageFile.getAbsolutePath().split("/");
             fileName = new JLabel("File name: " + file[file.length - 1]);
         } else {
             fileName = new JLabel("No file selected");
@@ -332,9 +332,9 @@ public class GUI implements ItemListener {
         customGrid.addElement(fileName, 4, 0, 2);
 
         //Display the image
-        displayImage(fileIn, 0, 1, 6);
+        displayImage(imageFile, 0, 1, 6);
 
-        makeImageControlButtons(fileIn, panelSixths);
+        makeImageControlButtons(imageFile, panelSixths);
 
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
@@ -373,7 +373,7 @@ public class GUI implements ItemListener {
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
                         try {
                             spinner.interrupt();
-                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
+                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), imageFile);
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -530,7 +530,7 @@ public class GUI implements ItemListener {
         reset.addActionListener(e -> {
             try {
                 customGrid = null;
-                imgPanel.setImage(UIFileChooser());
+                imgPanel.setImage(fileIn);
                 loadSolveOptionsGui(fileIn);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
@@ -671,5 +671,9 @@ public class GUI implements ItemListener {
             }
             latch.countDown();
         }
+    }
+
+    public static void main(String[] args) {
+        new GUI();
     }
 }

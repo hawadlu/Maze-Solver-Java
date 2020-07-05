@@ -3,18 +3,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Class used to hold the image in memory
  */
 public class ImageFile {
-    private boolean[][] imgArray;
+    public boolean[][] imgArray;
     private int width;
     private int height;
     private String path;
 
-    ImageFile(BufferedImage imageIn) {
+    ImageFile(BufferedImage imageIn, String filePath) {
         imgArray = makeImgArray(imageIn);
+        this.path = filePath;
     }
 
     /**
@@ -25,52 +27,13 @@ public class ImageFile {
      * @param width new width
      * @param height new height
      */
-    ImageFile(ImageFile imageIn, int startX, int startY, int width, int height) {
-        //todo implment me
-
-    }
-
-    /**
-     * Loads the image file. This can take command line arguments for the filepath, solve method, neighbour method and continuing for large imgs.
-     * The order is file, large img (y/n), neighbour method(1/2), solve method (1 - 4)
-     */
-    public ImageFile loadImage(File fileArg, String largeArg, String neighbourArg, String solveArg) {
-        BufferedImage in;
-
-        //Checking if the file exists
-        try {
-            in = ImageIO.read(fileArg);
-
-            path = fileArg.getAbsolutePath();
-
-            BufferedImage imgFile = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
-
-            //Check that the image colour is acceptable
-            checkImageColour(imgFile);
-
-            //Check that the maze is valid
-            //todo implement this
-            //checkMazeValidity(imgFile);
-
-            Graphics2D g = imgFile.createGraphics();
-            g.drawImage(in, 0, 0, null);
-            g.dispose();
-            checkForLargeImage(largeArg, imgFile);
-
-            //Ask the user how they might want to process a large image
-            boolean neighbourLoad = getNeighbourMethod(neighbourArg, imgFile);
-
-            //Load the image into a 2d array to save space
-            ImageFile imgObj = new ImageFile(imgFile);
-            System.out.println("Img height: " + imgObj.getHeight());
-            System.out.println("Img width: " + imgObj.getWidth());
-            System.out.println("Approximately " + imgObj.getHeight() * imgObj.getWidth() * 0.15 + " nodes");
-            return this;
-        } catch (Exception e) {
-            System.out.println("Program aborted: " + e);
-        }
-        //todo deal with this
-        return null;
+    ImageFile(ImageFile imageIn, int startX, int startY, int width, int height, int endX, int endY) {
+        //imageIn.imgArray.length - startY
+        //imageIn.imgArray[0].length - startX
+       this.width = width;
+       this.height = height;
+       this.imgArray = imageIn.getSubset(startX, startY, endX, endY);
+       this.path = imageIn.path;
     }
 
     /**
@@ -129,7 +92,7 @@ public class ImageFile {
      * @param largeArg Used when the program is invoked via the command line
      * @param imgFile the image file to process
      */
-    private void checkForLargeImage(String largeArg,  BufferedImage imgFile) {
+    private void checkForLargeImage(String largeArg,  ImageFile imgFile, GUI gui) throws IOException {
         //Checking for large images
         while (true) {
             //should be 4000
@@ -141,7 +104,7 @@ public class ImageFile {
                     break;
                 } else if (answer.equals("n")) {
                     System.out.println("Returning to image selection");
-                    loadImage(null, null, null, null);
+                    gui.loadSolveOptionsGui(imgFile);
                     break;
                 } else {
                     System.out.println("Invalid input. Try again!.");
@@ -242,5 +205,21 @@ public class ImageFile {
      * @param rgb the colour
      */
     public void setRGB(int x, int y, int rgb) {
+    }
+
+    /**
+     * Get and return a subset of the image array
+     * @param startY yPos
+     * @param startX xPos
+     * @return new array
+     */
+    private boolean[][] getSubset(int startX, int startY, int endX, int endY) {
+        boolean[][] toReturn = new boolean[imgArray.length - (2 * startY)][imgArray[0].length - (2 * startY)];
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
+                toReturn[i - startY][j - startX] = imgArray[i][j];
+            }
+        }
+        return toReturn;
     }
 }

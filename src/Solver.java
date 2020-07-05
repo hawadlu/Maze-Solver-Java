@@ -13,13 +13,6 @@ import java.util.*;
 
 class Solver {
     /**
-     * Constructor
-     */
-    Solver(String fileArg, String largeArg, String neighbourArg, String solveArg) {
-        GUI gui = new GUI();
-    }
-
-    /**
      * Solves the maze
      */
     public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
@@ -154,21 +147,5 @@ class Solver {
         System.out.print(question);
 
         return userInput.nextLine();
-    }
-
-    /**
-     * @param arguments The order is file, large img (y/n), neighbour method (1/2), solve method (1 - 4)
-     *                  Note that the command line part is primarily for testing
-     */
-    public static void main(String[] arguments) {
-        String filePath = null, loadLarge = null, neighbourSearch = null, searchMethod = null;
-
-        if (arguments.length > 0) {
-            filePath = arguments[0];
-            loadLarge = arguments[1];
-            neighbourSearch = arguments[2];
-            searchMethod = arguments[3];
-        }
-        new Solver(filePath, loadLarge, neighbourSearch, searchMethod);
     }
 }

@@ -263,8 +263,6 @@ public class ImageManipulation {
                 }
             }
         }
-
-
         return neighbours;
     }
 

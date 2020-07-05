@@ -43,18 +43,21 @@ public class ImagePanel extends JPanel {
     //todo make sure this works
     public void zoomIn() {
         System.out.println("Zooming in");
-        ImageFile toCrop;
         if (modified != null) {
             if (modified.getWidth() < 40) {
                 GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             } else {
-                modified = new ImageFile(modified, currentX, currentY, modified.getWidth() - 20, modified.getWidth() - 20);
+                int endY = modified.imgArray.length - currentX - 10;
+                int endX = modified.imgArray[0].length - currentX - 10;
+                modified = new ImageFile(modified, currentX + 10, currentY + 10, modified.getWidth() - 20, modified.getWidth() - 20, endX, endY);
             }
         } else{
-            if (modified.getWidth() < 40) {
+            if (image.getWidth() < 40) {
                 GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             } else {
-                modified = new ImageFile(modified, currentX, currentY, modified.getWidth() - 20, modified.getWidth() - 20);
+                int endY = image.imgArray.length - currentX - 10;
+                int endX = image.imgArray[0].length - currentX - 10;
+                modified = new ImageFile(image, currentX + 10, currentY + 10, image.getWidth() - 20, image.getWidth() - 20, endX, endY);
             }
         }
 
@@ -93,7 +96,10 @@ public class ImagePanel extends JPanel {
         System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
         System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
 
-        modified = new ImageFile(modified, currentX, currentY, modified.getWidth() + 20, modified.getHeight() + 20);
+        int endY = modified.imgArray.length + 20;
+        int endX = modified.imgArray[0].length + 20;
+
+        modified = new ImageFile(image, currentX, currentY, modified.getWidth() + 20, modified.getHeight() + 20, endX, endY);
     }
 
     /**
@@ -105,7 +111,10 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentX += 10;
-        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
+
+        int endY = modified.imgArray.length + currentY;
+        int endX = currentX + modified.imgArray[0].length;
+        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 
     /**
@@ -117,7 +126,9 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentX -= 10;
-        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
+        int endY = modified.imgArray.length + currentY;
+        int endX = modified.imgArray[0].length + currentX;
+        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 
     /**
@@ -132,7 +143,9 @@ public class ImagePanel extends JPanel {
             return;
         }
         currentY -= 10;
-        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
+        int endY = modified.imgArray.length - currentY;
+        int endX = modified.imgArray[0].length;
+        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 
     /**
@@ -149,7 +162,9 @@ public class ImagePanel extends JPanel {
         currentY += 10;
         System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
         System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
-        modified = new ImageFile(modified, currentX, currentY, modified.getWidth(), modified.getHeight());
+        int endY = modified.imgArray.length + currentY;
+        int endX = modified.imgArray[0].length;
+        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
     }
 
     /**
