@@ -163,8 +163,8 @@ public class ImageFile {
         return this.imgArray;
     }
 
-    public int getHeight() {return this.height;}
-    public int getWidth() {return this.width;}
+    public int getHeight() {return this.imgArray.length;}
+    public int getWidth() {return this.imgArray[0].length;}
 
     public String getAbsolutePath() {
         return this.path;
@@ -219,7 +219,7 @@ public class ImageFile {
     }
 
     public void initSolvedArr() {
-         solved = new byte[width][height];
+         solved = new byte[imgArray.length][imgArray[0].length];
     }
 
     /**

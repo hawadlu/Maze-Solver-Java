@@ -41,6 +41,11 @@ public class ImagePanel extends JPanel {
      */
     //todo make sure this works
     public void zoomIn() {
+        if (image.width < 40 || image.height < 40) {
+            GUI.displayMessage(parentComponent, "Cannot zoom in any further");
+            return;
+        }
+
         image.width -= 10;
         image.height -= 10;
         image.topY += 10;
@@ -52,7 +57,35 @@ public class ImagePanel extends JPanel {
      * @return the zoomed out image
      */
     public void zoomOut() {
-        //todo make robust
+        if (image.width == image.imgArray[0].length || image.height == image.imgArray.length) {
+            GUI.displayMessage(parentComponent, "Cannot zoom out any further");
+            return;
+        }
+
+        //On the right edge
+        if (image.leftX + image.width > image.imgArray[0].length) {
+            image.leftX -= 10;
+            image.width -= 10;
+        }
+
+        //On the left edge
+        if (image.leftX == 0) {
+            image.leftX += 10;
+            image.width += 10;
+        }
+
+        //On the bottom edge
+        if (image.topY + image.height > image.imgArray.length) {
+            image.topY -= 10;
+            image.height -= 10;
+        }
+
+        //On thr top edge
+        if (image.topY == 0) {
+            image.topY += 10;
+            image.height += 10;
+        }
+
         image.width += 10;
         image.height += 10;
         image.topY -= 10;
