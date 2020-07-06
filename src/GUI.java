@@ -338,6 +338,7 @@ public class GUI implements ItemListener {
 
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
+            //todo make this work, even with very quick mazes
             try {
                 final ImageFile[] solvedImg = {null};
                 Thread spinner = new Thread() {

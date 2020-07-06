@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
@@ -14,9 +15,19 @@ public class ImageFile {
     byte[][] solved;
     public int leftX = 0;
     public int topY = 0;
+    public Coordinates entry;
+    public  Coordinates exit;
 
     ImageFile(BufferedImage imageIn, String filePath) {
+        //Check the image colour
+        checkImageColour(imageIn);
+
+        //Make the array
         imgArray = makeImgArray(imageIn);
+
+        //Make sure there is only one entry and one exit
+        checkEntriesAndExits();
+
         this.path = filePath;
     }
 
@@ -43,13 +54,44 @@ public class ImageFile {
     }
 
     /**
-     * Check that the maze is valid. I.E. there is only one entry and one exit.
-     * White pixels do not meet diagonally unless there is anther white pixel between them
-     * @param imgFile
+     * Check that there is only one entry and one exit
      */
-    //todo implement me
-    private void checkMazeValidity(BufferedImage imgFile) {
-        throw new Error("Invalid maze");
+    private void checkEntriesAndExits() {
+        //ArrayList containing the coordinates of each of the entries and exits
+        ArrayList<Coordinates> entries = new ArrayList<>();
+
+        //Look at the top row.
+        for (int width = 0; width < getWidth(); width++) {
+            if (isWhite(width, 0)) {
+                entries.add(new Coordinates(width, 0));
+            }
+        }
+
+        //Look at the bottom row
+        for (int width = 0; width < getWidth(); width++) {
+            if (isWhite(width, getHeight() - 1)) {
+                entries.add(new Coordinates(width, getHeight() - 1));
+            }
+        }
+
+        //Look at the left side
+        for (int height = 0; height < getHeight(); height++) {
+            if (isWhite(0, height)) {
+                entries.add(new Coordinates(0, height));
+            }
+        }
+
+        //Look at the right side
+        for (int height = 0; height < getHeight(); height++) {
+            if (isWhite(getWidth() - 1, height)) {
+                entries.add(new Coordinates(getWidth() - 1, height));
+            }
+        }
+
+        if (entries.size() != 2) throw new Error("Maze must have one entry and one exit");
+
+        entry = entries.get(0);
+        exit = entries.get(1);
     }
 
     /**
@@ -60,7 +102,8 @@ public class ImageFile {
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
                 int colour = getColour(imgFile, width, height);
-                if (colour > 20 && colour < 235) {
+                System.out.println("x: " + width + " y: " + height + " col: " + colour);
+                if (colour > 50 && colour < 715) {
                     throw new Error("Invalid colour at x " + width + " y " + height);
                 }
             }
