@@ -13,19 +13,9 @@ import java.util.*;
 
 class Solver {
     /**
-     * Constructor
-     */
-    Solver(String fileArg, String largeArg, String neighbourArg, String solveArg) {
-        GUI gui = new GUI();
-    }
-
-    /**
      * Solves the maze
      */
-    public static BufferedImage solve(BufferedImage image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
-        //Load the image object
-        ImageFile imgObj = new ImageFile(image);
-
+    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
         long numNodes = 0;
 
         //Map containing the positions of each node
@@ -34,72 +24,41 @@ class Solver {
         System.out.println("Finding nodes");
 
         //Validate the parameters
-        ArrayList<Object> parameters = validateParameters(imgObj, algorithm, searchType, parentComponent);
+        ArrayList<Object> parameters = validateParameters(image, algorithm, searchType, parentComponent);
         algorithm = parameters.get(0);
         searchType = parameters.get(1);
 
         //Only load this if it is requested
         if (searchType.equals("Search for neighbours during loading")) {
-            nodes = ImageManipulation.findNeighboursForAll(imgObj);
+            nodes = ImageManipulation.findNeighboursForAll(image);
             numNodes = nodes.size();
-        }
-
-        //ArrayList containing the coordinates of each of the entries and exits
-        ArrayList<Coordinates> entries = new ArrayList<>();
-
-        //Look at the top row.
-        for (int width = 0; width < imgObj.getWidth(); width++) {
-            if (entries.size() != 2 && imgObj.isWhite(width, 0)) {
-                entries.add(new Coordinates(width, 0));
-            }
-        }
-
-        //Look at the bottom row
-        for (int width = 0; width < imgObj.getWidth(); width++) {
-            if (entries.size() != 2 && imgObj.isWhite(width, imgObj.getHeight() - 1)) {
-                entries.add(new Coordinates(width, imgObj.getHeight() - 1));
-            }
-        }
-
-        //Look at the left side
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            if (entries.size() != 2 && imgObj.isWhite(0, height)) {
-                entries.add(new Coordinates(0, height));
-            }
-        }
-
-        //Look at the right side
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            if (entries.size() != 2 && imgObj.isWhite(imgObj.getWidth() - 1, height)) {
-                entries.add(new Coordinates(imgObj.getWidth() - 1, height));
-            }
         }
 
         //If the nodes are to be initialised while solving add the start and end now
         if (!searchType.equals("Search for neighbours during loading")) {
             //Put the start and end in the map
-            nodes.put(entries.get(0), new MazeNode(entries.get(0).x, entries.get(0).y));
-            nodes.put(entries.get(1), new MazeNode(entries.get(1).x, entries.get(1).y));
+            nodes.put(image.entry, new MazeNode(image.entry.x, image.entry.y));
+            nodes.put(image.exit, new MazeNode(image.exit.x, image.exit.y));
         }
 
         System.out.println("Found all nodes");
-        System.out.println("Start at: " + entries.get(0).x + ", " + 0);
-        System.out.println("End at: " + entries.get(1).x + ", " + (imgObj.getHeight() - 1));
+        System.out.println("Start at: " + image.entry.x + ", " + 0);
+        System.out.println("End at: " + image.exit.x + ", " + (image.getHeight() - 1));
         System.out.println("Node count: " + numNodes);
-        System.out.println("Approximately " + (float) numNodes / (imgObj.getHeight() * imgObj.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
+        System.out.println("Approximately " + (float) numNodes / (image.getHeight() * image.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
         System.out.println("Solving");
 
         //Determine the method that should be used to solve the maze
         //todo implement automatic switching for larger mazes
         if (algorithm.equals("Depth First")) {
-            return SolveMethods.solveDFS(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveDFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
         } else if (algorithm.equals("Breadth First")) {
-            return SolveMethods.solveBFS(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveBFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
         } else if (algorithm.equals("Dijkstra")) {
-            return SolveMethods.solveDijkstra(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveDijkstra(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
         } else {
-            return SolveMethods.solveAStar(imgObj, nodes.get(entries.get(0)), nodes.get(entries.get(1)), nodes);
+            return SolveMethods.solveAStar(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
         }
     }
 
@@ -157,21 +116,5 @@ class Solver {
         System.out.print(question);
 
         return userInput.nextLine();
-    }
-
-    /**
-     * @param arguments The order is file, large img (y/n), neighbour method (1/2), solve method (1 - 4)
-     *                  Note that the command line part is primarily for testing
-     */
-    public static void main(String[] arguments) {
-        String filePath = null, loadLarge = null, neighbourSearch = null, searchMethod = null;
-
-        if (arguments.length > 0) {
-            filePath = arguments[0];
-            loadLarge = arguments[1];
-            neighbourSearch = arguments[2];
-            searchMethod = arguments[3];
-        }
-        new Solver(filePath, loadLarge, neighbourSearch, searchMethod);
     }
 }

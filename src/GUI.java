@@ -164,19 +164,15 @@ public class GUI implements ItemListener {
               Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
 
             //Go to the save menu
-            try {
-                //todo make the image properly generate
-                imgPanel = new ImagePanel(ImageIO.read(new File("Images/Tiny.png")), 750, 750, primaryGui); //todo remove and replace with the generated image
+            //todo make the image properly generate
+            imgPanel = new ImagePanel(null, 750, 750 ,primaryGui); //todo replace with the generated maze
 
-                if (nextMethod.equals("loadSolveOptionsGui")) {
-                    try {
-                        loadSolveOptionsGui(null);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+            if (nextMethod.equals("loadSolveOptionsGui")) {
+                try {
+                    loadSolveOptionsGui(null);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
         });
         customGrid.addElement(submit, 0, 3, 2);
@@ -230,7 +226,7 @@ public class GUI implements ItemListener {
      * The gui that displays the game
      * @param fileIn the image file
      */
-    private void playGameGui(File fileIn) {
+    private void playGameGui(ImageFile fileIn) {
         customGrid = new CustomGrid();
 
         //Set the size
@@ -278,7 +274,7 @@ public class GUI implements ItemListener {
      * Get and return the file that the user wants
      * @return the file
      */
-    private File UIFileChooser() throws IOException {
+    private ImageFile UIFileChooser() throws IOException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -287,7 +283,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return fileIn;
+            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath());
         } else {
             //todo deal with this
             throw new Error("Failed to open file");
@@ -296,10 +292,10 @@ public class GUI implements ItemListener {
 
     /**
      * Loads the options for solving a maze
-     * @param fileIn the file
+     * @param imageFile the file
      * @throws IOException whoops, something broke
      */
-    private void loadSolveOptionsGui(File fileIn) throws IOException {
+    public void loadSolveOptionsGui(ImageFile imageFile) throws IOException {
         customGrid = new CustomGrid();
 
         //Set the size
@@ -326,8 +322,8 @@ public class GUI implements ItemListener {
         customGrid.addElement(selectSearch, 2, 0, 2);
 
         JLabel fileName;
-        if (fileIn != null) {
-            String[] file = fileIn.getAbsolutePath().split("/");
+        if (imageFile != null) {
+            String[] file = imageFile.getAbsolutePath().split("/");
             fileName = new JLabel("File name: " + file[file.length - 1]);
         } else {
             fileName = new JLabel("No file selected");
@@ -336,14 +332,15 @@ public class GUI implements ItemListener {
         customGrid.addElement(fileName, 4, 0, 2);
 
         //Display the image
-        displayImage(fileIn, 0, 1, 6);
+        displayImage(imageFile, 0, 1, 6);
 
-        makeImageControlButtons(fileIn, panelSixths);
+        makeImageControlButtons(imageFile, panelSixths);
 
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
+            //todo make this work, even with very quick mazes
             try {
-                final BufferedImage[] solvedImg = {null};
+                final ImageFile[] solvedImg = {null};
                 Thread spinner = new Thread() {
                     public void run() {
                         //Spinning wheel
@@ -374,10 +371,11 @@ public class GUI implements ItemListener {
                         } catch (IllegalAccessException illegalAccessException) {
                             illegalAccessException.printStackTrace();
                         }
+                        solvedImg[0].resetZoom();
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
                         try {
                             spinner.interrupt();
-                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), fileIn);
+                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), imageFile);
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -410,9 +408,9 @@ public class GUI implements ItemListener {
      * @param fileIn the file containing the image
      * @throws IOException happens when there's a problem
      */
-    private void displayImage(File fileIn, int gridX, int gridY, int gridWidth) throws IOException {
+    private void displayImage(ImageFile fileIn, int gridX, int gridY, int gridWidth) throws IOException {
         //The Image
-        if (imgPanel == null) imgPanel = new ImagePanel(ImageIO.read(fileIn), 750, 750, primaryGui);
+        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
         JPanel displayImg = imgPanel;
         displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
@@ -429,7 +427,7 @@ public class GUI implements ItemListener {
      * @param fileIn the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
-    private void makeImageControlButtons(File fileIn, Dimension panelSixths) {
+    private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
         generic.addActionListener(e -> {
@@ -511,7 +509,7 @@ public class GUI implements ItemListener {
      * @throws IOException something bad happened
      */
     //fixme make this display the solved image
-    private void loadSaveGui(String algorithmUsed, File fileIn) throws IOException {
+    private void loadSaveGui(String algorithmUsed, ImageFile fileIn) throws IOException {
         customGrid = new CustomGrid();
         Dimension panelThirds = new Dimension(750 / 3, 50);
 
@@ -524,24 +522,27 @@ public class GUI implements ItemListener {
         //The Image
         displayImage(fileIn, 0, 1, 6);
 
+        //Control buttons
+        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50));
+
         //todo reset image panel on save and solve
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
         save.setPreferredSize(panelThirds);
-        customGrid.addElement(save, 0, 2, 1);
+        customGrid.addElement(save, 0, 3, 2);
 
         JButton reset = new JButton("Reset Maze");
         reset.addActionListener(e -> {
             try {
                 customGrid = null;
-                imgPanel.setImage(ImageIO.read(fileIn));
+                imgPanel.setImage(fileIn);
                 loadSolveOptionsGui(fileIn);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         });
         reset.setPreferredSize(panelThirds);
-        customGrid.addElement(reset, 1, 2, 1);
+        customGrid.addElement(reset, 2, 3, 2);
 
         JButton diffImg = new JButton("Use a different image");
         diffImg.addActionListener(e -> {
@@ -551,7 +552,7 @@ public class GUI implements ItemListener {
             loadSolveGui();
         });
         diffImg.setPreferredSize(panelThirds);
-        customGrid.addElement(diffImg, 2, 2, 1);
+        customGrid.addElement(diffImg, 4, 3, 2);
 
 
         System.out.println("Repainting primary");
@@ -563,7 +564,7 @@ public class GUI implements ItemListener {
      * Save the image in a place of the users choice
      * @param image the image to save
      */
-    private void saveImage(BufferedImage image) {
+    private void saveImage(ImageFile image) {
         JFileChooser save =new JFileChooser();
         int ret = save.showSaveDialog(primaryGui);
         if (ret == JFileChooser.APPROVE_OPTION) {
@@ -675,5 +676,9 @@ public class GUI implements ItemListener {
             }
             latch.countDown();
         }
+    }
+
+    public static void main(String[] args) {
+        new GUI();
     }
 }

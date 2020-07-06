@@ -1,52 +1,113 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
  */
 public class ImageFile {
-    private boolean[][] imgArray;
-    private int width;
-    private int height;
+    public boolean[][] imgArray;
+    public int width;
+    public int height;
+    private String path;
+    byte[][] solved;
+    public int leftX = 0;
+    public int topY = 0;
+    public Coordinates entry;
+    public  Coordinates exit;
 
-    ImageFile(BufferedImage imageIn) {
+    ImageFile(BufferedImage imageIn, String filePath) {
+        //Check the image colour
+        checkImageColour(imageIn);
+
+        //Make the array
         imgArray = makeImgArray(imageIn);
+
+        //Make sure there is only one entry and one exit
+        checkEntriesAndExits();
+
+        this.path = filePath;
     }
 
     /**
-     * Loads the image file. This can take command line arguments for the filepath, solve method, neighbour method and continuing for large imgs.
-     * The order is file, large img (y/n), neighbour method(1/2), solve method (1 - 4)
+     * Make this a subset of another image
+     * @param imageIn the image to crop
+     * @param startX start pos
+     * @param startY start pos
+     * @param width new width
+     * @param height new height
      */
-    public BufferedImage loadImage(File fileArg, String largeArg, String neighbourArg, String solveArg) {
-        BufferedImage in;
+    ImageFile(ImageFile imageIn, int startX, int startY, int width, int height, int endX, int endY) {
+        //imageIn.imgArray.length - startY
+        //imageIn.imgArray[0].length - startX
+       this.width = width;
+       this.height = height;
+       this.imgArray = imageIn.getSubset(startX, startY, endX, endY);
 
-        //Checking if the file exists
-        try {
-            in = ImageIO.read(fileArg);
-
-            BufferedImage imgFile = new BufferedImage(in.getWidth(), in.getHeight(), BufferedImage.TYPE_INT_RGB);
-
-            Graphics2D g = imgFile.createGraphics();
-            g.drawImage(in, 0, 0, null);
-            g.dispose();
-            checkForLargeImage(largeArg, imgFile);
-
-            //Ask the user how they might want to process a large image
-            boolean neighbourLoad = getNeighbourMethod(neighbourArg, imgFile);
-
-            //Load the image into a 2d array to save space
-            ImageFile imgObj = new ImageFile(imgFile);
-            System.out.println("Img height: " + imgObj.getHeight());
-            System.out.println("Img width: " + imgObj.getWidth());
-            System.out.println("Approximately " + imgObj.getHeight() * imgObj.getWidth() * 0.15 + " nodes");
-            return in;
-        } catch (Exception e) {
-            System.out.println("Program aborted: " + e);
+        //Apply to the solved image if it is not null
+        if (imageIn.solved != null) {
+            this.solved = imageIn.getSolvedSubset(startX, startY, endX, endX);
         }
-        //todo deal with this
-        return null;
+        this.path = imageIn.path;
+    }
+
+    /**
+     * Check that there is only one entry and one exit
+     */
+    private void checkEntriesAndExits() {
+        //ArrayList containing the coordinates of each of the entries and exits
+        ArrayList<Coordinates> entries = new ArrayList<>();
+
+        //Look at the top row.
+        for (int width = 0; width < getWidth(); width++) {
+            if (isWhite(width, 0)) {
+                entries.add(new Coordinates(width, 0));
+            }
+        }
+
+        //Look at the bottom row
+        for (int width = 0; width < getWidth(); width++) {
+            if (isWhite(width, getHeight() - 1)) {
+                entries.add(new Coordinates(width, getHeight() - 1));
+            }
+        }
+
+        //Look at the left side
+        for (int height = 0; height < getHeight(); height++) {
+            if (isWhite(0, height)) {
+                entries.add(new Coordinates(0, height));
+            }
+        }
+
+        //Look at the right side
+        for (int height = 0; height < getHeight(); height++) {
+            if (isWhite(getWidth() - 1, height)) {
+                entries.add(new Coordinates(getWidth() - 1, height));
+            }
+        }
+
+        if (entries.size() != 2) throw new Error("Maze must have one entry and one exit");
+
+        entry = entries.get(0);
+        exit = entries.get(1);
+    }
+
+    /**
+     * Make sure that the luminosity of the each pixel is somewhere between 0 - 20 and 235 - 255
+     * @param imgFile the image to check
+     */
+    private void checkImageColour(BufferedImage imgFile) {
+        for (int height = 0; height < imgFile.getHeight(); height++) {
+            for (int width = 0; width < imgFile.getWidth(); width++) {
+                int colour = getColour(imgFile, width, height);
+                System.out.println("x: " + width + " y: " + height + " col: " + colour);
+                if (colour > 50 && colour < 715) {
+                    throw new Error("Invalid colour at x " + width + " y " + height);
+                }
+            }
+        }
     }
 
     /**
@@ -80,7 +141,7 @@ public class ImageFile {
      * @param largeArg Used when the program is invoked via the command line
      * @param imgFile the image file to process
      */
-    private void checkForLargeImage(String largeArg,  BufferedImage imgFile) {
+    private void checkForLargeImage(String largeArg,  ImageFile imgFile, GUI gui) throws IOException {
         //Checking for large images
         while (true) {
             //should be 4000
@@ -92,7 +153,7 @@ public class ImageFile {
                     break;
                 } else if (answer.equals("n")) {
                     System.out.println("Returning to image selection");
-                    loadImage(null, null, null, null);
+                    gui.loadSolveOptionsGui(imgFile);
                     break;
                 } else {
                     System.out.println("Invalid input. Try again!.");
@@ -145,6 +206,113 @@ public class ImageFile {
         return this.imgArray;
     }
 
-    public int getHeight() {return this.height;}
-    public int getWidth() {return this.width;}
+    public int getHeight() {return this.imgArray.length;}
+    public int getWidth() {return this.imgArray[0].length;}
+
+    public String getAbsolutePath() {
+        return this.path;
+    }
+
+    /**
+     * Make an image using the inout array
+     * @return a buffered image
+     */
+    //todo make sure this works
+    public BufferedImage makeImage() {
+        BufferedImage toRet = new BufferedImage(width - leftX, height - topY, BufferedImage.TYPE_INT_ARGB);
+        for (int newHeight = 0; newHeight + topY < height; newHeight ++) {
+            for (int newWidth = 0; newWidth + leftX < width; newWidth++) {
+                //Check if the maze has been solved
+                if (solved != null) {
+                    if (solved[newHeight + topY][newWidth + leftX] == 0) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
+                    else if (solved[newHeight + topY][newWidth + leftX] == 1) toRet.setRGB(newWidth, newHeight, Color.white.getRGB());
+                    else toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
+                } else {
+                    if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
+                    else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
+                }
+            }
+        }
+        return toRet;
+    }
+
+    public void resetZoom() {
+        width = imgArray[0].length;
+        height = imgArray.length;
+        topY = 0;
+        leftX = 0;
+    }
+
+    /**
+     * Draw the image
+     */
+    //todo test me
+    public void draw(int panelWidth, int panelHeight, Graphics g, ImageFile imageFile, ImageObserver imgObserver) {
+        //First make an image
+        BufferedImage toPaint = imageFile.makeImage();
+
+        //todo, scale images proportionally so that they are not always square
+        BufferedImage resized = new BufferedImage(panelWidth, panelHeight, toPaint.getType());
+        Graphics2D g2 = resized.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g2.drawImage(toPaint, 0, 0, panelWidth, panelHeight, 0, 0, toPaint.getWidth(), toPaint.getHeight(), null);
+        g2.dispose();
+
+        g.drawImage(resized, 0, 0, imgObserver);
+    }
+
+    public void initSolvedArr() {
+         solved = new byte[imgArray.length][imgArray[0].length];
+    }
+
+    /**
+     * Change the colour of image
+     * 0 is black, 1 is white, 2 is red
+     * @param x the xPos
+     * @param y the yPos
+     * @param col the colour
+     */
+    public void setRGB(int x, int y, byte col) {
+        solved[y][x] = col;
+    }
+
+    /**
+     * Get and return a subset of the image array
+     * @param startY yPos
+     * @param startX xPos
+     * @return new array
+     */
+    private boolean[][] getSubset(int startX, int startY, int endX, int endY) {
+        boolean[][] toReturn = new boolean[endY - startY][endX - startX];
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
+                try {
+                    toReturn[i - startY][j - startX] = imgArray[i][j];
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return toReturn;
+    }
+
+    /**
+     * Get and return a subset of the image array
+     * @param startY yPos
+     * @param startX xPos
+     * @return new array
+     */
+    private byte[][] getSolvedSubset(int startX, int startY, int endX, int endY) {
+        byte[][] toReturn = new byte[endY - startY][endX - startX];
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
+                try {
+                    toReturn[i - startY][j - startX] = solved[i][j];
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return toReturn;
+    }
 }

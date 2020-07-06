@@ -16,35 +16,36 @@ public class ImageManipulation {
     /**
      * This method draws the solved maze and returns it
      */
-    public static BufferedImage drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
-        BufferedImage save = new BufferedImage(imgObj.getWidth(), imgObj.getHeight(), BufferedImage.TYPE_INT_RGB);
+    //todo change so that the red line can be painted
+    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
+        imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 if (imgObj.isWhite(width, height)) {
-                    save.setRGB(width, height, Color.WHITE.getRGB());
+                    imgObj.setRGB(width, height, (byte) 1);
                 } else {
-                    save.setRGB(width, height, Color.BLACK.getRGB());
+                    imgObj.setRGB(width, height, (byte) 0);
                 }
             }
         }
 
         //Colour the entry
-        save.setRGB(entry.getX(), entry.getY(), Color.RED.getRGB());
+        imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
 
         while (nodes.size() > 1) {
             MazeNode start = nodes.remove(0);
             MazeNode end = nodes.get(0);
             int y, x;
 
-            save.setRGB(start.getX(), start.getY(), Color.RED.getRGB());
-            save.setRGB(end.getX(), end.getY(), Color.RED.getRGB());
+            imgObj.setRGB(start.getX(), start.getY(), (byte) 2);
+            imgObj.setRGB(end.getX(), end.getY(), (byte) 2);
 
             //Drawing down
             if (start.getY() < end.getY()) {
                 y = start.getY() + 1;
                 while (y < end.getY()) {
-                    save.setRGB(start.getX(), y, Color.RED.getRGB());
+                    imgObj.setRGB(start.getX(), y, (byte) 2);
                     y += 1;
                 }
 
@@ -52,7 +53,7 @@ public class ImageManipulation {
             } else if (start.getY() > end.getY()) {
                 y = start.getY();
                 while (y > end.getY()) {
-                    save.setRGB(start.getX(), y, Color.RED.getRGB());
+                    imgObj.setRGB(start.getX(), y, (byte) 2);
                     y-=1;
                 }
 
@@ -60,7 +61,7 @@ public class ImageManipulation {
             } else if (start.getX() < end.getX()) {
                 x = start.getX();
                 while (x < end.getX()) {
-                    save.setRGB(x, start.getY(), Color.RED.getRGB());
+                    imgObj.setRGB(x, start.getY(), (byte) 2);
                     x+=1;
                 }
 
@@ -68,12 +69,12 @@ public class ImageManipulation {
             } else if (start.getX() > end.getX()) {
                 x = start.getX();
                 while (x > end.getX()) {
-                    save.setRGB(x, start.getY(), Color.RED.getRGB());
+                    imgObj.setRGB(x, start.getY(), (byte) 2);
                     x-=1;
                 }
             }
         }
-        return save;
+        return imgObj;
     }
 
 
@@ -263,8 +264,6 @@ public class ImageManipulation {
                 }
             }
         }
-
-
         return neighbours;
     }
 
@@ -348,10 +347,10 @@ public class ImageManipulation {
     /**
      * Saves solved images in the images folder
      */
-    public static void saveImage(BufferedImage img, String fileName) {
+    public static void saveImage(ImageFile img, String fileName) {
         //Saving the image
         try {
-            ImageIO.write(img, "png", new File(fileName));
+            ImageIO.write(img.makeImage(), "png", new File(fileName));
             System.out.println("Image saved as " + fileName);
         } catch (Exception e) {
             System.out.println("Unable to save image: " + e);
