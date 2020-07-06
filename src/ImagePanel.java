@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Class for displaying images
@@ -42,28 +41,10 @@ public class ImagePanel extends JPanel {
      */
     //todo make sure this works
     public void zoomIn() {
-        System.out.println("Zooming in");
-        if (modified != null) {
-            if (modified.getWidth() < 40) {
-                GUI.displayMessage(parentComponent, "Cannot zoom in any further");
-            } else {
-                int endY = modified.imgArray.length - currentY - 10;
-                int endX = modified.imgArray[0].length - currentX - 10;
-                modified = new ImageFile(modified, currentX + 10, currentY + 10, modified.getWidth() - 20, modified.getWidth() - 20, endX, endY);
-            }
-        } else{
-            if (image.getWidth() < 40) {
-                GUI.displayMessage(parentComponent, "Cannot zoom in any further");
-            } else {
-                int endY = image.imgArray.length - currentY - 10;
-                int endX = image.imgArray[0].length - currentX - 10;
-                modified = new ImageFile(image, currentX + 10, currentY + 10, image.getWidth() - 20, image.getWidth() - 20, endX, endY);
-            }
-        }
-
-        zoom +=10;
-        currentX += 10;
-        currentY += 10;
+        image.width -= 10;
+        image.height -= 10;
+        image.topY += 10;
+        image.leftX += 10;
     }
 
     /**
@@ -71,100 +52,59 @@ public class ImagePanel extends JPanel {
      * @return the zoomed out image
      */
     public void zoomOut() {
-        if (modified == null || modified.getHeight() == image.getHeight() && modified.getWidth() == image.getWidth()) {
-            GUI.displayMessage(parentComponent, "Cannot zoom out any further");
-            return;
-        }
-        //Deal with the cases where the image is at the far left or right
-        if (currentX == 0) {
-            //Do nothing todo remove
-        } else if (currentX + modified.getWidth() == image.getWidth()) {
-            currentX -= 20;
-        } else {
-            currentX -= 10;
-        }
-
-        //Deal with the cases where y is at the top or bottom
-        if (currentY == 0) {
-            //Do nothing todo remove
-        } else if (currentY + modified.getHeight() == image.getHeight()) {
-            currentY -= 20;
-        } else {
-            currentY -= 10;
-        }
-
-        System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
-        System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
-
-        int endY = modified.imgArray.length + 20;
-        int endX = modified.imgArray[0].length + 20;
-
-        modified = new ImageFile(image, currentX, currentY, modified.getWidth() + 20, modified.getHeight() + 20, endX, endY);
+        //todo make robust
+        image.width += 10;
+        image.height += 10;
+        image.topY -= 10;
+        image.leftX -= 10;
     }
 
     /**
      * Pan right by 10px
      */
     public void panRight() {
-        if (modified == null || currentX + modified.getWidth() == image.getWidth()) {
+        if (image.leftX == image.imgArray[0].length - (image.width - image.leftX)) {
             GUI.displayMessage(parentComponent, "Cannot pan right any further");
             return;
         }
-        currentX += 10;
-
-        int endY = modified.imgArray.length + currentY;
-        int endX = currentX + modified.imgArray[0].length;
-        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
+        image.leftX += 10;
+        image.width += 10;
     }
 
     /**
      * Pan left by 10px
      */
     public void panLeft() {
-        if (modified == null || currentX == 0) {
+        if (image.leftX == 0) {
             GUI.displayMessage(parentComponent, "Cannot pan left any further");
             return;
         }
-        currentX -= 10;
-        int endY = modified.imgArray.length + currentY;
-        int endX = modified.imgArray[0].length + currentX;
-        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
+        image.leftX -= 10;
+        image.width -= 10;
     }
 
     /**
      * Pan up by 10px
      */
     public void panUp() {
-        if (modified == null) {
-            GUI.displayMessage(parentComponent, "You need to zoom in first");
-            return;
-        } else if (currentY == 0) {
+        if (image.topY == 0) {
             GUI.displayMessage(parentComponent, "Cannot pan up any further");
             return;
         }
-        currentY -= 10;
-        int endY = modified.imgArray.length - currentY;
-        int endX = modified.imgArray[0].length + currentX;
-        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
+        image.topY -= 10;
+        image.height -= 10;
     }
 
     /**
      * Pan down by 10px. Return null if the operation is impossible
      */
     public void panDown() {
-        if (modified == null) {
-            GUI.displayMessage(parentComponent, "You need to zoom in first");
-            return;
-        } else if (currentY + modified.getHeight() == image.getHeight()) {
+        if (image.topY == image.imgArray.length - (image.height - image.topY)) {
             GUI.displayMessage(parentComponent, "Cannot pan down any further");
             return;
         }
-        currentY += 10;
-        System.out.println("Img w: " + image.getWidth() + " h: " + image.getHeight());
-        System.out.println("Mod w: " + modified.getWidth() + " h: " + modified.getHeight());
-        int endY = modified.imgArray.length + currentY;
-        int endX = modified.imgArray[0].length + currentX;
-        modified = new ImageFile(image, currentX, currentY, modified.getWidth(), modified.getHeight(), endX, endY);
+        image.topY += 10;
+        image.height += 10;
     }
 
     /**

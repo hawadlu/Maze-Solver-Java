@@ -370,6 +370,7 @@ public class GUI implements ItemListener {
                         } catch (IllegalAccessException illegalAccessException) {
                             illegalAccessException.printStackTrace();
                         }
+                        solvedImg[0].resetZoom();
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
                         try {
                             spinner.interrupt();
@@ -520,11 +521,14 @@ public class GUI implements ItemListener {
         //The Image
         displayImage(fileIn, 0, 1, 6);
 
+        //Control buttons
+        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50));
+
         //todo reset image panel on save and solve
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
         save.setPreferredSize(panelThirds);
-        customGrid.addElement(save, 0, 2, 1);
+        customGrid.addElement(save, 0, 3, 2);
 
         JButton reset = new JButton("Reset Maze");
         reset.addActionListener(e -> {
@@ -537,7 +541,7 @@ public class GUI implements ItemListener {
             }
         });
         reset.setPreferredSize(panelThirds);
-        customGrid.addElement(reset, 1, 2, 1);
+        customGrid.addElement(reset, 2, 3, 2);
 
         JButton diffImg = new JButton("Use a different image");
         diffImg.addActionListener(e -> {
@@ -547,7 +551,7 @@ public class GUI implements ItemListener {
             loadSolveGui();
         });
         diffImg.setPreferredSize(panelThirds);
-        customGrid.addElement(diffImg, 2, 2, 1);
+        customGrid.addElement(diffImg, 4, 3, 2);
 
 
         System.out.println("Repainting primary");

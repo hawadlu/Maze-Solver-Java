@@ -1,8 +1,6 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -10,10 +8,12 @@ import java.io.IOException;
  */
 public class ImageFile {
     public boolean[][] imgArray;
-    private int width;
-    private int height;
+    public int width;
+    public int height;
     private String path;
-    byte[][] solved = null;
+    byte[][] solved;
+    public int leftX = 0;
+    public int topY = 0;
 
     ImageFile(BufferedImage imageIn, String filePath) {
         imgArray = makeImgArray(imageIn);
@@ -34,7 +34,12 @@ public class ImageFile {
        this.width = width;
        this.height = height;
        this.imgArray = imageIn.getSubset(startX, startY, endX, endY);
-       this.path = imageIn.path;
+
+        //Apply to the solved image if it is not null
+        if (imageIn.solved != null) {
+            this.solved = imageIn.getSolvedSubset(startX, startY, endX, endX);
+        }
+        this.path = imageIn.path;
     }
 
     /**
@@ -171,21 +176,28 @@ public class ImageFile {
      */
     //todo make sure this works
     public BufferedImage makeImage() {
-        BufferedImage toRet = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        for (int height = 0; height < toRet.getHeight(); height ++) {
-            for (int width = 0; width < toRet.getWidth(); width++) {
+        BufferedImage toRet = new BufferedImage(width - leftX, height - topY, BufferedImage.TYPE_INT_ARGB);
+        for (int newHeight = 0; newHeight + topY < height; newHeight ++) {
+            for (int newWidth = 0; newWidth + leftX < width; newWidth++) {
                 //Check if the maze has been solved
                 if (solved != null) {
-                    if (solved[height][width] == 0) toRet.setRGB(width, height, Color.BLACK.getRGB());
-                    else if (solved[height][width] == 1) toRet.setRGB(width, height, Color.white.getRGB());
-                    else toRet.setRGB(width, height, Color.red.getRGB());
+                    if (solved[newHeight + topY][newWidth + leftX] == 0) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
+                    else if (solved[newHeight + topY][newWidth + leftX] == 1) toRet.setRGB(newWidth, newHeight, Color.white.getRGB());
+                    else toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
                 } else {
-                    if (!imgArray[height][width]) toRet.setRGB(width, height, Color.BLACK.getRGB());
-                    else toRet.setRGB(width, height, Color.WHITE.getRGB());
+                    if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
+                    else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
                 }
             }
         }
         return toRet;
+    }
+
+    public void resetZoom() {
+        width = imgArray[0].length;
+        height = imgArray.length;
+        topY = 0;
+        leftX = 0;
     }
 
     /**
@@ -233,6 +245,26 @@ public class ImageFile {
             for (int j = startX; j < endX; j++) {
                 try {
                     toReturn[i - startY][j - startX] = imgArray[i][j];
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return toReturn;
+    }
+
+    /**
+     * Get and return a subset of the image array
+     * @param startY yPos
+     * @param startX xPos
+     * @return new array
+     */
+    private byte[][] getSolvedSubset(int startX, int startY, int endX, int endY) {
+        byte[][] toReturn = new byte[endY - startY][endX - startX];
+        for (int i = startY; i < endY; i++) {
+            for (int j = startX; j < endX; j++) {
+                try {
+                    toReturn[i - startY][j - startX] = solved[i][j];
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(e);
                 }
