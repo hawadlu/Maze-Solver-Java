@@ -17,7 +17,7 @@ public class ImageManipulation {
      * This method draws the solved maze and returns it
      */
     //todo change so that the red line can be painted
-    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
+    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments) {
         imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -31,50 +31,81 @@ public class ImageManipulation {
         }
 
         //Colour the entry
-        imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
+        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
 
-        while (nodes.size() > 1) {
-            MazeNode start = nodes.remove(0);
-            MazeNode end = nodes.get(0);
-            int y, x;
+        //Draw the msp
+        if (segments != null) {
+            for (Segment segment : segments) {
+                Coordinates start = segment.nodeStart.location;
+                Coordinates end = segment.nodeEnd.location;
+                draw(imgObj, start.x, start.y, end.x, end.y, (byte) 3);
+            }
+        }
+        
+        //Draw the path
+        if (nodes != null) {
+            while (nodes.size() > 1) {
+                MazeNode start = nodes.remove(0);
+                MazeNode end = nodes.get(0);
 
-            imgObj.setRGB(start.getX(), start.getY(), (byte) 2);
-            imgObj.setRGB(end.getX(), end.getY(), (byte) 2);
-
-            //Drawing down
-            if (start.getY() < end.getY()) {
-                y = start.getY() + 1;
-                while (y < end.getY()) {
-                    imgObj.setRGB(start.getX(), y, (byte) 2);
-                    y += 1;
-                }
-
-                //Drawing up
-            } else if (start.getY() > end.getY()) {
-                y = start.getY();
-                while (y > end.getY()) {
-                    imgObj.setRGB(start.getX(), y, (byte) 2);
-                    y-=1;
-                }
-
-                //Drawing right
-            } else if (start.getX() < end.getX()) {
-                x = start.getX();
-                while (x < end.getX()) {
-                    imgObj.setRGB(x, start.getY(), (byte) 2);
-                    x+=1;
-                }
-
-                //Drawing left
-            } else if (start.getX() > end.getX()) {
-                x = start.getX();
-                while (x > end.getX()) {
-                    imgObj.setRGB(x, start.getY(), (byte) 2);
-                    x-=1;
-                }
+                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 2);
             }
         }
         return imgObj;
+    }
+
+    /**
+     * Draw the segments
+     * @param imgObj the image
+     * @param segment the segment
+     */
+    private static void drawSegment(ImageFile imgObj, Segment segment) {
+        MSTNode start = segment.nodeStart;
+        MSTNode end = segment.nodeEnd;
+    }
+
+    /**
+     * Draw the solved path in ren
+     * @param imgObj the image
+     */
+    private static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, byte col) {
+        int y, x;
+
+        imgObj.setRGB(startX, startY, col);
+        imgObj.setRGB(endX, endY, col);
+
+        //Drawing down
+        if (startY < endY) {
+            y = startY + 1;
+            while (y < endY) {
+                imgObj.setRGB(startX, y, col);
+                y += 1;
+            }
+
+            //Drawing up
+        } else if (startY > endY) {
+            y = startY;
+            while (y > endY) {
+                imgObj.setRGB(startX, y, col);
+                y-=1;
+            }
+
+            //Drawing right
+        } else if (startX < endX) {
+            x = startX;
+            while (x < endX) {
+                imgObj.setRGB(x, startY, col);
+                x+=1;
+            }
+
+            //Drawing left
+        } else if (startX > endX) {
+            x = startX;
+            while (x > endX) {
+                imgObj.setRGB(x, startY, col);
+                x-=1;
+            }
+        }
     }
 
 
