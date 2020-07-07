@@ -6,7 +6,7 @@ import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -78,11 +78,7 @@ public class GUI implements ItemListener {
      */
     private void loadSolveGui() {
         primaryGui.removeAll();
-        //Setup constraints
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridwidth = WIDTH;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.fill= GridBagConstraints.HORIZONTAL;
+        GridBagConstraints constraints = setupSolveConstraints();
 
         //Setup JPanel
         primaryGui.setLayout(new GridBagLayout());
@@ -108,6 +104,15 @@ public class GUI implements ItemListener {
         primaryGui.repaint();
         gui.revalidate();
         gui.repaint();
+    }
+
+    private GridBagConstraints setupSolveConstraints() {
+        //Setup constraints
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridwidth = WIDTH;
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        return constraints;
     }
 
     /**
@@ -197,6 +202,7 @@ public class GUI implements ItemListener {
 
         //Setup JPanel
         primaryGui.setLayout(new GridBagLayout());
+
         Button solveButton = new Button("Load Image");
         Button generateButton = new Button("Generate Maze");
         primaryGui.add(solveButton, constraints);
@@ -652,7 +658,7 @@ public class GUI implements ItemListener {
             String directory = save.getCurrentDirectory().toString();
             String filePath = directory + "/" + fileName;
             ImageManipulation.saveImage(image, filePath);
-            displayMessage(primaryGui, "Imaged as: " + filePath);
+            displayMessage(primaryGui, "Image saved as: " + filePath);
         } else if (ret == JFileChooser.CANCEL_OPTION) {
             System.out.println("You pressed cancel");
         }

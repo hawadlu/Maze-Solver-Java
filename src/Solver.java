@@ -1,8 +1,5 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -63,7 +60,7 @@ class Solver {
     }
 
     /**
-     * This method looks at the parameters that the user has entered and checks if they are vaible for solving the maze.
+     * This method looks at the parameters that the user has entered and checks if they are viable for solving the maze.
      *
      * @param imgObj     the image to solve
      * @param algorithm  the algorithm to use

@@ -12,7 +12,7 @@ public class ImageFile {
     public boolean[][] imgArray;
     public int width;
     public int height;
-    private String path;
+    private final String path;
     byte[][] solved;
     public int leftX = 0;
     public int topY = 0;
@@ -124,7 +124,7 @@ public class ImageFile {
             if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(6, 2)) {
                 //look for command line input
                 String answer = "";
-                //todo make this into a jpanel
+                //todo make this into a jPanel
                 if (answer.equals("1")) {
                     break;
                 } else if (answer.equals("2")) {
@@ -140,7 +140,7 @@ public class ImageFile {
     }
 
     /**
-     * Check for large images and ask the user how they want to proceede.
+     * Check for large images and ask the user how they want to proceed.
      * @param largeArg Used when the program is invoked via the command line
      * @param imgFile the image file to process
      */
@@ -151,7 +151,7 @@ public class ImageFile {
             if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(1999, 2)) {
                 //Look for command line input
                 String answer = "";
-                //todo make this into a jpanel
+                //todo make this into a jPanel
                 if (answer.equals("y")) {
                     break;
                 } else if (answer.equals("n")) {
@@ -294,7 +294,7 @@ public class ImageFile {
                 try {
                     toReturn[i - startY][j - startX] = imgArray[i][j];
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e);
+                    throw new IndexOutOfBoundsException("Error");
                 }
             }
         }
@@ -314,7 +314,7 @@ public class ImageFile {
                 try {
                     toReturn[i - startY][j - startX] = solved[i][j];
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e);
+                    throw new IndexOutOfBoundsException();
                 }
             }
         }

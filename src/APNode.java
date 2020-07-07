@@ -7,7 +7,7 @@ public class APNode {
     public double nodeDepth = Double.POSITIVE_INFINITY;
     public APNode parent = null;
     public Coordinates location;
-    public double reachback = -1;
+    public double reachBack = -1;
     HashSet<APNode> neighbours = new HashSet<>();
     int numSubtrees;
     ArrayList<APNode> children;
