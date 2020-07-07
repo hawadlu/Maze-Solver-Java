@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/luke.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/APNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/APNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$CustomGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$CustomGrid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageManipulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageManipulation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImagePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MazeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MazeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveMethods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Solver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/APNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/APNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MazeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
