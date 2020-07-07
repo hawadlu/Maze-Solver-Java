@@ -394,7 +394,13 @@ public class GUI implements ItemListener {
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
             MST minimumTree = new MST(imageFile);
-            minimumTree.kruskalsAlgorithm();
+            imageFile.segments = minimumTree.kruskalsAlgorithm();
+            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments);
+            try {
+                loadSolveOptionsGui(imageFile);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
         customGrid.addElement(generic,2, 3, 2);
 

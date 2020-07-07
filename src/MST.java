@@ -38,10 +38,6 @@ public class MST {
                     }
                 }
             }
-            //For debugging
-            if (height % 2000 == 0) {
-                System.out.println("Scanned " + height * imgObj.getWidth() + " of " + imgObj.getHeight() * imgObj.getWidth() + " pixels");
-            }
         }
         System.out.println("Node scanning complete");
     }
@@ -49,9 +45,10 @@ public class MST {
     /**
      * Find a minimum spanning tree using kruskals algorithm
      */
-    public boolean kruskalsAlgorithm() {
+    public HashSet<Segment> kruskalsAlgorithm() {
         //Make an arraylist of edges
         ArrayList<Segment> edges = new ArrayList<>(mspEdges);
+        mspEdges.clear();
         forest.addAll(nodes.values());
 
         //Create the forest
@@ -79,7 +76,7 @@ public class MST {
         }
         System.out.println("Found MSP with " + mspEdges.size() + " edges");
 
-        return true;
+        return mspEdges;
     }
 
     /**

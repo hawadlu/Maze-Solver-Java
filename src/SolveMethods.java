@@ -17,7 +17,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dfs.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, dfs.getPath(), start, imgObj.segments);
     }
 
     /**
@@ -33,7 +33,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, bfs.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, bfs.getPath(), start, imgObj.segments);
     }
 
     /**
@@ -49,7 +49,7 @@ public class SolveMethods {
 
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dijkstra.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, dijkstra.getPath(), start, imgObj.segments);
     }
 
     /**
@@ -67,7 +67,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, aStar.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, aStar.getPath(), start, imgObj.segments);
     }
 
 }

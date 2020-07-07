@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Class used to hold the image in memory
@@ -16,7 +17,9 @@ public class ImageFile {
     public int leftX = 0;
     public int topY = 0;
     public Coordinates entry;
-    public  Coordinates exit;
+    public Coordinates exit;
+    public HashSet<Segment> segments = null; //Used when drawing the Minimum spanning tree
+
 
     ImageFile(BufferedImage imageIn, String filePath) {
         //Check the image colour
@@ -102,7 +105,6 @@ public class ImageFile {
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
                 int colour = getColour(imgFile, width, height);
-                System.out.println("x: " + width + " y: " + height + " col: " + colour);
                 if (colour > 50 && colour < 715) {
                     throw new Error("Invalid colour at x " + width + " y " + height);
                 }
@@ -226,7 +228,8 @@ public class ImageFile {
                 if (solved != null) {
                     if (solved[newHeight + topY][newWidth + leftX] == 0) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
                     else if (solved[newHeight + topY][newWidth + leftX] == 1) toRet.setRGB(newWidth, newHeight, Color.white.getRGB());
-                    else toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
+                    else if (solved[newHeight + topY][newWidth + leftX] == 2) toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
+                    else if (solved[newHeight + topY][newWidth + leftX] == 3) toRet.setRGB(newWidth, newHeight, Color.green.getRGB());
                 } else {
                     if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
                     else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
@@ -267,7 +270,7 @@ public class ImageFile {
 
     /**
      * Change the colour of image
-     * 0 is black, 1 is white, 2 is red
+     * 0 is black, 1 is white, 2 is red, 3 is green
      * @param x the xPos
      * @param y the yPos
      * @param col the colour
