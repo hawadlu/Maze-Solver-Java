@@ -72,7 +72,7 @@ public class ArticulationPoints {
 
             if (currentNode.nodeDepth == Double.POSITIVE_INFINITY) {
                 //The first time visiting this node
-                currentNode.nodeDepth = currentNode.reachback = currentAPNode.nodeDepth;
+                currentNode.nodeDepth = currentNode.reachBack = currentAPNode.nodeDepth;
 
                 //Get all the neighbours except for the parent
                 currentNode.children = new ArrayList<>(currentNode.getNeighbours());
@@ -82,17 +82,17 @@ public class ArticulationPoints {
 
                 if (child.nodeDepth < Double.POSITIVE_INFINITY) {
                     //Direct alternative path
-                    currentNode.reachback = Math.min(child.nodeDepth, currentNode.reachback);
+                    currentNode.reachBack = Math.min(child.nodeDepth, currentNode.reachBack);
                 } else {
                     //Add the child to the stack because it is unvisited
                     toProcess.push(new APNode(child, currentAPNode.nodeDepth + 1, currentNode));
                 }
             } else {
                 if (currentNode != firstNode) {
-                    parentNode.reachback = Math.min(currentNode.reachback, parentNode.reachback);
+                    parentNode.reachBack = Math.min(currentNode.reachBack, parentNode.reachBack);
 
                     //Add this node to the articulation points if it matches the requirements
-                    if (currentNode.reachback >= parentNode.nodeDepth) {
+                    if (currentNode.reachBack >= parentNode.nodeDepth) {
                         articulationPoints.add(parentNode);
                     }
                 }

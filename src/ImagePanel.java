@@ -6,7 +6,7 @@ import java.awt.*;
  */
 public class ImagePanel extends JPanel {
     private ImageFile image;
-    private ImageFile modified = null;
+    private final ImageFile modified = null;
     int panelWidth;
     int panelHeight;
     int zoom = 0;

@@ -1,4 +1,3 @@
-import javax.lang.model.util.Types;
 import java.util.*;
 
 public class MST {
@@ -121,18 +120,6 @@ public class MST {
             return findRoot(start.parent);
         }
     }
-
-
-    /**
-     * Check if the node at the other end of the segment is unvisted.
-     * @param node the node to check
-     * @param segment the associated segment
-     * @return True if the node is not visited
-     */
-//    public boolean connectsUnvisted(Node node, Segment segment) {
-//        if (segment.start == node) return unvisited.contains(segment.end);
-//        else return unvisited.contains(segment.start);
-//    }
 
     /**
      * Look above and to the left of this node for connecting segments
