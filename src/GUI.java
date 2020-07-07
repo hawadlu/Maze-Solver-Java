@@ -55,10 +55,8 @@ public class GUI implements ItemListener {
         topBar = new JMenuBar();
         topBar.setBackground(Color.YELLOW);
         Button solveTab = new Button("Solve a Maze");
-        Button generateTab = new Button("Generate a Maze");
         Button gameTab = new Button("Game");
         topBar.add(solveTab);
-        topBar.add(generateTab);
         topBar.add(gameTab);
 
         //Set onclick listeners
@@ -66,7 +64,6 @@ public class GUI implements ItemListener {
             imgPanel = null;
             loadSolveGui();
         });
-        generateTab.addActionListener(e -> loadGenerateOptionsGUI(null));
         gameTab.addActionListener(e -> loadGameGui());
 
         return topBar;
@@ -83,9 +80,7 @@ public class GUI implements ItemListener {
         //Setup JPanel
         primaryGui.setLayout(new GridBagLayout());
         Button solveButton = new Button("Load Image");
-        Button generateButton = new Button("Generate Maze");
         primaryGui.add(solveButton, constraints);
-        primaryGui.add(generateButton, constraints);
 
         //Make the buttons do stuff when they are clicked
         solveButton.addActionListener(e -> {
@@ -96,7 +91,6 @@ public class GUI implements ItemListener {
                 ioException.printStackTrace();
             }
         });
-        generateButton.addActionListener(e -> loadGenerateOptionsGUI("loadSolveOptionsGui"));
 
         System.out.println("Repainting primary");
         primaryGui.setBackground(Color.PINK);
@@ -116,83 +110,10 @@ public class GUI implements ItemListener {
     }
 
     /**
-     * Shows all the options for generating a maze
-     */
-    private void loadGenerateOptionsGUI(String nextMethod) {
-        System.out.println("Show generate gui");
-        customGrid = new CustomGrid();
-
-        AtomicBoolean perfectChecked = new AtomicBoolean(false);
-
-        //Set the size
-        int panelHeight = 750;
-        int panelWidth = 750;
-        int elementHeight = 50;
-        Dimension panelHalves = new Dimension(panelWidth / 2, elementHeight);
-
-        customGrid.setSize(panelWidth, panelHeight);
-
-        //Add the labels
-        JLabel widthLabel = new JLabel("Width");
-        JLabel heightLabel = new JLabel("Height");
-        JLabel perfectLabel = new JLabel("Perfect Maze");
-        widthLabel.setPreferredSize(panelHalves);
-        heightLabel.setPreferredSize(panelHalves);
-        perfectLabel.setPreferredSize(panelHalves);
-        customGrid.addElement(widthLabel, 0, 0, 1);
-        customGrid.addElement(heightLabel, 0, 1, 1);
-        customGrid.addElement(perfectLabel, 0, 2, 1);
-
-        //Text inputs
-        JTextField widthIn = new JTextField();
-        JTextField heightIn = new JTextField();
-        widthIn.setPreferredSize(panelHalves);
-        heightIn.setPreferredSize(panelHalves);
-        customGrid.addElement(widthIn, 1, 0, 1);
-        customGrid.addElement(heightIn, 1, 1, 1);
-
-        //Checkbox
-        JCheckBox perfect = new JCheckBox();
-        //todo verify that this works
-        perfect.addActionListener(e -> {
-            if (perfectChecked.get()) perfectChecked.set(false);
-            else perfectChecked.set(true);
-        });
-        customGrid.addElement(perfect, 1, 2, 1);
-
-        //Submit button
-        JButton submit = new JButton("Generate");
-        //todo verify the input parameters
-        //todo add a spinner wheel while the maze generating
-        submit.addActionListener(e -> {
-            //Generate the maze
-            BufferedImage gen = Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
-
-            //Go to the save menu
-            //todo make the image properly generate
-            imgPanel = new ImagePanel(null, 750, 750 ,primaryGui); //todo replace with the generated maze
-
-            if (nextMethod.equals("loadSolveOptionsGui")) {
-                try {
-                    loadSolveOptionsGui(null);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        });
-        customGrid.addElement(submit, 0, 3, 2);
-
-        System.out.println("Repainting primary");
-        gui.revalidate();
-        gui.repaint();
-    }
-
-    /**
      * Load the game GUI
      */
     //todo implement me
     private void loadGameGui() {
-        System.out.println("Generating maze");
         primaryGui.removeAll();
         //Setup constraints
         GridBagConstraints constraints = new GridBagConstraints();
@@ -204,21 +125,6 @@ public class GUI implements ItemListener {
         primaryGui.setLayout(new GridBagLayout());
 
         Button solveButton = new Button("Load Image");
-        Button generateButton = new Button("Generate Maze");
-        primaryGui.add(solveButton, constraints);
-        primaryGui.add(generateButton, constraints);
-
-        //Make the buttons do stuff when they are clicked
-        solveButton.addActionListener(e -> {
-            try {
-                //Get the file and load the options Gui
-                playGameGui(UIFileChooser());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-        //todo update load generate options to handle this
-        generateButton.addActionListener(e -> loadGenerateOptionsGUI("playGameGui"));
 
         System.out.println("Repainting primary");
         primaryGui.setBackground(Color.PINK);
