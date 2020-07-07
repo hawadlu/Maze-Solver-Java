@@ -161,7 +161,7 @@ public class GUI implements ItemListener {
         //todo add a spinner wheel while the maze generating
         submit.addActionListener(e -> {
             //Generate the maze
-              Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
+            BufferedImage gen = Solver.generateMaze(widthIn.getText(), heightIn.getText(), perfectChecked.get());
 
             //Go to the save menu
             //todo make the image properly generate
@@ -392,6 +392,10 @@ public class GUI implements ItemListener {
 
         generic = new JButton("Minimum Spanning Tree");
         generic.setPreferredSize(panelThirds);
+        generic.addActionListener(e -> {
+            MST minimumTree = new MST(imageFile);
+            minimumTree.kruskalsAlgorithm();
+        });
         customGrid.addElement(generic,2, 3, 2);
 
         generic = new JButton("Articulation Points");

@@ -85,7 +85,7 @@ public class ImageManipulation {
      */
     public static HashMap<Coordinates, MazeNode> findNeighboursForAll(ImageFile imgObj) {
         HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
-        //Performing a one time pass over the maze to find all the nodes. Only look for the neighbours if it has been specified
+        //Performing a one time pass over the maze to find all the nodes.
         for (int height = 0; height < imgObj.getHeight(); height++) {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 //Don't make a node unless the square is white

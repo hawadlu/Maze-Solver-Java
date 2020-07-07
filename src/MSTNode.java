@@ -1,12 +1,15 @@
 public class MSTNode {
-
-
+    public Coordinates location;
     public MSTNode parent;
     public int depth;
 
     /**
      * Create a new MST node
      */
-    public MSTNode() {}
+    public MSTNode(Coordinates location) {
+        this.location = location;
+        parent = this;
+        depth = 0;
+    }
 
 }
