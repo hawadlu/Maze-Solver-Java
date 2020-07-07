@@ -395,7 +395,7 @@ public class GUI implements ItemListener {
         generic.addActionListener(e -> {
             MST minimumTree = new MST(imageFile);
             imageFile.segments = minimumTree.kruskalsAlgorithm();
-            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments);
+            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
             try {
                 loadSolveOptionsGui(imageFile);
             } catch (IOException ioException) {
@@ -406,6 +406,18 @@ public class GUI implements ItemListener {
 
         generic = new JButton("Articulation Points");
         generic.setPreferredSize(panelThirds);
+        generic.addActionListener(e -> {
+            ArticulationPoints aps = new ArticulationPoints();
+            aps.findNeighboursForAll(imageFile);
+            aps.findAps();
+            imageFile.artPoints = aps.getArticulationPoints();
+            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+            try {
+                loadSolveOptionsGui(imageFile);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         customGrid.addElement(generic, 4, 3, 2);
 
         System.out.println("Repainting primary");
@@ -546,6 +558,7 @@ public class GUI implements ItemListener {
             try {
                 customGrid = null;
                 imgPanel.setImage(fileIn);
+                fileIn.reset();
                 loadSolveOptionsGui(fileIn);
             } catch (IOException ioException) {
                 ioException.printStackTrace();

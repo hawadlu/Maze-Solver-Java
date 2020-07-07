@@ -17,7 +17,7 @@ public class ImageManipulation {
      * This method draws the solved maze and returns it
      */
     //todo change so that the red line can be painted
-    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments) {
+    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments, ArrayList<APNode> artPoints) {
         imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -51,6 +51,14 @@ public class ImageManipulation {
                 draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 2);
             }
         }
+
+        //Draw the articulation points
+        if (artPoints != null) {
+            for (APNode apNode: artPoints) {
+                imgObj.setRGB(apNode.location.x, apNode.location.y, (byte) 4);
+            }
+        }
+
         return imgObj;
     }
 
