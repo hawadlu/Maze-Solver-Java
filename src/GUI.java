@@ -340,14 +340,13 @@ public class GUI implements ItemListener {
         generic.addActionListener(e -> {
             //todo make this work, even with very quick mazes
             try {
-                final ImageFile[] solvedImg = {null};
                 Thread spinner = new Thread() {
                     public void run() {
                         //Spinning wheel
-                        JFrame spinnerFrame = new JFrame("Solve");
+                        JFrame spinnerFrame = new JFrame("Please Wait");
 
                         ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                        spinnerFrame.add(new JLabel("Solving, please wait... ", loading, JLabel.CENTER));
+                        spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
 
                         spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         spinnerFrame.setSize(300, 150);
@@ -361,7 +360,7 @@ public class GUI implements ItemListener {
                         interrupt();
                     }
                 };
-
+                final ImageFile[] solvedImg = {null};
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
@@ -381,8 +380,8 @@ public class GUI implements ItemListener {
                         }
                     }
                 };
-                solver.start();
                 spinner.start();
+                solver.start();
             } catch (Exception error) {
                 error.printStackTrace();
             }
@@ -393,30 +392,88 @@ public class GUI implements ItemListener {
         generic = new JButton("Minimum Spanning Tree");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
-            MST minimumTree = new MST(imageFile);
-            imageFile.segments = minimumTree.kruskalsAlgorithm();
-            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
-            try {
-                loadSolveOptionsGui(imageFile);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            Thread spinner = new Thread() {
+                public void run() {
+                    //Spinning wheel
+                    JFrame spinnerFrame = new JFrame("Please Wait");
+
+                    ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
+                    spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
+
+                    spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    spinnerFrame.setSize(300, 150);
+                    spinnerFrame.setVisible(true);
+
+                    while (!this.isInterrupted()) {
+                        //Don't do anything here
+                    }
+                    spinnerFrame.setVisible(false);
+                    System.out.println("Stopping spinner thread");
+                    interrupt();
+                }
+            };
+            Thread mspThread = new Thread() {
+                @Override
+                public void run() {
+                    MST minimumTree = new MST(imageFile);
+                    imageFile.segments = minimumTree.kruskalsAlgorithm();
+
+                    ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                    try {
+                        spinner.interrupt();
+                        loadSolveOptionsGui(imageFile);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            };
+            spinner.start();
+            mspThread.start();
         });
         customGrid.addElement(generic,2, 3, 2);
 
         generic = new JButton("Articulation Points");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
-            ArticulationPoints aps = new ArticulationPoints();
-            aps.findNeighboursForAll(imageFile);
-            aps.findAps();
-            imageFile.artPoints = aps.getArticulationPoints();
-            ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
-            try {
-                loadSolveOptionsGui(imageFile);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            Thread spinner = new Thread() {
+                public void run() {
+                    //Spinning wheel
+                    JFrame spinnerFrame = new JFrame("Please Wait");
+
+                    ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
+                    spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
+
+                    spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    spinnerFrame.setSize(300, 150);
+                    spinnerFrame.setVisible(true);
+
+                    while (!this.isInterrupted()) {
+                        //Don't do anything here
+                    }
+                    spinnerFrame.setVisible(false);
+                    System.out.println("Stopping spinner thread");
+                    interrupt();
+                }
+            };
+            Thread apThread = new Thread() {
+                @Override
+                public void run() {
+                    ArticulationPoints aps = new ArticulationPoints();
+                    aps.findNeighboursForAll(imageFile);
+                    aps.findAps();
+                    imageFile.artPoints = aps.getArticulationPoints();
+                    ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                    try {
+                        spinner.interrupt();
+                        loadSolveOptionsGui(imageFile);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            };
+
+            spinner.start();
+            apThread.start();
         });
         customGrid.addElement(generic, 4, 3, 2);
 
@@ -679,25 +736,6 @@ public class GUI implements ItemListener {
          */
         public void enable() {
             primaryGui.setEnabled(true);
-        }
-    }
-
-    class Worker extends Thread{
-        private CountDownLatch latch;
-
-        Worker (CountDownLatch latch, String name) {
-            super(name);
-            this.latch = latch;
-        }
-
-        @Override
-        public void run() {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            latch.countDown();
         }
     }
 
