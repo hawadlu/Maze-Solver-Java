@@ -14,8 +14,7 @@ public class ImageManipulation {
     /**
      * This method draws the solved maze and returns it
      */
-    //todo change so that the red line can be painted
-    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments, ArrayList<APNode> artPoints) {
+    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments, HashSet<APNode> artPoints) {
         imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -214,7 +213,7 @@ public class ImageManipulation {
         if (!nodes.containsKey(new Coordinates(x, y))) nodes.put(new Coordinates(x, y), new MazeNode(x, y));
 
         //Look left
-        if (imgObj.isWhite(x - 1, y)) {
+        if (x > 0 && imgObj.isWhite(x - 1, y)) {
             for (int width = x - 1; width > -1; width--) {
                 //marking dead end nodes
                 if (isDeadEnd(imgObj, width, y)) {
@@ -230,12 +229,16 @@ public class ImageManipulation {
                 } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
                     break;
+
+                    //Mark nodes at the corners
+                } else if (width == 0) {
+                        neighbours.add(new Coordinates(width, y));
                 }
             }
         }
 
         //Look Right
-        if (imgObj.isWhite(x + 1, y)) {
+        if (x < imgObj.getWidth() - 1 && imgObj.isWhite(x + 1, y)) {
             for (int width = x + 1; width < imgObj.getWidth(); width++) {
                 //marking dead end nodes
                 if (isDeadEnd(imgObj, width, y)) {
@@ -250,6 +253,11 @@ public class ImageManipulation {
                     //Marking pixels on corner junctions
                 } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
+                    break;
+
+                    //If the node is at the edge mark it.
+                } else if (width + 1 >= imgObj.getWidth()) {
+                    neighbours.add(new Coordinates(width,y));
                     break;
                 }
             }
@@ -272,12 +280,17 @@ public class ImageManipulation {
                 } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
                     neighbours.add(new Coordinates(x, height));
                     break;
+
+                    //Mark nodes at the edge
+                } else if (height == 0) {
+                    neighbours.add(new Coordinates(x, height));
+                    break;
                 }
             }
         }
 
         //Look down
-        if (y < imgObj.getHeight() && imgObj.isWhite(x, y + 1)) {
+        if (y < imgObj.getHeight() - 1 && imgObj.isWhite(x, y + 1)) {
             for (int height = y + 1; height < imgObj.getHeight(); height++) {
                 //The destination node
                 if (height == imgObj.getHeight() - 1) {
@@ -298,6 +311,9 @@ public class ImageManipulation {
                 } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
                     neighbours.add(new Coordinates(x, height));
                     break;
+
+                } else if (height + 1 >= imgObj.getHeight()) {
+                    neighbours.add(new Coordinates(x, height));
                 }
             }
         }

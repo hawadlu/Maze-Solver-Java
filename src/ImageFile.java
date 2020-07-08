@@ -1,3 +1,6 @@
+import customExceptions.InvalidColourException;
+import customExceptions.InvalidMazeException;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -19,10 +22,10 @@ public class ImageFile {
     public Coordinates entry;
     public Coordinates exit;
     public HashSet<Segment> segments = null; //Used when drawing the Minimum spanning tree
-    public ArrayList<APNode> artPoints = null; //Used when drawing the articulation points
+    public HashSet<APNode> artPoints = null; //Used when drawing the articulation points
 
 
-    ImageFile(BufferedImage imageIn, String filePath) {
+    ImageFile(BufferedImage imageIn, String filePath) throws InvalidColourException, InvalidMazeException {
         //Check the image colour
         checkImageColour(imageIn);
 
@@ -60,7 +63,7 @@ public class ImageFile {
     /**
      * Check that there is only one entry and one exit
      */
-    private void checkEntriesAndExits() {
+    private void checkEntriesAndExits() throws InvalidMazeException {
         //ArrayList containing the coordinates of each of the entries and exits
         ArrayList<Coordinates> entries = new ArrayList<>();
 
@@ -92,7 +95,7 @@ public class ImageFile {
             }
         }
 
-        if (entries.size() != 2) throw new Error("Maze must have one entry and one exit");
+        if (entries.size() != 2) throw new InvalidMazeException("Maze must have one entry and one exit");
 
         entry = entries.get(0);
         exit = entries.get(1);
@@ -102,67 +105,13 @@ public class ImageFile {
      * Make sure that the luminosity of the each pixel is somewhere between 0 - 20 and 235 - 255
      * @param imgFile the image to check
      */
-    private void checkImageColour(BufferedImage imgFile) {
+    private void checkImageColour(BufferedImage imgFile) throws InvalidColourException {
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
                 int colour = getColour(imgFile, width, height);
                 if (colour > 50 && colour < 715) {
-                    throw new Error("Invalid colour at x " + width + " y " + height);
+                    throw new InvalidColourException("Invalid colour at x " + width + " y " + height);
                 }
-            }
-        }
-    }
-
-    /**
-     * Checks if the user wants to find all the neighbours before or during solving.
-     * @param neighbourArg Used when the program is invoked via the command line
-     * @param imgFile the image file to process
-     * @return the search that the user wants to use
-     */
-    private boolean getNeighbourMethod(String neighbourArg, BufferedImage imgFile) {
-        while (true) {
-            if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(6, 2)) {
-                //look for command line input
-                String answer = "";
-                //todo make this into a jPanel
-                if (answer.equals("1")) {
-                    break;
-                } else if (answer.equals("2")) {
-                    return false;
-                } else {
-                    System.out.println("Invalid input. Try again!.");
-                }
-            } else {
-                break;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Check for large images and ask the user how they want to proceed.
-     * @param largeArg Used when the program is invoked via the command line
-     * @param imgFile the image file to process
-     */
-    private void checkForLargeImage(String largeArg,  ImageFile imgFile, GUI gui) throws IOException {
-        //Checking for large images
-        while (true) {
-            //should be 4000
-            if (imgFile.getHeight() * imgFile.getWidth() > Math.pow(1999, 2)) {
-                //Look for command line input
-                String answer = "";
-                //todo make this into a jPanel
-                if (answer.equals("y")) {
-                    break;
-                } else if (answer.equals("n")) {
-                    System.out.println("Returning to image selection");
-                    gui.loadSolveOptionsGui(imgFile);
-                    break;
-                } else {
-                    System.out.println("Invalid input. Try again!.");
-                }
-            } else {
-                break;
             }
         }
     }
@@ -205,10 +154,6 @@ public class ImageFile {
         return imgArray[y][x];
     }
 
-    public boolean[][] getImgArray() {
-        return this.imgArray;
-    }
-
     public int getHeight() {return this.imgArray.length;}
     public int getWidth() {return this.imgArray[0].length;}
 
@@ -220,7 +165,6 @@ public class ImageFile {
      * Make an image using the inout array
      * @return a buffered image
      */
-    //todo make sure this works
     public BufferedImage makeImage() {
         BufferedImage toRet = new BufferedImage(width - leftX, height - topY, BufferedImage.TYPE_INT_ARGB);
         for (int newHeight = 0; newHeight + topY < height; newHeight ++) {
@@ -251,19 +195,30 @@ public class ImageFile {
     /**
      * Draw the image
      */
-    //todo test me
     public void draw(int panelWidth, int panelHeight, Graphics g, ImageFile imageFile, ImageObserver imgObserver) {
         //First make an image
         BufferedImage toPaint = imageFile.makeImage();
 
-        //todo, scale images proportionally so that they are not always square
-        BufferedImage resized = new BufferedImage(panelWidth, panelHeight, toPaint.getType());
+        //Scale the image
+        Dimension imgSize = new Dimension(width, height);
+        Dimension bounds = new Dimension(panelWidth, panelHeight);
+        Dimension scaled = scale(imgSize, bounds);
+
+        BufferedImage resized = new BufferedImage(scaled.width, scaled.height, toPaint.getType());
         Graphics2D g2 = resized.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2.drawImage(toPaint, 0, 0, panelWidth, panelHeight, 0, 0, toPaint.getWidth(), toPaint.getHeight(), null);
         g2.dispose();
 
         g.drawImage(resized, 0, 0, imgObserver);
+    }
+
+    Dimension scale(Dimension imgSize, Dimension boundary) {
+        double widthRatio = boundary.getWidth() / imgSize.getWidth();
+        double heightRatio = boundary.getHeight() / imgSize.getHeight();
+        double ratio = Math.min(widthRatio, heightRatio);
+
+        return new Dimension((int) (imgSize.width * ratio), (int) (imgSize.height * ratio));
     }
 
     public void initSolvedArr() {

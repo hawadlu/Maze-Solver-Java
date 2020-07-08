@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class ArticulationPoints {
-    HashMap<Coordinates, APNode > nodes = new HashMap<>();
+    final HashMap<Coordinates, APNode > nodes = new HashMap<>();
     final HashSet<APNode> articulationPoints = new HashSet<>();
     final HashSet<APNode> unvisited = new HashSet<>();
 
     /**
      * Begins the search for the articulation points
-     * @return boolean indicating a failed/successful search
+     * @return arraylist of articulation points
      */
-    public boolean findAps() {
+    public HashSet<APNode> findAps() {
         System.out.println("Looking for aps");
 
         unvisited.addAll(nodes.values());
@@ -38,8 +38,7 @@ public class ArticulationPoints {
 
         System.out.println("AP search complete. Found " + articulationPoints.size() + " articulation points");
 
-        //Return a successful search
-        return true;
+        return articulationPoints;
     }
 
     /**

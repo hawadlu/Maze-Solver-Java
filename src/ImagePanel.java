@@ -21,11 +21,6 @@ public class ImagePanel extends JPanel {
         this.parentComponent = parentComponent;
     }
 
-    /**
-     * @return the modified image
-     */
-    public ImageFile getModified() { return modified; }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -35,13 +30,11 @@ public class ImagePanel extends JPanel {
         toPaint.draw(panelWidth, panelHeight, g, toPaint, this);
     }
 
-    //todo, make these methods more resilient
     /**
      * Zoom in by 10px
      */
-    //todo make sure this works
     public void zoomIn() {
-        if (image.width < 40 || image.height < 40) {
+        if (image.width - image.leftX < 40 || image.height - image.topY < 40) {
             GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             return;
         }
