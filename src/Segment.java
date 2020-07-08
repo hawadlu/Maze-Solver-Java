@@ -1,6 +1,7 @@
 public class Segment {
-    MSTNode nodeStart, nodeEnd;
-    int cost;
+    final MSTNode nodeStart;
+    final MSTNode nodeEnd;
+    final int cost;
 
     Segment(MSTNode start, MSTNode end, int newCost) {
         this.nodeStart = start;

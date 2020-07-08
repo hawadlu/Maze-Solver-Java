@@ -1,10 +1,10 @@
 import customExceptions.InvalidColourException;
 import customExceptions.InvalidMazeException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -25,45 +25,23 @@ public class ImageFile {
     public HashSet<APNode> artPoints = null; //Used when drawing the articulation points
 
 
-    ImageFile(BufferedImage imageIn, String filePath) throws InvalidColourException, InvalidMazeException {
+    ImageFile(BufferedImage imageIn, String filePath, JPanel parentComponent) throws InvalidColourException, InvalidMazeException {
         //Check the image colour
-        checkImageColour(imageIn);
+        checkImageColour(imageIn, parentComponent);
 
         //Make the array
         imgArray = makeImgArray(imageIn);
 
         //Make sure there is only one entry and one exit
-        checkEntriesAndExits();
+        checkEntriesAndExits(parentComponent);
 
         this.path = filePath;
     }
 
     /**
-     * Make this a subset of another image
-     * @param imageIn the image to crop
-     * @param startX start pos
-     * @param startY start pos
-     * @param width new width
-     * @param height new height
-     */
-    ImageFile(ImageFile imageIn, int startX, int startY, int width, int height, int endX, int endY) {
-        //imageIn.imgArray.length - startY
-        //imageIn.imgArray[0].length - startX
-       this.width = width;
-       this.height = height;
-       this.imgArray = imageIn.getSubset(startX, startY, endX, endY);
-
-        //Apply to the solved image if it is not null
-        if (imageIn.solved != null) {
-            this.solved = imageIn.getSolvedSubset(startX, startY, endX, endX);
-        }
-        this.path = imageIn.path;
-    }
-
-    /**
      * Check that there is only one entry and one exit
      */
-    private void checkEntriesAndExits() throws InvalidMazeException {
+    private void checkEntriesAndExits(JPanel parentComponent) throws InvalidMazeException {
         //ArrayList containing the coordinates of each of the entries and exits
         ArrayList<Coordinates> entries = new ArrayList<>();
 
@@ -95,7 +73,7 @@ public class ImageFile {
             }
         }
 
-        if (entries.size() != 2) throw new InvalidMazeException("Maze must have one entry and one exit");
+        if (entries.size() != 2) throw new InvalidMazeException("Maze must have one entry and one exit", parentComponent);
 
         entry = entries.get(0);
         exit = entries.get(1);
@@ -105,12 +83,12 @@ public class ImageFile {
      * Make sure that the luminosity of the each pixel is somewhere between 0 - 20 and 235 - 255
      * @param imgFile the image to check
      */
-    private void checkImageColour(BufferedImage imgFile) throws InvalidColourException {
+    private void checkImageColour(BufferedImage imgFile, JPanel parentComponent) throws InvalidColourException {
         for (int height = 0; height < imgFile.getHeight(); height++) {
             for (int width = 0; width < imgFile.getWidth(); width++) {
                 int colour = getColour(imgFile, width, height);
                 if (colour > 50 && colour < 715) {
-                    throw new InvalidColourException("Invalid colour at x " + width + " y " + height);
+                    throw new InvalidColourException(parentComponent, "Invalid colour at x " + width + " y " + height);
                 }
             }
         }
@@ -119,8 +97,8 @@ public class ImageFile {
     /**
      * Take the image and make a 2d boolean array that represents it.
      * True for white, false for black
-     * @param imgFile
-     * @return
+     * @param imgFile the png/jpg/etc file
+     * @return a 2d array representation of the image
      */
     private boolean[][] makeImgArray(BufferedImage imgFile) {
         boolean[][] toReturn = new boolean[imgFile.getHeight()][imgFile.getWidth()];
@@ -132,7 +110,6 @@ public class ImageFile {
         }
         height = toReturn.length;
         width = toReturn[0].length;
-        imgFile = null;
         return toReturn;
     }
 
@@ -200,7 +177,7 @@ public class ImageFile {
         BufferedImage toPaint = imageFile.makeImage();
 
         //Scale the image
-        Dimension imgSize = new Dimension(width, height);
+        Dimension imgSize = new Dimension(imgArray[0].length, imgArray.length);
         Dimension bounds = new Dimension(panelWidth, panelHeight);
         Dimension scaled = scale(imgSize, bounds);
 
@@ -234,46 +211,6 @@ public class ImageFile {
      */
     public void setRGB(int x, int y, byte col) {
         solved[y][x] = col;
-    }
-
-    /**
-     * Get and return a subset of the image array
-     * @param startY yPos
-     * @param startX xPos
-     * @return new array
-     */
-    private boolean[][] getSubset(int startX, int startY, int endX, int endY) {
-        boolean[][] toReturn = new boolean[endY - startY][endX - startX];
-        for (int i = startY; i < endY; i++) {
-            for (int j = startX; j < endX; j++) {
-                try {
-                    toReturn[i - startY][j - startX] = imgArray[i][j];
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException("Error");
-                }
-            }
-        }
-        return toReturn;
-    }
-
-    /**
-     * Get and return a subset of the image array
-     * @param startY yPos
-     * @param startX xPos
-     * @return new array
-     */
-    private byte[][] getSolvedSubset(int startX, int startY, int endX, int endY) {
-        byte[][] toReturn = new byte[endY - startY][endX - startX];
-        for (int i = startY; i < endY; i++) {
-            for (int j = startX; j < endX; j++) {
-                try {
-                    toReturn[i - startY][j - startX] = solved[i][j];
-                } catch (IndexOutOfBoundsException e) {
-                    throw new IndexOutOfBoundsException();
-                }
-            }
-        }
-        return toReturn;
     }
 
     /**

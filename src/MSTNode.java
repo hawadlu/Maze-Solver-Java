@@ -1,5 +1,5 @@
 public class MSTNode {
-    public Coordinates location;
+    public final Coordinates location;
     public MSTNode parent;
     public int depth;
 

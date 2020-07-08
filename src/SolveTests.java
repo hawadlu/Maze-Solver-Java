@@ -3,6 +3,7 @@ import customExceptions.InvalidMazeException;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  * Test the various solve algorithms for the mazes
  */
 public class SolveTests {
-    String standardDir = "Images/"; //Most images are stored here
+    final String standardDir = "Images/"; //Most images are stored here
 
 
     // =================================================================
@@ -29,7 +30,7 @@ public class SolveTests {
 
         for (String path: paths) {
             try {
-                new ImageFile(ImageIO.read(new File("Images/" + path)), path);
+                new ImageFile(ImageIO.read(new File("Images/" + path)), path, new JPanel());
             } catch (IOException | InvalidColourException | InvalidMazeException e) {
                 System.out.println("Path: " + path);
                 if (path.contains("invalid") || path.contains("Invalid")) System.out.println("Deliberate invalid");

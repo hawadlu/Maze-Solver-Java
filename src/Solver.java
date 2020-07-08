@@ -1,8 +1,6 @@
 import customExceptions.SolveFailureException;
 
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -14,7 +12,7 @@ class Solver {
     /**
      * Solves the maze
      */
-    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException, SolveFailureException {
+    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws SolveFailureException {
         long numNodes = 0;
 
         //Map containing the positions of each node
@@ -50,13 +48,13 @@ class Solver {
 
         //Determine the method that should be used to solve the maze
         if (algorithm.equals("Depth First")) {
-            return SolveMethods.solveDFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
+            return SolveMethods.solveDFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
         } else if (algorithm.equals("Breadth First")) {
-            return SolveMethods.solveBFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
+            return SolveMethods.solveBFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
         } else if (algorithm.equals("Dijkstra")) {
-            return SolveMethods.solveDijkstra(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
+            return SolveMethods.solveDijkstra(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
         } else {
-            return SolveMethods.solveAStar(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
+            return SolveMethods.solveAStar(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
         }
     }
 
@@ -66,7 +64,7 @@ class Solver {
      * @param imgObj     the image to solve
      * @param algorithm  the algorithm to use
      * @param searchType the method for finding neighbours
-     * @return
+     * @return an arraylist of valid parameters
      */
     private static ArrayList<Object> validateParameters(ImageFile imgObj, Object algorithm, Object searchType, JPanel parentComponent) {
         //Determine the correct algorithm
@@ -97,13 +95,4 @@ class Solver {
     }
 
 
-    /**
-     * Gets user input and returns a string
-     */
-    private String getUserInput(String question) {
-        Scanner userInput = new Scanner(System.in); //Scans the user input
-        System.out.print(question);
-
-        return userInput.nextLine();
-    }
 }

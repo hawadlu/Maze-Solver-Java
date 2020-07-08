@@ -1,14 +1,13 @@
 import java.util.*;
 
 public class MST {
-    final HashSet<MSTNode> unvisited = new HashSet<>();
     final HashSet<Segment> mspEdges = new HashSet<>(); //the edges in the minimum spanning tree
     final HashSet<MSTNode> forest = new HashSet<>();
-    HashMap<Coordinates, MSTNode> nodes = new HashMap<>();
+    final HashMap<Coordinates, MSTNode> nodes = new HashMap<>();
 
     /**
      * Constructor used to initialise all of the nodes and edges
-     * @param imgObj
+     * @param imgObj the image to use
      */
     MST(ImageFile imgObj) {
         //Performing a one time pass over the maze to find all the nodes.
@@ -31,7 +30,7 @@ public class MST {
                         connectSegments(nodes, new Coordinates(width, height), imgObj);
 
                         //Marking pixels on corner junctions
-                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && !ImageManipulation.directOpposite(imgObj, width, height)) {
+                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && ImageManipulation.notDirectOpposite(imgObj, width, height)) {
                         nodes.put(new Coordinates(width, height), new MSTNode(new Coordinates(width, height)));
                         connectSegments(nodes, new Coordinates(width, height), imgObj);
                     }

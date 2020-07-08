@@ -1,5 +1,6 @@
 import customExceptions.SolveFailureException;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ class Dijkstra extends Algorithms{
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) throws SolveFailureException {
+    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         MazeNode parent = null;
         PriorityQueue<MazeNode> toProcess = setupQueueWithCost(start);
         int initialNodeSize = nodes.size();
@@ -37,7 +38,7 @@ class Dijkstra extends Algorithms{
             }
 
             //If the stack is empty at this point, solving failed
-            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath());
+            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath(), parentComponent);
         }
 
         //Check if the neighbours have already been located

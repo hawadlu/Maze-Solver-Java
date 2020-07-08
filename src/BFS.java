@@ -1,5 +1,6 @@
 import customExceptions.SolveFailureException;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -16,7 +17,7 @@ class BFS extends Algorithms{
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) throws SolveFailureException {
+    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         MazeNode parent = null;
         Queue<MazeNode> toProcess = new ArrayDeque<>();
         start.visit();
@@ -51,7 +52,7 @@ class BFS extends Algorithms{
             }
 
             //If the stack is empty at this point, solving failed
-            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath());
+            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath(), parentComponent);
         }
 
         //Retrace the path

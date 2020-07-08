@@ -60,16 +60,6 @@ public class ImageManipulation {
     }
 
     /**
-     * Draw the segments
-     * @param imgObj the image
-     * @param segment the segment
-     */
-    private static void drawSegment(ImageFile imgObj, Segment segment) {
-        MSTNode start = segment.nodeStart;
-        MSTNode end = segment.nodeEnd;
-    }
-
-    /**
      * Draw the solved path in ren
      * @param imgObj the image
      */
@@ -147,7 +137,7 @@ public class ImageManipulation {
                         ImageManipulation.findNeighboursForSingleOnLoad(nodes, new Coordinates(width, height), imgObj);
 
                         //Marking pixels on corner junctions
-                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && !ImageManipulation.directOpposite(imgObj, width, height)) {
+                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && ImageManipulation.notDirectOpposite(imgObj, width, height)) {
                         nodes.put(new Coordinates(width, height), new MazeNode(width, height));
 
                         //Find the neighbours
@@ -226,7 +216,7 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
+                } else if (getAdjacentWhite(imgObj, width, y) == 2 && notDirectOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
                     break;
 
@@ -251,7 +241,7 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
+                } else if (getAdjacentWhite(imgObj, width, y) == 2 && notDirectOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
                     break;
 
@@ -277,7 +267,7 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
+                } else if (getAdjacentWhite(imgObj, x, height) == 2 && notDirectOpposite(imgObj, x, height)) {
                     neighbours.add(new Coordinates(x, height));
                     break;
 
@@ -308,7 +298,7 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
+                } else if (getAdjacentWhite(imgObj, x, height) == 2 && notDirectOpposite(imgObj, x, height)) {
                     neighbours.add(new Coordinates(x, height));
                     break;
 
@@ -324,14 +314,9 @@ public class ImageManipulation {
     /**
      * Returns true if two opposite squares are white
      */
-
-    public static boolean directOpposite(ImageFile imjObj, int width, int height) {
-        return (imjObj.isWhite(width - 1, height) && imjObj.isWhite(width + 1, height)) ||
-                (imjObj.isWhite(width, height - 1)&& imjObj.isWhite(width, height + 1));
-
-
-//        return (getColour(imgFile, width - 1, height) != 0 && getColour(imgFile, width + 1, height) != 0) ||
-//                (getColour(imgFile, width, height - 1) != 0 && getColour(imgFile, width, height + 1) != 0);
+    public static boolean notDirectOpposite(ImageFile imjObj, int width, int height) {
+        return (!imjObj.isWhite(width - 1, height) || !imjObj.isWhite(width + 1, height)) &&
+                (!imjObj.isWhite(width, height - 1) || !imjObj.isWhite(width, height + 1));
     }
 
     /**
