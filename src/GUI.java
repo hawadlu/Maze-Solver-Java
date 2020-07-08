@@ -166,6 +166,16 @@ public class GUI implements ItemListener {
         progTwo.setPreferredSize(panelThirds);
         start.setPreferredSize(panelThirds);
 
+        start.addActionListener(e -> {
+            //Make a thread for each of the programs
+            Thread progThreadOne = new Thread() {
+
+            };
+            Thread progThreadTwo = new Thread() {
+
+            };
+        });
+
         customGrid.addElement(progOne, 0, 1, 1);
         customGrid.addElement(start, 1, 1, 1);
         customGrid.addElement(progTwo, 2, 1, 1);
