@@ -5,39 +5,132 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/luke.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/luke.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animations/Spinning Arrows.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Animations/Spinning Arrows.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Approximate Data Sizes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Approximate Data Sizes.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/.idea/Images.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Images/.idea/Images.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Images/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Images/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Images/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Images/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/EightK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/EightK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/EightK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/EightK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/FourK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/FourK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/FourK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/FourK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Huge Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Huge Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Huge Imperfect2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Huge Imperfect2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Large Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Large Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Large.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Large.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Long.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Long.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Medium Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Medium Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Medium.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Medium.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/OneK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/OneK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/OneK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/OneK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/SixK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/SixK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/SixK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/SixK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Small Imperfect Invalid Colour.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Small Imperfect Invalid Colour.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Small Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Small Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Small Imperfect2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Small Imperfect2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Small.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Small.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/TenK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/TenK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/TenK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/TenK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny Invalid Colour.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny Invalid Colour.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny Invalid Colour.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny Invalid Colour.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny Invalid Exit.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny Invalid Exit.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny Invalid Exit.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny Invalid Exit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny3.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny3.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny4.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny4.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny5.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny5.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny5.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny6.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny6.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny7.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny7.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Tiny9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Tiny9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/TwoK Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/TwoK Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/TwoK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/TwoK.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Uneven Huge Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Uneven Huge Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Uneven Huge.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Uneven Huge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Uneven Imperfect.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Uneven Imperfect.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Uneven.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Uneven.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/huge.png" beforeDir="false" afterPath="$PROJECT_DIR$/Images/huge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maze Solver (Java).iml" beforeDir="false" afterPath="$PROJECT_DIR$/Maze Solver (Java).iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maze-Solver-Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Maze-Solver-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/AStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/AStar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Algorithms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Algorithms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/BFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/BFS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Coordinates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/DFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/DFS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/Dijkstra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/GUI (original).txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/GUI (original).txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImageFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImageManipulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImageManipulation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/ImagePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/MazeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/MazeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/SolveMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/SolveMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze Solver (Java)/solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze Solver (Java)/solver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/APNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/APNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/AStar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/AStar.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/BFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/BFS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Coordinates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Coordinates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/DFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/DFS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Dijkstra.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Dijkstra.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$CustomGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$CustomGrid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageFile.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageManipulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageManipulation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImagePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MSTNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MSTNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Segment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Segment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Solver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidColourException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidColourException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidMazeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidMazeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/SolveFailureException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/SolveFailureException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/APNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/APNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AStar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArticulationPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DFS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dijkstra.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageManipulation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MSTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MSTNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Segment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/customExceptions/InvalidColourException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customExceptions/InvalidColourException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/customExceptions/InvalidMazeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customExceptions/InvalidMazeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/customExceptions/SolveFailureException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customExceptions/SolveFailureException.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +176,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="customExceptions" />
       <recent name="CustomExceptions" />
     </key>
   </component>
@@ -129,6 +223,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="615" y="250" key="#Inspections" timestamp="1594093629599">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -158,42 +255,46 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="743" y="275" key="#xdebugger.evaluate/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594169532261" />
-    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594171591511">
+    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594196037407">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594171591511" />
-    <state width="1830" height="347" key="GridCell.Tab.0.bottom" timestamp="1594195880188">
+    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594196037407" />
+    <state width="1398" height="230" key="GridCell.Tab.0.bottom" timestamp="1594244917726">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1398" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1594244917726" />
+    <state width="1830" height="347" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640588" />
+    <state width="1398" height="230" key="GridCell.Tab.0.center" timestamp="1594244917725">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1398" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1594244917725" />
+    <state width="1830" height="347" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640587" />
+    <state width="1398" height="230" key="GridCell.Tab.0.left" timestamp="1594244917724">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1398" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1594244917724" />
+    <state width="1830" height="347" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640586" />
+    <state width="1398" height="230" key="GridCell.Tab.0.right" timestamp="1594244917725">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state width="1398" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1594244917725" />
+    <state width="1830" height="347" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640587" />
+    <state width="1830" height="347" key="GridCell.Tab.1.bottom" timestamp="1594200640590">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880188" />
-    <state width="1830" height="347" key="GridCell.Tab.0.center" timestamp="1594195880187">
+    <state width="1830" height="347" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640590" />
+    <state width="1830" height="347" key="GridCell.Tab.1.center" timestamp="1594200640589">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880187" />
-    <state width="1830" height="347" key="GridCell.Tab.0.left" timestamp="1594195880187">
+    <state width="1830" height="347" key="GridCell.Tab.1.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640589" />
+    <state width="1830" height="347" key="GridCell.Tab.1.left" timestamp="1594200640588">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880187" />
-    <state width="1830" height="347" key="GridCell.Tab.0.right" timestamp="1594195880188">
+    <state width="1830" height="347" key="GridCell.Tab.1.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640588" />
+    <state width="1830" height="347" key="GridCell.Tab.1.right" timestamp="1594200640589">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="1830" height="347" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880188" />
-    <state width="1830" height="347" key="GridCell.Tab.1.bottom" timestamp="1594195880190">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880190" />
-    <state width="1830" height="347" key="GridCell.Tab.1.center" timestamp="1594195880189">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880189" />
-    <state width="1830" height="347" key="GridCell.Tab.1.left" timestamp="1594195880189">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880189" />
-    <state width="1830" height="347" key="GridCell.Tab.1.right" timestamp="1594195880190">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state width="1830" height="347" key="GridCell.Tab.1.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594195880190" />
+    <state width="1830" height="347" key="GridCell.Tab.1.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594200640589" />
     <state x="787" y="490" key="ReplaceDuplicatesPrompt" timestamp="1594093524022">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -210,26 +311,35 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594087767557" />
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1594243679515">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1594243679515" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MST.java</url>
-          <line>77</line>
+          <line>76</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SolveTests.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/src/Dijkstra.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Dijkstra.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/src/BFS.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="java.awt.GridBagConstraints" fieldName="ipadx" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

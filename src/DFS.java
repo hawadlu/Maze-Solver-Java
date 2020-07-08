@@ -1,5 +1,6 @@
 import customExceptions.SolveFailureException;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ class DFS extends Algorithms{
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) throws SolveFailureException {
+    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         MazeNode parent = null;
         Stack<MazeNode> toProcess = new Stack<>();
         start.visit();
@@ -38,14 +39,14 @@ class DFS extends Algorithms{
                 }
 
                 //Add the node to the queue
-                if (!node.isVisited()) {
+                if (node.isVisited()) {
                     node.setParent(parent);
                     toProcess.push(node);
                 }
             }
 
             //If the stack is empty at this point, solving failed
-            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath());
+            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath(), parentComponent);
         }
 
         //backtrack to create the path

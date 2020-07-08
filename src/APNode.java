@@ -8,7 +8,6 @@ public class APNode {
     public Coordinates location;
     public double reachBack = -1;
     final HashSet<APNode> neighbours = new HashSet<>();
-    int numSubtrees;
     ArrayList<APNode> children;
 
 

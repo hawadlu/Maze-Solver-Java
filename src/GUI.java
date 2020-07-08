@@ -9,26 +9,28 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Class that controls the gui of the program.
  */
 public class GUI implements ItemListener {
-    JFrame gui = new JFrame("Maze Solver");
-    int WIDTH = 1000, HEIGHT = 1000;
+    final JFrame gui = new JFrame("Maze Solver");
+    final int WIDTH = 1000;
+    final int HEIGHT = 1000;
     ImagePanel imgPanel = null;
     CustomGrid customGrid = null;
 
-    JPanel primaryGui = new JPanel();
+    final JPanel primaryGui = new JPanel();
     JMenuBar topBar = new JMenuBar();
 
     //Size variable
-    int panelHeight = 750;
-    int panelWidth = 750;
-    int elementHeight = 50;
-    Dimension panelWhole = new Dimension(panelWidth, elementHeight);
-    Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
-    Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
+    final int panelHeight = 750;
+    final int panelWidth = 750;
+    final int elementHeight = 50;
+    final Dimension panelWhole = new Dimension(panelWidth, elementHeight);
+    final Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
+    final Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
 
     boolean hasDisplayedTradeOff = false;
 
@@ -62,7 +64,7 @@ public class GUI implements ItemListener {
     /**
      * Load the components of the top bar
      */
-    private JMenuBar loadTopBar() {
+    private void loadTopBar() {
         //Create the buttons
         topBar = new JMenuBar();
         topBar.setBackground(Color.YELLOW);
@@ -78,21 +80,16 @@ public class GUI implements ItemListener {
         });
         gameTab.addActionListener(e -> loadGameGui());
 
-        return topBar;
     }
 
     /**
      * Load the gui required for solving
-     * @return
      */
     private void loadSolveGui() {
-        primaryGui.removeAll();
-        GridBagConstraints constraints = setupSolveConstraints();
-
-        //Setup JPanel
-        primaryGui.setLayout(new GridBagLayout());
-        Button solveButton = new Button("Load Image");
-        primaryGui.add(solveButton, constraints);
+        customGrid = new CustomGrid(primaryGui);
+        customGrid.addElement(new JLabel("Load Maze To Solve"), 0, 0 ,1);
+        JButton solveButton = new JButton("Load Image");
+        customGrid.addElement(solveButton, 0, 1, 1);
 
         //Make the buttons do stuff when they are clicked
         solveButton.addActionListener(e -> {
@@ -126,18 +123,12 @@ public class GUI implements ItemListener {
      * Load the game GUI
      */
     private void loadGameGui() {
-        primaryGui.removeAll();
-        //Setup constraints
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridwidth = WIDTH;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.fill= GridBagConstraints.HORIZONTAL;
+        customGrid = new CustomGrid(primaryGui);
 
-        //Setup JPanel
-        primaryGui.setLayout(new GridBagLayout());
+        customGrid.addElement(new JLabel("Load Game Maze"), 0, 0, 1);
 
-        Button loadButton = new Button("Load Image");
-        primaryGui.add(loadButton);
+        JButton loadButton = new JButton("Load Image");
+        customGrid.addElement(loadButton, 0, 1, 1);
 
         loadButton.addActionListener(e -> {
             try {
@@ -158,35 +149,30 @@ public class GUI implements ItemListener {
 
     /**
      * The gui that displays the game
-     * @param fileIn the image file
      */
-    private void playGameGui(ImageFile fileIn) {
+    private void playGameGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
         customGrid.setSize(panelWidth, panelHeight);
 
-        //Create the title
-        String titleText = "Maze Race";
-        JLabel title = new JLabel();
-        title.setPreferredSize(panelWhole);
+        //Title of sorts
+        customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
 
-        Font labelFont = title.getFont();
+        //Load and play buttons
+        JButton progOne = new JButton("Load Program One");
+        JButton progTwo = new JButton("Load Program Two");
+        JButton start = new JButton("▶");
 
-        int stringWidth = title.getFontMetrics(labelFont).stringWidth(titleText);
-        int componentWidth = title.getWidth();
+        progOne.setPreferredSize(panelThirds);
+        progTwo.setPreferredSize(panelThirds);
+        start.setPreferredSize(panelThirds);
 
-        // Find out how much the font can grow in width.
-        double widthRatio = (double)componentWidth / (double)stringWidth;
+        customGrid.addElement(progOne, 0, 1, 1);
+        customGrid.addElement(start, 1, 1, 1);
+        customGrid.addElement(progTwo, 2, 1, 1);
 
-        int newFontSize = (int)(labelFont.getSize() * widthRatio);
-        int componentHeight = title.getHeight();
+        //Display the image
+        displayImage(imageFile, 2, 3);
 
-        // Pick a new font size so it will not be larger than the height of label.
-        int fontSizeToUse = Math.min(newFontSize, componentHeight);
-
-        // Set the label's font size to the newly determined size.
-        title.setFont(new Font(labelFont.getName(), Font.PLAIN, fontSizeToUse));
-
-        customGrid.addElement(title, 0, 0, 6);
 
         System.out.println("Repainting primary");
         gui.revalidate();
@@ -207,7 +193,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath());
+            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
         } else {
             return null;
         }
@@ -216,26 +202,28 @@ public class GUI implements ItemListener {
     /**
      * Loads the options for solving a maze
      * @param imageFile the file
-     * @throws IOException whoops, something broke
      */
-    public void loadSolveOptionsGui(ImageFile imageFile) throws IOException {
+    public void loadSolveOptionsGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
 
         customGrid.setSize(panelWidth, panelHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
-        JComboBox selectAlgorithm = new JComboBox(algorithms);
+        JComboBox<String> selectAlgorithm = new JComboBox<>(algorithms);
         selectAlgorithm.setPreferredSize(panelThirds);
         selectAlgorithm.setSelectedIndex(3);
 
-        customGrid.addElement(selectAlgorithm, 0, 0, 2);
+        //A title
+        customGrid.addElement(new JLabel("Solve The Maze"), 0, 0, 6);
+
+        customGrid.addElement(selectAlgorithm, 0, 1, 2);
 
         String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
-        JComboBox selectSearch = new JComboBox(searchType);
+        JComboBox<String> selectSearch = new JComboBox<>(searchType);
         selectSearch.setSelectedIndex(0);
         customGrid.setFill(GridBagConstraints.HORIZONTAL);
         selectSearch.setPreferredSize(panelThirds);
-        customGrid.addElement(selectSearch, 2, 0, 2);
+        customGrid.addElement(selectSearch, 2, 1, 2);
 
         JLabel fileName;
         if (imageFile != null) {
@@ -245,33 +233,30 @@ public class GUI implements ItemListener {
             fileName = new JLabel("No file selected");
         }
         fileName.setPreferredSize(panelThirds);
-        customGrid.addElement(fileName, 4, 0, 2);
+        customGrid.addElement(fileName, 4, 1, 2);
 
         //Display the image
-        displayImage(imageFile, 0, 1, 6);
+        displayImage(imageFile, 2, 6);
 
-        makeImageControlButtons(imageFile, panelSixths);
+        makeImageControlButtons(imageFile, panelSixths, 3);
 
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
             try {
+                assert imageFile != null;
                 Spinner spinner = new Spinner(imageFile);
                 final ImageFile[] solvedImg = {null};
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
                             solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
-                        } catch (IOException | IllegalAccessException | SolveFailureException ioException) {
+                        } catch (SolveFailureException ioException) {
                             ioException.printStackTrace();
                         }
                         solvedImg[0].resetZoom();
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
-                        try {
-                            spinner.interrupt();
-                            loadSaveGui(selectAlgorithm.getSelectedItem().toString(), imageFile);
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
+                        spinner.interrupt();
+                        loadSaveGui(Objects.requireNonNull(selectAlgorithm.getSelectedItem()).toString(), imageFile);
                     }
                 };
                 spinner.start();
@@ -281,56 +266,43 @@ public class GUI implements ItemListener {
             }
         });
         generic.setPreferredSize(panelThirds);
-        customGrid.addElement(generic, 0, 3, 2);
+        customGrid.addElement(generic, 0, 4, 2);
 
         generic = new JButton("Minimum Spanning Tree");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
+            assert imageFile != null;
             Spinner spinner = new Spinner(imageFile);
-            Thread mspThread = new Thread() {
-                @Override
-                public void run() {
-                    MST minimumTree = new MST(imageFile);
-                    imageFile.segments = minimumTree.kruskalsAlgorithm();
+            Thread mspThread = new Thread(() -> {
+                MST minimumTree = new MST(imageFile);
+                imageFile.segments = minimumTree.kruskalsAlgorithm();
 
-                    ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
-                    try {
-                        spinner.interrupt();
-                        loadSolveOptionsGui(imageFile);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            };
+                ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                spinner.interrupt();
+                loadSolveOptionsGui(imageFile);
+            });
             spinner.start();
             mspThread.start();
         });
-        customGrid.addElement(generic,2, 3, 2);
+        customGrid.addElement(generic,2, 4, 2);
 
         generic = new JButton("Articulation Points");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
+            assert imageFile != null;
             Spinner spinner = new Spinner(imageFile);
-            Thread apThread = new Thread() {
-                @Override
-                public void run() {
-                    ArticulationPoints aps = new ArticulationPoints();
-                    aps.findNeighboursForAll(imageFile);
-                    imageFile.artPoints = aps.findAps();
-                    ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
-                    try {
-                        spinner.interrupt();
-                        loadSolveOptionsGui(imageFile);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            };
+            Thread apThread = new Thread(() -> {
+                ArticulationPoints aps = new ArticulationPoints();
+                imageFile.artPoints = aps.findAps(imageFile);
+                ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                spinner.interrupt();
+                loadSolveOptionsGui(imageFile);
+            });
 
             spinner.start();
             apThread.start();
         });
-        customGrid.addElement(generic, 4, 3, 2);
+        customGrid.addElement(generic, 4, 4, 2);
 
         System.out.println("Repainting primary");
         gui.revalidate();
@@ -349,10 +321,10 @@ public class GUI implements ItemListener {
 
     /**
      * Displays the image
+     * NOTE the image always takes up the entire row, this gridX is always 0
      * @param fileIn the file containing the image
-     * @throws IOException happens when there's a problem
      */
-    private void displayImage(ImageFile fileIn, int gridX, int gridY, int gridWidth) throws IOException {
+    private void displayImage(ImageFile fileIn, int gridY, int gridWidth) {
         //The Image
         if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
         JPanel displayImg = imgPanel;
@@ -360,7 +332,7 @@ public class GUI implements ItemListener {
 
         customGrid.setIpadY(750);
         customGrid.setIpadX(750);
-        customGrid.addElement(displayImg, gridX, gridY, gridWidth);
+        customGrid.addElement(displayImg, 0, gridY, gridWidth);
         customGrid.setIpadY(0);
         customGrid.setIpadX(0);
     }
@@ -370,88 +342,63 @@ public class GUI implements ItemListener {
      * @param fileIn the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
-    private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths) {
+    private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths, int gridY) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.panUp();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.panUp();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 0, 2, 1);
+        customGrid.addElement(generic, 0, gridY, 1);
 
         generic = new JButton("▼");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.panDown();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.panDown();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 1, 2, 1);
+        customGrid.addElement(generic, 1, gridY, 1);
 
         generic = new JButton("+");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.zoomIn();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.zoomIn();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 2, 2, 1);
+        customGrid.addElement(generic, 2, gridY, 1);
 
         generic = new JButton("-");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.zoomOut();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.zoomOut();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 3, 2, 1);
+        customGrid.addElement(generic, 3, gridY, 1);
 
         generic = new JButton("<");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.panLeft();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.panLeft();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 4, 2, 1);
+        customGrid.addElement(generic, 4, gridY, 1);
 
         generic = new JButton(">");
         generic.addActionListener(e -> {
-            try {
-                imgPanel.panRight();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            imgPanel.panRight();
+            loadSolveOptionsGui(fileIn);
         });
         generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 5, 2, 1);
+        customGrid.addElement(generic, 5, gridY, 1);
     }
 
     /**
      * Gui that allows the user the save an image
      * @param algorithmUsed the algorithm that was used to solve the maze
      * @param fileIn file containing the image
-     * @throws IOException something bad happened
      */
-    private void loadSaveGui(String algorithmUsed, ImageFile fileIn) throws IOException {
+    private void loadSaveGui(String algorithmUsed, ImageFile fileIn) {
         customGrid = new CustomGrid(primaryGui);
 
         //Small title
@@ -460,10 +407,10 @@ public class GUI implements ItemListener {
         customGrid.addElement(fileName, 0, 0, 6);
 
         //The Image
-        displayImage(fileIn, 0, 1, 6);
+        displayImage(fileIn, 1, 6);
 
         //Control buttons
-        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50));
+        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50), 2);
 
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
@@ -472,14 +419,10 @@ public class GUI implements ItemListener {
 
         JButton reset = new JButton("Reset Maze");
         reset.addActionListener(e -> {
-            try {
-                customGrid = null;
-                imgPanel.setImage(fileIn);
-                fileIn.reset();
-                loadSolveOptionsGui(fileIn);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            customGrid = null;
+            imgPanel.setImage(fileIn);
+            fileIn.reset();
+            loadSolveOptionsGui(fileIn);
         });
         reset.setPreferredSize(panelThirds);
         customGrid.addElement(reset, 2, 3, 2);
@@ -526,10 +469,10 @@ public class GUI implements ItemListener {
     /**
      * Class that allows me to easily make custom grids
      */
-    class CustomGrid {
-        GridBagConstraints c = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
-        JComponent primaryComponent;
+    static class CustomGrid {
+        final GridBagConstraints c = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
+        final JComponent primaryComponent;
 
         /**
          * Setup the grid
@@ -585,25 +528,12 @@ public class GUI implements ItemListener {
             primaryComponent.setSize(width, height);
         }
 
-        /**
-         * Turn off interactions
-         */
-        public void disable(){
-            primaryComponent.setEnabled(false);
-        }
-
-        /**
-         * Turn on interactions
-         */
-        public void enable() {
-            primaryComponent.setEnabled(true);
-        }
     }
 
     static class Spinner extends Thread {
         //Spinning wheel
-        JFrame spinnerFrame = new JFrame("Please Wait");
-        int size;
+        final JFrame spinnerFrame = new JFrame("Please Wait");
+        final int size;
 
 
         public Spinner(ImageFile imageFile) {
@@ -629,7 +559,7 @@ public class GUI implements ItemListener {
             super.interrupt();
             spinnerFrame.setVisible(false);
         }
-    };
+    }
 
     public static void main(String[] args) {
         new GUI();

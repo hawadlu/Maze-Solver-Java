@@ -9,10 +9,11 @@ public class ArticulationPoints {
      * Begins the search for the articulation points
      * @return arraylist of articulation points
      */
-    public HashSet<APNode> findAps() {
-        System.out.println("Looking for aps");
+    public HashSet<APNode> findAps(ImageFile imgFile) {
+        System.out.println("Getting neighbours");
+        unvisited.addAll(findNeighboursForAll(imgFile).values());
 
-        unvisited.addAll(nodes.values());
+        System.out.println("Finding articulation points");
         while (!unvisited.isEmpty()) {
 
             //Cast the map of nodes to an arraylist then pick a random node
@@ -20,7 +21,6 @@ public class ArticulationPoints {
 
             //If this node has only one neighbour mark is as visited and ignore
             parent.nodeDepth = 0;
-            parent.numSubtrees = 0;
 
             unvisited.remove(parent);
             int subtrees = 0;
@@ -39,14 +39,6 @@ public class ArticulationPoints {
         System.out.println("AP search complete. Found " + articulationPoints.size() + " articulation points");
 
         return articulationPoints;
-    }
-
-    /**
-     * Get the articulation points
-     * @return arraylist containing all of the articulation points.
-     */
-    public ArrayList<APNode> getArticulationPoints() {
-        return new ArrayList<>(articulationPoints);
     }
 
     /**
@@ -132,7 +124,7 @@ public class ArticulationPoints {
                         findNeighboursForSingleOnLoad(nodes, new Coordinates(width, height), imgObj);
 
                         //Marking pixels on corner junctions
-                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && !ImageManipulation.directOpposite(imgObj, width, height)) {
+                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && ImageManipulation.notDirectOpposite(imgObj, width, height)) {
                         nodes.put(new Coordinates(width, height), new APNode(new Coordinates(width, height)));
 
                         //Find the neighbours

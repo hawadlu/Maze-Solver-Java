@@ -6,13 +6,9 @@ import java.awt.*;
  */
 public class ImagePanel extends JPanel {
     private ImageFile image;
-    private final ImageFile modified = null;
-    int panelWidth;
-    int panelHeight;
-    int zoom = 0;
-    int currentX = 0;
-    int currentY = 0;
-    JPanel parentComponent;
+    final int panelWidth;
+    final int panelHeight;
+    final JPanel parentComponent;
 
     public ImagePanel(ImageFile image, int width, int height, JPanel parentComponent) {
         this.image = image;
@@ -25,8 +21,7 @@ public class ImagePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         ImageFile toPaint;
-        if (modified != null) toPaint = modified;
-        else toPaint = image;
+        toPaint = image;
         toPaint.draw(panelWidth, panelHeight, g, toPaint, this);
     }
 
@@ -47,10 +42,9 @@ public class ImagePanel extends JPanel {
 
     /**
      * Zoom out by 10px
-     * @return the zoomed out image
      */
     public void zoomOut() {
-        if (image.width == image.imgArray[0].length || image.height == image.imgArray.length) {
+        if (image.width == image.imgArray[0].length && image.height == image.imgArray.length) {
             GUI.displayMessage(parentComponent, "Cannot zoom out any further");
             return;
         }
@@ -131,14 +125,6 @@ public class ImagePanel extends JPanel {
         }
         image.topY += 10;
         image.height += 10;
-    }
-
-    /**
-     * @return the current state of the image (modified)
-     */
-    public ImageFile getImage() {
-        if (modified != null) return modified;
-        return image;
     }
 
     /**
