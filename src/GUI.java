@@ -1,13 +1,14 @@
+import customExceptions.InvalidColourException;
+import customExceptions.InvalidMazeException;
+import customExceptions.SolveFailureException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Class that controls the gui of the program.
@@ -20,6 +21,17 @@ public class GUI implements ItemListener {
 
     JPanel primaryGui = new JPanel();
     JMenuBar topBar = new JMenuBar();
+
+    //Size variable
+    int panelHeight = 750;
+    int panelWidth = 750;
+    int elementHeight = 50;
+    Dimension panelWhole = new Dimension(panelWidth, elementHeight);
+    Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
+    Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
+
+    boolean hasDisplayedTradeOff = false;
+
 
     /**
      * Constructor that loads the gui
@@ -86,8 +98,9 @@ public class GUI implements ItemListener {
         solveButton.addActionListener(e -> {
             try {
                 //Get the file and load the options Gui
-                loadSolveOptionsGui(UIFileChooser());
-            } catch (IOException ioException) {
+                ImageFile tmp = UIFileChooser();
+                if (tmp != null) loadSolveOptionsGui(tmp);
+            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
                 ioException.printStackTrace();
             }
         });
@@ -112,7 +125,6 @@ public class GUI implements ItemListener {
     /**
      * Load the game GUI
      */
-    //todo implement me
     private void loadGameGui() {
         primaryGui.removeAll();
         //Setup constraints
@@ -124,7 +136,17 @@ public class GUI implements ItemListener {
         //Setup JPanel
         primaryGui.setLayout(new GridBagLayout());
 
-        Button solveButton = new Button("Load Image");
+        Button loadButton = new Button("Load Image");
+        primaryGui.add(loadButton);
+
+        loadButton.addActionListener(e -> {
+            try {
+                ImageFile tmp = UIFileChooser();
+                if (tmp != null) playGameGui(tmp);
+            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
+                ioException.printStackTrace();
+            }
+        });
 
         System.out.println("Repainting primary");
         primaryGui.setBackground(Color.PINK);
@@ -139,17 +161,7 @@ public class GUI implements ItemListener {
      * @param fileIn the image file
      */
     private void playGameGui(ImageFile fileIn) {
-        customGrid = new CustomGrid();
-
-        //Set the size
-        //todo look at making these globals
-        int panelHeight = 750;
-        int panelWidth = 750;
-        int elementHeight = 50;
-        Dimension panelWhole = new Dimension(panelWidth, elementHeight);
-        Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
-        Dimension panelHalves = new Dimension(panelWidth / 2, elementHeight);
-
+        customGrid = new CustomGrid(primaryGui);
         customGrid.setSize(panelWidth, panelHeight);
 
         //Create the title
@@ -186,7 +198,7 @@ public class GUI implements ItemListener {
      * Get and return the file that the user wants
      * @return the file
      */
-    private ImageFile UIFileChooser() throws IOException {
+    private ImageFile UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -197,8 +209,7 @@ public class GUI implements ItemListener {
             System.out.println("Opened: " + fileIn);
             return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath());
         } else {
-            //todo deal with this
-            throw new Error("Failed to open file");
+            return null;
         }
     }
 
@@ -208,14 +219,8 @@ public class GUI implements ItemListener {
      * @throws IOException whoops, something broke
      */
     public void loadSolveOptionsGui(ImageFile imageFile) throws IOException {
-        customGrid = new CustomGrid();
+        customGrid = new CustomGrid(primaryGui);
 
-        //Set the size
-        int panelHeight = 750;
-        int panelWidth = 750;
-        int elementHeight = 50;
-        Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
-        Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
         customGrid.setSize(panelWidth, panelHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
@@ -225,7 +230,6 @@ public class GUI implements ItemListener {
 
         customGrid.addElement(selectAlgorithm, 0, 0, 2);
 
-        //todo, display a dialogue box explaining the tradeoffs
         String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
         JComboBox selectSearch = new JComboBox(searchType);
         selectSearch.setSelectedIndex(0);
@@ -250,37 +254,15 @@ public class GUI implements ItemListener {
 
         JButton generic = new JButton("Solve");
         generic.addActionListener(e -> {
-            //todo make this work, even with very quick mazes
             try {
-                Thread spinner = new Thread() {
-                    public void run() {
-                        //Spinning wheel
-                        JFrame spinnerFrame = new JFrame("Please Wait");
-
-                        ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                        spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
-
-                        spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        spinnerFrame.setSize(300, 150);
-                        spinnerFrame.setVisible(true);
-
-                        while (!this.isInterrupted()) {
-                            //Don't do anything here
-                        }
-                        spinnerFrame.setVisible(false);
-                        System.out.println("Stopping spinner thread");
-                        interrupt();
-                    }
-                };
+                Spinner spinner = new Spinner(imageFile);
                 final ImageFile[] solvedImg = {null};
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
                             solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
-                        } catch (IOException ioException) {
+                        } catch (IOException | IllegalAccessException | SolveFailureException ioException) {
                             ioException.printStackTrace();
-                        } catch (IllegalAccessException illegalAccessException) {
-                            illegalAccessException.printStackTrace();
                         }
                         solvedImg[0].resetZoom();
                         imgPanel.setImage(solvedImg[0]); //Save the solved image
@@ -304,26 +286,7 @@ public class GUI implements ItemListener {
         generic = new JButton("Minimum Spanning Tree");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
-            Thread spinner = new Thread() {
-                public void run() {
-                    //Spinning wheel
-                    JFrame spinnerFrame = new JFrame("Please Wait");
-
-                    ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                    spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
-
-                    spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    spinnerFrame.setSize(300, 150);
-                    spinnerFrame.setVisible(true);
-
-                    while (!this.isInterrupted()) {
-                        //Don't do anything here
-                    }
-                    spinnerFrame.setVisible(false);
-                    System.out.println("Stopping spinner thread");
-                    interrupt();
-                }
-            };
+            Spinner spinner = new Spinner(imageFile);
             Thread mspThread = new Thread() {
                 @Override
                 public void run() {
@@ -347,33 +310,13 @@ public class GUI implements ItemListener {
         generic = new JButton("Articulation Points");
         generic.setPreferredSize(panelThirds);
         generic.addActionListener(e -> {
-            Thread spinner = new Thread() {
-                public void run() {
-                    //Spinning wheel
-                    JFrame spinnerFrame = new JFrame("Please Wait");
-
-                    ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                    spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
-
-                    spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    spinnerFrame.setSize(300, 150);
-                    spinnerFrame.setVisible(true);
-
-                    while (!this.isInterrupted()) {
-                        //Don't do anything here
-                    }
-                    spinnerFrame.setVisible(false);
-                    System.out.println("Stopping spinner thread");
-                    interrupt();
-                }
-            };
+            Spinner spinner = new Spinner(imageFile);
             Thread apThread = new Thread() {
                 @Override
                 public void run() {
                     ArticulationPoints aps = new ArticulationPoints();
                     aps.findNeighboursForAll(imageFile);
-                    aps.findAps();
-                    imageFile.artPoints = aps.getArticulationPoints();
+                    imageFile.artPoints = aps.findAps();
                     ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
                     try {
                         spinner.interrupt();
@@ -392,6 +335,16 @@ public class GUI implements ItemListener {
         System.out.println("Repainting primary");
         gui.revalidate();
         gui.repaint();
+
+        if (!hasDisplayedTradeOff) {
+            //Explain the different neighbour methods
+            displayMessage(primaryGui, "There are two ways to search for neighbours.\n" +
+                    "Searching for neighbours during loading uses more memory \n" +
+                    "but may lead to a quicker solve time.\n\n" +
+                    "Searching for neighbours while solving uses less memory (good for big mazes) \n" +
+                    "but may be slower at solve time.");
+            hasDisplayedTradeOff = true;
+        }
     }
 
     /**
@@ -403,7 +356,6 @@ public class GUI implements ItemListener {
         //The Image
         if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
         JPanel displayImg = imgPanel;
-        displayImg.setBackground(Color.magenta);
         displayImg.setSize(750, 750);
 
         customGrid.setIpadY(750);
@@ -499,15 +451,12 @@ public class GUI implements ItemListener {
      * @param fileIn file containing the image
      * @throws IOException something bad happened
      */
-    //fixme make this display the solved image
     private void loadSaveGui(String algorithmUsed, ImageFile fileIn) throws IOException {
-        customGrid = new CustomGrid();
-        Dimension panelThirds = new Dimension(750 / 3, 50);
+        customGrid = new CustomGrid(primaryGui);
 
         //Small title
         JLabel fileName = new JLabel("Solved using " + algorithmUsed);
-        //todo use the values already defined in loadSolveOptionsGui
-        fileName.setPreferredSize(new Dimension(750, 50));
+        fileName.setPreferredSize(panelWhole);
         customGrid.addElement(fileName, 0, 0, 6);
 
         //The Image
@@ -516,7 +465,6 @@ public class GUI implements ItemListener {
         //Control buttons
         makeImageControlButtons(fileIn, new Dimension(750 / 6, 50));
 
-        //todo reset image panel on save and solve
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
         save.setPreferredSize(panelThirds);
@@ -578,20 +526,21 @@ public class GUI implements ItemListener {
     /**
      * Class that allows me to easily make custom grids
      */
-    //todo make it so that this does not use a global variable
     class CustomGrid {
         GridBagConstraints c = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
+        JComponent primaryComponent;
 
         /**
          * Setup the grid
          */
-        CustomGrid() {
-            primaryGui.removeAll();
-            primaryGui.setLayout(new GridBagLayout());
+        CustomGrid(JComponent primaryComponent) {
+            this.primaryComponent = primaryComponent;
+            primaryComponent.removeAll();
+            primaryComponent.setLayout(new GridBagLayout());
             c.fill = GridBagConstraints.CENTER;
-            layout.setConstraints(primaryGui, c);
-            System.out.println("Primary width is: " + primaryGui.getWidth());
+            layout.setConstraints(primaryComponent, c);
+            System.out.println("Primary width is: " + primaryComponent.getWidth());
         }
 
         /**
@@ -619,7 +568,7 @@ public class GUI implements ItemListener {
             c.gridx = gridX;
             c.gridy = gridY;
             c.gridwidth = width;
-            primaryGui.add(component, c);
+            primaryComponent.add(component, c);
         }
 
         /**
@@ -633,23 +582,54 @@ public class GUI implements ItemListener {
          * Set the size of the grid
          */
         public void setSize(int width, int height) {
-            primaryGui.setSize(width, height);
+            primaryComponent.setSize(width, height);
         }
 
         /**
          * Turn off interactions
          */
         public void disable(){
-            primaryGui.setEnabled(false);
+            primaryComponent.setEnabled(false);
         }
 
         /**
          * Turn on interactions
          */
         public void enable() {
-            primaryGui.setEnabled(true);
+            primaryComponent.setEnabled(true);
         }
     }
+
+    static class Spinner extends Thread {
+        //Spinning wheel
+        JFrame spinnerFrame = new JFrame("Please Wait");
+        int size;
+
+
+        public Spinner(ImageFile imageFile) {
+            size = imageFile.width * imageFile.height;
+        }
+
+        public void run() {
+            //Only show the spinner if the maze is large enough
+            if (size >= 40401) {
+                ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
+                spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
+
+                spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                spinnerFrame.setSize(300, 150);
+                spinnerFrame.setVisible(true);
+            } else {
+                interrupt();
+            }
+        }
+
+        @Override
+        public void interrupt() {
+            super.interrupt();
+            spinnerFrame.setVisible(false);
+        }
+    };
 
     public static void main(String[] args) {
         new GUI();

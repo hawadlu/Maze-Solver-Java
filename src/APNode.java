@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
-//todo look at combining this and the AP node class
 public class APNode {
     public APNode firstNode = null;
     public double nodeDepth = Double.POSITIVE_INFINITY;
     public APNode parent = null;
     public Coordinates location;
     public double reachBack = -1;
-    HashSet<APNode> neighbours = new HashSet<>();
+    final HashSet<APNode> neighbours = new HashSet<>();
     int numSubtrees;
     ArrayList<APNode> children;
 

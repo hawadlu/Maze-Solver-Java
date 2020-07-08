@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.PriorityQueue;
 
 /**
@@ -74,5 +76,20 @@ public class Algorithms {
             node.setParent(parent);
             toProcess.offer(node);
         }
+    }
+
+    /**
+     * Choose the appropriate way to get neighbours for this node
+     * @param imgObj the image object
+     * @param nodes all the nodes in the maze so far
+     * @param parent the current node
+     * @param initialNodeSize the size of the nodes hashset when solving began
+     * @return arraylist of node locations
+     */
+    public ArrayList<Coordinates> getNeighbours(ImageFile imgObj, HashMap<Coordinates, MazeNode> nodes, MazeNode parent, int initialNodeSize) {
+        ArrayList<Coordinates> nodeLocations = new ArrayList<>();
+        if (initialNodeSize > 2) nodeLocations.addAll(Objects.requireNonNull(parent.getNeighbours()));
+        else nodeLocations.addAll(ImageManipulation.findNeighboursForSingleSolveTime(imgObj, nodes, parent.getX(), parent.getY()));
+        return nodeLocations;
     }
 }

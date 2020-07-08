@@ -1,3 +1,5 @@
+import customExceptions.SolveFailureException;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -12,7 +14,7 @@ class Solver {
     /**
      * Solves the maze
      */
-    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException {
+    public static ImageFile solve(ImageFile image, Object algorithm, Object searchType, JPanel parentComponent) throws IOException, IllegalAccessException, SolveFailureException {
         long numNodes = 0;
 
         //Map containing the positions of each node
@@ -47,7 +49,6 @@ class Solver {
         System.out.println("Solving");
 
         //Determine the method that should be used to solve the maze
-        //todo implement automatic switching for larger mazes
         if (algorithm.equals("Depth First")) {
             return SolveMethods.solveDFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes);
         } else if (algorithm.equals("Breadth First")) {
