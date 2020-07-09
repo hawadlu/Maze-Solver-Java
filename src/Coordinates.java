@@ -4,8 +4,8 @@ import java.util.Objects;
  * Very simple class for storing coordinates
  */
 public class Coordinates {
-    int x;
-    int y;
+    final int x;
+    final int y;
 
     Coordinates(int x, int y) {
         this.x = x;

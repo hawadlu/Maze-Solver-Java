@@ -1,6 +1,4 @@
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +14,7 @@ public class ImageManipulation {
     /**
      * This method draws the solved maze and returns it
      */
-    //todo change so that the red line can be painted
-    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry) {
+    public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments, HashSet<APNode> artPoints) {
         imgObj.initSolvedArr();
 
         for (int height = 0; height < imgObj.getHeight(); height++) {
@@ -31,50 +28,79 @@ public class ImageManipulation {
         }
 
         //Colour the entry
-        imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
+        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
 
-        while (nodes.size() > 1) {
-            MazeNode start = nodes.remove(0);
-            MazeNode end = nodes.get(0);
-            int y, x;
-
-            imgObj.setRGB(start.getX(), start.getY(), (byte) 2);
-            imgObj.setRGB(end.getX(), end.getY(), (byte) 2);
-
-            //Drawing down
-            if (start.getY() < end.getY()) {
-                y = start.getY() + 1;
-                while (y < end.getY()) {
-                    imgObj.setRGB(start.getX(), y, (byte) 2);
-                    y += 1;
-                }
-
-                //Drawing up
-            } else if (start.getY() > end.getY()) {
-                y = start.getY();
-                while (y > end.getY()) {
-                    imgObj.setRGB(start.getX(), y, (byte) 2);
-                    y-=1;
-                }
-
-                //Drawing right
-            } else if (start.getX() < end.getX()) {
-                x = start.getX();
-                while (x < end.getX()) {
-                    imgObj.setRGB(x, start.getY(), (byte) 2);
-                    x+=1;
-                }
-
-                //Drawing left
-            } else if (start.getX() > end.getX()) {
-                x = start.getX();
-                while (x > end.getX()) {
-                    imgObj.setRGB(x, start.getY(), (byte) 2);
-                    x-=1;
-                }
+        //Draw the msp
+        if (segments != null) {
+            for (Segment segment : segments) {
+                Coordinates start = segment.nodeStart.location;
+                Coordinates end = segment.nodeEnd.location;
+                draw(imgObj, start.x, start.y, end.x, end.y, (byte) 3);
             }
         }
+        
+        //Draw the path
+        if (nodes != null) {
+            while (nodes.size() > 1) {
+                MazeNode start = nodes.remove(0);
+                MazeNode end = nodes.get(0);
+
+                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 2);
+            }
+        }
+
+        //Draw the articulation points
+        if (artPoints != null) {
+            for (APNode apNode: artPoints) {
+                imgObj.setRGB(apNode.location.x, apNode.location.y, (byte) 4);
+            }
+        }
+
         return imgObj;
+    }
+
+    /**
+     * Draw the solved path in ren
+     * @param imgObj the image
+     */
+    public static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, byte col) {
+        int y, x;
+
+        imgObj.setRGB(startX, startY, col);
+        imgObj.setRGB(endX, endY, col);
+
+        //Drawing down
+        if (startY < endY) {
+            y = startY + 1;
+            while (y < endY) {
+                imgObj.setRGB(startX, y, col);
+                y += 1;
+            }
+
+            //Drawing up
+        } else if (startY > endY) {
+            y = startY;
+            while (y > endY) {
+                imgObj.setRGB(startX, y, col);
+                y-=1;
+            }
+
+            //Drawing right
+        } else if (startX < endX) {
+            x = startX;
+            while (x < endX) {
+                imgObj.setRGB(x, startY, col);
+                x+=1;
+            }
+
+            //Drawing left
+        } else if (startX > endX) {
+            x = startX;
+            while (x > endX) {
+                imgObj.setRGB(x, startY, col);
+                x-=1;
+            }
+        }
     }
 
 
@@ -85,7 +111,7 @@ public class ImageManipulation {
      */
     public static HashMap<Coordinates, MazeNode> findNeighboursForAll(ImageFile imgObj) {
         HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
-        //Performing a one time pass over the maze to find all the nodes. Only look for the neighbours if it has been specified
+        //Performing a one time pass over the maze to find all the nodes.
         for (int height = 0; height < imgObj.getHeight(); height++) {
             for (int width = 0; width < imgObj.getWidth(); width++) {
                 //Don't make a node unless the square is white
@@ -111,7 +137,7 @@ public class ImageManipulation {
                         ImageManipulation.findNeighboursForSingleOnLoad(nodes, new Coordinates(width, height), imgObj);
 
                         //Marking pixels on corner junctions
-                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && !ImageManipulation.directOpposite(imgObj, width, height)) {
+                    } else if (ImageManipulation.getAdjacentWhite(imgObj, width, height) == 2 && ImageManipulation.notDirectOpposite(imgObj, width, height)) {
                         nodes.put(new Coordinates(width, height), new MazeNode(width, height));
 
                         //Find the neighbours
@@ -177,7 +203,7 @@ public class ImageManipulation {
         if (!nodes.containsKey(new Coordinates(x, y))) nodes.put(new Coordinates(x, y), new MazeNode(x, y));
 
         //Look left
-        if (imgObj.isWhite(x - 1, y)) {
+        if (x > 0 && imgObj.isWhite(x - 1, y)) {
             for (int width = x - 1; width > -1; width--) {
                 //marking dead end nodes
                 if (isDeadEnd(imgObj, width, y)) {
@@ -190,15 +216,19 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
+                } else if (getAdjacentWhite(imgObj, width, y) == 2 && notDirectOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
                     break;
+
+                    //Mark nodes at the corners
+                } else if (width == 0) {
+                        neighbours.add(new Coordinates(width, y));
                 }
             }
         }
 
         //Look Right
-        if (imgObj.isWhite(x + 1, y)) {
+        if (x < imgObj.getWidth() - 1 && imgObj.isWhite(x + 1, y)) {
             for (int width = x + 1; width < imgObj.getWidth(); width++) {
                 //marking dead end nodes
                 if (isDeadEnd(imgObj, width, y)) {
@@ -211,8 +241,13 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, width, y) == 2 && !directOpposite(imgObj, width, y)) {
+                } else if (getAdjacentWhite(imgObj, width, y) == 2 && notDirectOpposite(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
+                    break;
+
+                    //If the node is at the edge mark it.
+                } else if (width + 1 >= imgObj.getWidth()) {
+                    neighbours.add(new Coordinates(width,y));
                     break;
                 }
             }
@@ -232,7 +267,12 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
+                } else if (getAdjacentWhite(imgObj, x, height) == 2 && notDirectOpposite(imgObj, x, height)) {
+                    neighbours.add(new Coordinates(x, height));
+                    break;
+
+                    //Mark nodes at the edge
+                } else if (height == 0) {
                     neighbours.add(new Coordinates(x, height));
                     break;
                 }
@@ -240,7 +280,7 @@ public class ImageManipulation {
         }
 
         //Look down
-        if (y < imgObj.getHeight() && imgObj.isWhite(x, y + 1)) {
+        if (y < imgObj.getHeight() - 1 && imgObj.isWhite(x, y + 1)) {
             for (int height = y + 1; height < imgObj.getHeight(); height++) {
                 //The destination node
                 if (height == imgObj.getHeight() - 1) {
@@ -258,9 +298,12 @@ public class ImageManipulation {
                     break;
 
                     //Marking pixels on corner junctions
-                } else if (getAdjacentWhite(imgObj, x, height) == 2 && !directOpposite(imgObj, x, height)) {
+                } else if (getAdjacentWhite(imgObj, x, height) == 2 && notDirectOpposite(imgObj, x, height)) {
                     neighbours.add(new Coordinates(x, height));
                     break;
+
+                } else if (height + 1 >= imgObj.getHeight()) {
+                    neighbours.add(new Coordinates(x, height));
                 }
             }
         }
@@ -271,14 +314,9 @@ public class ImageManipulation {
     /**
      * Returns true if two opposite squares are white
      */
-
-    public static boolean directOpposite(ImageFile imjObj, int width, int height) {
-        return (imjObj.isWhite(width - 1, height) && imjObj.isWhite(width + 1, height)) ||
-                (imjObj.isWhite(width, height - 1)&& imjObj.isWhite(width, height + 1));
-
-
-//        return (getColour(imgFile, width - 1, height) != 0 && getColour(imgFile, width + 1, height) != 0) ||
-//                (getColour(imgFile, width, height - 1) != 0 && getColour(imgFile, width, height + 1) != 0);
+    public static boolean notDirectOpposite(ImageFile imjObj, int width, int height) {
+        return (!imjObj.isWhite(width - 1, height) || !imjObj.isWhite(width + 1, height)) &&
+                (!imjObj.isWhite(width, height - 1) || !imjObj.isWhite(width, height + 1));
     }
 
     /**

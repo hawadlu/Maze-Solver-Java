@@ -1,4 +1,6 @@
-import java.awt.image.BufferedImage;
+import customExceptions.SolveFailureException;
+
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -8,66 +10,63 @@ public class SolveMethods {
     /**
      * Solves the maze depth first
      */
-    public static ImageFile solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create a DFS object
         DFS dfs = new DFS();
-        dfs.solve(imgObj, start, destination, nodes);
+        dfs.solve(imgObj, start, destination, nodes, parentComponent);
 
         System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dfs.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, dfs.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
      * Solves the maze breadth first
      */
-    public static ImageFile solveBFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveBFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
 
         //Create a BFS object
         BFS bfs = new BFS();
-        bfs.solve(imgObj, start, destination, nodes);
+        bfs.solve(imgObj, start, destination, nodes, parentComponent);
 
         System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, bfs.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, bfs.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
      * Solves the maze using the Dijkstra algorithm
      */
-    public static ImageFile solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create a DFS object
         Dijkstra dijkstra = new Dijkstra();
-        dijkstra.solve(imgObj, start, destination, nodes);
+        dijkstra.solve(imgObj, start, destination, nodes, parentComponent);
 
         System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
         System.out.println("Drawing image");
 
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dijkstra.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, dijkstra.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
      * Solves the maze using the AStar algorithm
      */
-    public static ImageFile solveAStar(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public static ImageFile solveAStar(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create an AStar object
         AStar aStar = new AStar();
-        aStar.solve(imgObj, start, destination, nodes);
-
-        //todo delete in the other methods?
-        nodes.clear();
+        aStar.solve(imgObj, start, destination, nodes, parentComponent);
 
         System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, aStar.getPath(), start);
+        return ImageManipulation.drawImage(imgObj, aStar.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
 }

@@ -1,75 +1,55 @@
+import customExceptions.SolveFailureException;
+
+import javax.swing.*;
 import java.util.*;
 
 /**
  * This class solves the maze depth first.
  * It takes a start node, end node and and returns a path between them
  */
-//fixme make this work with finding neighbours on the fly
 class DFS extends Algorithms{
-    /**
-     * Constructor
-     */
-    public DFS() {}
-
     /**
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
-    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes) {
+    public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         MazeNode parent = null;
         Stack<MazeNode> toProcess = new Stack<>();
         start.visit();
         toProcess.push(start);
+        int initialNodeSize = nodes.size();
 
-        if (nodes.size() > 2) {
-            while (!toProcess.isEmpty()) {
-                parent = toProcess.peek();
-                parent.visit(); //set visited
-                if (parent.equals(destination)) {
-                    break;
-                } else {
+        while (!toProcess.isEmpty()) {
+            parent = toProcess.pop();
+            parent.visit();
 
-                    //Add all children
-                    for (Coordinates location : Objects.requireNonNull(toProcess.pop()).getNeighbours()) {
-                        //Get the node
-                        MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-                        if (!node.isVisited()) {
-                            node.setParent(parent);
-                            toProcess.push(node);
-                        }
-                    }
+            if (parent.equals(destination)) break;
+
+            //Choose how to get neighbours
+            ArrayList<Coordinates> nodeLocations = getNeighbours(imgObj, nodes, parent, initialNodeSize);
+
+            //Add all the appropriate neighbours to the stack
+            for (Coordinates location: nodeLocations) {
+                MazeNode node = nodes.get(new Coordinates(location.x, location.y));
+
+                //If there is no node here, make one
+                if (node == null) {
+                    node = new MazeNode(location.x, location.y);
+                    nodes.put(new Coordinates(location.x, location.y), node);
+                }
+
+                //Add the node to the queue
+                if (!node.isVisited()) {
+                    node.setParent(parent);
+                    toProcess.push(node);
                 }
             }
-        } else {
-            while (!toProcess.isEmpty()) {
-                parent = toProcess.peek();
-                parent.visit(); //set visited
-                if (parent.equals(destination)) {
-                    break;
-                } else {
 
-                    //Add all children
-                    MazeNode current = toProcess.pop();
-                    for (Coordinates location : ImageManipulation.findNeighboursForSingleSolveTime(imgObj, nodes, current.getX(), current.getY())) {
-                        //Get the node
-                        MazeNode node = nodes.get(new Coordinates(location.x, location.y));
-
-                        //If there is no node here, make one
-                        if (node == null) {
-                            node = new MazeNode(location.x, location.y);
-                            nodes.put(new Coordinates(location.x, location.y), node);
-                        }
-
-                        if (!node.isVisited()) {
-                            node.setParent(parent);
-                            toProcess.push(node);
-                        }
-                    }
-                }
-            }
+            //If the stack is empty at this point, solving failed
+            if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath(), parentComponent);
         }
 
-        //retrace from the parent to the start
+        //backtrack to create the path
         backtrack(parent);
     }
 }
