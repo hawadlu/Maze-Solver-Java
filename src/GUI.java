@@ -171,7 +171,7 @@ public class GUI implements ItemListener {
                         HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                         search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                         Animate animate = new Animate(search.getPath(), copyImg, "Player One");
-                        animate.play((byte) 5);
+                        animate.play((byte) 3);
                         GUI.displayMessage(primaryGui, "Player one has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
                         solveFailureException.printStackTrace();
