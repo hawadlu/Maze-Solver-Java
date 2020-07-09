@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -88,7 +90,7 @@ public class GUI implements ItemListener {
     private void loadSolveGui() {
         customGrid = new CustomGrid(primaryGui);
         customGrid.addElement(new JLabel("Load Maze To Solve"), 0, 0 ,1);
-        JButton solveButton = new JButton("Load Image");
+        JButton solveButton = new JButton("Load Image For Solving");
         customGrid.addElement(solveButton, 0, 1, 1);
 
         //Make the buttons do stuff when they are clicked
@@ -110,15 +112,6 @@ public class GUI implements ItemListener {
         gui.repaint();
     }
 
-    private GridBagConstraints setupSolveConstraints() {
-        //Setup constraints
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridwidth = WIDTH;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        return constraints;
-    }
-
     /**
      * Load the game GUI
      */
@@ -127,7 +120,7 @@ public class GUI implements ItemListener {
 
         customGrid.addElement(new JLabel("Load Game Maze"), 0, 0, 1);
 
-        JButton loadButton = new JButton("Load Image");
+        JButton loadButton = new JButton("Load Image For Game");
         customGrid.addElement(loadButton, 0, 1, 1);
 
         loadButton.addActionListener(e -> {
@@ -169,11 +162,42 @@ public class GUI implements ItemListener {
         start.addActionListener(e -> {
             //Make a thread for each of the programs
             Thread progThreadOne = new Thread() {
-
+                //todo implement, currently it is just a test and does not use the parser
+                @Override
+                public void run() {
+                    try {
+                        ImageFile copyImg = imageFile.clone();
+                        BFS search = new BFS();
+                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        animate.play((byte) 5);
+                        GUI.displayMessage(primaryGui, "Player one has finished");
+                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
+                        solveFailureException.printStackTrace();
+                    }
+                }
             };
+
             Thread progThreadTwo = new Thread() {
-
+                //todo implement, currently it is just a test and does not use the parser
+                @Override
+                public void run() {
+                    try {
+                        ImageFile copyImg = imageFile.clone();
+                        DFS search = new DFS();
+                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        animate.play((byte) 4);
+                        GUI.displayMessage(primaryGui, "Player two has finished");
+                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
+                        solveFailureException.printStackTrace();
+                    }
+                }
             };
+            progThreadOne.start();
+            progThreadTwo.start();
         });
 
         customGrid.addElement(progOne, 0, 1, 1);
@@ -476,70 +500,6 @@ public class GUI implements ItemListener {
 
     }
 
-    /**
-     * Class that allows me to easily make custom grids
-     */
-    static class CustomGrid {
-        final GridBagConstraints c = new GridBagConstraints();
-        final GridBagLayout layout = new GridBagLayout();
-        final JComponent primaryComponent;
-
-        /**
-         * Setup the grid
-         */
-        CustomGrid(JComponent primaryComponent) {
-            this.primaryComponent = primaryComponent;
-            primaryComponent.removeAll();
-            primaryComponent.setLayout(new GridBagLayout());
-            c.fill = GridBagConstraints.CENTER;
-            layout.setConstraints(primaryComponent, c);
-            System.out.println("Primary width is: " + primaryComponent.getWidth());
-        }
-
-        /**
-         * @param padY, set the y padding
-         */
-        public void setIpadY(int padY) {
-            c.ipady = padY;
-        }
-
-        /**
-         * @param padX, set the x padding
-         */
-        public void setIpadX(int padX) {
-            c.ipadx = padX;
-        }
-
-        /**
-         * Add an element
-         * @param component the component
-         * @param gridX the grid position x
-         * @param gridY the grid position y
-         * @param width the width of this element
-         */
-        public void addElement(JComponent component, int gridX, int gridY, int width){
-            c.gridx = gridX;
-            c.gridy = gridY;
-            c.gridwidth = width;
-            primaryComponent.add(component, c);
-        }
-
-        /**
-         * @param fill int value for grid fill
-         */
-        public void setFill(int fill) {
-            c.fill = fill;
-        }
-
-        /**
-         * Set the size of the grid
-         */
-        public void setSize(int width, int height) {
-            primaryComponent.setSize(width, height);
-        }
-
-    }
-
     static class Spinner extends Thread {
         //Spinning wheel
         final JFrame spinnerFrame = new JFrame("Please Wait");
@@ -552,7 +512,7 @@ public class GUI implements ItemListener {
 
         public void run() {
             //Only show the spinner if the maze is large enough
-            if (size >= 40401) {
+            if (size > 40401) {
                 ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
                 spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
 

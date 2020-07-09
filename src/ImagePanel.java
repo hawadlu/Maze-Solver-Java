@@ -20,9 +20,7 @@ public class ImagePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ImageFile toPaint;
-        toPaint = image;
-        toPaint.draw(panelWidth, panelHeight, g, toPaint, this);
+        image.draw(panelWidth, panelHeight, g, image, this);
     }
 
     /**

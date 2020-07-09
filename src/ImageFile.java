@@ -11,11 +11,11 @@ import java.util.HashSet;
 /**
  * Class used to hold the image in memory
  */
-public class ImageFile {
+public class ImageFile implements Cloneable {
     public boolean[][] imgArray;
     public int width;
     public int height;
-    private final String path;
+    private String path = "";
     byte[][] solved;
     public int leftX = 0;
     public int topY = 0;
@@ -24,6 +24,12 @@ public class ImageFile {
     public HashSet<Segment> segments = null; //Used when drawing the Minimum spanning tree
     public HashSet<APNode> artPoints = null; //Used when drawing the articulation points
 
+    @Override
+    public ImageFile clone() throws CloneNotSupportedException {
+        ImageFile cloned = null;
+        cloned = (ImageFile) super.clone();
+        return cloned;
+    }
 
     ImageFile(BufferedImage imageIn, String filePath, JPanel parentComponent) throws InvalidColourException, InvalidMazeException {
         //Check the image colour
@@ -153,6 +159,7 @@ public class ImageFile {
                     else if (solved[newHeight + topY][newWidth + leftX] == 2) toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
                     else if (solved[newHeight + topY][newWidth + leftX] == 3) toRet.setRGB(newWidth, newHeight, Color.green.getRGB());
                     else if (solved[newHeight + topY][newWidth + leftX] == 4) toRet.setRGB(newWidth, newHeight, Color.blue.getRGB());
+                    else if (solved[newHeight + topY][newWidth + leftX] == 5) toRet.setRGB(newWidth, newHeight, Color.yellow.getRGB());
                 } else {
                     if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
                     else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
@@ -204,7 +211,7 @@ public class ImageFile {
 
     /**
      * Change the colour of image
-     * 0 is black, 1 is white, 2 is red, 3 is green, 4 is blue
+     * 0 is black, 1 is white, 2 is red, 3 is green, 4 is blue, 5 is yellow
      * @param x the xPos
      * @param y the yPos
      * @param col the colour
@@ -220,5 +227,16 @@ public class ImageFile {
         solved = null;
         segments = null;
         artPoints = null;
+    }
+
+    /**
+     * Paints white squares in the solved array
+     */
+    public void initWhiteSquares() {
+        for (int i = 0; i < imgArray.length; i++) {
+            for (int j = 0; j < imgArray[0].length; j++) {
+                if (imgArray[i][j]) setRGB(j, i, (byte) 1);
+            }
+        }
     }
 }
