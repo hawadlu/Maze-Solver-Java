@@ -159,7 +159,6 @@ public class ImageFile implements Cloneable {
                     else if (solved[newHeight + topY][newWidth + leftX] == 2) toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
                     else if (solved[newHeight + topY][newWidth + leftX] == 3) toRet.setRGB(newWidth, newHeight, Color.green.getRGB());
                     else if (solved[newHeight + topY][newWidth + leftX] == 4) toRet.setRGB(newWidth, newHeight, Color.blue.getRGB());
-                    else if (solved[newHeight + topY][newWidth + leftX] == 5) toRet.setRGB(newWidth, newHeight, Color.yellow.getRGB());
                 } else {
                     if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
                     else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
@@ -211,7 +210,7 @@ public class ImageFile implements Cloneable {
 
     /**
      * Change the colour of image
-     * 0 is black, 1 is white, 2 is red, 3 is green, 4 is blue, 5 is yellow
+     * 0 is black, 1 is white, 2 is red, 3 is green, 4 is blue
      * @param x the xPos
      * @param y the yPos
      * @param col the colour
