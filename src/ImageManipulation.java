@@ -63,7 +63,7 @@ public class ImageManipulation {
      * Draw the solved path in ren
      * @param imgObj the image
      */
-    private static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, byte col) {
+    public static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, byte col) {
         int y, x;
 
         imgObj.setRGB(startX, startY, col);

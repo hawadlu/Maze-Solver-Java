@@ -39,7 +39,7 @@ class DFS extends Algorithms{
                 }
 
                 //Add the node to the queue
-                if (node.isVisited()) {
+                if (!node.isVisited()) {
                     node.setParent(parent);
                     toProcess.push(node);
                 }
