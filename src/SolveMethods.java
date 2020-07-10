@@ -12,14 +12,14 @@ public class SolveMethods {
      */
     public static ImageFile solveDFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create a DFS object
-        DFS dfs = new DFS();
-        dfs.solve(imgObj, start, destination, nodes, parentComponent);
+        DepthFirstSearch depthFirstSearch = new DepthFirstSearch();
+        depthFirstSearch.solve(imgObj, start, destination, nodes, parentComponent);
 
-        System.out.println("Maze solved. Nodes in path: " + dfs.getPathSize());
+        System.out.println("Maze solved. Nodes in path: " + depthFirstSearch.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dfs.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, depthFirstSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
@@ -28,14 +28,14 @@ public class SolveMethods {
     public static ImageFile solveBFS(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
 
         //Create a BFS object
-        BFS bfs = new BFS();
-        bfs.solve(imgObj, start, destination, nodes, parentComponent);
+        BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
+        breadthFirstSearch.solve(imgObj, start, destination, nodes, parentComponent);
 
-        System.out.println("Maze solved. Nodes in path: " + bfs.getPathSize());
+        System.out.println("Maze solved. Nodes in path: " + breadthFirstSearch.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, bfs.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, breadthFirstSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
@@ -43,15 +43,15 @@ public class SolveMethods {
      */
     public static ImageFile solveDijkstra(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create a DFS object
-        Dijkstra dijkstra = new Dijkstra();
-        dijkstra.solve(imgObj, start, destination, nodes, parentComponent);
+        DijkstraSearch dijkstraSearch = new DijkstraSearch();
+        dijkstraSearch.solve(imgObj, start, destination, nodes, parentComponent);
 
-        System.out.println("Maze solved. Nodes in path: " + dijkstra.getPathSize());
+        System.out.println("Maze solved. Nodes in path: " + dijkstraSearch.getPathSize());
         System.out.println("Drawing image");
 
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dijkstra.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, dijkstraSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
     /**
@@ -59,14 +59,14 @@ public class SolveMethods {
      */
     public static ImageFile solveAStar(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         //Create an AStar object
-        AStar aStar = new AStar();
-        aStar.solve(imgObj, start, destination, nodes, parentComponent);
+        AStarSearch aStarSearch = new AStarSearch();
+        aStarSearch.solve(imgObj, start, destination, nodes, parentComponent);
 
-        System.out.println("Maze solved. Nodes in path: " + aStar.getPathSize());
+        System.out.println("Maze solved. Nodes in path: " + aStarSearch.getPathSize());
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, aStar.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, aStarSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
     }
 
 }

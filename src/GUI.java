@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -171,22 +170,22 @@ public class GUI implements ItemListener {
                         Animate animate = null;
                         System.out.println("Program one is using: " + progOne.getSelectedItem());
                         if (progOne.getSelectedItem().toString().equals("Depth First")) {
-                            DFS search = new DFS();
+                            DepthFirstSearch search = new DepthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
-                            BFS search = new BFS();
+                            BreadthFirstSearch search = new BreadthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
-                            Dijkstra search = new Dijkstra();
+                            DijkstraSearch search = new DijkstraSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else {
-                            AStar search = new AStar();
+                            AStarSearch search = new AStarSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
@@ -212,22 +211,22 @@ public class GUI implements ItemListener {
                         System.out.println("Program one is using: " + progTwo.getSelectedItem());
 
                         if (progTwo.getSelectedItem().toString().equals("Depth First")) {
-                            DFS search = new DFS();
+                            DepthFirstSearch search = new DepthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else if (progTwo.getSelectedItem().toString().equals("Breadth Birst")) {
-                            BFS search = new BFS();
+                            BreadthFirstSearch search = new BreadthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
-                            Dijkstra search = new Dijkstra();
+                            DijkstraSearch search = new DijkstraSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else {
-                            AStar search = new AStar();
+                            AStarSearch search = new AStarSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                             search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");

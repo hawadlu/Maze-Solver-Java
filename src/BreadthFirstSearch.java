@@ -4,23 +4,29 @@ import javax.swing.*;
 import java.util.*;
 
 /**
- * This class solves the maze depth first.
+ * This class solves the maze breadth first.
  * It takes a start node, end node and and returns a path between them
  */
-class DFS extends Algorithms{
+class BreadthFirstSearch extends Algorithms{
+    /**
+     * Constructor
+     */
+    public BreadthFirstSearch() {}
+
     /**
      * Solves the maze node.
      * Uses iteration to avoid stack overflow error
      */
     public void solve(ImageFile imgObj, MazeNode start, MazeNode destination, HashMap<Coordinates, MazeNode> nodes, JPanel parentComponent) throws SolveFailureException {
         MazeNode parent = null;
-        Stack<MazeNode> toProcess = new Stack<>();
+        Queue<MazeNode> toProcess = new ArrayDeque<>();
         start.visit();
-        toProcess.push(start);
+        toProcess.offer(start);
         int initialNodeSize = nodes.size();
 
+
         while (!toProcess.isEmpty()) {
-            parent = toProcess.pop();
+            parent = toProcess.poll();
             parent.visit();
 
             if (parent.equals(destination)) break;
@@ -41,7 +47,7 @@ class DFS extends Algorithms{
                 //Add the node to the queue
                 if (!node.isVisited()) {
                     node.setParent(parent);
-                    toProcess.push(node);
+                    toProcess.offer(node);
                 }
             }
 
@@ -49,7 +55,7 @@ class DFS extends Algorithms{
             if (toProcess.isEmpty()) throw new SolveFailureException("Failed to solve " + imgObj.getAbsolutePath(), parentComponent);
         }
 
-        //backtrack to create the path
+        //Retrace the path
         backtrack(parent);
     }
 }
