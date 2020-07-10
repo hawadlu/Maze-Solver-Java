@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * This class implements a Dijkstra type search
  */
-class Dijkstra extends Algorithms{
+class DijkstraSearch extends Algorithms{
 
     /**
      * Solves the maze node.

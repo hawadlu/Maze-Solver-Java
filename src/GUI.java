@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -151,8 +150,9 @@ public class GUI implements ItemListener {
         customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
 
         //Load and play buttons
-        JButton progOne = new JButton("Load Program One");
-        JButton progTwo = new JButton("Load Program Two");
+        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
+        JComboBox progOne = new JComboBox(algorithms);
+        JComboBox progTwo = new JComboBox(algorithms);
         JButton start = new JButton("▶");
 
         progOne.setPreferredSize(panelThirds);
@@ -167,10 +167,31 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        BFS search = new BFS();
-                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
-                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        Animate animate = null;
+                        System.out.println("Program one is using: " + progOne.getSelectedItem());
+                        if (progOne.getSelectedItem().toString().equals("Depth First")) {
+                            DepthFirstSearch search = new DepthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
+                            BreadthFirstSearch search = new BreadthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
+                            DijkstraSearch search = new DijkstraSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else {
+                            AStarSearch search = new AStarSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        }
+
+
                         animate.play((byte) 3);
                         GUI.displayMessage(primaryGui, "Player one has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
@@ -185,10 +206,31 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        DFS search = new DFS();
-                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
-                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        Animate animate = null;
+
+                        System.out.println("Program one is using: " + progTwo.getSelectedItem());
+
+                        if (progTwo.getSelectedItem().toString().equals("Depth First")) {
+                            DepthFirstSearch search = new DepthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Breadth Birst")) {
+                            BreadthFirstSearch search = new BreadthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
+                            DijkstraSearch search = new DijkstraSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else {
+                            AStarSearch search = new AStarSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        }
                         animate.play((byte) 4);
                         GUI.displayMessage(primaryGui, "Player two has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
