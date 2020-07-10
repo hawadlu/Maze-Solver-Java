@@ -1,4 +1,6 @@
+package parserInterfaces;
+
 public interface ParserExecutionNode {
-    void execute(Algorithms algorithm);
+    void execute();
     String toString();
 }

@@ -207,7 +207,7 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        BFS search = new BFS();
+                        BreadthFirstSearch search = new BreadthFirstSearch();
                         HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
                         search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
                         Animate animate = new Animate(search.getPath(), copyImg, "Player One");

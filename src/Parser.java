@@ -1,4 +1,6 @@
 import customExceptions.ParserFailureException;
+import parserInterfaces.ParserExecutionNode;
+import parserInterfaces.ParserTypeNode;
 
 import javax.swing.*;
 import java.io.File;
@@ -66,7 +68,8 @@ public class Parser {
 
         if (programScanner.hasNext(Regex.dataStructure)) return parseDataStructure(programScanner);
 
-        throw new ParserFailureException("Missing data structure...", parentComponent); //todo add other failures
+        if (!programScanner.hasNext(Regex.semiColon)) throw new ParserFailureException("Statement missing ';'", parentComponent);
+        return null; //todo remove?
     }
 
     /**
@@ -92,8 +95,8 @@ public class Parser {
         //Discard the hashmap token
         programScanner.next();
 
-        ParserObjectNode entry = null;
-        ParserObjectNode value = null;
+        ParserTypeNode entry = null;
+        ParserTypeNode value = null;
 
         //Check for an opening <
         if (!programScanner.hasNext(Regex.openPointy)) throw new ParserFailureException("Hashmap missing opening '<'", parentComponent);
@@ -101,32 +104,39 @@ public class Parser {
         programScanner.next(); //discard the <
 
         //Process the first object
-        if (programScanner.hasNext(Regex.object)) entry = parseObject(programScanner);
-        else throw new ParserFailureException("Hashmap missing opening argument", parentComponent);
+        if (programScanner.hasNext(Regex.object)) entry = parseTypeArgument(programScanner);
+        else throw new ParserFailureException("Map missing opening argument", parentComponent);
 
         //Check for and discard comma if required
-        if (!programScanner.hasNext(Regex.comma)) throw new ParserFailureException("Hashmap missing ','", parentComponent);
+        if (!programScanner.hasNext(Regex.comma)) throw new ParserFailureException("Map missing ','", parentComponent);
         else programScanner.next();
 
         //Process the second object
-        if (programScanner.hasNext(Regex.object)) value = parseObject(programScanner);
-        else throw new ParserFailureException("Hashmap missing second argument", parentComponent);
+        if (programScanner.hasNext(Regex.object)) value = parseTypeArgument(programScanner);
+        else throw new ParserFailureException("Map missing second argument", parentComponent);
 
         //Check for closing >
-        if (!programScanner.hasNext(Regex.closePointy)) throw new ParserFailureException("Hashmap missing closing '>'", parentComponent);
+        if (!programScanner.hasNext(Regex.closePointy)) throw new ParserFailureException("Map missing closing '>'", parentComponent);
 
-        throw new ParserFailureException("Failed to parse hashmap", parentComponent);
+        programScanner.next(); //discard the >
+
+        //todo create the variable
+
+        //todo create the map node
+
+        return null; //todo implement this
     }
 
     /**
-     * Parse objects
+     * Parse types for maps etc
      * @param programScanner the scanner
      * @return the object
      */
-    private ParserObjectNode parseObject(Scanner programScanner) {
-        if (programScanner.hasNext(Regex.coordinate)) System.out.println("Found coordinate");
+    private ParserTypeNode parseTypeArgument(Scanner programScanner) throws ParserFailureException {
+        if (programScanner.hasNext(Regex.coordinate)) return new TypeNode(programScanner.next());
+        if (programScanner.hasNext(Regex.mazeNode)) return new TypeNode(programScanner.next());
 
-        return null;
+        throw new ParserFailureException(programScanner.next() + " is not a valid type", parentComponent);
     }
 
 

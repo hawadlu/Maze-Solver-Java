@@ -6,6 +6,7 @@ public class Regex {
     public static final Pattern openPointy = Pattern.compile("<");
     public static final Pattern closePointy = Pattern.compile(">");
     public static final Pattern comma = Pattern.compile(",");
+    public static final Pattern semiColon = Pattern.compile(";");
 
     //OBJECTS
     public static final Pattern coordinate = Pattern.compile("((?i)Coordinates(?-i))W*");
@@ -13,7 +14,7 @@ public class Regex {
     public static final Pattern object = Pattern.compile(coordinate + "|" + mazeNode);
 
     //DATA STRUCTURES
-    public static final Pattern hashmap = Pattern.compile("((?i)HashMap(?-i))W*");
+    public static final Pattern hashmap = Pattern.compile("((?i)Map(?-i))W*");
     public static final Pattern dataStructure = Pattern.compile(hashmap + "");
 
     //VARIABLES

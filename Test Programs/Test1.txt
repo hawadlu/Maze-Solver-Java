@@ -1,1 +1,1 @@
-HashMap<Coordinates, MazeNode> nodes = findNeighboursForAll();
+Map<Coordinates, MazeNode> nodes;
