@@ -1,5 +1,6 @@
 import customExceptions.InvalidColourException;
 import customExceptions.InvalidMazeException;
+import customExceptions.ParserFailureException;
 import customExceptions.SolveFailureException;
 
 import javax.imageio.ImageIO;
@@ -12,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Class that controls the gui of the program.
@@ -226,12 +226,12 @@ public class GUI implements ItemListener {
                     try {
                         ImageFile copyImg = imageFile.clone();
                         Parser parser = new Parser();
-                        parser.parseProgram(fileTwo[0]);
+                        parser.setupParser(fileTwo[0], primaryGui);
                         parser.execute();
                         Animate animate = new Animate(parser.getPath(), copyImg, "Player Two");
                         animate.play((byte) 4);
                         GUI.displayMessage(primaryGui, "Player two has finished");
-                    } catch (InterruptedException | CloneNotSupportedException | FileNotFoundException solveFailureException) {
+                    } catch (InterruptedException | CloneNotSupportedException | FileNotFoundException | ParserFailureException solveFailureException) {
                         solveFailureException.printStackTrace();
                     }
                 }

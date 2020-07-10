@@ -5,15 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Parser$PrintScanner.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ParserExecutionNode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ParserObjectNode.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Regex.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ParserFailureException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserExecutionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ParserObjectNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Regex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/customExceptions/ParserFailureException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test Programs/Test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Test Programs/Test1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test Programs/Test2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Test Programs/Test2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Parser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ErrorPopup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ErrorPopup.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SolveTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/customExceptions/ErrorPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customExceptions/ErrorPopup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +38,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -59,11 +71,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="parserInterfaces" />
       <recent name="customExceptions" />
       <recent name="CustomExceptions" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="JUnit.Test">
     <configuration name="Run" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="Maze-Solver-Java" />
@@ -102,6 +115,7 @@
       <workItem from="1594085641413" duration="8568000" />
       <workItem from="1594249025365" duration="10426000" />
       <workItem from="1594262029923" duration="1491000" />
+      <workItem from="1594336683766" duration="4876000" />
     </task>
     <servers />
   </component>
@@ -124,10 +138,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="794" y="278" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594260499807" />
-    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1594170946802">
+    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1594338510086">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170946802" />
+    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594338510085" />
     <state x="718" y="362" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1594170492268">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -144,26 +158,26 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594196037407" />
-    <state width="1830" height="225" key="GridCell.Tab.0.bottom" timestamp="1594263529722">
+    <state width="1830" height="225" key="GridCell.Tab.0.bottom" timestamp="1594341587572">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1594246638429" />
-    <state width="1830" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594263529722" />
-    <state width="1830" height="225" key="GridCell.Tab.0.center" timestamp="1594263529721">
+    <state width="1830" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594341587572" />
+    <state width="1830" height="225" key="GridCell.Tab.0.center" timestamp="1594341587571">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1594246638429" />
-    <state width="1830" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594263529721" />
-    <state width="1830" height="225" key="GridCell.Tab.0.left" timestamp="1594263529720">
+    <state width="1830" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594341587571" />
+    <state width="1830" height="225" key="GridCell.Tab.0.left" timestamp="1594341587571">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1594246638429" />
-    <state width="1830" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594263529720" />
-    <state width="1830" height="225" key="GridCell.Tab.0.right" timestamp="1594263529721">
+    <state width="1830" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594341587571" />
+    <state width="1830" height="225" key="GridCell.Tab.0.right" timestamp="1594341587572">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1594246638429" />
-    <state width="1830" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594263529721" />
+    <state width="1830" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594341587572" />
     <state width="1830" height="347" key="GridCell.Tab.1.bottom" timestamp="1594261500711">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

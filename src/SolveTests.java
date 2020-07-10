@@ -1,11 +1,8 @@
-import customExceptions.InvalidColourException;
-import customExceptions.InvalidMazeException;
+import customExceptions.ParserFailureException;
 import org.junit.Test;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -23,20 +20,25 @@ public class SolveTests {
     // =================================================================
 
     //Test reading the mazes in
-    @Test
-    public void readImages() {
-        ArrayList<String> paths = getFiles(".png");
-        System.out.println("Collected files");
+//    @Test
+//    public void readImages() {
+//        ArrayList<String> paths = getFiles(".png");
+//        System.out.println("Collected files");
+//
+//        for (String path: paths) {
+//            try {
+//                new ImageFile(ImageIO.read(new File("Images/" + path)), path, new JPanel());
+//            } catch (IOException | InvalidColourException | InvalidMazeException e) {
+//                System.out.println("Path: " + path);
+//                if (path.contains("invalid") || path.contains("Invalid")) System.out.println("Deliberate invalid");
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-        for (String path: paths) {
-            try {
-                new ImageFile(ImageIO.read(new File("Images/" + path)), path, new JPanel());
-            } catch (IOException | InvalidColourException | InvalidMazeException e) {
-                System.out.println("Path: " + path);
-                if (path.contains("invalid") || path.contains("Invalid")) System.out.println("Deliberate invalid");
-                e.printStackTrace();
-            }
-        }
+    @Test
+    public void parseProg() throws FileNotFoundException, ParserFailureException {
+        new Parser().setupParser(new File("Test Programs/Test1.txt"), null);
     }
 
     /**
