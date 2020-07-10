@@ -7,12 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Class that controls the gui of the program.
@@ -98,8 +97,7 @@ public class GUI implements ItemListener {
         solveButton.addActionListener(e -> {
             try {
                 //Get the file and load the options Gui
-                File fileIn = UIFileChooser();
-                ImageFile tmp = new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
+                ImageFile tmp = UIFileChooser();
                 if (tmp != null) loadSolveOptionsGui(tmp);
             } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
                 ioException.printStackTrace();
@@ -127,8 +125,7 @@ public class GUI implements ItemListener {
 
         loadButton.addActionListener(e -> {
             try {
-                File fileIn = UIFileChooser();
-                ImageFile tmp = new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
+                ImageFile tmp = UIFileChooser();
                 if (tmp != null) playGameGui(tmp);
             } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
                 ioException.printStackTrace();
@@ -146,10 +143,7 @@ public class GUI implements ItemListener {
     /**
      * The gui that displays the game
      */
-    private void playGameGui(ImageFile imageFile) throws InvalidMazeException, IOException, InvalidColourException {
-        final File[] fileOne = {null};
-        final File[] fileTwo = {null};
-
+    private void playGameGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
         customGrid.setSize(panelWidth, panelHeight);
 
@@ -157,49 +151,16 @@ public class GUI implements ItemListener {
         customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
 
         //Load and play buttons
-        JButton progOne = new JButton("Load Program One");
-        JButton progTwo = new JButton("Load Program Two");
+        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
+        JComboBox progOne = new JComboBox(algorithms);
+        JComboBox progTwo = new JComboBox(algorithms);
         JButton start = new JButton("▶");
 
         progOne.setPreferredSize(panelThirds);
         progTwo.setPreferredSize(panelThirds);
         start.setPreferredSize(panelThirds);
 
-        progOne.addActionListener(e -> {
-            try {
-                fileOne[0] = UIFileChooser();
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-        progTwo.addActionListener(e -> {
-            try {
-                fileTwo[0] = UIFileChooser();
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
         start.addActionListener(e -> {
-            //Make sure that both files are loaded
-            if (fileOne[0] == null) {
-                displayMessage(primaryGui, "File one is not loaded");
-                return;
-            } else if (!fileOne[0].getName().contains(".txt")) {
-                displayMessage(primaryGui, "File one must be a .txt file");
-                return;
-            }
-
-            if (fileTwo[0] == null) {
-                displayMessage(primaryGui, "File two is not loaded");
-                return;
-            } else if (!fileOne[0].getName().contains(".txt")) {
-                displayMessage(primaryGui, "File two must be a .txt file");
-                return;
-            }
-
-
             //Make a thread for each of the programs
             Thread progThreadOne = new Thread() {
                 //todo implement, currently it is just a test and does not use the parser
@@ -207,10 +168,31 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        BFS search = new BFS();
-                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
-                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        Animate animate = null;
+                        System.out.println("Program one is using: " + progOne.getSelectedItem());
+                        if (progOne.getSelectedItem().toString().equals("Depth First")) {
+                            DFS search = new DFS();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
+                            BFS search = new BFS();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
+                            Dijkstra search = new Dijkstra();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else {
+                            AStar search = new AStar();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        }
+
+
                         animate.play((byte) 3);
                         GUI.displayMessage(primaryGui, "Player one has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
@@ -225,13 +207,34 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        Parser parser = new Parser();
-                        parser.parseProgram(fileTwo[0]);
-                        parser.execute();
-                        Animate animate = new Animate(parser.getPath(), copyImg, "Player Two");
+                        Animate animate = null;
+
+                        System.out.println("Program one is using: " + progTwo.getSelectedItem());
+
+                        if (progTwo.getSelectedItem().toString().equals("Depth First")) {
+                            DFS search = new DFS();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Breadth Birst")) {
+                            BFS search = new BFS();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
+                            Dijkstra search = new Dijkstra();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else {
+                            AStar search = new AStar();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        }
                         animate.play((byte) 4);
                         GUI.displayMessage(primaryGui, "Player two has finished");
-                    } catch (InterruptedException | CloneNotSupportedException | FileNotFoundException solveFailureException) {
+                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
                         solveFailureException.printStackTrace();
                     }
                 }
@@ -258,7 +261,7 @@ public class GUI implements ItemListener {
      * Get and return the file that the user wants
      * @return the file
      */
-    private File UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
+    private ImageFile UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -267,7 +270,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return fileIn;
+            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
         } else {
             return null;
         }
