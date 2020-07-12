@@ -12,9 +12,13 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(ImageFile image, int width, int height, JPanel parentComponent) {
         this.image = image;
-        this.panelWidth = width + 10;
-        this.panelHeight = height + 10;
+        this.panelWidth = width;
+        this.panelHeight = height;
         this.parentComponent = parentComponent;
+
+        //Setup the layout
+        this.setBackground(Color.green);
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
     @Override

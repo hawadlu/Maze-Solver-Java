@@ -19,8 +19,6 @@ import java.util.Objects;
  */
 public class GUI implements ItemListener {
     final JFrame gui = new JFrame("Maze Solver");
-    final int WIDTH = 1000;
-    final int HEIGHT = 1000;
     ImagePanel imgPanel = null;
     CustomGrid customGrid = null;
 
@@ -28,12 +26,16 @@ public class GUI implements ItemListener {
     JMenuBar topBar = new JMenuBar();
 
     //Size variable
-    final int panelHeight = 750;
-    final int panelWidth = 750;
+    int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+    final int guiHeight = screenHeight - 50;
+    final int guiWidth = screenHeight - 50;
     final int elementHeight = 50;
-    final Dimension panelWhole = new Dimension(panelWidth, elementHeight);
-    final Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
-    final Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
+    final int primaryHeight = guiHeight - 200;
+    final int primaryWidth = guiWidth - 50;
+    final Dimension panelWhole = new Dimension(guiWidth, elementHeight);
+    final Dimension panelThirds = new Dimension(guiWidth / 3, elementHeight);
+    final Dimension panelSixths = new Dimension(guiWidth / 6, elementHeight);
 
     boolean hasDisplayedTradeOff = false;
 
@@ -44,7 +46,7 @@ public class GUI implements ItemListener {
     GUI() {
         //Creating the Frame
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(WIDTH, HEIGHT);
+        gui.setSize(guiWidth, guiHeight);
         gui.setBackground(Color.RED);
 
         loadTopBar();
@@ -151,7 +153,7 @@ public class GUI implements ItemListener {
         final File[] fileTwo = {null};
 
         customGrid = new CustomGrid(primaryGui);
-        customGrid.setSize(panelWidth, panelHeight);
+        customGrid.setSize(primaryWidth, primaryHeight);
 
         //Title of sorts
         customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
@@ -280,7 +282,7 @@ public class GUI implements ItemListener {
     public void loadSolveOptionsGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
 
-        customGrid.setSize(panelWidth, panelHeight);
+        customGrid.setSize(primaryWidth, primaryHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
         JComboBox<String> selectAlgorithm = new JComboBox<>(algorithms);
@@ -399,14 +401,13 @@ public class GUI implements ItemListener {
      * @param fileIn the file containing the image
      */
     private void displayImage(ImageFile fileIn, int gridY, int gridWidth) {
-        //The Image
-        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
-        JPanel displayImg = imgPanel;
-        displayImg.setSize(750, 750);
+        int maxDimension = Math.min(primaryHeight, primaryWidth);
 
-        customGrid.setIpadY(750);
-        customGrid.setIpadX(750);
-        customGrid.addElement(displayImg, 0, gridY, gridWidth);
+        //The Image
+        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, maxDimension, maxDimension, primaryGui);
+        customGrid.setIpadY(maxDimension);
+        customGrid.setIpadX(maxDimension);
+        customGrid.addElement(imgPanel, 0, gridY, gridWidth);
         customGrid.setIpadY(0);
         customGrid.setIpadX(0);
     }
