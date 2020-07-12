@@ -7,6 +7,7 @@ import javax.swing.*;
  */
 public class ErrorPopup {
     public void showPopup(JPanel parentComponent, String message) {
-        JOptionPane.showMessageDialog(parentComponent, message);
+        if (parentComponent == null) System.out.println(message);
+        else JOptionPane.showMessageDialog(parentComponent, message);
     }
 }

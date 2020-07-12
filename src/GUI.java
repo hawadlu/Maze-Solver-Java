@@ -1,5 +1,6 @@
 import customExceptions.InvalidColourException;
 import customExceptions.InvalidMazeException;
+import customExceptions.ParserFailureException;
 import customExceptions.SolveFailureException;
 
 import javax.imageio.ImageIO;
@@ -167,6 +168,12 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
+<<<<<<< HEAD
+                        BreadthFirstSearch search = new BreadthFirstSearch();
+                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+=======
                         Animate animate = null;
                         System.out.println("Program one is using: " + progOne.getSelectedItem());
                         if (progOne.getSelectedItem().toString().equals("Depth First")) {
@@ -192,6 +199,7 @@ public class GUI implements ItemListener {
                         }
 
 
+>>>>>>> Dev
                         animate.play((byte) 3);
                         GUI.displayMessage(primaryGui, "Player one has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
@@ -206,6 +214,15 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
+<<<<<<< HEAD
+                        Parser parser = new Parser();
+                        parser.setupParser(fileTwo[0], primaryGui);
+                        parser.execute();
+                        Animate animate = new Animate(parser.getPath(), copyImg, "Player Two");
+                        animate.play((byte) 4);
+                        GUI.displayMessage(primaryGui, "Player two has finished");
+                    } catch (InterruptedException | CloneNotSupportedException | FileNotFoundException | ParserFailureException solveFailureException) {
+=======
                         Animate animate = null;
 
                         System.out.println("Program one is using: " + progTwo.getSelectedItem());
@@ -234,6 +251,7 @@ public class GUI implements ItemListener {
                         animate.play((byte) 4);
                         GUI.displayMessage(primaryGui, "Player two has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
+>>>>>>> Dev
                         solveFailureException.printStackTrace();
                     }
                 }
