@@ -420,11 +420,12 @@ public class GUI implements ItemListener {
     private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths, int gridY) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
+        generic.setBackground(Color.red);
         generic.addActionListener(e -> {
             imgPanel.panUp();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setPreferredSize(panelSixths);
+        generic.setSize(panelSixths);
         customGrid.addElement(generic, 0, gridY, 1);
 
         generic = new JButton("▼");
@@ -432,23 +433,23 @@ public class GUI implements ItemListener {
             imgPanel.panDown();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setPreferredSize(panelSixths);
+        generic.setSize(panelSixths);
         customGrid.addElement(generic, 1, gridY, 1);
-
-        generic = new JButton("+");
-        generic.addActionListener(e -> {
-            imgPanel.zoomIn();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 2, gridY, 1);
 
         generic = new JButton("-");
         generic.addActionListener(e -> {
             imgPanel.zoomOut();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setPreferredSize(panelSixths);
+        generic.setSize(panelSixths);
+        customGrid.addElement(generic, 2, gridY, 1);
+
+        generic = new JButton("+");
+        generic.addActionListener(e -> {
+            imgPanel.zoomIn();
+            loadSolveOptionsGui(fileIn);
+        });
+        generic.setSize(panelSixths);
         customGrid.addElement(generic, 3, gridY, 1);
 
         generic = new JButton("<");
@@ -456,7 +457,7 @@ public class GUI implements ItemListener {
             imgPanel.panLeft();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setPreferredSize(panelSixths);
+        generic.setSize(panelSixths);
         customGrid.addElement(generic, 4, gridY, 1);
 
         generic = new JButton(">");
@@ -464,8 +465,10 @@ public class GUI implements ItemListener {
             imgPanel.panRight();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setPreferredSize(panelSixths);
+        generic.setSize(panelSixths);
         customGrid.addElement(generic, 5, gridY, 1);
+
+        customGrid.setColour(Color.blue);
     }
 
     /**
@@ -485,7 +488,7 @@ public class GUI implements ItemListener {
         displayImage(fileIn, 1, 6);
 
         //Control buttons
-        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50), 2);
+        makeImageControlButtons(fileIn, panelSixths, 2);
 
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));

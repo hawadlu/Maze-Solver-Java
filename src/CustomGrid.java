@@ -63,4 +63,11 @@ public class CustomGrid {
         primaryComponent.setSize(width, height);
     }
 
+    /**
+     * Set the background of the component
+     */
+    public void setColour(Color colour) {
+        primaryComponent.setBackground(colour);
+    }
+
 }
