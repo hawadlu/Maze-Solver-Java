@@ -12,13 +12,9 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(ImageFile image, int width, int height, JPanel parentComponent) {
         this.image = image;
-        this.panelWidth = width;
-        this.panelHeight = height;
+        this.panelWidth = width + 10;
+        this.panelHeight = height + 10;
         this.parentComponent = parentComponent;
-
-        //Setup the layout
-        this.setBackground(Color.green);
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
     }
 
     @Override
@@ -36,16 +32,10 @@ public class ImagePanel extends JPanel {
             return;
         }
 
-        //Zoom in by 1/4
-        image.width *= 0.75;
-        image.height *= 0.75;
-        image.topY *= 1.25;
-        image.leftX *= 1.25;
-
-//        image.width -= 10;
-//        image.height -= 10;
-//        image.topY += 10;
-//        image.leftX += 10;
+        image.width -= 10;
+        image.height -= 10;
+        image.topY += 10;
+        image.leftX += 10;
     }
 
     /**
@@ -59,36 +49,32 @@ public class ImagePanel extends JPanel {
 
         //On the right edge
         if (image.leftX + image.width > image.imgArray[0].length) {
-            image.leftX *= 0.75;
-            image.width *= 0.75;
+            image.leftX -= 10;
+            image.width -= 10;
         }
 
         //On the left edge
         if (image.leftX == 0) {
-            image.leftX *= 1.25;
-            image.width *= 1.25;
+            image.leftX += 10;
+            image.width += 10;
         }
 
         //On the bottom edge
         if (image.topY + image.height > image.imgArray.length) {
-            image.topY *= 0.75;
-            image.height *= 0.75;
+            image.topY -= 10;
+            image.height -= 10;
         }
 
-        //On the top edge
+        //On thr top edge
         if (image.topY == 0) {
-            image.topY *= 1.25;
-            image.height *= 1.25;
+            image.topY += 10;
+            image.height += 10;
         }
 
-        image.width *= 1.25;
-        image.height *= 1.25;
-        image.topY *= 0.75;
-        image.leftX *= 0.75;
-
-        //Make sure that the image is not out of bounds
-        if (image.height > image.imgArray.length) image.height = image.imgArray.length;
-        if (image.width > image.imgArray[0].length) image.width = image.imgArray[0].length;
+        image.width += 10;
+        image.height += 10;
+        image.topY -= 10;
+        image.leftX -= 10;
     }
 
     /**

@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
@@ -19,6 +18,8 @@ import java.util.Objects;
  */
 public class GUI implements ItemListener {
     final JFrame gui = new JFrame("Maze Solver");
+    final int WIDTH = 1000;
+    final int HEIGHT = 1000;
     ImagePanel imgPanel = null;
     CustomGrid customGrid = null;
 
@@ -26,16 +27,12 @@ public class GUI implements ItemListener {
     JMenuBar topBar = new JMenuBar();
 
     //Size variable
-    int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-
-    final int guiHeight = screenHeight - 50;
-    final int guiWidth = screenHeight - 50;
+    final int panelHeight = 750;
+    final int panelWidth = 750;
     final int elementHeight = 50;
-    final int primaryHeight = guiHeight - 200;
-    final int primaryWidth = guiWidth - 50;
-    final Dimension panelWhole = new Dimension(guiWidth, elementHeight);
-    final Dimension panelThirds = new Dimension(guiWidth / 3, elementHeight);
-    final Dimension panelSixths = new Dimension(guiWidth / 6, elementHeight);
+    final Dimension panelWhole = new Dimension(panelWidth, elementHeight);
+    final Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
+    final Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
 
     boolean hasDisplayedTradeOff = false;
 
@@ -46,7 +43,7 @@ public class GUI implements ItemListener {
     GUI() {
         //Creating the Frame
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(guiWidth, guiHeight);
+        gui.setSize(WIDTH, HEIGHT);
         gui.setBackground(Color.RED);
 
         loadTopBar();
@@ -100,8 +97,7 @@ public class GUI implements ItemListener {
         solveButton.addActionListener(e -> {
             try {
                 //Get the file and load the options Gui
-                File fileIn = UIFileChooser();
-                ImageFile tmp = new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
+                ImageFile tmp = UIFileChooser();
                 if (tmp != null) loadSolveOptionsGui(tmp);
             } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
                 ioException.printStackTrace();
@@ -129,8 +125,7 @@ public class GUI implements ItemListener {
 
         loadButton.addActionListener(e -> {
             try {
-                File fileIn = UIFileChooser();
-                ImageFile tmp = new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
+                ImageFile tmp = UIFileChooser();
                 if (tmp != null) playGameGui(tmp);
             } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
                 ioException.printStackTrace();
@@ -148,60 +143,24 @@ public class GUI implements ItemListener {
     /**
      * The gui that displays the game
      */
-    private void playGameGui(ImageFile imageFile) throws InvalidMazeException, IOException, InvalidColourException {
-        final File[] fileOne = {null};
-        final File[] fileTwo = {null};
-
+    private void playGameGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
-        customGrid.setSize(primaryWidth, primaryHeight);
+        customGrid.setSize(panelWidth, panelHeight);
 
         //Title of sorts
         customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
 
         //Load and play buttons
-        JButton progOne = new JButton("Load Program One");
-        JButton progTwo = new JButton("Load Program Two");
+        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
+        JComboBox progOne = new JComboBox(algorithms);
+        JComboBox progTwo = new JComboBox(algorithms);
         JButton start = new JButton("▶");
 
         progOne.setPreferredSize(panelThirds);
         progTwo.setPreferredSize(panelThirds);
         start.setPreferredSize(panelThirds);
 
-        progOne.addActionListener(e -> {
-            try {
-                fileOne[0] = UIFileChooser();
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-        progTwo.addActionListener(e -> {
-            try {
-                fileTwo[0] = UIFileChooser();
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
         start.addActionListener(e -> {
-            //Make sure that both files are loaded
-            if (fileOne[0] == null) {
-                displayMessage(primaryGui, "File one is not loaded");
-                return;
-            } else if (!fileOne[0].getName().contains(".txt")) {
-                displayMessage(primaryGui, "File one must be a .txt file");
-                return;
-            }
-
-            if (fileTwo[0] == null) {
-                displayMessage(primaryGui, "File two is not loaded");
-                return;
-            } else if (!fileOne[0].getName().contains(".txt")) {
-                displayMessage(primaryGui, "File two must be a .txt file");
-                return;
-            }
-
-
             //Make a thread for each of the programs
             Thread progThreadOne = new Thread() {
                 //todo implement, currently it is just a test and does not use the parser
@@ -209,10 +168,30 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        BreadthFirstSearch search = new BreadthFirstSearch();
-                        HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                        search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
-                        Animate animate = new Animate(search.getPath(), copyImg, "Player One");
+                        System.out.println("Program one is using: " + progOne.getSelectedItem());
+                        Animate animate = null;
+                        if (progOne.getSelectedItem().toString().equals("Depth First")) {
+                            DepthFirstSearch search = new DepthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
+                            BreadthFirstSearch search = new BreadthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
+                            DijkstraSearch search = new DijkstraSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        } else {
+                            AStarSearch search = new AStarSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player One");
+                        }
+
                         animate.play((byte) 3);
                         GUI.displayMessage(primaryGui, "Player one has finished");
                     } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
@@ -227,13 +206,33 @@ public class GUI implements ItemListener {
                 public void run() {
                     try {
                         ImageFile copyImg = imageFile.clone();
-                        Parser parser = new Parser();
-                        parser.setupParser(fileTwo[0], primaryGui);
-                        parser.execute();
-                        Animate animate = new Animate(parser.getPath(), copyImg, "Player Two");
+                        System.out.println("Program two is using: " + progOne.getSelectedItem());
+                        Animate animate = null;
+                        if (progTwo.getSelectedItem().toString().equals("Depth First")) {
+                            DepthFirstSearch search = new DepthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Breadth First")) {
+                            BreadthFirstSearch search = new BreadthFirstSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
+                            DijkstraSearch search = new DijkstraSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        } else {
+                            AStarSearch search = new AStarSearch();
+                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
+                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            animate = new Animate(search.getPath(), copyImg, "Player Two");
+                        }
+
                         animate.play((byte) 4);
                         GUI.displayMessage(primaryGui, "Player two has finished");
-                    } catch (InterruptedException | CloneNotSupportedException | FileNotFoundException | ParserFailureException solveFailureException) {
+                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
                         solveFailureException.printStackTrace();
                     }
                 }
@@ -260,7 +259,7 @@ public class GUI implements ItemListener {
      * Get and return the file that the user wants
      * @return the file
      */
-    private File UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
+    private ImageFile UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
         System.out.println("Load image");
         //Get the file
         final JFileChooser filePicker = new JFileChooser();
@@ -269,7 +268,7 @@ public class GUI implements ItemListener {
         if (fileReturn == JFileChooser.APPROVE_OPTION) {
             File fileIn = filePicker.getSelectedFile();
             System.out.println("Opened: " + fileIn);
-            return fileIn;
+            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
         } else {
             return null;
         }
@@ -282,7 +281,7 @@ public class GUI implements ItemListener {
     public void loadSolveOptionsGui(ImageFile imageFile) {
         customGrid = new CustomGrid(primaryGui);
 
-        customGrid.setSize(primaryWidth, primaryHeight);
+        customGrid.setSize(panelWidth, panelHeight);
 
         String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
         JComboBox<String> selectAlgorithm = new JComboBox<>(algorithms);
@@ -401,13 +400,14 @@ public class GUI implements ItemListener {
      * @param fileIn the file containing the image
      */
     private void displayImage(ImageFile fileIn, int gridY, int gridWidth) {
-        int maxDimension = Math.min(primaryHeight, primaryWidth);
-
         //The Image
-        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, maxDimension, maxDimension, primaryGui);
-        customGrid.setIpadY(maxDimension);
-        customGrid.setIpadX(maxDimension);
-        customGrid.addElement(imgPanel, 0, gridY, gridWidth);
+        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
+        JPanel displayImg = imgPanel;
+        displayImg.setSize(750, 750);
+
+        customGrid.setIpadY(750);
+        customGrid.setIpadX(750);
+        customGrid.addElement(displayImg, 0, gridY, gridWidth);
         customGrid.setIpadY(0);
         customGrid.setIpadX(0);
     }
@@ -420,12 +420,11 @@ public class GUI implements ItemListener {
     private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths, int gridY) {
         //Generic because it is reused several times
         JButton generic = new JButton("▲");
-        generic.setBackground(Color.red);
         generic.addActionListener(e -> {
             imgPanel.panUp();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setSize(panelSixths);
+        generic.setPreferredSize(panelSixths);
         customGrid.addElement(generic, 0, gridY, 1);
 
         generic = new JButton("▼");
@@ -433,23 +432,23 @@ public class GUI implements ItemListener {
             imgPanel.panDown();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setSize(panelSixths);
+        generic.setPreferredSize(panelSixths);
         customGrid.addElement(generic, 1, gridY, 1);
-
-        generic = new JButton("-");
-        generic.addActionListener(e -> {
-            imgPanel.zoomOut();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setSize(panelSixths);
-        customGrid.addElement(generic, 2, gridY, 1);
 
         generic = new JButton("+");
         generic.addActionListener(e -> {
             imgPanel.zoomIn();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setSize(panelSixths);
+        generic.setPreferredSize(panelSixths);
+        customGrid.addElement(generic, 2, gridY, 1);
+
+        generic = new JButton("-");
+        generic.addActionListener(e -> {
+            imgPanel.zoomOut();
+            loadSolveOptionsGui(fileIn);
+        });
+        generic.setPreferredSize(panelSixths);
         customGrid.addElement(generic, 3, gridY, 1);
 
         generic = new JButton("<");
@@ -457,7 +456,7 @@ public class GUI implements ItemListener {
             imgPanel.panLeft();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setSize(panelSixths);
+        generic.setPreferredSize(panelSixths);
         customGrid.addElement(generic, 4, gridY, 1);
 
         generic = new JButton(">");
@@ -465,10 +464,8 @@ public class GUI implements ItemListener {
             imgPanel.panRight();
             loadSolveOptionsGui(fileIn);
         });
-        generic.setSize(panelSixths);
+        generic.setPreferredSize(panelSixths);
         customGrid.addElement(generic, 5, gridY, 1);
-
-        customGrid.setColour(Color.blue);
     }
 
     /**
@@ -488,7 +485,7 @@ public class GUI implements ItemListener {
         displayImage(fileIn, 1, 6);
 
         //Control buttons
-        makeImageControlButtons(fileIn, panelSixths, 2);
+        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50), 2);
 
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
