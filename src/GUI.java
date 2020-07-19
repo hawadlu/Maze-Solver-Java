@@ -23,6 +23,9 @@ public class GUI implements ItemListener {
     ImagePanel imgPanel = null;
     CustomGrid customGrid = null;
 
+    Color greyBackground = new Color(235, 235, 235);
+    Color darkGreyBackground = new Color(186, 186, 186);
+
     final JPanel primaryGui = new JPanel();
     JMenuBar topBar = new JMenuBar();
 
@@ -44,7 +47,7 @@ public class GUI implements ItemListener {
         //Creating the Frame
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setSize(WIDTH, HEIGHT);
-        gui.setBackground(Color.RED);
+        gui.setBackground(Color.GRAY);
 
         loadTopBar();
         loadSolveGui();
@@ -52,6 +55,8 @@ public class GUI implements ItemListener {
         //Adding Components to the gui.
         gui.getContentPane().add(BorderLayout.NORTH, topBar);
         gui.getContentPane().add(BorderLayout.CENTER, primaryGui);
+        gui.setBackground(darkGreyBackground);
+        primaryGui.setBackground(darkGreyBackground);
         gui.setVisible(true);
     }
 
@@ -69,18 +74,27 @@ public class GUI implements ItemListener {
     private void loadTopBar() {
         //Create the buttons
         topBar = new JMenuBar();
+        topBar.setBorder(null);
         topBar.setBackground(Color.YELLOW);
         Button solveTab = new Button("Solve a Maze");
         Button gameTab = new Button("Game");
+        solveTab.setBackground(darkGreyBackground);
+        gameTab.setBackground(greyBackground);
         topBar.add(solveTab);
         topBar.add(gameTab);
 
         //Set onclick listeners
         solveTab.addActionListener(e -> {
+            solveTab.setBackground(darkGreyBackground);
+            gameTab.setBackground(greyBackground);
             imgPanel = null;
             loadSolveGui();
         });
-        gameTab.addActionListener(e -> loadGameGui());
+        gameTab.addActionListener(e -> {
+            solveTab.setBackground(greyBackground);
+            gameTab.setBackground(darkGreyBackground);
+            loadGameGui();
+        });
 
     }
 
@@ -105,7 +119,6 @@ public class GUI implements ItemListener {
         });
 
         System.out.println("Repainting primary");
-        primaryGui.setBackground(Color.PINK);
         primaryGui.revalidate();
         primaryGui.repaint();
         gui.revalidate();
@@ -133,7 +146,6 @@ public class GUI implements ItemListener {
         });
 
         System.out.println("Repainting primary");
-        primaryGui.setBackground(Color.PINK);
         primaryGui.revalidate();
         primaryGui.repaint();
         gui.revalidate();
