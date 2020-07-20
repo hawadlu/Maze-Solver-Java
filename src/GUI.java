@@ -36,6 +36,7 @@ public class GUI implements ItemListener {
     final Dimension panelWhole = new Dimension(panelWidth, elementHeight);
     final Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
     final Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
+    final Dimension entirePanel = new Dimension(panelWidth, panelHeight);
 
     boolean hasDisplayedTradeOff = false;
 
@@ -55,13 +56,13 @@ public class GUI implements ItemListener {
         //Adding Components to the gui.
         gui.getContentPane().add(BorderLayout.NORTH, topBar);
         gui.getContentPane().add(BorderLayout.CENTER, primaryGui);
-        gui.setBackground(darkGreyBackground);
         primaryGui.setBackground(darkGreyBackground);
         gui.setVisible(true);
     }
 
     /**
      * Display an error message popup
+     *
      * @param message the message
      */
     public static void displayMessage(JPanel parentComponent, String message) {
@@ -102,12 +103,37 @@ public class GUI implements ItemListener {
      * Load the gui required for solving
      */
     private void loadSolveGui() {
-        customGrid = new CustomGrid(primaryGui);
-        customGrid.addElement(new JLabel("Load Maze To Solve"), 0, 0 ,1);
-        JButton solveButton = new JButton("Load Image For Solving");
-        customGrid.addElement(solveButton, 0, 1, 1);
+        //todo update this to use tbe custom grid
+        primaryGui.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        //Make the buttons do stuff when they are clicked
+        //This is an empty panel to create space
+        JPanel panel = new JPanel();
+        panel.setBackground(darkGreyBackground);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.ipady = 100;
+        primaryGui.add(panel, c);
+
+        JLabel title = new JLabel("Load Image To Solve");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 100;
+        c.gridx = 0;
+        c.gridy = 1;
+        title.setFont(new Font("Sans-Serif", Font.PLAIN, 40));
+        title.setHorizontalAlignment((int) JComponent.CENTER_ALIGNMENT);
+        primaryGui.add(title, c);
+
+        JButton solveButton = new JButton("Load Image");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 50;
+        c.ipadx = panelWidth;
+        c.weightx = 0.0;
+        c.gridwidth = 1;
+        c.gridx = 0;
+        c.gridy = 2;
+
         solveButton.addActionListener(e -> {
             try {
                 //Get the file and load the options Gui
@@ -118,11 +144,7 @@ public class GUI implements ItemListener {
             }
         });
 
-        System.out.println("Repainting primary");
-        primaryGui.revalidate();
-        primaryGui.repaint();
-        gui.revalidate();
-        gui.repaint();
+        primaryGui.add(solveButton, c);
     }
 
     /**
@@ -269,6 +291,7 @@ public class GUI implements ItemListener {
 
     /**
      * Get and return the file that the user wants
+     *
      * @return the file
      */
     private ImageFile UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
@@ -288,6 +311,7 @@ public class GUI implements ItemListener {
 
     /**
      * Loads the options for solving a maze
+     *
      * @param imageFile the file
      */
     public void loadSolveOptionsGui(ImageFile imageFile) {
@@ -336,7 +360,7 @@ public class GUI implements ItemListener {
                 Thread solver = new Thread() {
                     public synchronized void run() {
                         try {
-                            solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(),selectAlgorithm.getSelectedItem(),selectSearch.getSelectedItem(), primaryGui);
+                            solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem(), primaryGui);
                         } catch (SolveFailureException ioException) {
                             ioException.printStackTrace();
                         }
@@ -371,7 +395,7 @@ public class GUI implements ItemListener {
             spinner.start();
             mspThread.start();
         });
-        customGrid.addElement(generic,2, 4, 2);
+        customGrid.addElement(generic, 2, 4, 2);
 
         generic = new JButton("Articulation Points");
         generic.setPreferredSize(panelThirds);
@@ -409,6 +433,7 @@ public class GUI implements ItemListener {
     /**
      * Displays the image
      * NOTE the image always takes up the entire row, this gridX is always 0
+     *
      * @param fileIn the file containing the image
      */
     private void displayImage(ImageFile fileIn, int gridY, int gridWidth) {
@@ -426,7 +451,8 @@ public class GUI implements ItemListener {
 
     /**
      * Make the control buttons for the images
-     * @param fileIn the file, used for making the image if required
+     *
+     * @param fileIn      the file, used for making the image if required
      * @param panelSixths the size of each sixth of the grid in the x direction
      */
     private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths, int gridY) {
@@ -482,8 +508,9 @@ public class GUI implements ItemListener {
 
     /**
      * Gui that allows the user the save an image
+     *
      * @param algorithmUsed the algorithm that was used to solve the maze
-     * @param fileIn file containing the image
+     * @param fileIn        file containing the image
      */
     private void loadSaveGui(String algorithmUsed, ImageFile fileIn) {
         customGrid = new CustomGrid(primaryGui);
@@ -532,10 +559,11 @@ public class GUI implements ItemListener {
 
     /**
      * Save the image in a place of the users choice
+     *
      * @param image the image to save
      */
     private void saveImage(ImageFile image) {
-        JFileChooser save =new JFileChooser();
+        JFileChooser save = new JFileChooser();
         int ret = save.showSaveDialog(primaryGui);
         if (ret == JFileChooser.APPROVE_OPTION) {
             String fileName = save.getSelectedFile().getName();
