@@ -1,3 +1,9 @@
+package Solve;
+
+import Image.ImageFile;
+import Image.ImageManipulation;
+import Location.Coordinates;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;

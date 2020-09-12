@@ -1,4 +1,10 @@
+package Solve;
+
+import Image.ImageFile;
+import Image.ImageManipulation;
+import Location.Coordinates;
 import customExceptions.SolveFailureException;
+import GUI.GUI;
 
 import javax.swing.*;
 import java.util.*;
@@ -8,7 +14,7 @@ import java.util.*;
  * It will attempt to solve it and output a solved image file.
  */
 
-class Solver {
+public class Solver {
     /**
      * Solves the maze
      */
@@ -34,13 +40,13 @@ class Solver {
         //If the nodes are to be initialised while solving add the start and end now
         if (!searchType.equals("Search for neighbours during loading")) {
             //Put the start and end in the map
-            nodes.put(image.entry, new MazeNode(image.entry.x, image.entry.y));
-            nodes.put(image.exit, new MazeNode(image.exit.x, image.exit.y));
+            nodes.put(image.entry, new MazeNode(image.entry.getX(), image.entry.getY()));
+            nodes.put(image.exit, new MazeNode(image.exit.getX(), image.exit.getY()));
         }
 
         System.out.println("Found all nodes");
-        System.out.println("Start at: " + image.entry.x + ", " + 0);
-        System.out.println("End at: " + image.exit.x + ", " + (image.getHeight() - 1));
+        System.out.println("Start at: " + image.entry.getX() + ", " + 0);
+        System.out.println("End at: " + image.exit.getX() + ", " + (image.getHeight() - 1));
         System.out.println("Node count: " + numNodes);
         System.out.println("Approximately " + (float) numNodes / (image.getHeight() * image.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
