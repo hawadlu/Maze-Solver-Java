@@ -5,6 +5,7 @@ import Location.Coordinates;
 import Solve.MazeNode;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,22 +27,22 @@ public class ImageManipulation {
         for (int height = 0; height < imgObj.getTrueHeight(); height++) {
             for (int width = 0; width < imgObj.getTrueWidth(); width++) {
                 if (imgObj.isWhite(width, height)) {
-                    imgObj.setRGB(width, height, (byte) 1);
+                    imgObj.setRGB(width, height, new DrawColour(Color.red));
                 } else {
-                    imgObj.setRGB(width, height, (byte) 0);
+                    imgObj.setRGB(width, height, (new DrawColour(Color.BLACK));
                 }
             }
         }
 
         //Colour the entry
-        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), (byte) 2);
+        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), (new DrawColour(Color.BLUE));
 
         //Draw the msp
         if (segments != null) {
             for (Segment segment : segments) {
                 Coordinates start = segment.nodeStart.getLocation();
                 Coordinates end = segment.nodeEnd.getLocation();
-                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 3);
+                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), new DrawColour(Color.green));
             }
         }
         
@@ -51,14 +52,14 @@ public class ImageManipulation {
                 MazeNode start = nodes.remove(0);
                 MazeNode end = nodes.get(0);
 
-                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 2);
+                draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), new DrawColour(Color.red));
             }
         }
 
         //Draw the articulation points
         if (artPoints != null) {
             for (APNode apNode: artPoints) {
-                imgObj.setRGB(apNode.getLocation().getX(), apNode.getLocation().getY(), (byte) 4);
+                imgObj.setRGB(apNode.getLocation().getX(), apNode.getLocation().getY(), new DrawColour(Color.green));
             }
         }
 
@@ -69,7 +70,7 @@ public class ImageManipulation {
      * Draw the solved path in ren
      * @param imgObj the image
      */
-    public static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, byte col) {
+    public static void draw(ImageFile imgObj, int startX, int startY, int endX, int endY, DrawColour col) {
         int y, x;
 
         imgObj.setRGB(startX, startY, col);

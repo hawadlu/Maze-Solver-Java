@@ -20,7 +20,7 @@ public class ImageFile implements Cloneable {
     int width;
     int height;
     private String path = "";
-    byte[][] solved;
+    DrawColour[][] solved;
     int leftX = 0;
     int topY = 0;
     Coordinates entry;
@@ -167,11 +167,7 @@ public class ImageFile implements Cloneable {
             for (int newWidth = 0; newWidth + leftX < width; newWidth++) {
                 //Check if the maze has been solved
                 if (solved != null) {
-                    if (solved[newHeight + topY][newWidth + leftX] == 0) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
-                    else if (solved[newHeight + topY][newWidth + leftX] == 1) toRet.setRGB(newWidth, newHeight, Color.white.getRGB());
-                    else if (solved[newHeight + topY][newWidth + leftX] == 2) toRet.setRGB(newWidth, newHeight, Color.red.getRGB());
-                    else if (solved[newHeight + topY][newWidth + leftX] == 3) toRet.setRGB(newWidth, newHeight, Color.green.getRGB());
-                    else if (solved[newHeight + topY][newWidth + leftX] == 4) toRet.setRGB(newWidth, newHeight, Color.blue.getRGB());
+                    toRet.setRGB(newWidth, newHeight, solved[newHeight + topY][newWidth + leftX].getDrawCol().getRGB());
                 } else {
                     if (!imgArray[newHeight + topY][newWidth + leftX]) toRet.setRGB(newWidth, newHeight, Color.BLACK.getRGB());
                     else toRet.setRGB(newWidth, newHeight, Color.WHITE.getRGB());
@@ -218,7 +214,7 @@ public class ImageFile implements Cloneable {
     }
 
     public void initSolvedArr() {
-         solved = new byte[imgArray.length][imgArray[0].length];
+         solved = new DrawColour[imgArray.length][imgArray[0].length];
     }
 
     /**
@@ -228,7 +224,7 @@ public class ImageFile implements Cloneable {
      * @param y the yPos
      * @param col the colour
      */
-    public void setRGB(int x, int y, byte col) {
+    public void setRGB(int x, int y, DrawColour col) {
         solved[y][x] = col;
     }
 
@@ -247,7 +243,7 @@ public class ImageFile implements Cloneable {
     public void initWhiteSquares() {
         for (int i = 0; i < imgArray.length; i++) {
             for (int j = 0; j < imgArray[0].length; j++) {
-                if (imgArray[i][j]) setRGB(j, i, (byte) 1);
+                if (imgArray[i][j]) setRGB(j, i, new DrawColour(Color.white));
             }
         }
     }
