@@ -5,20 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CustomGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ParserNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParserNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test Programs/Test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Test Programs/Test1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/APNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/AStarSearch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Algorithms.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Animate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/BreadthFirstSearch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Coordinates.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/CustomGrid.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/DepthFirstSearch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/DijkstraSearch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI$Spinner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImageManipulation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ImagePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MST.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MSTNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MazeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Parser$PrintScanner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ParserNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Regex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Segment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/SolveTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Solver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/TypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ParserFailureException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ParserFailureException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/parserInterfaces/ParserExecutionNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/parserInterfaces/ParserObjectNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/parserInterfaces/ParserTypeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/APNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/APNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AStarSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/AStarSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/Algorithms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Animate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/ArticulationPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BreadthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/BreadthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Location/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/DepthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DijkstraSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/DijkstraSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageManipulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MSTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MSTNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/MazeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ParserNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ParserNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/Segment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/SolveMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/SolveTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solve/Solver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/customExceptions/ParserFailureException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customExceptions/ParserFailureException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserExecutionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parserInterfaces/ParserExecutionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserObjectNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parserInterfaces/ParserObjectNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserTypeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parserInterfaces/ParserTypeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserExecutionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ParserExecutionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserObjectNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ParserObjectNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parserInterfaces/ParserTypeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ParserTypeNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +111,16 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="GUI" />
+      <recent name="Solve" />
+      <recent name="ArticulationPoints" />
+      <recent name="Image" />
+      <recent name="Location" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="customExceptions" />
       <recent name="CustomExceptions" />
@@ -70,8 +128,19 @@
   </component>
   <component name="RunManager" selected="Application.Run">
     <configuration name="Run" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="GUI" />
+      <option name="MAIN_CLASS_NAME" value="GUI.GUI" />
       <module name="Maze-Solver-Java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -79,14 +148,13 @@
     <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="Maze-Solver-Java" />
       <useClassPathOnly />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SolveTests" />
+      <option name="PACKAGE_NAME" value="Solve" />
+      <option name="MAIN_CLASS_NAME" value="Solve.SolveTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
@@ -94,6 +162,7 @@
       <item itemvalue="JUnit.Test" />
     </list>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -110,11 +179,13 @@
       <workItem from="1595229129227" duration="1591000" />
       <workItem from="1595464899761" duration="494000" />
       <workItem from="1595755056011" duration="264000" />
+      <workItem from="1599777062421" duration="128000" />
+      <workItem from="1599879609857" duration="2662000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
@@ -132,14 +203,18 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="794" y="278" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594260499807" />
-    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1594170946802">
+    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1599880340707">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170946802" />
+    <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599880340707" />
     <state x="718" y="362" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1594170492268">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="718" y="362" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170492268" />
+    <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1599881298568">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881298568" />
     <state x="686" y="158" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594090270517">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -152,26 +227,26 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594196037407" />
-    <state width="1398" height="230" key="GridCell.Tab.0.bottom" timestamp="1595469749798">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1735" height="225" key="GridCell.Tab.0.bottom" timestamp="1599708580238">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1595469749798" />
-    <state width="1830" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1595044811229" />
-    <state width="1398" height="230" key="GridCell.Tab.0.center" timestamp="1595469749797">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1735" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599708580238" />
+    <state width="1735" height="225" key="GridCell.Tab.0.center" timestamp="1599708580236">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1595469749797" />
-    <state width="1830" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1595044811227" />
-    <state width="1398" height="230" key="GridCell.Tab.0.left" timestamp="1595469749797">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1735" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599708580236" />
+    <state width="1735" height="225" key="GridCell.Tab.0.left" timestamp="1599708580236">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1595469749797" />
-    <state width="1830" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1595044811227" />
-    <state width="1398" height="230" key="GridCell.Tab.0.right" timestamp="1595469749798">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1735" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599708580236" />
+    <state width="1735" height="225" key="GridCell.Tab.0.right" timestamp="1599708580237">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1595469749798" />
-    <state width="1830" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1595044811228" />
+    <state width="1735" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599708580237" />
     <state width="1398" height="286" key="GridCell.Tab.1.bottom" timestamp="1595212347271">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -196,6 +271,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="787" y="490" key="ReplaceDuplicatesPrompt/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594093524022" />
+    <state x="419" y="177" key="SettingsEditor" timestamp="1599881410333">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="419" y="177" key="SettingsEditor/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881410333" />
     <state width="936" height="515" key="XDebugger.FullValuePopup" timestamp="1594259358827">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -212,6 +291,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594087767557" />
+    <state x="516" y="160" key="new project wizard" timestamp="1599777207674">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="516" y="160" key="new project wizard/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599777207674" />
     <state x="688" y="348" key="refactoring.ChangeSignatureDialog" timestamp="1594260847944">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -225,7 +308,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/MST.java</url>
+          <url>file://$PROJECT_DIR$/src/MinimumSpanningTree/MST.java</url>
           <line>76</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -243,7 +326,7 @@
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo typeName="java.awt.GridBagConstraints" fieldName="ipadx" />
+        <PinnedItemInfo />
       </pinned-members>
     </pin-to-top-manager>
   </component>
