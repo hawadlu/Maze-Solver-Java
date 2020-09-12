@@ -30,102 +30,102 @@ public class ImagePanel extends JPanel {
      * Zoom in by 10px
      */
     public void zoomIn() {
-        if (image.width - image.leftX < 40 || image.height - image.topY < 40) {
+        if (image.getTrueWidth() - image.getLeftX() < 40 || image.getTrueHeight() - image.getTopY() < 40) {
             GUI.displayMessage(parentComponent, "Cannot zoom in any further");
             return;
         }
 
-        image.width -= 10;
-        image.height -= 10;
-        image.topY += 10;
-        image.leftX += 10;
+        image.setWidth(image.getTrueWidth() - 10);
+        image.setHeight(image.getTrueHeight() - 10);
+        image.setTopY(image.getTopY() + 10);
+        image.setLeftX(image.getLeftX() + 10);
     }
 
     /**
      * Zoom out by 10px
      */
     public void zoomOut() {
-        if (image.width == image.imgArray[0].length && image.height == image.imgArray.length) {
+        if (image.getTrueWidth() == image.getCurrentWidth() && image.getTrueHeight() == image.getCurrentHeight() || image.getCurrentWidth() > image.getTrueWidth()) {
             GUI.displayMessage(parentComponent, "Cannot zoom out any further");
             return;
         }
 
         //On the right edge
-        if (image.leftX + image.width > image.imgArray[0].length) {
-            image.leftX -= 10;
-            image.width -= 10;
+        if (image.getLeftX() + image.getCurrentWidth() > image.getTrueWidth()) {
+            image.setLeftX(image.getLeftX() - 10);
+            image.setWidth(image.getCurrentWidth() - 10);
         }
 
         //On the left edge
-        if (image.leftX == 0) {
-            image.leftX += 10;
-            image.width += 10;
+        if (image.getLeftX() == 0) {
+            image.setLeftX(image.getLeftX() + 10);
+            image.setWidth(image.getCurrentWidth() + 10);
         }
 
         //On the bottom edge
-        if (image.topY + image.height > image.imgArray.length) {
-            image.topY -= 10;
-            image.height -= 10;
+        if (image.getTopY() + image.getCurrentHeight() > image.getTrueHeight()) {
+            image.setTopY(image.getTopY() - 10);
+            image.setHeight(image.getCurrentHeight() - 10);
         }
 
         //On thr top edge
-        if (image.topY == 0) {
-            image.topY += 10;
-            image.height += 10;
+        if (image.getTopY() == 0) {
+            image.setTopY(image.getTopY() + 10);
+            image.setHeight(image.getCurrentHeight() + 10);
         }
 
-        image.width += 10;
-        image.height += 10;
-        image.topY -= 10;
-        image.leftX -= 10;
+        image.setWidth(image.getCurrentWidth() + 10);
+        image.setHeight(image.getCurrentHeight() + 10);
+        image.setTopY(image.getTopY() - 10);
+        image.setLeftX(image.getLeftX() - 10);
     }
 
     /**
      * Pan right by 10px
      */
     public void panRight() {
-        if (image.leftX == image.imgArray[0].length - (image.width - image.leftX)) {
+        if (image.getLeftX() == image.getTrueWidth() - (image.getCurrentWidth() - image.getLeftX())) {
             GUI.displayMessage(parentComponent, "Cannot pan right any further");
             return;
         }
-        image.leftX += 10;
-        image.width += 10;
+        image.setLeftX(image.getLeftX() + 10);
+        image.setWidth(image.getCurrentWidth() + 10);
     }
 
     /**
      * Pan left by 10px
      */
     public void panLeft() {
-        if (image.leftX == 0) {
+        if (image.getLeftX() == 0) {
             GUI.displayMessage(parentComponent, "Cannot pan left any further");
             return;
         }
-        image.leftX -= 10;
-        image.width -= 10;
+        image.setLeftX(image.getLeftX() - 10);
+        image.setWidth(image.getCurrentWidth() - 10);
     }
 
     /**
      * Pan up by 10px
      */
     public void panUp() {
-        if (image.topY == 0) {
+        if (image.getTopY() == 0) {
             GUI.displayMessage(parentComponent, "Cannot pan up any further");
             return;
         }
-        image.topY -= 10;
-        image.height -= 10;
+        image.setTopY(image.getTopY() - 10);
+        image.setHeight(image.getCurrentHeight() - 10);
     }
 
     /**
      * Pan down by 10px. Return null if the operation is impossible
      */
     public void panDown() {
-        if (image.topY == image.imgArray.length - (image.height - image.topY)) {
+        if (image.getTopY() == image.getTrueHeight() - (image.getCurrentHeight() - image.getTopY())) {
             GUI.displayMessage(parentComponent, "Cannot pan down any further");
             return;
         }
-        image.topY += 10;
-        image.height += 10;
+        image.setTopY(image.getTopY() + 10);
+        image.setHeight(image.getCurrentHeight() + 10);
     }
 
     /**

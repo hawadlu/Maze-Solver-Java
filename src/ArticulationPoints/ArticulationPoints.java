@@ -105,11 +105,11 @@ public class ArticulationPoints {
      */
     public HashMap<Coordinates, APNode> findNeighboursForAll(ImageFile imgObj) {
         //Performing a one time pass over the maze to find all the nodes.
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            for (int width = 0; width < imgObj.getWidth(); width++) {
+        for (int height = 0; height < imgObj.getTrueHeight(); height++) {
+            for (int width = 0; width < imgObj.getTrueWidth(); width++) {
                 //Don't make a node unless the square is white
                 if (imgObj.isWhite(width, height)) {
-                    if (height == 0 || height == imgObj.getHeight() - 1 || width == 0 || width == imgObj.getWidth() - 1) {
+                    if (height == 0 || height == imgObj.getTrueHeight() - 1 || width == 0 || width == imgObj.getTrueWidth() - 1) {
                         nodes.put(new Coordinates(width, height), new APNode(new Coordinates(width, height)));
 
                         //Find the neighbours

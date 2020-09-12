@@ -213,22 +213,22 @@ public class GUI implements ItemListener {
                         if (progOne.getSelectedItem().toString().equals("Depth First")) {
                             DepthFirstSearch search = new DepthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
                             BreadthFirstSearch search = new BreadthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
                             DijkstraSearch search = new DijkstraSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         } else {
                             AStarSearch search = new AStarSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player One");
                         }
 
@@ -251,22 +251,22 @@ public class GUI implements ItemListener {
                         if (progTwo.getSelectedItem().toString().equals("Depth First")) {
                             DepthFirstSearch search = new DepthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else if (progTwo.getSelectedItem().toString().equals("Breadth First")) {
                             BreadthFirstSearch search = new BreadthFirstSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
                             DijkstraSearch search = new DijkstraSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         } else {
                             AStarSearch search = new AStarSearch();
                             HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.entry), nodes.get(copyImg.exit), nodes, primaryGui);
+                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
                             animate = new Animate(search.getPath(), copyImg, "Player Two");
                         }
 
@@ -392,9 +392,9 @@ public class GUI implements ItemListener {
             Spinner spinner = new Spinner(imageFile);
             Thread mspThread = new Thread(() -> {
                 MST minimumTree = new MST(imageFile);
-                imageFile.segments = minimumTree.kruskalsAlgorithm();
+                imageFile.setSegments(minimumTree.kruskalsAlgorithm());
 
-                ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                ImageManipulation.drawImage(imageFile, null, null, imageFile.getSegments(), imageFile.getArtPoints());
                 spinner.interrupt();
                 loadSolveOptionsGui(imageFile);
             });
@@ -410,8 +410,8 @@ public class GUI implements ItemListener {
             Spinner spinner = new Spinner(imageFile);
             Thread apThread = new Thread(() -> {
                 ArticulationPoints aps = new ArticulationPoints();
-                imageFile.artPoints = aps.findAps(imageFile);
-                ImageManipulation.drawImage(imageFile, null, null, imageFile.segments, imageFile.artPoints);
+                imageFile.setArtPoints(aps.findAps(imageFile));
+                ImageManipulation.drawImage(imageFile, null, null, imageFile.getSegments(), imageFile.getArtPoints());
                 spinner.interrupt();
                 loadSolveOptionsGui(imageFile);
             });
@@ -594,7 +594,7 @@ public class GUI implements ItemListener {
 
 
         public Spinner(ImageFile imageFile) {
-            size = imageFile.width * imageFile.height;
+            size = imageFile.getTrueWidth() * imageFile.getTrueHeight();
         }
 
         public void run() {

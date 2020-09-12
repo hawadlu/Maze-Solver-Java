@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class APNode {
-    public APNode firstNode = null;
-    public double nodeDepth = Double.POSITIVE_INFINITY;
-    public APNode parent = null;
-    public Coordinates location;
-    public double reachBack = -1;
+    APNode firstNode = null;
+    double nodeDepth = Double.POSITIVE_INFINITY;
+    APNode parent = null;
+    Coordinates location;
+    double reachBack = -1;
     final HashSet<APNode> neighbours = new HashSet<>();
     ArrayList<APNode> children;
 
@@ -29,6 +29,11 @@ public class APNode {
         neighbours.add(neighbour);
     }
 
+
+    /**
+     * Getters
+     */
+
     public HashSet<APNode> getNeighbours() {
         return neighbours;
     }
@@ -36,4 +41,6 @@ public class APNode {
     public APNode getParent() {
         return parent;
     }
+
+    public Coordinates getLocation() {return location;}
 }

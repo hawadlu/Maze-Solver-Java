@@ -3,9 +3,9 @@ package MinimumSpanningTree;
 import Location.Coordinates;
 
 public class MSTNode {
-    public final Coordinates location;
-    public MSTNode parent;
-    public int depth;
+    final Coordinates location;
+    MSTNode parent;
+    int depth;
 
     /**
      * Create a new MinimumSpanningTree.MST node
@@ -16,4 +16,8 @@ public class MSTNode {
         depth = 0;
     }
 
+    /**
+     * Getters
+     */
+    public Coordinates getLocation() {return this.location;}
 }

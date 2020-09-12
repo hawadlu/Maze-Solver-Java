@@ -16,17 +16,17 @@ import java.util.HashSet;
  * Class used to hold the image in memory
  */
 public class ImageFile implements Cloneable {
-    public boolean[][] imgArray;
-    public int width;
-    public int height;
+    boolean[][] imgArray;
+    int width;
+    int height;
     private String path = "";
     byte[][] solved;
-    public int leftX = 0;
-    public int topY = 0;
-    public Coordinates entry;
-    public Coordinates exit;
-    public HashSet<Segment> segments = null; //Used when drawing the Minimum spanning tree
-    public HashSet<APNode> artPoints = null; //Used when drawing the articulation points
+    int leftX = 0;
+    int topY = 0;
+    Coordinates entry;
+    Coordinates exit;
+    HashSet<Segment> segments = null; //Used when drawing the Minimum spanning tree
+    HashSet<APNode> artPoints = null; //Used when drawing the articulation points
 
     @Override
     public ImageFile clone() throws CloneNotSupportedException {
@@ -56,30 +56,30 @@ public class ImageFile implements Cloneable {
         ArrayList<Coordinates> entries = new ArrayList<>();
 
         //Look at the top row.
-        for (int width = 0; width < getWidth(); width++) {
+        for (int width = 0; width < getTrueWidth(); width++) {
             if (isWhite(width, 0)) {
                 entries.add(new Coordinates(width, 0));
             }
         }
 
         //Look at the bottom row
-        for (int width = 0; width < getWidth(); width++) {
-            if (isWhite(width, getHeight() - 1)) {
-                entries.add(new Coordinates(width, getHeight() - 1));
+        for (int width = 0; width < getTrueWidth(); width++) {
+            if (isWhite(width, getTrueHeight() - 1)) {
+                entries.add(new Coordinates(width, getTrueHeight() - 1));
             }
         }
 
         //Look at the left side
-        for (int height = 0; height < getHeight(); height++) {
+        for (int height = 0; height < getTrueHeight(); height++) {
             if (isWhite(0, height)) {
                 entries.add(new Coordinates(0, height));
             }
         }
 
         //Look at the right side
-        for (int height = 0; height < getHeight(); height++) {
-            if (isWhite(getWidth() - 1, height)) {
-                entries.add(new Coordinates(getWidth() - 1, height));
+        for (int height = 0; height < getTrueHeight(); height++) {
+            if (isWhite(getTrueWidth() - 1, height)) {
+                entries.add(new Coordinates(getTrueWidth() - 1, height));
             }
         }
 
@@ -141,8 +141,17 @@ public class ImageFile implements Cloneable {
         return imgArray[y][x];
     }
 
-    public int getHeight() {return this.imgArray.length;}
-    public int getWidth() {return this.imgArray[0].length;}
+    public int getTrueHeight() {return this.imgArray.length;} //The true height of the image
+    public int getTrueWidth() {return this.imgArray[0].length;} //The true width of the image
+    public int getCurrentHeight() {return this.height;} //The current height of the image
+    public int getCurrentWidth() {return this.width;} //The current width of the image
+    public int getLeftX() {return this.leftX;}
+    public int getTopY() {return this.topY;}
+    public Coordinates getEntry() {return this.entry;}
+    public Coordinates getExit() {return this.exit;}
+    public HashSet<Segment> getSegments() {return this.segments;}
+    public HashSet<APNode> getArtPoints() {return this.artPoints;}
+
 
     public String getAbsolutePath() {
         return this.path;
@@ -242,4 +251,11 @@ public class ImageFile implements Cloneable {
             }
         }
     }
+
+    public void setWidth(int newWidth) {this.width = newWidth;}
+    public void setHeight(int newHeight) {this.height = newHeight;}
+    public void setTopY(int newTopY) {this.topY = newTopY;}
+    public void setLeftX(int newLeftX) {this.leftX = newLeftX;}
+    public void setSegments(HashSet<Segment> newSegments) {this.segments = newSegments;}
+    public void setArtPoints(HashSet<APNode> newArtPoints) {this.artPoints = newArtPoints;}
 }

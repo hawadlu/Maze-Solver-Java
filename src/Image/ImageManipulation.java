@@ -23,8 +23,8 @@ public class ImageManipulation {
     public static ImageFile drawImage(ImageFile imgObj, ArrayList<MazeNode> nodes, MazeNode entry, HashSet<Segment> segments, HashSet<APNode> artPoints) {
         imgObj.initSolvedArr();
 
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            for (int width = 0; width < imgObj.getWidth(); width++) {
+        for (int height = 0; height < imgObj.getTrueHeight(); height++) {
+            for (int width = 0; width < imgObj.getTrueWidth(); width++) {
                 if (imgObj.isWhite(width, height)) {
                     imgObj.setRGB(width, height, (byte) 1);
                 } else {
@@ -39,8 +39,8 @@ public class ImageManipulation {
         //Draw the msp
         if (segments != null) {
             for (Segment segment : segments) {
-                Coordinates start = segment.nodeStart.location;
-                Coordinates end = segment.nodeEnd.location;
+                Coordinates start = segment.nodeStart.getLocation();
+                Coordinates end = segment.nodeEnd.getLocation();
                 draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), (byte) 3);
             }
         }
@@ -58,7 +58,7 @@ public class ImageManipulation {
         //Draw the articulation points
         if (artPoints != null) {
             for (APNode apNode: artPoints) {
-                imgObj.setRGB(apNode.location.getX(), apNode.location.getY(), (byte) 4);
+                imgObj.setRGB(apNode.getLocation().getX(), apNode.getLocation().getY(), (byte) 4);
             }
         }
 
@@ -118,11 +118,11 @@ public class ImageManipulation {
     public static HashMap<Coordinates, MazeNode> findNeighboursForAll(ImageFile imgObj) {
         HashMap<Coordinates, MazeNode> nodes = new HashMap<>();
         //Performing a one time pass over the maze to find all the nodes.
-        for (int height = 0; height < imgObj.getHeight(); height++) {
-            for (int width = 0; width < imgObj.getWidth(); width++) {
+        for (int height = 0; height < imgObj.getTrueHeight(); height++) {
+            for (int width = 0; width < imgObj.getTrueWidth(); width++) {
                 //Don't make a node unless the square is white
                 if (imgObj.isWhite(width, height)) {
-                    if (height == 0 || height == imgObj.getHeight() - 1 || width == 0 || width == imgObj.getWidth() - 1) {
+                    if (height == 0 || height == imgObj.getTrueHeight() - 1 || width == 0 || width == imgObj.getTrueWidth() - 1) {
                         nodes.put(new Coordinates(width, height), new MazeNode(width, height));
 
                         //Find the neighbours
@@ -153,7 +153,7 @@ public class ImageManipulation {
             }
             //For debugging
             if (height % 2000 == 0) {
-                System.out.println("Scanned " + height * imgObj.getWidth() + " of " + imgObj.getHeight() * imgObj.getWidth() + " pixels");
+                System.out.println("Scanned " + height * imgObj.getTrueWidth() + " of " + imgObj.getTrueHeight() * imgObj.getTrueWidth() + " pixels");
             }
         }
 
@@ -234,8 +234,8 @@ public class ImageManipulation {
         }
 
         //Look Right
-        if (x < imgObj.getWidth() - 1 && imgObj.isWhite(x + 1, y)) {
-            for (int width = x + 1; width < imgObj.getWidth(); width++) {
+        if (x < imgObj.getTrueWidth() - 1 && imgObj.isWhite(x + 1, y)) {
+            for (int width = x + 1; width < imgObj.getTrueWidth(); width++) {
                 //marking dead end nodes
                 if (isDeadEnd(imgObj, width, y)) {
                     neighbours.add(new Coordinates(width, y));
@@ -252,7 +252,7 @@ public class ImageManipulation {
                     break;
 
                     //If the node is at the edge mark it.
-                } else if (width + 1 >= imgObj.getWidth()) {
+                } else if (width + 1 >= imgObj.getTrueWidth()) {
                     neighbours.add(new Coordinates(width,y));
                     break;
                 }
@@ -286,10 +286,10 @@ public class ImageManipulation {
         }
 
         //Look down
-        if (y < imgObj.getHeight() - 1 && imgObj.isWhite(x, y + 1)) {
-            for (int height = y + 1; height < imgObj.getHeight(); height++) {
+        if (y < imgObj.getTrueHeight() - 1 && imgObj.isWhite(x, y + 1)) {
+            for (int height = y + 1; height < imgObj.getTrueHeight(); height++) {
                 //The destination node
-                if (height == imgObj.getHeight() - 1) {
+                if (height == imgObj.getTrueHeight() - 1) {
                     neighbours.add(new Coordinates(x, height));
                     break;
 
@@ -308,7 +308,7 @@ public class ImageManipulation {
                     neighbours.add(new Coordinates(x, height));
                     break;
 
-                } else if (height + 1 >= imgObj.getHeight()) {
+                } else if (height + 1 >= imgObj.getTrueHeight()) {
                     neighbours.add(new Coordinates(x, height));
                 }
             }
@@ -337,7 +337,7 @@ public class ImageManipulation {
         }
 
         //Looking right
-        if ((width + 1 < imgObj.getWidth()) && (imgObj.isWhite(width + 1, height))) {
+        if ((width + 1 < imgObj.getTrueWidth()) && (imgObj.isWhite(width + 1, height))) {
             adjacent++;
         }
 
@@ -347,7 +347,7 @@ public class ImageManipulation {
         }
 
         //Looking down
-        if ((height + 1 < imgObj.getHeight()) && (imgObj.isWhite(width, height + 1))) {
+        if ((height + 1 < imgObj.getTrueHeight()) && (imgObj.isWhite(width, height + 1))) {
             adjacent++;
         }
 
@@ -375,13 +375,13 @@ public class ImageManipulation {
         if ((width - 1 > -1) && (!imgObj.isWhite(width - 1, height))) {
             blackSides++;
         }
-        if ((width + 1 < imgObj.getWidth()) && (!imgObj.isWhite(width + 1, height))) {
+        if ((width + 1 < imgObj.getTrueWidth()) && (!imgObj.isWhite(width + 1, height))) {
             blackSides++;
         }
         if ((height - 1 > -1) && (!imgObj.isWhite(width, height - 1))) {
             blackSides++;
         }
-        if ((height + 1 < imgObj.getHeight()) && (!imgObj.isWhite(width, height + 1))) {
+        if ((height + 1 < imgObj.getTrueHeight()) && (!imgObj.isWhite(width, height + 1))) {
             blackSides++;
         }
 

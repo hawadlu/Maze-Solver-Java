@@ -13,8 +13,8 @@ import java.util.PriorityQueue;
  * Class containing common method implementations and variables used between the various solve algorithms
  */
 public class Algorithms {
-    public int pathSize = 0;
-    public final ArrayList<MazeNode> path = new ArrayList<>(); //The path
+    int pathSize = 0;
+    final ArrayList<MazeNode> path = new ArrayList<>(); //The path
 
 
     /**

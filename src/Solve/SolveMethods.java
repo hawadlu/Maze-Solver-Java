@@ -24,7 +24,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, depthFirstSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, depthFirstSearch.getPath(), start, imgObj.getSegments(), imgObj.getArtPoints());
     }
 
     /**
@@ -40,7 +40,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, breadthFirstSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, breadthFirstSearch.getPath(), start, imgObj.getSegments(), imgObj.getArtPoints());
     }
 
     /**
@@ -56,7 +56,7 @@ public class SolveMethods {
 
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, dijkstraSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, dijkstraSearch.getPath(), start, imgObj.getSegments(), imgObj.getArtPoints());
     }
 
     /**
@@ -71,7 +71,7 @@ public class SolveMethods {
         System.out.println("Drawing image");
 
         //Draw
-        return ImageManipulation.drawImage(imgObj, aStarSearch.getPath(), start, imgObj.segments, imgObj.artPoints);
+        return ImageManipulation.drawImage(imgObj, aStarSearch.getPath(), start, imgObj.getSegments(), imgObj.getArtPoints());
     }
 
 }

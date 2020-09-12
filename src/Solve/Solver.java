@@ -40,27 +40,27 @@ public class Solver {
         //If the nodes are to be initialised while solving add the start and end now
         if (!searchType.equals("Search for neighbours during loading")) {
             //Put the start and end in the map
-            nodes.put(image.entry, new MazeNode(image.entry.getX(), image.entry.getY()));
-            nodes.put(image.exit, new MazeNode(image.exit.getX(), image.exit.getY()));
+            nodes.put(image.getEntry(), new MazeNode(image.getEntry().getX(), image.getEntry().getY()));
+            nodes.put(image.getExit(), new MazeNode(image.getExit().getX(), image.getExit().getY()));
         }
 
         System.out.println("Found all nodes");
-        System.out.println("Start at: " + image.entry.getX() + ", " + 0);
-        System.out.println("End at: " + image.exit.getX() + ", " + (image.getHeight() - 1));
+        System.out.println("Start at: " + image.getEntry().getX() + ", " + 0);
+        System.out.println("End at: " + image.getExit().getX() + ", " + (image.getTrueHeight() - 1));
         System.out.println("Node count: " + numNodes);
-        System.out.println("Approximately " + (float) numNodes / (image.getHeight() * image.getWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
+        System.out.println("Approximately " + (float) numNodes / (image.getTrueHeight() * image.getTrueWidth()) + "% of pixels are nodes. Assumed storage is: " + numNodes * 114 + " bytes");
         System.out.println("Finding neighbours");
         System.out.println("Solving");
 
         //Determine the method that should be used to solve the maze
         if (algorithm.equals("Depth First")) {
-            return SolveMethods.solveDFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
+            return SolveMethods.solveDFS(image, nodes.get(image.getEntry()), nodes.get(image.getExit()), nodes, parentComponent);
         } else if (algorithm.equals("Breadth First")) {
-            return SolveMethods.solveBFS(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
+            return SolveMethods.solveBFS(image, nodes.get(image.getEntry()), nodes.get(image.getExit()), nodes, parentComponent);
         } else if (algorithm.equals("Dijkstra")) {
-            return SolveMethods.solveDijkstra(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
+            return SolveMethods.solveDijkstra(image, nodes.get(image.getEntry()), nodes.get(image.getExit()), nodes, parentComponent);
         } else {
-            return SolveMethods.solveAStar(image, nodes.get(image.entry), nodes.get(image.exit), nodes, parentComponent);
+            return SolveMethods.solveAStar(image, nodes.get(image.getEntry()), nodes.get(image.getExit()), nodes, parentComponent);
         }
     }
 
@@ -74,7 +74,7 @@ public class Solver {
      */
     private static ArrayList<Object> validateParameters(ImageFile imgObj, Object algorithm, Object searchType, JPanel parentComponent) {
         //Determine the correct algorithm
-        double imgSize = imgObj.getHeight() * imgObj.getWidth();
+        double imgSize = imgObj.getTrueHeight() * imgObj.getTrueWidth();
         //Really big mazes have to use astar
         if (imgSize > 64000000 && !algorithm.equals("AStar")) {
             GUI.displayMessage(parentComponent, "This maze is too large for " + algorithm + ". Using AStar instead.");
