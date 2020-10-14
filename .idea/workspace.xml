@@ -4,11 +4,7 @@
     <option name="SPLITTER_PROPORTION" value="0.37598646" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageManipulation.java" afterDir="false" />
-    </list>
+    <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,17 +69,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="Maze-Solver-Java" />
       <useClassPathOnly />
@@ -120,6 +105,7 @@
       <workItem from="1595755056011" duration="264000" />
       <workItem from="1599777062421" duration="128000" />
       <workItem from="1599879609857" duration="6340000" />
+      <workItem from="1601971584705" duration="11000" />
     </task>
     <servers />
   </component>
