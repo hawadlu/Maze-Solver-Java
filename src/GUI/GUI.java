@@ -1,3 +1,4 @@
+//todo add javadoc (checkstyle and spotbugs)
 package GUI;
 
 import Image.*;

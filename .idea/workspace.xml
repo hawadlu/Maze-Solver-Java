@@ -4,7 +4,12 @@
     <option name="SPLITTER_PROPORTION" value="0.37598646" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="" />
+    <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maze-Solver-Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Maze-Solver-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageManipulation.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +74,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="Maze-Solver-Java" />
       <useClassPathOnly />
@@ -106,6 +122,8 @@
       <workItem from="1599777062421" duration="128000" />
       <workItem from="1599879609857" duration="6340000" />
       <workItem from="1601971584705" duration="11000" />
+      <workItem from="1603155817559" duration="30000" />
+      <workItem from="1603580165709" duration="4053000" />
     </task>
     <servers />
   </component>
@@ -116,42 +134,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="615" y="250" key="#Inspections" timestamp="1594093629599">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="615" y="250" key="#Inspections/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594093629599" />
-    <state x="445" y="227" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594170493839">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="445" y="227" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170493839" />
-    <state x="794" y="278" key="#com.intellij.ide.util.MemberChooser" timestamp="1594260499807">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="794" y="278" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594260499807" />
     <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1599880340707">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599880340707" />
-    <state x="718" y="362" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1594170492268">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="718" y="362" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170492268" />
     <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1599881298568">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881298568" />
-    <state x="686" y="158" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594090270517">
-      <screen x="0" y="23" width="1920" height="1057" />
+    <state x="-936" y="449" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603588110324">
+      <screen x="-1280" y="79" width="1280" height="1001" />
     </state>
-    <state x="686" y="158" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594090270517" />
-    <state x="743" y="275" key="#xdebugger.evaluate" timestamp="1594259033173">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="743" y="275" key="#xdebugger.evaluate/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594259033173" />
-    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594196037407">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="740" y="442" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594196037407" />
+    <state x="-936" y="449" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1280.79.1280.1001@-1280.79.1280.1001" timestamp="1603588110324" />
     <state width="1735" height="225" key="GridCell.Tab.0.bottom" timestamp="1599885966253">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -176,58 +170,31 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1595212347271" />
-    <state width="1830" height="347" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594809230143" />
     <state width="1398" height="286" key="GridCell.Tab.1.center" timestamp="1595212347270">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1595212347270" />
-    <state width="1830" height="347" key="GridCell.Tab.1.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594809230142" />
     <state width="1398" height="286" key="GridCell.Tab.1.left" timestamp="1595212347270">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1595212347270" />
-    <state width="1830" height="347" key="GridCell.Tab.1.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594809230142" />
     <state width="1398" height="286" key="GridCell.Tab.1.right" timestamp="1595212347271">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1595212347271" />
-    <state width="1830" height="347" key="GridCell.Tab.1.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594809230143" />
-    <state x="787" y="490" key="ReplaceDuplicatesPrompt" timestamp="1594093524022">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="787" y="490" key="ReplaceDuplicatesPrompt/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594093524022" />
     <state x="419" y="177" key="SettingsEditor" timestamp="1599881410333">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="419" y="177" key="SettingsEditor/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881410333" />
-    <state width="936" height="515" key="XDebugger.FullValuePopup" timestamp="1594259358827">
+    <state x="682" y="320" width="598" height="490" key="find.popup" timestamp="1603155830496">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state width="936" height="515" key="XDebugger.FullValuePopup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594259358827" />
-    <state x="692" y="464" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1594170465466">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="692" y="464" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594170465466" />
-    <state x="719" y="310" key="extract.method.dialog" timestamp="1594173301756">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="719" y="310" key="extract.method.dialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594173301756" />
-    <state x="682" y="320" width="598" height="490" key="find.popup" timestamp="1599885789427">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
+    <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603155830496" />
     <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885789427" />
     <state x="516" y="160" key="new project wizard" timestamp="1599777207674">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="516" y="160" key="new project wizard/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599777207674" />
-    <state x="688" y="348" key="refactoring.ChangeSignatureDialog" timestamp="1594260847944">
-      <screen x="0" y="23" width="1920" height="1057" />
-    </state>
-    <state x="688" y="348" key="refactoring.ChangeSignatureDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1594260847944" />
-    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup" timestamp="1594243679515">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="385" y="213" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1594243679515" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
