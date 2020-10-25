@@ -6,9 +6,43 @@
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maze-Solver-Java.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Maze-Solver-Java.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/UML/design.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/UML/design.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test Programs/Test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Test Programs/Test1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints/APNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints/ArticulationPoints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/DrawColour.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/ImageFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/Segment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Location/Coordinates.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MinimumSpanningTree/MSTNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ErrorPopup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidColourException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidMazeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ParserFailureException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/SolveFailureException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints/APNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/APNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints/ArticulationPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/ArticulationPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Animate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Animate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageManipulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/ImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/DrawColour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/DrawColour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/ImageFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/ImageManipulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/Segment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Location/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MinimumSpanningTree/MST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MinimumSpanningTree/MSTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MSTNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/AStarSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/AStarSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Algorithms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/BreadthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/BreadthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/DepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DepthFirstSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/DijkstraSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DijkstraSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/MazeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/MazeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solve/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,19 +102,21 @@
   </component>
   <component name="RunManager" selected="Application.Run">
     <configuration name="Run" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="GUI.GUI" />
+      <option name="MAIN_CLASS_NAME" value="Application.Application" />
       <module name="Maze-Solver-Java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -88,8 +124,8 @@
     <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="Maze-Solver-Java" />
       <useClassPathOnly />
-      <option name="PACKAGE_NAME" value="Solve" />
-      <option name="MAIN_CLASS_NAME" value="Solve.SolveTests" />
+      <option name="PACKAGE_NAME" value="Algorithm" />
+      <option name="MAIN_CLASS_NAME" value="Algorithm.SolveTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="PARAMETERS" value="" />
@@ -124,6 +160,7 @@
       <workItem from="1601971584705" duration="11000" />
       <workItem from="1603155817559" duration="30000" />
       <workItem from="1603580165709" duration="4053000" />
+      <workItem from="1603593810892" duration="3552000" />
     </task>
     <servers />
   </component>
@@ -134,18 +171,27 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="411" y="218" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603595204380">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="411" y="218" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603595204380" />
     <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1599880340707">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599880340707" />
+    <state x="684" y="365" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1603595203077">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="684" y="365" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603595203077" />
     <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1599881298568">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="681" y="439" width="494" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881298568" />
-    <state x="-936" y="449" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603588110324">
-      <screen x="-1280" y="79" width="1280" height="1001" />
+    <state x="516" y="414" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603595850718">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="-936" y="449" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1280.79.1280.1001@-1280.79.1280.1001" timestamp="1603588110324" />
+    <state x="516" y="414" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603595850718" />
     <state width="1735" height="225" key="GridCell.Tab.0.bottom" timestamp="1599885966253">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -186,10 +232,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="419" y="177" key="SettingsEditor/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599881410333" />
-    <state x="682" y="320" width="598" height="490" key="find.popup" timestamp="1603155830496">
+    <state x="682" y="320" width="598" height="548" key="find.popup" timestamp="1603596317665">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603155830496" />
+    <state x="682" y="320" width="598" height="548" key="find.popup/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603596317665" />
     <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885789427" />
     <state x="516" y="160" key="new project wizard" timestamp="1599777207674">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -201,7 +247,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinimumSpanningTree/MST.java</url>
-          <line>76</line>
+          <line>79</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
