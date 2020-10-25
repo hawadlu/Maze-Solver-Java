@@ -5,44 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docs/UML/design.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/UML/design.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test Programs/Test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Test Programs/Test1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints/APNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/ArticulationPoints/ArticulationPoints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/DrawColour.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/ImageFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Image/Segment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Location/Coordinates.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/MinimumSpanningTree/MSTNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ErrorPopup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidColourException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/InvalidMazeException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/ParserFailureException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/customExceptions/SolveFailureException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints/APNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/APNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArticulationPoints/ArticulationPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticulationPoints/ArticulationPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Animate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Animate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/ImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/DrawColour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/DrawColour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/ImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageManipulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/ImageManipulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/ImageProcessor/Segment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Location/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MinimumSpanningTree/MST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MinimumSpanningTree/MSTNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinimumSpanningTree/MSTNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/AStarSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/AStarSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Algorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/BreadthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/BreadthFirstSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/DepthFirstSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DepthFirstSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/DijkstraSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DijkstraSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/MazeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/MazeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/SolveMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/SolveTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Solve/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +125,7 @@
       <workItem from="1601971584705" duration="11000" />
       <workItem from="1603155817559" duration="30000" />
       <workItem from="1603580165709" duration="4053000" />
-      <workItem from="1603593810892" duration="3552000" />
+      <workItem from="1603593810892" duration="4584000" />
     </task>
     <servers />
   </component>
@@ -192,25 +157,29 @@
     </state>
     <state x="-936" y="449" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1280.79.1280.1001@-1280.79.1280.1001" timestamp="1603588110324" />
     <state x="516" y="414" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603595850718" />
-    <state width="1735" height="225" key="GridCell.Tab.0.bottom" timestamp="1599885966253">
+    <state width="1849" height="229" key="GridCell.Tab.0.bottom" timestamp="1603598331692">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1595469749798" />
+    <state width="1849" height="229" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603598331692" />
     <state width="1735" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
-    <state width="1735" height="225" key="GridCell.Tab.0.center" timestamp="1599885966252">
+    <state width="1849" height="229" key="GridCell.Tab.0.center" timestamp="1603598331690">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1595469749797" />
+    <state width="1849" height="229" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603598331690" />
     <state width="1735" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966252" />
-    <state width="1735" height="225" key="GridCell.Tab.0.left" timestamp="1599885966251">
+    <state width="1849" height="229" key="GridCell.Tab.0.left" timestamp="1603598331688">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1595469749797" />
+    <state width="1849" height="229" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603598331688" />
     <state width="1735" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966251" />
-    <state width="1735" height="225" key="GridCell.Tab.0.right" timestamp="1599885966253">
+    <state width="1849" height="229" key="GridCell.Tab.0.right" timestamp="1603598331691">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="230" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1595469749798" />
+    <state width="1849" height="229" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603598331691" />
     <state width="1735" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
     <state width="1398" height="286" key="GridCell.Tab.1.bottom" timestamp="1595212347271">
       <screen x="0" y="23" width="1440" height="877" />
