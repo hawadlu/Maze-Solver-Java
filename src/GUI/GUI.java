@@ -2,11 +2,12 @@ package GUI;
 
 import Application.Application;
 
+import javax.sound.sampled.BooleanControl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI implements ItemListener {
+public class GUI {
   Application application;
   public final int width = 1280;
   public final int height = 800;
@@ -15,8 +16,10 @@ public class GUI implements ItemListener {
 
   //Panels
   JFrame window;
-  JPanel activityArea; //This is the panel where all the action happens
-  JPanel topTabs;
+  JPanel container; //This panel holds all other panels
+  JPanel activityArea; //This is the panel hosts the two panels below as required
+  JPanel algoMainArea;
+  JPanel gameMainArea;
 
   /**
    * Constructor, creates and displays the gui
@@ -32,18 +35,47 @@ public class GUI implements ItemListener {
     window.setResizable(false);
     window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 
+    //Setup the container
+    container = new JPanel();
+    container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+    container.setBackground(activeCol);
+
     //Setup the top tabs
     JPanel topTabs = new JPanel();
     makeTopTabs(topTabs, activeCol, inactiveCol);
 
-    window.add(topTabs);
+    container.add(topTabs);
 
     activityArea = new JPanel();
     activityArea.setBackground(activeCol);
-    window.add(activityArea);
+    activityArea.setSize(new Dimension(width, height));
+    activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
+
+    //Add the algorithms panel by default
+    algoMainArea = makeAlgoLoadScreen(activityArea.getWidth(), activityArea.getHeight());
+    activityArea.add(algoMainArea);
+
+    container.add(activityArea);
+
+    window.add(container);
+
 
     //Make the window visible
     window.setVisible(true);
+  }
+
+  /**
+   * Make the panel that will be used to create the algorithms.
+   * It creates a simple panel that houses a button for loading images
+   * @return the panel that holds the load image button
+   */
+  private JPanel makeAlgoLoadScreen(int width, int height) {
+    JPanel loadPanel = new JPanel();
+    loadPanel.setBackground(activeCol);
+    loadPanel.setMinimumSize(new Dimension(width, height));
+    JButton loadImage = new JButton("Load Image");
+    loadPanel.add(loadImage);
+    return loadPanel;
   }
 
   /**
@@ -56,11 +88,12 @@ public class GUI implements ItemListener {
     topTabs.removeAll(); //Remove all current nested components
 
     topTabs.setLayout(new BoxLayout(topTabs, BoxLayout.X_AXIS));
-    topTabs.setBackground(Color.red); //todo remove me
     topTabs.setSize(new Dimension(width, 100));
 
     //The algorithm tab
     JPanel algoTab = new JPanel();
+    System.out.println("max size: " + width/2);
+    algoTab.setMinimumSize(new Dimension(width/2, 100));
     algoTab.setMaximumSize(new Dimension(width/2, 100));
     algoTab.setBackground(tabOneCol);
     algoTab.add(makeTabLabel("Algorithms"));
@@ -88,6 +121,7 @@ public class GUI implements ItemListener {
 
     //The game tab
     JPanel gameTab = new JPanel();
+    gameTab.setMinimumSize(new Dimension(width/2, 100));
     gameTab.setMaximumSize(new Dimension(width/2, 100));
     gameTab.setBackground(tabTwoCol);
     gameTab.add(makeTabLabel("Game"));
@@ -132,13 +166,5 @@ public class GUI implements ItemListener {
     tabLabel.setFont(new Font("Verdana", 1, 50));
     tabLabel.setForeground(Color.WHITE);
     return tabLabel;
-  }
-
-  /**
-   * Change the cards at the bottom of the screen
-   * @param e the event
-   */
-  @Override
-  public void itemStateChanged(ItemEvent e) {
   }
 }
