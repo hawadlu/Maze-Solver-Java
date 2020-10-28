@@ -18,8 +18,8 @@ public class GUI {
   JFrame window;
   JPanel container; //This panel holds all other panels
   JPanel activityArea; //This is the panel hosts the two panels below as required
-  JPanel algoMainArea;
-  JPanel gameMainArea;
+  JPanel algoMainArea = null;
+  JPanel gameMainArea = null;
 
   /**
    * Constructor, creates and displays the gui
@@ -65,20 +65,6 @@ public class GUI {
   }
 
   /**
-   * Make the panel that will be used to create the algorithms.
-   * It creates a simple panel that houses a button for loading images
-   * @return the panel that holds the load image button
-   */
-  private JPanel makeAlgoLoadScreen(int width, int height) {
-    JPanel loadPanel = new JPanel();
-    loadPanel.setBackground(activeCol);
-    loadPanel.setMinimumSize(new Dimension(width, height));
-    JButton loadImage = new JButton("Load Image");
-    loadPanel.add(loadImage);
-    return loadPanel;
-  }
-
-  /**
    * This method makes the tabs that go at the top of the screen
    * @param topTabs the JPanel that houses the tabs
    * @param tabOneCol the colour of the first tab
@@ -113,6 +99,10 @@ public class GUI {
 
           makeTopTabs(topTabs, activeCol, inactiveCol);
 
+          //Remake the algorithms screen
+          activityArea.removeAll();
+          activityArea.add(algoMainArea);
+
           refresh();
         }
       }
@@ -141,11 +131,47 @@ public class GUI {
 
           makeTopTabs(topTabs, inactiveCol, activeCol);
 
+          //Make the game screen
+          activityArea.removeAll();
+
+          //Check if the game screen has bene made already
+          if (gameMainArea == null) gameMainArea = makeGameStartScreen(width, width - 100);
+
+          activityArea.add(gameMainArea);
+
           refresh();
         }
       }
     });
     topTabs.add(gameTab);
+  }
+
+  /**
+   * Make the start screen for playing games
+   * @param width the desired width of the screen
+   * @param height the desired height of the screen
+   * @return the new JPanel
+   */
+  //todo properly implement this
+  private JPanel makeGameStartScreen(int width, int height) {
+    JPanel startScreen = new JPanel();
+    startScreen.setMinimumSize(new Dimension(width, height));
+    startScreen.setBackground(Color.red);
+    return startScreen;
+  }
+
+  /**
+   * Make the panel that will be used to create the algorithms.
+   * It creates a simple panel that houses a button for loading images
+   * @return the panel that holds the load image button
+   */
+  private JPanel makeAlgoLoadScreen(int width, int height) {
+    JPanel loadPanel = new JPanel();
+    loadPanel.setBackground(activeCol);
+    loadPanel.setMinimumSize(new Dimension(width, height));
+    JButton loadImage = new JButton("Load Image"); //todo add functionality
+    loadPanel.add(loadImage);
+    return loadPanel;
   }
 
   /**
