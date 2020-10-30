@@ -2,6 +2,7 @@ package Application;
 
 import GUI.GUI;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,15 @@ public class Application {
     ArrayList tmp = new ArrayList();
     for (int i = 0; i < 4; i++) tmp.add(arr);
     return tmp;
+  }
+  
+  /**
+   * Take the image file and parse it into the appropriate format
+   * @param imageToParse
+   */
+  //todo, implement me, use the image classes to do the parsing
+  public void parseFile(File imageToParse) {
+    //not yet implemented
   }
 
   /**

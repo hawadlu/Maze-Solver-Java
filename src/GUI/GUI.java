@@ -6,6 +6,7 @@ import javax.sound.sampled.BooleanControl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class GUI {
   Application application;
@@ -169,9 +170,35 @@ public class GUI {
     JPanel loadPanel = new JPanel();
     loadPanel.setBackground(activeCol);
     loadPanel.setMinimumSize(new Dimension(width, height));
-    JButton loadImage = new JButton("Load Image"); //todo add functionality
+    JButton loadImage = new JButton("Load Image");
+    
+    //Bind functionality to the load image button
+    loadImage.addActionListener(e -> {
+      application.parseFile(UIFileChooser());
+    });
+    
     loadPanel.add(loadImage);
     return loadPanel;
+  }
+  
+  /**
+   * Get and return the file that the user wants
+   *
+   * @return the file
+   */
+  private File UIFileChooser()  {
+    System.out.println("Load image");
+    //Get the file
+    final JFileChooser filePicker = new JFileChooser();
+    int fileReturn = filePicker.showOpenDialog(filePicker);
+    
+    if (fileReturn == JFileChooser.APPROVE_OPTION) {
+      File fileIn = filePicker.getSelectedFile();
+      System.out.println("Opened: " + fileIn);
+      return fileIn;
+    } else {
+      return null;
+    }
   }
 
   /**
