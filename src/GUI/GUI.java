@@ -1,8 +1,6 @@
 package GUI;
 
 import Application.Application;
-
-import javax.sound.sampled.BooleanControl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -175,10 +173,35 @@ public class GUI {
     //Bind functionality to the load image button
     loadImage.addActionListener(e -> {
       application.parseFile(UIFileChooser());
+      
+      //Load the image to the main screen
+      algoMainArea.removeAll();
+      makeAlgoSolveScreen();
+      refresh();
     });
     
     loadPanel.add(loadImage);
     return loadPanel;
+  }
+  
+  /**
+   * Make the sc®een that will be used to load the options for solving the maze
+   */
+  private JPanel makeAlgoSolveScreen() {
+    System.out.println("Making algorithm solve screen");
+    JPanel main = new JPanel();
+    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+    
+    JPanel imageArea = new JPanel(); //this hosts the image
+    imageArea.setBackground(Color.BLACK);
+    
+    JPanel buttonArea = new JPanel(); //this hosts the solve options
+    buttonArea.setBackground(Color.DARK_GRAY);
+    
+    main.add(imageArea);
+    main.add(buttonArea);
+    
+    return main;
   }
   
   /**
@@ -205,6 +228,7 @@ public class GUI {
    * Reload the gui
    */
   private void refresh() {
+    System.out.println("Refreshing gui");
     window.revalidate();
     window.repaint();
   }
