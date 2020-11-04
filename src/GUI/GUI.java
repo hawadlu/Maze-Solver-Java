@@ -1,6 +1,8 @@
 package GUI;
 
 import Application.Application;
+import Utility.Exceptions.GenericError;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -172,8 +174,12 @@ public class GUI {
     
     //Bind functionality to the load image button
     loadImage.addActionListener(e -> {
-      application.parseFile(UIFileChooser());
-      
+      try {
+        application.parseImageFile(UIFileChooser());
+      } catch (GenericError genericError) {
+        genericError.printStackTrace();
+      }
+  
       //Load the image to the main screen
       algoMainArea.removeAll();
       makeAlgoSolveScreen();

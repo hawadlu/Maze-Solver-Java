@@ -1,6 +1,9 @@
 package Application;
 
 import GUI.GUI;
+import Utility.Exceptions.GenericError;
+import Utility.Exceptions.InvalidImage;
+import Utility.Image.ImageFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 public class Application {
   GUI gui;
   static Application currentApplication;
+  ImageFile currentImage;
 
   /**
    * Get the options that can be used to solve mazes
@@ -30,8 +34,8 @@ public class Application {
    * @param imageToParse
    */
   //todo, implement me, use the image classes to do the parsing
-  public void parseFile(File imageToParse) {
-    //not yet implemented
+  public void parseImageFile(File imageToParse) throws GenericError {
+    currentImage = new ImageFile(imageToParse);
   }
 
   /**
