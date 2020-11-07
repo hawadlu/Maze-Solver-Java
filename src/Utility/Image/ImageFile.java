@@ -58,4 +58,8 @@ public class ImageFile {
       System.out.print("\n");
     }
   }
+  
+  /**
+   * Make image
+   */
 }

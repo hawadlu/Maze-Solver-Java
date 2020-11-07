@@ -182,7 +182,7 @@ public class GUI {
   
       //Load the image to the main screen
       algoMainArea.removeAll();
-      makeAlgoSolveScreen();
+      algoMainArea.add(makeAlgoSolveScreen()); //Add the algo solve area to the main panel
       refresh();
     });
     
@@ -199,7 +199,15 @@ public class GUI {
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
     
     JPanel imageArea = new JPanel(); //this hosts the image
+    imageArea.setLayout(new GridBagLayout());
     imageArea.setBackground(Color.BLACK);
+    
+    //todo set the background to be an image
+    
+    //Add the buttons to the image panel
+    addControlButtons(imageArea);
+    
+    //imageArea.add(new Button("hello"));
     
     JPanel buttonArea = new JPanel(); //this hosts the solve options
     buttonArea.setBackground(Color.DARK_GRAY);
@@ -208,6 +216,52 @@ public class GUI {
     main.add(buttonArea);
     
     return main;
+  }
+  
+  /**
+   * Takes the image panel and add the necessary image control buttons
+   * @param imageArea the panel to be updated
+   */
+  private void addControlButtons(JPanel imageArea) {
+    //todo bind button functionality
+    
+    GridBagConstraints constraints = new GridBagConstraints();
+    
+    //This div fills the top left corner
+    //todo change these to divs
+    JButton button = new JButton("Top Left");
+    
+    //top left area
+    constraints.gridx = 0;
+    constraints.gridy = 0;
+    constraints.gridwidth = 2;
+    constraints.ipadx = 200;
+    constraints.ipady = 100;
+    imageArea.add(button, constraints);
+    
+    //Pan up
+    constraints.gridx = 3;
+    constraints.gridy = 0;
+    constraints.ipadx = 100;
+    constraints.gridwidth = 1;
+    button = new JButton("Up");
+    imageArea.add(button, constraints);
+  
+    //Top  right area
+    constraints.gridx = 4;
+    constraints.gridy = 0;
+    constraints.gridwidth = 2;
+    constraints.ipadx = 200;
+    button = new JButton("Top Right");
+    imageArea.add(button, constraints);
+    
+    //Add the empty area in the centre
+    constraints.gridwidth = 1;
+    constraints.gridx = 0;
+    constraints.gridy = 1;
+    constraints.ipadx = 300;
+    button = new JButton("Centre");
+    imageArea.add(button, constraints);
   }
   
   /**
