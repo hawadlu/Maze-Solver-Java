@@ -218,19 +218,24 @@ public class GUI {
    */
   private void addControlButtons(JPanel imageArea) {
     imageArea.setLayout(new GridLayout(5, 5));
-    
+
+    Color hoverColour = new Color(169, 169, 169, 100);
+
     for (int i = 0; i < 25; i++) {
       JPanel newPanel = new JPanel();
       newPanel.setPreferredSize(new Dimension(100, 100));
-      if (i % 2 == 0) newPanel.setBackground(Color.BLUE);
-      else newPanel.setBackground(Color.GREEN);
+      newPanel.setBackground(null);
       
       //Add the hover effects
       newPanel.addMouseListener(new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mouseEntered(MouseEvent e) {
+          newPanel.setBackground(hoverColour);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
           newPanel.setBackground(null);
-          refresh();
         }
       });
       
