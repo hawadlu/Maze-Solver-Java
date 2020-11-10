@@ -17,7 +17,7 @@ public class GUI {
   public final Color inactiveCol = new Color(66, 66, 66);
 
   //Panels
-  JFrame window;
+  static JFrame window;
   JPanel container; //This panel holds all other panels
   JPanel activityArea; //This is the panel hosts the two panels below as required
   JPanel algoMainArea = null;
@@ -219,7 +219,7 @@ public class GUI {
   private void addControlButtons(JPanel imageArea) {
     imageArea.setLayout(new GridLayout(5, 5));
 
-    Color hoverColour = new Color(169, 169, 169, 100);
+    //Color hoverColour = new Color(169, 169, 169, 100);
 
     //Use a nested for loop to add the necessary divs in a grid layout.
     for (int height = 0; height < 5; height++) {
@@ -229,12 +229,12 @@ public class GUI {
         newPanel.setBackground(null);
 
         //These are the various conditions for the control buttons
-        if (height == 0 && width == 2) newPanel.setControlButton("imageLink", "action", hoverColour);
-        else if (height == 2 && width == 0) newPanel.setControlButton("imageLink", "action", hoverColour);
-        else if (height == 2 && width == 1) newPanel.setControlButton("imageLink", "action", hoverColour);
-        else if (height == 2 && width == 3) newPanel.setControlButton("imageLink", "action", hoverColour);
-        else if (height == 2 && width == 4) newPanel.setControlButton("imageLink", "action", hoverColour);
-        else if (height == 4 && width == 2) newPanel.setControlButton("imageLink", "action", hoverColour);
+        if (height == 0 && width == 2) newPanel.setControlButton("Assets/Control Icons/Active/Up Arrow.png", "Assets/Control Icons/Inactive/Up Arrow.png", "action");
+        else if (height == 2 && width == 0) newPanel.setControlButton("Assets/Control Icons/Active/Left Arrow.png", "Assets/Control Icons/Inactive/Left Arrow.png", "action");
+        else if (height == 2 && width == 1) newPanel.setControlButton("Assets/Control Icons/Active/Minus.png", "Assets/Control Icons/Inactive/Minus.png","action");
+        else if (height == 2 && width == 3) newPanel.setControlButton("Assets/Control Icons/Active/Plus.png", "Assets/Control Icons/Inactive/Plus.png",  "action");
+        else if (height == 2 && width == 4) newPanel.setControlButton("Assets/Control Icons/Active/Right Arrow.png", "Assets/Control Icons/Inactive/Right Arrow.png","action");
+        else if (height == 4 && width == 2) newPanel.setControlButton("Assets/Control Icons/Active/Down Arrow.png", "Assets/Control Icons/Inactive/Down Arrow.png","action");
         imageArea.add(newPanel);
       }
     }
@@ -263,7 +263,7 @@ public class GUI {
   /**
    * Reload the gui
    */
-  private void refresh() {
+  public static void refresh() {
     System.out.println("Refreshing gui");
     window.revalidate();
     window.repaint();

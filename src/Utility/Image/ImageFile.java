@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * Class used to hold the image in memory
+ * todo expand this to deal with the colours needed to show solved mazes. Probably just a method to make a buffered image.
  */
 public class ImageFile {
   Boolean[][] imageArray;
