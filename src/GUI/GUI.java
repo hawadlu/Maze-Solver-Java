@@ -1,6 +1,7 @@
 package GUI;
 
 import Application.Application;
+import GUI.CustomPanels.ImagePanel;
 import Utility.Exceptions.GenericError;
 
 import javax.swing.*;
@@ -198,9 +199,8 @@ public class GUI {
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
     
-    JPanel imageArea = new JPanel(); //this hosts the image
+    JPanel imageArea = new ImagePanel(); //this hosts the image
     imageArea.setPreferredSize(new Dimension(500, 500));
-    imageArea.setBackground(Color.RED);
     
     //todo set the background to be an image
     
@@ -221,25 +221,22 @@ public class GUI {
 
     Color hoverColour = new Color(169, 169, 169, 100);
 
-    for (int i = 0; i < 25; i++) {
-      JPanel newPanel = new JPanel();
-      newPanel.setPreferredSize(new Dimension(100, 100));
-      newPanel.setBackground(null);
-      
-      //Add the hover effects
-      newPanel.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseEntered(MouseEvent e) {
-          newPanel.setBackground(hoverColour);
-        }
+    //Use a nested for loop to add the necessary divs in a grid layout.
+    for (int height = 0; height < 5; height++) {
+      for (int width = 0; width < 5; width++) {
+        ImagePanel newPanel = new ImagePanel();
+        newPanel.setPreferredSize(new Dimension(100, 100));
+        newPanel.setBackground(null);
 
-        @Override
-        public void mouseExited(MouseEvent e) {
-          newPanel.setBackground(null);
-        }
-      });
-      
-      imageArea.add(newPanel);
+        //These are the various conditions for the control buttons
+        if (height == 0 && width == 2) newPanel.setControlButton("imageLink", "action", hoverColour);
+        else if (height == 2 && width == 0) newPanel.setControlButton("imageLink", "action", hoverColour);
+        else if (height == 2 && width == 1) newPanel.setControlButton("imageLink", "action", hoverColour);
+        else if (height == 2 && width == 3) newPanel.setControlButton("imageLink", "action", hoverColour);
+        else if (height == 2 && width == 4) newPanel.setControlButton("imageLink", "action", hoverColour);
+        else if (height == 4 && width == 2) newPanel.setControlButton("imageLink", "action", hoverColour);
+        imageArea.add(newPanel);
+      }
     }
   }
   
