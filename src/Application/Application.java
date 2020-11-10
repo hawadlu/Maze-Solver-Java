@@ -5,6 +5,7 @@ import Utility.Exceptions.GenericError;
 import Utility.Exceptions.InvalidImage;
 import Utility.Image.ImageFile;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -44,6 +45,12 @@ public class Application {
   private void setUpGui() {
     this.gui = new GUI(currentApplication);
   }
+
+  /**
+   * Gets a buffered image of the current maze.
+   * @return an image of the maze
+   */
+  public BufferedImage getBufferedImage() {return currentImage.makeImage(); }
 
   public static void main(String[] args) {
     //Create the GUI

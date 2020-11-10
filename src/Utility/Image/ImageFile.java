@@ -59,7 +59,27 @@ public class ImageFile {
       System.out.print("\n");
     }
   }
-  
+
+  /**
+   * Make a buffered image
+   * @return the buffered image
+   * todo refactor to deal with colour
+   */
+  public BufferedImage makeImage() {
+    BufferedImage toReturn = new BufferedImage(imageArray[0].length, imageArray.length, BufferedImage.TYPE_INT_RGB);
+
+    //Go through the array and make the image
+    for (int height = 0; height < imageArray.length; height++) {
+      for (int width = 0; width < imageArray[0].length; width++) {
+        //Set the colours
+        if (imageArray[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
+        else toReturn.setRGB(width, height, Color.BLACK.getRGB());
+      }
+    }
+
+    return toReturn;
+  }
+
   /**
    * Make image
    */

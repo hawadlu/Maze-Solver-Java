@@ -7,6 +7,7 @@ import Utility.Exceptions.GenericError;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class GUI {
@@ -199,10 +200,7 @@ public class GUI {
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
     
-    JPanel imageArea = new ImagePanel(); //this hosts the image
-    imageArea.setPreferredSize(new Dimension(500, 500));
-    
-    //todo set the background to be an image
+    ImagePanel imageArea = new ImagePanel(new Dimension(500, 500), true, this); //this hosts the image
     
     //Add the buttons to the image panel
     addControlButtons(imageArea);
@@ -224,9 +222,7 @@ public class GUI {
     //Use a nested for loop to add the necessary divs in a grid layout.
     for (int height = 0; height < 5; height++) {
       for (int width = 0; width < 5; width++) {
-        ImagePanel newPanel = new ImagePanel();
-        newPanel.setPreferredSize(new Dimension(100, 100));
-        newPanel.setBackground(null);
+        ImagePanel newPanel = new ImagePanel(new Dimension(100, 100), false, this);
 
         //These are the various conditions for the control buttons
         if (height == 0 && width == 2) newPanel.setControlButton("Assets/Control Icons/Active/Up Arrow.png", "Assets/Control Icons/Inactive/Up Arrow.png", "action");
@@ -264,7 +260,7 @@ public class GUI {
    * Reload the gui
    */
   public static void refresh() {
-    System.out.println("Refreshing gui");
+//    System.out.println("Refreshing gui");
     window.revalidate();
     window.repaint();
   }
@@ -279,5 +275,13 @@ public class GUI {
     tabLabel.setFont(new Font("Verdana", 1, 50));
     tabLabel.setForeground(Color.WHITE);
     return tabLabel;
+  }
+
+  /**
+   * Get the current maze image from the applciation
+   * @return
+   */
+  public BufferedImage getImage() {
+    return application.getBufferedImage();
   }
 }
