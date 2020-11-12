@@ -1,8 +1,8 @@
 package GUI;
 
 import Application.Application;
-import GUI.CustomPanels.ImagePanel;
-//import GUI.CustomPanels.ImagePanel.Action;
+import GUI.CustomPanels.Rule;
+import GUI.CustomPanels.ScrollDemo;
 import Utility.Exceptions.GenericError;
 
 
@@ -201,15 +201,9 @@ public class GUI {
   private JPanel makeAlgoSolveScreen() {
     System.out.println("Making algorithm solve screen");
     JPanel main = new JPanel();
-    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+    main.setLayout(new BoxLayout(main, BoxLayout.LINE_AXIS));
 
-    JScrollPane imageScroll = new JScrollPane();
-    imageScroll.setPreferredSize(new Dimension(500, 500));
-    imageScroll.setBackground(Color.CYAN);
-
-    imageScroll.add(new ImagePanel(new Dimension(500, 500), this));
-
-    main.add(imageScroll);
+    main.add(new ScrollDemo(this));
     
     return main;
   }
