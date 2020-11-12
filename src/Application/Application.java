@@ -5,6 +5,7 @@ import Utility.Exceptions.GenericError;
 import Utility.Exceptions.InvalidImage;
 import Utility.Image.ImageFile;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -50,11 +51,28 @@ public class Application {
    * Gets a buffered image of the current maze.
    * @return an image of the maze
    */
-  public BufferedImage getBufferedImage() {return currentImage.makeImage(); }
+  public BufferedImage getImage() {return currentImage.makeImage(); }
+
+  /**
+   * Get a specific part of the maze image
+   * @param calculateParams the parameters used to calculate what part of the image to get
+   * @return the image
+   */
+  public BufferedImage getImage(int[] calculateParams) {
+    return currentImage.makeImage(calculateParams);
+  }
 
   public static void main(String[] args) {
     //Create the GUI
     currentApplication = new Application();
     currentApplication.setUpGui();
+  }
+
+  /**
+   * Get the dimensions of the maze
+   * @return the dimensions
+   */
+  public Dimension getMazeDimensions() {
+    return currentImage.getDimensions();
   }
 }

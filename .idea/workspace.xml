@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="v">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Down Arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Down Arrow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Left Arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Left Arrow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Minus.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Minus.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Plus.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Plus.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Right Arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Right Arrow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Up Arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Control Icons/Inactive/Up Arrow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Application/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Application/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ImagePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ImagePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ImagePanel$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ImagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ImagePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$2.class" afterDir="false" />
@@ -91,15 +85,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,11 +160,11 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="411" y="218" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603595204380" />
-    <state x="759" y="269" key="#com.intellij.ide.util.MemberChooser" timestamp="1604971918270">
+    <state x="759" y="269" key="#com.intellij.ide.util.MemberChooser" timestamp="1605151082840">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="569" y="227" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1604875363687" />
-    <state x="759" y="269" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604971918270" />
+    <state x="759" y="269" key="#com.intellij.ide.util.MemberChooser/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151082840" />
     <state x="718" y="348" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1599880340707">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -202,50 +194,50 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="292" y="32" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1604199319636" />
-    <state width="1849" height="229" key="GridCell.Tab.0.bottom" timestamp="1604981547185">
+    <state width="1849" height="354" key="GridCell.Tab.0.bottom" timestamp="1605151473461">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1604891589477" />
-    <state width="1849" height="229" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981547185" />
+    <state width="1849" height="354" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473461" />
     <state width="1735" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
-    <state width="1849" height="229" key="GridCell.Tab.0.center" timestamp="1604981547185">
+    <state width="1849" height="354" key="GridCell.Tab.0.center" timestamp="1605151473460">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981547185" />
+    <state width="1849" height="354" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473460" />
     <state width="1735" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966252" />
-    <state width="1849" height="229" key="GridCell.Tab.0.left" timestamp="1604981547184">
+    <state width="1849" height="354" key="GridCell.Tab.0.left" timestamp="1605151473460">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981547184" />
+    <state width="1849" height="354" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473460" />
     <state width="1735" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966251" />
-    <state width="1849" height="229" key="GridCell.Tab.0.right" timestamp="1604981547185">
+    <state width="1849" height="354" key="GridCell.Tab.0.right" timestamp="1605151473461">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981547185" />
+    <state width="1849" height="354" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473461" />
     <state width="1735" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
-    <state width="1849" height="354" key="GridCell.Tab.1.bottom" timestamp="1604981544702">
+    <state width="1849" height="354" key="GridCell.Tab.1.bottom" timestamp="1605151473463">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.bottom/0.23.1440.877@0.23.1440.877" timestamp="1604697021755" />
-    <state width="1849" height="354" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981544702" />
-    <state width="1849" height="354" key="GridCell.Tab.1.center" timestamp="1604981544701">
+    <state width="1849" height="354" key="GridCell.Tab.1.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473463" />
+    <state width="1849" height="354" key="GridCell.Tab.1.center" timestamp="1605151473462">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.center/0.23.1440.877@0.23.1440.877" timestamp="1604697021754" />
-    <state width="1849" height="354" key="GridCell.Tab.1.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981544701" />
-    <state width="1849" height="354" key="GridCell.Tab.1.left" timestamp="1604981544701">
+    <state width="1849" height="354" key="GridCell.Tab.1.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473462" />
+    <state width="1849" height="354" key="GridCell.Tab.1.left" timestamp="1605151473462">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.left/0.23.1440.877@0.23.1440.877" timestamp="1604697021754" />
-    <state width="1849" height="354" key="GridCell.Tab.1.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981544701" />
-    <state width="1849" height="354" key="GridCell.Tab.1.right" timestamp="1604981544702">
+    <state width="1849" height="354" key="GridCell.Tab.1.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473462" />
+    <state width="1849" height="354" key="GridCell.Tab.1.right" timestamp="1605151473463">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="286" key="GridCell.Tab.1.right/0.23.1440.877@0.23.1440.877" timestamp="1604697021754" />
-    <state width="1849" height="354" key="GridCell.Tab.1.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1604981544702" />
+    <state width="1849" height="354" key="GridCell.Tab.1.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605151473463" />
     <state x="314" y="63" key="SettingsEditor" timestamp="1604522240641">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -294,6 +286,11 @@
           <url>file://$PROJECT_DIR$/src/BFS.java</url>
           <line>27</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI/CustomPanels/ImagePanel.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -2,7 +2,9 @@ package GUI;
 
 import Application.Application;
 import GUI.CustomPanels.ImagePanel;
+//import GUI.CustomPanels.ImagePanel.Action;
 import Utility.Exceptions.GenericError;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,7 @@ import java.io.File;
 
 public class GUI {
   Application application;
+
   public final int width = 1280;
   public final int height = 800;
   public final Color activeCol = new Color(0, 131, 233);
@@ -199,41 +202,16 @@ public class GUI {
     System.out.println("Making algorithm solve screen");
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
-    
-    ImagePanel imageArea = new ImagePanel(new Dimension(500, 500), true, this); //this hosts the image
-    
-    //Add the buttons to the image panel
-    addControlButtons(imageArea);
-    System.out.println("Image area size: " + imageArea.getSize());
-    main.add(imageArea);
+
+    JScrollPane imageScroll = new JScrollPane();
+    imageScroll.setPreferredSize(new Dimension(500, 500));
+    imageScroll.setBackground(Color.CYAN);
+
+    imageScroll.add(new ImagePanel(new Dimension(500, 500), this));
+
+    main.add(imageScroll);
     
     return main;
-  }
-  
-  /**
-   * Takes the image panel and add the necessary image control buttons
-   * @param imageArea the panel to be updated
-   */
-  private void addControlButtons(JPanel imageArea) {
-    imageArea.setLayout(new GridLayout(5, 5));
-
-    //Color hoverColour = new Color(169, 169, 169, 100);
-
-    //Use a nested for loop to add the necessary divs in a grid layout.
-    for (int height = 0; height < 5; height++) {
-      for (int width = 0; width < 5; width++) {
-        ImagePanel newPanel = new ImagePanel(new Dimension(100, 100), false, this);
-
-        //These are the various conditions for the control buttons
-        if (height == 0 && width == 2) newPanel.setControlButton("Assets/Control Icons/Active/Up Arrow.png", "Assets/Control Icons/Inactive/Up Arrow.png", "action");
-        else if (height == 2 && width == 0) newPanel.setControlButton("Assets/Control Icons/Active/Left Arrow.png", "Assets/Control Icons/Inactive/Left Arrow.png", "action");
-        else if (height == 2 && width == 1) newPanel.setControlButton("Assets/Control Icons/Active/Minus.png", "Assets/Control Icons/Inactive/Minus.png","action");
-        else if (height == 2 && width == 3) newPanel.setControlButton("Assets/Control Icons/Active/Plus.png", "Assets/Control Icons/Inactive/Plus.png",  "action");
-        else if (height == 2 && width == 4) newPanel.setControlButton("Assets/Control Icons/Active/Right Arrow.png", "Assets/Control Icons/Inactive/Right Arrow.png","action");
-        else if (height == 4 && width == 2) newPanel.setControlButton("Assets/Control Icons/Active/Down Arrow.png", "Assets/Control Icons/Inactive/Down Arrow.png","action");
-        imageArea.add(newPanel);
-      }
-    }
   }
   
   /**
@@ -282,6 +260,23 @@ public class GUI {
    * @return
    */
   public BufferedImage getImage() {
-    return application.getBufferedImage();
+    return application.getImage();
+  }
+
+  /**
+   * Get a specific part of the maze image
+   * @param calculateParams the parameters used to calculate what part of the image to get
+   * @return the image
+   */
+  public BufferedImage getImage(int[] calculateParams) {
+    return application.getImage(calculateParams);
+  }
+
+  /**
+   * Get the dimensions of the maze
+   * @return dimensions
+   */
+  public Dimension getMazeDimensions() {
+    return application.getMazeDimensions();
   }
 }

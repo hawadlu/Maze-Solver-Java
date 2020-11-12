@@ -81,6 +81,39 @@ public class ImageFile {
   }
 
   /**
+   * Create a cropped version of the image
+   * @param calculateParams the specifications to crop to.
+   * @return the cropped image
+   */
+  public BufferedImage makeImage(int[] calculateParams) {
+    BufferedImage toReturn = new BufferedImage(calculateParams[0], calculateParams[1], BufferedImage.TYPE_INT_RGB);
+
+    int pixAcross = calculateParams[0];
+    int pixDown = calculateParams[1];
+    int left = calculateParams[2];
+    int top = calculateParams[3];
+
+    for (int height = 0; height < top + pixDown; height++) {
+      for (int width = left; width < left + pixAcross; width++) {
+        //Set the colours
+        System.out.println("Width: " + width + " height: " + height + " arr width: " + imageArray[0].length + " arr height: " + imageArray.length + " img width: " + toReturn.getWidth() + " img height: " + toReturn.getHeight());
+        if (imageArray[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
+        else toReturn.setRGB(width, height, Color.BLACK.getRGB());
+      }
+    }
+
+    return toReturn;
+  }
+
+  /**
+   * Get the dimensions of the maze
+   * @return maze dimensions
+   */
+  public Dimension getDimensions() {
+    return new Dimension(imageArray[0].length, imageArray.length);
+  }
+
+  /**
    * Make image
    */
 }
