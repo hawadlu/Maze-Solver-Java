@@ -244,8 +244,45 @@ public class GUI {
       solveControls.add(algoOptions);
       solveControls.add(new JLabel("Neighbours"));
       solveControls.add(neighbourOptions);
-      solveControls.add(new JLabel("Help?")); //todo add functionality
+      JButton help = new JButton("Help");
+      solveControls.add(help);
       optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "AStar: This is the most efficient\n" +
+                "search and is recommended in most circumstances.\n\n" +
+                "Breath First: This search is guaranteed to find\n" +
+                "the shortest route. However it can be memory\n" +
+                "intensive and slow\n\n" +
+                "Depth First: The most basic algorithm. Usually\n" +
+                "gets the job done, but can be memory intensive,\n" +
+                "slow and meandering\n\n" +
+                "Dijkstra: Similar to AStar but slightly inferior\n" +
+                "performance\n\n\n" +
+                "NEIGHBOURS\n\n" +
+                "During Loading: Find all of the nodes in the maze\n" +
+                "before starting to solve. May lead to faster solve\n" +
+                "times but is more memory intensive.\n\n" +
+                "During Solving: Find only the necessary nodes while\n" +
+                "solving the maze. This has better memory performance\n" +
+                "but may be slower.";
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        makePopup(helpPanel, exit, new Dimension(400, 500));
+      });
 
       //todo add functionality
       JPanel buttonPanel = new JPanel();
