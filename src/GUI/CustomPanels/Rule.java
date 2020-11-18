@@ -31,6 +31,8 @@
 
 package GUI.CustomPanels;
 
+import GUI.GUI;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -89,8 +91,8 @@ public class Rule extends JComponent {
   protected void paintComponent(Graphics g) {
     Rectangle drawHere = g.getClipBounds();
 
-    // Fill clipping area with dirty brown/orange.
-    g.setColor(new Color(230, 163, 4));
+    // Fill clipping area with the background colour
+    g.setColor(GUI.backgroundCol);
     g.fillRect(drawHere.x, drawHere.y, drawHere.width, drawHere.height);
 
     // Do the ruler labels in a small font that's black.

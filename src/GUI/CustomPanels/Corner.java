@@ -31,6 +31,8 @@
 
 package GUI.CustomPanels;
 
+import GUI.GUI;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -38,8 +40,8 @@ import javax.swing.*;
 
 public class Corner extends JComponent {
   protected void paintComponent(Graphics g) {
-    // Fill me with dirty brown/orange.
-    g.setColor(new Color(230, 163, 4));
+    // Fill me with the background colour
+    g.setColor(GUI.backgroundCol);
     g.fillRect(0, 0, getWidth(), getHeight());
   }
 }

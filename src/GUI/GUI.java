@@ -16,8 +16,9 @@ public class GUI {
 
   public final int width = 1280;
   public final int height = 800;
-  public final Color activeCol = new Color(0, 131, 233);
-  public final Color inactiveCol = new Color(66, 66, 66);
+  public static final Color activeCol = new Color(0, 131, 233);
+  public static final Color inactiveCol = new Color(66, 66, 66);
+  public static final Color backgroundCol = new Color(211, 211,211);
 
   //Panels
   static JFrame window;
@@ -43,7 +44,7 @@ public class GUI {
     //Setup the container
     container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-    container.setBackground(activeCol);
+    container.setBackground(backgroundCol);
 
     //Setup the top tabs
     JPanel topTabs = new JPanel();
@@ -52,7 +53,7 @@ public class GUI {
     container.add(topTabs);
 
     activityArea = new JPanel();
-    activityArea.setBackground(activeCol);
+    activityArea.setBackground(backgroundCol);
     activityArea.setSize(new Dimension(width, height));
     activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
 
@@ -172,7 +173,7 @@ public class GUI {
    */
   private JPanel makeAlgoLoadScreen(int width, int height) {
     JPanel loadPanel = new JPanel();
-    loadPanel.setBackground(activeCol);
+    loadPanel.setBackground(backgroundCol);
     loadPanel.setMinimumSize(new Dimension(width, height));
     JButton loadImage = new JButton("Load Image");
     
@@ -200,9 +201,29 @@ public class GUI {
   private JPanel makeAlgoSolveScreen() {
     System.out.println("Making algorithm solve screen");
     JPanel main = new JPanel();
-    main.setLayout(new BoxLayout(main, BoxLayout.LINE_AXIS));
+    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 
-    main.add(new Scroll(this));
+    main.add(new Scroll(getImage()));
+
+    //Add the control panel
+    JPanel control = new JPanel();
+    control.setLayout(new FlowLayout());
+
+    control.setPreferredSize(new Dimension(500, 100));
+    control.setBackground(backgroundCol);
+
+    //todo add functionality
+    JButton solve = new JButton("Solve");
+    JButton artPts = new JButton("Articulation Points");
+    JButton minTree = new JButton("Minimum Tree");
+    JButton startOver = new JButton("Choose another image");
+
+    control.add(solve);
+    control.add(artPts);
+    control.add(minTree);
+    control.add(startOver);
+
+    main.add(control);
     
     return main;
   }

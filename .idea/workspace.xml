@@ -6,20 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="1c16c2a0-18ee-4647-a17c-340cf8a96393" name="Default Changelist" comment="v">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Features" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Application/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Application/Application.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/Rule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/Rule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ScrollDemo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/Scroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/Scroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ScrollablePicture.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/CustomPanels/ScrollablePicture.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/GUI/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Utility/Image/ImageFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Maze-Solver-Java/Utility/Image/ImageFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/ScrollDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/Scroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/Corner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/Scroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/ScrollablePicture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/ScrollablePicture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utility/Image/ImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Image/ImageFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +148,7 @@
       <workItem from="1604891909575" duration="511000" />
       <workItem from="1604970181051" duration="10726000" />
       <workItem from="1605217097133" duration="3580000" />
-      <workItem from="1605656896227" duration="8691000" />
+      <workItem from="1605656896227" duration="11282000" />
     </task>
     <servers />
   </component>
@@ -200,29 +197,29 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="292" y="32" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1604199319636" />
-    <state width="1849" height="229" key="GridCell.Tab.0.bottom" timestamp="1605682913148">
+    <state width="1849" height="229" key="GridCell.Tab.0.bottom" timestamp="1605685499759">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1604891589477" />
-    <state width="1849" height="229" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605682913148" />
+    <state width="1849" height="229" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605685499759" />
     <state width="1735" height="225" key="GridCell.Tab.0.bottom/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
-    <state width="1849" height="229" key="GridCell.Tab.0.center" timestamp="1605682913146">
+    <state width="1849" height="229" key="GridCell.Tab.0.center" timestamp="1605685499758">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605682913146" />
+    <state width="1849" height="229" key="GridCell.Tab.0.center/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605685499758" />
     <state width="1735" height="225" key="GridCell.Tab.0.center/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966252" />
-    <state width="1849" height="229" key="GridCell.Tab.0.left" timestamp="1605682913146">
+    <state width="1849" height="229" key="GridCell.Tab.0.left" timestamp="1605685499744">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605682913146" />
+    <state width="1849" height="229" key="GridCell.Tab.0.left/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605685499744" />
     <state width="1735" height="225" key="GridCell.Tab.0.left/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966251" />
-    <state width="1849" height="229" key="GridCell.Tab.0.right" timestamp="1605682913147">
+    <state width="1849" height="229" key="GridCell.Tab.0.right" timestamp="1605685499759">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="229" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1604891589476" />
-    <state width="1849" height="229" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605682913147" />
+    <state width="1849" height="229" key="GridCell.Tab.0.right/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605685499759" />
     <state width="1735" height="225" key="GridCell.Tab.0.right/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885966253" />
     <state width="1849" height="354" key="GridCell.Tab.1.bottom" timestamp="1605682730825">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -265,10 +262,10 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="683" y="325" key="extract.method.dialog/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1603868111936" />
-    <state x="682" y="320" width="598" height="548" key="find.popup" timestamp="1605662077283">
+    <state x="682" y="320" width="598" height="548" key="find.popup" timestamp="1605685388317">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="682" y="320" width="598" height="548" key="find.popup/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605662077283" />
+    <state x="682" y="320" width="598" height="548" key="find.popup/0.23.1920.1057/-1280.79.1280.1001@0.23.1920.1057" timestamp="1605685388317" />
     <state x="682" y="320" width="598" height="490" key="find.popup/0.23.1920.1057/-1920.23.1920.1177@0.23.1920.1057" timestamp="1599885789427" />
     <state x="516" y="160" key="new project wizard" timestamp="1605218361078">
       <screen x="0" y="23" width="1920" height="1057" />
@@ -305,7 +302,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/CustomPanels/Rule.java</url>
-          <line>96</line>
+          <line>98</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>

@@ -31,6 +31,8 @@
 
 package GUI.CustomPanels;
 
+import GUI.GUI;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -50,7 +52,7 @@ public class ScrollablePicture extends JLabel implements Scrollable, MouseMotion
       setText("No picture found.");
       setHorizontalAlignment(CENTER);
       setOpaque(true);
-      setBackground(Color.white);
+      setBackground(GUI.backgroundCol);
 
       this.setPreferredSize(new Dimension(500, 500));
       this.setMinimumSize(new Dimension(500, 500));

@@ -35,6 +35,7 @@ import GUI.GUI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 /*
@@ -49,15 +50,14 @@ public class Scroll extends JPanel implements ItemListener {
   private Rule rowView;
   private JToggleButton isMetric;
   private ScrollablePicture picture;
-  private GUI gui;
 
-  public Scroll(GUI gui) {
-    this.gui = gui;
+  public Scroll(BufferedImage toDisplay) {
+    this.setBackground(GUI.backgroundCol);
 
     setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
     //Get the image to use.
-    ImageIcon imageToDisplay = new ImageIcon(gui.getImage());
+    ImageIcon imageToDisplay = new ImageIcon(toDisplay);
 
 
     //Create the row and column headers.
@@ -79,8 +79,7 @@ public class Scroll extends JPanel implements ItemListener {
     picture = new ScrollablePicture(imageToDisplay, columnView.getIncrement());
     JScrollPane pictureScrollPane = new JScrollPane(picture);
     pictureScrollPane.setPreferredSize(new Dimension(500, 500));
-    pictureScrollPane.setViewportBorder(
-            BorderFactory.createLineBorder(Color.black));
+    pictureScrollPane.setViewportBorder(null);
 
     pictureScrollPane.setColumnHeaderView(columnView);
     pictureScrollPane.setRowHeaderView(rowView);
@@ -100,7 +99,6 @@ public class Scroll extends JPanel implements ItemListener {
 
     //Put it in this panel.
     add(pictureScrollPane);
-    setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
   }
 
   public void itemStateChanged(ItemEvent e) {
