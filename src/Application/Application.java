@@ -66,4 +66,13 @@ public class Application {
   public Dimension getMazeDimensions() {
     return currentImage.getDimensions();
   }
+
+  /**
+   * Get a specified piece of information about the image
+   * @param info the requested info
+   * @return the info
+   */
+  public String getImageInfo(String info) {
+    return currentImage.getInfo(info);
+  }
 }

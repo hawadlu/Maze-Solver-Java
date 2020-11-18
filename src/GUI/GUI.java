@@ -6,10 +6,12 @@ import Utility.Exceptions.GenericError;
 
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Stack;
 
 public class GUI {
   Application application;
@@ -212,7 +214,6 @@ public class GUI {
     control.setPreferredSize(new Dimension(500, 100));
     control.setBackground(backgroundCol);
 
-    //todo add functionality
     JButton solve = new JButton("Solve");
     JButton artPts = new JButton("Articulation Points");
     JButton minTree = new JButton("Minimum Tree");
@@ -223,11 +224,57 @@ public class GUI {
     control.add(minTree);
     control.add(startOver);
 
+    //Bind the functionality
+    solve.addActionListener(e -> {
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      JComboBox algoOptions = new JComboBox(new String[]{"AStar", "Breadth First", "Depth First", "Dijkstra"});
+      JComboBox neighbourOptions = new JComboBox(new String[]{"During Loading", "During Solving"});
+
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      solveControls.add(algoOptions);
+      solveControls.add(new JLabel("Neighbours"));
+      solveControls.add(neighbourOptions);
+      solveControls.add(new JLabel("Help?")); //todo add functionality
+      optionPanel.add(solveControls);
+
+      //todo add functionality
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancel, new Dimension(350, 200));
+    });
+
     main.add(control);
     
     return main;
   }
-  
+
+  /**
+   * Get a specified piece of information about the image
+   * @param info the requested info
+   * @return the info
+   */
+  private String getImageInfo(String info) {
+    return application.getImageInfo(info);
+  }
+
   /**
    * Get and return the file that the user wants
    *
@@ -283,5 +330,21 @@ public class GUI {
    */
   public Dimension getMazeDimensions() {
     return application.getMazeDimensions();
+  }
+
+  public void makePopup(JPanel panelToDisplay, JButton exit, Dimension panelDimensions) {
+    System.out.println("Making popup");
+    JFrame frame = new JFrame();
+    frame.setSize(panelDimensions);
+    frame.setBackground(backgroundCol);
+    frame.add(panelToDisplay);
+    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+    //Add the button functionality
+    exit.addActionListener(e -> {
+      frame.dispose();
+    });
+
+    frame.setVisible(true);
   }
 }

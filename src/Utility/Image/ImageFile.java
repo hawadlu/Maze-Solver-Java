@@ -14,6 +14,7 @@ import java.io.IOException;
  */
 public class ImageFile {
   Boolean[][] imageArray;
+  String filePath;
   
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
@@ -23,6 +24,8 @@ public class ImageFile {
     } catch (IOException e) {
       throw new InvalidImage("File is not an image");
     }
+
+    filePath = toLoad.getPath();
     
     //Make the 2d array of boolean values
     imageArray = new Boolean[tmp.getHeight()][tmp.getWidth()];
@@ -161,6 +164,26 @@ public class ImageFile {
    */
   public Dimension getDimensions() {
     return new Dimension(imageArray[0].length, imageArray.length);
+  }
+
+  /**
+   * Get a specified piece of information about the image
+   * @param info the requested info
+   * @return the info
+   */
+  public String getInfo(String info) {
+    if (info.equals("path")) return filePath;
+    else if (info.equals("name")) return getName();
+    else return "Info not found";
+  }
+
+  /**
+   * Get the name of the file from the file path
+   * @return the name
+   */
+  private String getName() {
+    String[] tmp = filePath.split("/");
+    return tmp[tmp.length - 1];
   }
 
   /**
