@@ -63,17 +63,67 @@ public class ImageFile {
   /**
    * Make a buffered image
    * @return the buffered image
-   * todo refactor to deal with colour
    */
   public BufferedImage makeImage() {
-    BufferedImage toReturn = new BufferedImage(imageArray[0].length, imageArray.length, BufferedImage.TYPE_INT_RGB);
+    Boolean[][] toUse;
+
+    //Scale the array up if required
+    if (imageArray.length < 500 || imageArray[0].length < 500) toUse = scaleArray();
+    else toUse = imageArray;
+
+    BufferedImage toReturn = new BufferedImage(toUse[0].length, toUse.length, BufferedImage.TYPE_INT_ARGB);
 
     //Go through the array and make the image
-    for (int height = 0; height < imageArray.length; height++) {
-      for (int width = 0; width < imageArray[0].length; width++) {
+    for (int height = 0; height < toUse.length; height++) {
+      for (int width = 0; width < toUse[0].length; width++) {
+        //todo adjust so this creates the image based on the scale.
+
         //Set the colours
-        if (imageArray[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
+        if (toUse[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
         else toReturn.setRGB(width, height, Color.BLACK.getRGB());
+      }
+    }
+
+    return toReturn;
+  }
+
+  /**
+   * Create a temporary scaled up array
+   * @return the larger array
+   */
+  private Boolean[][] scaleArray() {
+    //Get the desired with and height
+    int imageHeight = imageArray.length;
+    int imageWidth = imageArray[0].length;
+
+    //Calculate the new values until both exceed 500
+    if (imageHeight < 500 || imageWidth < 500) {
+      //Get the smaller of the two'
+      int smaller;
+      if (imageWidth < imageHeight) smaller = imageWidth;
+      else smaller = imageHeight;
+
+      while (smaller <= 500) {
+        imageHeight *= 2;
+        imageWidth *= 2;
+        smaller *= 2;
+      }
+    }
+
+    Boolean[][] toReturn = new Boolean[imageHeight][imageWidth];
+
+    System.out.println("Image has been scaled from " + imageArray[0].length + " by " + imageArray.length + " to " + imageWidth + " by " + imageHeight);
+
+    int scale = imageHeight/imageArray.length;
+    for (int height = 0; height < imageArray.length; height++) {
+      //Repeat for each row
+      for (int rowPos = 0; rowPos < scale; rowPos++) {
+        //Go through the columns in the row
+        for (int width = 0; width < imageArray[0].length; width++) {
+          for (int colPos = 0; colPos < scale; colPos++) {
+            toReturn[height * scale + rowPos][width * scale + colPos] = imageArray[height][width];
+          }
+        }
       }
     }
 

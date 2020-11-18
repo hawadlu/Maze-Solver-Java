@@ -51,6 +51,9 @@ public class ScrollablePicture extends JLabel implements Scrollable, MouseMotion
       setHorizontalAlignment(CENTER);
       setOpaque(true);
       setBackground(Color.white);
+
+      this.setPreferredSize(new Dimension(500, 500));
+      this.setMinimumSize(new Dimension(500, 500));
     }
     maxUnitIncrement = m;
 

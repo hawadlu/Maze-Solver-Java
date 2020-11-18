@@ -1,8 +1,7 @@
 package GUI;
 
 import Application.Application;
-import GUI.CustomPanels.Rule;
-import GUI.CustomPanels.ScrollDemo;
+import GUI.CustomPanels.Scroll;
 import Utility.Exceptions.GenericError;
 
 
@@ -203,7 +202,7 @@ public class GUI {
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.LINE_AXIS));
 
-    main.add(new ScrollDemo(this));
+    main.add(new Scroll(this));
     
     return main;
   }
@@ -255,15 +254,6 @@ public class GUI {
    */
   public BufferedImage getImage() {
     return application.getImage();
-  }
-
-  /**
-   * Get a specific part of the maze image
-   * @param calculateParams the parameters used to calculate what part of the image to get
-   * @return the image
-   */
-  public BufferedImage getImage(int[] calculateParams) {
-    return application.getImage(calculateParams);
   }
 
   /**

@@ -53,15 +53,6 @@ public class Application {
    */
   public BufferedImage getImage() {return currentImage.makeImage(); }
 
-  /**
-   * Get a specific part of the maze image
-   * @param calculateParams the parameters used to calculate what part of the image to get
-   * @return the image
-   */
-  public BufferedImage getImage(int[] calculateParams) {
-    return currentImage.makeImage(calculateParams);
-  }
-
   public static void main(String[] args) {
     //Create the GUI
     currentApplication = new Application();

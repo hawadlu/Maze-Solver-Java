@@ -36,7 +36,6 @@ import GUI.GUI;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 /*
  * ScrollDemo.java requires these files:
@@ -45,33 +44,28 @@ import javax.swing.border.*;
  *   ScrollablePicture.java
  *   images/flyingBee.jpg
  */
-public class ScrollDemo extends JPanel implements ItemListener {
+public class Scroll extends JPanel implements ItemListener {
   private Rule columnView;
   private Rule rowView;
   private JToggleButton isMetric;
   private ScrollablePicture picture;
   private GUI gui;
 
-  public ScrollDemo(GUI gui) {
+  public Scroll(GUI gui) {
     this.gui = gui;
 
     setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
     //Get the image to use.
     ImageIcon imageToDisplay = new ImageIcon(gui.getImage());
-//    ImageIcon imageToDisplay = createImageIcon("images/flyingBee.jpg");
+
 
     //Create the row and column headers.
     columnView = new Rule(Rule.HORIZONTAL, true);
     rowView = new Rule(Rule.VERTICAL, true);
 
-    if (imageToDisplay != null) {
-      columnView.setPreferredWidth(imageToDisplay.getIconWidth());
-      rowView.setPreferredHeight(imageToDisplay.getIconHeight());
-    } else {
-      columnView.setPreferredWidth(320);
-      rowView.setPreferredHeight(480);
-    }
+    columnView.setPreferredWidth(500);
+    rowView.setPreferredHeight(500);
 
     //Create the corners.
     JPanel buttonCorner = new JPanel(); //use FlowLayout
@@ -84,7 +78,7 @@ public class ScrollDemo extends JPanel implements ItemListener {
     //Set up the scroll pane.
     picture = new ScrollablePicture(imageToDisplay, columnView.getIncrement());
     JScrollPane pictureScrollPane = new JScrollPane(picture);
-    pictureScrollPane.setPreferredSize(new Dimension(300, 250));
+    pictureScrollPane.setPreferredSize(new Dimension(500, 500));
     pictureScrollPane.setViewportBorder(
             BorderFactory.createLineBorder(Color.black));
 
@@ -124,7 +118,7 @@ public class ScrollDemo extends JPanel implements ItemListener {
 
   /** Returns an ImageIcon, or null if the path was invalid. */
   protected static ImageIcon createImageIcon(String path) {
-    java.net.URL imgURL = ScrollDemo.class.getResource(path);
+    java.net.URL imgURL = Scroll.class.getResource(path);
     if (imgURL != null) {
       return new ImageIcon(imgURL);
     } else {
