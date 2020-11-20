@@ -71,15 +71,13 @@ public class ImageFile {
     Boolean[][] toUse;
 
     //Scale the array up if required
-    if (imageArray.length < 500 || imageArray[0].length < 500) toUse = scaleArray();
-    else toUse = imageArray;
+    toUse = scaleArray();
 
     BufferedImage toReturn = new BufferedImage(toUse[0].length, toUse.length, BufferedImage.TYPE_INT_ARGB);
 
     //Go through the array and make the image
     for (int height = 0; height < toUse.length; height++) {
       for (int width = 0; width < toUse[0].length; width++) {
-        //todo adjust so this creates the image based on the scale.
 
         //Set the colours
         if (toUse[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
@@ -111,6 +109,9 @@ public class ImageFile {
         imageWidth *= 2;
         smaller *= 2;
       }
+    } else {
+      imageHeight *= 3;
+      imageWidth *= 3;
     }
 
     Boolean[][] toReturn = new Boolean[imageHeight][imageWidth];
