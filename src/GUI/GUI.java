@@ -284,11 +284,17 @@ public class GUI {
         makePopup(helpPanel, exit, new Dimension(400, 500));
       });
 
-      //todo add functionality
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new FlowLayout());
       JButton solveButton = new JButton("Solve");
       JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+        String algorithm = (String) algoOptions.getSelectedItem();
+        String params = (String) neighbourOptions.getSelectedItem();
+        application.solve(algorithm, params);
+      });
 
       buttonPanel.add(cancel);
       buttonPanel.add(solveButton);

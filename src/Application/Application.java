@@ -1,5 +1,6 @@
 package Application;
 
+import Application.Solve.SolveAlgorithm;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
 import Utility.Exceptions.InvalidImage;
@@ -18,18 +19,6 @@ public class Application {
   GUI gui;
   static Application currentApplication;
   ImageFile currentImage;
-
-  /**
-   * Get the options that can be used to solve mazes
-   * @return arraylist of arrays
-   */
-  //todo implement me
-  public ArrayList<String[]> getSolveOptions() {
-    String arr[] = {"Hi", "there"};
-    ArrayList tmp = new ArrayList();
-    for (int i = 0; i < 4; i++) tmp.add(arr);
-    return tmp;
-  }
   
   /**
    * Take the image file and parse it into the appropriate format
@@ -53,6 +42,10 @@ public class Application {
    */
   public BufferedImage getImage() {return currentImage.makeImage(); }
 
+  public ImageFile getImageFile() {
+    return currentImage;
+  }
+
   public static void main(String[] args) {
     //Create the GUI
     currentApplication = new Application();
@@ -74,5 +67,14 @@ public class Application {
    */
   public String getImageInfo(String info) {
     return currentImage.getInfo(info);
+  }
+
+  /**
+   * Start solving the maze
+   * @param algorithm the algorithm to use
+   * @param params the parameters to use
+   */
+  public void solve(String algorithm, String params) {
+    new SolveAlgorithm(algorithm, params, currentApplication);
   }
 }

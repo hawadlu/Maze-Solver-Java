@@ -1,6 +1,7 @@
 package Utility.Image;
 
 import Utility.Exceptions.InvalidImage;
+import Utility.Location;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class ImageFile {
   Boolean[][] imageArray;
   String filePath;
-  
+
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
     BufferedImage tmp;
@@ -26,14 +27,14 @@ public class ImageFile {
     }
 
     filePath = toLoad.getPath();
-    
+
     //Make the 2d array of boolean values
     imageArray = new Boolean[tmp.getHeight()][tmp.getWidth()];
-    
+
     for (int height = 0; height < tmp.getHeight(); height++) {
       for (int width = 0; width < tmp.getWidth(); width++) {
         Color pixelCol = new Color(tmp.getRGB(width, height));
-        
+
         //Check if the colour is white
         if (pixelCol.getRed() == 255 && pixelCol.getGreen() == 255 && pixelCol.getBlue() == 255) {
           imageArray[height][width] = true;
@@ -42,15 +43,15 @@ public class ImageFile {
         }
       }
     }
-    
+
     System.out.println("Constructed image array");
     //printImageArray();
-    
+
     //Discard the original buffered image and call the garbage collector
     tmp = null;
     System.gc();
   }
-  
+
   /**
    * Utility method used for testing
    */
@@ -65,6 +66,7 @@ public class ImageFile {
 
   /**
    * Make a buffered image
+   *
    * @return the buffered image
    */
   public BufferedImage makeImage() {
@@ -90,6 +92,7 @@ public class ImageFile {
 
   /**
    * Create a temporary scaled up array
+   *
    * @return the larger array
    */
   private Boolean[][] scaleArray() {
@@ -118,7 +121,7 @@ public class ImageFile {
 
     System.out.println("Image has been scaled from " + imageArray[0].length + " by " + imageArray.length + " to " + imageWidth + " by " + imageHeight);
 
-    int scale = imageHeight/imageArray.length;
+    int scale = imageHeight / imageArray.length;
     for (int height = 0; height < imageArray.length; height++) {
       //Repeat for each row
       for (int rowPos = 0; rowPos < scale; rowPos++) {
@@ -136,6 +139,7 @@ public class ImageFile {
 
   /**
    * Create a cropped version of the image
+   *
    * @param calculateParams the specifications to crop to.
    * @return the cropped image
    */
@@ -161,6 +165,7 @@ public class ImageFile {
 
   /**
    * Get the dimensions of the maze
+   *
    * @return maze dimensions
    */
   public Dimension getDimensions() {
@@ -169,6 +174,7 @@ public class ImageFile {
 
   /**
    * Get a specified piece of information about the image
+   *
    * @param info the requested info
    * @return the info
    */
@@ -180,6 +186,7 @@ public class ImageFile {
 
   /**
    * Get the name of the file from the file path
+   *
    * @return the name
    */
   private String getName() {
@@ -187,7 +194,8 @@ public class ImageFile {
     return tmp[tmp.length - 1];
   }
 
-  /**
-   * Make image
-   */
+  public boolean isWhite(Location location) {
+    return imageArray[location.y][location.x];
+  }
 }
+
