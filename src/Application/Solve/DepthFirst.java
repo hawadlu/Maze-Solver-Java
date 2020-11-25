@@ -1,7 +1,11 @@
 package Application.Solve;
 
+import Utility.Exceptions.SolveFailureException;
+import Utility.Location;
 import Utility.Node;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -12,33 +16,38 @@ public class DepthFirst {
     public void solve(SolveAlgorithm solve) {
         System.out.println("Solving depth first");
 
-        Stack<Node> queue = new Stack<>();
-
-        //Add the first node to the stack
-        queue.push(solve.entry);
+        Node start = solve.entry;
+        Node destination = solve.exit;
 
         Node parent = null;
+        Stack<Node> toProcess = new Stack<>();
+        start.visit();
+        toProcess.push(start);
 
-        while (!queue.isEmpty()) {
-            Node currentNode = queue.pop();
+        while (!toProcess.isEmpty()) {
+            parent = toProcess.pop();
+            parent.visit();
 
-            //Add all of the child nodes to the queue
-            for (Node neighbour: currentNode.getNeighbours()) {
-                if (!neighbour.isVisited()) {
-                    queue.push(neighbour);
+            if (parent.equals(destination)) break;
+
+            //Choose how to get neighbours
+            HashSet<Node> neighbours = parent.getNeighbours();
+
+            //Add all the appropriate neighbours to the stack
+            for (Node node: neighbours) {
+                //Add the node to the queue
+                if (!node.isVisited()) {
+                    node.setParent(parent);
+                    toProcess.push(node);
                 }
             }
 
-            currentNode.visit();
-
-            //Check if this node is the end
-            if (currentNode.equals(solve.exit)) break;
-
-            if (parent == null) parent = currentNode;
-            else currentNode.setParent(parent);
-
-            parent = currentNode;
-
+            //If the stack is empty at this point, solving failed
+            if (toProcess.isEmpty()) try {
+                throw new SolveFailureException("");
+            } catch (SolveFailureException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

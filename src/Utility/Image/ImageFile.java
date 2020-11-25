@@ -1,20 +1,23 @@
 package Utility.Image;
 
+import Utility.Colours;
+import Utility.Colours.*;
 import Utility.Exceptions.InvalidImage;
-import Utility.Location;
+import Utility.Node;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
  * todo expand this to deal with the colours needed to show solved mazes. Probably just a method to make a buffered image.
  */
 public class ImageFile {
-  private final Boolean[][] imageArray;
+  private colEnum[][] imageArray = null;
   private final String filePath;
 
   public ImageFile(File toLoad) throws InvalidImage {
@@ -29,7 +32,7 @@ public class ImageFile {
     filePath = toLoad.getPath();
 
     //Make the 2d array of boolean values
-    imageArray = new Boolean[tmp.getHeight()][tmp.getWidth()];
+    imageArray = new colEnum[tmp.getHeight()][tmp.getWidth()];
 
     for (int height = 0; height < tmp.getHeight(); height++) {
       for (int width = 0; width < tmp.getWidth(); width++) {
@@ -37,9 +40,9 @@ public class ImageFile {
 
         //Check if the colour is white
         if (pixelCol.getRed() == 255 && pixelCol.getGreen() == 255 && pixelCol.getBlue() == 255) {
-          imageArray[height][width] = true;
+          imageArray[height][width] = colEnum.WHITE;
         } else {
-          imageArray[height][width] = false;
+          imageArray[height][width] = colEnum.BLACK;
         }
       }
     }
@@ -70,7 +73,7 @@ public class ImageFile {
    * @return the buffered image
    */
   public BufferedImage makeImage() {
-    Boolean[][] toUse;
+    colEnum[][] toUse;
 
     //Scale the array up if required
     toUse = scaleArray();
@@ -82,8 +85,12 @@ public class ImageFile {
       for (int width = 0; width < toUse[0].length; width++) {
 
         //Set the colours
-        if (toUse[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
-        else toReturn.setRGB(width, height, Color.BLACK.getRGB());
+        //todo deal with green and blue
+        if (toUse[height][width] == colEnum.WHITE) toReturn.setRGB(width, height, Colours.white);
+        else if (toUse[height][width] == colEnum.RED) toReturn.setRGB(width, height, Colours.red);
+        else if (toUse[height][width] == colEnum.BLUE) toReturn.setRGB(width, height, Colours.blue);
+        else if (toUse[height][width] == colEnum.GREEN) toReturn.setRGB(width, height, Colours.green);
+        else toReturn.setRGB(width, height, Colours.black);
       }
     }
 
@@ -95,7 +102,7 @@ public class ImageFile {
    *
    * @return the larger array
    */
-  private Boolean[][] scaleArray() {
+  private colEnum[][] scaleArray() {
     //Get the desired with and height
     int imageHeight = imageArray.length;
     int imageWidth = imageArray[0].length;
@@ -117,7 +124,7 @@ public class ImageFile {
       imageWidth *= 3;
     }
 
-    Boolean[][] toReturn = new Boolean[imageHeight][imageWidth];
+    colEnum[][] toReturn = new colEnum[imageHeight][imageWidth];
 
     System.out.println("Image has been scaled from " + imageArray[0].length + " by " + imageArray.length + " to " + imageWidth + " by " + imageHeight);
 
@@ -155,7 +162,7 @@ public class ImageFile {
       for (int width = left; width < left + pixAcross; width++) {
         //Set the colours
         System.out.println("Width: " + width + " height: " + height + " arr width: " + imageArray[0].length + " arr height: " + imageArray.length + " img width: " + toReturn.getWidth() + " img height: " + toReturn.getHeight());
-        if (imageArray[height][width]) toReturn.setRGB(width, height, Color.WHITE.getRGB());
+        if (imageArray[height][width] == colEnum.WHITE) toReturn.setRGB(width, height, Color.WHITE.getRGB());
         else toReturn.setRGB(width, height, Color.BLACK.getRGB());
       }
     }
@@ -194,8 +201,62 @@ public class ImageFile {
     return tmp[tmp.length - 1];
   }
 
-  public Boolean[][] getArray() {
+  public colEnum[][] getArray() {
     return imageArray;
+  }
+
+  /**
+   * Creates an image of the solved maze
+   * @param path
+   */
+  public void createSolvedImage(ArrayList<Node> path) {
+    while (path.size() > 1) {
+      Node currentNode = path.remove(0);
+      Node nextNode = path.get(0);
+
+      int startX = currentNode.getLocation().x;
+      int startY = currentNode.getLocation().y;
+      int endX = nextNode.getLocation().x;
+      int endY = nextNode.getLocation().y;
+      int y, x;
+
+      //Set the colours at the start and end
+      imageArray[startY][startX] = colEnum.RED;
+      imageArray[endY][endX] = colEnum.RED;
+
+      //Drawing down
+      if (startY < endY) {
+        y = startY + 1;
+        while (y < endY) {
+          imageArray[y][startX] = colEnum.RED;
+          y += 1;
+        }
+
+        //Drawing up
+      } else if (startY > endY) {
+        y = startY;
+        while (y > endY) {
+          imageArray[y][startX] = colEnum.RED;
+          y-=1;
+        }
+
+        //Drawing right
+      } else if (startX < endX) {
+        x = startX;
+        while (x < endX) {
+          imageArray[startY][x] = colEnum.RED;
+          x+=1;
+        }
+
+        //Drawing left
+      } else if (startX > endX) {
+        x = startX;
+        while (x > endX) {
+          imageArray[startY][x] = colEnum.RED;
+          x -= 1;
+        }
+      }
+    }
   }
 }
 

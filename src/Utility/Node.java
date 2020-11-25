@@ -7,7 +7,7 @@ import java.util.HashSet;
  */
 public class Node {
     Location nodeLocation;
-    HashSet<Node> neighbours;
+    HashSet<Node> neighbours = new HashSet<>();
     Node parent;
     Boolean isVisited = false;
 

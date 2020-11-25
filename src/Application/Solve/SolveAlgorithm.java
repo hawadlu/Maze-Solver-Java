@@ -16,7 +16,6 @@ public class SolveAlgorithm {
     boolean scanAll = false;
     ImageProcessor processor;
     HashMap<Location, Node> nodes = new HashMap<>();
-    ArrayList<Location> exits = new ArrayList<>();
     Node entry, exit;
 
     /**
@@ -32,11 +31,12 @@ public class SolveAlgorithm {
     }
 
     public void Scan(String params) {
-        this.processor.setSolve(this);
         if (params.equals("During Loading")) {
             nodes = processor.scanAll();
             scanAll = true;
         }
+
+        ArrayList<Location> exits = processor.getExits();
 
         //make sure there is at least one entry and exit
         if (exits.size() < 2) try {
@@ -47,21 +47,6 @@ public class SolveAlgorithm {
 
         entry = nodes.get(exits.get(0));
         exit = nodes.get(exits.get(1));
-    }
-
-    /**
-     * Add an exit location to the solver
-     * @param exitLocation the location of the exit node
-     */
-    public void addExit(Location exitLocation) {
-        exits.add(exitLocation);
-
-        //Check if their are too many exits
-        if (exits.size() > 2) try {
-            throw new InvalidMaze("Too many exits");
-        } catch (InvalidMaze invalidMaze) {
-            invalidMaze.printStackTrace();
-        }
     }
 
     /**

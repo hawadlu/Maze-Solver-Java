@@ -3,13 +3,11 @@ package Application;
 import Application.Solve.SolveAlgorithm;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
-import Utility.Exceptions.InvalidImage;
 import Utility.Image.ImageFile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * This class is the base of the program.
@@ -78,5 +76,8 @@ public class Application {
     SolveAlgorithm solve = new SolveAlgorithm(currentApplication);
     solve.Scan(params);
     solve.Solve(algorithm);
+
+    //Create the solved image
+    currentImage.createSolvedImage(solve.getPath());
   }
 }

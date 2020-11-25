@@ -294,6 +294,11 @@ public class GUI {
         String algorithm = (String) algoOptions.getSelectedItem();
         String params = (String) neighbourOptions.getSelectedItem();
         application.solve(algorithm, params);
+
+        //todo make a spinner thread
+        System.out.println("Solve completed");
+
+
       });
 
       buttonPanel.add(cancel);
