@@ -75,6 +75,8 @@ public class Application {
    * @param params the parameters to use
    */
   public void solve(String algorithm, String params) {
-    new SolveAlgorithm(algorithm, params, currentApplication);
+    SolveAlgorithm solve = new SolveAlgorithm(currentApplication);
+    solve.Scan(params);
+    solve.Solve(algorithm);
   }
 }

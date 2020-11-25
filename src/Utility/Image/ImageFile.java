@@ -14,8 +14,8 @@ import java.io.IOException;
  * todo expand this to deal with the colours needed to show solved mazes. Probably just a method to make a buffered image.
  */
 public class ImageFile {
-  Boolean[][] imageArray;
-  String filePath;
+  private final Boolean[][] imageArray;
+  private final String filePath;
 
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
@@ -99,19 +99,19 @@ public class ImageFile {
     //Get the desired with and height
     int imageHeight = imageArray.length;
     int imageWidth = imageArray[0].length;
+    double minValue = 500;
 
     //Calculate the new values until both exceed 500
-    if (imageHeight < 500 || imageWidth < 500) {
+    if (imageHeight < minValue || imageWidth < minValue) {
       //Get the smaller of the two'
       int smaller;
       if (imageWidth < imageHeight) smaller = imageWidth;
       else smaller = imageHeight;
 
-      while (smaller <= 500) {
-        imageHeight *= 2;
-        imageWidth *= 2;
-        smaller *= 2;
-      }
+      double scaleFactor = Math.ceil(minValue/smaller);
+
+      imageHeight *= scaleFactor;
+      imageWidth *= scaleFactor;
     } else {
       imageHeight *= 3;
       imageWidth *= 3;
@@ -194,8 +194,8 @@ public class ImageFile {
     return tmp[tmp.length - 1];
   }
 
-  public boolean isWhite(Location location) {
-    return imageArray[location.y][location.x];
+  public Boolean[][] getArray() {
+    return imageArray;
   }
 }
 
