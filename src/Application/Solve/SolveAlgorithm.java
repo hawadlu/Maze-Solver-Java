@@ -57,7 +57,7 @@ public class SolveAlgorithm {
         ArrayList<Node> path = new ArrayList<>();
         Node currentNode = exit;
 
-        while (currentNode.getParent() != null) {
+        while (currentNode != null) {
             path.add(currentNode);
             currentNode = currentNode.getParent();
         }
