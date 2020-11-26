@@ -7,7 +7,9 @@ import Utility.Location;
 import Utility.Node;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * This class contains common methdods that are used by all algorithms
@@ -32,9 +34,13 @@ public class SolveAlgorithm {
 
     public void Scan(String params) {
         if (params.equals("During Loading")) {
-            nodes = processor.scanAll();
+            processor.scanAll();
             scanAll = true;
+        } else {
+            processor.findExits();
         }
+
+        nodes = processor.getNodes();
 
         ArrayList<Location> exits = processor.getExits();
 
@@ -63,5 +69,14 @@ public class SolveAlgorithm {
         }
 
         return path;
+    }
+
+    /**
+     * Find the return the neighbours of a specific node
+     * @param parent the node to find neighbours of.
+     * @return a hashset of all the neighbours
+     */
+    public void findNeighbours(Node parent) {
+        processor.scanAll(parent);
     }
 }

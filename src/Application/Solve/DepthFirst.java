@@ -25,16 +25,17 @@ public class DepthFirst {
         toProcess.push(start);
 
         while (!toProcess.isEmpty()) {
+
             parent = toProcess.pop();
             parent.visit();
 
             if (parent.equals(destination)) break;
 
-            //Choose how to get neighbours
-            HashSet<Node> neighbours = parent.getNeighbours();
+            //If the neighbours are not already loaded, load them.
+            if (!solve.scanAll) solve.findNeighbours(parent);
 
             //Add all the appropriate neighbours to the stack
-            for (Node node: neighbours) {
+            for (Node node: parent.getNeighbours()) {
                 //Add the node to the queue
                 if (!node.isVisited()) {
                     node.setParent(parent);
@@ -44,7 +45,7 @@ public class DepthFirst {
 
             //If the stack is empty at this point, solving failed
             if (toProcess.isEmpty()) try {
-                throw new SolveFailureException("");
+                throw new SolveFailureException("The stack is empty");
             } catch (SolveFailureException e) {
                 e.printStackTrace();
             }
