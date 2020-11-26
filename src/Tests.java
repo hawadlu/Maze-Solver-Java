@@ -1,5 +1,6 @@
+import Utility.Thread.AlgorithmWorkerThread;
 import Application.Application;
-import Application.Solve.SolveAlgorithm;
+import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.GenericError;
 import Utility.Image.ImageProcessor;
 import Utility.Location;
@@ -8,10 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -251,5 +250,25 @@ public class Tests {
         application.getImageFile().createSolvedImage(path);
         BufferedImage solvedImage = application.getImage();
         System.out.println("Created image");
+    }
+
+    //TEST THE WORKER THREAD
+    @Test
+    public void testWorkerThread() throws InterruptedException {
+        Application application = new Application();
+        File image = new File("Images/TwoK Imperfect.png");
+        try {
+            application.parseImageFile(image);
+        } catch (GenericError genericError) {
+            genericError.printStackTrace();
+            System.out.println("Failed to parse image");
+        }
+
+        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "During Loading", application);
+        thread.start();
+
+        thread.join(); //Wait for the other thread to finish
+
+        System.out.println("Thread finished");
     }
 }

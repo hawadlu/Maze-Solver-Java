@@ -1,11 +1,8 @@
-package Application.Solve;
+package Algorithm;
 
-import Utility.Exceptions.SolveFailureException;
-import Utility.Location;
+import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Stack;
 
 /**
@@ -45,8 +42,8 @@ public class DepthFirst {
 
             //If the stack is empty at this point, solving failed
             if (toProcess.isEmpty()) try {
-                throw new SolveFailureException("The stack is empty");
-            } catch (SolveFailureException e) {
+                throw new SolveFailure("The stack is empty");
+            } catch (SolveFailure e) {
                 e.printStackTrace();
             }
         }

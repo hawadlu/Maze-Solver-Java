@@ -1,6 +1,6 @@
 package Application;
 
-import Application.Solve.SolveAlgorithm;
+import Utility.Thread.AlgorithmWorkerThread;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
 import Utility.Image.ImageFile;
@@ -72,12 +72,8 @@ public class Application {
    * @param algorithm the algorithm to use
    * @param params the parameters to use
    */
-  public void solve(String algorithm, String params) {
-    SolveAlgorithm solve = new SolveAlgorithm(currentApplication);
-    solve.Scan(params);
-    solve.Solve(algorithm);
-
-    //Create the solved image
-    currentImage.createSolvedImage(solve.getPath());
+  public AlgorithmWorkerThread solve(String algorithm, String params) {
+    AlgorithmWorkerThread worker = new AlgorithmWorkerThread(algorithm, params, this);
+    return worker;
   }
 }

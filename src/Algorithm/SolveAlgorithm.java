@@ -1,4 +1,4 @@
-package Application.Solve;
+package Algorithm;
 
 import Application.Application;
 import Utility.Exceptions.InvalidMaze;
@@ -7,9 +7,7 @@ import Utility.Location;
 import Utility.Node;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * This class contains common methdods that are used by all algorithms

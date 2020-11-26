@@ -2,7 +2,10 @@ package GUI;
 
 import Application.Application;
 import GUI.CustomPanels.Scroll;
+import GUI.CustomPanels.SpinnerPanel;
 import Utility.Exceptions.GenericError;
+import Utility.Thread.AlgorithmWorkerThread;
+import Utility.Thread.WaitThread;
 
 
 import javax.swing.*;
@@ -11,7 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class GUI {
   Application application;
@@ -226,6 +229,8 @@ public class GUI {
 
     //Bind the functionality
     solve.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
       //Make a popup JPanel
       JPanel optionPanel = new JPanel();
       optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
@@ -281,7 +286,9 @@ public class GUI {
         JButton exit = new JButton("exit");
         helpPanel.add(exit);
         helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        makePopup(helpPanel, exit, new Dimension(400, 500));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 500));
       });
 
       JPanel buttonPanel = new JPanel();
@@ -293,25 +300,51 @@ public class GUI {
       solveButton.addActionListener(e12 -> {
         String algorithm = (String) algoOptions.getSelectedItem();
         String params = (String) neighbourOptions.getSelectedItem();
-        application.solve(algorithm, params);
 
-        //todo make a spinner thread
-        System.out.println("Solve completed");
-
-
+        makeAlgoWorkingScreen(algorithm, params);
       });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
 
       buttonPanel.add(cancel);
       buttonPanel.add(solveButton);
 
       optionPanel.add(buttonPanel);
 
-      makePopup(optionPanel, cancel, new Dimension(350, 200));
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
     });
 
     main.add(control);
     
     return main;
+  }
+
+  /**
+   * Make the screen that shows a spinner while the algorithm is solving.
+   */
+  private void makeAlgoWorkingScreen(String algorithm, String params) {
+    //Prepare the main area
+    algoMainArea.removeAll();
+
+    //Add the spinner
+    algoMainArea.add(new SpinnerPanel(backgroundCol));
+
+    //Start solving the algorithm
+    AlgorithmWorkerThread thread = application.solve(algorithm, params);
+
+    refresh();
+
+    //Create a spinner thread
+    WaitThread spinner = new WaitThread(thread);
+
+    //start the threads
+    spinner.start();
+
+    System.out.println("Solve complete");
+
+    
   }
 
   /**
@@ -380,7 +413,7 @@ public class GUI {
     return application.getMazeDimensions();
   }
 
-  public void makePopup(JPanel panelToDisplay, JButton exit, Dimension panelDimensions) {
+  public void makePopup(JPanel panelToDisplay, ArrayList<JButton> exitButtons, Dimension panelDimensions) {
     System.out.println("Making popup");
     JFrame frame = new JFrame();
     frame.setSize(panelDimensions);
@@ -389,9 +422,11 @@ public class GUI {
     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     //Add the button functionality
-    exit.addActionListener(e -> {
-      frame.dispose();
-    });
+    for (JButton exit: exitButtons) {
+      exit.addActionListener(e -> {
+        frame.dispose();
+      });
+    }
 
     frame.setVisible(true);
   }
