@@ -258,5 +258,31 @@ public class ImageFile {
       }
     }
   }
+
+  /**
+   * Remove all of the colour from the image file
+   */
+  public void reset() {
+    for (int height = 0; height < imageArray.length; height++) {
+      for (int width = 0; width < imageArray[0].length; width++) {
+        //todo refactor to deal with blue and green
+        if (imageArray[height][width].equals(colEnum.RED)) imageArray[height][width] = colEnum.WHITE;
+      }
+    }
+  }
+
+  /**
+   * Save this image
+   * @param fileName place to save to
+   */
+  public void saveImage(String fileName) {
+    //Saving the image
+    try {
+      ImageIO.write(makeImage(), "png", new File(fileName));
+      System.out.println("Image saved as " + fileName);
+    } catch (Exception e) {
+      System.out.println("Unable to save image: " + e);
+    }
+  }
 }
 

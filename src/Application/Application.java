@@ -76,4 +76,19 @@ public class Application {
     AlgorithmWorkerThread worker = new AlgorithmWorkerThread(algorithm, params, this);
     return worker;
   }
+
+  /**
+   * Reset the current image to remove any marks from solving etc
+   */
+  public void resetImage() {
+    currentImage.reset();
+  }
+
+  /**
+   * Save the current image to a file
+   * @param path the place to save the image
+   */
+  public void saveImage(String path) {
+    currentImage.saveImage(path);
+  }
 }

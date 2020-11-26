@@ -11,10 +11,10 @@ import java.net.URL;
  * This class deals with drawing the spinner panel;
  */
 public class SpinnerPanel extends JPanel {
-  public SpinnerPanel(Color background) {
+  public SpinnerPanel() {
     ImageIcon spinner = new ImageIcon("Animations/Spinning Arrows.gif");
 
-    this.setBackground(background);
+    this.setBackground(null);
     this.add(new JLabel("working...", spinner, JLabel.CENTER));
   }
 }

@@ -63,7 +63,7 @@ public class GUI {
     activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
 
     //Add the algorithms panel by default
-    algoMainArea = makeAlgoLoadScreen(activityArea.getWidth(), activityArea.getHeight());
+    makeAlgoLoadScreen();
     activityArea.add(algoMainArea);
 
     container.add(activityArea);
@@ -176,10 +176,14 @@ public class GUI {
    * It creates a simple panel that houses a button for loading images
    * @return the panel that holds the load image button
    */
-  private JPanel makeAlgoLoadScreen(int width, int height) {
+  private void makeAlgoLoadScreen() {
+    if (algoMainArea != null) algoMainArea.removeAll();
+    else algoMainArea = new JPanel();
+    algoMainArea.setBackground(backgroundCol);
+
     JPanel loadPanel = new JPanel();
     loadPanel.setBackground(backgroundCol);
-    loadPanel.setMinimumSize(new Dimension(width, height));
+    loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
     JButton loadImage = new JButton("Load Image");
     
     //Bind functionality to the load image button
@@ -191,19 +195,21 @@ public class GUI {
       }
   
       //Load the image to the main screen
-      algoMainArea.removeAll();
-      algoMainArea.add(makeAlgoSolveScreen()); //Add the algo solve area to the main panel
+      makeAlgoSolveScreen();
       refresh();
     });
     
     loadPanel.add(loadImage);
-    return loadPanel;
+    algoMainArea.add(loadPanel);
+    refresh();
   }
   
   /**
    * Make the sc®een that will be used to load the options for solving the maze
    */
-  private JPanel makeAlgoSolveScreen() {
+  private void makeAlgoSolveScreen() {
+    algoMainArea.removeAll();
+
     System.out.println("Making algorithm solve screen");
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
@@ -317,8 +323,9 @@ public class GUI {
     });
 
     main.add(control);
-    
-    return main;
+
+    algoMainArea.add(main);
+    refresh();
   }
 
   /**
@@ -328,8 +335,12 @@ public class GUI {
     //Prepare the main area
     algoMainArea.removeAll();
 
+    Dimension currentDimension = algoMainArea.getSize();
+    System.out.println("Main area size: " + currentDimension);
+
     //Add the spinner
-    algoMainArea.add(new SpinnerPanel(backgroundCol));
+    algoMainArea.add(new SpinnerPanel());
+
 
     //Start solving the algorithm
     AlgorithmWorkerThread thread = application.solve(algorithm, params);
@@ -344,7 +355,72 @@ public class GUI {
 
     System.out.println("Solve complete");
 
-    
+    makeAlgoSolvedScreen();
+  }
+
+  /**
+   * Show the completed image on screen
+   */
+  private void makeAlgoSolvedScreen() {
+    algoMainArea.removeAll();
+
+    System.out.println("Making algorithm solved screen");
+    JPanel main = new JPanel();
+    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+
+    main.add(new Scroll(getImage()));
+
+    //Add the control panel
+    JPanel control = new JPanel();
+    control.setLayout(new FlowLayout());
+
+    control.setPreferredSize(new Dimension(500, 100));
+    control.setBackground(backgroundCol);
+
+    JButton loadOther = new JButton("Load Another Image");
+    JButton reset = new JButton("Reset This Image");
+    JButton save = new JButton("Save");
+
+    control.add(loadOther);
+    control.add(reset);
+    control.add(save);
+
+    //Bind the functionality
+    loadOther.addActionListener(e -> makeAlgoLoadScreen());
+    reset.addActionListener(e -> resetImage());
+    save.addActionListener(e -> saveImage());
+
+    main.add(control);
+
+    algoMainArea.add(main);
+
+    refresh();
+  }
+
+  /**
+   * Save the image
+   */
+  private void saveImage() {
+    JFileChooser save =new JFileChooser();
+    int ret = save.showSaveDialog(window);
+    if (ret == JFileChooser.APPROVE_OPTION) {
+      String fileName = save.getSelectedFile().getName();
+      String directory = save.getCurrentDirectory().toString();
+      System.out.println(fileName);
+      System.out.println(directory);
+      System.out.println("Concat: " + directory + "/" + fileName);
+      application.saveImage(directory + "/" + fileName);
+    } else if (ret == JFileChooser.CANCEL_OPTION) {
+      System.out.println("You pressed cancel");
+    }
+  }
+
+  /**
+   * Reset the image so that is can be used again
+   */
+  private void resetImage() {
+    application.resetImage();
+    makeAlgoSolveScreen();
   }
 
   /**
