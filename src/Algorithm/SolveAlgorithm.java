@@ -17,21 +17,26 @@ public class SolveAlgorithm {
     ImageProcessor processor;
     HashMap<Location, Node> nodes = new HashMap<>();
     Node entry, exit;
+    Application application;
 
     /**
      * Start the solve process.
      * @param currentApplication  the current application.
      */
     public SolveAlgorithm(Application currentApplication) {
+        this.application = currentApplication;
         this.processor = new ImageProcessor(currentApplication);
     }
 
     public void Solve(String algorithm) {
+        long startTime = System.nanoTime();
         if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this);
+        long stopTime = System.nanoTime();
+        System.out.println("Execution time: " + (stopTime - startTime) + "ns");
     }
 
     public void Scan(String params) {
-        if (params.equals("During Loading")) {
+        if (params.equals("Loading")) {
             processor.scanAll();
             scanAll = true;
         } else {

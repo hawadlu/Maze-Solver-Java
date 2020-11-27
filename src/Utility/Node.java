@@ -62,8 +62,14 @@ public class Node {
 
     /**
      * Visit this node
+     * @param visitor the thread that visited this node
      */
     public void visit() {
         this.isVisited = true;
+    }
+
+    @Override
+    public String toString() {
+        return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
     }
 }

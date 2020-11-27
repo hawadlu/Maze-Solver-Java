@@ -22,7 +22,7 @@ public class ImageProcessor {
 
 
     /**
-     * Take the maze image and scan it for all the nodes
+     * Take the maze image and scan it for all the nodes.
      */
     public void scanAll() {
         nodes.clear();
@@ -111,6 +111,8 @@ public class ImageProcessor {
                 exits.add(location);
                 nodes.put(location, new Node(location));
             }
+//            System.out.println(new Location(width, 0) + " " + imgArray[0][width]);
+//            System.out.println(new Location(width, imgArray.length - 1) + " " + imgArray[imgArray.length - 1][width]);
             if (imgArray[imgArray[0].length - 1][width] == colEnum.WHITE) {
                 Location location = new Location(width, imgArray.length - 1);
                 exits.add(location);

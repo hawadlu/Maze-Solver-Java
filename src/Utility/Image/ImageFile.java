@@ -37,9 +37,10 @@ public class ImageFile {
     for (int height = 0; height < tmp.getHeight(); height++) {
       for (int width = 0; width < tmp.getWidth(); width++) {
         Color pixelCol = new Color(tmp.getRGB(width, height));
+        int whiteMin = 50;
 
         //Check if the colour is white
-        if (pixelCol.getRed() == 255 && pixelCol.getGreen() == 255 && pixelCol.getBlue() == 255) {
+        if (pixelCol.getRed() > whiteMin && pixelCol.getGreen() > whiteMin && pixelCol.getBlue() > whiteMin) {
           imageArray[height][width] = colEnum.WHITE;
         } else {
           imageArray[height][width] = colEnum.BLACK;

@@ -247,7 +247,7 @@ public class GUI {
 
       //The popup options
       JComboBox algoOptions = new JComboBox(new String[]{"AStar", "Breadth First", "Depth First", "Dijkstra"});
-      JComboBox neighbourOptions = new JComboBox(new String[]{"During Loading", "During Solving"});
+      JComboBox neighbourOptions = new JComboBox(new String[]{"Loading", "Solving"});
 
       solveControls.add(new JLabel("Image"));
       solveControls.add(new JLabel(getImageInfo("name")));
@@ -276,7 +276,7 @@ public class GUI {
                 "During Loading: Find all of the nodes in the maze\n" +
                 "before starting to solve. May lead to faster solve\n" +
                 "times but is more memory intensive.\n\n" +
-                "During Solving: Find only the necessary nodes while\n" +
+                "Solving: Find only the necessary nodes while\n" +
                 "solving the maze. This has better memory performance\n" +
                 "but may be slower.";
 

@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,213 +45,48 @@ public class Tests {
 
 
     //TESTS OF THE DEPTH FIRST SEARCH
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
     @Test
-    public void testDFSSmallScanOnLoad() {
-        Application application = new Application();
-        File image = new File("Images/Tiny.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
+    public void testDFS() throws InterruptedException {
+        ArrayList<File> files = getAllFiles(new File("Images"));
+
+        //Remove anything that is not an image
+        files = removeNonImages(files, false);
+
+        Comparator<File> smallest = (File f1, File f2) -> {
+            if (f1.length() < f2.length()) return -1;
+            if (f1.length() > f2.length()) return 1;
+            return 0;
+        };
+
+        files.sort(smallest);
+
+        System.out.println("files: " + files);
+
+        String[] options = {"Loading", "Solving"};
+
+        for (File file: files) {
+            for (String option: options) {
+                System.out.println("DFS solve " + file.getName() + " " + option);
+
+                Application application = new Application();
+                try {
+                    application.parseImageFile(file);
+                } catch (GenericError genericError) {
+                    genericError.printStackTrace();
+                    System.out.println("Failed to parse image");
+                }
+
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                thread.start();
+
+                thread.join(); //Wait for the other thread to finish
+
+                System.out.println("Thread finished");
+
+                application.saveImage("Images/Solved/Test " + file.getName());
+            }
         }
 
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Loading");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSMediumScanOnLoad() {
-        Application application = new Application();
-        File image = new File("Images/Large Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Loading");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSHugeScanOnLoad() {
-        Application application = new Application();
-        File image = new File("Images/Huge Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Loading");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSMaxScanOnLoad() {
-        Application application = new Application();
-        File image = new File("Images/OneK Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Loading");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSSmallScanOnSolve() {
-        Application application = new Application();
-        File image = new File("Images/Tiny.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Solving");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSMediumScanOnSolve() {
-        Application application = new Application();
-        File image = new File("Images/Large Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Solving");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSHugeScanOnSolve() {
-        Application application = new Application();
-        File image = new File("Images/Huge Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Solving");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
-    }
-
-    /**
-     * Test DFS search, find neighbours during loading.
-     */
-    @Test
-    public void testDFSMaxScanOnSolve() {
-        Application application = new Application();
-        File image = new File("Images/OneK Imperfect.png");
-        try {
-            application.parseImageFile(image);
-        } catch (GenericError genericError) {
-            genericError.printStackTrace();
-            System.out.println("Failed to parse image");
-        }
-
-        SolveAlgorithm solve = new SolveAlgorithm(application);
-        solve.Scan("During Solving");
-        solve.Solve("Depth First");
-        ArrayList<Node> path = solve.getPath();
-        assert !path.isEmpty();
-
-        //Create the image
-        application.getImageFile().createSolvedImage(path);
-        BufferedImage solvedImage = application.getImage();
-        System.out.println("Created image");
     }
 
     //TEST THE WORKER THREAD
@@ -264,11 +101,59 @@ public class Tests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "During Loading", application);
+        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application);
         thread.start();
 
         thread.join(); //Wait for the other thread to finish
 
         System.out.println("Thread finished");
+    }
+
+    //TEST SAVING
+    @Test
+    public void testSave() throws InterruptedException {
+        Application application = new Application();
+        File image = new File("Images/Small Imperfect.png");
+        try {
+            application.parseImageFile(image);
+        } catch (GenericError genericError) {
+            genericError.printStackTrace();
+            System.out.println("Failed to parse image");
+        }
+
+        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application);
+        thread.start();
+
+        thread.join(); //Wait for the other thread to finish
+
+        System.out.println("Thread finished");
+
+        application.saveImage("Images/Solved/Test.png");
+    }
+
+    /**
+     * @param dir the directory to check
+     * @return all the files in the directory
+     */
+    private ArrayList<File> getAllFiles(final File dir) {
+        ArrayList<File> files = new ArrayList<>();
+        for (final File fileEntry: dir.listFiles()) {
+            if (!fileEntry.isDirectory()) files.add(fileEntry);
+        }
+        return files;
+    }
+
+    /**
+     * Remove any files without a supported extension
+     * @param files arraylist of files.
+     */
+    private ArrayList<File> removeNonImages(ArrayList<File> files, boolean inclDeliberateInvalid) {
+        ArrayList<File> toReturn = new ArrayList<>();
+        for (File file: files) {
+            if (file.getName().contains(".png") || file.getName().contains(".jpg") || file.getName().contains(".jpeg")) {
+                if (!inclDeliberateInvalid && !file.getName().contains("Invalid")) toReturn.add(file);
+            }
+        }
+        return toReturn;
     }
 }
