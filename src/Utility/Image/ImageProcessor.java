@@ -120,7 +120,7 @@ public class ImageProcessor {
             }
         }
 
-        //Look at the top and bottom rows
+        //Look at the left and right columns
         for (int height = 0; height < imgArray.length; height++) {
             if (imgArray[height][0] == colEnum.WHITE) {
                 Location location = new Location(0, height);

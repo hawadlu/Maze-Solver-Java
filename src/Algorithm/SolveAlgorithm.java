@@ -18,6 +18,8 @@ public class SolveAlgorithm {
     HashMap<Location, Node> nodes = new HashMap<>();
     Node entry, exit;
     Application application;
+    double singleThreadSize = Math.pow(100, 2); //The size of maze that should be handles by a single thread
+    double mazeSize;
 
     /**
      * Start the solve process.
@@ -26,11 +28,19 @@ public class SolveAlgorithm {
     public SolveAlgorithm(Application currentApplication) {
         this.application = currentApplication;
         this.processor = new ImageProcessor(currentApplication);
+        this.mazeSize = application.getMazeDimensions().width * application.getMazeDimensions().height;
     }
 
     public void Solve(String algorithm) {
         long startTime = System.nanoTime();
-        if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this);
+
+        //Check if the maze is large enough for two threads.
+        Boolean twoThread = false;
+        System.out.println("maze size: " + mazeSize);
+        System.out.println("Single thread size: " + singleThreadSize);
+        if (mazeSize > singleThreadSize) twoThread = true;
+
+        if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this, twoThread);
         long stopTime = System.nanoTime();
         System.out.println("Execution time: " + (stopTime - startTime) + "ns");
     }

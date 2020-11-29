@@ -87,6 +87,7 @@ public class Application {
   /**
    * Save the current image to a file
    * @param path the place to save the image
+   * @param drawNodes should the nodes be coloured in the resulting image
    */
   public void saveImage(String path) {
     currentImage.saveImage(path);

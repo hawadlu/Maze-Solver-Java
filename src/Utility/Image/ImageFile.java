@@ -3,6 +3,7 @@ package Utility.Image;
 import Utility.Colours;
 import Utility.Colours.*;
 import Utility.Exceptions.InvalidImage;
+import Utility.Location;
 import Utility.Node;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Class used to hold the image in memory
@@ -211,6 +213,7 @@ public class ImageFile {
    * @param path
    */
   public void createSolvedImage(ArrayList<Node> path) {
+    System.out.println("Creating solved image");
     while (path.size() > 1) {
       Node currentNode = path.remove(0);
       Node nextNode = path.get(0);

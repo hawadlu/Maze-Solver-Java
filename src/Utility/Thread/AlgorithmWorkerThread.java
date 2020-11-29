@@ -12,7 +12,6 @@ public class AlgorithmWorkerThread extends Thread {
   private final String algorithm;
   private final String params;
   private final Application currentApplication;
-  private ImageFile solvedImage = null;
 
   public AlgorithmWorkerThread(String algorithm, String params, Application currentApplication) {
     this.algorithm = algorithm;
@@ -21,13 +20,12 @@ public class AlgorithmWorkerThread extends Thread {
   }
 
   @Override
-  public synchronized void start() {
-    solvedImage = currentApplication.getImageFile();
+  public synchronized void run() {
     SolveAlgorithm solve = new SolveAlgorithm(currentApplication);
     solve.Scan(params);
     solve.Solve(algorithm);
 
     //Create the solved image
-    solvedImage.createSolvedImage(solve.getPath());
+    currentApplication.getImageFile().createSolvedImage(solve.getPath());
   }
 }
