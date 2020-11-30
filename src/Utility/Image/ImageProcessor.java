@@ -105,16 +105,16 @@ public class ImageProcessor {
         colEnum[][] imgArray = application.getImageFile().getArray();
 
         //Look at the top and bottom rows
+        int topY = 0, bottomY = imgArray.length - 1;
         for (int width = 0; width < imgArray[0].length; width++) {
-            if (imgArray[0][width] == colEnum.WHITE) {
-                Location location = new Location(width, 0);
+            if (imgArray[topY][width] == colEnum.WHITE) {
+                Location location = new Location(width, topY);
                 exits.add(location);
                 nodes.put(location, new Node(location));
             }
-//            System.out.println(new Location(width, 0) + " " + imgArray[0][width]);
-//            System.out.println(new Location(width, imgArray.length - 1) + " " + imgArray[imgArray.length - 1][width]);
-            if (imgArray[imgArray[0].length - 1][width] == colEnum.WHITE) {
-                Location location = new Location(width, imgArray.length - 1);
+
+            if (imgArray[bottomY][width] == colEnum.WHITE) {
+                Location location = new Location(width, bottomY);
                 exits.add(location);
                 nodes.put(location, new Node(location));
             }

@@ -85,6 +85,45 @@ public class Tests {
     }
 
     @Test
+    public void DFSUnevenOnly() throws GenericError, InterruptedException {
+        //Delete all the files in the solved folder
+        deleteFiles(new File("Images/Solved"));
+
+        ArrayList<File> files = getAllFiles(new File("Images"));
+
+        //Remove anything that is not an image
+        files = removeNonImages(files, false, "Uneven");
+
+        Comparator<File> smallest = (File f1, File f2) -> {
+            if (f1.length() < f2.length()) return -1;
+            if (f1.length() > f2.length()) return 1;
+            return 0;
+        };
+
+        files.sort(smallest);
+
+        System.out.println("files: " + files);
+
+        String[] options = {"Loading", "Solving"};
+
+        for (File file: files) {
+            for (String option: options) {
+                System.out.println("DFS solve " + file.getName() + " " + option);
+
+                Application application = new Application();
+                application.parseImageFile(file);
+
+                AlgorithmWorkerThread thread = application.solve("Depth First", option);
+                thread.run();
+                thread.join();
+                System.out.println("Thread complete");
+
+                application.saveImage("Images/Solved/Test DFS " + option + " " + file.getName());
+            }
+        }
+    }
+
+    @Test
     public void DFSSmallOnly() throws GenericError, InterruptedException {
         deleteFiles(new File("Images/Solved"));
         ArrayList<File> files = getAllFiles(new File("Images"));
