@@ -1,176 +1,122 @@
 package Algorithm;
 
 import Utility.Exceptions.SolveFailure;
-import Utility.Exceptions.ThreadFailure;
 import Utility.Node;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Solve the maze, Depth first
  */
 public class DepthFirst {
+    int threadCount = 0;
+    boolean done = false;
 
     /**
      * Do a depth first search.
      * Start at each end to speed up
      * @param solve the solve object
-     * @param twoThread indicate if the maze is large enough for a single thread.
      */
-    public void solve(SolveAlgorithm solve, Boolean twoThread) {
+    public void solve(SolveAlgorithm solve) {
         System.out.println("Solving depth first");
 
         Node start = solve.entry;
         Node destination = solve.exit;
 
-        DFSWorker workerOne = new DFSWorker(solve, start, destination, "t1");
-        DFSWorker workerTwo = null;
+        DFSWorker worker = new DFSWorker(solve, start, destination, null, this);
+        worker.start();
 
-        //Only create a second worker if the maze is big enough
-        System.out.println("Two thread: " + twoThread);
-        if (twoThread) {
-            workerTwo = new DFSWorker(solve, destination, start, "t2");
-            workerOne.setOther(workerTwo);
-            workerTwo.setOther(workerOne);
-            workerTwo.start();
-        }
-
-        workerOne.start();
-
-        //Wait for the threads to finish
+        //Wait for the worker to finish
         try {
-            workerOne.join();
-            if (workerTwo != null && workerTwo.isAlive()) workerTwo.join();
+            worker.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Threads have finished execution. There were a total of " + threadCount);
     }
+
+
 }
 
 /**
  * Allows DFS to be multi threaded
  */
-class DFSWorker extends SolveWorker {
-    Boolean multithreading = false;
+class DFSWorker extends Thread {
+    SolveAlgorithm solve;
+    Node destination, start;
+    DFSWorker parent;
+    int threadId;
+    DepthFirst dfs;
+    ArrayList<DFSWorker> toProcess = new ArrayList<>();
+    boolean stopped;
+    final AtomicBoolean running = new AtomicBoolean(true);
 
-    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, String threadName) {
-        super(solve, start, destination, threadName);
-    }
-
-    public void setOther(SolveWorker other) {
-        this.other = other;
-        multithreading = true;
+    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, DFSWorker parent, DepthFirst dfs) {
+        this.solve = solve;
+        this.start = start;
+        this.destination = destination;
+        this.parent = parent;
+        this.dfs = dfs;
+        dfs.threadCount++;
+        this.threadId = dfs.threadCount;
     }
 
     @Override
-    public void runSolve() {
-        this.running.set(true);
+    public void run() {
+        boolean isDone = false;
+        while(running.get()) {
+            if (!isDone) {
+                super.run();
 
-        Node parent = null;
-        Stack<Node> toProcess = new Stack<>();
-        start.visit(this);
-        toProcess.push(start);
+                if (!start.isVisited()) start.visit();
 
-        while (running.get()) {
-            parent = toProcess.pop();
-            parent.visit(this);
-            addNode(parent);
+                if (start.equals(destination)) {
+                    System.out.println(threadId + " reached the destination");
+                    dfs.done = true;
 
-            //Stop both threads
-            if (parent.equals(destination)) {
-                System.out.println(threadName + " has reached the destination");
-                if (multithreading) other.running.set(false);
-                running.set(false);
-            }
-
-            //Scan for neighbours if required
-            if (!solve.scanAll) solve.findNeighbours(parent);
-
-            //Add the neighbours to the stack
-            for (Node node: parent.getNeighbours()) {
-                if (node.isVisited() == null) {
-                    node.setParent(parent);
-                    toProcess.push(node);
-                } else if (node.isVisited().equals(other)) {
-                    if (multithreading) {
-                        other.running.set(false);
-                        System.out.println("Node: " + node + " has already been visited by thread " + other.threadName);
-                    }
+                    //Stop this thread
                     running.set(false);
                 }
-            }
 
-            if (toProcess.isEmpty()) {
-                try {
-                    other.running.set(false);
-                    throw new SolveFailure(threadName + " the stack is empty");
-                } catch (SolveFailure e) {
-                    e.printStackTrace();
+
+                if (!solve.scanAll) solve.findNeighbours(start);
+
+                for (Node node : start.getNeighbours()) {
+                    //If the node has not been added, add it
+                    if (!node.isVisited()) {
+                        node.visit();
+                        node.setParent(start);
+                        toProcess.add(new DFSWorker(solve, node, destination, this, dfs));
+                    }
                 }
+
+                //Start all the threads
+                for (DFSWorker thread : toProcess) thread.start();
+                isDone = true;
+            } else if (threadId != 1) {
+                //Close this thread
+                running.set(false);
+            } else if (dfs.done) {
+                //Keep thead 1 running until the maze is marked as solved
+                running.set(false);
             }
         }
-
-        System.out.println("Thread " + threadName + " has exited the while loop");
-
-//        while (!toProcess.isEmpty() || !running.get()) {
-//            System.out.println(threadName + " " + running + " " + other.threadName + " " + other.running);
-//            System.out.println(threadName + ": process size: " + toProcess.size() + " " + toProcess);
-//
-//            parent = toProcess.pop();
-//            parent.visit(this);
-//            addNode(parent);
-//
-//            if (parent.equals(destination)) {
-//                running.set(false);
-//            }
-//
-//            //If the neighbours are not already loaded, load them.
-//            if (!solve.scanAll) solve.findNeighbours(parent);
-//
-//            //Add all the appropriate neighbours to the stack
-//            for (Node node: parent.getNeighbours()) {
-//                if (!other.running.get()) {
-//                    running.set(false);
-//                    System.out.println(threadName + " left the for loop");
-//                    break;
-//                } else if (node.isVisited() == null) {
-//                    node.setParent(parent);
-//                    toProcess.push(node);
-//                } else if (node.isVisited().equals(other)) {
-//                    running.set(false);
-//                    System.out.println("Thread " + threadName + " stopped because " + other.threadName + " has visited this node");
-//                }
-//
-//
-//                //Add the node to the queue
-////                if (!node.isVisited()) {
-////                    node.setParent(parent);
-////                    toProcess.push(node);
-////                } else if (other.visited.contains(node)) { node.setParent(parent);
-////                    this.isDone = true;
-////
-////                    System.out.println(threadName + " Solved, the other thread (" + other.threadName + ") has this node. halting thread execution.");
-////                    other.interrupt();
-////                    this.interrupt();
-////                }
-//            }
-//
-//            if (other.running.get()) System.out.println(threadName + " stopped because " + other.threadName + " is done");
-//
-//            //If the stack is empty at this point, solving failed
-//            if (toProcess.isEmpty()) {
-//                try {
-//                    throw new SolveFailure(threadName + " the stack is empty");
-//                } catch (SolveFailure e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
     }
 
     @Override
-    public String toString() {
-        return "Thread: DFSWorker " + threadName;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DFSWorker worker = (DFSWorker) o;
+        return threadId == worker.threadId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(threadId);
     }
 }

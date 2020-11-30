@@ -72,12 +72,7 @@ public class Tests {
                 System.out.println("DFS solve " + file.getName() + " " + option);
 
                 Application application = new Application();
-                try {
-                    application.parseImageFile(file);
-                } catch (GenericError genericError) {
-                    genericError.printStackTrace();
-                    System.out.println("Failed to parse image");
-                }
+                application.parseImageFile(file);
 
                 AlgorithmWorkerThread thread = application.solve("Depth First", option);
                 thread.run();
@@ -91,6 +86,7 @@ public class Tests {
 
     @Test
     public void DFSSmallOnly() throws GenericError, InterruptedException {
+        deleteFiles(new File("Images/Solved"));
         ArrayList<File> files = getAllFiles(new File("Images"));
 
         //Remove anything that is not an image
@@ -131,6 +127,93 @@ public class Tests {
             }
         }
     }
+
+    @Test
+    public void DFSMediumOnly() throws GenericError, InterruptedException {
+        ArrayList<File> files = getAllFiles(new File("Images"));
+
+        //Remove anything that is not an image
+        files = removeNonImages(files, false, "Medium");
+
+        Comparator<File> smallest = (File f1, File f2) -> {
+            if (f1.length() < f2.length()) return -1;
+            if (f1.length() > f2.length()) return 1;
+            return 0;
+        };
+
+        files.sort(smallest);
+
+        System.out.println("files: " + files);
+
+        String[] options = {"Loading", "Solving"};
+
+        for (File file: files) {
+            for (String option: options) {
+                System.out.println("DFS solve " + file.getName() + " " + option);
+
+                Application application = new Application();
+                try {
+                    application.parseImageFile(file);
+                } catch (GenericError genericError) {
+                    genericError.printStackTrace();
+                    System.out.println("Failed to parse image");
+                }
+
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                thread.start();
+
+                thread.join(); //Wait for the other thread to finish
+
+                System.out.println("Thread finished");
+
+                application.saveImage("Images/Solved/Test DFS " + option + " " + file.getName());
+            }
+        }
+    }
+
+    @Test
+    public void DFSHugeOnly() throws GenericError, InterruptedException {
+        ArrayList<File> files = getAllFiles(new File("Images"));
+
+        //Remove anything that is not an image
+        files = removeNonImages(files, false, "Huge");
+
+        Comparator<File> smallest = (File f1, File f2) -> {
+            if (f1.length() < f2.length()) return -1;
+            if (f1.length() > f2.length()) return 1;
+            return 0;
+        };
+
+        files.sort(smallest);
+
+        System.out.println("files: " + files);
+
+        String[] options = {"Loading", "Solving"};
+
+        for (File file: files) {
+            for (String option: options) {
+                System.out.println("DFS solve " + file.getName() + " " + option);
+
+                Application application = new Application();
+                try {
+                    application.parseImageFile(file);
+                } catch (GenericError genericError) {
+                    genericError.printStackTrace();
+                    System.out.println("Failed to parse image");
+                }
+
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                thread.start();
+
+                thread.join(); //Wait for the other thread to finish
+
+                System.out.println("Thread finished");
+
+                application.saveImage("Images/Solved/Test DFS " + option + " " + file.getName());
+            }
+        }
+    }
+
 
     @Test
     public void testDFS() throws InterruptedException {

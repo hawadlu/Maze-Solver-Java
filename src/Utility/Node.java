@@ -1,7 +1,5 @@
 package Utility;
 
-import Algorithm.SolveWorker;
-
 import java.util.HashSet;
 
 /**
@@ -11,7 +9,7 @@ public class Node {
     Location nodeLocation;
     HashSet<Node> neighbours = new HashSet<>();
     Node parent;
-    SolveWorker visitor = null;
+    Boolean isVisited = false;
 
     public Node(Location nodeLocation) {
         this.nodeLocation = nodeLocation;
@@ -58,20 +56,19 @@ public class Node {
     /**
      * @return has this node been visited.
      */
-    public SolveWorker isVisited() {
-        return this.visitor;
+    public Boolean isVisited() {
+        return this.isVisited;
     }
 
     /**
      * Visit this node
-     * @param visitor the thread that visited this.
      */
-    public void visit(SolveWorker visitor) {
-        this.visitor = visitor;
+    public void visit() {
+        this.isVisited = true;
     }
 
     @Override
     public String toString() {
-        return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + visitor;
+        return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
     }
 }
