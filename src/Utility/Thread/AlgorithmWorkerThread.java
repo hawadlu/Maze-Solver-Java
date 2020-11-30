@@ -12,15 +12,18 @@ public class AlgorithmWorkerThread extends Thread {
   private final String algorithm;
   private final String params;
   private final Application currentApplication;
+  private final String id;
 
-  public AlgorithmWorkerThread(String algorithm, String params, Application currentApplication) {
+  public AlgorithmWorkerThread(String algorithm, String params, Application currentApplication, String id) {
     this.algorithm = algorithm;
     this.params = params;
     this.currentApplication = currentApplication;
+    this.id = id;
   }
 
   @Override
   public synchronized void run() {
+    System.out.println("Worker id: " + id);
     SolveAlgorithm solve = new SolveAlgorithm(currentApplication);
     solve.Scan(params);
     solve.Solve(algorithm);

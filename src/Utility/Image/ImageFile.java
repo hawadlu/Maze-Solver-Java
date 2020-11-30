@@ -79,7 +79,8 @@ public class ImageFile {
     colEnum[][] toUse;
 
     //Scale the array up if required
-    toUse = scaleArray();
+    if (imageArray.length * imageArray[0].length > Math.pow(2000, 2)) toUse = imageArray;
+    else toUse = scaleArray();
 
     BufferedImage toReturn = new BufferedImage(toUse[0].length, toUse.length, BufferedImage.TYPE_INT_ARGB);
 

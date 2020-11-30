@@ -332,36 +332,37 @@ public class GUI {
    * Make the screen that shows a spinner while the algorithm is solving.
    */
   private void makeAlgoWorkingScreen(String algorithm, String params) {
-    //Prepare the main area
+//Prepare the main area
     algoMainArea.removeAll();
-
-    Dimension currentDimension = algoMainArea.getSize();
-    System.out.println("Main area size: " + currentDimension);
 
     //Add the spinner
     algoMainArea.add(new SpinnerPanel());
-
-
-    //Start solving the algorithm
-    AlgorithmWorkerThread thread = application.solve(algorithm, params);
-
     refresh();
 
-    //Create a spinner thread
-    WaitThread spinner = new WaitThread(thread);
+    Thread solveThread = application.solve(algorithm, params);
 
-    //start the threads
-    spinner.start();
+    //Create another thread that will only wait for algorithm to finish
+    Thread algoWait = new Thread() {
+      @Override
+      public void run() {
+        super.run();
+        try {
+          solveThread.start();
+          solveThread.join();
+          makeAlgoSolvedScreen();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    };
 
-    System.out.println("Solve complete");
-
-    makeAlgoSolvedScreen();
+    algoWait.start();
   }
 
   /**
    * Show the completed image on screen
    */
-  private void makeAlgoSolvedScreen() {
+  public void makeAlgoSolvedScreen() {
     algoMainArea.removeAll();
 
     System.out.println("Making algorithm solved screen");

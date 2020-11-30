@@ -72,8 +72,8 @@ public class Application {
    * @param algorithm the algorithm to use
    * @param params the parameters to use
    */
-  public AlgorithmWorkerThread solve(String algorithm, String params) {
-    AlgorithmWorkerThread worker = new AlgorithmWorkerThread(algorithm, params, this);
+  public Thread solve(String algorithm, String params) {
+    AlgorithmWorkerThread worker = new AlgorithmWorkerThread(algorithm, params, this, "solver");
     return worker;
   }
 

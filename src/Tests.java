@@ -74,9 +74,7 @@ public class Tests {
                 Application application = new Application();
                 application.parseImageFile(file);
 
-                AlgorithmWorkerThread thread = application.solve("Depth First", option);
-                thread.run();
-                thread.join();
+                application.solve("Depth First", option);
                 System.out.println("Thread complete");
 
                 application.saveImage("Images/Solved/Test DFS " + option + " " + file.getName());
@@ -113,9 +111,7 @@ public class Tests {
                 Application application = new Application();
                 application.parseImageFile(file);
 
-                AlgorithmWorkerThread thread = application.solve("Depth First", option);
-                thread.run();
-                thread.join();
+                application.solve("Depth First", option);
                 System.out.println("Thread complete");
 
                 application.saveImage("Images/Solved/Test DFS " + option + " " + file.getName());
@@ -155,7 +151,7 @@ public class Tests {
                     System.out.println("Failed to parse image");
                 }
 
-                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application, "test");
                 thread.start();
 
                 thread.join(); //Wait for the other thread to finish
@@ -198,7 +194,7 @@ public class Tests {
                     System.out.println("Failed to parse image");
                 }
 
-                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application, "test");
                 thread.start();
 
                 thread.join(); //Wait for the other thread to finish
@@ -241,7 +237,7 @@ public class Tests {
                     System.out.println("Failed to parse image");
                 }
 
-                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application, "test");
                 thread.start();
 
                 thread.join(); //Wait for the other thread to finish
@@ -285,7 +281,7 @@ public class Tests {
                     System.out.println("Failed to parse image");
                 }
 
-                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application);
+                AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", option, application, "test");
                 thread.start();
 
                 thread.join(); //Wait for the other thread to finish
@@ -310,7 +306,7 @@ public class Tests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application);
+        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application, "test");
         thread.start();
 
         thread.join(); //Wait for the other thread to finish
@@ -330,7 +326,7 @@ public class Tests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application);
+        AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application, "test");
         thread.start();
 
         thread.join(); //Wait for the other thread to finish
