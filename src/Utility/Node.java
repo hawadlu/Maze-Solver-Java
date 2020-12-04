@@ -1,6 +1,7 @@
 package Utility;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Class used to represent nodes in the maze
@@ -9,7 +10,7 @@ public class Node {
     Location nodeLocation;
     HashSet<Node> neighbours = new HashSet<>();
     Node parent;
-    Boolean isVisited = false;
+    Thread isVisited = null;
 
     public Node(Location nodeLocation) {
         this.nodeLocation = nodeLocation;
@@ -56,19 +57,32 @@ public class Node {
     /**
      * @return has this node been visited.
      */
-    public Boolean isVisited() {
+    public Thread isVisited() {
         return this.isVisited;
     }
 
     /**
      * Visit this node
      */
-    public void visit() {
-        this.isVisited = true;
+    public void visit(Thread visitor) {
+        this.isVisited = visitor;
     }
 
     @Override
     public String toString() {
         return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return Objects.equals(nodeLocation, node.nodeLocation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeLocation);
     }
 }

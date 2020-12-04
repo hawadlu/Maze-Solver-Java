@@ -7,6 +7,7 @@ import Utility.Location;
 import Utility.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -18,8 +19,9 @@ public class SolveAlgorithm {
     HashMap<Location, Node> nodes = new HashMap<>();
     Node entry, exit;
     Application application;
-    double singleThreadSize = Math.pow(500, 2); //The size of maze that should be handles by a single thread
-    double mazeSize;
+    public double mazeSize;
+    Node[] join = null;
+    public long execTime;
 
     /**
      * Start the solve process.
@@ -31,12 +33,16 @@ public class SolveAlgorithm {
         this.mazeSize = application.getMazeDimensions().width * application.getMazeDimensions().height;
     }
 
-    public void Solve(String algorithm) {
+    public void Solve(String algorithm, Boolean multiThreading) {
         long startTime = System.nanoTime();
 
-        if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this);
+        if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this, multiThreading);
         long stopTime = System.nanoTime();
-        System.out.println("Execution time: " + (stopTime - startTime) + "ns");
+        execTime = stopTime - startTime;
+        System.out.println("Execution time: " + execTime + "ns");
+
+        //Build the path
+        makePath();
     }
 
     public void Scan(String params) {
@@ -63,27 +69,58 @@ public class SolveAlgorithm {
     }
 
     /**
-     * Create the path from the start to the finish
-     * @return the path;
+     * Used for multi threaded solves.
+     * @param nodeOne node one at meeting point
+     * @param nodeTwo node two at meeting point
      */
-    public ArrayList<Node> getPath() {
+    public void addJoinerNodes(Node nodeOne, Node nodeTwo) {
+        if (join == null) {
+            join = new Node[2];
+            join[0] = nodeOne;
+            join[1] = nodeTwo;
+        }
+    }
+
+    /**
+     * Create the path from the start to the finish
+     */
+    public void makePath() {
+        //If there is no multithreading
+
+        Node currentNode;
+
+        if (join == null) {
+            if (exit.getParent() != null) currentNode = exit;
+            else currentNode = entry;
+
+            application.getImageFile().fillPath(generatePathArraylist(currentNode));
+        } else {
+            application.getImageFile().fillPath(generatePathArraylist(join[0]));
+            application.getImageFile().fillPath(generatePathArraylist(join[1]));
+            ArrayList<Node> tmp = new ArrayList<>();
+            tmp.add(join[0]);
+            tmp.add(join[1]);
+            application.getImageFile().fillPath(tmp);
+        }
+    }
+
+    private ArrayList<Node> generatePathArraylist(Node currentNode) {
         ArrayList<Node> path = new ArrayList<>();
-        Node currentNode = exit;
 
         while (currentNode != null) {
             path.add(currentNode);
             currentNode = currentNode.getParent();
         }
-
         return path;
     }
 
     /**
      * Find the return the neighbours of a specific node
      * @param parent the node to find neighbours of.
+     * @param multiThreading boolean to indicate if the program is currently multithreading.
      * @return a hashset of all the neighbours
      */
-    public void findNeighbours(Node parent) {
-        processor.scanAll(parent);
+    public void findNeighbours(Node parent, Boolean multiThreading) {
+        processor.scanAll(parent, multiThreading);
     }
 }

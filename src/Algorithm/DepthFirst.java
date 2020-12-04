@@ -1,9 +1,12 @@
 package Algorithm;
 
 import Utility.Exceptions.SolveFailure;
+import Utility.Location;
 import Utility.Node;
+import org.w3c.dom.css.CSSStyleDeclaration;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,33 +16,41 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class DepthFirst {
     int threadCount = 0;
-    boolean done = false;
+    AtomicBoolean done = new AtomicBoolean(false);
+    Boolean multiThreading = false;
 
     /**
      * Do a depth first search.
      * Start at each end to speed up
      * @param solve the solve object
      */
-    public void solve(SolveAlgorithm solve) {
+    public void solve(SolveAlgorithm solve, Boolean multiThreading) {
         System.out.println("Solving depth first");
 
         Node start = solve.entry;
         Node destination = solve.exit;
 
-        DFSWorker worker = new DFSWorker(solve, start, destination, null, this);
-        worker.start();
+        DFSWorker workerOne = new DFSWorker(solve, start, destination, this, "t1");
+        DFSWorker workerTwo = new DFSWorker(solve, destination, start, this, "t2");
+        workerOne.other = workerTwo;
+        workerTwo.other = workerOne;
+        workerOne.start();
+
+        //Only start the second worker in the case that the maze is large enough
+        if (multiThreading) {
+            workerTwo.start();
+        }
 
         //Wait for the worker to finish
         try {
-            worker.join();
+            workerOne.join();
+            workerTwo.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         System.out.println("Threads have finished execution. There were a total of " + threadCount);
     }
-
-
 }
 
 /**
@@ -48,63 +59,72 @@ public class DepthFirst {
 class DFSWorker extends Thread {
     SolveAlgorithm solve;
     Node destination, start;
-    DFSWorker parent;
-    int threadId;
+    String threadId;
     DepthFirst dfs;
-    ArrayList<DFSWorker> toProcess = new ArrayList<>();
-    boolean stopped;
-    final AtomicBoolean running = new AtomicBoolean(true);
+    DFSWorker other;
+    ArrayList<Stack<Node>> stacks = new ArrayList<>(); //todo delete me
 
-    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, DFSWorker parent, DepthFirst dfs) {
+    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, DepthFirst dfs, String threadId) {
         this.solve = solve;
         this.start = start;
         this.destination = destination;
-        this.parent = parent;
+        this.threadId = threadId;
         this.dfs = dfs;
-        dfs.threadCount++;
-        this.threadId = dfs.threadCount;
     }
 
     @Override
     public void run() {
-        boolean isDone = false;
-        while(running.get()) {
-            if (!isDone) {
-                super.run();
+        System.out.println("Thread: " + threadId + "\nstart: " + start + "\ndestination: " + destination + "\n");
 
-                if (!start.isVisited()) start.visit();
 
-                if (start.equals(destination)) {
-                    System.out.println(threadId + " reached the destination");
-                    dfs.done = true;
+        Node parent = null;
+        Stack<Node> toProcess = new Stack<>();
+        start.visit(this);
+        toProcess.push(start);
 
-                    //Stop this thread
-                    running.set(false);
+        while (!toProcess.isEmpty() && !dfs.done.get()) {
+//            System.out.println(threadId + " 1");
+
+            parent = toProcess.pop();
+            parent.visit(this);
+
+            if (parent.equals(destination)) {
+                System.out.println("Thread " + threadId + " is attempting to exit the loop");
+                break;
+            }
+
+//            System.out.println(parent);
+
+//            if (parent.getLocation().equals(new Location(3, 1))) {
+//                System.out.println("Location");
+//            }
+
+            //todo make for on solves only
+            //If the neighbours are not already loaded, load them.
+            if (!solve.scanAll) solve.findNeighbours(parent, dfs.multiThreading);
+
+            //Add all the appropriate neighbours to the stack
+            for (Node node : parent.getNeighbours()) {
+                if (node.isVisited() == null) {
+                    node.setParent(parent);
+                    toProcess.push(node);
+                    node.visit(this);
+                } else if (node.isVisited().equals(other)) {
+                    solve.addJoinerNodes(parent, node);
+                    dfs.done.set(true);
                 }
+            }
 
-
-                if (!solve.scanAll) solve.findNeighbours(start);
-
-                for (Node node : start.getNeighbours()) {
-                    //If the node has not been added, add it
-                    if (!node.isVisited()) {
-                        node.visit();
-                        node.setParent(start);
-                        toProcess.add(new DFSWorker(solve, node, destination, this, dfs));
-                    }
+            //If the stack is empty at this point, solving failed
+            if (toProcess.isEmpty() && !dfs.done.get()) {
+                try {
+                    throw new SolveFailure("The stack is empty on thread " + threadId);
+                } catch (SolveFailure e) {
+                    e.printStackTrace();
                 }
-
-                //Start all the threads
-                for (DFSWorker thread : toProcess) thread.start();
-                isDone = true;
-            } else if (threadId != 1) {
-                //Close this thread
-                running.set(false);
-            } else if (dfs.done) {
-                //Keep thead 1 running until the maze is marked as solved
-                running.set(false);
             }
         }
+        System.out.println("Thread " + threadId + " has exited the loop");
     }
 
     @Override
@@ -112,11 +132,18 @@ class DFSWorker extends Thread {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DFSWorker worker = (DFSWorker) o;
-        return threadId == worker.threadId;
+        return destination.equals(worker.destination) &&
+                start.equals(worker.start) &&
+                threadId.equals(worker.threadId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(threadId);
+        return Objects.hash(destination, start, threadId);
+    }
+
+    @Override
+    public String toString() {
+        return threadId;
     }
 }

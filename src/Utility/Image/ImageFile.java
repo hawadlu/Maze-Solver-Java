@@ -210,10 +210,10 @@ public class ImageFile {
   }
 
   /**
-   * Creates an image of the solved maze
-   * @param path
+   * Fills a specified path in the maze
+   * @param path the path to fill
    */
-  public void createSolvedImage(ArrayList<Node> path) {
+  public void fillPath(ArrayList<Node> path) {
     System.out.println("Creating solved image");
     while (path.size() > 1) {
       Node currentNode = path.remove(0);

@@ -339,7 +339,8 @@ public class GUI {
     algoMainArea.add(new SpinnerPanel());
     refresh();
 
-    Thread solveThread = application.solve(algorithm, params);
+    //todo refactor this to make it a user option
+    Thread solveThread = application.solve(algorithm, params, true);
 
     //Create another thread that will only wait for algorithm to finish
     Thread algoWait = new Thread() {

@@ -34,7 +34,9 @@ public class ImageProcessor {
         for (int height = 0; height < imgArr.length; height++) {
             for (int width = 0; width < imgArr[0].length; width++) {
                 Location currentLocation = new Location(width, height);
-                if (isNode(currentLocation)) {
+                //Note: The isNode method expects a parameter to indicate multithreading.
+                //When searching for neighbours on load this is not required.
+                if (isNode(currentLocation, true, false)) {
                     //Create a node and look for the neighbours
                     Node newNode = new Node(currentLocation);
                     neighbourSearch(newNode, nodes);
@@ -52,44 +54,50 @@ public class ImageProcessor {
     /**
      * Take a node in the maze and look for all its neighbours
      */
-    public void scanAll(Node currentNode) {
+    public void scanAll(Node currentNode, Boolean multiThread) {
         //Look up
         for (int height = currentNode.getLocation().y - 1; height > -1; height--) {
             Location currentLocation = new Location(currentNode.getLocation().x, height);
-            if (checkNodeExistsOnSolve(currentNode, currentLocation)) break;
+            if (checkNodeExistsOnSolve(currentNode, currentLocation, multiThread)) break;
         }
 
         //look down
         for (int height = currentNode.getLocation().y + 1; height < application.getImageFile().getArray().length; height++) {
             Location currentLocation = new Location(currentNode.getLocation().x, height);
-            if (checkNodeExistsOnSolve(currentNode, currentLocation)) break;
+            if (checkNodeExistsOnSolve(currentNode, currentLocation, multiThread)) break;
         }
 
         //Look left
         for (int width = currentNode.getLocation().x - 1; width > -1; width--) {
             Location currentLocation = new Location(width, currentNode.getLocation().y);
-            if (checkNodeExistsOnSolve(currentNode, currentLocation)) break;
+            if (checkNodeExistsOnSolve(currentNode, currentLocation, multiThread)) break;
         }
 
         //Look right
         for (int width = currentNode.getLocation().x + 1; width < application.getImageFile().getArray()[0].length; width++) {
             Location currentLocation = new Location(width, currentNode.getLocation().y);
-            if (checkNodeExistsOnSolve(currentNode, currentLocation)) break;
+            if (checkNodeExistsOnSolve(currentNode, currentLocation, multiThread)) break;
         }
     }
 
-    private boolean checkNodeExistsOnSolve(Node currentNode, Location currentLocation) {
+    private boolean checkNodeExistsOnSolve(Node currentNode, Location currentLocation, Boolean multiThread) {
         //If this is an exit add it
         if (exits.contains(currentLocation)) {
             Node neighbour = nodes.get(exits.get(exits.indexOf(currentLocation)));
             neighbour.addNeighbour(currentNode);
             currentNode.addNeighbour(neighbour);
             return true;
-        } else if (isNode(currentLocation)) {
-            Node newNode = new Node(currentLocation);
-            nodes.put(currentLocation, newNode);
-            newNode.addNeighbour(currentNode);
-            currentNode.addNeighbour(newNode);
+        } else if (isNode(currentLocation, false, multiThread)) {
+            if (!nodes.containsKey(currentLocation)) {
+                Node newNode = new Node(currentLocation);
+                nodes.put(currentLocation, newNode);
+                newNode.addNeighbour(currentNode);
+                currentNode.addNeighbour(newNode);
+            } else {
+                currentNode.addNeighbour(nodes.get(currentLocation));
+                nodes.get(currentLocation).addNeighbour(currentNode);
+            }
+
             return true;
         } else if (application.getImageFile().getArray()[currentLocation.y][currentLocation.x].equals(colEnum.BLACK)) {
             //This is a black square, break.
@@ -166,12 +174,25 @@ public class ImageProcessor {
         }
     }
 
-    private boolean isNode(Location location) {
+    /**
+     * @param location The location of the current node.
+     * @param scanAll scanning all the nodes on load.
+     * @return boolean indicating node.
+     */
+    private boolean isNode(Location location, Boolean scanAll, Boolean multiThread) {
         colEnum[][] imgArray = application.getImageFile().getArray();
 
-
-        //If this has already been marked as an exit, it does not need to be considered
-        if (nodes.containsKey(location)) return false;
+        //Check if the node map already contains this.
+        //If it does while scanning on load it does not need to be considered.
+//        System.out.println(nodes);
+        if (nodes.containsKey(location) && scanAll) {
+            return false;
+        }
+        else if (nodes.containsKey(location) && multiThread){
+//            System.out.println(nodes.get(location));
+            return true;
+        }
+        //else if (nodes.containsKey(location)) return false;
 
         //Check if it is a white square
         if (imgArray[location.y][location.x] != colEnum.WHITE) return false;
