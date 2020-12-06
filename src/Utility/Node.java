@@ -10,6 +10,7 @@ public class Node {
     HashSet<Node> neighbours = new HashSet<>();
     Node parent;
     Thread isVisited = null;
+    double cost = Double.POSITIVE_INFINITY; //Field used in Dijkstra and AStar
 
     public Node(Location nodeLocation) {
         this.nodeLocation = nodeLocation;
@@ -47,17 +48,9 @@ public class Node {
 
     /**
      * Get all of the neighbours
-     * @param closest boolean to indicate if the collection should be sorted
      * @return a collection of all the neighbours
      */
-    public Collection<Node> getNeighbours(Boolean closest) {
-        if (closest) {
-            ArrayList<Node> neighbours = new ArrayList<>(this.neighbours);
-            neighbours.sort(Comparator.comparingInt(this::getDistance));
-            return neighbours;
-        }
-
-        //return the set as it is
+    public Collection<Node> getNeighbours() {
         return this.neighbours;
     }
 
@@ -79,16 +72,58 @@ public class Node {
      * @return the distance from another node to this one.
      */
     public int getDistance(Node other) {
-        //Return the distance on the x plane
-        if (other.getLocation().x == this.getLocation().x) return Math.abs(other.getLocation().x - this.getLocation().x);
+        int toReturn = 0;
 
-        //return the distance on the y plane
-        return Math.abs(other.getLocation().y - this.getLocation().y);
+        //Return the distance on the x plane
+        if (other.getLocation().x == this.getLocation().x) {
+            toReturn = other.getLocation().x - nodeLocation.x;
+        } else {
+            //return the distance on the y plane
+            toReturn = other.getLocation().y - nodeLocation.y;
+        }
+        if (toReturn < 0) toReturn *= -1;
+        return toReturn;
+    }
+
+    /**
+     * @return the cost of this node
+     */
+    public double getCost() {
+        return cost;
+    }
+
+    /**
+     * Set the cost of this node.
+     * @param newCost the new cost
+     */
+    public void setCost(double newCost) {
+        this.cost = newCost;
+    }
+
+    /**
+     * Get comparator used in priority queues in solving
+     * @param algorithm the algorithm that is being used
+     * @return a comparator that is tailored to the algorithm
+     */
+    public static Comparator<Node> getComparator(String algorithm) {
+        Comparator<Node> compare = null;
+
+        if (algorithm.equals("Dijkstra")) {
+            compare = new Comparator<Node>() {
+                @Override
+                public int compare(Node nodeOne, Node nodeTwo) {
+                    return Double.compare(nodeOne.cost, nodeTwo.cost);
+                }
+            };
+        }
+
+        //todo implement for Astar
+        return compare;
     }
 
     @Override
     public String toString() {
-        return "Location: " + getLocation() + " Neighbours: " + getNeighbours(false).size() + " visited: " + isVisited;
+        return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
     }
 
     @Override

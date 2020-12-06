@@ -1,4 +1,4 @@
-import Utility.Thread.AlgorithmDispatchThread;
+import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
 import Utility.Exceptions.GenericError;
 import Utility.Image.ImageProcessor;
@@ -78,7 +78,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -125,7 +125,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -171,7 +171,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -214,7 +214,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -258,7 +258,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -301,7 +301,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -344,7 +344,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -391,7 +391,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -446,7 +446,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -493,7 +493,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -539,7 +539,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -581,7 +581,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -624,7 +624,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -667,7 +667,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -710,7 +710,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -757,7 +757,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -775,9 +775,320 @@ public class Tests {
   }
 
 
-  //TEST ALL OF THE ALGORITHMS
-  //todo add a tester, not stat gatherer
 
+
+
+
+  //TESTS OF THE DIJKSTRA SEARCH
+  @Test
+  public void DijkstraTinyOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Tiny");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+
+  }
+
+  @Test
+  public void DijkstraTwoKOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "TwoK");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void DijkstraUnevenOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Uneven");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void DijkstraSmallOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Small");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void DijkstraMediumOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Medium");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void DijkstraHugeOnly() throws GenericError, InterruptedException {
+    String algorithm = "Dijkstra";
+
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Huge");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void testDijkstra() throws InterruptedException, GenericError {
+    String algorithm = "Dijkstra";
+
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, null);
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+
+  }
 
   /**
    * Test select few images and save the results
@@ -785,8 +1096,8 @@ public class Tests {
    * @throws InterruptedException
    */
   @Test
-  public void testAllSaveResults() throws InterruptedException, GenericError, IOException {
-    String[] algorithmArr = new String[]{"Depth First", "Breadth First"};
+  public void testDijkstraSaveResults() throws InterruptedException, GenericError, IOException {
+    String algorithm = "Dijkstra";
 
 
     ArrayList<String> testFiles = new ArrayList<>();
@@ -808,13 +1119,77 @@ public class Tests {
       File file = new File("Images/" + fileStr);
       for (String option : options) {
         for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          //Add these to the tracker
+          String loading = null, solving = null;
+          if (option.equals("Loading")) loading = "Loading";
+          else if (option.equals("Solving")) solving = "Solving";
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+        }
+      }
+    }
+
+    tracker.saveResult();
+  }
+
+
+
+
+
+
+  //TEST ALL OF THE ALGORITHMS
+  //todo add a tester, not stat gatherer
+
+
+  /**
+   * Test select few images and save the results
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  public void testAllSaveResults() throws InterruptedException, GenericError, IOException {
+    //todo add Dijkstra
+    //todo add AStar
+    String[] algorithmArr = new String[]{"Depth First", "Breadth First", "Dijkstra"};
+
+
+    ArrayList<String> testFiles = new ArrayList<>();
+    testFiles.add("Tiny.png");
+    testFiles.add("Small Imperfect.png");
+    testFiles.add("Medium Imperfect.png");
+    testFiles.add("Large Imperfect.png");
+    testFiles.add("Huge Imperfect.png");
+    testFiles.add("OneK Imperfect.png");
+    testFiles.add("TwoK Imperfect.png");
+    testFiles.add("FourK Imperfect.png");
+    testFiles.add("SixK Imperfect.png");
+
+    //todo add the big mazes but refactor so that only AStar and Dijkstra will attempt
+
+    ResultTracker tracker = new ResultTracker();
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (String fileStr : testFiles) {
+      File file = new File("Images/" + fileStr);
+      for (String option : options) {
+        for (Boolean multi : threading) {
           for (String algorithm : algorithmArr) {
             System.out.println("BFS Solve " + file.getName() + " " + option);
 
             Application application = new Application();
             application.parseImageFile(file);
 
-            AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+            AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
             thread.start();
             thread.join();
             System.out.println("Thread complete");
@@ -849,7 +1224,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmDispatchThread thread = new AlgorithmDispatchThread(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
@@ -873,7 +1248,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmDispatchThread thread = new AlgorithmDispatchThread(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish

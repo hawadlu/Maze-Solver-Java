@@ -19,8 +19,8 @@ public class DepthFirst extends AlgorithmRunner {
     public void solve(SolveAlgorithm solve, Boolean multiThreading) {
         System.out.println("Solving depth first");
 
-        AlgorithmWorkerThread workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, "t1");
-        AlgorithmWorkerThread workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, "t2");
+        AlgorithmWorker workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, "t1");
+        AlgorithmWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, "t2");
 
         solve.startThreads(workerOne, workerTwo, multiThreading);
     }
@@ -29,7 +29,7 @@ public class DepthFirst extends AlgorithmRunner {
 /**
  * Allows DFS to be multi threaded
  */
-class DFSWorker extends AlgorithmWorkerThread {
+class DFSWorker extends AlgorithmWorker {
     public DFSWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
         super(solve, start, destination, runner, threadId);
     }
@@ -58,7 +58,7 @@ class DFSWorker extends AlgorithmWorkerThread {
             if (!solve.scanAll) solve.findNeighbours(parent, runner.multiThreading);
 
             //Add all the appropriate neighbours to the stack
-            for (Node node : parent.getNeighbours(false)) {
+            for (Node node : parent.getNeighbours()) {
                 if (node.isVisited() == null) {
                     node.setParent(parent);
                     toProcess.push(node);
