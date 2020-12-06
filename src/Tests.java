@@ -775,7 +775,62 @@ public class Tests {
   }
 
 
+  //TEST ALL OF THE ALGORITHMS
+  //todo add a tester, not stat gatherer
 
+
+  /**
+   * Test select few images and save the results
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  public void testAllSaveResults() throws InterruptedException, GenericError, IOException {
+    String[] algorithmArr = new String[]{"Depth First", "Breadth First"};
+
+
+    ArrayList<String> testFiles = new ArrayList<>();
+    testFiles.add("Tiny.png");
+    testFiles.add("Small Imperfect.png");
+    testFiles.add("Medium Imperfect.png");
+    testFiles.add("Large Imperfect.png");
+    testFiles.add("Huge Imperfect.png");
+    testFiles.add("OneK Imperfect.png");
+    testFiles.add("TwoK Imperfect.png");
+    testFiles.add("FourK Imperfect.png");
+    testFiles.add("SixK Imperfect.png");
+
+    ResultTracker tracker = new ResultTracker();
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (String fileStr : testFiles) {
+      File file = new File("Images/" + fileStr);
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          for (String algorithm : algorithmArr) {
+            System.out.println("BFS Solve " + file.getName() + " " + option);
+
+            Application application = new Application();
+            application.parseImageFile(file);
+
+            AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
+            thread.start();
+            thread.join();
+            System.out.println("Thread complete");
+
+            //Add these to the tracker
+            String loading = null, solving = null;
+            if (option.equals("Loading")) loading = "Loading";
+            else if (option.equals("Solving")) solving = "Solving";
+            tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          }
+        }
+      }
+    }
+
+    tracker.saveResult();
+  }
 
 
 
@@ -801,6 +856,8 @@ public class Tests {
 
     System.out.println("Thread finished");
   }
+
+
 
   //TEST SAVING
   @Test
