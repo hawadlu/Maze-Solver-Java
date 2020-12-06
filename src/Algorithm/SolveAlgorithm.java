@@ -38,7 +38,7 @@ public class SolveAlgorithm {
         if (algorithm.equals("Depth First")) new DepthFirst().solve(this, multiThreading);
         else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading);
         else if (algorithm.equals("Dijkstra")) new Dijkstra().solve(this, multiThreading);
-//        else if (algorithm.equals("AStar")) new AStar().solve(this, multiThreading);
+        else if (algorithm.equals("AStar")) new AStar().solve(this, multiThreading);
 
         long stopTime = System.nanoTime();
         execTime = stopTime - startTime;

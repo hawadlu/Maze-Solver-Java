@@ -3,12 +3,13 @@ package Algorithm;
 import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.PriorityQueue;
 
 /**
  * Solve the maze, breadth first
  */
-public class Dijkstra extends AlgorithmRunner{
+public class AStar extends AlgorithmRunner{
 
   /**
    * Do a depth first search.
@@ -18,8 +19,8 @@ public class Dijkstra extends AlgorithmRunner{
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
     System.out.println("Solving Dijkstra");
 
-    AlgorithmWorker workerOne = new DijkstraWorker(solve, solve.entry, solve.exit, this, "t1");
-    AlgorithmWorker workerTwo = new DijkstraWorker(solve, solve.exit, solve.entry, this, "t2");
+    AlgorithmWorker workerOne = new AStarWorker(solve, solve.entry, solve.exit, this, "t1");
+    AlgorithmWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
   }
@@ -28,8 +29,8 @@ public class Dijkstra extends AlgorithmRunner{
 /**
  * Allows DFS to be multi threaded
  */
-class DijkstraWorker extends AlgorithmWorker {
-  public DijkstraWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+class AStarWorker extends AlgorithmWorker {
+  public AStarWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 
@@ -59,7 +60,7 @@ class DijkstraWorker extends AlgorithmWorker {
 
       //Add all the appropriate neighbours to the stack
       for (Node node : parent.getNeighbours()) {
-        double costToNode = parent.calculateCost(node);
+        double costToNode = parent.calculateCost(node) + Node.calculateEuclideanDistance(node, destination);
 
         //node is unvisited
         if (node.isVisited() == null) {
@@ -102,7 +103,7 @@ class DijkstraWorker extends AlgorithmWorker {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    DijkstraWorker worker = (DijkstraWorker) o;
+    AStarWorker worker = (AStarWorker) o;
     return destination.equals(worker.destination) &&
             start.equals(worker.start) &&
             threadId.equals(worker.threadId);
