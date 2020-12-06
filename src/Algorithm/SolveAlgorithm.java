@@ -37,7 +37,9 @@ public class SolveAlgorithm {
     public void Solve(String algorithm, Boolean multiThreading) {
         long startTime = System.nanoTime();
 
-        if (algorithm.endsWith("Depth First")) new DepthFirst().solve(this, multiThreading);
+        if (algorithm.equals("Depth First")) new DepthFirst().solve(this, multiThreading);
+        else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading);
+
         long stopTime = System.nanoTime();
         execTime = stopTime - startTime;
         System.out.println("Execution time: " + execTime + "ns");

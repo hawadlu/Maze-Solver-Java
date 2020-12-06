@@ -1,7 +1,6 @@
 package Utility;
 
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Class used to represent nodes in the maze
@@ -48,9 +47,17 @@ public class Node {
 
     /**
      * Get all of the neighbours
-     * @return a set of all the neighbours
+     * @param closest boolean to indicate if the collection should be sorted
+     * @return a collection of all the neighbours
      */
-    public HashSet<Node> getNeighbours() {
+    public Collection<Node> getNeighbours(Boolean closest) {
+        if (closest) {
+            ArrayList<Node> neighbours = new ArrayList<>(this.neighbours);
+            neighbours.sort(Comparator.comparingInt(this::getDistance));
+            return neighbours;
+        }
+
+        //return the set as it is
         return this.neighbours;
     }
 
@@ -68,9 +75,20 @@ public class Node {
         this.isVisited = visitor;
     }
 
+    /**
+     * @return the distance from another node to this one.
+     */
+    public int getDistance(Node other) {
+        //Return the distance on the x plane
+        if (other.getLocation().x == this.getLocation().x) return Math.abs(other.getLocation().x - this.getLocation().x);
+
+        //return the distance on the y plane
+        return Math.abs(other.getLocation().y - this.getLocation().y);
+    }
+
     @Override
     public String toString() {
-        return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
+        return "Location: " + getLocation() + " Neighbours: " + getNeighbours(false).size() + " visited: " + isVisited;
     }
 
     @Override

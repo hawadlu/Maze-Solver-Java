@@ -12,7 +12,7 @@ import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Solve the maze, Depth first
+ * Solve the maze, depth first
  */
 public class DepthFirst {
     int threadCount = 0;
@@ -104,7 +104,7 @@ class DFSWorker extends Thread {
             if (!solve.scanAll) solve.findNeighbours(parent, dfs.multiThreading);
 
             //Add all the appropriate neighbours to the stack
-            for (Node node : parent.getNeighbours()) {
+            for (Node node : parent.getNeighbours(false)) {
                 if (node.isVisited() == null) {
                     node.setParent(parent);
                     toProcess.push(node);

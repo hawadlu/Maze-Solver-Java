@@ -51,6 +51,9 @@ public class Tests {
   //TESTS OF THE DEPTH FIRST SEARCH
   @Test
   public void DFSTinyOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+    
     //Delete all the files in the solved folder
     deleteFiles(new File("Images/Solved"));
 
@@ -74,12 +77,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("DFS solve " + file.getName() + " " + option);
+          System.out.println("BFS Solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -94,6 +97,9 @@ public class Tests {
 
   @Test
   public void DFSTwoKOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+
     //Delete all the files in the solved folder
     deleteFiles(new File("Images/Solved"));
 
@@ -123,7 +129,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -137,6 +143,9 @@ public class Tests {
 
   @Test
   public void DFSUnevenOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+
     //Delete all the files in the solved folder
     deleteFiles(new File("Images/Solved"));
 
@@ -166,7 +175,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -180,6 +189,9 @@ public class Tests {
 
   @Test
   public void DFSSmallOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+
     deleteFiles(new File("Images/Solved"));
     ArrayList<File> files = getAllFiles(new File("Images"));
 
@@ -206,7 +218,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -220,6 +232,9 @@ public class Tests {
 
   @Test
   public void DFSMediumOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+
     deleteFiles(new File("Images/Solved"));
     ArrayList<File> files = getAllFiles(new File("Images"));
 
@@ -247,7 +262,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -261,6 +276,9 @@ public class Tests {
 
   @Test
   public void DFSHugeOnly() throws GenericError, InterruptedException {
+    String algorithm = "Depth First";
+
+
     ArrayList<File> files = getAllFiles(new File("Images"));
 
     //Remove anything that is not an image
@@ -287,7 +305,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -299,9 +317,11 @@ public class Tests {
     }
   }
 
-
   @Test
   public void testDFS() throws InterruptedException, GenericError {
+    String algorithm = "Depth First";
+
+
     deleteFiles(new File("Images/Solved"));
     ArrayList<File> files = getAllFiles(new File("Images"));
 
@@ -328,7 +348,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -341,7 +361,6 @@ public class Tests {
 
   }
 
-
   /**
    * Test select few images and save the results
    *
@@ -349,6 +368,9 @@ public class Tests {
    */
   @Test
   public void testDFSSaveResults() throws InterruptedException, GenericError, IOException {
+    String algorithm = "Depth First";
+
+
     ArrayList<String> testFiles = new ArrayList<>();
     testFiles.add("Tiny.png");
     testFiles.add("Small Imperfect.png");
@@ -373,7 +395,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve("Depth First", option, multi);
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -382,7 +404,7 @@ public class Tests {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult("Depth First", fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
         }
       }
     }
@@ -390,9 +412,383 @@ public class Tests {
     tracker.saveResult();
   }
 
+
+
+
+
+  //TESTS OF THE BREADTH FIRST SEARCH
+  @Test
+  public void BFSTinyOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Tiny");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+
+  }
+
+  @Test
+  public void BFSTwoKOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "TwoK");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void BFSUnevenOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Uneven");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void BFSSmallOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Small");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void BFSMediumOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Medium");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void BFSHugeOnly() throws GenericError, InterruptedException {
+    String algorithm = "Breadth First";
+
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Huge");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+  }
+
+  @Test
+  public void testBFS() throws InterruptedException, GenericError {
+    String algorithm = "Breadth First";
+
+
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, null);
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+    for (File file : files) {
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          application.saveImage("Images/Solved/Test BFS " + option + " multi threading " + multi + " " + file.getName());
+          System.out.println("Complete");
+        }
+      }
+    }
+
+  }
+
+  /**
+   * Test select few images and save the results
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  public void testBFSSaveResults() throws InterruptedException, GenericError, IOException {
+    String algorithm = "Breadth First";
+
+
+    ArrayList<String> testFiles = new ArrayList<>();
+    testFiles.add("Tiny.png");
+    testFiles.add("Small Imperfect.png");
+    testFiles.add("Medium Imperfect.png");
+    testFiles.add("Large Imperfect.png");
+    testFiles.add("Huge Imperfect.png");
+    testFiles.add("OneK Imperfect.png");
+    testFiles.add("TwoK Imperfect.png");
+    testFiles.add("FourK Imperfect.png");
+    testFiles.add("SixK Imperfect.png");
+
+    ResultTracker tracker = new ResultTracker();
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (String fileStr : testFiles) {
+      File file = new File("Images/" + fileStr);
+      for (String option : options) {
+        for (Boolean multi : threading) {
+          System.out.println("BFS Solve " + file.getName() + " " + option);
+
+          Application application = new Application();
+          application.parseImageFile(file);
+
+          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          thread.start();
+          thread.join();
+          System.out.println("Thread complete");
+
+          //Add these to the tracker
+          String loading = null, solving = null;
+          if (option.equals("Loading")) loading = "Loading";
+          else if (option.equals("Solving")) solving = "Solving";
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+        }
+      }
+    }
+
+    tracker.saveResult();
+  }
+
+
+
+
+
+
   //TEST THE WORKER THREAD
   @Test
   public void testWorkerThread() throws InterruptedException {
+    String algorithm = "Breadth First";
+
+
     Application application = new Application();
     File image = new File("Images/TwoK Imperfect.png");
     try {
@@ -402,7 +798,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application, "test", false);
+    AlgorithmWorkerThread thread = new AlgorithmWorkerThread(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
@@ -413,6 +809,8 @@ public class Tests {
   //TEST SAVING
   @Test
   public void testSave() throws InterruptedException {
+    String algorithm = "Breadth First";
+
     Application application = new Application();
     File image = new File("Images/Small Imperfect.png");
     try {
@@ -422,7 +820,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmWorkerThread thread = new AlgorithmWorkerThread("Depth First", "Loading", application, "test", false);
+    AlgorithmWorkerThread thread = new AlgorithmWorkerThread(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
