@@ -1524,8 +1524,6 @@ public class Tests {
    */
   @Test
   public void testAllSaveResults() throws InterruptedException, GenericError, IOException {
-    //todo add Dijkstra
-    //todo add AStar
     String[] algorithmArr = new String[]{"Depth First", "Breadth First", "Dijkstra", "AStar"};
 
     ArrayList<File> files = getAllFiles(new File("Images"));

@@ -36,10 +36,10 @@ public class SolveAlgorithm {
         long startTime = System.nanoTime();
 
         //Check is the algorithm will be compatible with the maze size
-        if ((algorithm.equals("Breadth First") || algorithm.equals("Depth First")) && mazeSize > (6001^2)) {
+        if ((algorithm.equals("Breadth First") || algorithm.equals("Depth First")) && mazeSize > Math.pow(6001, 2)) {
             System.out.println("Maze is too large for " + algorithm + ". Using Astar instead");
             algorithm = "AStar";
-        } else if (algorithm.equals("Dijkstra") && mazeSize > (8001^2)) {
+        } else if (algorithm.equals("Dijkstra") && mazeSize > Math.pow(8001, 2)) {
             System.out.println("Maze is too large for " + algorithm + ". Using Astar instead");
             algorithm = "AStar";
         }
@@ -80,7 +80,7 @@ public class SolveAlgorithm {
     }
 
     public void Scan(String param) {
-        if (param.equals("Loading") && mazeSize > (6001 ^ 2)) {
+        if (param.equals("Loading") && mazeSize > Math.pow(6001, 2)) {
             System.out.println("Maze is too large to scan for all nodes. Scanning on solve.");
             param = "Solving";
         }
