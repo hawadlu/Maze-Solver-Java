@@ -35,6 +35,15 @@ public class SolveAlgorithm {
     public void Solve(String algorithm, Boolean multiThreading) {
         long startTime = System.nanoTime();
 
+        //Check is the algorithm will be compatible with the maze size
+        if ((algorithm.equals("Breadth First") || algorithm.equals("Depth First")) && mazeSize > (6001^2)) {
+            System.out.println("Maze is too large for " + algorithm + ". Using Astar instead");
+            algorithm = "AStar";
+        } else if (algorithm.equals("Dijkstra") && mazeSize > (8001^2)) {
+            System.out.println("Maze is too large for " + algorithm + ". Using Astar instead");
+            algorithm = "AStar";
+        }
+
         if (algorithm.equals("Depth First")) new DepthFirst().solve(this, multiThreading);
         else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading);
         else if (algorithm.equals("Dijkstra")) new Dijkstra().solve(this, multiThreading);
@@ -70,8 +79,13 @@ public class SolveAlgorithm {
         }
     }
 
-    public void Scan(String params) {
-        if (params.equals("Loading")) {
+    public void Scan(String param) {
+        if (param.equals("Loading") && mazeSize > (6001 ^ 2)) {
+            System.out.println("Maze is too large to scan for all nodes. Scanning on solve.");
+            param = "Solving";
+        }
+
+        if (param.equals("Loading")) {
             processor.scanAll();
             scanAll = true;
         } else {

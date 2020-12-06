@@ -1526,46 +1526,53 @@ public class Tests {
   public void testAllSaveResults() throws InterruptedException, GenericError, IOException {
     //todo add Dijkstra
     //todo add AStar
-    String[] algorithmArr = new String[]{"Depth First", "Breadth First", "Dijkstra"};
+    String[] algorithmArr = new String[]{"Depth First", "Breadth First", "Dijkstra", "AStar"};
 
+    ArrayList<File> files = getAllFiles(new File("Images"));
 
-    ArrayList<String> testFiles = new ArrayList<>();
-    testFiles.add("Tiny.png");
-    testFiles.add("Small Imperfect.png");
-    testFiles.add("Medium Imperfect.png");
-    testFiles.add("Large Imperfect.png");
-    testFiles.add("Huge Imperfect.png");
-    testFiles.add("OneK Imperfect.png");
-    testFiles.add("TwoK Imperfect.png");
-    testFiles.add("FourK Imperfect.png");
-    testFiles.add("SixK Imperfect.png");
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, null);
 
-    //todo add the big mazes but refactor so that only AStar and Dijkstra will attempt
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
 
     ResultTracker tracker = new ResultTracker();
     String[] options = {"Loading", "Solving"};
     Boolean[] threading = {true, false};
 
-    for (String fileStr : testFiles) {
-      File file = new File("Images/" + fileStr);
+    for (File file : files) {
       for (String option : options) {
-        for (Boolean multi : threading) {
+        //Check if the maze is too big for this option
+        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+        else{
           for (String algorithm : algorithmArr) {
-            System.out.println("BFS Solve " + file.getName() + " " + option);
+            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+            else {
+              for (Boolean multi : threading) {
+                System.out.println(algorithm + " " + file.getName() + " " + option);
 
-            Application application = new Application();
-            application.parseImageFile(file);
+                Application application = new Application();
+                application.parseImageFile(file);
 
-            AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
-            thread.start();
-            thread.join();
-            System.out.println("Thread complete");
+                AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+                thread.start();
+                thread.join();
+                System.out.println("Thread complete");
 
-            //Add these to the tracker
-            String loading = null, solving = null;
-            if (option.equals("Loading")) loading = "Loading";
-            else if (option.equals("Solving")) solving = "Solving";
-            tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+                //Add these to the tracker
+                String loading = null, solving = null;
+                if (option.equals("Loading")) loading = "Loading";
+                else if (option.equals("Solving")) solving = "Solving";
+                tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+              }
+            }
           }
         }
       }
@@ -1701,7 +1708,6 @@ public class Tests {
    * Holds each individual result
    */
   private class TestResult {
-    //todo multi threading should be treated as two different files
     String fileName, onLoad, onSolve, algorithm;
     long execTime;
     boolean multiThreading;
