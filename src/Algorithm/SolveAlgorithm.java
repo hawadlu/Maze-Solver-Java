@@ -9,6 +9,7 @@ import Utility.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class contains common methdods that are used by all algorithms
@@ -16,7 +17,7 @@ import java.util.HashMap;
 public class SolveAlgorithm {
     boolean scanAll = false;
     ImageProcessor processor;
-    HashMap<Location, Node> nodes = new HashMap<>();
+    ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
     Node entry, exit;
     Application application;
     public double mazeSize;

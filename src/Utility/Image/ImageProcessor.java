@@ -9,11 +9,12 @@ import Utility.Colours.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageProcessor {
     static Application application;
     ArrayList<Location> exits = new ArrayList<>();
-    HashMap<Location, Node> nodes = new HashMap<>();
+    ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
 
     public ImageProcessor(Application application) {
         this.application = application;
@@ -148,7 +149,7 @@ public class ImageProcessor {
      * @param node the node to use to search for neighbours.
      * @param nodes the current nodes
      */
-    private static void neighbourSearch(Node node, HashMap<Location, Node> nodes) {
+    private static void neighbourSearch(Node node, ConcurrentHashMap<Location, Node> nodes) {
         colEnum[][] imgArray = application.getImageFile().getArray();
 
         //Look left until a black node is found
@@ -247,7 +248,7 @@ public class ImageProcessor {
     /**
      * @return the nodes.
      */
-    public HashMap<Location, Node> getNodes() {
+    public ConcurrentHashMap<Location, Node> getNodes() {
         return this.nodes;
     }
 }

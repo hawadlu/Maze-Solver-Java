@@ -248,6 +248,7 @@ public class GUI {
       //The popup options
       JComboBox algoOptions = new JComboBox(new String[]{"AStar", "Breadth First", "Depth First", "Dijkstra"});
       JComboBox neighbourOptions = new JComboBox(new String[]{"Loading", "Solving"});
+      JCheckBox threadBox = new JCheckBox();
 
       solveControls.add(new JLabel("Image"));
       solveControls.add(new JLabel(getImageInfo("name")));
@@ -255,6 +256,8 @@ public class GUI {
       solveControls.add(algoOptions);
       solveControls.add(new JLabel("Neighbours"));
       solveControls.add(neighbourOptions);
+      solveControls.add(new JLabel("Multi Threading"));
+      solveControls.add(threadBox);
       JButton help = new JButton("Help");
       solveControls.add(help);
       optionPanel.add(solveControls);
@@ -278,7 +281,11 @@ public class GUI {
                 "times but is more memory intensive.\n\n" +
                 "Solving: Find only the necessary nodes while\n" +
                 "solving the maze. This has better memory performance\n" +
-                "but may be slower.";
+                "but may be slower.\n\n" +
+                "MULTI THREADING\n" +
+                "The maze will be solved using two concurrent threads.\n" +
+                "It is recommend that this is only used for large mazes as\n" +
+                "the performance tends to be poor on small mazes.";
 
 
         JPanel helpPanel = new JPanel();
@@ -294,7 +301,7 @@ public class GUI {
         helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         cancelButtons.add(exit);
-        makePopup(helpPanel, cancelButtons, new Dimension(400, 500));
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
       });
 
       JPanel buttonPanel = new JPanel();
@@ -306,8 +313,9 @@ public class GUI {
       solveButton.addActionListener(e12 -> {
         String algorithm = (String) algoOptions.getSelectedItem();
         String params = (String) neighbourOptions.getSelectedItem();
+        Boolean multiThread = threadBox.isSelected();
 
-        makeAlgoWorkingScreen(algorithm, params);
+        makeAlgoWorkingScreen(algorithm, params, multiThread);
       });
 
       cancelButtons.clear();
@@ -331,7 +339,7 @@ public class GUI {
   /**
    * Make the screen that shows a spinner while the algorithm is solving.
    */
-  private void makeAlgoWorkingScreen(String algorithm, String params) {
+  private void makeAlgoWorkingScreen(String algorithm, String params, Boolean multiThread) {
 //Prepare the main area
     algoMainArea.removeAll();
 
@@ -340,7 +348,7 @@ public class GUI {
     refresh();
 
     //todo refactor this to make it a user option
-    Thread solveThread = application.solve(algorithm, params, true);
+    Thread solveThread = application.solve(algorithm, params, multiThread);
 
     //Create another thread that will only wait for algorithm to finish
     Thread algoWait = new Thread() {

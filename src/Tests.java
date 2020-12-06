@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -41,7 +42,7 @@ public class Tests {
     ImageProcessor processor = new ImageProcessor(application);
 
     processor.scanAll();
-    HashMap<Location, Node> nodes = processor.getNodes();
+    ConcurrentHashMap<Location, Node> nodes = processor.getNodes();
     int expectedSize = 12;
     assertEquals(expectedSize, nodes.size(), "Size is: " + nodes.size() + ",  expected size: " + expectedSize);
   }
