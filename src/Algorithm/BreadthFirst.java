@@ -3,16 +3,14 @@ package Algorithm;
 import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.ArrayDeque;
+import java.util.Objects;
+import java.util.Queue;
 
 /**
  * Solve the maze, breadth first
  */
-public class BreadthFirst {
-  int threadCount = 0;
-  AtomicBoolean done = new AtomicBoolean(false);
-  Boolean multiThreading = false;
+public class BreadthFirst extends AlgorithmRunner{
 
   /**
    * Do a depth first search.
@@ -22,48 +20,21 @@ public class BreadthFirst {
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
     System.out.println("Solving depth first");
 
-    Node start = solve.entry;
-    Node destination = solve.exit;
 
-    BFSWorker workerOne = new BFSWorker(solve, start, destination, this, "t1");
-    BFSWorker workerTwo = new BFSWorker(solve, destination, start, this, "t2");
-    workerOne.other = workerTwo;
-    workerTwo.other = workerOne;
-    workerOne.start();
+    AlgorithmWorkerThread workerOne = new BFSWorker(solve, solve.entry, solve.exit, this, "t1");
+    AlgorithmWorkerThread workerTwo = new BFSWorker(solve, solve.exit, solve.entry, this, "t2");
 
-    //Only start the second worker in the case that the maze is large enough
-    if (multiThreading) {
-      workerTwo.start();
-    }
-
-    //Wait for the worker to finish
-    try {
-      workerOne.join();
-      workerTwo.join();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
-    System.out.println("Threads have finished execution. There were a total of " + threadCount);
+    solve.startThreads(workerOne, workerTwo, multiThreading);
   }
 }
 
 /**
  * Allows DFS to be multi threaded
  */
-class BFSWorker extends Thread {
-  SolveAlgorithm solve;
-  Node destination, start;
-  String threadId;
-  BreadthFirst bfs;
-  BFSWorker other;
+class BFSWorker extends AlgorithmWorkerThread {
 
-  public BFSWorker(SolveAlgorithm solve, Node start, Node destination, BreadthFirst bfs, String threadId) {
-    this.solve = solve;
-    this.start = start;
-    this.destination = destination;
-    this.threadId = threadId;
-    this.bfs = bfs;
+  public BFSWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+    super(solve, start, destination, runner, threadId);
   }
 
   @Override
@@ -71,14 +42,15 @@ class BFSWorker extends Thread {
     System.out.println("Thread: " + threadId + "\nstart: " + start + "\ndestination: " + destination + "\n");
 
 
-    Node parent = null;
+    Node parent;
     Queue<Node> toProcess = new ArrayDeque<>();
     start.visit(this);
     toProcess.add(start);
 
-    while (!toProcess.isEmpty() && !bfs.done.get()) {
+    while (!toProcess.isEmpty() && !runner.done.get()) {
 
       parent = toProcess.poll();
+      assert parent != null;
       parent.visit(this);
 
       if (parent.equals(destination)) {
@@ -86,7 +58,7 @@ class BFSWorker extends Thread {
         break;
       }
 
-      if (!solve.scanAll) solve.findNeighbours(parent, bfs.multiThreading);
+      if (!solve.scanAll) solve.findNeighbours(parent, runner.multiThreading);
 
       //Add all the appropriate neighbours to the stack
       for (Node node : parent.getNeighbours(true)) {
@@ -96,12 +68,12 @@ class BFSWorker extends Thread {
           node.visit(this);
         } else if (node.isVisited().equals(other)) {
           solve.addJoinerNodes(parent, node);
-          bfs.done.set(true);
+          runner.done.set(true);
         }
       }
 
-      //If the stack is empty at this point, solving failed
-      if (toProcess.isEmpty() && !bfs.done.get()) {
+      //If the queue is empty at this point, solving failed
+      if (toProcess.isEmpty() && !runner.done.get()) {
         try {
           throw new SolveFailure("The stack is empty on thread " + threadId);
         } catch (SolveFailure e) {

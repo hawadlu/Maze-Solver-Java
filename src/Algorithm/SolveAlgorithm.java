@@ -7,20 +7,18 @@ import Utility.Location;
 import Utility.Node;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This class contains common methdods that are used by all algorithms
+ * This class contains common methods that are used by all algorithms
  */
 public class SolveAlgorithm {
     boolean scanAll = false;
-    ImageProcessor processor;
+    final ImageProcessor processor;
     ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
     Node entry, exit;
-    Application application;
-    public double mazeSize;
+    final Application application;
+    public final double mazeSize;
     Node[] join = null;
     public long execTime;
 
@@ -46,6 +44,28 @@ public class SolveAlgorithm {
 
         //Build the path
         makePath();
+    }
+
+    /**
+     * Takes the worker threads from the algorithm and begins execution.
+     */
+    public void startThreads(AlgorithmWorkerThread workerOne, AlgorithmWorkerThread workerTwo, Boolean multiThreading) {
+        workerOne.other = workerTwo;
+        workerTwo.other = workerOne;
+        workerOne.start();
+
+        //Only start the second worker in the case that the maze is large enough
+        if (multiThreading) {
+            workerTwo.start();
+        }
+
+        //Wait for the worker to finish
+        try {
+            workerOne.join();
+            workerTwo.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void Scan(String params) {
@@ -121,7 +141,6 @@ public class SolveAlgorithm {
      * Find the return the neighbours of a specific node
      * @param parent the node to find neighbours of.
      * @param multiThreading boolean to indicate if the program is currently multithreading.
-     * @return a hashset of all the neighbours
      */
     public void findNeighbours(Node parent, Boolean multiThreading) {
         processor.scanAll(parent, multiThreading);

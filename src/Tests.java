@@ -1,22 +1,18 @@
-import Utility.Thread.AlgorithmWorkerThread;
+import Utility.Thread.AlgorithmDispatchThread;
 import Application.Application;
-import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.GenericError;
 import Utility.Image.ImageProcessor;
 import Utility.Location;
 import Utility.Node;
 import org.junit.jupiter.api.Test;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,7 +49,7 @@ public class Tests {
   public void DFSTinyOnly() throws GenericError, InterruptedException {
     String algorithm = "Depth First";
 
-    
+
     //Delete all the files in the solved folder
     deleteFiles(new File("Images/Solved"));
 
@@ -82,7 +78,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -129,7 +125,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -175,7 +171,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -218,7 +214,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -262,7 +258,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -305,7 +301,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -348,7 +344,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -395,7 +391,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -450,7 +446,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -497,7 +493,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -543,7 +539,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -585,7 +581,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -628,7 +624,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -671,7 +667,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -714,7 +710,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -761,7 +757,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmWorkerThread thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatchThread thread = application.solve(algorithm, option, multi);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -798,7 +794,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmWorkerThread thread = new AlgorithmWorkerThread(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatchThread thread = new AlgorithmDispatchThread(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
@@ -820,7 +816,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmWorkerThread thread = new AlgorithmWorkerThread(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatchThread thread = new AlgorithmDispatchThread(algorithm, "Loading", application, "test", false);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
@@ -892,7 +888,7 @@ public class Tests {
       FileWriter csv = new FileWriter(newCSV);
 
       //Add the headers
-      csv.append("File, Algorithm, Size, Load, Solve, execTime, Multi Threading\n");
+      csv.append("File, Algorithm, Size, Load, Solve, execTime (ns), Multi Threading\n");
 
       //Add each of the results
       for (TestResult test: results) csv.append(test.printCSV());

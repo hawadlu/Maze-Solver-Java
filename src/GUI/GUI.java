@@ -4,8 +4,6 @@ import Application.Application;
 import GUI.CustomPanels.Scroll;
 import GUI.CustomPanels.SpinnerPanel;
 import Utility.Exceptions.GenericError;
-import Utility.Thread.AlgorithmWorkerThread;
-import Utility.Thread.WaitThread;
 
 
 import javax.swing.*;

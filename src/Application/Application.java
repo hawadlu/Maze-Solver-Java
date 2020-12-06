@@ -1,6 +1,6 @@
 package Application;
 
-import Utility.Thread.AlgorithmWorkerThread;
+import Utility.Thread.AlgorithmDispatchThread;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
 import Utility.Image.ImageFile;
@@ -72,8 +72,8 @@ public class Application {
    * @param algorithm the algorithm to use
    * @param params the parameters to use
    */
-  public AlgorithmWorkerThread solve(String algorithm, String params, Boolean multiThreading) {
-    AlgorithmWorkerThread worker = new AlgorithmWorkerThread(algorithm, params, this, "solver", multiThreading);
+  public AlgorithmDispatchThread solve(String algorithm, String params, Boolean multiThreading) {
+    AlgorithmDispatchThread worker = new AlgorithmDispatchThread(algorithm, params, this, "solver", multiThreading);
     return worker;
   }
 
