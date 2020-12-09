@@ -1,4 +1,4 @@
-package Algorithm.MST;
+package Algorithm.MinimumTree;
 
 import Algorithm.AlgorithmRunner;
 import Algorithm.AlgorithmWorker;
@@ -9,9 +9,8 @@ import Utility.Segment;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.PriorityQueue;
 
-public class Kruskals extends AlgorithmRunner {
+public class Kruskals {
   ArrayList<Segment> mstEdges = new ArrayList<>();
   HashSet<Node> unvisited = new HashSet<>();
   HashSet<Node> forest = new HashSet<>();
@@ -19,32 +18,7 @@ public class Kruskals extends AlgorithmRunner {
   public void solve(SolveAlgorithm solve) {
     System.out.println("Solving Kruskals");
 
-    AlgorithmWorker worker = new KruskalsWorker(solve, solve.entry, solve.exit, this, "t1", this);
-    worker.start();
 
-    //Wait for the worker to finish
-    try {
-      worker.join();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public ArrayList<Segment> getSegments() {
-    return mstEdges;
-  }
-}
-
-class KruskalsWorker extends AlgorithmWorker {
-  Kruskals kruskals;
-
-  public KruskalsWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId, Kruskals kruskals) {
-    super(solve, start, destination, runner, threadId);
-    this.kruskals = kruskals;
-  }
-
-  @Override
-  public void run() {
     //Scan all of the nodes
     solve.scan("Loading");
 
@@ -53,11 +27,11 @@ class KruskalsWorker extends AlgorithmWorker {
     ArrayList<Segment> edges = new ArrayList<>(solve.segments);
 
     //Add all the nodes to the unvisited set
-    kruskals.unvisited.addAll(solve.getNodes());
+    unvisited.addAll(solve.getNodes());
 
     //Create the forest
-    for (Node node: kruskals.unvisited) {
-      kruskals.forest.add(node);
+    for (Node node: unvisited) {
+      forest.add(node);
       node.setParent(node);
       node.setCost(0);
     }
@@ -71,11 +45,12 @@ class KruskalsWorker extends AlgorithmWorker {
       Segment currentSegment = edges.remove(0);
 
       if (union(currentSegment.entry, currentSegment.exit)) {
-        kruskals.mstEdges.add(currentSegment);
+        mstEdges.add(currentSegment);
       }
 
     }
-    System.out.println("Found MST with " + kruskals.mstEdges.size() + " edges");
+    System.out.println("Found MST with " + mstEdges.size() + " edges");
+
   }
 
   /**
@@ -95,10 +70,10 @@ class KruskalsWorker extends AlgorithmWorker {
       //Merge the trees
       if (startRoot.getCost() < endRoot.getCost()) {
         startRoot.setParent(end);
-        kruskals.forest.remove(start);
+        forest.remove(start);
       } else {
         endRoot.setParent(start);
-        kruskals.forest.remove(end);
+        forest.remove(end);
 
         if (startRoot.getCost() == endRoot.getCost()) {
           startRoot.setCost(startRoot.getCost() + 1);
@@ -119,6 +94,10 @@ class KruskalsWorker extends AlgorithmWorker {
     } else {
       return findRoot(start.getParent());
     }
+  }
+
+  public ArrayList<Segment> getSegments() {
+    return mstEdges;
   }
 }
 
