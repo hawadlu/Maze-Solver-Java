@@ -27,7 +27,7 @@ public class AlgorithmDispatcher extends Thread {
   public synchronized void run() {
     System.out.println("Worker id: " + id);
     solve = new SolveAlgorithm(currentApplication);
-    solve.Scan(params);
+    solve.scan(params);
     solve.Solve(algorithm, multiThreading);
   }
 

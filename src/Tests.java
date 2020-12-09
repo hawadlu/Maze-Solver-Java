@@ -400,7 +400,7 @@ public class Tests {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
         }
       }
     }
@@ -766,7 +766,7 @@ public class Tests {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1133,7 +1133,7 @@ public class Tests {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1499,7 +1499,7 @@ public class Tests {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+          tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1566,7 +1566,7 @@ public class Tests {
                 String loading = null, solving = null;
                 if (option.equals("Loading")) loading = "Loading";
                 else if (option.equals("Solving")) solving = "Solving";
-                tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), multi);
+                tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
               }
             }
           }
@@ -1578,8 +1578,9 @@ public class Tests {
   }
 
 
+
+
   //TEST PRIMS ALGORITHM
-  //TESTS OF THE DEPTH FIRST SEARCH
   @Test
   public void PrimsTinyOnly() throws GenericError, InterruptedException {
     String algorithm = "Prims";
@@ -1775,7 +1776,7 @@ public class Tests {
     ArrayList<File> files = getAllFiles(new File("Images"));
 
     //Remove anything that is not an image
-    files = removeNonImages(files, false, "Prims");
+    files = removeNonImages(files, false, "Huge");
 
     Comparator<File> smallest = (File f1, File f2) -> {
       if (f1.length() < f2.length()) return -1;
@@ -1877,11 +1878,401 @@ public class Tests {
 
       //Add these to the tracker
       String loading = null, solving = null;
-      tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), false);
+      tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), false, "Success");
     }
 
     tracker.saveResult();
   }
+
+
+
+
+  //TEST KRUSKALS ALGORITHM
+  @Test
+  public void KruskalsTinyOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Tiny");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void KruskalsTwoKOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "TwoK");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void KruskalsUnevenOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Uneven");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void KruskalsSmallOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Small");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void KruskalsMediumOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Medium");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void KruskalsHugeOnly() throws GenericError, InterruptedException {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, "Huge");
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+  }
+
+  @Test
+  public void testKruskals() throws InterruptedException, GenericError {
+    String algorithm = "Kruskals";
+
+    //Delete all the files in the solved folder
+    deleteFiles(new File("Images/Solved"));
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, null);
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+    for (File file : files) {
+      System.out.println("Prims Solve " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      System.out.println("Complete");
+    }
+
+  }
+
+  /**
+   * Test select few images and save the results
+   *
+   * @throws InterruptedException
+   */
+  @Test
+  public void testKruskalsSaveResults() throws InterruptedException, GenericError, IOException {
+    String algorithm = "Kruskals";
+
+
+    ArrayList<String> testFiles = new ArrayList<>();
+    testFiles.add("Tiny.png");
+    testFiles.add("Small Imperfect.png");
+    testFiles.add("Medium Imperfect.png");
+    testFiles.add("Large Imperfect.png");
+    testFiles.add("Huge Imperfect.png");
+    testFiles.add("OneK Imperfect.png");
+    testFiles.add("TwoK Imperfect.png");
+    testFiles.add("FourK Imperfect.png");
+    testFiles.add("SixK Imperfect.png");
+
+    ResultTracker tracker = new ResultTracker();;
+
+    for (String fileStr : testFiles) {
+      File file = new File("Images/" + fileStr);
+      System.out.println(algorithm + " " + file.getName());
+
+      Application application = new Application();
+      application.parseImageFile(file);
+
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      thread.start();
+      thread.join();
+      System.out.println("Thread complete");
+
+      //Add these to the tracker
+      String loading = null, solving = null;
+      tracker.addResult(algorithm, fileStr, thread.getMazeSize(), loading, solving, thread.getExecTime(), false, "Success");
+    }
+
+    tracker.saveResult();
+  }
+
+
+
+  //TEST ALL OF THE ALGORITHMS
+  @Test
+  public void testAlgoSaveResults() throws IOException, GenericError, InterruptedException {
+    String[] solveAlgo = new String[]{"Depth First", "Breadth First", "Dijkstra", "AStar"};
+    String[] mstAlgo = new String[]{"Prims", "Kruskals"};
+
+    ArrayList<File> files = getAllFiles(new File("Images"));
+
+    //Remove anything that is not an image
+    files = removeNonImages(files, false, null);
+
+    Comparator<File> smallest = (File f1, File f2) -> {
+      if (f1.length() < f2.length()) return -1;
+      if (f1.length() > f2.length()) return 1;
+      return 0;
+    };
+
+    files.sort(smallest);
+
+    System.out.println("files: " + files);
+
+    ResultTracker tracker = new ResultTracker();
+    String[] options = {"Loading", "Solving"};
+    Boolean[] threading = {true, false};
+
+    for (File file : files) {
+      //Do the solve algorithms
+      for (String option : options) {
+        //Check if the maze is too big for this option
+        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+        else{
+          for (String algorithm : solveAlgo) {
+            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+            else {
+              for (Boolean multi : threading) {
+                //Add these to the tracker
+                String loading = null, solving = null;
+                if (option.equals("Loading")) loading = "Loading";
+                else if (option.equals("Solving")) solving = "Solving";
+
+                try {
+                  System.out.println(algorithm + " " + file.getName() + " " + option);
+
+                  Application application = new Application();
+                  application.parseImageFile(file);
+
+                  AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+                  thread.start();
+                  thread.join();
+                  System.out.println("Thread complete");
+
+                  tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
+                } catch (Exception e) {
+                  tracker.addResult(algorithm, file.getName(), 0, loading, solving, 0, multi, "Failed");
+                }
+              }
+            }
+          }
+        }
+      }
+
+      for (String algo: mstAlgo) {
+        Application application = new Application();
+        application.parseImageFile(file);
+
+        AlgorithmDispatcher thread = application.solve(algo, "", false);
+        thread.start();
+        thread.join();
+        System.out.println("Thread complete");
+
+        //Add these to the tracker
+        String loading = null, solving = null;
+        tracker.addResult(algo, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), false, "Success");
+      }
+    }
+
+    tracker.saveResult();
+  }
+
+
 
 
   //TEST THE WORKER THREAD
@@ -1982,8 +2373,8 @@ public class Tests {
   private class ResultTracker {
     ArrayList<TestResult> results = new ArrayList<>();
 
-    public void addResult(String algorithm, String file, double size, String onLoad, String onSolve, long execTime, boolean multiThreading) {
-      results.add(new TestResult(algorithm, file, size, onLoad, onSolve, execTime, multiThreading));
+    public void addResult(String algorithm, String file, double size, String onLoad, String onSolve, long execTime, boolean multiThreading, String success) {
+      results.add(new TestResult(algorithm, file, size, onLoad, onSolve, execTime, multiThreading, success));
     }
 
     /**
@@ -1995,7 +2386,7 @@ public class Tests {
       FileWriter csv = new FileWriter(newCSV);
 
       //Add the headers
-      csv.append("File, Algorithm, Size, Load, Solve, execTime (ns), Multi Threading\n");
+      csv.append("File, Algorithm, Size, Load, Solve, execTime (ns), Multi Threading, Success\n");
 
       //Add each of the results
       for (TestResult test: results) csv.append(test.printCSV());
@@ -2009,12 +2400,12 @@ public class Tests {
    * Holds each individual result
    */
   private class TestResult {
-    String fileName, onLoad, onSolve, algorithm;
+    String fileName, onLoad, onSolve, algorithm, success = "success";
     long execTime;
     boolean multiThreading;
     double size;
 
-    public TestResult(String algorithm, String fileName, double size, String onLoad, String onSolve, long execTime, boolean multiThreading) {
+    public TestResult(String algorithm, String fileName, double size, String onLoad, String onSolve, long execTime, boolean multiThreading, String success) {
       this.fileName = fileName;
       this.onLoad = onLoad;
       this.onSolve = onSolve;
@@ -2022,13 +2413,14 @@ public class Tests {
       this.multiThreading = multiThreading;
       this.size = size;
       this.algorithm = algorithm;
+      this.success = success;
     }
 
     /**
      * @return return the data in csv format
      */
     public String printCSV() {
-      return fileName + ", " + algorithm + ", " + size + ", " + onLoad + ", " + onSolve + ", " + execTime + ", " + multiThreading + "\n";
+      return fileName + ", " + algorithm + ", " + size + ", " + onLoad + ", " + onSolve + ", " + execTime + ", " + multiThreading + " " + success + "\n";
     }
   }
 }

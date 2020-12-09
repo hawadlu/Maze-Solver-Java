@@ -1,5 +1,6 @@
 package Algorithm;
 
+import Algorithm.MST.Kruskals;
 import Algorithm.MST.Prims;
 import Algorithm.Solvers.AStar;
 import Algorithm.Solvers.BreadthFirst;
@@ -13,6 +14,8 @@ import Utility.Node;
 import Utility.Segment;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -62,6 +65,11 @@ public class SolveAlgorithm {
             Prims prims = new Prims();
             prims.solve(this);
             segments = prims.getSegments();
+        } else if (algorithm.equals("Kruskals")) {
+            buildNodePath = false;
+            Kruskals kruskals = new Kruskals();
+            kruskals.solve(this);
+            segments = kruskals.getSegments();
         }
 
         long stopTime = System.nanoTime();
@@ -96,7 +104,7 @@ public class SolveAlgorithm {
         }
     }
 
-    public void Scan(String param) {
+    public void scan(String param) {
         if (param.equals("Loading") && mazeSize > Math.pow(6001, 2)) {
             System.out.println("Maze is too large to scan for all nodes. Scanning on solve.");
             param = "Solving";
@@ -166,6 +174,18 @@ public class SolveAlgorithm {
         application.getImageFile().fillSegmentPath(segments);
     }
 
+    /**
+     * Populate the set array of segments using the nodes
+     */
+    public void makeSegments() {
+        for (Node node: nodes.values()) {
+            for (Node neighbour: node.getNeighbours()) {
+                Segment newSegment = new Segment(node, neighbour);
+                if (!segments.contains(newSegment)) segments.add(newSegment);
+            }
+        }
+    }
+
     private ArrayList<Node> generatePathArraylist(Node currentNode) {
         ArrayList<Node> path = new ArrayList<>();
 
@@ -183,5 +203,20 @@ public class SolveAlgorithm {
      */
     public void findNeighbours(Node parent, Boolean multiThreading) {
         processor.scanAll(parent, multiThreading);
+    }
+
+    /**
+     * Set the cost of all known nodes to zero
+     */
+    public void resetCost() {
+        for (Node node: nodes.values()) node.setCost(0);
+    }
+
+    /**
+     * Get all of the nodes stored in the map
+     * @return a collection of nodes
+     */
+    public Collection<Node> getNodes() {
+        return nodes.values();
     }
 }

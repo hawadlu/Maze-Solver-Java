@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Segment implements Comparable {
   public Node entry, exit;
-  int segmentLen;
+  public int segmentLen;
 
   public Segment(Node entry, Node exit) {
     this.entry = entry;
