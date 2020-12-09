@@ -1,15 +1,19 @@
-package Algorithm;
+package Algorithm.Solvers;
 
+import Algorithm.AlgorithmRunner;
+import Algorithm.AlgorithmWorker;
+import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
+import java.util.ArrayDeque;
 import java.util.Objects;
-import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Solve the maze, breadth first
  */
-public class AStar extends AlgorithmRunner{
+public class BreadthFirst extends AlgorithmRunner {
 
   /**
    * Do a depth first search.
@@ -17,10 +21,11 @@ public class AStar extends AlgorithmRunner{
    * @param solve the solve object
    */
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
-    System.out.println("Solving Dijkstra");
+    System.out.println("Solving breadth first");
 
-    AlgorithmWorker workerOne = new AStarWorker(solve, solve.entry, solve.exit, this, "t1");
-    AlgorithmWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, "t2");
+
+    AlgorithmWorker workerOne = new BFSWorker(solve, solve.entry, solve.exit, this, "t1");
+    AlgorithmWorker workerTwo = new BFSWorker(solve, solve.exit, solve.entry, this, "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
   }
@@ -29,8 +34,9 @@ public class AStar extends AlgorithmRunner{
 /**
  * Allows DFS to be multi threaded
  */
-class AStarWorker extends AlgorithmWorker {
-  public AStarWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+class BFSWorker extends AlgorithmWorker {
+
+  public BFSWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 
@@ -40,9 +46,8 @@ class AStarWorker extends AlgorithmWorker {
 
 
     Node parent;
-    PriorityQueue<Node> toProcess = new PriorityQueue<Node>(Node.getComparator());
+    Queue<Node> toProcess = new ArrayDeque<>();
     start.visit(this);
-    start.setCost(0);
     toProcess.add(start);
 
     while (!toProcess.isEmpty() && !runner.done.get()) {
@@ -60,30 +65,13 @@ class AStarWorker extends AlgorithmWorker {
 
       //Add all the appropriate neighbours to the stack
       for (Node node : parent.getNeighbours()) {
-        double costToNode = parent.calculateCost(node) + Node.calculateEuclideanDistance(node, destination);
-
-        //node is unvisited
         if (node.isVisited() == null) {
           node.setParent(parent);
-          node.setCost(parent.getCost() + costToNode);
           toProcess.add(node);
           node.visit(this);
-
-          //node has been visited by the other thread
         } else if (node.isVisited().equals(other)) {
           solve.addJoinerNodes(parent, node);
           runner.done.set(true);
-
-          //node has been visited by this thread
-        } else {
-          //Check if the cost is lower
-          if (parent.getCost() + costToNode < node.getCost()) {
-            //A lower cost route has been found, re add the node to the queue
-            node.setParent(parent);
-            node.setCost(parent.getCost() + costToNode);
-            toProcess.add(node);
-            node.visit(this);
-          }
         }
       }
 
@@ -103,7 +91,7 @@ class AStarWorker extends AlgorithmWorker {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    AStarWorker worker = (AStarWorker) o;
+    BFSWorker worker = (BFSWorker) o;
     return destination.equals(worker.destination) &&
             start.equals(worker.start) &&
             threadId.equals(worker.threadId);

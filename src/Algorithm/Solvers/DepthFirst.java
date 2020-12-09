@@ -1,5 +1,8 @@
-package Algorithm;
+package Algorithm.Solvers;
 
+import Algorithm.AlgorithmRunner;
+import Algorithm.AlgorithmWorker;
+import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 

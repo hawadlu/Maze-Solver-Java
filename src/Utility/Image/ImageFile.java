@@ -5,6 +5,7 @@ import Utility.Colours.*;
 import Utility.Exceptions.InvalidImage;
 import Utility.Location;
 import Utility.Node;
+import Utility.Segment;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -213,7 +214,7 @@ public class ImageFile {
    * Fills a specified path in the maze
    * @param path the path to fill
    */
-  public void fillPath(ArrayList<Node> path) {
+  public void fileNodePath(ArrayList<Node> path) {
     System.out.println("Creating solved image");
     while (path.size() > 1) {
       Node currentNode = path.remove(0);
@@ -223,43 +224,65 @@ public class ImageFile {
       int startY = currentNode.getLocation().y;
       int endX = nextNode.getLocation().x;
       int endY = nextNode.getLocation().y;
-      int y, x;
 
-      //Set the colours at the start and end
-      imageArray[startY][startX] = colEnum.RED;
-      imageArray[endY][endX] = colEnum.RED;
+      drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
+    }
+  }
 
-      //Drawing down
-      if (startY < endY) {
-        y = startY + 1;
-        while (y < endY) {
-          imageArray[y][startX] = colEnum.RED;
-          y += 1;
-        }
+  /**
+   * Fill a path of segments.
+   * @param segments the segments to fill
+   */
+  public void fillSegmentPath(ArrayList<Segment> segments) {
+    System.out.println("Creating solved image");
+    while (!segments.isEmpty()) {
+      Segment segment = segments.remove(0);
 
-        //Drawing up
-      } else if (startY > endY) {
-        y = startY;
-        while (y > endY) {
-          imageArray[y][startX] = colEnum.RED;
-          y-=1;
-        }
+      int startX = segment.entry.getLocation().x;
+      int startY = segment.entry.getLocation().y;
+      int endX = segment.exit.getLocation().x;
+      int endY = segment.exit.getLocation().y;
 
-        //Drawing right
-      } else if (startX < endX) {
-        x = startX;
-        while (x < endX) {
-          imageArray[startY][x] = colEnum.RED;
-          x+=1;
-        }
+      drawBetweenNodes(startX, startY, endX, endY, colEnum.GREEN);
+    }
+  }
 
-        //Drawing left
-      } else if (startX > endX) {
-        x = startX;
-        while (x > endX) {
-          imageArray[startY][x] = colEnum.RED;
-          x -= 1;
-        }
+  private void drawBetweenNodes(int startX, int startY, int endX, int endY, colEnum colour) {
+    int x, y;
+    //Set the colours at the start and end
+    imageArray[startY][startX] = colour;
+    imageArray[endY][endX] = colour;
+
+    //Drawing down
+    if (startY < endY) {
+      y = startY + 1;
+      while (y < endY) {
+        imageArray[y][startX] = colour;
+        y += 1;
+      }
+
+      //Drawing up
+    } else if (startY > endY) {
+      y = startY;
+      while (y > endY) {
+        imageArray[y][startX] = colour;
+        y-=1;
+      }
+
+      //Drawing right
+    } else if (startX < endX) {
+      x = startX;
+      while (x < endX) {
+        imageArray[startY][x] = colour;
+        x+=1;
+      }
+
+      //Drawing left
+    } else if (startX > endX) {
+      x = startX;
+      while (x > endX) {
+        imageArray[startY][x] = colour;
+        x -= 1;
       }
     }
   }
@@ -270,8 +293,7 @@ public class ImageFile {
   public void reset() {
     for (int height = 0; height < imageArray.length; height++) {
       for (int width = 0; width < imageArray[0].length; width++) {
-        //todo refactor to deal with blue and green
-        if (imageArray[height][width].equals(colEnum.RED)) imageArray[height][width] = colEnum.WHITE;
+        if (!imageArray[height][width].equals(colEnum.WHITE) || !imageArray[height][width].equals(colEnum.BLACK)) imageArray[height][width] = colEnum.WHITE;
       }
     }
   }

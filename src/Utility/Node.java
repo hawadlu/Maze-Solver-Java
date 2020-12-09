@@ -16,6 +16,14 @@ public class Node {
         this.nodeLocation = nodeLocation;
     }
 
+    public Node(Node node) {
+        this.nodeLocation = node.getLocation();
+        this.neighbours = (HashSet<Node>) node.getNeighbours();
+        this.parent = node.getParent();
+        this.isVisited = node.isVisited;
+        this.cost = node.getCost();
+    }
+
     /**
      * Get the location of the node.
      * @return the location
@@ -163,6 +171,18 @@ public class Node {
                 return Double.compare(nodeOne.cost, nodeTwo.cost);
             }
         };
+    }
+
+    /**
+     * @return a list of segments based on the neighbours
+     */
+    public ArrayList<Segment> getSegments() {
+       ArrayList<Segment> toReturn = new ArrayList<>();
+       for (Node neighbour: getNeighbours()) {
+           //Only add if the neighbour is unvisited
+           if (neighbour.isVisited == null) toReturn.add(new Segment(this, neighbour));
+       }
+       return toReturn;
     }
 
     @Override

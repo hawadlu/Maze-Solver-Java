@@ -1,10 +1,16 @@
 package Algorithm;
 
+import Algorithm.MST.Prims;
+import Algorithm.Solvers.AStar;
+import Algorithm.Solvers.BreadthFirst;
+import Algorithm.Solvers.DepthFirst;
+import Algorithm.Solvers.Dijkstra;
 import Application.Application;
 import Utility.Exceptions.InvalidMaze;
 import Utility.Image.ImageProcessor;
 import Utility.Location;
 import Utility.Node;
+import Utility.Segment;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,14 +19,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * This class contains common methods that are used by all algorithms
  */
 public class SolveAlgorithm {
-    boolean scanAll = false;
+    public boolean scanAll = false;
     final ImageProcessor processor;
     ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
-    Node entry, exit;
+    public Node entry;
+    public Node exit;
     final Application application;
     public final double mazeSize;
     Node[] join = null;
     public long execTime;
+    public ArrayList<Segment> segments = new ArrayList<>();
 
     /**
      * Start the solve process.
@@ -33,6 +41,7 @@ public class SolveAlgorithm {
     }
 
     public void Solve(String algorithm, Boolean multiThreading) {
+        boolean buildNodePath = true;
         long startTime = System.nanoTime();
 
         //Check is the algorithm will be compatible with the maze size
@@ -48,14 +57,22 @@ public class SolveAlgorithm {
         else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading);
         else if (algorithm.equals("Dijkstra")) new Dijkstra().solve(this, multiThreading);
         else if (algorithm.equals("AStar")) new AStar().solve(this, multiThreading);
+        else if (algorithm.equals("Prims")) {
+            buildNodePath = false;
+            Prims prims = new Prims();
+            prims.solve(this);
+            segments = prims.getSegments();
+        }
 
         long stopTime = System.nanoTime();
         execTime = stopTime - startTime;
         System.out.println("Execution time: " + execTime + "ns");
 
-        //Build the path
-        makePath();
+        //Build the path if the path can be traced from node to node
+        if (buildNodePath) makePath();
+        else makePath(segments);
     }
+
 
     /**
      * Takes the worker threads from the algorithm and begins execution.
@@ -124,23 +141,29 @@ public class SolveAlgorithm {
      * Create the path from the start to the finish
      */
     public void makePath() {
-        //If there is no multithreading
-
         Node currentNode;
 
         if (join == null) {
             if (exit.getParent() != null) currentNode = exit;
             else currentNode = entry;
 
-            application.getImageFile().fillPath(generatePathArraylist(currentNode));
+            application.getImageFile().fileNodePath(generatePathArraylist(currentNode));
         } else {
-            application.getImageFile().fillPath(generatePathArraylist(join[0]));
-            application.getImageFile().fillPath(generatePathArraylist(join[1]));
+            application.getImageFile().fileNodePath(generatePathArraylist(join[0]));
+            application.getImageFile().fileNodePath(generatePathArraylist(join[1]));
             ArrayList<Node> tmp = new ArrayList<>();
             tmp.add(join[0]);
             tmp.add(join[1]);
-            application.getImageFile().fillPath(tmp);
+            application.getImageFile().fileNodePath(tmp);
         }
+    }
+
+    /**
+     * Fill the image with the necessary segments
+     * @param segments the arraylist of segments
+     */
+    private void makePath(ArrayList<Segment> segments) {
+        application.getImageFile().fillSegmentPath(segments);
     }
 
     private ArrayList<Node> generatePathArraylist(Node currentNode) {
