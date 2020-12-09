@@ -1812,7 +1812,7 @@ public class Tests {
     ArrayList<File> files = getAllFiles(new File("Images"));
 
     //Remove anything that is not an image
-    files = removeNonImages(files, false, "Prims");
+    files = removeNonImages(files, false, null);
 
     Comparator<File> smallest = (File f1, File f2) -> {
       if (f1.length() < f2.length()) return -1;
@@ -1847,7 +1847,7 @@ public class Tests {
    */
   @Test
   public void testPrimsSaveResults() throws InterruptedException, GenericError, IOException {
-    String algorithm = "AStar";
+    String algorithm = "Prims";
 
 
     ArrayList<String> testFiles = new ArrayList<>();
