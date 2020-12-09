@@ -18,7 +18,7 @@ public class Segment implements Comparable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Segment segment = (Segment) o;
-    return entry.equals(segment.entry) && exit.equals(segment.exit);
+    return (entry.equals(segment.entry) && exit.equals(segment.exit) || (entry.equals(segment.exit) && exit.equals(segment.entry)));
   }
 
   @Override
