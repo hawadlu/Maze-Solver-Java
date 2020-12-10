@@ -213,20 +213,29 @@ public class ImageFile {
   /**
    * Fills a specified path in the maze
    * @param path the path to fill
+   * @param fill fill in the spaces between the nodes
    */
-  public void fileNodePath(ArrayList<Node> path) {
+  public void fillNodePath(ArrayList<Node> path, boolean fill) {
     System.out.println("Creating solved image");
     while (path.size() > 1) {
       Node currentNode = path.remove(0);
-      Node nextNode = path.get(0);
 
-      int startX = currentNode.getLocation().x;
-      int startY = currentNode.getLocation().y;
-      int endX = nextNode.getLocation().x;
-      int endY = nextNode.getLocation().y;
+      if (fill) {
+        Node nextNode = path.get(0);
+        int startX = currentNode.getLocation().x;
+        int startY = currentNode.getLocation().y;
+        int endX = nextNode.getLocation().x;
+        int endY = nextNode.getLocation().y;
 
-      drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
+        drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
+      } else {
+        drawNode(currentNode.getLocation(), colEnum.BLUE);
+      }
     }
+  }
+
+  public void drawNode(Location drawLocation, colEnum colour) {
+    imageArray[drawLocation.y][drawLocation.x] = colour;
   }
 
   /**

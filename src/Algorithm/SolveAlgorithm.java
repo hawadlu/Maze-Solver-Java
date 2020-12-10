@@ -1,5 +1,6 @@
 package Algorithm;
 
+import Algorithm.ArticulationPoint.ArticulationPoints;
 import Algorithm.MinimumTree.Kruskals;
 import Algorithm.MinimumTree.Prims;
 import Algorithm.Solvers.AStar;
@@ -32,6 +33,7 @@ public class SolveAlgorithm {
     Node[] join = null;
     public long execTime;
     public ArrayList<Segment> segments = new ArrayList<>();
+    public ArrayList<Node> artPts = new ArrayList<>();
 
     /**
      * Start the solve process.
@@ -72,9 +74,9 @@ public class SolveAlgorithm {
             segments = kruskals.getSegments();
         } else if (algorithm.equals("Articulation")) {
             buildNodePath = false;
-            Kruskals kruskals = new Kruskals();
-            kruskals.solve(this);
-            segments = kruskals.getSegments();
+            ArticulationPoints articulation = new ArticulationPoints(processor.getNodes());
+            articulation.solve();
+            artPts = articulation.getArticulationPoints();
         }
 
         long stopTime = System.nanoTime();
@@ -83,7 +85,8 @@ public class SolveAlgorithm {
 
         //Build the path if the path can be traced from node to node
         if (buildNodePath) makePath();
-        else makePath(segments);
+        else if (!segments.isEmpty()) makePath(segments);
+        else if (!artPts.isEmpty()) makeNodePath(artPts);
     }
 
 
@@ -160,14 +163,14 @@ public class SolveAlgorithm {
             if (exit.getParent() != null) currentNode = exit;
             else currentNode = entry;
 
-            application.getImageFile().fileNodePath(generatePathArraylist(currentNode));
+            application.getImageFile().fillNodePath(generatePathArraylist(currentNode), true);
         } else {
-            application.getImageFile().fileNodePath(generatePathArraylist(join[0]));
-            application.getImageFile().fileNodePath(generatePathArraylist(join[1]));
+            application.getImageFile().fillNodePath(generatePathArraylist(join[0]), true);
+            application.getImageFile().fillNodePath(generatePathArraylist(join[1]), true);
             ArrayList<Node> tmp = new ArrayList<>();
             tmp.add(join[0]);
             tmp.add(join[1]);
-            application.getImageFile().fileNodePath(tmp);
+            application.getImageFile().fillNodePath(tmp, true);
         }
     }
 
@@ -180,12 +183,19 @@ public class SolveAlgorithm {
     }
 
     /**
+     * Fill in the articulation points on the image
+     * @param artPts
+     */
+    private void makeNodePath(ArrayList<Node> artPts) {
+        application.getImageFile().fillNodePath(artPts, false);
+    }
+
+    /**
      * Populate the set array of segments using the nodes
      */
     public void makeSegments() {
         for (Node node: nodes.values()) {
-            for (Location neighbourLocation: node.getNeighbours()) {
-                Node neighbour = nodes.get(neighbourLocation);
+            for (Node neighbour: node.getNeighbours()) {
                 Segment newSegment = new Segment(node, neighbour);
                 if (!segments.contains(newSegment)) segments.add(newSegment);
             }

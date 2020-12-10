@@ -62,8 +62,7 @@ class DFSWorker extends AlgorithmWorker {
             if (!solve.scanAll) solve.findNeighbours(parent, runner.multiThreading);
 
             //Add all the appropriate neighbours to the stack
-            for (Location nodeLocation : parent.getNeighbours()) {
-                Node node = solve.getNodeMap().get(nodeLocation);
+            for (Node node : parent.getNeighbours()) {
                 if (node.isVisited() == null) {
                     node.setParent(parent);
                     toProcess.push(node);

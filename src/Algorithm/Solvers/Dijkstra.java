@@ -62,8 +62,7 @@ class DijkstraWorker extends AlgorithmWorker {
       if (!solve.scanAll) solve.findNeighbours(parent, runner.multiThreading);
 
       //Add all the appropriate neighbours to the stack
-      for (Location nodeLocation : parent.getNeighbours()) {
-        Node node = solve.getNodeMap().get(nodeLocation);
+      for (Node node : parent.getNeighbours()) {
         double costToNode = parent.calculateCost(node);
 
         //node is unvisited

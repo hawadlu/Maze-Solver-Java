@@ -7,10 +7,16 @@ import java.util.*;
  */
 public class Node {
     private Location nodeLocation;
-    private HashSet<Location> neighbours = new HashSet<>();
+    private HashSet<Node> neighbours = new HashSet<>();
     private Node parent;
     private Thread isVisited = null;
-    private double cost = Double.POSITIVE_INFINITY; //Field used in Dijkstra and AStar
+    private double cost = Double.POSITIVE_INFINITY; //Field used in Dijkstra, AStar and Kruskals
+
+    //fields used in articulation points
+    private double nodeDepth = Double.POSITIVE_INFINITY;
+    private int subTrees = 0;
+    private double reachBack = 0;
+    private ArrayList<Node> children = new ArrayList<>();
 
     public Node(Location nodeLocation) {
         this.nodeLocation = nodeLocation;
@@ -18,7 +24,7 @@ public class Node {
 
     public Node(Node node) {
         this.nodeLocation = node.getLocation();
-        this.neighbours = (HashSet<Location>) node.getNeighbours();
+        this.neighbours = (HashSet<Node>) node.getNeighbours();
         this.parent = node.getParent();
         this.isVisited = node.isVisited;
         this.cost = node.getCost();
@@ -34,10 +40,10 @@ public class Node {
 
     /**
      * Make these into neighbours
-     * @param neighbourLocation the neighbour
+     * @param neighbour the neighbour
      */
-    public void addNeighbour(Location neighbourLocation) {
-        neighbours.add(neighbourLocation);
+    public void addNeighbour(Node neighbour) {
+        neighbours.add(neighbour);
     }
 
     /**
@@ -58,7 +64,7 @@ public class Node {
      * Get all of the neighbours
      * @return a collection of all the neighbours
      */
-    public Collection<Location> getNeighbours() {
+    public Collection<Node> getNeighbours() {
         return this.neighbours;
     }
 
@@ -178,11 +184,59 @@ public class Node {
      */
     public ArrayList<Segment> getSegments(Map<Location, Node> nodeMap) {
        ArrayList<Segment> toReturn = new ArrayList<>();
-       for (Location neighbourLocation: getNeighbours()) {
-           Node neighbour = nodeMap.get(neighbourLocation);
+       for (Node neighbour: getNeighbours()) {
            if (neighbour.isVisited == null) toReturn.add(new Segment(this, neighbour));
        }
        return toReturn;
+    }
+
+    /**
+     * @param depth new node depth
+     */
+    public void setNodeDepth(double depth) {
+        this.nodeDepth = depth;
+    }
+
+    /**
+     * @return node depth
+     */
+    public double getNodeDepth() {
+        return this.nodeDepth;
+    }
+
+    /**
+     * @param numTrees the number of subtrees
+     */
+    public void setSubTrees(int numTrees) {
+        this.subTrees = numTrees;
+    }
+
+    /**
+     * @return the reachBack
+     */
+    public double getReachBack() {
+        return reachBack;
+    }
+
+    /**
+     * @param reachBack the new reachBack
+     */
+    public void setReachBack(double reachBack) {
+        this.reachBack = reachBack;
+    }
+
+    /**
+     * @return get the children of this node
+     */
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
+    /**
+     * @param children the new children of this node
+     */
+    public void setChildren(ArrayList<Node> children) {
+        this.children = children;
     }
 
     @Override

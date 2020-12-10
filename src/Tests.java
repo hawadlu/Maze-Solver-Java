@@ -2215,12 +2215,10 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
-
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2257,7 +2255,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2294,7 +2292,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2331,7 +2329,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2368,7 +2366,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2405,7 +2403,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2442,7 +2440,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
