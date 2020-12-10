@@ -1,7 +1,7 @@
 import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
 import Utility.Exceptions.GenericError;
-import Utility.Image.ImageProcessor;
+import Image.ImageProcessor;
 import Utility.Location;
 import Utility.Node;
 import org.junit.jupiter.api.Test;
@@ -2499,8 +2499,10 @@ public class Tests {
   //TEST ALL OF THE ALGORITHMS
   @Test
   public void testAlgoSaveResults() throws IOException, GenericError, InterruptedException {
+    deleteFiles(new File("Images/Solved"));
+
     String[] solveAlgo = new String[]{"Depth First", "Breadth First", "Dijkstra", "AStar"};
-    String[] mstAlgo = new String[]{"Prims", "Kruskals"};
+    String[] loadOnlyAlgo = new String[]{"Prims", "Kruskals", "Articulation"};
 
     ArrayList<File> files = getAllFiles(new File("Images"));
 
@@ -2547,6 +2549,7 @@ public class Tests {
                   thread.join();
                   System.out.println("Thread complete");
 
+                  application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName() + " " + multi);
                   tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), multi, "Success");
                 } catch (Exception e) {
                   tracker.addResult(algorithm, file.getName(), 0, loading, solving, 0, multi, "Failed");
@@ -2557,18 +2560,20 @@ public class Tests {
         }
       }
 
-      for (String algo: mstAlgo) {
+      for (String algorithm: loadOnlyAlgo) {
         Application application = new Application();
         application.parseImageFile(file);
 
-        AlgorithmDispatcher thread = application.solve(algo, "", false);
+        AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
         thread.start();
         thread.join();
         System.out.println("Thread complete");
 
+        application.saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+
         //Add these to the tracker
-        String loading = null, solving = null;
-        tracker.addResult(algo, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), false, "Success");
+        String loading = "Loading", solving = null;
+        tracker.addResult(algorithm, file.getName(), thread.getMazeSize(), loading, solving, thread.getExecTime(), false, "Success");
       }
     }
 

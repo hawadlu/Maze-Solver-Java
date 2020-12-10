@@ -2,14 +2,18 @@ package Application;
 
 //todo tidy code up so that most interfaces through this class
 
+import Utility.Location;
+import Utility.Node;
 import Utility.Thread.AlgorithmDispatcher;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
-import Utility.Image.ImageFile;
+import Image.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class is the base of the program.
@@ -19,7 +23,8 @@ public class Application {
   GUI gui;
   static Application currentApplication;
   ImageFile currentImage;
-  
+  ImageProcessor imageProcessor;
+
   /**
    * Take the image file and parse it into the appropriate format
    * @param imageToParse
@@ -75,6 +80,7 @@ public class Application {
    * @param params the parameters to use
    */
   public AlgorithmDispatcher solve(String algorithm, String params, Boolean multiThreading) {
+    this.imageProcessor = new ImageProcessor(this);
     AlgorithmDispatcher worker = new AlgorithmDispatcher(algorithm, params, this, "solver", multiThreading);
     return worker;
   }
@@ -92,5 +98,42 @@ public class Application {
    */
   public void saveImage(String path) {
     currentImage.saveImage(path);
+  }
+
+  /**
+   * @return the nodes from the image processor
+   */
+  public ConcurrentHashMap<Location, Node> getNodes() {
+    return imageProcessor.getNodes();
+  }
+
+  /**
+   * Scan the entire maze
+   */
+  public void scanEntireMaze() {
+    imageProcessor.scanAll();
+  }
+
+  /**
+   * Find the exits in the maze
+   */
+  public void findMazeExits() {
+    imageProcessor.findExits();
+  }
+
+  /**
+   * @return the maze exits
+   */
+  public ArrayList<Location> getMazeExits() {
+    return imageProcessor.getExits();
+  }
+
+  /**
+   * Scan only a part of the maze
+   * @param parent the node to start at
+   * @param multiThreading is the program currently multi threading?
+   */
+  public void scanPart(Node parent, Boolean multiThreading) {
+    imageProcessor.scanPart(parent, multiThreading);
   }
 }

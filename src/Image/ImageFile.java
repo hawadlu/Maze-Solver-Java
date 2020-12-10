@@ -1,4 +1,4 @@
-package Utility.Image;
+package Image;
 
 import Utility.Colours;
 import Utility.Colours.*;
@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Class used to hold the image in memory
@@ -302,7 +301,10 @@ public class ImageFile {
   public void reset() {
     for (int height = 0; height < imageArray.length; height++) {
       for (int width = 0; width < imageArray[0].length; width++) {
-        if (!imageArray[height][width].equals(colEnum.WHITE) || !imageArray[height][width].equals(colEnum.BLACK)) imageArray[height][width] = colEnum.WHITE;
+        colEnum currentCol = imageArray[height][width];
+        if (currentCol == colEnum.BLUE || currentCol == colEnum.GREEN || currentCol == colEnum.RED) {
+          imageArray[height][width] = colEnum.WHITE;
+        }
       }
     }
   }

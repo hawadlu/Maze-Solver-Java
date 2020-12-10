@@ -11,6 +11,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 
 public class Kruskals {
+  //todo investigate why this is slow
+
   ArrayList<Segment> mstEdges = new ArrayList<>();
   HashSet<Node> unvisited = new HashSet<>();
   HashSet<Node> forest = new HashSet<>();

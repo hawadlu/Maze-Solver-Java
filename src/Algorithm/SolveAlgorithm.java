@@ -9,7 +9,6 @@ import Algorithm.Solvers.DepthFirst;
 import Algorithm.Solvers.Dijkstra;
 import Application.Application;
 import Utility.Exceptions.InvalidMaze;
-import Utility.Image.ImageProcessor;
 import Utility.Location;
 import Utility.Node;
 import Utility.Segment;
@@ -17,15 +16,12 @@ import Utility.Segment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This class contains common methods that are used by all algorithms
  */
 public class SolveAlgorithm {
     public boolean scanAll = false;
-    final ImageProcessor processor;
-    ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
     public Node entry;
     public Node exit;
     final Application application;
@@ -41,7 +37,6 @@ public class SolveAlgorithm {
      */
     public SolveAlgorithm(Application currentApplication) {
         this.application = currentApplication;
-        this.processor = new ImageProcessor(currentApplication);
         this.mazeSize = application.getMazeDimensions().width * application.getMazeDimensions().height;
     }
 
@@ -74,7 +69,7 @@ public class SolveAlgorithm {
             segments = kruskals.getSegments();
         } else if (algorithm.equals("Articulation")) {
             buildNodePath = false;
-            ArticulationPoints articulation = new ArticulationPoints(processor.getNodes());
+            ArticulationPoints articulation = new ArticulationPoints(application.getNodes());
             articulation.solve();
             artPts = articulation.getArticulationPoints();
         }
@@ -119,15 +114,13 @@ public class SolveAlgorithm {
         }
 
         if (param.equals("Loading")) {
-            processor.scanAll();
+            application.scanEntireMaze();
             scanAll = true;
         } else {
-            processor.findExits();
+            application.findMazeExits();
         }
 
-        nodes = processor.getNodes();
-
-        ArrayList<Location> exits = processor.getExits();
+        ArrayList<Location> exits = application.getMazeExits();
 
         //make sure there is at least one entry and exit
         if (exits.size() < 2) try {
@@ -136,8 +129,8 @@ public class SolveAlgorithm {
             invalidMaze.printStackTrace();
         }
 
-        entry = nodes.get(exits.get(0));
-        exit = nodes.get(exits.get(1));
+        entry = application.getNodes().get(exits.get(0));
+        exit = application.getNodes().get(exits.get(1));
     }
 
     /**
@@ -194,7 +187,7 @@ public class SolveAlgorithm {
      * Populate the set array of segments using the nodes
      */
     public void makeSegments() {
-        for (Node node: nodes.values()) {
+        for (Node node: application.getNodes().values()) {
             for (Node neighbour: node.getNeighbours()) {
                 Segment newSegment = new Segment(node, neighbour);
                 if (!segments.contains(newSegment)) segments.add(newSegment);
@@ -218,14 +211,14 @@ public class SolveAlgorithm {
      * @param multiThreading boolean to indicate if the program is currently multithreading.
      */
     public void findNeighbours(Node parent, Boolean multiThreading) {
-        processor.scanAll(parent, multiThreading);
+        application.scanPart(parent, multiThreading);
     }
 
     /**
      * Set the cost of all known nodes to zero
      */
     public void resetCost() {
-        for (Node node: nodes.values()) node.setCost(0);
+        for (Node node: application.getNodes().values()) node.setCost(0);
     }
 
     /**
@@ -233,13 +226,13 @@ public class SolveAlgorithm {
      * @return a collection of nodes
      */
     public Collection<Node> getNodes() {
-        return nodes.values();
+        return application.getNodes().values();
     }
 
     /**
      * @return the map of nodes
      */
     public Map<Location, Node> getNodeMap() {
-        return nodes;
+        return application.getNodes();
     }
 }

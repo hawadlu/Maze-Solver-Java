@@ -1,14 +1,11 @@
-package Utility.Image;
+package Image;
 
 import Application.Application;
-import Utility.Colours;
 import Utility.Location;
 import Utility.Node;
 import Utility.Colours.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageProcessor {
@@ -55,7 +52,7 @@ public class ImageProcessor {
     /**
      * Take a node in the maze and look for all its neighbours
      */
-    public void scanAll(Node currentNode, Boolean multiThread) {
+    public void scanPart(Node currentNode, Boolean multiThread) {
         //Look up
         for (int height = currentNode.getLocation().y - 1; height > -1; height--) {
             Location currentLocation = new Location(currentNode.getLocation().x, height);

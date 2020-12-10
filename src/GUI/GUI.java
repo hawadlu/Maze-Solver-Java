@@ -232,6 +232,144 @@ public class GUI {
     control.add(startOver);
 
     //Bind the functionality
+    artPts.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      JButton help = new JButton("Help");
+      solveControls.add(help);
+      optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "There is only one algorithm\n" +
+                "that I know of.";
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+      });
+
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+
+        //This algorithm only works on a single thread and while searching for neighbours on load
+        makeAlgoWorkingScreen("Articulation", "Loading", false);
+      });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+    });
+
+    minTree.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      JComboBox algoOptions = new JComboBox(new String[]{"Prims", "Kruskals"});
+      JCheckBox threadBox = new JCheckBox();
+
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      solveControls.add(algoOptions);
+      JButton help = new JButton("Help");
+      solveControls.add(help);
+      optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "PRIMS: Usually the fastest\n" +
+                "Kruskals: A bit of an unknown\n" +
+                "but hopefully it will work"; //todo update this
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+      });
+
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+        String algorithm = (String) algoOptions.getSelectedItem();
+
+        //All of these algorithms search for neighbours on load and do not multi thread
+        makeAlgoWorkingScreen(algorithm, "Loading", false);
+      });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+    });
+
     solve.addActionListener(e -> {
       ArrayList<JButton> cancelButtons = new ArrayList<>();
 
