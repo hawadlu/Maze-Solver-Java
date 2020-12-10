@@ -3,10 +3,7 @@ package Algorithm;
 import Algorithm.ArticulationPoint.ArticulationPoints;
 import Algorithm.MinimumTree.Kruskals;
 import Algorithm.MinimumTree.Prims;
-import Algorithm.Solvers.AStar;
-import Algorithm.Solvers.BreadthFirst;
-import Algorithm.Solvers.DepthFirst;
-import Algorithm.Solvers.Dijkstra;
+import Algorithm.Solvers.*;
 import Application.Application;
 import Utility.Exceptions.InvalidMaze;
 import Utility.Location;
@@ -88,7 +85,7 @@ public class SolveAlgorithm {
     /**
      * Takes the worker threads from the algorithm and begins execution.
      */
-    public void startThreads(AlgorithmWorker workerOne, AlgorithmWorker workerTwo, Boolean multiThreading) {
+    public void startThreads(SolveWorker workerOne, SolveWorker workerTwo, Boolean multiThreading) {
         workerOne.other = workerTwo;
         workerTwo.other = workerOne;
         workerOne.start();

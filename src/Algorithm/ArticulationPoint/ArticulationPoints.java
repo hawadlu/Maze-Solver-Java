@@ -42,7 +42,6 @@ public class ArticulationPoints {
 
       //If this node has only one neighbour mark is as visited and ignore
       parent.setNodeDepth(0);
-      parent.setSubTrees(0);
 
       unvisited.remove(parent);
       int subtrees = 0;

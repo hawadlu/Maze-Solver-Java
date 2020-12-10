@@ -14,7 +14,6 @@ public class Node {
 
     //fields used in articulation points
     private double nodeDepth = Double.POSITIVE_INFINITY;
-    private int subTrees = 0;
     private double reachBack = 0;
     private ArrayList<Node> children = new ArrayList<>();
 
@@ -204,12 +203,6 @@ public class Node {
         return this.nodeDepth;
     }
 
-    /**
-     * @param numTrees the number of subtrees
-     */
-    public void setSubTrees(int numTrees) {
-        this.subTrees = numTrees;
-    }
 
     /**
      * @return the reachBack

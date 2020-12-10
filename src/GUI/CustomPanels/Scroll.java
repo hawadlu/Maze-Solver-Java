@@ -48,7 +48,6 @@ import javax.swing.*;
 public class Scroll extends JPanel implements ItemListener {
   private Rule columnView;
   private Rule rowView;
-  private JToggleButton isMetric;
   private ScrollablePicture picture;
 
   public Scroll(BufferedImage toDisplay) {
@@ -69,7 +68,7 @@ public class Scroll extends JPanel implements ItemListener {
 
     //Create the corners.
     JPanel buttonCorner = new JPanel(); //use FlowLayout
-    isMetric = new JToggleButton("cm", true);
+    JToggleButton isMetric = new JToggleButton("cm", true);
     isMetric.setFont(new Font("SansSerif", Font.PLAIN, 11));
     isMetric.setMargin(new Insets(2,2,2,2));
     isMetric.addItemListener(this);

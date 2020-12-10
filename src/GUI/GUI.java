@@ -619,7 +619,7 @@ public class GUI {
   }
 
   /**
-   * Get the current maze image from the applciation
+   * Get the current maze image from the application
    * @return
    */
   public BufferedImage getImage() {

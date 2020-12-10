@@ -1,10 +1,7 @@
 package Algorithm.Solvers;
 
-import Algorithm.AlgorithmRunner;
-import Algorithm.AlgorithmWorker;
 import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
-import Utility.Location;
 import Utility.Node;
 
 import java.util.Objects;
@@ -13,7 +10,7 @@ import java.util.PriorityQueue;
 /**
  * Solve the maze, breadth first
  */
-public class AStar extends AlgorithmRunner {
+public class AStar extends SolveRunner {
 
   /**
    * Do a depth first search.
@@ -23,8 +20,8 @@ public class AStar extends AlgorithmRunner {
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
     System.out.println("Solving Dijkstra");
 
-    AlgorithmWorker workerOne = new AStarWorker(solve, solve.entry, solve.exit, this, "t1");
-    AlgorithmWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, "t2");
+    SolveWorker workerOne = new AStarWorker(solve, solve.entry, solve.exit, this, "t1");
+    SolveWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
   }
@@ -33,8 +30,8 @@ public class AStar extends AlgorithmRunner {
 /**
  * Allows DFS to be multi threaded
  */
-class AStarWorker extends AlgorithmWorker {
-  public AStarWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+class AStarWorker extends SolveWorker {
+  public AStarWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 
@@ -43,15 +40,11 @@ class AStarWorker extends AlgorithmWorker {
     System.out.println("Thread: " + threadId + "\nstart: " + start + "\ndestination: " + destination + "\n");
 
 
-    Node parent;
-    PriorityQueue<Node> toProcess = new PriorityQueue<Node>(Node.getComparator());
-    start.visit(this);
-    start.setCost(0);
-    toProcess.add(start);
+    PriorityQueue<Node> toProcess = runner.setupPriorityQueue(start, this);
 
     while (!toProcess.isEmpty() && !runner.done.get()) {
 
-      parent = toProcess.poll();
+      Node parent = toProcess.poll();
       assert parent != null;
       parent.visit(this);
 
@@ -67,28 +60,7 @@ class AStarWorker extends AlgorithmWorker {
         double costToNode = parent.calculateCost(node) + Node.calculateEuclideanDistance(node, destination);
 
         //node is unvisited
-        if (node.isVisited() == null) {
-          node.setParent(parent);
-          node.setCost(parent.getCost() + costToNode);
-          toProcess.add(node);
-          node.visit(this);
-
-          //node has been visited by the other thread
-        } else if (node.isVisited().equals(other)) {
-          solve.addJoinerNodes(parent, node);
-          runner.done.set(true);
-
-          //node has been visited by this thread
-        } else {
-          //Check if the cost is lower
-          if (parent.getCost() + costToNode < node.getCost()) {
-            //A lower cost route has been found, re add the node to the queue
-            node.setParent(parent);
-            node.setCost(parent.getCost() + costToNode);
-            toProcess.add(node);
-            node.visit(this);
-          }
-        }
+        runner.processNode(toProcess, parent, node, costToNode, this, other, solve);
       }
 
       //If the queue is empty at this point, solving failed

@@ -1,15 +1,13 @@
 package Algorithm.MinimumTree;
 
-import Algorithm.AlgorithmRunner;
-import Algorithm.AlgorithmWorker;
+import Algorithm.Solvers.SolveRunner;
 import Algorithm.SolveAlgorithm;
-import Utility.Node;
 import Utility.Segment;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Prims extends AlgorithmRunner {
+public class Prims extends SolveRunner {
   ArrayList<Segment> mstEdges = new ArrayList<>();
 
   public void solve(SolveAlgorithm solve) {

@@ -1,10 +1,7 @@
 package Algorithm.Solvers;
 
-import Algorithm.AlgorithmRunner;
-import Algorithm.AlgorithmWorker;
 import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
-import Utility.Location;
 import Utility.Node;
 
 import java.util.ArrayDeque;
@@ -14,7 +11,7 @@ import java.util.Queue;
 /**
  * Solve the maze, breadth first
  */
-public class BreadthFirst extends AlgorithmRunner {
+public class BreadthFirst extends SolveRunner {
 
   /**
    * Do a depth first search.
@@ -25,8 +22,8 @@ public class BreadthFirst extends AlgorithmRunner {
     System.out.println("Solving breadth first");
 
 
-    AlgorithmWorker workerOne = new BFSWorker(solve, solve.entry, solve.exit, this, "t1");
-    AlgorithmWorker workerTwo = new BFSWorker(solve, solve.exit, solve.entry, this, "t2");
+    SolveWorker workerOne = new BFSWorker(solve, solve.entry, solve.exit, this, "t1");
+    SolveWorker workerTwo = new BFSWorker(solve, solve.exit, solve.entry, this, "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
   }
@@ -35,9 +32,9 @@ public class BreadthFirst extends AlgorithmRunner {
 /**
  * Allows DFS to be multi threaded
  */
-class BFSWorker extends AlgorithmWorker {
+class BFSWorker extends SolveWorker {
 
-  public BFSWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+  public BFSWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 

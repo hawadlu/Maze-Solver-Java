@@ -1,10 +1,7 @@
 package Algorithm.Solvers;
 
-import Algorithm.AlgorithmRunner;
-import Algorithm.AlgorithmWorker;
 import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
-import Utility.Location;
 import Utility.Node;
 
 import java.util.Objects;
@@ -13,7 +10,7 @@ import java.util.Stack;
 /**
  * Solve the maze, depth first
  */
-public class DepthFirst extends AlgorithmRunner {
+public class DepthFirst extends SolveRunner {
 
     /**
      * Do a depth first search.
@@ -23,8 +20,8 @@ public class DepthFirst extends AlgorithmRunner {
     public void solve(SolveAlgorithm solve, Boolean multiThreading) {
         System.out.println("Solving depth first");
 
-        AlgorithmWorker workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, "t1");
-        AlgorithmWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, "t2");
+        SolveWorker workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, "t1");
+        SolveWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, "t2");
 
         solve.startThreads(workerOne, workerTwo, multiThreading);
     }
@@ -33,8 +30,8 @@ public class DepthFirst extends AlgorithmRunner {
 /**
  * Allows DFS to be multi threaded
  */
-class DFSWorker extends AlgorithmWorker {
-    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId) {
+class DFSWorker extends SolveWorker {
+    public DFSWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
         super(solve, start, destination, runner, threadId);
     }
 
