@@ -22,7 +22,7 @@ public class Prims extends AlgorithmRunner {
     if (!solve.scanAll) solve.findNeighbours(solve.entry, false);
 
     //Add the start segment
-    PriorityQueue<Segment> toProcess = new PriorityQueue<>(solve.entry.getSegments());
+    PriorityQueue<Segment> toProcess = new PriorityQueue<>(solve.entry.getSegments(solve.getNodeMap()));
 
     while (!toProcess.isEmpty()) {
       Segment currentSegment = toProcess.poll();
@@ -33,7 +33,7 @@ public class Prims extends AlgorithmRunner {
         solve.findNeighbours(currentSegment.exit, false);
 
         //Add all segments
-        toProcess.addAll(currentSegment.exit.getSegments());
+        toProcess.addAll(currentSegment.exit.getSegments(solve.getNodeMap()));
 
         //Add this segment to the list of edges
         this.mstEdges.add(currentSegment);
@@ -46,18 +46,4 @@ public class Prims extends AlgorithmRunner {
     return mstEdges;
   }
 
-}
-
-class PrimsWorker extends AlgorithmWorker {
-  Prims prims;
-
-  public PrimsWorker(SolveAlgorithm solve, Node start, Node destination, AlgorithmRunner runner, String threadId, Prims prims) {
-    super(solve, start, destination, runner, threadId);
-    this.prims = prims;
-  }
-
-  @Override
-  public void run() {
-
-  }
 }

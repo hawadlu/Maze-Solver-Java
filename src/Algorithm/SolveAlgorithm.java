@@ -1,7 +1,7 @@
 package Algorithm;
 
-import Algorithm.MST.Kruskals;
-import Algorithm.MST.Prims;
+import Algorithm.MinimumTree.Kruskals;
+import Algorithm.MinimumTree.Prims;
 import Algorithm.Solvers.AStar;
 import Algorithm.Solvers.BreadthFirst;
 import Algorithm.Solvers.DepthFirst;
@@ -66,6 +66,11 @@ public class SolveAlgorithm {
             prims.solve(this);
             segments = prims.getSegments();
         } else if (algorithm.equals("Kruskals")) {
+            buildNodePath = false;
+            Kruskals kruskals = new Kruskals();
+            kruskals.solve(this);
+            segments = kruskals.getSegments();
+        } else if (algorithm.equals("Articulation")) {
             buildNodePath = false;
             Kruskals kruskals = new Kruskals();
             kruskals.solve(this);
@@ -179,7 +184,8 @@ public class SolveAlgorithm {
      */
     public void makeSegments() {
         for (Node node: nodes.values()) {
-            for (Node neighbour: node.getNeighbours()) {
+            for (Location neighbourLocation: node.getNeighbours()) {
+                Node neighbour = nodes.get(neighbourLocation);
                 Segment newSegment = new Segment(node, neighbour);
                 if (!segments.contains(newSegment)) segments.add(newSegment);
             }
@@ -218,5 +224,12 @@ public class SolveAlgorithm {
      */
     public Collection<Node> getNodes() {
         return nodes.values();
+    }
+
+    /**
+     * @return the map of nodes
+     */
+    public Map<Location, Node> getNodeMap() {
+        return nodes;
     }
 }

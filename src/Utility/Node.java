@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Node {
     private Location nodeLocation;
-    private HashSet<Node> neighbours = new HashSet<>();
+    private HashSet<Location> neighbours = new HashSet<>();
     private Node parent;
     private Thread isVisited = null;
     private double cost = Double.POSITIVE_INFINITY; //Field used in Dijkstra and AStar
@@ -18,7 +18,7 @@ public class Node {
 
     public Node(Node node) {
         this.nodeLocation = node.getLocation();
-        this.neighbours = (HashSet<Node>) node.getNeighbours();
+        this.neighbours = (HashSet<Location>) node.getNeighbours();
         this.parent = node.getParent();
         this.isVisited = node.isVisited;
         this.cost = node.getCost();
@@ -34,10 +34,10 @@ public class Node {
 
     /**
      * Make these into neighbours
-     * @param node the neighbour
+     * @param neighbourLocation the neighbour
      */
-    public void addNeighbour(Node node) {
-        neighbours.add(node);
+    public void addNeighbour(Location neighbourLocation) {
+        neighbours.add(neighbourLocation);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Node {
      * Get all of the neighbours
      * @return a collection of all the neighbours
      */
-    public Collection<Node> getNeighbours() {
+    public Collection<Location> getNeighbours() {
         return this.neighbours;
     }
 
@@ -176,10 +176,10 @@ public class Node {
     /**
      * @return a list of segments based on the neighbours
      */
-    public ArrayList<Segment> getSegments() {
+    public ArrayList<Segment> getSegments(Map<Location, Node> nodeMap) {
        ArrayList<Segment> toReturn = new ArrayList<>();
-       for (Node neighbour: getNeighbours()) {
-           //Only add if the neighbour is unvisited
+       for (Location neighbourLocation: getNeighbours()) {
+           Node neighbour = nodeMap.get(neighbourLocation);
            if (neighbour.isVisited == null) toReturn.add(new Segment(this, neighbour));
        }
        return toReturn;

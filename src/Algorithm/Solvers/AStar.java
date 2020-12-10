@@ -4,6 +4,7 @@ import Algorithm.AlgorithmRunner;
 import Algorithm.AlgorithmWorker;
 import Algorithm.SolveAlgorithm;
 import Utility.Exceptions.SolveFailure;
+import Utility.Location;
 import Utility.Node;
 
 import java.util.Objects;
@@ -62,7 +63,8 @@ class AStarWorker extends AlgorithmWorker {
       if (!solve.scanAll) solve.findNeighbours(parent, runner.multiThreading);
 
       //Add all the appropriate neighbours to the stack
-      for (Node node : parent.getNeighbours()) {
+      for (Location nodeLocation : parent.getNeighbours()) {
+        Node node = solve.getNodeMap().get(nodeLocation);
         double costToNode = parent.calculateCost(node) + Node.calculateEuclideanDistance(node, destination);
 
         //node is unvisited

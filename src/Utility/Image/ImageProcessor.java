@@ -85,18 +85,18 @@ public class ImageProcessor {
         //If this is an exit add it
         if (exits.contains(currentLocation)) {
             Node neighbour = nodes.get(exits.get(exits.indexOf(currentLocation)));
-            neighbour.addNeighbour(currentNode);
-            currentNode.addNeighbour(neighbour);
+            neighbour.addNeighbour(currentNode.getLocation());
+            currentNode.addNeighbour(neighbour.getLocation());
             return true;
         } else if (isNode(currentLocation, false, multiThread)) {
             if (!nodes.containsKey(currentLocation)) {
                 Node newNode = new Node(currentLocation);
                 nodes.put(currentLocation, newNode);
-                newNode.addNeighbour(currentNode);
-                currentNode.addNeighbour(newNode);
+                newNode.addNeighbour(currentNode.getLocation());
+                currentNode.addNeighbour(newNode.getLocation());
             } else {
-                currentNode.addNeighbour(nodes.get(currentLocation));
-                nodes.get(currentLocation).addNeighbour(currentNode);
+                currentNode.addNeighbour(nodes.get(currentLocation).getLocation());
+                nodes.get(currentLocation).addNeighbour(currentNode.getLocation());
             }
 
             return true;
@@ -157,8 +157,8 @@ public class ImageProcessor {
             if (nodes.containsKey(new Location(width, node.getLocation().y))) {
                 //Add both as neighbours
                 Node neighbour = nodes.get(new Location(width, node.getLocation().y));
-                neighbour.addNeighbour(node);
-                node.addNeighbour(neighbour);
+                neighbour.addNeighbour(node.getLocation());
+                node.addNeighbour(neighbour.getLocation());
                 break;
             } else if (imgArray[node.getLocation().y][width] == colEnum.BLACK) break;
         }
@@ -168,8 +168,8 @@ public class ImageProcessor {
             if (nodes.containsKey(new Location(node.getLocation().x, height))) {
                 //Add both as neighbours
                 Node neighbour = nodes.get(new Location(node.getLocation().x, height));
-                neighbour.addNeighbour(node);
-                node.addNeighbour(neighbour);
+                neighbour.addNeighbour(node.getLocation());
+                node.addNeighbour(neighbour.getLocation());
                 break;
             } else if (imgArray[height][node.getLocation().x] == colEnum.BLACK) break;
         }

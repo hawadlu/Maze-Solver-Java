@@ -1,5 +1,7 @@
 package Application;
 
+//todo tidy code up so that most interfaces through this class
+
 import Utility.Thread.AlgorithmDispatcher;
 import GUI.GUI;
 import Utility.Exceptions.GenericError;
