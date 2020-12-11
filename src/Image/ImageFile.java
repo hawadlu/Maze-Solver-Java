@@ -22,6 +22,15 @@ public class ImageFile {
   private colEnum[][] imageArray = null;
   private final String filePath;
 
+  /**
+   * Copy constrcutor used to copy an image
+   * @param oldImage the old image
+   */
+  public ImageFile(ImageFile oldImage) {
+    this.imageArray = oldImage.getArray();
+    this.filePath = oldImage.getFilePath();
+  }
+
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
     BufferedImage tmp;
@@ -321,6 +330,13 @@ public class ImageFile {
     } catch (Exception e) {
       System.out.println("Unable to save image: " + e);
     }
+  }
+
+  /**
+   * @return the file path
+   */
+  private String getFilePath() {
+    return filePath;
   }
 }
 

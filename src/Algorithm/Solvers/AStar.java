@@ -18,7 +18,7 @@ public class AStar extends SolveRunner {
    * @param solve the solve object
    */
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
-    System.out.println("Solving Dijkstra");
+    System.out.println("Solving AStar");
 
     SolveWorker workerOne = new AStarWorker(solve, solve.entry, solve.exit, this, "t1");
     SolveWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, "t2");

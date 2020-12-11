@@ -1,9 +1,11 @@
 package GUI;
 
 import Application.Application;
+import GUI.CustomPanels.PlayerPanel;
 import GUI.CustomPanels.Scroll;
 import GUI.CustomPanels.SpinnerPanel;
 import Utility.Exceptions.GenericError;
+import Utility.Thread.NodeLoader;
 
 
 import javax.swing.*;
@@ -61,7 +63,7 @@ public class GUI {
     activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
 
     //Add the algorithms panel by default
-    makeAlgoLoadScreen();
+    makeLoadScreen("Algorithm");
     activityArea.add(algoMainArea);
 
     container.add(activityArea);
@@ -144,7 +146,7 @@ public class GUI {
           activityArea.removeAll();
 
           //Check if the game screen has bene made already
-          if (gameMainArea == null) gameMainArea = makeGameStartScreen(width, width - 100);
+          if (gameMainArea == null) makeLoadScreen("Game");
 
           activityArea.add(gameMainArea);
 
@@ -157,27 +159,77 @@ public class GUI {
 
   /**
    * Make the start screen for playing games
-   * @param width the desired width of the screen
-   * @param height the desired height of the screen
-   * @return the new JPanel
    */
-  //todo properly implement this
-  private JPanel makeGameStartScreen(int width, int height) {
+  private void makeGameStartScreen() {
+    //Make the control panel and players which will be used both in and out of the thread
+    JPanel controlPanel = new JPanel();
+    JTextArea timeDelay = new JTextArea();
+    Dimension maxSize = new Dimension(width / 2, height - 200);
+    PlayerPanel playerOne = new PlayerPanel(application, "Player One", maxSize, this);
+    PlayerPanel playerTwo = new PlayerPanel(application, "Player Two", maxSize, this);
+
+
+    gameMainArea.removeAll();
+
     JPanel startScreen = new JPanel();
-    startScreen.setMinimumSize(new Dimension(width, height));
     startScreen.setBackground(Color.red);
-    return startScreen;
+    startScreen.setLayout(new BoxLayout(startScreen, BoxLayout.Y_AXIS));
+
+    //Add the info panel
+    JPanel infoPanel = new JPanel();
+    infoPanel.setMaximumSize(new Dimension(width, 100));
+    infoPanel.add(new JLabel(application.getImageInfo("path")));
+    startScreen.add(infoPanel);
+
+    System.out.println("Making game panel");
+
+    //Add the player panels
+    JPanel centrePanel = new JPanel();
+    centrePanel.setBackground(Color.ORANGE);
+    centrePanel.setLayout(new GridLayout(1, 1));
+
+
+    centrePanel.add(playerOne);
+    centrePanel.add(playerTwo);
+
+    startScreen.add(centrePanel);
+
+    controlPanel.setLayout(new GridLayout(2, 2));
+    controlPanel.add(new JLabel("Set draw delay (ms)"));
+    controlPanel.add(new JLabel("Start the race"));
+
+    JComponent solve = new JLabel("Waiting for node scan to finish");
+
+    controlPanel.add(timeDelay);
+    controlPanel.add(solve);
+
+    startScreen.add(controlPanel);
+
+    gameMainArea.add(startScreen);
+    refresh();
+
+    NodeLoader loader = new NodeLoader();
+    loader.setPlayers(playerOne, playerTwo);
+    loader.setComponentToUpdate(controlPanel);
+    loader.setApplication(application);
+    loader.start();
   }
 
   /**
    * Make the panel that will be used to create the algorithms.
    * It creates a simple panel that houses a button for loading images
-   * @return the panel that holds the load image button
+   * @param param parameter to indicate which screen sould come after this
    */
-  private void makeAlgoLoadScreen() {
-    if (algoMainArea != null) algoMainArea.removeAll();
-    else algoMainArea = new JPanel();
-    algoMainArea.setBackground(backgroundCol);
+  private void makeLoadScreen(String param) {
+    if (param.equals("Algorithm")) {
+      if (algoMainArea != null) algoMainArea.removeAll();
+      else algoMainArea = new JPanel();
+      algoMainArea.setBackground(backgroundCol);
+    } else if (param.equals("Game")) {
+      if (gameMainArea != null) gameMainArea.removeAll();
+      else gameMainArea = new JPanel();
+      gameMainArea.setBackground(backgroundCol);
+    }
 
     JPanel loadPanel = new JPanel();
     loadPanel.setBackground(backgroundCol);
@@ -193,15 +245,20 @@ public class GUI {
       }
   
       //Load the image to the main screen
-      makeAlgoSolveScreen();
+      if (param.equals("Algorithm")) makeAlgoSolveScreen();
+      else if (param.equals("Game")) makeGameStartScreen();
+
       refresh();
     });
-    
+
     loadPanel.add(loadImage);
-    algoMainArea.add(loadPanel);
+
+    if (param.equals("Algorithm")) algoMainArea.add(loadPanel);
+    else if (param.equals("Game")) gameMainArea.add(loadPanel);
+
     refresh();
   }
-  
+
   /**
    * Make the sc®een that will be used to load the options for solving the maze
    */
@@ -283,7 +340,7 @@ public class GUI {
       solveButton.addActionListener(e12 -> {
 
         //This algorithm only works on a single thread and while searching for neighbours on load
-        makeAlgoWorkingScreen("Articulation", "Loading", false);
+        makeAlgoWorkingScreen(algoMainArea,"Articulation", "Loading", false, application);
       });
 
       cancelButtons.clear();
@@ -324,9 +381,18 @@ public class GUI {
       //Add functionality to the help link
       help.addActionListener(e1 -> {
         String helpText = "ALGORITHMS\n\n" +
+                "Note: Neither of these\n" +
+                "algorithms are very good\n" +
+                "with mazes larger than 500\n" +
+                "by 500\n\n" +
                 "PRIMS: Usually the fastest\n" +
-                "Kruskals: A bit of an unknown\n" +
-                "but hopefully it will work"; //todo update this
+                "Kruskals: In this application\n" +
+                "it is only a proof of concept.\n" +
+                "In general kruskals algorithm\n" +
+                "does not deal with dense graphs\n" +
+                "such as this maze very well.\n" +
+                "I recommend that you use Prims\n" +
+                "algorithm";
 
 
         JPanel helpPanel = new JPanel();
@@ -355,7 +421,7 @@ public class GUI {
         String algorithm = (String) algoOptions.getSelectedItem();
 
         //All of these algorithms search for neighbours on load and do not multi thread
-        makeAlgoWorkingScreen(algorithm, "Loading", false);
+        makeAlgoWorkingScreen(algoMainArea, algorithm, "Loading", false, application);
       });
 
       cancelButtons.clear();
@@ -451,7 +517,7 @@ public class GUI {
         String params = (String) neighbourOptions.getSelectedItem();
         Boolean multiThread = threadBox.isSelected();
 
-        makeAlgoWorkingScreen(algorithm, params, multiThread);
+        makeAlgoWorkingScreen(algoMainArea, algorithm, params, multiThread, application);
       });
 
       cancelButtons.clear();
@@ -475,12 +541,11 @@ public class GUI {
   /**
    * Make the screen that shows a spinner while the algorithm is solving.
    */
-  private void makeAlgoWorkingScreen(String algorithm, String params, Boolean multiThread) {
-//Prepare the main area
-    algoMainArea.removeAll();
+  public void makeAlgoWorkingScreen(JPanel mainArea, String algorithm, String params, Boolean multiThread, Application application) {
+    mainArea.removeAll();
 
     //Add the spinner
-    algoMainArea.add(new SpinnerPanel());
+    mainArea.add(new SpinnerPanel());
     refresh();
 
     Thread solveThread = application.solve(algorithm, params, multiThread);
@@ -493,7 +558,7 @@ public class GUI {
         try {
           solveThread.start();
           solveThread.join();
-          makeAlgoSolvedScreen();
+          makeAlgoSolvedScreen(mainArea);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -506,7 +571,7 @@ public class GUI {
   /**
    * Show the completed image on screen
    */
-  public void makeAlgoSolvedScreen() {
+  public void makeAlgoSolvedScreen(JPanel algoMainArea) {
     algoMainArea.removeAll();
 
     System.out.println("Making algorithm solved screen");
@@ -531,7 +596,7 @@ public class GUI {
     control.add(save);
 
     //Bind the functionality
-    loadOther.addActionListener(e -> makeAlgoLoadScreen());
+    loadOther.addActionListener(e -> makeLoadScreen("Algorithm"));
     reset.addActionListener(e -> resetImage());
     save.addActionListener(e -> saveImage());
 

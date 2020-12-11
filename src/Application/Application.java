@@ -2,6 +2,7 @@ package Application;
 
 //todo tidy code up so that most interfaces through this class
 
+import Utility.Exceptions.InvalidImage;
 import Utility.Location;
 import Utility.Node;
 import Utility.Thread.AlgorithmDispatcher;
@@ -24,6 +25,19 @@ public class Application {
   static Application currentApplication;
   ImageFile currentImage;
   ImageProcessor imageProcessor;
+
+  public Application(){};
+
+  /**
+   * Copy constructor used to deep copy fields
+   * @param oldApplication the old application
+   */
+  public Application(Application oldApplication) {
+    currentApplication = new Application();
+    this.currentImage = new ImageFile(oldApplication.currentImage);
+    this.gui = oldApplication.gui;
+    this.imageProcessor = new ImageProcessor(oldApplication.imageProcessor, this);
+  }
 
   /**
    * Take the image file and parse it into the appropriate format
@@ -85,6 +99,7 @@ public class Application {
     return worker;
   }
 
+
   /**
    * Reset the current image to remove any marks from solving etc
    */
@@ -111,6 +126,7 @@ public class Application {
    * Scan the entire maze
    */
   public void scanEntireMaze() {
+    if (imageProcessor == null) imageProcessor = new ImageProcessor(currentApplication);
     imageProcessor.scanAll();
   }
 
