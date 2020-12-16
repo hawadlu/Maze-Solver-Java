@@ -265,4 +265,12 @@ public class ImageProcessor {
   public ConcurrentHashMap<Location, Node> getNodes() {
     return this.nodes;
   }
+
+  /**
+   * Delete all known nodes
+   */
+  public void clear() {
+    exits.clear();
+    nodes.clear();
+  }
 }

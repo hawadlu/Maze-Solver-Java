@@ -40,6 +40,7 @@ public class Game {
     Thread load = new Thread() {
       @Override
       public void run() {
+
         System.out.println("Starting node scan");
         application.scanEntireMaze();
 

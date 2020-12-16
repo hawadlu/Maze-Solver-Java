@@ -48,6 +48,9 @@ public class SolveAlgorithm {
     boolean buildNodePath = true;
     long startTime = System.nanoTime();
 
+    //Locate the entry and exit
+    getExits();
+
     //Check is the algorithm will be compatible with the maze size
     if ((algorithm.equals("Breadth First") || algorithm.equals("Depth First")) && mazeSize > Math.pow(6001, 2)) {
       System.out.println("Maze is too large for " + algorithm + ". Using Astar instead");
@@ -88,6 +91,20 @@ public class SolveAlgorithm {
     else if (!artPts.isEmpty()) PathMaker.makeNodePath(artPts, application);
   }
 
+  private void getExits() {
+    ArrayList<Location> exits = application.getMazeExits();
+
+    //make sure there is at least one entry and exit
+    if (exits.size() < 2) try {
+      throw new InvalidMaze("Not enough exits");
+    } catch (InvalidMaze invalidMaze) {
+      invalidMaze.printStackTrace();
+    }
+
+    entry = application.getNodes().get(exits.get(0));
+    exit = application.getNodes().get(exits.get(1));
+  }
+
 
   /**
    * Takes the worker threads from the algorithm and begins execution.
@@ -123,18 +140,6 @@ public class SolveAlgorithm {
     } else {
       application.findMazeExits();
     }
-
-    ArrayList<Location> exits = application.getMazeExits();
-
-    //make sure there is at least one entry and exit
-    if (exits.size() < 2) try {
-      throw new InvalidMaze("Not enough exits");
-    } catch (InvalidMaze invalidMaze) {
-      invalidMaze.printStackTrace();
-    }
-
-    entry = application.getNodes().get(exits.get(0));
-    exit = application.getNodes().get(exits.get(1));
   }
 
   /**

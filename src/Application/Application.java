@@ -52,6 +52,11 @@ public class Application {
    * @param imageToParse
    */
   public void parseImageFile(File imageToParse) throws GenericError {
+    //If there are already nodes in the node scanner, remove them
+    if (imageProcessor != null && !imageProcessor.getNodes().isEmpty()) {
+      imageProcessor.clear();
+    }
+
     currentImage = new ImageFile(imageToParse);
   }
 

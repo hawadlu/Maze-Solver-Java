@@ -2,10 +2,7 @@ package GUI.CustomPanels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 /**
  * Class for displaying images
@@ -17,31 +14,36 @@ public class ImagePanel extends JPanel {
   public ImagePanel(BufferedImage image, Dimension imageDimensions) {
     this.image = image;
     this.imageDimensions = imageDimensions;
-    
-    //Scale the image
-    scaleImage();
   }
 
-  private void scaleImage() {
-    BufferedImage before = image;
-    int w = before.getWidth();
-    int h = before.getHeight();
-    BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-    AffineTransform transform = new AffineTransform();
+  private void drawImage(Graphics g) {
+    //Scale the image
+    Dimension imgSize = new Dimension(image.getWidth(), image.getHeight());
+    Dimension bounds = new Dimension((int) imageDimensions.getWidth(), (int) imageDimensions.getHeight());
+    Dimension scaled = scale(imgSize, bounds);
 
-    //Calculate the scale
-    double xScale = imageDimensions.getWidth() / image.getWidth();
-    double yScale = imageDimensions.getHeight() / image.getHeight();
+    BufferedImage resized = new BufferedImage(scaled.width, scaled.height, image.getType());
+    Graphics2D g2 = resized.createGraphics();
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 
-    transform.scale(xScale, yScale);
-    AffineTransformOp scaleOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-    image = scaleOp.filter(before, after);
+    g2.drawImage(image, 0, 0, (int) imageDimensions.getWidth(), (int) imageDimensions.getHeight(), 0, 0, image.getWidth(), image.getHeight(), null);
+    g2.dispose();
+
+    g.drawImage(resized, 0, 0, null);
+  }
+
+  Dimension scale(Dimension imgSize, Dimension boundary) {
+    double widthRatio = boundary.getWidth() / imgSize.getWidth();
+    double heightRatio = boundary.getHeight() / imgSize.getHeight();
+    double ratio = Math.min(widthRatio, heightRatio);
+
+    return new Dimension((int) (imgSize.width * ratio), (int) (imgSize.height * ratio));
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    g.drawImage(image, 0, 0, null);
+    drawImage(g);
   }
 
   /**
@@ -50,8 +52,6 @@ public class ImagePanel extends JPanel {
    */
   public void updateImage(BufferedImage newImage) {
     this.image = newImage;
-
-    scaleImage();
 
     GUI.GUI.refresh();
   }

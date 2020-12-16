@@ -25,7 +25,7 @@ public class PlayerPanel extends JPanel {
     this.setBackground(Color.CYAN);
     this.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     this.setPreferredSize(maxSize);
-    this.imageSize = new Dimension((int) maxSize.getWidth(), (int) maxSize.getWidth());
+    this.imageSize = new Dimension(500, 500);
 
     makeSolveLayout();
   }
