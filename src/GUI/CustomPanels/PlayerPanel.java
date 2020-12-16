@@ -59,7 +59,7 @@ public class PlayerPanel extends JPanel {
   /**
    * Update this panel to display the image to be solved
    */
-  public void initSolvePanel(ImageFile displayImage) {
+  public void initSolvePanel() {
     this.removeAll();
     this.imagePanel = new ImagePanel(application.getImage(), imageSize);
     this.add(imagePanel);

@@ -53,7 +53,6 @@ public class ImagePanel extends JPanel {
 
     scaleImage();
 
-    this.revalidate();
-    this.repaint();
+    GUI.GUI.refresh();
   }
 }

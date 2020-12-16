@@ -31,8 +31,8 @@ public class Player {
     this.panel = new PlayerPanel(application, playerName, maxSize);
   }
 
-  public void createSolveImagePanel(ImageFile displayImage) {
-    panel.initSolvePanel(displayImage);
+  public void createSolveImagePanel() {
+    panel.initSolvePanel();
   }
 
   private void updateSolveImage(ImageFile displayImage) {
@@ -51,9 +51,7 @@ public class Player {
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
 
-    createSolveImagePanel(newImage);
-
-//    GUI.GUI.refresh();
+    updateSolveImage(newImage);
   }
 
   /**
@@ -72,7 +70,7 @@ public class Player {
     System.out.println(playerName + " has started the solve");
 
     //Make this display an image panel
-    createSolveImagePanel(application.getImageFile());
+    createSolveImagePanel();
 
     String algorithm = panel.getAlgorithm();
 
