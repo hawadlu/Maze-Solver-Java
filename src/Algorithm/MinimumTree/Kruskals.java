@@ -30,7 +30,7 @@ public class Kruskals {
     unvisited.addAll(solve.getNodes());
 
     //Create the forest
-    for (Node node: unvisited) {
+    for (Node node : unvisited) {
       forest.add(node);
       node.setParent(node);
       node.setCost(0);
@@ -55,8 +55,9 @@ public class Kruskals {
 
   /**
    * Merge two nodes into the same tree
+   *
    * @param start the first node
-   * @param end the second node
+   * @param end   the second node
    * @return true/false was the union successful?
    */
   private boolean union(Node start, Node end) {
@@ -85,6 +86,7 @@ public class Kruskals {
 
   /**
    * Locate the root of a given tree
+   *
    * @param start the tree
    * @return the root node
    */

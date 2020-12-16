@@ -5,7 +5,6 @@ import GUI.CustomPanels.PlayerPanel;
 import GUI.CustomPanels.Scroll;
 import GUI.CustomPanels.SpinnerPanel;
 import Utility.Exceptions.GenericError;
-import Utility.Thread.NodeLoader;
 
 
 import javax.swing.*;
@@ -23,7 +22,7 @@ public class GUI {
   public final int height = 800;
   public static final Color activeCol = new Color(0, 131, 233);
   public static final Color inactiveCol = new Color(66, 66, 66);
-  public static final Color backgroundCol = new Color(211, 211,211);
+  public static final Color backgroundCol = new Color(211, 211, 211);
 
   //Panels
   static JFrame window;
@@ -35,7 +34,7 @@ public class GUI {
   /**
    * Constructor, creates and displays the gui
    */
-  public GUI(Application application){
+  public GUI(Application application) {
     System.out.println("initiating gui");
     this.application = application;
 
@@ -77,7 +76,8 @@ public class GUI {
 
   /**
    * This method makes the tabs that go at the top of the screen
-   * @param topTabs the JPanel that houses the tabs
+   *
+   * @param topTabs   the JPanel that houses the tabs
    * @param tabOneCol the colour of the first tab
    * @param tabTwoCol the colour of the second tab
    */
@@ -89,9 +89,9 @@ public class GUI {
 
     //The algorithm tab
     JPanel algoTab = new JPanel();
-    System.out.println("max size: " + width/2);
-    algoTab.setMinimumSize(new Dimension(width/2, 100));
-    algoTab.setMaximumSize(new Dimension(width/2, 100));
+    System.out.println("max size: " + width / 2);
+    algoTab.setMinimumSize(new Dimension(width / 2, 100));
+    algoTab.setMaximumSize(new Dimension(width / 2, 100));
     algoTab.setBackground(tabOneCol);
     algoTab.add(makeTabLabel("Algorithms"));
     algoTab.addMouseListener(new MouseAdapter() {
@@ -122,8 +122,8 @@ public class GUI {
 
     //The game tab
     JPanel gameTab = new JPanel();
-    gameTab.setMinimumSize(new Dimension(width/2, 100));
-    gameTab.setMaximumSize(new Dimension(width/2, 100));
+    gameTab.setMinimumSize(new Dimension(width / 2, 100));
+    gameTab.setMaximumSize(new Dimension(width / 2, 100));
     gameTab.setBackground(tabTwoCol);
     gameTab.add(makeTabLabel("Game"));
     gameTab.addMouseListener(new MouseAdapter() {
@@ -165,9 +165,12 @@ public class GUI {
     JPanel controlPanel = new JPanel();
     JTextArea timeDelay = new JTextArea();
     Dimension maxSize = new Dimension(width / 2, height - 200);
-    PlayerPanel playerOne = new PlayerPanel(application, "Player One", maxSize, this);
-    PlayerPanel playerTwo = new PlayerPanel(application, "Player Two", maxSize, this);
 
+    //initate the game
+    application.initialiseGame(maxSize);
+
+    PlayerPanel playerOne = application.getGamePanel(1);
+    PlayerPanel playerTwo = application.getGamePanel(2);
 
     gameMainArea.removeAll();
 
@@ -208,16 +211,13 @@ public class GUI {
     gameMainArea.add(startScreen);
     refresh();
 
-    NodeLoader loader = new NodeLoader();
-    loader.setPlayers(playerOne, playerTwo);
-    loader.setComponentToUpdate(controlPanel);
-    loader.setApplication(application);
-    loader.start();
+    application.loadGameNodes(controlPanel, timeDelay);
   }
 
   /**
    * Make the panel that will be used to create the algorithms.
    * It creates a simple panel that houses a button for loading images
+   *
    * @param param parameter to indicate which screen sould come after this
    */
   private void makeLoadScreen(String param) {
@@ -235,7 +235,7 @@ public class GUI {
     loadPanel.setBackground(backgroundCol);
     loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
     JButton loadImage = new JButton("Load Image");
-    
+
     //Bind functionality to the load image button
     loadImage.addActionListener(e -> {
       try {
@@ -243,7 +243,7 @@ public class GUI {
       } catch (GenericError genericError) {
         genericError.printStackTrace();
       }
-  
+
       //Load the image to the main screen
       if (param.equals("Algorithm")) makeAlgoSolveScreen();
       else if (param.equals("Game")) makeGameStartScreen();
@@ -269,7 +269,7 @@ public class GUI {
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 
-    main.add(new Scroll(getImage()));
+    main.add(new Scroll(application.getImage()));
 
     //Add the control panel
     JPanel control = new JPanel();
@@ -340,7 +340,7 @@ public class GUI {
       solveButton.addActionListener(e12 -> {
 
         //This algorithm only works on a single thread and while searching for neighbours on load
-        makeAlgoWorkingScreen(algoMainArea,"Articulation", "Loading", false, application);
+        makeAlgoWorkingScreen(algoMainArea, "Articulation", "Loading", false, application);
       });
 
       cancelButtons.clear();
@@ -548,7 +548,7 @@ public class GUI {
     mainArea.add(new SpinnerPanel());
     refresh();
 
-    Thread solveThread = application.solve(algorithm, params, multiThread);
+    Thread solveThread = application.solve(algorithm, params, multiThread, 0, null);
 
     //Create another thread that will only wait for algorithm to finish
     Thread algoWait = new Thread() {
@@ -558,7 +558,7 @@ public class GUI {
         try {
           solveThread.start();
           solveThread.join();
-          makeAlgoSolvedScreen(mainArea);
+          makeAlgoSolvedScreen(mainArea, application);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -571,14 +571,14 @@ public class GUI {
   /**
    * Show the completed image on screen
    */
-  public void makeAlgoSolvedScreen(JPanel algoMainArea) {
+  public void makeAlgoSolvedScreen(JPanel algoMainArea, Application currentApplication) {
     algoMainArea.removeAll();
 
     System.out.println("Making algorithm solved screen");
     JPanel main = new JPanel();
     main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 
-    main.add(new Scroll(getImage()));
+    main.add(new Scroll(currentApplication.getImage()));
 
     //Add the control panel
     JPanel control = new JPanel();
@@ -611,7 +611,7 @@ public class GUI {
    * Save the image
    */
   private void saveImage() {
-    JFileChooser save =new JFileChooser();
+    JFileChooser save = new JFileChooser();
     int ret = save.showSaveDialog(window);
     if (ret == JFileChooser.APPROVE_OPTION) {
       String fileName = save.getSelectedFile().getName();
@@ -635,6 +635,7 @@ public class GUI {
 
   /**
    * Get a specified piece of information about the image
+   *
    * @param info the requested info
    * @return the info
    */
@@ -647,12 +648,12 @@ public class GUI {
    *
    * @return the file
    */
-  private File UIFileChooser()  {
+  private File UIFileChooser() {
     System.out.println("Load image");
     //Get the file
     final JFileChooser filePicker = new JFileChooser();
     int fileReturn = filePicker.showOpenDialog(filePicker);
-    
+
     if (fileReturn == JFileChooser.APPROVE_OPTION) {
       File fileIn = filePicker.getSelectedFile();
       System.out.println("Opened: " + fileIn);
@@ -673,6 +674,7 @@ public class GUI {
 
   /**
    * Make JLabels for the tabs
+   *
    * @param name the tab title
    * @return a new JLabel
    */
@@ -685,6 +687,7 @@ public class GUI {
 
   /**
    * Get the current maze image from the application
+   *
    * @return
    */
   public BufferedImage getImage() {
@@ -693,6 +696,7 @@ public class GUI {
 
   /**
    * Get the dimensions of the maze
+   *
    * @return dimensions
    */
   public Dimension getMazeDimensions() {
@@ -708,7 +712,7 @@ public class GUI {
     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
     //Add the button functionality
-    for (JButton exit: exitButtons) {
+    for (JButton exit : exitButtons) {
       exit.addActionListener(e -> {
         frame.dispose();
       });

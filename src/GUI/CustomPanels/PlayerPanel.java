@@ -1,10 +1,12 @@
 package GUI.CustomPanels;
 
 import Application.Application;
-import GUI.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
+
+import Image.ImageFile;
 
 /**
  * This class holds all of the interactions used when playing the game
@@ -12,16 +14,18 @@ import java.awt.*;
 public class PlayerPanel extends JPanel {
   Application application;
   String playerLabel;
-  JComponent algorithm = null, parser = null;
-  GUI gui;
+  JComboBox<String> algorithm = null;
+  JButton parser = null;
+  ImagePanel imagePanel;
+  Dimension imageSize;
 
-  public PlayerPanel(Application application, String playerLabel, Dimension maxSize, GUI gui) {
+  public PlayerPanel(Application application, String playerLabel, Dimension maxSize) {
     this.application = application;
     this.playerLabel = playerLabel;
     this.setBackground(Color.CYAN);
     this.setBorder(BorderFactory.createLineBorder(Color.GREEN));
     this.setPreferredSize(maxSize);
-    this.gui = gui;
+    this.imageSize = new Dimension((int) maxSize.getWidth(), (int) maxSize.getWidth());
 
     makeSolveLayout();
   }
@@ -53,13 +57,28 @@ public class PlayerPanel extends JPanel {
   }
 
   /**
-   * Start the process of solving this maze
+   * Update this panel to display the image to be solved
    */
-  public void solve() {
-    //Create a new application for this thread
-    Application newApplication = new Application(application);
+  public void initSolvePanel(ImageFile displayImage) {
+    this.removeAll();
+    this.imagePanel = new ImagePanel(application.getImage(), imageSize);
+    this.add(imagePanel);
 
-    //Make a new application class that copies the orignal
-    gui.makeAlgoWorkingScreen(this, "AStar", "Loading", false, application);
+    //refresh the gui
+    GUI.GUI.refresh();
+  }
+
+  /**
+   * Update the image
+   */
+  public void updateImage(ImageFile displayImage) {
+    imagePanel.updateImage(displayImage.makeImage());
+  }
+
+  /**
+   * @return the selected algorithm
+   */
+  public String getAlgorithm() {
+    return Objects.requireNonNull(algorithm.getSelectedItem()).toString();
   }
 }

@@ -6,7 +6,7 @@ import Utility.Node;
 /**
  * This class contains variables and methods used by the various solve algorithms
  */
-public class SolveWorker extends Thread{
+public class SolveWorker extends Thread {
   public final SolveAlgorithm solve;
   public final Node destination;
   public final Node start;

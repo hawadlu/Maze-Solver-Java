@@ -6,6 +6,7 @@ import Utility.Node;
 
 import java.util.Objects;
 import java.util.PriorityQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Solve the maze, breadth first
@@ -15,6 +16,7 @@ public class AStar extends SolveRunner {
   /**
    * Do a depth first search.
    * Start at each end to speed up
+   *
    * @param solve the solve object
    */
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
@@ -68,6 +70,17 @@ class AStarWorker extends SolveWorker {
         try {
           throw new SolveFailure("The stack is empty on thread " + threadId);
         } catch (SolveFailure e) {
+          e.printStackTrace();
+        }
+      }
+
+      if (solve.player != null) {
+        solve.updatePlayer(parent);
+
+        //Pause this thead
+        try {
+          TimeUnit.MILLISECONDS.sleep(solve.delay);
+        } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }

@@ -7,6 +7,7 @@ import Utility.Node;
 import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Solve the maze, breadth first
@@ -16,6 +17,7 @@ public class BreadthFirst extends SolveRunner {
   /**
    * Do a depth first search.
    * Start at each end to speed up
+   *
    * @param solve the solve object
    */
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
@@ -78,6 +80,17 @@ class BFSWorker extends SolveWorker {
         try {
           throw new SolveFailure("The stack is empty on thread " + threadId);
         } catch (SolveFailure e) {
+          e.printStackTrace();
+        }
+      }
+
+      if (solve.player != null) {
+        solve.updatePlayer(parent);
+
+        //Pause this thead
+        try {
+          TimeUnit.MILLISECONDS.sleep(solve.delay);
+        } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }

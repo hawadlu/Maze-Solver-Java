@@ -49,6 +49,7 @@ public class Scroll extends JPanel implements ItemListener {
   private Rule columnView;
   private Rule rowView;
   private ScrollablePicture picture;
+  private ImageIcon imageToDisplay;
 
   public Scroll(BufferedImage toDisplay) {
     this.setBackground(GUI.backgroundCol);
@@ -56,7 +57,7 @@ public class Scroll extends JPanel implements ItemListener {
     setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
     //Get the image to use.
-    ImageIcon imageToDisplay = new ImageIcon(toDisplay);
+    this.imageToDisplay = new ImageIcon(toDisplay);
 
 
     //Create the row and column headers.
@@ -70,7 +71,7 @@ public class Scroll extends JPanel implements ItemListener {
     JPanel buttonCorner = new JPanel(); //use FlowLayout
     JToggleButton isMetric = new JToggleButton("cm", true);
     isMetric.setFont(new Font("SansSerif", Font.PLAIN, 11));
-    isMetric.setMargin(new Insets(2,2,2,2));
+    isMetric.setMargin(new Insets(2, 2, 2, 2));
     isMetric.addItemListener(this);
     buttonCorner.add(isMetric);
 
@@ -113,34 +114,12 @@ public class Scroll extends JPanel implements ItemListener {
     picture.setMaxUnitIncrement(rowView.getIncrement());
   }
 
-  /** Returns an ImageIcon, or null if the path was invalid. */
-  protected static ImageIcon createImageIcon(String path) {
-    java.net.URL imgURL = Scroll.class.getResource(path);
-    if (imgURL != null) {
-      return new ImageIcon(imgURL);
-    } else {
-      System.err.println("Couldn't find file: " + path);
-      return null;
-    }
+  /**
+   * Update the image that is being diplsayed
+   *
+   * @param displayImage the new images
+   */
+  public void updateImage(BufferedImage displayImage) {
+    this.imageToDisplay = new ImageIcon(displayImage);
   }
-
-//  /**
-//   * Create the GUI and show it.  For thread safety,
-//   * this method should be invoked from the
-//   * event-dispatching thread.
-//   */
-//  private static void createAndShowGUI() {
-//    //Create and set up the window.
-//    JFrame frame = new JFrame("ScrollDemo");
-//    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//    //Create and set up the content pane.
-//    JComponent newContentPane = new ScrollDemo();
-//    newContentPane.setOpaque(true); //content panes must be opaque
-//    frame.setContentPane(newContentPane);
-//
-//    //Display the window.
-//    frame.pack();
-//    frame.setVisible(true);
-//  }
 }

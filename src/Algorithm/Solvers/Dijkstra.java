@@ -5,6 +5,7 @@ import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Solve the maze, breadth first
@@ -14,6 +15,7 @@ public class Dijkstra extends SolveRunner {
   /**
    * Do a depth first search.
    * Start at each end to speed up
+   *
    * @param solve the solve object
    */
   public void solve(SolveAlgorithm solve, Boolean multiThreading) {
@@ -69,7 +71,19 @@ class DijkstraWorker extends SolveWorker {
           e.printStackTrace();
         }
       }
+      if (solve.player != null) {
+        solve.updatePlayer(parent);
+
+        //Pause this thead
+        try {
+          TimeUnit.MILLISECONDS.sleep(solve.delay);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
     }
+
+
     System.out.println("Thread " + threadId + " has exited the loop");
   }
 

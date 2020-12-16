@@ -2,6 +2,7 @@ package Algorithm.ArticulationPoint;
 
 import Utility.Location;
 import Utility.Node;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,6 +14,7 @@ public class ArticulationPoints {
 
   /**
    * The Articulation points constructor
+   *
    * @param allNodes a map containing all of the nodes in the graph
    */
   public ArticulationPoints(ConcurrentHashMap<Location, Node> allNodes) {
@@ -21,6 +23,7 @@ public class ArticulationPoints {
 
   /**
    * Get the articulation points
+   *
    * @return arraylist containing all of the articulation points.
    */
   public ArrayList<Node> getArticulationPoints() {
@@ -29,6 +32,7 @@ public class ArticulationPoints {
 
   /**
    * Begins the search for the articulation points
+   *
    * @return boolean indicating a failed/successful search
    */
   public boolean solve() {
@@ -66,9 +70,10 @@ public class ArticulationPoints {
 
   /**
    * Look for articulation points using a iterative algorithm
+   *
    * @param firstNode The first node to look at
-   * @param depth The current depth
-   * @param root essentially the node that came before this one.
+   * @param depth     The current depth
+   * @param root      essentially the node that came before this one.
    */
   public void iterativeSearch(Node firstNode, double depth, Node root) {
     Stack<APNode> toProcess = new Stack<>();

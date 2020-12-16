@@ -24,6 +24,7 @@ public class ImageFile {
 
   /**
    * Copy constrcutor used to copy an image
+   *
    * @param oldImage the old image
    */
   public ImageFile(ImageFile oldImage) {
@@ -128,7 +129,7 @@ public class ImageFile {
       if (imageWidth < imageHeight) smaller = imageWidth;
       else smaller = imageHeight;
 
-      double scaleFactor = Math.ceil(minValue/smaller);
+      double scaleFactor = Math.ceil(minValue / smaller);
 
       imageHeight *= scaleFactor;
       imageWidth *= scaleFactor;
@@ -138,8 +139,6 @@ public class ImageFile {
     }
 
     colEnum[][] toReturn = new colEnum[imageHeight][imageWidth];
-
-    System.out.println("Image has been scaled from " + imageArray[0].length + " by " + imageArray.length + " to " + imageWidth + " by " + imageHeight);
 
     int scale = imageHeight / imageArray.length;
     for (int height = 0; height < imageArray.length; height++) {
@@ -220,11 +219,11 @@ public class ImageFile {
 
   /**
    * Fills a specified path in the maze
+   *
    * @param path the path to fill
    * @param fill fill in the spaces between the nodes
    */
   public void fillNodePath(ArrayList<Node> path, boolean fill) {
-    System.out.println("Creating solved image");
     while (path.size() > 1) {
       Node currentNode = path.remove(0);
 
@@ -248,10 +247,10 @@ public class ImageFile {
 
   /**
    * Fill a path of segments.
+   *
    * @param segments the segments to fill
    */
   public void fillSegmentPath(ArrayList<Segment> segments) {
-    System.out.println("Creating solved image");
     while (!segments.isEmpty()) {
       Segment segment = segments.remove(0);
 
@@ -283,7 +282,7 @@ public class ImageFile {
       y = startY;
       while (y > endY) {
         imageArray[y][startX] = colour;
-        y-=1;
+        y -= 1;
       }
 
       //Drawing right
@@ -291,7 +290,7 @@ public class ImageFile {
       x = startX;
       while (x < endX) {
         imageArray[startY][x] = colour;
-        x+=1;
+        x += 1;
       }
 
       //Drawing left
@@ -320,6 +319,7 @@ public class ImageFile {
 
   /**
    * Save this image
+   *
    * @param fileName place to save to
    */
   public void saveImage(String fileName) {

@@ -19,12 +19,16 @@ public class ImageProcessor {
 
   /**
    * Copy constructor
+   *
    * @param oldProcessor the old processor
    */
   public ImageProcessor(ImageProcessor oldProcessor, Application application) {
     this.application = application;
-    this.exits = oldProcessor.getExits();
-    this.nodes = oldProcessor.getNodes();
+
+    if (oldProcessor != null) {
+      this.exits = oldProcessor.getExits();
+      this.nodes = oldProcessor.getNodes();
+    }
   }
 
 

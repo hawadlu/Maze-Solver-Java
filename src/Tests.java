@@ -78,7 +78,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -125,7 +125,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -171,7 +171,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -214,7 +214,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -258,7 +258,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -301,7 +301,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -344,7 +344,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -391,7 +391,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -407,9 +407,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
-
 
 
   //TESTS OF THE BREADTH FIRST SEARCH
@@ -446,7 +443,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -493,7 +490,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -539,7 +536,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -581,7 +578,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -624,7 +621,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -667,7 +664,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -710,7 +707,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -757,7 +754,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -773,10 +770,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
-
-
 
 
   //TESTS OF THE DIJKSTRA SEARCH
@@ -813,7 +806,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -860,7 +853,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -906,7 +899,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -948,7 +941,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -991,7 +984,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1034,7 +1027,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1077,7 +1070,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1124,7 +1117,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1140,9 +1133,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
-
 
 
   //TESTS OF THE ASTAR SEARCH
@@ -1179,7 +1169,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1226,7 +1216,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1272,7 +1262,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1314,7 +1304,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1357,7 +1347,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1400,7 +1390,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1443,7 +1433,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1490,7 +1480,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1506,11 +1496,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
-
-
-
 
 
   //TEST ALL OF THE ALGORITHMS
@@ -1546,10 +1531,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         //Check if the maze is too big for this option
-        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
-        else{
+        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten")))
+          ; //Do nothing
+        else {
           for (String algorithm : algorithmArr) {
-            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten")))
+              ; //Do nothing
             else {
               for (Boolean multi : threading) {
                 System.out.println(algorithm + " " + file.getName() + " " + option);
@@ -1557,7 +1544,7 @@ public class Tests {
                 Application application = new Application();
                 application.parseImageFile(file);
 
-                AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+                AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
                 thread.start();
                 thread.join();
                 System.out.println("Thread complete");
@@ -1576,8 +1563,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
 
 
   //TEST PRIMS ALGORITHM
@@ -1608,7 +1593,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1645,7 +1630,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1682,7 +1667,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1719,7 +1704,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1756,7 +1741,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1793,7 +1778,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1830,7 +1815,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1862,7 +1847,8 @@ public class Tests {
     testFiles.add("FourK Imperfect.png");
     testFiles.add("SixK Imperfect.png");
 
-    ResultTracker tracker = new ResultTracker();;
+    ResultTracker tracker = new ResultTracker();
+    ;
 
     for (String fileStr : testFiles) {
       File file = new File("Images/" + fileStr);
@@ -1871,7 +1857,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1883,8 +1869,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
 
 
   //TEST KRUSKALS ALGORITHM
@@ -1915,7 +1899,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1952,7 +1936,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1989,7 +1973,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2026,7 +2010,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2063,7 +2047,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2100,7 +2084,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2137,7 +2121,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2169,7 +2153,8 @@ public class Tests {
     testFiles.add("FourK Imperfect.png");
     testFiles.add("SixK Imperfect.png");
 
-    ResultTracker tracker = new ResultTracker();;
+    ResultTracker tracker = new ResultTracker();
+    ;
 
     for (String fileStr : testFiles) {
       File file = new File("Images/" + fileStr);
@@ -2178,7 +2163,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2218,7 +2203,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2255,7 +2240,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2292,7 +2277,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2329,7 +2314,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2366,7 +2351,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2403,7 +2388,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2440,7 +2425,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2472,7 +2457,8 @@ public class Tests {
     testFiles.add("FourK Imperfect.png");
     testFiles.add("SixK Imperfect.png");
 
-    ResultTracker tracker = new ResultTracker();;
+    ResultTracker tracker = new ResultTracker();
+    ;
 
     for (String fileStr : testFiles) {
       File file = new File("Images/" + fileStr);
@@ -2481,7 +2467,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2493,7 +2479,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
 
 
   //TEST ALL OF THE ALGORITHMS
@@ -2527,10 +2512,12 @@ public class Tests {
       //Do the solve algorithms
       for (String option : options) {
         //Check if the maze is too big for this option
-        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
-        else{
+        if (option.equals("Loading") && (file.getName().contains("Eight") || file.getName().contains("Ten")))
+          ; //Do nothing
+        else {
           for (String algorithm : solveAlgo) {
-            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten"))); //Do nothing
+            if ((algorithm.equals("Depth First") || algorithm.equals("Breadth First")) && (file.getName().contains("Eight") || file.getName().contains("Ten")))
+              ; //Do nothing
             else {
               for (Boolean multi : threading) {
                 //Add these to the tracker
@@ -2544,7 +2531,7 @@ public class Tests {
                   Application application = new Application();
                   application.parseImageFile(file);
 
-                  AlgorithmDispatcher thread = application.solve(algorithm, option, multi);
+                  AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
                   thread.start();
                   thread.join();
                   System.out.println("Thread complete");
@@ -2560,11 +2547,11 @@ public class Tests {
         }
       }
 
-      for (String algorithm: loadOnlyAlgo) {
+      for (String algorithm : loadOnlyAlgo) {
         Application application = new Application();
         application.parseImageFile(file);
 
-        AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false);
+        AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
         thread.start();
         thread.join();
         System.out.println("Thread complete");
@@ -2579,8 +2566,6 @@ public class Tests {
 
     tracker.saveResult();
   }
-
-
 
 
   //TEST THE WORKER THREAD
@@ -2598,14 +2583,13 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false, 0, null);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
 
     System.out.println("Thread finished");
   }
-
 
 
   //TEST SAVING
@@ -2622,7 +2606,7 @@ public class Tests {
       System.out.println("Failed to parse image");
     }
 
-    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false);
+    AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false, 0, null);
     thread.start();
 
     thread.join(); //Wait for the other thread to finish
@@ -2697,7 +2681,7 @@ public class Tests {
       csv.append("File, Algorithm, Size, Load, Solve, execTime (ns), Multi Threading, Success\n");
 
       //Add each of the results
-      for (TestResult test: results) csv.append(test.printCSV());
+      for (TestResult test : results) csv.append(test.printCSV());
 
       csv.flush();
       csv.close();
