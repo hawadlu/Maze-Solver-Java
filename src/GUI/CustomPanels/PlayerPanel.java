@@ -81,4 +81,14 @@ public class PlayerPanel extends JPanel {
   public String getAlgorithm() {
     return Objects.requireNonNull(algorithm.getSelectedItem()).toString();
   }
+
+  /**
+   * @param message to display in the panel
+   */
+  public void displayMessage(String message) {
+    this.removeAll();
+    this.add(new JLabel("Game message: " + message));
+
+    GUI.GUI.refresh();
+  }
 }

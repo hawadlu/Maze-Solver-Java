@@ -5,6 +5,9 @@ import GUI.CustomPanels.PlayerPanel;
 import Utility.Node;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import Image.ImageFile;
 import Utility.PathMaker;
@@ -14,19 +17,21 @@ public class Player {
   Node currentNode;
   PlayerPanel panel;
   String playerName;
-  Boolean done = false;
   ImageFile originalImage;
+  Game currentGame;
+  AtomicBoolean done = new AtomicBoolean(false);
 
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
-  public Player(Dimension maxSize, String playerName, Application application) {
+  public Player(Dimension maxSize, String playerName, Application application, Game game) {
     this.originalImage = new ImageFile(application.getImageFile());
 
     //Create a new application
     this.application = new Application(application);
     this.playerName = playerName;
+    this.currentGame = game;
 
     this.panel = new PlayerPanel(application, playerName, maxSize);
   }
@@ -78,5 +83,39 @@ public class Player {
     //Start the solve algorithm
     Thread solveThread = application.solve(algorithm, "Loading", false, delay, this);
     solveThread.start();
+  }
+
+  /**
+   * Make the panel display a done message.
+   * @param message, the message to display
+   */
+  public void makeDoneDisplay(String message) {
+    panel.displayMessage(message);
+  }
+
+  /**
+   * Mark this player as done
+   */
+  public void markDone() {
+    done.set(true);
+    currentGame.markDone(this);
+  }
+
+  @Override
+  public String toString() {
+    return playerName + " Done: " + done;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Player player = (Player) o;
+    return panel.equals(player.panel) && playerName.equals(player.playerName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(panel, playerName);
   }
 }

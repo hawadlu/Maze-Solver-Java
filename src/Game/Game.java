@@ -6,17 +6,19 @@ import GUI.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Game {
   Player playerOne, playerTwo;
   Application application;
 
+
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
   public Game(Dimension maxSize, Application application) {
-    playerOne = new Player(maxSize, "Player One", application);
-    playerTwo = new Player(maxSize, "Player Two", application);
+    playerOne = new Player(maxSize, "Player One", application, this);
+    playerTwo = new Player(maxSize, "Player Two", application, this);
     this.application = application;
   }
 
@@ -64,5 +66,17 @@ public class Game {
     };
 
     load.start();
+  }
+
+  /**
+   * Mark that this player has completed solving
+   * @param player the player who has finished.
+   */
+  public void markDone(Player player) {
+    //Determine if the other player is finished
+    if (player.equals(playerOne) && !playerTwo.done.get()) playerOne.makeDoneDisplay("1st");
+    else if (player.equals(playerOne) && playerTwo.done.get()) playerOne.makeDoneDisplay("2nd");
+    else if (player.equals(playerTwo) && !playerOne.done.get()) playerTwo.makeDoneDisplay("1st");
+    else if (player.equals(playerTwo) && playerOne.done.get()) playerTwo.makeDoneDisplay("2nd");
   }
 }

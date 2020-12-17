@@ -95,6 +95,8 @@ class BFSWorker extends SolveWorker {
         }
       }
     }
+    //Mark the player as done
+    if (solve.player != null) solve.player.markDone();
     System.out.println("Thread " + threadId + " has exited the loop");
   }
 
