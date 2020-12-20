@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
- * todo expand this to deal with the colours needed to show solved mazes. Probably just a method to make a buffered image.
  */
 public class ImageFile {
   private colEnum[][] imageArray = null;
@@ -28,8 +27,17 @@ public class ImageFile {
    * @param oldImage the old image
    */
   public ImageFile(ImageFile oldImage) {
-    this.imageArray = oldImage.getArray();
-    this.filePath = oldImage.getFilePath();
+    //Create a new array based on the dimensions of the old one
+    this.imageArray = new colEnum[oldImage.imageArray.length][oldImage.imageArray[0].length];
+
+    //remove any solved reset all the white squares
+    for (int height = 0; height < oldImage.imageArray.length - 1; height++) {
+      for (int width = 0; width < oldImage.imageArray[0].length - 1; width++) {
+        if (oldImage.imageArray[height][width] == colEnum.BLACK) this.imageArray[height][width] = colEnum.BLACK;
+        else this.imageArray[height][width] = colEnum.WHITE;
+      }
+    }
+    this.filePath = oldImage.filePath;
   }
 
   public ImageFile(File toLoad) throws InvalidImage {

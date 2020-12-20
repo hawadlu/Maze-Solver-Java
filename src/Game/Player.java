@@ -17,7 +17,7 @@ public class Player {
   Node currentNode;
   PlayerPanel panel;
   String playerName;
-  ImageFile originalImage;
+  final ImageFile originalImage;
   Game currentGame;
   AtomicBoolean done = new AtomicBoolean(false);
 
