@@ -172,9 +172,11 @@ public class Application {
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
+   * @param gui the main gui;
+   * @param controlPanel the panel that hosts the game controls.
    */
-  public void initialiseGame(Dimension maxSize) {
-    this.game = new Game(maxSize, this);
+  public void initialiseGame(Dimension maxSize, GUI gui, JPanel controlPanel) {
+    this.game = new Game(maxSize, this, gui, controlPanel);
   }
 
   public Game getGame() {
@@ -191,12 +193,10 @@ public class Application {
 
   /**
    * Tell the game object to load the nodes
-   *
-   * @param componentToUpdate the panel that will be updated upon completion
    * @param delayTextArea     text area containing the requested delay
    */
-  public void loadGameNodes(JPanel componentToUpdate, JTextArea delayTextArea) {
-    game.loadNodes(componentToUpdate, delayTextArea);
+  public void loadGameNodes(JTextArea delayTextArea) {
+    game.loadNodes(delayTextArea);
   }
 
   public static void main(String[] args) {

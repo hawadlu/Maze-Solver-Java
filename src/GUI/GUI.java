@@ -160,14 +160,14 @@ public class GUI {
   /**
    * Make the start screen for playing games
    */
-  private void makeGameStartScreen() {
+  public void makeGameStartScreen() {
     //Make the control panel and players which will be used both in and out of the thread
     JPanel controlPanel = new JPanel();
     JTextArea timeDelay = new JTextArea();
     Dimension maxSize = new Dimension(width / 2, height - 200);
 
     //initate the game
-    application.initialiseGame(maxSize);
+    application.initialiseGame(maxSize, this, controlPanel);
 
     PlayerPanel playerOne = application.getGamePanel(1);
     PlayerPanel playerTwo = application.getGamePanel(2);
@@ -211,7 +211,7 @@ public class GUI {
     gameMainArea.add(startScreen);
     refresh();
 
-    application.loadGameNodes(controlPanel, timeDelay);
+    application.loadGameNodes(timeDelay);
   }
 
   /**
