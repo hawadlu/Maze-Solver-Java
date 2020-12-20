@@ -1,1 +1,1 @@
-Maze Solve.Solver
+Maze Algorithm.Solver

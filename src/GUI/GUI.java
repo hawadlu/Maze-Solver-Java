@@ -1,624 +1,723 @@
 package GUI;
 
-import Image.*;
-import ArticulationPoints.ArticulationPoints;
-import Location.Coordinates;
-import MinimumSpanningTree.MST;
-import Solve.*;
-import customExceptions.InvalidColourException;
-import customExceptions.InvalidMazeException;
-import customExceptions.SolveFailureException;
+import Application.Application;
+import GUI.CustomPanels.PlayerPanel;
+import GUI.CustomPanels.Scroll;
+import GUI.CustomPanels.SpinnerPanel;
+import Utility.Exceptions.GenericError;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.ArrayList;
 
-/**
- * Class that controls the gui of the program.
- */
-public class GUI implements ItemListener {
-    final JFrame gui = new JFrame("Maze Solve.Solver");
-    final int WIDTH = 1000;
-    final int HEIGHT = 1000;
-    ImagePanel imgPanel = null;
-    CustomGrid customGrid = null;
+public class GUI {
+  Application application;
 
-    Color greyBackground = new Color(235, 235, 235);
-    Color darkGreyBackground = new Color(186, 186, 186);
+  public final int width = 1280;
+  public final int height = 800;
+  public static final Color activeCol = new Color(0, 131, 233);
+  public static final Color inactiveCol = new Color(66, 66, 66);
+  public static final Color backgroundCol = new Color(211, 211, 211);
 
-    final JPanel primaryGui = new JPanel();
-    JMenuBar topBar = new JMenuBar();
+  //Panels
+  static JFrame window;
+  JPanel container; //This panel holds all other panels
+  JPanel activityArea; //This is the panel hosts the two panels below as required
+  JPanel algoMainArea = null;
+  JPanel gameMainArea = null;
 
-    //Size variable
-    final int panelHeight = 750;
-    final int panelWidth = 750;
-    final int elementHeight = 50;
-    final Dimension panelWhole = new Dimension(panelWidth, elementHeight);
-    final Dimension panelThirds = new Dimension(panelWidth / 3, elementHeight);
-    final Dimension panelSixths = new Dimension(panelWidth / 6, elementHeight);
-    final Dimension entirePanel = new Dimension(panelWidth, panelHeight);
+  /**
+   * Constructor, creates and displays the gui
+   */
+  public GUI(Application application) {
+    System.out.println("initiating gui");
+    this.application = application;
 
-    boolean hasDisplayedTradeOff = false;
+    window = new JFrame("Maze Solver");
 
+    //Setup the size
+    window.setSize(width, height);
+    window.setResizable(false);
+    window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
 
-    /**
-     * Constructor that loads the gui
-     */
-    GUI() {
-        //Creating the Frame
-        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gui.setSize(WIDTH, HEIGHT);
-        gui.setBackground(Color.GRAY);
+    //Setup the container
+    container = new JPanel();
+    container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+    container.setBackground(backgroundCol);
 
-        loadTopBar();
-        loadSolveGui();
+    //Setup the top tabs
+    JPanel topTabs = new JPanel();
+    makeTopTabs(topTabs, activeCol, inactiveCol);
 
-        //Adding Components to the gui.
-        gui.getContentPane().add(BorderLayout.NORTH, topBar);
-        gui.getContentPane().add(BorderLayout.CENTER, primaryGui);
-        primaryGui.setBackground(darkGreyBackground);
-        gui.setVisible(true);
-    }
+    container.add(topTabs);
 
-    /**
-     * Display an error message popup
-     *
-     * @param message the message
-     */
-    public static void displayMessage(JPanel parentComponent, String message) {
-        JOptionPane.showMessageDialog(parentComponent, message);
-    }
+    activityArea = new JPanel();
+    activityArea.setBackground(backgroundCol);
+    activityArea.setSize(new Dimension(width, height));
+    activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
 
-    /**
-     * Load the components of the top bar
-     */
-    private void loadTopBar() {
-        //Create the buttons
-        topBar = new JMenuBar();
-        topBar.setBorder(null);
-        topBar.setBackground(Color.YELLOW);
-        Button solveTab = new Button("Solve a Maze");
-        Button gameTab = new Button("Game");
-        solveTab.setBackground(darkGreyBackground);
-        gameTab.setBackground(greyBackground);
-        topBar.add(solveTab);
-        topBar.add(gameTab);
+    //Add the algorithms panel by default
+    makeLoadScreen("Algorithm");
+    activityArea.add(algoMainArea);
 
-        //Set onclick listeners
-        solveTab.addActionListener(e -> {
-            solveTab.setBackground(darkGreyBackground);
-            gameTab.setBackground(greyBackground);
-            imgPanel = null;
-            loadSolveGui();
-        });
-        gameTab.addActionListener(e -> {
-            solveTab.setBackground(greyBackground);
-            gameTab.setBackground(darkGreyBackground);
-            loadGameGui();
-        });
+    container.add(activityArea);
 
-    }
-
-    /**
-     * Load the gui required for solving
-     */
-    private void loadSolveGui() {
-        //todo update this to use tbe custom grid
-        primaryGui.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        //This is an empty panel to create space
-        JPanel panel = new JPanel();
-        panel.setBackground(darkGreyBackground);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.ipady = 100;
-        primaryGui.add(panel, c);
-
-        JLabel title = new JLabel("Load Image To Solve");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 100;
-        c.gridx = 0;
-        c.gridy = 1;
-        title.setFont(new Font("Sans-Serif", Font.PLAIN, 40));
-        title.setHorizontalAlignment((int) JComponent.CENTER_ALIGNMENT);
-        primaryGui.add(title, c);
-
-        JButton solveButton = new JButton("Load Image");
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 50;
-        c.ipadx = panelWidth;
-        c.weightx = 0.0;
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy = 2;
-
-        solveButton.addActionListener(e -> {
-            try {
-                //Get the file and load the options Gui
-                ImageFile tmp = UIFileChooser();
-                if (tmp != null) loadSolveOptionsGui(tmp);
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-        primaryGui.add(solveButton, c);
-    }
-
-    /**
-     * Load the game GUI.GUI
-     */
-    private void loadGameGui() {
-        customGrid = new CustomGrid(primaryGui);
-
-        customGrid.addElement(new JLabel("Load Game Maze"), 0, 0, 1);
-
-        JButton loadButton = new JButton("Load Image For Game");
-        customGrid.addElement(loadButton, 0, 1, 1);
-
-        loadButton.addActionListener(e -> {
-            try {
-                ImageFile tmp = UIFileChooser();
-                if (tmp != null) playGameGui(tmp);
-            } catch (IOException | InvalidColourException | InvalidMazeException ioException) {
-                ioException.printStackTrace();
-            }
-        });
-
-        System.out.println("Repainting primary");
-        primaryGui.revalidate();
-        primaryGui.repaint();
-        gui.revalidate();
-        gui.repaint();
-    }
-
-    /**
-     * The gui that displays the game
-     */
-    private void playGameGui(ImageFile imageFile) {
-        customGrid = new CustomGrid(primaryGui);
-        customGrid.setSize(panelWidth, panelHeight);
-
-        //Title of sorts
-        customGrid.addElement(new JLabel("The Race"), 0, 0, 3);
-
-        //Load and play buttons
-        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
-        JComboBox progOne = new JComboBox(algorithms);
-        JComboBox progTwo = new JComboBox(algorithms);
-        JButton start = new JButton("▶");
-
-        progOne.setPreferredSize(panelThirds);
-        progTwo.setPreferredSize(panelThirds);
-        start.setPreferredSize(panelThirds);
-
-        start.addActionListener(e -> {
-            //Make a thread for each of the programs
-            Thread progThreadOne = new Thread() {
-                //todo implement, currently it is just a test and does not use the parser
-                @Override
-                public void run() {
-                    try {
-                        ImageFile copyImg = imageFile.clone();
-                        System.out.println("Program one is using: " + progOne.getSelectedItem());
-                        Animate animate = null;
-                        if (progOne.getSelectedItem().toString().equals("Depth First")) {
-                            DepthFirstSearch search = new DepthFirstSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player One");
-                        } else if (progOne.getSelectedItem().toString().equals("Breadth First")) {
-                            BreadthFirstSearch search = new BreadthFirstSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player One");
-                        } else if (progOne.getSelectedItem().toString().equals("Dijkstra")) {
-                            DijkstraSearch search = new DijkstraSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player One");
-                        } else {
-                            AStarSearch search = new AStarSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player One");
-                        }
-
-                        animate.play((byte) 3);
-                        GUI.displayMessage(primaryGui, "Player one has finished");
-                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
-                        solveFailureException.printStackTrace();
-                    }
-                }
-            };
-
-            Thread progThreadTwo = new Thread() {
-                //todo implement, currently it is just a test and does not use the parser
-                @Override
-                public void run() {
-                    try {
-                        ImageFile copyImg = imageFile.clone();
-                        System.out.println("Program two is using: " + progOne.getSelectedItem());
-                        Animate animate = null;
-                        if (progTwo.getSelectedItem().toString().equals("Depth First")) {
-                            DepthFirstSearch search = new DepthFirstSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player Two");
-                        } else if (progTwo.getSelectedItem().toString().equals("Breadth First")) {
-                            BreadthFirstSearch search = new BreadthFirstSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player Two");
-                        } else if (progTwo.getSelectedItem().toString().equals("Dijkstra")) {
-                            DijkstraSearch search = new DijkstraSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player Two");
-                        } else {
-                            AStarSearch search = new AStarSearch();
-                            HashMap<Coordinates, MazeNode> nodes = ImageManipulation.findNeighboursForAll(copyImg);
-                            search.solve(copyImg, nodes.get(copyImg.getEntry()), nodes.get(copyImg.getExit()), nodes, primaryGui);
-                            animate = new Animate(search.getPath(), copyImg, "Player Two");
-                        }
-
-                        animate.play((byte) 4);
-                        GUI.displayMessage(primaryGui, "Player two has finished");
-                    } catch (SolveFailureException | InterruptedException | CloneNotSupportedException solveFailureException) {
-                        solveFailureException.printStackTrace();
-                    }
-                }
-            };
-            progThreadOne.start();
-            progThreadTwo.start();
-        });
-
-        customGrid.addElement(progOne, 0, 1, 1);
-        customGrid.addElement(start, 1, 1, 1);
-        customGrid.addElement(progTwo, 2, 1, 1);
-
-        //Display the image
-        displayImage(imageFile, 2, 3);
+    window.add(container);
 
 
-        System.out.println("Repainting primary");
-        gui.revalidate();
-        gui.repaint();
-    }
+    //Make the window visible
+    window.setVisible(true);
+  }
 
+  /**
+   * This method makes the tabs that go at the top of the screen
+   *
+   * @param topTabs   the JPanel that houses the tabs
+   * @param tabOneCol the colour of the first tab
+   * @param tabTwoCol the colour of the second tab
+   */
+  private void makeTopTabs(JPanel topTabs, Color tabOneCol, Color tabTwoCol) {
+    topTabs.removeAll(); //Remove all current nested components
 
-    /**
-     * Get and return the file that the user wants
-     *
-     * @return the file
-     */
-    private ImageFile UIFileChooser() throws IOException, InvalidColourException, InvalidMazeException {
-        System.out.println("Load image");
-        //Get the file
-        final JFileChooser filePicker = new JFileChooser();
-        int fileReturn = filePicker.showOpenDialog(filePicker);
+    topTabs.setLayout(new BoxLayout(topTabs, BoxLayout.X_AXIS));
+    topTabs.setSize(new Dimension(width, 100));
 
-        if (fileReturn == JFileChooser.APPROVE_OPTION) {
-            File fileIn = filePicker.getSelectedFile();
-            System.out.println("Opened: " + fileIn);
-            return new ImageFile(ImageIO.read(fileIn), fileIn.getAbsolutePath(), primaryGui);
-        } else {
-            return null;
+    //The algorithm tab
+    JPanel algoTab = new JPanel();
+    System.out.println("max size: " + width / 2);
+    algoTab.setMinimumSize(new Dimension(width / 2, 100));
+    algoTab.setMaximumSize(new Dimension(width / 2, 100));
+    algoTab.setBackground(tabOneCol);
+    algoTab.add(makeTabLabel("Algorithms"));
+    algoTab.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mousePressed(MouseEvent e) {
+        System.out.println("Clicked on the algorithms tab with col: " + algoTab.getForeground());
+
+        //Check if this is the currently active tab
+        if (algoTab.getBackground().equals(inactiveCol)) {
+          System.out.println("The algorithms tab is inactive");
+
+          //Make this tab active
+          algoTab.setForeground(activeCol);
+
+          System.out.println("Algorithm tab col: " + algoTab.getForeground());
+
+          makeTopTabs(topTabs, activeCol, inactiveCol);
+
+          //Remake the algorithms screen
+          activityArea.removeAll();
+          activityArea.add(algoMainArea);
+
+          refresh();
         }
-    }
+      }
+    });
+    topTabs.add(algoTab);
 
-    /**
-     * Loads the options for solving a maze
-     *
-     * @param imageFile the file
-     */
-    public void loadSolveOptionsGui(ImageFile imageFile) {
-        customGrid = new CustomGrid(primaryGui);
+    //The game tab
+    JPanel gameTab = new JPanel();
+    gameTab.setMinimumSize(new Dimension(width / 2, 100));
+    gameTab.setMaximumSize(new Dimension(width / 2, 100));
+    gameTab.setBackground(tabTwoCol);
+    gameTab.add(makeTabLabel("Game"));
+    gameTab.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mousePressed(MouseEvent e) {
+        System.out.println("Clicked on the game tab with col: " + gameTab.getForeground());
 
-        customGrid.setSize(panelWidth, panelHeight);
+        //Check if this is the currently active tab
+        if (gameTab.getBackground().equals(inactiveCol)) {
+          System.out.println("The game tab is inactive");
 
-        String[] algorithms = {"Depth First", "Breadth First", "Dijkstra", "AStar"};
-        JComboBox<String> selectAlgorithm = new JComboBox<>(algorithms);
-        selectAlgorithm.setPreferredSize(panelThirds);
-        selectAlgorithm.setSelectedIndex(3);
+          //Make this tab active
+          gameTab.setForeground(activeCol);
 
-        //A title
-        customGrid.addElement(new JLabel("Solve The Maze"), 0, 0, 6);
+          System.out.println("Game tab col: " + gameTab.getForeground());
 
-        customGrid.addElement(selectAlgorithm, 0, 1, 2);
+          makeTopTabs(topTabs, inactiveCol, activeCol);
 
-        String[] searchType = {"Search for neighbours during loading", "Search for neighbours during solving"};
-        JComboBox<String> selectSearch = new JComboBox<>(searchType);
-        selectSearch.setSelectedIndex(0);
-        customGrid.setFill(GridBagConstraints.HORIZONTAL);
-        selectSearch.setPreferredSize(panelThirds);
-        customGrid.addElement(selectSearch, 2, 1, 2);
+          //Make the game screen
+          activityArea.removeAll();
 
-        JLabel fileName;
-        if (imageFile != null) {
-            String[] file = imageFile.getAbsolutePath().split("/");
-            fileName = new JLabel("File name: " + file[file.length - 1]);
-        } else {
-            fileName = new JLabel("No file selected");
+          //Check if the game screen has bene made already
+          if (gameMainArea == null) makeLoadScreen("Game");
+
+          activityArea.add(gameMainArea);
+
+          refresh();
         }
-        fileName.setPreferredSize(panelThirds);
-        customGrid.addElement(fileName, 4, 1, 2);
+      }
+    });
+    topTabs.add(gameTab);
+  }
 
-        //Display the image
-        displayImage(imageFile, 2, 6);
+  /**
+   * Make the start screen for playing games
+   */
+  public void makeGameStartScreen() {
+    //Make the control panel and players which will be used both in and out of the thread
+    JPanel controlPanel = new JPanel();
+    JTextArea timeDelay = new JTextArea();
+    Dimension maxSize = new Dimension(width / 2, height - 200);
 
-        makeImageControlButtons(imageFile, panelSixths, 3);
+    //initate the game
+    application.initialiseGame(maxSize, this, controlPanel);
 
-        JButton generic = new JButton("Solve");
-        generic.addActionListener(e -> {
-            try {
-                assert imageFile != null;
-                Spinner spinner = new Spinner(imageFile);
-                final ImageFile[] solvedImg = {null};
-                Thread solver = new Thread() {
-                    public synchronized void run() {
-                        try {
-                            solvedImg[0] = Solver.solve(imgPanel.getOriginalImage(), selectAlgorithm.getSelectedItem(), selectSearch.getSelectedItem(), primaryGui);
-                        } catch (SolveFailureException ioException) {
-                            ioException.printStackTrace();
-                        }
-                        solvedImg[0].resetZoom();
-                        imgPanel.setImage(solvedImg[0]); //Save the solved image
-                        spinner.interrupt();
-                        loadSaveGui(Objects.requireNonNull(selectAlgorithm.getSelectedItem()).toString(), imageFile);
-                    }
-                };
-                spinner.start();
-                solver.start();
-            } catch (Exception error) {
-                error.printStackTrace();
-            }
-        });
-        generic.setPreferredSize(panelThirds);
-        customGrid.addElement(generic, 0, 4, 2);
+    PlayerPanel playerOne = application.getGamePanel(1);
+    PlayerPanel playerTwo = application.getGamePanel(2);
 
-        generic = new JButton("Minimum Spanning Tree");
-        generic.setPreferredSize(panelThirds);
-        generic.addActionListener(e -> {
-            assert imageFile != null;
-            Spinner spinner = new Spinner(imageFile);
-            Thread mspThread = new Thread(() -> {
-                MST minimumTree = new MST(imageFile);
-                imageFile.setSegments(minimumTree.kruskalsAlgorithm());
+    gameMainArea.removeAll();
 
-                ImageManipulation.drawImage(imageFile, null, null, imageFile.getSegments(), imageFile.getArtPoints());
-                spinner.interrupt();
-                loadSolveOptionsGui(imageFile);
-            });
-            spinner.start();
-            mspThread.start();
-        });
-        customGrid.addElement(generic, 2, 4, 2);
+    JPanel startScreen = new JPanel();
+    startScreen.setBackground(Color.red);
+    startScreen.setLayout(new BoxLayout(startScreen, BoxLayout.Y_AXIS));
 
-        generic = new JButton("Articulation Points");
-        generic.setPreferredSize(panelThirds);
-        generic.addActionListener(e -> {
-            assert imageFile != null;
-            Spinner spinner = new Spinner(imageFile);
-            Thread apThread = new Thread(() -> {
-                ArticulationPoints aps = new ArticulationPoints();
-                imageFile.setArtPoints(aps.findAps(imageFile));
-                ImageManipulation.drawImage(imageFile, null, null, imageFile.getSegments(), imageFile.getArtPoints());
-                spinner.interrupt();
-                loadSolveOptionsGui(imageFile);
-            });
+    //Add the info panel
+    JPanel infoPanel = new JPanel();
+    infoPanel.setMaximumSize(new Dimension(width, 100));
+    infoPanel.add(new JLabel(application.getImageInfo("path")));
+    startScreen.add(infoPanel);
 
-            spinner.start();
-            apThread.start();
-        });
-        customGrid.addElement(generic, 4, 4, 2);
+    System.out.println("Making game panel");
 
-        System.out.println("Repainting primary");
-        gui.revalidate();
-        gui.repaint();
+    //Add the player panels
+    JPanel centrePanel = new JPanel();
+    centrePanel.setBackground(Color.ORANGE);
+    centrePanel.setLayout(new GridLayout(1, 1));
 
-        if (!hasDisplayedTradeOff) {
-            //Explain the different neighbour methods
-            displayMessage(primaryGui, "There are two ways to search for neighbours.\n" +
-                    "Searching for neighbours during loading uses more memory \n" +
-                    "but may lead to a quicker solve time.\n\n" +
-                    "Searching for neighbours while solving uses less memory (good for big mazes) \n" +
-                    "but may be slower at solve time.");
-            hasDisplayedTradeOff = true;
+
+    centrePanel.add(playerOne);
+    centrePanel.add(playerTwo);
+
+    startScreen.add(centrePanel);
+
+    controlPanel.setLayout(new GridLayout(2, 2));
+    controlPanel.add(new JLabel("Set draw delay (ms)"));
+    controlPanel.add(new JLabel("Start the race"));
+
+    JComponent solve = new JLabel("Waiting for node scan to finish");
+
+    controlPanel.add(timeDelay);
+    controlPanel.add(solve);
+
+    startScreen.add(controlPanel);
+
+    gameMainArea.add(startScreen);
+    refresh();
+
+    application.loadGameNodes(timeDelay);
+  }
+
+  /**
+   * Make the panel that will be used to create the algorithms.
+   * It creates a simple panel that houses a button for loading images
+   *
+   * @param param parameter to indicate which screen sould come after this
+   */
+  private void makeLoadScreen(String param) {
+    if (param.equals("Algorithm")) {
+      if (algoMainArea != null) algoMainArea.removeAll();
+      else algoMainArea = new JPanel();
+      algoMainArea.setBackground(backgroundCol);
+    } else if (param.equals("Game")) {
+      if (gameMainArea != null) gameMainArea.removeAll();
+      else gameMainArea = new JPanel();
+      gameMainArea.setBackground(backgroundCol);
+    }
+
+    JPanel loadPanel = new JPanel();
+    loadPanel.setBackground(backgroundCol);
+    loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
+    JButton loadImage = new JButton("Load Image");
+
+    //Bind functionality to the load image button
+    loadImage.addActionListener(e -> {
+      try {
+        application.parseImageFile(UIFileChooser());
+      } catch (GenericError genericError) {
+        genericError.printStackTrace();
+      }
+
+      //Load the image to the main screen
+      if (param.equals("Algorithm")) makeAlgoSolveScreen();
+      else if (param.equals("Game")) makeGameStartScreen();
+
+      refresh();
+    });
+
+    loadPanel.add(loadImage);
+
+    if (param.equals("Algorithm")) algoMainArea.add(loadPanel);
+    else if (param.equals("Game")) gameMainArea.add(loadPanel);
+
+    refresh();
+  }
+
+  /**
+   * Make the sc®een that will be used to load the options for solving the maze
+   */
+  private void makeAlgoSolveScreen() {
+    algoMainArea.removeAll();
+
+    System.out.println("Making algorithm solve screen");
+    JPanel main = new JPanel();
+    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+
+    main.add(new Scroll(application.getImage()));
+
+    //Add the control panel
+    JPanel control = new JPanel();
+    control.setLayout(new FlowLayout());
+
+    control.setPreferredSize(new Dimension(500, 100));
+    control.setBackground(backgroundCol);
+
+    JButton solve = new JButton("Solve");
+    JButton artPts = new JButton("Articulation Points");
+    JButton minTree = new JButton("Minimum Tree");
+    JButton startOver = new JButton("Choose another image");
+
+    control.add(solve);
+    control.add(artPts);
+    control.add(minTree);
+    control.add(startOver);
+
+    //Bind the functionality
+    artPts.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      JButton help = new JButton("Help");
+      solveControls.add(help);
+      optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "There is only one algorithm\n" +
+                "that I know of.";
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+      });
+
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+
+        //This algorithm only works on a single thread and while searching for neighbours on load
+        makeAlgoWorkingScreen(algoMainArea, "Articulation", "Loading", false, application);
+      });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+    });
+
+    minTree.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      JComboBox algoOptions = new JComboBox(new String[]{"Prims", "Kruskals"});
+      JCheckBox threadBox = new JCheckBox();
+
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      solveControls.add(algoOptions);
+      JButton help = new JButton("Help");
+      solveControls.add(help);
+      optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "Note: Neither of these\n" +
+                "algorithms are very good\n" +
+                "with mazes larger than 500\n" +
+                "by 500\n\n" +
+                "PRIMS: Usually the fastest\n" +
+                "Kruskals: In this application\n" +
+                "it is only a proof of concept.\n" +
+                "In general kruskals algorithm\n" +
+                "does not deal with dense graphs\n" +
+                "such as this maze very well.\n" +
+                "I recommend that you use Prims\n" +
+                "algorithm";
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+      });
+
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+        String algorithm = (String) algoOptions.getSelectedItem();
+
+        //All of these algorithms search for neighbours on load and do not multi thread
+        makeAlgoWorkingScreen(algoMainArea, algorithm, "Loading", false, application);
+      });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+    });
+
+    solve.addActionListener(e -> {
+      ArrayList<JButton> cancelButtons = new ArrayList<>();
+
+      //Make a popup JPanel
+      JPanel optionPanel = new JPanel();
+      optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
+      optionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+      JPanel solveControls = new JPanel();
+      solveControls.setLayout(new GridLayout(0, 2));
+
+
+      //The popup options
+      JComboBox algoOptions = new JComboBox(new String[]{"AStar", "Breadth First", "Depth First", "Dijkstra"});
+      JComboBox neighbourOptions = new JComboBox(new String[]{"Loading", "Solving"});
+      JCheckBox threadBox = new JCheckBox();
+
+      solveControls.add(new JLabel("Image"));
+      solveControls.add(new JLabel(getImageInfo("name")));
+      solveControls.add(new JLabel("Algorithm"));
+      solveControls.add(algoOptions);
+      solveControls.add(new JLabel("Neighbours"));
+      solveControls.add(neighbourOptions);
+      solveControls.add(new JLabel("Multi Threading"));
+      solveControls.add(threadBox);
+      JButton help = new JButton("Help");
+      solveControls.add(help);
+      optionPanel.add(solveControls);
+
+      //Add functionality to the help link
+      help.addActionListener(e1 -> {
+        String helpText = "ALGORITHMS\n\n" +
+                "AStar: This is the most efficient\n" +
+                "search and is recommended in most circumstances.\n\n" +
+                "Breath First: This search is guaranteed to find\n" +
+                "the shortest route. However it can be memory\n" +
+                "intensive and slow\n\n" +
+                "Depth First: The most basic algorithm. Usually\n" +
+                "gets the job done, but can be memory intensive,\n" +
+                "slow and meandering\n\n" +
+                "Dijkstra: Similar to AStar but slightly inferior\n" +
+                "performance\n\n\n" +
+                "NEIGHBOURS\n\n" +
+                "During Loading: Find all of the nodes in the maze\n" +
+                "before starting to solve. May lead to faster solve\n" +
+                "times but is more memory intensive.\n\n" +
+                "Solving: Find only the necessary nodes while\n" +
+                "solving the maze. This has better memory performance\n" +
+                "but may be slower.\n\n" +
+                "MULTI THREADING\n" +
+                "The maze will be solved using two concurrent threads.\n" +
+                "It is recommend that this is only used for large mazes as\n" +
+                "the performance tends to be poor on small mazes.";
+
+
+        JPanel helpPanel = new JPanel();
+        helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
+        JTextArea helpTextPanel = new JTextArea();
+        helpTextPanel.setEditable(false);
+        helpTextPanel.setText(helpText);
+        helpTextPanel.setBackground(backgroundCol);
+        helpPanel.add(helpTextPanel);
+
+        JButton exit = new JButton("exit");
+        helpPanel.add(exit);
+        helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        cancelButtons.add(exit);
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+      });
+
+      JPanel buttonPanel = new JPanel();
+      buttonPanel.setLayout(new FlowLayout());
+      JButton solveButton = new JButton("Solve");
+      JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
+
+      //Start the solve process
+      solveButton.addActionListener(e12 -> {
+        String algorithm = (String) algoOptions.getSelectedItem();
+        String params = (String) neighbourOptions.getSelectedItem();
+        Boolean multiThread = threadBox.isSelected();
+
+        makeAlgoWorkingScreen(algoMainArea, algorithm, params, multiThread, application);
+      });
+
+      cancelButtons.clear();
+      cancelButtons.add(cancel);
+      cancelButtons.add(solveButton);
+
+      buttonPanel.add(cancel);
+      buttonPanel.add(solveButton);
+
+      optionPanel.add(buttonPanel);
+
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+    });
+
+    main.add(control);
+
+    algoMainArea.add(main);
+    refresh();
+  }
+
+  /**
+   * Make the screen that shows a spinner while the algorithm is solving.
+   */
+  public void makeAlgoWorkingScreen(JPanel mainArea, String algorithm, String params, Boolean multiThread, Application application) {
+    mainArea.removeAll();
+
+    //Add the spinner
+    mainArea.add(new SpinnerPanel());
+    refresh();
+
+    Thread solveThread = application.solve(algorithm, params, multiThread, 0, null);
+
+    //Create another thread that will only wait for algorithm to finish
+    Thread algoWait = new Thread() {
+      @Override
+      public void run() {
+        super.run();
+        try {
+          solveThread.start();
+          solveThread.join();
+          makeAlgoSolvedScreen(mainArea, application);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
         }
+      }
+    };
+
+    algoWait.start();
+  }
+
+  /**
+   * Show the completed image on screen
+   */
+  public void makeAlgoSolvedScreen(JPanel algoMainArea, Application currentApplication) {
+    algoMainArea.removeAll();
+
+    System.out.println("Making algorithm solved screen");
+    JPanel main = new JPanel();
+    main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+
+    main.add(new Scroll(currentApplication.getImage()));
+
+    //Add the control panel
+    JPanel control = new JPanel();
+    control.setLayout(new FlowLayout());
+
+    control.setPreferredSize(new Dimension(500, 100));
+    control.setBackground(backgroundCol);
+
+    JButton loadOther = new JButton("Load Another Image");
+    JButton reset = new JButton("Reset This Image");
+    JButton save = new JButton("Save");
+
+    control.add(loadOther);
+    control.add(reset);
+    control.add(save);
+
+    //Bind the functionality
+    loadOther.addActionListener(e -> makeLoadScreen("Algorithm"));
+    reset.addActionListener(e -> resetImage());
+    save.addActionListener(e -> saveImage());
+
+    main.add(control);
+
+    algoMainArea.add(main);
+
+    refresh();
+  }
+
+  /**
+   * Save the image
+   */
+  private void saveImage() {
+    JFileChooser save = new JFileChooser();
+    int ret = save.showSaveDialog(window);
+    if (ret == JFileChooser.APPROVE_OPTION) {
+      String fileName = save.getSelectedFile().getName();
+      String directory = save.getCurrentDirectory().toString();
+      System.out.println(fileName);
+      System.out.println(directory);
+      System.out.println("Concat: " + directory + "/" + fileName);
+      application.saveImage(directory + "/" + fileName);
+    } else if (ret == JFileChooser.CANCEL_OPTION) {
+      System.out.println("You pressed cancel");
+    }
+  }
+
+  /**
+   * Reset the image so that is can be used again
+   */
+  private void resetImage() {
+    application.resetImage();
+    makeAlgoSolveScreen();
+  }
+
+  /**
+   * Get a specified piece of information about the image
+   *
+   * @param info the requested info
+   * @return the info
+   */
+  private String getImageInfo(String info) {
+    return application.getImageInfo(info);
+  }
+
+  /**
+   * Get and return the file that the user wants
+   *
+   * @return the file
+   */
+  private File UIFileChooser() {
+    System.out.println("Load image");
+    //Get the file
+    final JFileChooser filePicker = new JFileChooser();
+    int fileReturn = filePicker.showOpenDialog(filePicker);
+
+    if (fileReturn == JFileChooser.APPROVE_OPTION) {
+      File fileIn = filePicker.getSelectedFile();
+      System.out.println("Opened: " + fileIn);
+      return fileIn;
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Reload the gui
+   */
+  public static void refresh() {
+//    System.out.println("Refreshing gui");
+    window.revalidate();
+    window.repaint();
+  }
+
+  /**
+   * Make JLabels for the tabs
+   *
+   * @param name the tab title
+   * @return a new JLabel
+   */
+  private Component makeTabLabel(String name) {
+    JLabel tabLabel = new JLabel(name);
+    tabLabel.setFont(new Font("Verdana", 1, 50));
+    tabLabel.setForeground(Color.WHITE);
+    return tabLabel;
+  }
+
+  /**
+   * Get the current maze image from the application
+   *
+   * @return
+   */
+  public BufferedImage getImage() {
+    return application.getImage();
+  }
+
+  /**
+   * Get the dimensions of the maze
+   *
+   * @return dimensions
+   */
+  public Dimension getMazeDimensions() {
+    return application.getMazeDimensions();
+  }
+
+  public void makePopup(JPanel panelToDisplay, ArrayList<JButton> exitButtons, Dimension panelDimensions) {
+    System.out.println("Making popup");
+    JFrame frame = new JFrame();
+    frame.setSize(panelDimensions);
+    frame.setBackground(backgroundCol);
+    frame.add(panelToDisplay);
+    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+    //Add the button functionality
+    for (JButton exit : exitButtons) {
+      exit.addActionListener(e -> {
+        frame.dispose();
+      });
     }
 
-    /**
-     * Displays the image
-     * NOTE the image always takes up the entire row, this gridX is always 0
-     *
-     * @param fileIn the file containing the image
-     */
-    private void displayImage(ImageFile fileIn, int gridY, int gridWidth) {
-        //The Image
-        if (imgPanel == null) imgPanel = new ImagePanel(fileIn, 750, 750, primaryGui);
-        JPanel displayImg = imgPanel;
-        displayImg.setSize(750, 750);
-
-        customGrid.setIpadY(750);
-        customGrid.setIpadX(750);
-        customGrid.addElement(displayImg, 0, gridY, gridWidth);
-        customGrid.setIpadY(0);
-        customGrid.setIpadX(0);
-    }
-
-    /**
-     * Make the control buttons for the images
-     *
-     * @param fileIn      the file, used for making the image if required
-     * @param panelSixths the size of each sixth of the grid in the x direction
-     */
-    private void makeImageControlButtons(ImageFile fileIn, Dimension panelSixths, int gridY) {
-        //Generic because it is reused several times
-        JButton generic = new JButton("▲");
-        generic.addActionListener(e -> {
-            imgPanel.panUp();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 0, gridY, 1);
-
-        generic = new JButton("▼");
-        generic.addActionListener(e -> {
-            imgPanel.panDown();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 1, gridY, 1);
-
-        generic = new JButton("+");
-        generic.addActionListener(e -> {
-            imgPanel.zoomIn();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 2, gridY, 1);
-
-        generic = new JButton("-");
-        generic.addActionListener(e -> {
-            imgPanel.zoomOut();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 3, gridY, 1);
-
-        generic = new JButton("<");
-        generic.addActionListener(e -> {
-            imgPanel.panLeft();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 4, gridY, 1);
-
-        generic = new JButton(">");
-        generic.addActionListener(e -> {
-            imgPanel.panRight();
-            loadSolveOptionsGui(fileIn);
-        });
-        generic.setPreferredSize(panelSixths);
-        customGrid.addElement(generic, 5, gridY, 1);
-    }
-
-    /**
-     * Gui that allows the user the save an image
-     *
-     * @param algorithmUsed the algorithm that was used to solve the maze
-     * @param fileIn        file containing the image
-     */
-    private void loadSaveGui(String algorithmUsed, ImageFile fileIn) {
-        customGrid = new CustomGrid(primaryGui);
-
-        //Small title
-        JLabel fileName = new JLabel("Solved using " + algorithmUsed);
-        fileName.setPreferredSize(panelWhole);
-        customGrid.addElement(fileName, 0, 0, 6);
-
-        //The Image
-        displayImage(fileIn, 1, 6);
-
-        //Control buttons
-        makeImageControlButtons(fileIn, new Dimension(750 / 6, 50), 2);
-
-        JButton save = new JButton("Save");
-        save.addActionListener(e -> saveImage(imgPanel.getOriginalImage()));
-        save.setPreferredSize(panelThirds);
-        customGrid.addElement(save, 0, 3, 2);
-
-        JButton reset = new JButton("Reset Maze");
-        reset.addActionListener(e -> {
-            customGrid = null;
-            imgPanel.setImage(fileIn);
-            fileIn.reset();
-            loadSolveOptionsGui(fileIn);
-        });
-        reset.setPreferredSize(panelThirds);
-        customGrid.addElement(reset, 2, 3, 2);
-
-        JButton diffImg = new JButton("Use a different image");
-        diffImg.addActionListener(e -> {
-            //reset the image panel
-            imgPanel = null;
-            customGrid = null;
-            loadSolveGui();
-        });
-        diffImg.setPreferredSize(panelThirds);
-        customGrid.addElement(diffImg, 4, 3, 2);
-
-
-        System.out.println("Repainting primary");
-        gui.revalidate();
-        gui.repaint();
-    }
-
-    /**
-     * Save the image in a place of the users choice
-     *
-     * @param image the image to save
-     */
-    private void saveImage(ImageFile image) {
-        JFileChooser save = new JFileChooser();
-        int ret = save.showSaveDialog(primaryGui);
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            String fileName = save.getSelectedFile().getName();
-            String directory = save.getCurrentDirectory().toString();
-            String filePath = directory + "/" + fileName;
-            ImageManipulation.saveImage(image, filePath);
-            displayMessage(primaryGui, "Image saved as: " + filePath);
-        } else if (ret == JFileChooser.CANCEL_OPTION) {
-            System.out.println("You pressed cancel");
-        }
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-
-    }
-
-    static class Spinner extends Thread {
-        //Spinning wheel
-        final JFrame spinnerFrame = new JFrame("Please Wait");
-        final int size;
-
-
-        public Spinner(ImageFile imageFile) {
-            size = imageFile.getTrueWidth() * imageFile.getTrueHeight();
-        }
-
-        public void run() {
-            //Only show the spinner if the maze is large enough
-            if (size > 40401) {
-                ImageIcon loading = new ImageIcon("Animations/Spinning Arrows.gif");
-                spinnerFrame.add(new JLabel("Working, please wait... ", loading, JLabel.CENTER));
-
-                spinnerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                spinnerFrame.setSize(300, 150);
-                spinnerFrame.setVisible(true);
-            } else {
-                interrupt();
-            }
-        }
-
-        @Override
-        public void interrupt() {
-            super.interrupt();
-            spinnerFrame.setVisible(false);
-        }
-    }
-
-    public static void main(String[] args) {
-        new GUI();
-    }
+    frame.setVisible(true);
+  }
 }
