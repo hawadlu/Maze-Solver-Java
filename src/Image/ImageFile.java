@@ -107,7 +107,6 @@ public class ImageFile {
       for (int width = 0; width < toUse[0].length; width++) {
 
         //Set the colours
-        //todo deal with green and blue
         if (toUse[height][width] == colEnum.WHITE) toReturn.setRGB(width, height, Colours.white);
         else if (toUse[height][width] == colEnum.RED) toReturn.setRGB(width, height, Colours.red);
         else if (toUse[height][width] == colEnum.BLUE) toReturn.setRGB(width, height, Colours.blue);

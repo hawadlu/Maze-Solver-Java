@@ -142,7 +142,8 @@ public class Application {
    * Scan the entire maze
    */
   public void scanEntireMaze() {
-    if (imageProcessor == null) imageProcessor = new ImageProcessor(this);
+    //If the image processor is null or already contains nodes, make a new one.
+    if (imageProcessor == null || !imageProcessor.getNodes().isEmpty()) imageProcessor = new ImageProcessor(this);
     imageProcessor.scanAll();
   }
 

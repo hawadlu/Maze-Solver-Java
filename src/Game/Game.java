@@ -52,8 +52,11 @@ public class Game {
         //Update the component
         JButton solve = new JButton("Solve");
         solve.addActionListener(e -> {
+
           //Extract the requested time delay
-          int delay = Integer.parseInt(delayTextArea.getText()); //todo make this more robust
+          int delay = 25;
+          if (isInt(delayTextArea.getText()) && Integer.parseInt(delayTextArea.getText()) > 0) delay = Integer.parseInt(delayTextArea.getText());
+          else System.out.println(delayTextArea.getText() + " is not valid. Delay has been set to 25.");
 
           //Create a new thread for the purpose of updating the control panel
           Thread controlUpdate = new Thread() {
@@ -79,6 +82,21 @@ public class Game {
     };
 
     load.start();
+  }
+
+  /**
+   * Check if a given string is an int.
+   * @param text the text to check.
+   * @return boolean, true/false
+   */
+  private boolean isInt(String text) {
+    try {
+      Integer.parseInt(text);
+    } catch(NumberFormatException | NullPointerException e) {
+      return false;
+    }
+    // only got here if we didn't return false
+    return true;
   }
 
   /**

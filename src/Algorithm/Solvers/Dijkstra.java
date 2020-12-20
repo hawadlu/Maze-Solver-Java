@@ -63,14 +63,8 @@ class DijkstraWorker extends SolveWorker {
         runner.processNode(toProcess, parent, node, costToNode, this, other, solve);
       }
 
-      //If the queue is empty at this point, solving failed
-      if (toProcess.isEmpty() && !runner.done.get()) {
-        try {
-          throw new SolveFailure("The stack is empty on thread " + threadId);
-        } catch (SolveFailure e) {
-          e.printStackTrace();
-        }
-      }
+      runner.checkCollection(toProcess, solve, threadId);
+
       if (solve.player != null) {
         solve.updatePlayer(parent);
 

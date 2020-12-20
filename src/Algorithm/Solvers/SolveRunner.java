@@ -1,8 +1,10 @@
 package Algorithm.Solvers;
 
 import Algorithm.SolveAlgorithm;
+import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
+import java.util.Collection;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -64,4 +66,20 @@ public class SolveRunner {
     }
   }
 
+  /**
+   * Check if the collection is empty.
+   * @param toProcess the collection
+   * @param threadId
+   */
+  public void checkCollection(Collection<Node> toProcess, SolveAlgorithm solve, String threadId) {
+    //If the queue is empty at this point, solving failed
+    if (toProcess.isEmpty() && !done.get()) {
+      try {
+        solve.player.makeDoneDisplay("Solve failure: The stack is empty");
+        throw new SolveFailure("The stack is empty on thread " + threadId);
+      } catch (SolveFailure e) {
+        e.printStackTrace();
+      }
+    }
+  }
 }
