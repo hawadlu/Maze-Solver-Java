@@ -4,6 +4,7 @@ import Application.Application;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import Image.ImageFile;
@@ -86,9 +87,19 @@ public class PlayerPanel extends JPanel {
    * @param message to display in the panel
    */
   public void displayMessage(String message) {
-    this.removeAll();
     this.add(new JLabel("Game message: " + message));
 
+    GUI.GUI.refresh();
+  }
+
+  /**
+   * Mark this panel as done.
+   * @param message the place in which this player finished
+   */
+  public void markDone(String message, ImageFile completeImage) {
+    this.removeAll();
+    this.displayMessage(message);
+    this.add(new ImagePanel(completeImage.makeImage(), imageSize));
     GUI.GUI.refresh();
   }
 }

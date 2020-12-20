@@ -90,7 +90,13 @@ public class Player {
    * @param message, the message to display
    */
   public void makeDoneDisplay(String message) {
-    panel.displayMessage(message);
+    //Make the completed image
+    ImageFile newImage = new ImageFile(originalImage);
+
+    //Create a path from the current node
+    newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
+
+    panel.markDone(message, newImage);
   }
 
   /**
