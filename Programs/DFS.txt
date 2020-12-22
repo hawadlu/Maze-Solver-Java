@@ -1,0 +1,27 @@
+print("DFS is starting the solve");
+
+Node parent = Maze.getStart();
+Stack toProcess;
+toProcess.add(parent);
+
+while (!toProcess.isEmpty()) {
+
+  print("");
+  parent = toProcess.getNext();
+  Maze.visit(parent);
+
+  if (Maze.isDone(parent)) {
+    print("This, maze " + (1 + 12 / 3 * 2 - 4) + " is done.");
+    Maze.finish();
+  }
+
+  List neighbours = Maze.getNeighbours(parent);
+
+  for (node: neighbours) {
+    if (!Maze.isVisted(node)) {
+        Maze.setParent(node, parent);
+        Maze.visit(node);
+        toProcess.add(node);
+    }
+  }
+}

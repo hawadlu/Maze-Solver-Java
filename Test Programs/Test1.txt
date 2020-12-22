@@ -1,1 +1,0 @@
-Map<Algorithm.Coordinates, Algorithm.MazeNode> nodes;

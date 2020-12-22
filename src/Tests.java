@@ -1,3 +1,4 @@
+import Parser.Parser;
 import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
 import Utility.Exceptions.GenericError;
@@ -2714,5 +2715,15 @@ public class Tests {
     public String printCSV() {
       return fileName + ", " + algorithm + ", " + size + ", " + onLoad + ", " + onSolve + ", " + execTime + ", " + multiThreading + " " + success + "\n";
     }
+  }
+
+
+
+
+  //TEST THE PARSER
+  @Test
+  public void testDFSParser() {
+    File dfs = new File("Programs/DFS.txt");
+    new Parser(dfs);
   }
 }
