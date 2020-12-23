@@ -3,10 +3,10 @@ package Parser.ProgramNodes;
 /**
  * Perform a given action on a variable
  */
-public class VariableAction implements Exec {
+public class VariableActionNode implements Exec {
   String name;
   Exec action;
-  public VariableAction(String varName, Exec action) {
+  public VariableActionNode(String varName, Exec action) {
     this.name = varName;
     this.action = action;
   }

@@ -1,10 +1,14 @@
 package Parser.ProgramNodes;
 
 public class PrintNode implements Exec{
-  String toPrint;
+  StringBuilder toPrint = new StringBuilder();
 
-  public PrintNode(String string) {
-    toPrint = string;
+  public void append(StringBuilder str) {
+    toPrint.append(str);
+  }
+
+  public void append(Exec print) {
+    toPrint.append(print.toString());
   }
 
   @Override
@@ -14,6 +18,6 @@ public class PrintNode implements Exec{
 
   @Override
   public String toString() {
-    return toPrint;
+    return toPrint.toString();
   }
 }

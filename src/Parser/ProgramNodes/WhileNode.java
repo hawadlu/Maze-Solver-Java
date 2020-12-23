@@ -2,12 +2,15 @@ package Parser.ProgramNodes;
 
 import java.util.ArrayList;
 
-public class WhileLoop implements Exec {
+public class WhileNode implements Exec {
   ArrayList<Exec> statements = new ArrayList<>();
+  Condition loopCondition;
 
-  public void addStatement(Exec statement) {
-    statements.add(statement);
+  public WhileNode(Condition condition, ArrayList<Exec> statements) {
+    this.loopCondition = condition;
+    this.statements = statements;
   }
+
 
   @Override
   public void Execute() {

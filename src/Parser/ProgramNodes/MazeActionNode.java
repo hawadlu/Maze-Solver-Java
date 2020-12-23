@@ -3,11 +3,11 @@ package Parser.ProgramNodes;
 /**
  * This class deals with calls to maze actions
  */
-public class MazeAction implements Exec {
-  MethodNode method;
+public class MazeActionNode implements Exec {
+  MethodNode methodNode;
 
-  public MazeAction(MethodNode method) {
-    this.method = method;
+  public MazeActionNode(MethodNode methodNode) {
+    this.methodNode = methodNode;
   }
 
   @Override
