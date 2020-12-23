@@ -1,6 +1,6 @@
 package Parser.ProgramNodes;
 
-public interface ExecNode {
+public interface Exec {
   void Execute();
   String toString();
 }
