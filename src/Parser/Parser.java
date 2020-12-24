@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * This class is responsible for parsing the files.
@@ -77,6 +78,7 @@ public class Parser {
    * @return the statement node
    */
   private Exec parseStatement(Scanner fileScanner) {
+    Boolean semiRequired = true; //Indication of the necessity of a semi colon after this statement.
     Exec toReturn = null;
     System.out.println("parsing statement");
 
@@ -85,21 +87,86 @@ public class Parser {
 
     System.out.println("Next: " + next);
 
-    if (next.matches(Regex.print.pattern())) toReturn = parsePrint(fileScanner, true);
-    else if (next.matches(Regex.declaration.pattern())) toReturn = parseDeclaration(fileScanner, next);
-    else if (next.matches(Regex.whileLoop.pattern())) toReturn = parseWhile(fileScanner);
-    else if (next.matches(Regex.ifStmt.pattern())) toReturn = parseIf(fileScanner);
+    if (next.matches(Regex.print.pattern())) {
+      toReturn = parsePrint(fileScanner, true);
+    } else if (next.matches(Regex.declaration.pattern())) {
+      toReturn = parseDeclaration(fileScanner, next);
+    } else if (next.matches(Regex.whileLoop.pattern())) {
+      semiRequired = false;
+      toReturn = parseWhile(fileScanner);
+    } else if (next.matches(Regex.forLoop.pattern())) {
+      semiRequired = false;
+      toReturn = parseFor(fileScanner);
+    } else if (next.matches(Regex.ifStmt.pattern())) {
+      semiRequired = false;
+      toReturn = parseIf(fileScanner);
 
-    //Last because my regex considers things such as 'while' as valid names
-    else if (next.matches(Regex.name.pattern())) toReturn = parseVariableReference(fileScanner, next);
-
-    if (!fileScanner.hasNext(Regex.semiColon)) {
-//      printScanner(fileScanner);
-      fail("Statement missing ;");
+      //Last because my regex considers things such as 'while' as valid names
+    } else if (next.matches(Regex.name.pattern())) {
+      toReturn = parseVariableReference(fileScanner, next);
     }
-    else fileScanner.next();
+
+    if (semiRequired && !fileScanner.hasNext(Regex.semiColon)) {
+//      printScanner(fileScanner);
+      fail("Statement missing ';'");
+    }
+    else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
     return toReturn;
+  }
+
+  /**
+   * Parse for loops.
+   * @param fileScanner the file scanner.
+   * @return a for loop object
+   */
+  private Exec parseFor(Scanner fileScanner) {
+    System.out.println("Parsing for loop");
+    Exec forLoop = null;
+
+    //Check for opening '('
+    scannerHasNext(fileScanner, Regex.openParen, "For loop missing opening '('");
+
+    //Get the loop variable name
+    String varName = null;
+    if (!fileScanner.hasNext(Regex.name)) fail("Must declare variable name in for loop.");
+    else varName = fileScanner.next().replaceAll("\\s", "");
+
+    //Check for the ':'
+    if (!fileScanner.hasNext(Regex.colon)) fail("For loop must contain ':' between variable and collection");
+    else fileScanner.next(); //discard the colon
+
+    //Get the name of the collection that the loop will use
+    String collectionName = null;
+    if (!fileScanner.hasNext(Regex.name)) fail("For loop must contain a collection variable");
+    else collectionName = fileScanner.next().replaceAll("\\s", "");
+
+    //Check for the closing ')'
+    scannerHasNext(fileScanner, Regex.closeParen, "For loop missing closing ')'");
+
+    //Check for open curly
+    scannerHasNext(fileScanner, Regex.openCurly, "For loop missing opening '{'");
+
+    //Parse all the statements
+    ArrayList<Exec> statements = new ArrayList<>();
+    while (fileScanner.hasNext(Regex.statement)) statements.add(parseStatement(fileScanner));
+
+    //Check for closing '}'
+    scannerHasNext(fileScanner, Regex.closeCurly, "For loop missing closing '}'");
+
+    return forLoop;
+  }
+
+  /**
+   * Check if the scanner has a particular regex next.
+   * If fail, print a fail message, if success return the token
+   * @param fileScanner the file scanner.
+   * @param regex the regex to check.
+   * @param failMessage message to print on failure
+   */
+  private void scannerHasNext(Scanner fileScanner, Pattern regex, String failMessage) {
+    if (!fileScanner.hasNext(regex)) fail(failMessage);
+    else fileScanner.next();
   }
 
   /**
@@ -111,19 +178,16 @@ public class Parser {
     System.out.println("Parsing if");
 
     //Check for an opening brace
-    if (!fileScanner.hasNext(Regex.openParen)) fail("If statement missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "If statement missing opening '('");
 
     Condition condition;
     if (fileScanner.hasNext(Regex.not)) condition = parseNotCondition(fileScanner);
     else condition = parseCondition(fileScanner);
 
-    if (!fileScanner.hasNext(Regex.closeParen)) fail("If statement missing closing ')'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.closeParen, "If statement missing closing ')'");
 
     //Check for the opening {
-    if (!fileScanner.hasNext(Regex.openCurly)) fail("If statement missing opening '{'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openCurly, "If statement missing opening '{'");
 
     //Parse all of the statements
     ArrayList<Exec> statements = new ArrayList<>();
@@ -134,8 +198,7 @@ public class Parser {
     }
 
     //Check for the closing }
-    if (!fileScanner.hasNext(Regex.closeCurly)) fail("If statement missing closing '}'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.closeCurly, "If statement missing closing '}'");
 
     return new IfNode(condition, statements);
   }
@@ -149,19 +212,16 @@ public class Parser {
     System.out.println("Parsing while");
 
     //Check for an opening brace
-    if (!fileScanner.hasNext(Regex.openParen)) fail("While loop missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "While loop missing opening '('");
 
     Condition condition;
     if (fileScanner.hasNext(Regex.not)) condition = parseNotCondition(fileScanner);
     else condition = parseCondition(fileScanner);
 
-    if (!fileScanner.hasNext(Regex.closeParen)) fail("While loop missing closing ')'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.closeParen, "While loop missing closing ')'");
 
     //Check for the opening {
-    if (!fileScanner.hasNext(Regex.openCurly)) fail("While loop missing opening '{'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openCurly, "While loop missing opening '{'");
 
     //Parse all of the statements
     ArrayList<Exec> statements = new ArrayList<>();
@@ -172,8 +232,7 @@ public class Parser {
     }
 
     //Check for the closing }
-    if (!fileScanner.hasNext(Regex.closeCurly)) fail("While loop missing closing '}'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.closeCurly, "While loop missing closing '}'");
 
     return new WhileNode(condition, statements);
   }
@@ -219,9 +278,20 @@ public class Parser {
     //If there is a .xyz return an action node
     if (fileScanner.hasNext(Regex.dot)) actionOrAssignment = parseVariableAction(fileScanner, varName);
     else if (fileScanner.hasNext(Regex.equals)) actionOrAssignment = parseVariableAssignment(fileScanner, varName);
+    else if (fileScanner.hasNext(Regex.plus)) actionOrAssignment = getVariable(varName);
     else fail("Invalid variable reference");
 
     return actionOrAssignment;
+  }
+
+  /**
+   * Get a variable from the collection of variables.
+   * @param varName the variable name.
+   * @return the variable object.
+   */
+  //todo implement this properly
+  private Exec getVariable(String varName) {
+    return new PrintNode();
   }
 
   private Exec parseVariableAssignment(Scanner fileScanner, String varName) {
@@ -315,8 +385,7 @@ public class Parser {
     System.out.println("parsing method");
 
     //Check for the '.'
-    if (!fileScanner.hasNext(Regex.dot)) fail("Method call missing '.'");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.dot, "Method call missing '.'");
 
     //Check for a valid method name
     String methodName = null;
@@ -325,16 +394,14 @@ public class Parser {
 
 
     //Check for the opening parentheses
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Method missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Method missing opening '('");
 
     //Check if there are any parameters
     if (fileScanner.hasNext(Regex.name)) toReturn = new MethodNode(methodName, parseParams(fileScanner));
     else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName);
 
     //Check for closing brace
-    if (!fileScanner.hasNext(Regex.closeParen)) fail("Method missing closing ');");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.closeParen, "Method missing closing ');");
 
     return toReturn;
   }
@@ -369,8 +436,7 @@ public class Parser {
 
     //Check for opening (
     if (firstParen) {
-      if (!fileScanner.hasNext(Regex.openParen)) fail("Print missing opening (");
-      else fileScanner.next();
+      scannerHasNext(fileScanner, Regex.openParen, "Print missing opening (");
     }
 
     //parse sections with a quote mark
@@ -383,8 +449,7 @@ public class Parser {
         }
       }
 
-      if (!fileScanner.hasNext(Regex.doubleQuote)) fail("Quotation missing closing \"");
-      else fileScanner.next();
+      scannerHasNext(fileScanner, Regex.doubleQuote, "Quotation missing closing \"");
 
       //Add the string to the print node
       printer.append(toPrint);
@@ -403,8 +468,7 @@ public class Parser {
 
     //Check for closing )
     if (firstParen) {
-      if (!fileScanner.hasNext(Regex.closeParen)) fail("Print missing closing )");
-      else fileScanner.next();
+      scannerHasNext(fileScanner, Regex.closeParen, "Print missing closing )");
     }
 
     return printer;
@@ -443,8 +507,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the root
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Root missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Root missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -471,8 +534,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the power
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Power missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Power missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -499,8 +561,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the multiply
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Multiply missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Multiply missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -527,8 +588,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the divide
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Divide missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Divide missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -555,8 +615,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the minus
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Minus missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Minus missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -578,8 +637,7 @@ public class Parser {
 
     fileScanner.next(); //Discard the plus
 
-    if (!fileScanner.hasNext(Regex.openParen)) fail("Plus missing opening '('");
-    else fileScanner.next();
+    scannerHasNext(fileScanner, Regex.openParen, "Plus missing opening '('");
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -609,7 +667,7 @@ public class Parser {
   }
 
   private void fail(String message) {
-    String msg = "Parse error: " + message + "\n   @ ...";
+    String msg = "FAIL: Parse error: " + message + "\n   @ ...";
     for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
       msg += " " + fileScanner.next();
     }

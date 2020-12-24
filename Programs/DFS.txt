@@ -11,7 +11,7 @@ while (!toProcess.isEmpty()) {
   Maze.visit(parent);
 
   if (Maze.isDone(parent)) {
-    print("This, maze " + plus(1, 4, minus(6, 2, divide(9, 1, multiply(8, 6, power(2, root(4, 5)))) + " " + parent + " " + 1 + " is done.");
+    print("This, maze " + plus(1, 4, minus(6, 2, divide(9, 1, multiply(8, 6, power(2, root(4, 5)))))) + " " + parent + " " + 1 + " is done.");
 
     Maze.finish();
   }

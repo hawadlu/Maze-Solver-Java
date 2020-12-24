@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Programs/DFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/DFS.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,19 +58,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tests.testDFSParser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
@@ -108,6 +84,7 @@
       <updated>1608677723122</updated>
       <workItem from="1608677727737" duration="7417000" />
       <workItem from="1608704742108" duration="9155000" />
+      <workItem from="1608838090340" duration="5019000" />
     </task>
     <servers />
   </component>

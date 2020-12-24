@@ -3,13 +3,14 @@ package Parser;
 import java.util.regex.Pattern;
 
 public class Regex {
-  public static Pattern delimiter = Pattern.compile("\\s*(?=[{}(),;!=\\.\"\\+])|(?<=[{}(),;!=\\.\"\\+])");
+  public static Pattern delimiter = Pattern.compile("\\s*(?=[:{}(),;!=\\.\"\\+])|(?<=[:{}(),;!=\\.\"\\+])");
 
   //Punctuation
   public static Pattern openParen = Pattern.compile("\\(");
   public static Pattern closeParen = Pattern.compile("\\)");
   public static Pattern doubleQuote = Pattern.compile("\"");
   public static Pattern equals = Pattern.compile("=");
+  public static Pattern colon = Pattern.compile(":");
   public static Pattern semiColon = Pattern.compile(";");
   public static Pattern dot = Pattern.compile("\\.");
   public static Pattern not = Pattern.compile("!");
@@ -53,11 +54,11 @@ public class Regex {
   public static Pattern ifStmt = Pattern.compile("\\s*if\\s*");
 
   //Assignment statements
-  public static Pattern declaration = Pattern.compile("([" + node + "|" + list + "|" + stack + "]+\\s\\w+\\s*)");
+  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "]+\\s\\w+\\s*)");
 
   //Statements in the program
   public static Pattern print = Pattern.compile("\\s*print");
 
   //The collective program statement
-  public static Pattern statement = Pattern.compile("[\\n\\s]*(" + print + "|" + declaration + "|" + name + "|" + whileLoop + ")");
+  public static Pattern statement = Pattern.compile("[\\n\\s]*(" + print + "|" + declaration + "|" + name + "|" + whileLoop + "|" + forLoop + ")");
 }
