@@ -8,13 +8,13 @@ public class VariableNode implements Exec {
   Exec value;
 
   public VariableNode(String type, String name) {
-    this.name = name;
-    this.type = type;
+    this.name = name.replaceAll(" ", "");;
+    this.type = type.replaceAll(" ", "");;
   }
 
   public VariableNode(String type, String name, Exec value) {
-    this.name = name;
-    this.type = type;
+    this.name = name.replaceAll(" ", "");
+    this.type = type.replaceAll(" ", "");;
     this.value = value;
   }
 
@@ -25,6 +25,6 @@ public class VariableNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    return type + " " + name + " " + value;
   }
 }

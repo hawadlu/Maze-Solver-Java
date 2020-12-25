@@ -15,6 +15,6 @@ public class NotConditionNode implements Condition {
 
   @Override
   public String toString() {
-    return super.toString();
+    return "not(" + condition + ")";
   }
 }

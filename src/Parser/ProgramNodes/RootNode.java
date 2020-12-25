@@ -19,6 +19,6 @@ public class RootNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    return "root(" + values + ")";
   }
 }

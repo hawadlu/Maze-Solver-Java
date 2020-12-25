@@ -7,7 +7,7 @@ public class VariableActionNode implements Exec {
   String name;
   Exec action;
   public VariableActionNode(String varName, Exec action) {
-    this.name = varName;
+    this.name = varName.replaceAll(" ", "");
     this.action = action;
   }
 
@@ -18,6 +18,6 @@ public class VariableActionNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    return name + " " + action;
   }
 }

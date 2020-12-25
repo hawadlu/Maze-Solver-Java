@@ -19,6 +19,6 @@ public class DivideNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    return "divide(" + values + ")";
   }
 }

@@ -19,6 +19,9 @@ public class WhileNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    StringBuilder internals = new StringBuilder();
+    for (Exec statement: statements) internals.append("\t").append(statement).append("\n");
+
+    return "while (" + loopCondition + ") {\n" + internals + "\n}\n";
   }
 }

@@ -14,6 +14,6 @@ public class NumberNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    return "" + value;
   }
 }

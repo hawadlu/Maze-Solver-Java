@@ -14,6 +14,6 @@ public class ConditionNode implements Condition{
 
   @Override
   public String toString() {
-    return super.toString();
+    return method.toString();
   }
 }

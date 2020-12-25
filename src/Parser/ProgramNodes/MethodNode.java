@@ -25,6 +25,7 @@ public class MethodNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    if (parameters == null) return "Method (" + name + "())";
+    else return "Method (" + name + "(" + parameters + "))";
   }
 }

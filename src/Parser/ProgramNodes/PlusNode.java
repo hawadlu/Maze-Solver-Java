@@ -19,6 +19,6 @@ public class PlusNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    return "plus(" + values + ")";
   }
 }

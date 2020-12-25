@@ -21,42 +21,43 @@ public class Parser {
   public Parser(File toRead) {
     try {
       fileScanner = new Scanner(toRead);
-
-      fileScanner.useDelimiter(Regex.delimiter);
-
-      System.out.println("Statement: " + Regex.statement);
-      System.out.println("Method call: " + Regex.methodCall);
-      System.out.println("Maze: " + Regex.mazeCall);
-      System.out.println("Name: " + Regex.name);
-      System.out.println("Sentence: " + Regex.sentence);
-      System.out.println("Print: " + Regex.print);
-      System.out.println("Print concat: " + Regex.printConcatenate);
-      System.out.println("Declare var: " + Regex.declareVar);
-      System.out.println("Use var: " + Regex.useVar);
-      System.out.println("Reassign var: " + Regex.reassignVar);
-      System.out.println("While: " + Regex.whileLoop);
-      System.out.println("For: " + Regex.forLoop);
-      System.out.println("If: " + Regex.ifStmt);
-      System.out.println("Declaration: " + Regex.declaration);
-      System.out.println("Math: " + Regex.math);
-
-
-      System.out.println();
-
-      //Start the scanner
-      baseNode = parseProgram(fileScanner);
-
-      fileScanner.close();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
-    } catch (ParserFailure e) {
-      System.out.println("parser error");
-      System.out.println(e.getMessage());
-      fileScanner.close();
     }
   }
 
-  private Exec parseProgram(Scanner fileScanner) {
+  /**
+   * Start the parser.
+   */
+  public void startParser() {
+    fileScanner.useDelimiter(Regex.delimiter);
+
+    System.out.println("Statement: " + Regex.statement);
+    System.out.println("Method call: " + Regex.methodCall);
+    System.out.println("Maze: " + Regex.mazeCall);
+    System.out.println("Name: " + Regex.name);
+    System.out.println("Sentence: " + Regex.sentence);
+    System.out.println("Print: " + Regex.print);
+    System.out.println("Print concat: " + Regex.printConcatenate);
+    System.out.println("Declare var: " + Regex.declareVar);
+    System.out.println("Use var: " + Regex.useVar);
+    System.out.println("Reassign var: " + Regex.reassignVar);
+    System.out.println("While: " + Regex.whileLoop);
+    System.out.println("For: " + Regex.forLoop);
+    System.out.println("If: " + Regex.ifStmt);
+    System.out.println("Declaration: " + Regex.declaration);
+    System.out.println("Math: " + Regex.math);
+
+
+    System.out.println();
+
+    //Start the scanner
+    baseNode = new BaseNode(parseProgram(fileScanner));
+
+    fileScanner.close();
+  }
+
+  private ArrayList<Exec> parseProgram(Scanner fileScanner) {
     ArrayList<Exec> statements = new ArrayList<>();
 
     //Add statements to the list until the scanner is empty
@@ -69,7 +70,7 @@ public class Parser {
       }
     }
 
-    return new StatementNode();
+    return statements;
   }
 
   /**
@@ -244,7 +245,7 @@ public class Parser {
     if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall(fileScanner));
     else {
       if (!fileScanner.hasNext(Regex.name)) fail("Unrecognised value in condition");
-      else return new ConditionNode(parseVariableReference(fileScanner, fileScanner.next()));
+      else return new ConditionNode(parseVariableReference(fileScanner, fileScanner.next().replaceAll("\\s", "")));
     }
 
     fail("Invalid condition");
@@ -456,7 +457,7 @@ public class Parser {
     } else {
       //parse other things to be printed such as math or other variables
       if (fileScanner.hasNext(Regex.math)) printer.append(parseMath(fileScanner));
-      if (fileScanner.hasNext(Regex.name)) printer.append(parseVariableReference(fileScanner, fileScanner.next()));
+      if (fileScanner.hasNext(Regex.name)) printer.append(parseVariableReference(fileScanner, fileScanner.next().replaceAll("\\s", "")));
     }
 
     //Check if there is any concatenation going on
@@ -672,5 +673,19 @@ public class Parser {
       msg += " " + fileScanner.next();
     }
     throw new ParserFailure(msg + "...");
+  }
+
+  /**
+   * Execute the compile code.
+   */
+  public void execute() {
+    baseNode.Execute();
+  }
+
+  /**
+   * Print the compiled version of the program
+   */
+  public void print() {
+    System.out.println(baseNode.toString());
   }
 }

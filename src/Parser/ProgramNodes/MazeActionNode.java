@@ -17,6 +17,6 @@ public class MazeActionNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    return "Maze action " + methodNode;
   }
 }

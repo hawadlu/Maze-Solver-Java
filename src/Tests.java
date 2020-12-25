@@ -2724,6 +2724,9 @@ public class Tests {
   @Test
   public void testDFSParser() {
     File dfs = new File("Programs/DFS.txt");
-    new Parser(dfs);
+    Parser p = new Parser(dfs);
+    p.startParser();
+    p.print();
+//    p.execute();
   }
 }

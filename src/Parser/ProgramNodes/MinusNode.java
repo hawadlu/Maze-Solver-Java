@@ -19,6 +19,6 @@ public class MinusNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    return "minus(" + values + ")";
   }
 }

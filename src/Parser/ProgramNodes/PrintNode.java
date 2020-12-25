@@ -8,7 +8,7 @@ public class PrintNode implements Exec{
   }
 
   public void append(Exec print) {
-    toPrint.append(print.toString());
+    toPrint.append(" ").append(print.toString());
   }
 
   @Override

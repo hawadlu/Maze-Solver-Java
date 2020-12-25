@@ -8,7 +8,7 @@ public class VariableAssignmentNode implements Exec {
   Exec newVal;
 
   public VariableAssignmentNode(String varName, Exec newVal) {
-    this.varName = varName;
+    this.varName = varName.replaceAll(" ", "");
     this.newVal = newVal;
   }
 
@@ -19,6 +19,6 @@ public class VariableAssignmentNode implements Exec {
 
   @Override
   public String toString() {
-    return super.toString();
+    return varName + " equals " + newVal;
   }
 }

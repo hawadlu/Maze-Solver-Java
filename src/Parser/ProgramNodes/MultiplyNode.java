@@ -19,6 +19,6 @@ public class MultiplyNode implements Exec{
 
   @Override
   public String toString() {
-    return super.toString();
+    return "multiply(" + values + ")";
   }
 }

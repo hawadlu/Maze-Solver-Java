@@ -2,10 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/DFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/DFS.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/IfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PlusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PlusNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAssignmentNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAssignmentNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +75,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tests.testDFSParser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
@@ -84,7 +112,7 @@
       <updated>1608677723122</updated>
       <workItem from="1608677727737" duration="7417000" />
       <workItem from="1608704742108" duration="9155000" />
-      <workItem from="1608838090340" duration="5019000" />
+      <workItem from="1608838090340" duration="8259000" />
     </task>
     <servers />
   </component>
