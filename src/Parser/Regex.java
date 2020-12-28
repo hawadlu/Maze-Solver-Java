@@ -44,6 +44,7 @@ public class Regex {
   public static Pattern node = Pattern.compile("Node");
   public static Pattern list = Pattern.compile("List");
   public static Pattern stack = Pattern.compile("Stack");
+  public static Pattern queue = Pattern.compile("Queue");
 
   //Loops
   public static Pattern whileLoop = Pattern.compile("\\s*while\\s*");
@@ -53,7 +54,7 @@ public class Regex {
   public static Pattern ifStmt = Pattern.compile("\\s*if\\s*");
 
   //Assignment statements
-  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "]+\\s\\w+\\s*)");
+  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "]+\\s\\w+\\s*)");
 
   //Statements in the program
   public static Pattern print = Pattern.compile("\\s*print");

@@ -2765,7 +2765,53 @@ public class Tests {
     p.execute();
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
-    application.saveImage("Images/Solved/Small Imperfect Custom Algorithm.png");
+    application.saveImage("Images/Solved/DFS Small Imperfect Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
+
+  @Test
+  public void testBFSParserTiny() {
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Tiny.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
+    File dfs = new File("Programs/BFS.txt");
+    Parser p = new Parser(dfs, maze);
+    p.startParser();
+    p.print();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/BFS Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
+
+  @Test
+  public void testBFSParserSmall() {
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Small Imperfect.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
+    File dfs = new File("Programs/BFS.txt");
+    Parser p = new Parser(dfs, maze);
+    p.startParser();
+    p.print();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/BFS Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
 }

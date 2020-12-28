@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/MazeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/MazeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +57,7 @@
       <recent name="Parser.ProgramNodes" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="JUnit.Tests.testBFSParserSmall">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Application.Application" />
       <module name="Maze-Solver-Java" />
@@ -81,21 +82,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.DFSTinyOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testBFSParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="DFSTinyOnly" />
+      <option name="METHOD_NAME" value="testBFSParserSmall" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testDFSParser" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration name="Tests.testBFSParserTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testDFSParser" />
+      <option name="METHOD_NAME" value="testBFSParserTiny" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -123,11 +124,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Tests.testBFSParserSmall" />
+        <item itemvalue="JUnit.Tests.testDFSParserSmall" />
+        <item itemvalue="JUnit.Tests.testBFSParserTiny" />
         <item itemvalue="Application.Application" />
         <item itemvalue="JUnit.Tests.testDFSParserTiny" />
-        <item itemvalue="JUnit.Tests.DFSTinyOnly" />
-        <item itemvalue="JUnit.Tests.testDFSParserSmall" />
-        <item itemvalue="JUnit.Tests.testDFSParser" />
       </list>
     </recent_temporary>
   </component>
@@ -162,6 +163,11 @@
           <url>file://$PROJECT_DIR$/src/GUI/GUI.java</url>
           <line>607</line>
           <option name="timeStamp" value="166" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ConditionNode.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="167" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

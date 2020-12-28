@@ -72,6 +72,7 @@ public class VariableNode implements Exec {
       if (type.equals("Node") || type.equals("List")) value = toEvaluate.execute(parser);
     } else {
       if (type.equals("Stack")) value = new Stack<>();
+      else if (type.equals("Queue")) value = new ArrayDeque<>();
     }
     return null;
   }
@@ -121,9 +122,8 @@ public class VariableNode implements Exec {
    * @return the next value in the collection.
    */
   private Object getNext() {
-    if (type.equals("Stack")) {
-      return ((Stack) value).pop();
-    }
+    if (type.equals("Stack")) return ((Stack) value).pop();
+    else if (type.equals("Queue")) return ((ArrayDeque) value).poll();
     return null;
   }
 
@@ -146,11 +146,19 @@ public class VariableNode implements Exec {
       Object toAdd = method.execute(parser);
 
       //Cast the variable to a node if required
-      if (toAdd instanceof VariableNode) {
-        toAdd = (Node) ((VariableNode) toAdd).getValue();
-      }
+      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       tmp.push(toAdd);
+      value = tmp;
+    } else if (type.equals("Queue")) {
+      ArrayDeque tmp = (ArrayDeque) value;
+
+      Object toAdd = method.execute(parser);
+
+      //Cast the variable to a node if required
+      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
+
+      tmp.offer(toAdd);
       value = tmp;
     }
   }
