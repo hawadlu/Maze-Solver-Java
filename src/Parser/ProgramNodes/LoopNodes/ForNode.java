@@ -63,7 +63,9 @@ public class ForNode implements Exec {
   @Override
   public String toString() {
     StringBuilder internals = new StringBuilder();
-    for (Exec statement : statements) internals.append("\t").append(statement).append("\n");
+    for (Exec statement : statements) {
+      internals.append("\t").append(statement).append("\n");
+    }
 
     return "For (" + varName + " : " + collectionName + ") {\n" + internals + "\n}\n";
   }

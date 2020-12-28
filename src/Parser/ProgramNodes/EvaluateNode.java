@@ -34,7 +34,7 @@ public class EvaluateNode implements Exec, Number {
 
   @Override
   public String toString() {
-    //todo implement me
-    return super.toString();
+    if (variableNode != null) return "Variable: " + variableNode + " Evaluate: " + toEvaluate;
+    else return "Evaluate: " + toEvaluate;
   }
 }

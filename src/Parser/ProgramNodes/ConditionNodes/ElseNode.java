@@ -23,7 +23,9 @@ public class ElseNode implements Exec {
 
   @Override
   public String toString() {
-    //Todo implement this
-    return super.toString();
+    StringBuilder internals = new StringBuilder();
+    for (Exec statement: statements) internals.append("\t").append(statement).append("\n");
+
+    return "else {\n" + internals + "}\n";
   }
 }

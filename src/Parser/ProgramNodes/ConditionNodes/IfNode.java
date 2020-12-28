@@ -35,9 +35,14 @@ public class IfNode implements Exec {
 
   @Override
   public String toString() {
+    StringBuilder toReturn = new StringBuilder();
     StringBuilder internals = new StringBuilder();
     for (Exec statement: statements) internals.append("\t").append(statement).append("\n");
 
-    return "if (" + ifCondition + "){\n" + internals + "}\n";
+    toReturn.append("if (" + ifCondition + "){\n" + internals + "}\n");
+
+    if (elseNode != null) toReturn.append(elseNode);
+
+    return toReturn.toString();
   }
 }

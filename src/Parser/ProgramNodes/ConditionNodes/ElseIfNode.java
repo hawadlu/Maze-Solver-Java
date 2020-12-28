@@ -25,7 +25,16 @@ public class ElseIfNode implements Exec {
 
   @Override
   public String toString() {
-    //todo implement me
-    return null;
+
+    StringBuilder toReturn = new StringBuilder();
+    toReturn.append(ifNodes.get(0));
+
+    for (int i = 1; i < ifNodes.size(); i++) {
+      toReturn.append(" else ").append(ifNodes.get(i));
+    }
+
+    if (elseNode != null) toReturn.append(elseNode);
+
+    return toReturn.toString();
   }
 }

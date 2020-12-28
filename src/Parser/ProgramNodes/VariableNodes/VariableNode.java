@@ -79,7 +79,7 @@ public class VariableNode implements Exec {
 
   @Override
   public String toString() {
-    return type + " " + name + " " + toEvaluate;
+    return print();
   }
 
   @Override
@@ -186,6 +186,7 @@ public class VariableNode implements Exec {
   }
 
   public String print() {
-    return "Name: " + name + " Type: " + type + " value: " + value;
+    if (value == null) return "Name: " + name + " Type: " + type;
+    else return "Name: " + name + " Type: " + type + " value: " + value;
   }
 }
