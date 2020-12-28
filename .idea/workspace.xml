@@ -2,26 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/MazeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/Condition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ConditionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/ForNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/DivideNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MinusNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MultiplyNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/Number.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PlusNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PowerNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/DFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/DFS.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/Condition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/DivideNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/Exec.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/Exec.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/IfNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PlusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PlusNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MazeActionNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MethodNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MinusNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MultiplyNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NotConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/NotConditionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/NumberNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PlusNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PowerNode.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAssignmentNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAssignmentNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/RootNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/StatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/StatementNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableActionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableAssignmentNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableAssignmentNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/WhileNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/WhileNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +91,7 @@
       <recent name="Parser.ProgramNodes" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.Tests.testDFSParser">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -82,6 +99,16 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.DFSTinyOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Maze-Solver-Java" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="DFSTinyOnly" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,6 +126,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Tests.testDFSParser" />
+        <item itemvalue="JUnit.Tests.DFSTinyOnly" />
       </list>
     </recent_temporary>
   </component>
@@ -112,11 +140,22 @@
       <updated>1608677723122</updated>
       <workItem from="1608677727737" duration="7417000" />
       <workItem from="1608704742108" duration="9155000" />
-      <workItem from="1608838090340" duration="8259000" />
+      <workItem from="1608838090340" duration="11370000" />
+      <workItem from="1609018790532" duration="22579000" />
+      <workItem from="1609107445430" duration="10075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Parser.ProgramNodes.VariableActionNode" memberName="action" />
+        <PinnedItemInfo parentTag="Parser.ProgramNodes.VariableNodes.VariableNode" memberName="value" />
+        <PinnedItemInfo parentTag="Image.ImageProcessor" memberName="nodes" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

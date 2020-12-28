@@ -1,4 +1,6 @@
-package Parser.ProgramNodes;
+package Parser.ProgramNodes.ConditionNodes;
+
+import Parser.Parser;
 
 public class NotConditionNode implements Condition {
   Condition condition;
@@ -9,8 +11,8 @@ public class NotConditionNode implements Condition {
 
   //todo make this return true if the condition is not true.
   @Override
-  public boolean evaluate() {
-    return false;
+  public boolean evaluate(Parser parser) {
+    return !condition.evaluate(parser);
   }
 
   @Override

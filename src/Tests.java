@@ -1,4 +1,6 @@
 import Parser.Parser;
+import Parser.MazeHandler;
+import Utility.PathMaker;
 import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
 import Utility.Exceptions.GenericError;
@@ -2723,10 +2725,24 @@ public class Tests {
   //TEST THE PARSER
   @Test
   public void testDFSParser() {
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Tiny.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
     File dfs = new File("Programs/DFS.txt");
-    Parser p = new Parser(dfs);
+    Parser p = new Parser(dfs, maze);
     p.startParser();
     p.print();
-//    p.execute();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/DFS Custom Algorithm.png");
+    System.out.println("Saved image");
   }
 }

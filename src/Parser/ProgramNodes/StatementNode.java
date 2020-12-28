@@ -1,9 +1,12 @@
 package Parser.ProgramNodes;
 
+import Parser.Parser;
+
 public class StatementNode implements Exec {
   @Override
-  public void Execute() {
+  public Object execute(Parser parser) {
 
+    return null;
   }
 
   @Override

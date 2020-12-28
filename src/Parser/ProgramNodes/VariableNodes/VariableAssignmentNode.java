@@ -1,4 +1,7 @@
-package Parser.ProgramNodes;
+package Parser.ProgramNodes.VariableNodes;
+
+import Parser.Parser;
+import Parser.ProgramNodes.Exec;
 
 /**
  * Class used to assign values to variables during execution
@@ -13,8 +16,10 @@ public class VariableAssignmentNode implements Exec {
   }
 
   @Override
-  public void Execute() {
-
+  public Object execute(Parser parser) {
+    if (!parser.variables.containsKey(varName)) parser.executionError("Could not find variable " + varName);
+    parser.variables.get(varName).update(newVal, parser);
+    return null;
   }
 
   @Override

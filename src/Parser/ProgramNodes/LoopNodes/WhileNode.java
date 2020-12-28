@@ -1,4 +1,8 @@
-package Parser.ProgramNodes;
+package Parser.ProgramNodes.LoopNodes;
+
+import Parser.Parser;
+import Parser.ProgramNodes.ConditionNodes.Condition;
+import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
 
@@ -13,8 +17,15 @@ public class WhileNode implements Exec {
 
 
   @Override
-  public void Execute() {
+  public Object execute(Parser parser) {
 
+    while (loopCondition.evaluate(parser)) {
+      for (Exec statement: statements) {
+        statement.execute(parser);
+      }
+    }
+
+    return null;
   }
 
   @Override

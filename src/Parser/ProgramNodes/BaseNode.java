@@ -1,5 +1,7 @@
 package Parser.ProgramNodes;
 
+import Parser.Parser;
+
 import java.util.ArrayList;
 
 /**
@@ -12,8 +14,11 @@ public class BaseNode implements Exec{
   }
 
   @Override
-  public void Execute() {
-
+  public Object execute(Parser parser) {
+    for (Exec statement: statements){
+      statement.execute(parser);
+    }
+    return null;
   }
 
   @Override

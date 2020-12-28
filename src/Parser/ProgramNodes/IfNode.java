@@ -1,5 +1,8 @@
 package Parser.ProgramNodes;
 
+import Parser.Parser;
+import Parser.ProgramNodes.ConditionNodes.Condition;
+
 import java.util.ArrayList;
 
 public class IfNode implements Exec {
@@ -12,8 +15,13 @@ public class IfNode implements Exec {
   }
 
   @Override
-  public void Execute() {
-
+  public Object execute(Parser parser) {
+    if (ifCondition.evaluate(parser)) {
+      for (Exec statement: statements) {
+        statement.execute(parser);
+      }
+    }
+    return null;
   }
 
   @Override

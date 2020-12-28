@@ -8,7 +8,7 @@ public class Regex {
   //Punctuation
   public static Pattern openParen = Pattern.compile("\\(");
   public static Pattern closeParen = Pattern.compile("\\)");
-  public static Pattern doubleQuote = Pattern.compile("\"");
+  public static Pattern doubleQuote = Pattern.compile("\\s*\"");
   public static Pattern equals = Pattern.compile("=");
   public static Pattern colon = Pattern.compile(":");
   public static Pattern semiColon = Pattern.compile(";");
@@ -17,7 +17,7 @@ public class Regex {
   public static Pattern openCurly = Pattern.compile("\\{");
   public static Pattern closeCurly = Pattern.compile("\\}");
   public static Pattern plus = Pattern.compile("\\s*\\+");
-  public static Pattern number = Pattern.compile("\\s*[0-9]");
+  public static Pattern number = Pattern.compile("\\s*[0-9]+");
   public static Pattern comma = Pattern.compile(",");
 
   public static Pattern name = Pattern.compile("\\s*\\w+"); // \w Matches any letter, digit or underscore. Equivalent to [a-zA-Z0-9_].
