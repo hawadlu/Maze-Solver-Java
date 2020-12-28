@@ -1,9 +1,7 @@
 package Parser;
 
 import Parser.ProgramNodes.*;
-import Parser.ProgramNodes.ConditionNodes.Condition;
-import Parser.ProgramNodes.ConditionNodes.ConditionNode;
-import Parser.ProgramNodes.ConditionNodes.NotConditionNode;
+import Parser.ProgramNodes.ConditionNodes.*;
 import Parser.ProgramNodes.LoopNodes.ForNode;
 import Parser.ProgramNodes.LoopNodes.WhileNode;
 import Parser.ProgramNodes.MathNodes.*;
@@ -26,8 +24,9 @@ import java.util.regex.Pattern;
 /**
  * This class is responsible for parsing the files.
  */
+//todo add less than, greater than and equal to capability.
 public class Parser {
-  boolean debug = false;
+  boolean debug = true;
   Scanner fileScanner = null;
   Exec baseNode;
   public HashMap<String, VariableNode> variables = new HashMap<>();
@@ -50,6 +49,7 @@ public class Parser {
 
     fileScanner.useDelimiter(Regex.delimiter);
 
+    if (debug) System.out.println("Delimiter: " + Regex.delimiter);
     if (debug) System.out.println("Statement: " + Regex.statement);
     if (debug) System.out.println("Method call: " + Regex.methodCall);
     if (debug) System.out.println("Maze: " + Regex.mazeCall);
@@ -125,6 +125,19 @@ public class Parser {
     } else if (next.matches(Regex.ifStmt.pattern())) {
       semiRequired = false;
       toReturn = parseIf(fileScanner);
+
+      //Check for any else if statements
+      if (fileScanner.hasNext(Regex.elseIf)) {
+        //Parse all of the else if nodes
+        ArrayList<IfNode> ifs = new ArrayList<>();
+        ifs.add((IfNode) toReturn);
+
+        while (fileScanner.hasNext(Regex.elseIf)) {
+          ifs.add((IfNode) parseIf(fileScanner));
+        }
+
+        toReturn = new ElseIfNode(ifs);
+      }
     } else if (next.matches(Regex.mazeCall.pattern())) {
       toReturn = parseMazeCall(fileScanner);
 
@@ -140,6 +153,24 @@ public class Parser {
     else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
     return toReturn;
+  }
+
+  /**
+   * Parse a comparator object that will be used to to sort objects in a collection.
+   * @param fileScanner the file scanner.
+   * @return a comparator object.
+   */
+  private Exec parseComparator(Scanner fileScanner) {
+    if (debug) System.out.println("Parsing comparator");
+
+    //Discard the '->'
+    fileScanner.next();
+
+    //Check for a method call
+    if (!fileScanner.hasNext(Regex.mazeCall)) fail("Comparator is missing call to maze method.");
+    else return new ComparatorNode(parseMazeCall(fileScanner));
+
+    return null;
   }
 
   /**
@@ -220,6 +251,9 @@ public class Parser {
   private Exec parseIf(Scanner fileScanner) {
     if (debug) System.out.println("Parsing if");
 
+    //Discard the 'else if' if required
+    if (fileScanner.hasNext(Regex.elseIf)) fileScanner.next();
+
     //Check for an opening brace
     scannerHasNext(fileScanner, Regex.openParen, "If statement missing opening '('");
 
@@ -289,13 +323,66 @@ public class Parser {
 
     //Parse the method that will evaluate the condition
     if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall(fileScanner));
+    else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck(fileScanner));
     else {
-      if (!fileScanner.hasNext(Regex.name)) fail("Unrecognised value in condition");
-      else return new ConditionNode(parseVariableReference(fileScanner, fileScanner.next().replaceAll("\\s", ""), false));
+      if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner, fileScanner.next().replaceAll("\\s", ""), false));
+      else fail("Unrecognised value in condition");
     }
 
     fail("Invalid condition");
     return null;
+  }
+
+  /**
+   * Parse less than, greater than and equal to.
+   * @param fileScanner the file scanner.
+   * @return an equality node.
+   */
+  private Exec parseEqualityCheck(Scanner fileScanner) {
+    if (debug) System.out.println("Parsing equality check");
+
+    //check for less than
+    if (fileScanner.hasNext(Regex.lessThan)) {
+      return new LessThanNode(parseEqualityConditions());
+    }
+
+    //todo implement greater than and equal to
+
+    return null;
+  }
+
+  /**
+   * Parse the conditions that will be used in checking equality
+   * @return an array containing the two conditions to be checked.
+   */
+  private Number[] parseEqualityConditions() {
+    if (debug) System.out.println("Parsing equality conditions");
+
+    Number[] values = new Number[2];
+
+    //Discard the 'lt'
+    fileScanner.next();
+
+    //Check for the opening '('
+    scannerHasNext(fileScanner, Regex.openParen, "Equality condition missing opening '('");
+
+    //Parse the first part of the condition
+    //todo make a method for parseEvaluateMethod call so that the user can do things like toProcess.getSize()
+    if (fileScanner.hasNext(Regex.math)) values[0] = parseMath(fileScanner);
+    else if (fileScanner.hasNext(Regex.mazeCall)) values[0] = parseEvaluateMazeCall(fileScanner);
+
+    //Check for a comma
+    scannerHasNext(fileScanner, Regex.comma, "Equality condition missing ','");
+
+    //Parse the second part of the condition
+    //todo make a method for parseEvaluateMethod call so that the user can do things like toProcess.getSize()
+    if (fileScanner.hasNext(Regex.math)) values[1] = parseMath(fileScanner);
+    else if (fileScanner.hasNext(Regex.mazeCall)) values[1] = parseEvaluateMazeCall(fileScanner);
+
+    //Check for the closing ')'
+    scannerHasNext(fileScanner, Regex.closeParen, "Equality condition missing closing ')'");
+
+    return values;
   }
 
   /**
@@ -384,7 +471,7 @@ public class Parser {
     //Check if the variable is being assigned at the same time
     if (fileScanner.hasNext(Regex.semiColon)) {
       return new VariableNode(varInfo[0], varInfo[1]);
-    } else if (fileScanner.hasNext(Regex.equals)) {
+    } else if (fileScanner.hasNext(Regex.equals) || fileScanner.hasNext(Regex.comparatorAssignment)) {
       return new VariableNode(varInfo, parseValue(fileScanner));
     }
 
@@ -401,9 +488,14 @@ public class Parser {
     if (debug) System.out.println("parsing value");
 
     //Discard the =
-    if (fileScanner.hasNext(Regex.equals)) fileScanner.next();
-
-    if (fileScanner.hasNext(Regex.mazeCall)) return parseMazeCall(fileScanner);
+    if (fileScanner.hasNext(Regex.equals)) {
+      fileScanner.next();
+      if (fileScanner.hasNext(Regex.mazeCall)) {
+        return parseMazeCall(fileScanner);
+      }
+    } else if (fileScanner.hasNext(Regex.comparatorAssignment)) {
+      return parseComparator(fileScanner);
+    }
 
     return null;
   }
@@ -709,6 +801,7 @@ public class Parser {
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) plus.add(parseMath(fileScanner));
+      else if (fileScanner.hasNext(Regex.mazeCall)) plus.add(parseEvaluateMazeCall(fileScanner));
       else fail("Invalid math operation in plus");
     }
 
@@ -716,6 +809,17 @@ public class Parser {
     fileScanner.next();
 
     return plus;
+  }
+
+  /**
+   * Parse the evaluation of a maze call so that it will return a number at runtime.
+   * @param fileScanner the file scanner.
+   * @return a node which will evaluate the contents of a variable at runtime
+   */
+  private Number parseEvaluateMazeCall(Scanner fileScanner) {
+    if (debug) System.out.println("Parsing runtime variable evaluation");
+
+    return new EvaluateNode(parseMazeCall(fileScanner));
   }
 
   private Number parseNumber(Scanner fileScanner) {

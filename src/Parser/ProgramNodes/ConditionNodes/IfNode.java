@@ -1,11 +1,14 @@
-package Parser.ProgramNodes;
+package Parser.ProgramNodes.ConditionNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.ConditionNodes.Condition;
+import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
 
+//todo deal with else statements
 public class IfNode implements Exec {
+
   ArrayList<Exec> statements = new ArrayList<>();
   Condition ifCondition;
 

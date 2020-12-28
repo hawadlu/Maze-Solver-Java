@@ -28,6 +28,10 @@ public class Regex {
   public static Pattern useVar = Pattern.compile("^((?!Maze)\\w+\\.+)");
   public static Pattern reassignVar = Pattern.compile("\\w+\\s=\\s");
   public static Pattern comment = Pattern.compile("\\*\\*\\*");
+  public static Pattern comparatorAssignment = Pattern.compile("->");
+  public static Pattern lessThan = Pattern.compile("\\s*lt");
+  public static Pattern greaterThan = Pattern.compile("\\s*qt");
+  public static Pattern equalTo = Pattern.compile("\\s*eq");
 
   //Math action
   public static Pattern mathPlus = Pattern.compile("\\s*plus");
@@ -45,6 +49,8 @@ public class Regex {
   public static Pattern list = Pattern.compile("List");
   public static Pattern stack = Pattern.compile("Stack");
   public static Pattern queue = Pattern.compile("Queue");
+  public static Pattern priorityQueue = Pattern.compile("PriorityQueue");
+  public static Pattern comparator = Pattern.compile("Comparator");
 
   //Loops
   public static Pattern whileLoop = Pattern.compile("\\s*while\\s*");
@@ -52,9 +58,10 @@ public class Regex {
 
   //If statements
   public static Pattern ifStmt = Pattern.compile("\\s*if\\s*");
+  public static Pattern elseIf = Pattern.compile("\\s*else if\\s*");
 
   //Assignment statements
-  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "]+\\s\\w+\\s*)");
+  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "|" + priorityQueue + "|" + comparator + "]+\\s\\w+\\s*)");
 
   //Statements in the program
   public static Pattern print = Pattern.compile("\\s*print");
@@ -62,6 +69,6 @@ public class Regex {
   //The collective program statement
   public static Pattern statement = Pattern.compile("[\\n\\s]*(" + print + "|" + declaration + "|" + name + "|" + whileLoop + "|" + forLoop + "|" + comment + ")");
 
-  public static Pattern delimiter = Pattern.compile("\\s*(?=[:{}(),;!=\\.\"\\+]|" + comment + ")|(?<=[:{}(),;!=\\.\"\\+]|" + comment + ")");
+  public static Pattern delimiter = Pattern.compile("\\s*(?=[:{}(),;!=\\.\"\\+]|(" + comment + ")|(" + comparatorAssignment + "))|(?<=[:{}(),;!=\\.\"\\+]|(" + comment + ")|(" + comparatorAssignment + "))");
 
 }
