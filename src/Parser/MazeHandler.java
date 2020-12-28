@@ -108,7 +108,7 @@ public class MazeHandler {
   public void reportDone(Node lastNode) {
     System.out.println("Reported done on node: " + lastNode);
     this.lastNode = lastNode;
-    player.markDone();
+    if (player != null) player.markDone();
   }
 
   /**

@@ -5,6 +5,7 @@ Stack toProcess;
 toProcess.add(Maze.getStart());
 
 while (!toProcess.isEmpty()) {
+   ***This is a test comment***
 
   print("");
   parent = toProcess.getNext();
@@ -21,6 +22,7 @@ while (!toProcess.isEmpty()) {
 
   List neighbours = Maze.getNeighbours(parent);
 
+  ***Loop through the all of the neighbour nodes***
   for (node: neighbours) {
     print(node + " At the top");
     if (!Maze.isVisited(node)) {

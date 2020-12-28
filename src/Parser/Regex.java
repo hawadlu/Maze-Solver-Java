@@ -3,8 +3,6 @@ package Parser;
 import java.util.regex.Pattern;
 
 public class Regex {
-  public static Pattern delimiter = Pattern.compile("\\s*(?=[:{}(),;!=\\.\"\\+])|(?<=[:{}(),;!=\\.\"\\+])");
-
   //Punctuation
   public static Pattern openParen = Pattern.compile("\\(");
   public static Pattern closeParen = Pattern.compile("\\)");
@@ -29,6 +27,7 @@ public class Regex {
   public static Pattern declareVar = Pattern.compile("\\w+\\s\\w+[\\s=\\s]*");
   public static Pattern useVar = Pattern.compile("^((?!Maze)\\w+\\.+)");
   public static Pattern reassignVar = Pattern.compile("\\w+\\s=\\s");
+  public static Pattern comment = Pattern.compile("\\*\\*\\*");
 
   //Math action
   public static Pattern mathPlus = Pattern.compile("\\s*plus");
@@ -60,5 +59,8 @@ public class Regex {
   public static Pattern print = Pattern.compile("\\s*print");
 
   //The collective program statement
-  public static Pattern statement = Pattern.compile("[\\n\\s]*(" + print + "|" + declaration + "|" + name + "|" + whileLoop + "|" + forLoop + ")");
+  public static Pattern statement = Pattern.compile("[\\n\\s]*(" + print + "|" + declaration + "|" + name + "|" + whileLoop + "|" + forLoop + "|" + comment + ")");
+
+  public static Pattern delimiter = Pattern.compile("\\s*(?=[:{}(),;!=\\.\"\\+]|" + comment + ")|(?<=[:{}(),;!=\\.\"\\+]|" + comment + ")");
+
 }

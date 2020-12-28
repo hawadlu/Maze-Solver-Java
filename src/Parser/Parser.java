@@ -95,6 +95,7 @@ public class Parser {
 
   /**
    * Parse the program statements.
+   * Will return null when parsing comments
    * @param fileScanner the file scanner.
    * @return the statement node
    */
@@ -108,7 +109,10 @@ public class Parser {
 
     if (debug) System.out.println("Next: " + next);
 
-    if (next.matches(Regex.print.pattern())) {
+    if (next.matches(Regex.comment.pattern())) {
+      parseComment(fileScanner);
+      semiRequired = false;
+    } else if (next.matches(Regex.print.pattern())) {
       toReturn = parsePrint(fileScanner, true);
     } else if (next.matches(Regex.declaration.pattern())) {
       toReturn = parseDeclaration(fileScanner, next);
@@ -136,6 +140,16 @@ public class Parser {
     else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
     return toReturn;
+  }
+
+  /**
+   * Parse any comments in the file.
+   * @param fileScanner the file scanner
+   */
+  private void parseComment(Scanner fileScanner) {
+    if (debug) System.out.println("Parsing comment");
+    while (!fileScanner.hasNext(Regex.comment)) fileScanner.next(); //Discard all tokens inside the comment
+    fileScanner.next(); //Discard the ***
   }
 
   /**
@@ -172,7 +186,11 @@ public class Parser {
 
     //Parse all the statements
     ArrayList<Exec> statements = new ArrayList<>();
-    while (fileScanner.hasNext(Regex.statement)) statements.add(parseStatement(fileScanner));
+    while (fileScanner.hasNext(Regex.statement)) {
+      //Only add the statement if it is not null.
+      Exec statement = parseStatement(fileScanner);
+      if (statement != null) statements.add(statement);
+    }
 
     //Check for closing '}'
     scannerHasNext(fileScanner, Regex.closeCurly, "For loop missing closing '}'");
@@ -219,7 +237,9 @@ public class Parser {
 
     //Repeat until the next no more statements are found
     while (fileScanner.hasNext(Regex.statement)) {
-      statements.add(parseStatement(fileScanner));
+      //Only add the statement if it is not null.
+      Exec statement = parseStatement(fileScanner);
+      if (statement != null) statements.add(statement);
     }
 
     //Check for the closing }
@@ -253,7 +273,9 @@ public class Parser {
 
     //Repeat until the next no more statements are found
     while (fileScanner.hasNext(Regex.statement)) {
-      statements.add(parseStatement(fileScanner));
+      //Only add the statement if it is not null.
+      Exec statement = parseStatement(fileScanner);
+      if (statement != null) statements.add(statement);
     }
 
     //Check for the closing }
