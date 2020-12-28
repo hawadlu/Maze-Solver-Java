@@ -59,6 +59,7 @@ public class Regex {
   //If statements
   public static Pattern ifStmt = Pattern.compile("\\s*if\\s*");
   public static Pattern elseIf = Pattern.compile("\\s*else if\\s*");
+  public static Pattern ifElse = Pattern.compile("\\s*else\\s*");
 
   //Assignment statements
   public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "|" + priorityQueue + "|" + comparator + "]+\\s\\w+\\s*)");

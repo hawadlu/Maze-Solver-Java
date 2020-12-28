@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  */
 //todo add less than, greater than and equal to capability.
 public class Parser {
-  boolean debug = true;
+  boolean debug = false;
   Scanner fileScanner = null;
   Exec baseNode;
   public HashMap<String, VariableNode> variables = new HashMap<>();
@@ -85,6 +85,8 @@ public class Parser {
     while (fileScanner.hasNext()) {
       if (fileScanner.hasNext(Regex.statement)) {
         statements.add(parseStatement(fileScanner));
+      } else if (fileScanner.hasNext("\n")){
+        fileScanner.next(); //Discard the new line
       } else {
         fail(fileScanner.next() + " is not a valid statement");
       }
@@ -127,17 +129,11 @@ public class Parser {
       toReturn = parseIf(fileScanner);
 
       //Check for any else if statements
-      if (fileScanner.hasNext(Regex.elseIf)) {
-        //Parse all of the else if nodes
-        ArrayList<IfNode> ifs = new ArrayList<>();
-        ifs.add((IfNode) toReturn);
+      if (fileScanner.hasNext(Regex.elseIf)) toReturn = parseElseIf(fileScanner, (IfNode) toReturn);
 
-        while (fileScanner.hasNext(Regex.elseIf)) {
-          ifs.add((IfNode) parseIf(fileScanner));
-        }
+      //Check for any else statements
+      if (fileScanner.hasNext(Regex.ifElse)) toReturn = parseElse(fileScanner, toReturn);
 
-        toReturn = new ElseIfNode(ifs);
-      }
     } else if (next.matches(Regex.mazeCall.pattern())) {
       toReturn = parseMazeCall(fileScanner);
 
@@ -153,6 +149,55 @@ public class Parser {
     else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
     return toReturn;
+  }
+
+  /**
+   * Parse an else statement.
+   * @param fileScanner the file scanner.
+   * @param toReturn the first block(s) of the if else statement.
+   * @return an else node
+   */
+  private Exec parseElse(Scanner fileScanner, Exec toReturn) {
+    if (debug) System.out.println("Parsing else");
+
+    //Discard the 'else'
+    fileScanner.next();
+
+    scannerHasNext(fileScanner, Regex.openCurly, "Else missing opening '{'");
+
+    ArrayList<Exec> statements = new ArrayList<>();
+
+    //Parse all of the statements
+    while (fileScanner.hasNext(Regex.statement)) {
+      statements.add(parseStatement(fileScanner));
+    }
+
+    scannerHasNext(fileScanner, Regex.closeCurly, "Else missing closing '}'");
+
+    ElseNode elseNode = new ElseNode(statements);
+
+    //Add the else clause to the if statement
+    if (toReturn instanceof IfNode) ((IfNode) toReturn).addElse(elseNode);
+    else if (toReturn instanceof ElseIfNode) ((ElseIfNode) toReturn).addElse(elseNode);
+
+    return toReturn;
+  }
+
+  /**
+   * Parse an else if.
+   * @param fileScanner the file scanner.
+   * @return an elif object
+   */
+  private Exec parseElseIf(Scanner fileScanner, IfNode firstBlock) {
+      //Parse all of the else if nodes
+      ArrayList<IfNode> ifs = new ArrayList<>();
+      ifs.add(firstBlock);
+
+      while (fileScanner.hasNext(Regex.elseIf)) {
+        ifs.add((IfNode) parseIf(fileScanner));
+      }
+
+      return new ElseIfNode(ifs);
   }
 
   /**
@@ -558,14 +603,11 @@ public class Parser {
     if (debug) System.out.println("parsing parameters");
 
     while (!fileScanner.hasNext(Regex.closeParen)) {
-      String parameterName = fileScanner.next();
-
-      Object parameter;
       //Parse a maze call if Necessary
-      if (parameterName.equals("Maze")) parameter = parseMazeCall(fileScanner);
-      else parameter = parameterName;
-
-      if (!parameterName.contains(",")) params.add(parameter);
+      if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //Discard the comma
+      if (fileScanner.hasNext(Regex.mazeCall)) params.add(parseMazeCall(fileScanner));
+      else if (fileScanner.hasNext(Regex.math)) params.add(parseMath(fileScanner));
+      else params.add(fileScanner.next());
     }
 
 
@@ -802,6 +844,7 @@ public class Parser {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) plus.add(parseMath(fileScanner));
       else if (fileScanner.hasNext(Regex.mazeCall)) plus.add(parseEvaluateMazeCall(fileScanner));
+      else if (fileScanner.hasNext(Regex.name)) plus.add(parseEvaluateNameCall(fileScanner));
       else fail("Invalid math operation in plus");
     }
 
@@ -809,6 +852,22 @@ public class Parser {
     fileScanner.next();
 
     return plus;
+  }
+
+  /**
+   * Parse the runtime evaluation of a name.
+   * @param fileScanner the file scanner.
+   * @return an object that can be evaluated at runtime
+   */
+  private Number parseEvaluateNameCall(Scanner fileScanner) {
+    if (debug) System.out.println("Parsing runtime variable evaluation");
+
+    String name = fileScanner.next();
+    GetVariableNode getVar = new GetVariableNode(name);
+
+    Exec eval = parseMethod(fileScanner);
+
+    return new EvaluateNode(getVar, eval);
   }
 
   /**

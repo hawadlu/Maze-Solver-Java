@@ -7,10 +7,14 @@ import java.util.ArrayList;
 
 public class ElseIfNode implements Exec {
   ArrayList<IfNode> ifNodes = new ArrayList<>();
-  ArrayList<Exec> statements = new ArrayList<>(); //These will be the 'else' part of the if else statement
+  ElseNode elseNode;
 
   public ElseIfNode(ArrayList<IfNode> ifs) {
     this.ifNodes = ifs;
+  }
+
+  public void addElse(ElseNode elseNode) {
+    this.elseNode = elseNode;
   }
 
 

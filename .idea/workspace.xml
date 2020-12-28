@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ComparatorNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/LessThanNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/BFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/BFS.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,19 +75,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tests.testBFSParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
@@ -134,8 +118,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Tests.testDijkstraParserTiny" />
-        <item itemvalue="JUnit.Tests.testBFSParserTiny" />
         <item itemvalue="JUnit.Tests.testBFSParserSmall" />
+        <item itemvalue="JUnit.Tests.testBFSParserTiny" />
         <item itemvalue="JUnit.Tests.testDFSParserSmall" />
         <item itemvalue="Application.Application" />
       </list>
@@ -155,6 +139,7 @@
       <workItem from="1609018790532" duration="22579000" />
       <workItem from="1609107445430" duration="14397000" />
       <workItem from="1609137222035" duration="7605000" />
+      <workItem from="1609190183764" duration="3910000" />
     </task>
     <servers />
   </component>

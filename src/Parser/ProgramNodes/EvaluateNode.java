@@ -9,8 +9,14 @@ import Parser.ProgramNodes.VariableNodes.GetVariableNode;
  */
 public class EvaluateNode implements Exec, Number {
   Exec toEvaluate;
+  GetVariableNode variableNode;
 
   public EvaluateNode(Exec toEvaluate) {
+    this.toEvaluate = toEvaluate;
+  }
+
+  public EvaluateNode(GetVariableNode varNode, Exec toEvaluate) {
+    this.variableNode = varNode;
     this.toEvaluate = toEvaluate;
   }
 
