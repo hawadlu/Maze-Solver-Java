@@ -4,6 +4,8 @@ import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import GUI.CustomPanels.Scroll;
 import GUI.CustomPanels.SpinnerPanel;
+import Parser.Parser;
+import Parser.MazeHandler;
 import Utility.Exceptions.GenericError;
 
 
@@ -340,7 +342,7 @@ public class GUI {
       solveButton.addActionListener(e12 -> {
 
         //This algorithm only works on a single thread and while searching for neighbours on load
-        makeAlgoWorkingScreen(algoMainArea, "Articulation", "Loading", false, application);
+        makeAlgoWorkingScreen(algoMainArea, "Articulation", "Loading", false, application, null);
       });
 
       cancelButtons.clear();
@@ -421,7 +423,7 @@ public class GUI {
         String algorithm = (String) algoOptions.getSelectedItem();
 
         //All of these algorithms search for neighbours on load and do not multi thread
-        makeAlgoWorkingScreen(algoMainArea, algorithm, "Loading", false, application);
+        makeAlgoWorkingScreen(algoMainArea, algorithm, "Loading", false, application, null);
       });
 
       cancelButtons.clear();
@@ -448,7 +450,7 @@ public class GUI {
 
 
       //The popup options
-      JComboBox algoOptions = new JComboBox(new String[]{"AStar", "Breadth First", "Depth First", "Dijkstra"});
+      JComboBox algoOptions = new JComboBox(new String[]{"Custom", "AStar", "Breadth First", "Depth First", "Dijkstra"});
       JComboBox neighbourOptions = new JComboBox(new String[]{"Loading", "Solving"});
       JCheckBox threadBox = new JCheckBox();
 
@@ -467,6 +469,10 @@ public class GUI {
       //Add functionality to the help link
       help.addActionListener(e1 -> {
         String helpText = "ALGORITHMS\n\n" +
+                "Custom: You may use you own algorithm.\n" +
+                "It will run on a single thread and the\n" +
+                "neighbours will be initialised prior to\n" +
+                "execution.\n\n" +
                 "AStar: This is the most efficient\n" +
                 "search and is recommended in most circumstances.\n\n" +
                 "Breath First: This search is guaranteed to find\n" +
@@ -503,7 +509,7 @@ public class GUI {
         helpPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         cancelButtons.add(exit);
-        makePopup(helpPanel, cancelButtons, new Dimension(400, 550));
+        makePopup(helpPanel, cancelButtons, new Dimension(400, 750));
       });
 
       JPanel buttonPanel = new JPanel();
@@ -517,7 +523,15 @@ public class GUI {
         String params = (String) neighbourOptions.getSelectedItem();
         Boolean multiThread = threadBox.isSelected();
 
-        makeAlgoWorkingScreen(algoMainArea, algorithm, params, multiThread, application);
+        //Load the users own algorithm if requested
+        Parser parser = null;
+        if (algorithm.equals("Custom")) {
+          //Setup the parser
+          MazeHandler maze = new MazeHandler(application);
+          parser = new Parser(UIFileChooser(), maze);
+        }
+
+        makeAlgoWorkingScreen(algoMainArea, algorithm, params, multiThread, application, parser);
       });
 
       cancelButtons.clear();
@@ -541,14 +555,27 @@ public class GUI {
   /**
    * Make the screen that shows a spinner while the algorithm is solving.
    */
-  public void makeAlgoWorkingScreen(JPanel mainArea, String algorithm, String params, Boolean multiThread, Application application) {
+  public void makeAlgoWorkingScreen(JPanel mainArea, String algorithm, String params, Boolean multiThread, Application application, Parser parser) {
     mainArea.removeAll();
 
     //Add the spinner
     mainArea.add(new SpinnerPanel());
     refresh();
 
-    Thread solveThread = application.solve(algorithm, params, multiThread, 0, null);
+    Thread solveThread;
+
+    //If the parser is not null run it, otherwise use an inbuilt algorithm
+    if (parser != null) {
+      solveThread = new Thread() {
+        @Override
+        public void run() {
+          parser.startParser();
+          parser.execute();
+        }
+      };
+    } else {
+      solveThread = application.solve(algorithm, params, multiThread, 0, null);
+    }
 
     //Create another thread that will only wait for algorithm to finish
     Thread algoWait = new Thread() {

@@ -4,6 +4,7 @@ import Application.Application;
 import Game.Player;
 import Utility.Location;
 import Utility.Node;
+import Utility.PathMaker;
 
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
@@ -109,6 +110,7 @@ public class MazeHandler {
     System.out.println("Reported done on node: " + lastNode);
     this.lastNode = lastNode;
     if (player != null) player.markDone();
+    else application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
   }
 
   /**
