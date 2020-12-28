@@ -1,10 +1,12 @@
 package Parser;
 
 import Application.Application;
+import Game.Player;
 import Utility.Location;
 import Utility.Node;
 
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class contains variables and methods used by the parser during execution.
@@ -14,12 +16,23 @@ public class MazeHandler {
   Application application;
   Thread currentThread = new Thread();
   Location start, destination;
+  Player player;
+  int delay;
 
   public MazeHandler(Application application) {
     this.application = application;
     application.scanEntireMaze();
     this.start = application.getMazeExits().get(0);
     this.destination = application.getMazeExits().get(1);
+  }
+
+  /**
+   * Set the player that is using this handler.
+   * Used in the game mode.
+   * @param player the player that is using this handler.
+   */
+  public void setPlayer(Player player) {
+    this.player = player;
   }
 
   /**
@@ -35,6 +48,19 @@ public class MazeHandler {
    */
   public void visit(Node toVisit) {
     toVisit.visit(currentThread);
+
+    //Update the image if necessary
+    if (player != null) {
+      //Update the player
+      player.update(toVisit);
+
+      //Pause execution
+      try {
+        TimeUnit.MILLISECONDS.sleep(delay);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   /**
@@ -82,6 +108,7 @@ public class MazeHandler {
   public void reportDone(Node lastNode) {
     System.out.println("Reported done on node: " + lastNode);
     this.lastNode = lastNode;
+    player.markDone();
   }
 
   /**
@@ -90,5 +117,13 @@ public class MazeHandler {
    */
   public Node getLastNode() {
     return lastNode;
+  }
+
+  /**
+   * Set the delay between execution steps.
+   * @param delay the delay.
+   */
+  public void setDelay(int delay) {
+    this.delay = delay;
   }
 }

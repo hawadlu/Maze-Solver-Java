@@ -2,6 +2,7 @@ package Game;
 
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
+import Parser.Parser;
 import Utility.Node;
 
 import java.awt.*;
@@ -79,9 +80,25 @@ public class Player {
 
     String algorithm = panel.getAlgorithm();
 
-    //todo refactor to allow the players own algorithm
     //Start the solve algorithm
-    Thread solveThread = application.solve(algorithm, "Loading", false, delay, this);
+    Thread solveThread;
+    Parser customAlgo = panel.getCustomAlgo();
+
+    if (customAlgo != null) {
+      Player currentPlayer = this;
+      //Start a new thread using the custom algorithm
+      solveThread = new Thread() {
+        @Override
+        public void run() {
+          customAlgo.handler.setPlayer(currentPlayer);
+          customAlgo.handler.setDelay(delay);
+          customAlgo.execute();
+        }
+      };
+    } else {
+      //Start using one of the prebuilt algorithms
+      solveThread = application.solve(algorithm, "Loading", false, delay, this);
+    }
     solveThread.start();
   }
 

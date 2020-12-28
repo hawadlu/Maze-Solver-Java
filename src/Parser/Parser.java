@@ -46,6 +46,8 @@ public class Parser {
    * Start the parser.
    */
   public void startParser() {
+    System.out.println("Commenced parsing");
+
     fileScanner.useDelimiter(Regex.delimiter);
 
     if (debug) System.out.println("Statement: " + Regex.statement);
@@ -71,6 +73,8 @@ public class Parser {
     baseNode = new BaseNode(parseProgram(fileScanner));
 
     fileScanner.close();
+
+    System.out.println("Parsing complete");
   }
 
   private ArrayList<Exec> parseProgram(Scanner fileScanner) {

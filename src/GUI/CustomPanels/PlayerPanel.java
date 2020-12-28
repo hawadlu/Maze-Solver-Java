@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 import Image.ImageFile;
+import Parser.MazeHandler;
+import Parser.Parser;
 
 /**
  * This class holds all of the interactions used when playing the game
@@ -19,6 +21,7 @@ public class PlayerPanel extends JPanel {
   JButton parser = null;
   ImagePanel imagePanel;
   Dimension imageSize;
+  Parser customAlgo = null;
 
   public PlayerPanel(Application application, String playerLabel, Dimension maxSize) {
     this.application = application;
@@ -53,6 +56,14 @@ public class PlayerPanel extends JPanel {
     //The button to parse an algorithm
     if (parser == null) {
       parser = new JButton("Load Custom Algorithm");
+
+      parser.addActionListener(e -> {
+        MazeHandler maze = new MazeHandler(application);
+
+        customAlgo = new Parser(GUI.GUI.UIFileChooser(), maze);
+
+        customAlgo.startParser();
+      });
     }
     this.add(parser);
   }
@@ -101,5 +112,12 @@ public class PlayerPanel extends JPanel {
     this.displayMessage(message);
     this.add(new ImagePanel(completeImage.makeImage(), imageSize));
     GUI.GUI.refresh();
+  }
+
+  /**
+   * @return the custom algorithm
+   */
+  public Parser getCustomAlgo() {
+    return customAlgo;
   }
 }

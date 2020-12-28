@@ -2724,7 +2724,7 @@ public class Tests {
 
   //TEST THE PARSER
   @Test
-  public void testDFSParser() {
+  public void testDFSParserTiny() {
     Application application = new Application();
     try {
       application.parseImageFile(new File("Images/Tiny.png"));
@@ -2743,6 +2743,29 @@ public class Tests {
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
     application.saveImage("Images/Solved/DFS Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
+
+  @Test
+  public void testDFSParserSmall() {
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Small Imperfect.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
+    File dfs = new File("Programs/DFS.txt");
+    Parser p = new Parser(dfs, maze);
+    p.startParser();
+    p.print();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
 }

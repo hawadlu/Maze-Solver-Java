@@ -648,7 +648,7 @@ public class GUI {
    *
    * @return the file
    */
-  private File UIFileChooser() {
+  public static File UIFileChooser() {
     System.out.println("Load image");
     //Get the file
     final JFileChooser filePicker = new JFileChooser();
