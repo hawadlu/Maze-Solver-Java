@@ -29,6 +29,8 @@ while (!toProcess.isEmpty()) {
     print(node + " At the top");
 
     if (!Maze.isVisited(node)) {
+		Number nodeCost = Maze.getDistance(parent, node);
+    
         Maze.setParent(node, parent);
         Maze.visit(node);
         Maze.setCost(node, nodeCost);

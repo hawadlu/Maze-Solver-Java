@@ -122,28 +122,6 @@ public class Node {
   }
 
   /**
-   * Calculate the cost of moving between two nodes.
-   * Factoring both the distance from this node to the next
-   * and the next node to the final destination.
-   *
-   * @param nextNode         the node to move to.
-   * @param finalDestination the final node.
-   * @return the calculated cost
-   */
-  public double calculateCost(Node nextNode, Node finalDestination) {
-    double toReturn = 0;
-    //Return the distance on the x plane
-    if (nodeLocation.x == nextNode.getLocation().x) {
-      toReturn = calculateXDistance(nextNode) + calculateEuclideanDistance(nextNode, finalDestination);
-    } else {
-      //return the distance on the y plane
-      toReturn = calculateYDistance(nextNode);
-    }
-    if (toReturn < 0) toReturn *= -1;
-    return toReturn;
-  }
-
-  /**
    * Calculate the distance between two nodes that are not necessary on the same x, y plane
    *
    * @param start       the node to start at
@@ -243,7 +221,7 @@ public class Node {
 
   @Override
   public String toString() {
-    return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
+    return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited + " Cost: " + cost;
   }
 
   @Override

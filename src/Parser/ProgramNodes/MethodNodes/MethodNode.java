@@ -32,6 +32,14 @@ public class MethodNode implements Exec {
     return name;
   }
 
+  /**
+   * Get the parameters of this method.
+   * @return the parameters.
+   */
+  public ArrayList<Object> getParameters() {
+    return parameters;
+  }
+
   @Override
   public Object execute(Parser parser) {
     if (name.equals("add")) {

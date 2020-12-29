@@ -513,6 +513,12 @@ public class Parser {
     //Split the variable into type and name
     String[] varInfo = declarationInfo.split(" ");
 
+    //Go through the array and remove any unwanted characters
+    for (int i = 0; i < varInfo.length; i++) {
+      if (varInfo[i].contains("\t")) varInfo[i] = varInfo[i].replaceAll("\t", "");
+      if (varInfo[i].contains("\n")) varInfo[i] = varInfo[i].replaceAll("\n", "");
+    }
+
     //Check if the variable is being assigned at the same time
     if (fileScanner.hasNext(Regex.semiColon)) {
       return new VariableNode(varInfo[0], varInfo[1]);
@@ -603,11 +609,10 @@ public class Parser {
     if (debug) System.out.println("parsing parameters");
 
     while (!fileScanner.hasNext(Regex.closeParen)) {
-      //Parse a maze call if Necessary
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //Discard the comma
       if (fileScanner.hasNext(Regex.mazeCall)) params.add(parseMazeCall(fileScanner));
       else if (fileScanner.hasNext(Regex.math)) params.add(parseMath(fileScanner));
-      else params.add(fileScanner.next());
+      else params.add(fileScanner.next().replaceAll(" ", "")); //Remove any spaces in the parameter
     }
 
 

@@ -2,6 +2,8 @@ package Parser.ProgramNodes.MethodNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
+import Parser.ProgramNodes.MathNodes.Number;
+import Parser.ProgramNodes.MathNodes.NumberNode;
 import Utility.Node;
 
 /**
@@ -12,6 +14,10 @@ public class MazeActionNode implements Exec {
 
   public MazeActionNode(MethodNode methodNode) {
     this.methodNode = methodNode;
+  }
+
+  public MethodNode getMethodNode() {
+    return methodNode;
   }
 
   @Override
@@ -45,6 +51,27 @@ public class MazeActionNode implements Exec {
       String varName = (String) methodNode.parameters.get(0);
       Node toUpdate = (Node) parser.variables.get(varName).getValue();
       parser.handler.reportDone(toUpdate);
+    } else if (methodNode.name.equals("setCost")) {
+      String nodeName = (String) methodNode.parameters.get(0);
+      Node toUpdate = (Node) parser.variables.get(nodeName).getValue();
+
+      String varName = (String) methodNode.parameters.get(1);
+      Number num = (Number) parser.variables.get(varName).getValue();
+      double cost = num.calculate();
+
+      parser.handler.setCost(toUpdate, cost);
+    } else if (methodNode.name.equals("getCost")) {
+      String nodeName = (String) methodNode.parameters.get(0);
+      Node toUpdate = (Node) parser.variables.get(nodeName).getValue();
+      return new NumberNode(parser.handler.getCost(toUpdate));
+    } else if (methodNode.name.equals("getDistance")) {
+      String nodeOneName = (String) methodNode.parameters.get(0);
+      String nodeTwoName = (String) methodNode.parameters.get(1);
+
+      Node nodeOne = (Node) parser.variables.get(nodeOneName).getValue();
+      Node nodeTwo = (Node) parser.variables.get(nodeTwoName).getValue();
+
+      return new NumberNode(parser.handler.getDistance(nodeOne, nodeTwo));
     } else parser.executionError("Unrecognised method " + methodNode.name);
     return null;
   }

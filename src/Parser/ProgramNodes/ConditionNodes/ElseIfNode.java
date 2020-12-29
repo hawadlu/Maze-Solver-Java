@@ -20,6 +20,21 @@ public class ElseIfNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
+    //Go through each of the statements until one is true
+    Boolean run = false;
+
+    for (IfNode statement: ifNodes) {
+      //Check to see if the condition will be evaluated
+      if (statement.ifCondition.evaluate(parser)){
+        statement.execute(parser);
+        run = true;
+        break;
+      }
+    }
+
+    //Run the else node if necessary
+    if (!run) elseNode.execute(parser);
+
     return null;
   }
 

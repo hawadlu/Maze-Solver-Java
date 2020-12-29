@@ -51,6 +51,7 @@ public class Regex {
   public static Pattern queue = Pattern.compile("Queue");
   public static Pattern priorityQueue = Pattern.compile("PriorityQueue");
   public static Pattern comparator = Pattern.compile("Comparator");
+  public static Pattern numberDeclaration = Pattern.compile("Number");
 
   //Loops
   public static Pattern whileLoop = Pattern.compile("\\s*while\\s*");
@@ -62,7 +63,7 @@ public class Regex {
   public static Pattern ifElse = Pattern.compile("\\s*else\\s*");
 
   //Assignment statements
-  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "|" + priorityQueue + "|" + comparator + "]+\\s\\w+\\s*)");
+  public static Pattern declaration = Pattern.compile("\\s*([" + node + "|" + list + "|" + stack + "|" + queue + "|" + priorityQueue + "|" + comparator + "|" + numberDeclaration + "]+\\s\\w+\\s*)");
 
   //Statements in the program
   public static Pattern print = Pattern.compile("\\s*print");

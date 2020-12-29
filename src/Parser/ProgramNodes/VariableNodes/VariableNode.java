@@ -69,10 +69,11 @@ public class VariableNode implements Exec {
 
     //Evaluate the Exec node that will assign the value
     if (toEvaluate != null) {
-      if (type.equals("Node") || type.equals("List")) value = toEvaluate.execute(parser);
+      if (type.equals("Node") || type.equals("List") || type.equals("Comparator") || type.equals("Number")) value = toEvaluate.execute(parser);
     } else {
       if (type.equals("Stack")) value = new Stack<>();
       else if (type.equals("Queue")) value = new ArrayDeque<>();
+      else if (type.equals("PriorityQueue")) value = new PriorityQueue<>();
     }
     return null;
   }
@@ -106,9 +107,25 @@ public class VariableNode implements Exec {
       else if (method.getName().equals("isEmpty")) return isEmpty();
       else if (method.getName().equals("getNext")) return getNext();
       else if (method.getName().equals("getSize")) return getSize();
+      else if (method.getName().equals("assignComparator")) assignComparator(method, parser);
     }
 
     return null;
+  }
+
+  /**
+   * Assign a comparator to the value if required.
+   * @param method the method
+   * @param parser the parser
+   */
+  private void assignComparator(MethodNode method, Parser parser) {
+    if (!(value instanceof PriorityQueue));
+
+    //Get the comparator out of the variable map
+    String varName = (String) method.getParameters().get(0);
+    Comparator<Node> comparator = (Comparator<Node>) parser.variables.get(varName).value;
+
+    value = new PriorityQueue<>(comparator);
   }
 
   /**
@@ -124,6 +141,7 @@ public class VariableNode implements Exec {
   private Object getNext() {
     if (type.equals("Stack")) return ((Stack) value).pop();
     else if (type.equals("Queue")) return ((ArrayDeque) value).poll();
+    else if (type.equals("PriorityQueue")) return ((PriorityQueue) value).poll();
     return null;
   }
 
@@ -150,8 +168,12 @@ public class VariableNode implements Exec {
 
       tmp.push(toAdd);
       value = tmp;
-    } else if (type.equals("Queue")) {
-      ArrayDeque tmp = (ArrayDeque) value;
+    } else if (type.equals("Queue") || type.equals("PriorityQueue")) {
+      Queue tmp = null;
+      if (this.type.equals("Queue")) tmp = (ArrayDeque) value;
+      else if (this.type.equals("PriorityQueue")) {
+        tmp = (PriorityQueue) value;
+      }
 
       Object toAdd = method.execute(parser);
 

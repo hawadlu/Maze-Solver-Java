@@ -128,4 +128,32 @@ public class MazeHandler {
   public void setDelay(int delay) {
     this.delay = delay;
   }
+
+  /**
+   * Get the cost of a node.
+   * @param toUpdate the node to get the cost for.
+   * @return the cost.
+   */
+  public double getCost(Node toUpdate) {
+    return toUpdate.getCost();
+  }
+
+  /**
+   * Update the cost of a node.
+   * @param toUpdate the node to update.
+   * @param cost the new cost.
+   */
+  public void setCost(Node toUpdate, double cost) {
+    toUpdate.setCost(cost);
+  }
+
+  /**
+   * Return the distance between two nodes.
+   * @param nodeOne the first node.
+   * @param nodeTwo the second node.
+   * @return the distance.
+   */
+  public double getDistance(Node nodeOne, Node nodeTwo) {
+    return nodeOne.calculateCost(nodeTwo);
+  }
 }
