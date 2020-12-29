@@ -1,3 +1,5 @@
+import Game.Game;
+import Game.Player;
 import Parser.Parser;
 import Parser.MazeHandler;
 import Utility.PathMaker;
@@ -2859,6 +2861,144 @@ public class Tests {
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
+  }
+
+  @Test
+  public void testAStarParserTiny() {
+
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Tiny.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
+    File dfs = new File("Programs/AStar.txt");
+    Parser p = new Parser(dfs, maze);
+    p.startParser();
+    p.print();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/AStar Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
+
+  @Test
+  public void testAStarParserSmall() {
+    Application application = new Application();
+    try {
+      application.parseImageFile(new File("Images/Small Imperfect.png"));
+    } catch (GenericError genericError) {
+      genericError.printStackTrace();
+    }
+
+    MazeHandler maze = new MazeHandler(application);
+
+
+    File dfs = new File("Programs/AStar.txt");
+    Parser p = new Parser(dfs, maze);
+    p.startParser();
+    p.print();
+    p.execute();
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
+
+  @Test
+  public void testAllParsersTiny() {
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Programs"));
+
+    for (File file: files) {
+      System.out.println("File: " + file);
+
+      Application application = new Application();
+      try {
+        application.parseImageFile(new File("Images/Tiny.png"));
+      } catch (GenericError genericError) {
+        genericError.printStackTrace();
+      }
+
+      MazeHandler maze = new MazeHandler(application);
+
+      ;
+      Parser p = new Parser(file, maze);
+      p.startParser();
+      p.print();
+      p.execute();
+
+      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+      application.saveImage("Images/Solved/" + file.getName() + " Tiny Custom Algorithm.png");
+      System.out.println("Saved image");
+    }
+  }
+
+  @Test
+  public void testAllParsersSmall() {
+    deleteFiles(new File("Images/Solved"));
+    ArrayList<File> files = getAllFiles(new File("Programs"));
+
+    for (File file: files) {
+      System.out.println("File: " + file);
+
+      Application application = new Application();
+      try {
+        application.parseImageFile(new File("Images/Small Imperfect2.png"));
+      } catch (GenericError genericError) {
+        genericError.printStackTrace();
+      }
+
+      MazeHandler maze = new MazeHandler(application);
+
+      ;
+      Parser p = new Parser(file, maze);
+      p.startParser();
+      p.print();
+      p.execute();
+
+      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+      application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
+      System.out.println("Saved image");
+    }
+  }
+
+  @Test
+  public void testGame() throws InterruptedException {
+    Thread runner = new Thread() {
+      @Override
+      public void run() {
+        Application application = new Application();
+        try {
+          application.parseImageFile(new File("Images/Tiny.png"));
+        } catch (GenericError genericError) {
+          genericError.printStackTrace();
+        }
+        application.scanEntireMaze();
+
+        MazeHandler mazeOne = new MazeHandler(application);
+        MazeHandler mazeTwo = new MazeHandler(application);
+
+        Parser pOne = new Parser(new File("Programs/AStar No Print.txt"), mazeOne);
+        Parser pTwo = new Parser(new File("Programs/AStar No Print.txt"), mazeTwo);
+
+        pOne.startParser();
+        pTwo.startParser();
+
+       Game game = new Game(application, pOne, pTwo);
+
+        game.startPlayers(25);
+      }
+    };
+
+    runner.start();
+    runner.join();
+    System.out.println("Done");
   }
 }
 

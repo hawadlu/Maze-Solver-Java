@@ -3,10 +3,12 @@ package Game;
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import GUI.GUI;
+import Parser.Parser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
   Player playerOne, playerTwo;
@@ -24,6 +26,15 @@ public class Game {
     this.application = application;
     this.gui = gui;
     this.controlPanel = controlPanel;
+  }
+
+  public Game (Application application, Parser algoOne, Parser algoTwo) {
+    this.application = application;
+    playerOne = new Player("Player One", application, this);
+    playerTwo = new Player("Player Two", application, this);
+
+    playerOne.customAlgo = algoOne;
+    playerTwo.customAlgo = algoTwo;
   }
 
   /**
@@ -68,8 +79,7 @@ public class Game {
 
           controlUpdate.start();
 
-          playerOne.solve(delay);
-          playerTwo.solve(delay);
+          startPlayers(delay);
         });
 
 
@@ -82,6 +92,24 @@ public class Game {
     };
 
     load.start();
+  }
+
+  /**
+   * Start the players
+   * @param delay
+   */
+  public void startPlayers(int delay) {
+    playerOne.solve(delay);
+    playerTwo.solve(delay);
+
+    //Wait for both threads to finish
+    while (!playerOne.isDone.get() && !playerTwo.isDone.get()) {
+      try {
+        TimeUnit.MILLISECONDS.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   /**
@@ -129,5 +157,12 @@ public class Game {
     });
 
     GUI.refresh();
+  }
+
+  public Player[] getPlayers() {
+    Player[] players = new Player[2];
+    players[0] = playerOne;
+    players[1] = playerTwo;
+    return players;
   }
 }

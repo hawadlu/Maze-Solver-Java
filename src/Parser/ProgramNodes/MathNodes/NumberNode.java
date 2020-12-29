@@ -23,7 +23,7 @@ public class NumberNode implements Number, Exec {
   }
 
   @Override
-  public double calculate() {
+  public double calculate(Parser parser) {
     return value;
   }
 }

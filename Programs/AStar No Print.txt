@@ -1,0 +1,37 @@
+print("AStar is starting the solve");
+
+Node parent;
+Comparator compare -> Maze.getCost(node);
+PriorityQueue toProcess;
+toProcess.assignComparator(compare);
+toProcess.add(Maze.getStart());
+
+while (!toProcess.isEmpty()) {
+   ***This is a test comment***
+  parent = toProcess.getNext();
+  Maze.visit(parent);
+
+  if (Maze.isDone(parent)) {
+    Maze.finish(parent);
+  }
+
+  List neighbours = Maze.getNeighbours(parent);
+
+  ***Loop through the all of the neighbour nodes***
+  for (node: neighbours) {
+
+    if (!Maze.isVisited(node)) {
+		Number nodeCost = plus(Maze.getDistance(parent, node), Maze.distanceToDestination(node));
+
+        Maze.setParent(node, parent);
+        Maze.visit(node);
+        Maze.setCost(node, nodeCost);
+        toProcess.add(node);
+    } else if (lt(plus(Maze.getCost(parent), Maze.getDistance(parent, node)), Maze.getCost(parent))) {
+        Maze.setParent(node, parent);
+        Maze.setCost(node, plus(parent.getCost(), Maze.getDistance(parent, node));
+        toProcess.add(node);
+        Maze.visit(node);
+    }
+  }
+}

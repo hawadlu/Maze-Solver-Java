@@ -17,7 +17,7 @@ public class LessThanNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
-    return valueOne.calculate() < valueTwo.calculate();
+    return valueOne.calculate(parser) < valueTwo.calculate(parser);
   }
 
   @Override

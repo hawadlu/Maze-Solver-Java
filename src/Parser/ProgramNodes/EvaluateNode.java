@@ -2,6 +2,7 @@ package Parser.ProgramNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.MathNodes.Number;
+import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 
 /**
@@ -10,6 +11,7 @@ import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 public class EvaluateNode implements Exec, Number {
   Exec toEvaluate;
   GetVariableNode variableNode;
+  Number number;
 
   public EvaluateNode(Exec toEvaluate) {
     this.toEvaluate = toEvaluate;
@@ -20,16 +22,22 @@ public class EvaluateNode implements Exec, Number {
     this.toEvaluate = toEvaluate;
   }
 
+  public EvaluateNode(Number number) {
+    this.number = number;
+  }
+
 
   @Override
   public Object execute(Parser parser) {
+    if (toEvaluate != null) return toEvaluate.execute(parser);
+    else if (number != null) return new NumberNode(number.calculate(parser));
     return null;
   }
 
   @Override
-  public double calculate() {
-    //todo, will probably have to cast to an number node (instanceof)
-    return 0;
+  public double calculate(Parser parser) {
+    if (number == null) return ((Number) toEvaluate.execute(parser)).calculate(parser);
+    return number.calculate(parser);
   }
 
   @Override

@@ -2,17 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Programs/AStar No Print.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/Dijkstra.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Dijkstra.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/MazeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/MazeHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ComparatorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ComparatorNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/LessThanNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/LessThanNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/ForNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/ForNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/DivideNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/DivideNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MinusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MinusNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MultiplyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MultiplyNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/NumberNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PlusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PlusNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PowerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PowerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/RootNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MethodNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MethodNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utility/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +66,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Programs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -65,8 +79,24 @@
       <recent name="Parser.ProgramNodes.ConditionNodes" />
       <recent name="Parser.ProgramNodes" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Programs" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests.DijkstraSmallOnly">
+  <component name="RunManager" selected="JUnit.Tests.testGame">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Application.Application" />
+      <module name="Maze-Solver-Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -78,51 +108,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.DijkstraSmallOnly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testAStarParserTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="DijkstraSmallOnly" />
+      <option name="METHOD_NAME" value="testAStarParserTiny" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testBFSParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testAllParsersSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testBFSParserSmall" />
+      <option name="METHOD_NAME" value="testAllParsersSmall" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testBFSParserTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testAllParsersTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testBFSParserTiny" />
+      <option name="METHOD_NAME" value="testAllParsersTiny" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testDijkstraParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testDijkstraParserSmall" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tests.testDijkstraParserTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Maze-Solver-Java" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testDijkstraParserTiny" />
+      <option name="METHOD_NAME" value="testGame" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -130,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Tests.DijkstraSmallOnly" />
-        <item itemvalue="JUnit.Tests.testDijkstraParserSmall" />
-        <item itemvalue="JUnit.Tests.testDijkstraParserTiny" />
-        <item itemvalue="JUnit.Tests.testBFSParserSmall" />
-        <item itemvalue="JUnit.Tests.testBFSParserTiny" />
+        <item itemvalue="JUnit.Tests.testGame" />
+        <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.Tests.testAllParsersSmall" />
+        <item itemvalue="JUnit.Tests.testAllParsersTiny" />
+        <item itemvalue="JUnit.Tests.testAStarParserTiny" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +172,7 @@
       <workItem from="1609018790532" duration="22579000" />
       <workItem from="1609107445430" duration="14397000" />
       <workItem from="1609137222035" duration="7605000" />
-      <workItem from="1609190183764" duration="15071000" />
+      <workItem from="1609190183764" duration="28139000" />
     </task>
     <servers />
   </component>
@@ -173,14 +193,19 @@
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/MazeHandler.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="228" />
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="237" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="232" />
+          <url>file://$PROJECT_DIR$/src/Parser/Parser.java</url>
+          <line>928</line>
+          <option name="timeStamp" value="269" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="272" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

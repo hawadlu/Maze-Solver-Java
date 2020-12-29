@@ -30,7 +30,6 @@ public class ForNode implements Exec {
 
     //Get and iterate through a list of the nodes
     for (Node node: getValueList(value)) {
-      System.out.println(node + " middle 1");
       this.varNode.setValue(node);
 
       //Go through the statements
@@ -38,7 +37,6 @@ public class ForNode implements Exec {
         statement.execute(parser);
       }
 
-      System.out.println(node + " middle 2");
     }
 
     //Remove the variable

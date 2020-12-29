@@ -1,7 +1,6 @@
 package Algorithm.Solvers;
 
 import Algorithm.SolveAlgorithm;
-import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
 import java.util.Objects;
@@ -59,7 +58,7 @@ class AStarWorker extends SolveWorker {
 
       //Add all the appropriate neighbours to the stack
       for (Node node : parent.getNeighbours()) {
-        double costToNode = parent.calculateCost(node) + Node.calculateEuclideanDistance(node, destination);
+        double costToNode = parent.calculateDistance(node) + Node.calculateEuclideanDistance(node, destination);
 
         //node is unvisited
         runner.processNode(toProcess, parent, node, costToNode, this, other, solve);

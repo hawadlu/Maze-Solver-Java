@@ -57,7 +57,7 @@ public class MazeActionNode implements Exec {
 
       String varName = (String) methodNode.parameters.get(1);
       Number num = (Number) parser.variables.get(varName).getValue();
-      double cost = num.calculate();
+      double cost = num.calculate(parser);
 
       parser.handler.setCost(toUpdate, cost);
     } else if (methodNode.name.equals("getCost")) {
@@ -72,6 +72,10 @@ public class MazeActionNode implements Exec {
       Node nodeTwo = (Node) parser.variables.get(nodeTwoName).getValue();
 
       return new NumberNode(parser.handler.getDistance(nodeOne, nodeTwo));
+    } else if (methodNode.name.equals("distanceToDestination")) {
+      Node node = (Node) parser.variables.get((String) methodNode.parameters.get(0)).getValue();
+
+      return new NumberNode(parser.handler.getDistanceToDestination(node));
     } else parser.executionError("Unrecognised method " + methodNode.name);
     return null;
   }

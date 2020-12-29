@@ -88,7 +88,7 @@ public class Node {
    * @param nextNode the node to calculate distance to
    * @return the distance from another node to this one.
    */
-  public double calculateCost(Node nextNode) {
+  public double calculateDistance(Node nextNode) {
     double toReturn = 0;
     //Return the distance on the x plane
     if (nodeLocation.x == nextNode.getLocation().x) {

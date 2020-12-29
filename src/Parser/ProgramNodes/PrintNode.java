@@ -33,7 +33,7 @@ public class PrintNode implements Exec{
 
     for (Object obj: printVals) {
       if (obj instanceof String) toReturn.append(obj);
-      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate());
+      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate(parser));
       else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString(parser));
       else if (obj instanceof GetVariableNode) toReturn.append(parser.variables.get(((GetVariableNode) obj).getInfo(parser)));
       else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute(parser));
@@ -45,12 +45,12 @@ public class PrintNode implements Exec{
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public void execute(Parser parser) {
     StringBuilder toPrint = new StringBuilder();
 
     for (Object obj: printVals) {
       if (obj instanceof String) toPrint.append(obj);
-      else if (obj instanceof Number) toPrint.append(((Number) obj).calculate());
+      else if (obj instanceof Number) toPrint.append(((Number) obj).calculate(parser));
       else if (obj instanceof PrintNode) toPrint.append(((PrintNode) obj).makeString(parser));
       else if (obj instanceof GetVariableNode) toPrint.append(((GetVariableNode) obj).getInfo(parser));
       else if (obj instanceof MethodNode) toPrint.append(((MethodNode) obj).execute(parser));

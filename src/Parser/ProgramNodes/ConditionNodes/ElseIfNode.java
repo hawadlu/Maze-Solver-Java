@@ -33,7 +33,7 @@ public class ElseIfNode implements Exec {
     }
 
     //Run the else node if necessary
-    if (!run) elseNode.execute(parser);
+    if (!run && elseNode != null) elseNode.execute(parser);
 
     return null;
   }

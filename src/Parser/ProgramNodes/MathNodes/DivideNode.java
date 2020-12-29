@@ -17,7 +17,7 @@ public class DivideNode implements Exec, Number {
 
   @Override
   public Object execute(Parser parser) {
-    return calculate();
+    return calculate(parser);
   }
 
   @Override
@@ -26,13 +26,13 @@ public class DivideNode implements Exec, Number {
   }
 
   @Override
-  public double calculate() {
+  public double calculate(Parser parser) {
     ArrayList<Number> copyVals = new ArrayList<>(values);
-    double initialValue = copyVals.remove(0).calculate();
+    double initialValue = copyVals.remove(0).calculate(parser);
 
     for (Number num : copyVals) {
       if (num instanceof NumberNode) initialValue /= ((NumberNode) num).value;
-      else initialValue /= num.calculate();
+      else initialValue /= num.calculate(parser);
     }
 
     return initialValue;

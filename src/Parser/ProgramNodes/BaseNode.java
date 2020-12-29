@@ -16,9 +16,12 @@ public class BaseNode implements Exec{
   @Override
   public Object execute(Parser parser) {
     for (Exec statement: statements){
+      System.out.println(parser.handler.getPlayer());
       statement.execute(parser);
     }
-    return null;
+
+    if (!parser.handler.done) parser.executionError(parser.handler.getPlayer() + " Base node reached the end without solving");
+    return false;
   }
 
   @Override

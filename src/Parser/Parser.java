@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -541,14 +542,22 @@ public class Parser {
     //Discard the =
     if (fileScanner.hasNext(Regex.equals)) {
       fileScanner.next();
-      if (fileScanner.hasNext(Regex.mazeCall)) {
-        return parseMazeCall(fileScanner);
-      }
+      if (fileScanner.hasNext(Regex.mazeCall)) return parseMazeCall(fileScanner);
+      else if (fileScanner.hasNext(Regex.math)) return parseEvaluateMathCall(fileScanner);
     } else if (fileScanner.hasNext(Regex.comparatorAssignment)) {
       return parseComparator(fileScanner);
     }
 
     return null;
+  }
+
+  /**
+   * Parse a call to a math method that is executed at runtime.
+   * @param fileScanner the file scanner.
+   * @return an evaluate object.
+   */
+  private Exec parseEvaluateMathCall(Scanner fileScanner) {
+    return new EvaluateNode(parseMath(fileScanner));
   }
 
   /**
@@ -925,5 +934,18 @@ public class Parser {
    */
   public void print() {
     System.out.println(baseNode.toString());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Parser parser = (Parser) o;
+    return debug == parser.debug && fileScanner.equals(parser.fileScanner) && baseNode.equals(parser.baseNode) && variables.equals(parser.variables) && handler.equals(parser.handler);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(debug, fileScanner, baseNode, variables, handler);
   }
 }

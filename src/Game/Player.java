@@ -21,6 +21,10 @@ public class Player {
   final ImageFile originalImage;
   Game currentGame;
   AtomicBoolean done = new AtomicBoolean(false);
+  PlayerWorker thread;
+  Player other;
+  Parser customAlgo;
+  AtomicBoolean isDone = new AtomicBoolean(false);
 
 
   /**
@@ -37,6 +41,19 @@ public class Player {
     this.panel = new PlayerPanel(application, playerName, maxSize);
   }
 
+
+  public Player(String playerName, Application application, Game game) {
+    this.originalImage = new ImageFile(application.getImageFile());
+
+    //Create a new application
+    this.application = new Application(application);
+    this.playerName = playerName;
+    this.currentGame = game;
+  }
+  public void setOther(Player other) {
+    this.other = other;
+  }
+
   public void createSolveImagePanel() {
     panel.initSolvePanel();
   }
@@ -49,6 +66,7 @@ public class Player {
    * @param node the node to draw the image from
    */
   public void update(Node node) {
+    System.out.println(this + " is updating");
     this.currentNode = node;
 
     //Create a duplicate image file
@@ -57,7 +75,9 @@ public class Player {
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
 
-    updateSolveImage(newImage);
+    newImage.saveImage("Images/Solved/" + this.playerName + " " + System.currentTimeMillis() + ".png");
+
+    if (panel != null) updateSolveImage(newImage);
   }
 
   /**
@@ -76,25 +96,20 @@ public class Player {
     System.out.println(playerName + " has started the solve");
 
     //Make this display an image panel
-    createSolveImagePanel();
-
-    String algorithm = panel.getAlgorithm();
+    String algorithm = "";
+    if (panel != null) {
+      createSolveImagePanel();
+      algorithm = panel.getAlgorithm();
+    }
 
     //Start the solve algorithm
     Thread solveThread;
-    Parser customAlgo = panel.getCustomAlgo();
+    if (customAlgo == null) customAlgo = panel.getCustomAlgo();
 
     if (customAlgo != null) {
-      Player currentPlayer = this;
       //Start a new thread using the custom algorithm
-      solveThread = new Thread() {
-        @Override
-        public void run() {
-          customAlgo.handler.setPlayer(currentPlayer);
-          customAlgo.handler.setDelay(delay);
-          customAlgo.execute();
-        }
-      };
+      thread = new PlayerWorker(this, customAlgo, delay);
+      solveThread = thread;
     } else {
       //Start using one of the prebuilt algorithms
       solveThread = application.solve(algorithm, "Loading", false, delay, this);
@@ -140,5 +155,47 @@ public class Player {
   @Override
   public int hashCode() {
     return Objects.hash(panel, playerName);
+  }
+}
+
+/**
+ * This class deal with running each custom algorithms for each player.
+ * This is done in a separate class because when both players use a
+ * custom algorithm in the game mode, one thread seems to override
+ * the other.
+ */
+class PlayerWorker extends Thread {
+//  String threadId;
+  volatile Player player;
+  volatile Parser customAlgo;
+  volatile int delay;
+
+  PlayerWorker(Player player, Parser customAlgo, int delay) {
+    this.player = player;
+    this.customAlgo = customAlgo;
+    this.delay = delay;
+  }
+
+  @Override
+  public void run() {
+    System.out.println("Started thread for " + player);
+    customAlgo.handler.setPlayer(player);
+    customAlgo.handler.setDelay(delay);
+    customAlgo.execute();
+    System.out.println(player + " has completed the thread");
+    player.isDone.set(true);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PlayerWorker that = (PlayerWorker) o;
+    return delay == that.delay && player.equals(that.player) && customAlgo.equals(that.customAlgo);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(player, customAlgo, delay);
   }
 }

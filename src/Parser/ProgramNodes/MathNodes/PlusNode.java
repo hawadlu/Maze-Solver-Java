@@ -1,5 +1,7 @@
 package Parser.ProgramNodes.MathNodes;
 
+import Parser.Parser;
+
 import java.util.ArrayList;
 
 /**
@@ -18,13 +20,13 @@ public class PlusNode implements Number {
   }
 
   @Override
-  public double calculate() {
+  public double calculate(Parser parser) {
     ArrayList<Number> copyVals = new ArrayList<>(values);
-    double initialValue = copyVals.remove(0).calculate();
+    double initialValue = copyVals.remove(0).calculate(parser);
 
     for (Number num : copyVals) {
       if (num instanceof NumberNode) initialValue += ((NumberNode) num).value;
-      else initialValue += num.calculate();
+      else initialValue += num.calculate(parser);
     }
 
     return initialValue;
