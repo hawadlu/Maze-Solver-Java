@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 /**
  * This class is responsible for parsing the files.
  */
-//todo add less than, greater than and equal to capability.
 public class Parser {
   boolean debug = false;
   Scanner fileScanner = null;
@@ -410,7 +409,6 @@ public class Parser {
       return new GreaterThanNode(parseEqualityConditions());
     }
 
-    //todo implement greater than and equal to
 
     return null;
   }
@@ -733,7 +731,6 @@ public class Parser {
    * @param fileScanner the file scanner.
    * @return a multiply node
    */
-  //fixme, this can only have one argument
   private Number parseRoot(Scanner fileScanner) {
     if (debug) System.out.println("Parsing root");
 

@@ -9,7 +9,6 @@ public class NotConditionNode implements Condition {
     this.condition = condition;
   }
 
-  //todo make this return true if the condition is not true.
   @Override
   public boolean evaluate(Parser parser) {
     return !condition.evaluate(parser);

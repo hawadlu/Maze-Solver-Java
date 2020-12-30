@@ -6,7 +6,6 @@ import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
 
-//todo deal with else statements
 public class IfNode implements Exec {
 
   ArrayList<Exec> statements = new ArrayList<>();
@@ -24,11 +23,12 @@ public class IfNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
-    //todo refactor to deal with else
     if (ifCondition.evaluate(parser)) {
       for (Exec statement: statements) {
         statement.execute(parser);
       }
+    } else if (this.elseNode != null) {
+      elseNode.execute(parser);
     }
     return null;
   }

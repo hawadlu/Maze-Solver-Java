@@ -18,6 +18,9 @@ public class ElseNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
+    for (Exec statement: statements) {
+      statement.execute(parser);
+    }
     return null;
   }
 

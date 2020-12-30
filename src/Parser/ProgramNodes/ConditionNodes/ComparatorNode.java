@@ -33,6 +33,7 @@ public class ComparatorNode implements Exec {
         String methodName = method.getName();
 
         if (methodName.equals("getCost")) return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
+        else if (methodName.equals("getNeighbourCount")) return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
       }
 
       return 0;

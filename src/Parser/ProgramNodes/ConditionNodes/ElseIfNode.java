@@ -11,6 +11,12 @@ public class ElseIfNode implements Exec {
 
   public ElseIfNode(ArrayList<IfNode> ifs) {
     this.ifNodes = ifs;
+
+    //If the last statement has an else condition add it to the else here
+    if (ifNodes.get(ifNodes.size() - 1).elseNode != null) {
+      this.elseNode = new ElseNode(ifNodes.get(ifNodes.size() - 1).elseNode.statements);
+      ifNodes.get(ifNodes.size() - 1).elseNode = null;
+    }
   }
 
   public void addElse(ElseNode elseNode) {

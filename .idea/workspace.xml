@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Programs/Valid Tests/Test Equality.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/EqualToNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/GreaterThanNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EmptyStatement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Programs/Working Algorithms/AStar Neighbour Comparator.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/Valid Tests/Test Equality.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Valid Tests/Test Equality.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/IfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/NotConditionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/NotConditionNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +52,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Programs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Programs/Working Algorithms" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -70,6 +66,7 @@
       <recent name="Parser.ProgramNodes" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Programs/Working Algorithms" />
       <recent name="$PROJECT_DIR$/Programs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -77,16 +74,14 @@
       <recent name="$PROJECT_DIR$/Programs/Working Algorithms" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests.runValid">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.Tests.testAllParsersSmall">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -143,11 +138,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Tests.runValid" />
         <item itemvalue="JUnit.Tests.testAllParsersSmall" />
-        <item itemvalue="JUnit.Tests.testGame" />
-        <item itemvalue="JUnit.Tests.testAllParsersTiny" />
         <item itemvalue="JUnit.Tests.testAStarParserSmall" />
+        <item itemvalue="JUnit.Tests.testAllParsersTiny" />
+        <item itemvalue="JUnit.Tests.runValid" />
+        <item itemvalue="JUnit.Tests.testGame" />
       </list>
     </recent_temporary>
   </component>
@@ -167,6 +162,7 @@
       <workItem from="1609137222035" duration="7605000" />
       <workItem from="1609190183764" duration="28139000" />
       <workItem from="1609307436993" duration="7366000" />
+      <workItem from="1609362717902" duration="2866000" />
     </task>
     <servers />
   </component>
@@ -187,14 +183,14 @@
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="326" />
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="341" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="328" />
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="342" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
