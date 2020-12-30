@@ -20,7 +20,6 @@ public class ComparatorNode implements Exec {
   @Override
   public Object execute(Parser parser) {
     comparator = (nodeOne, nodeTwo) -> {
-      //todo implement more ways to compare
 
       //Check what the user wants to use as a compare
       if (callToInit instanceof MazeActionNode) {
