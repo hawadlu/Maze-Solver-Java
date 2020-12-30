@@ -153,7 +153,9 @@ public class Parser {
     }
     else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
-    return toReturn;
+    //If the statement is empty return a new empty statement
+    if (toReturn != null) return toReturn;
+    else return new EmptyStatement();
   }
 
   /**
@@ -229,7 +231,10 @@ public class Parser {
    */
   private void parseComment(Scanner fileScanner) {
     if (debug) System.out.println("Parsing comment");
-    while (!fileScanner.hasNext(Regex.comment)) fileScanner.next(); //Discard all tokens inside the comment
+    while (!fileScanner.hasNext(Regex.comment)) {
+      if (!fileScanner.hasNext()) fail("Comment missing closing '***'"); //Reached the end of the program while parsing the comment
+      fileScanner.next(); //Discard all tokens inside the comment
+    }
     fileScanner.next(); //Discard the ***
   }
 
@@ -329,7 +334,12 @@ public class Parser {
     //Check for the closing }
     scannerHasNext(fileScanner, Regex.closeCurly, "If statement missing closing '}'");
 
-    return new IfNode(condition, statements);
+    IfNode ifNode = new IfNode(condition, statements);
+
+    //If there is an else add it to the if node
+    if (fileScanner.hasNext(Regex.ifElse)) parseElse(fileScanner, ifNode);
+
+    return ifNode;
   }
 
   /**
@@ -394,6 +404,10 @@ public class Parser {
     //check for less than
     if (fileScanner.hasNext(Regex.lessThan)) {
       return new LessThanNode(parseEqualityConditions());
+    } else if (fileScanner.hasNext(Regex.equalTo)) {
+      return new EqualToNode(parseEqualityConditions());
+    } else if (fileScanner.hasNext(Regex.greaterThan)) {
+      return new GreaterThanNode(parseEqualityConditions());
     }
 
     //todo implement greater than and equal to
@@ -417,17 +431,19 @@ public class Parser {
     scannerHasNext(fileScanner, Regex.openParen, "Equality condition missing opening '('");
 
     //Parse the first part of the condition
-    //todo make a method for parseEvaluateMethod call so that the user can do things like toProcess.getSize()
     if (fileScanner.hasNext(Regex.math)) values[0] = parseMath(fileScanner);
     else if (fileScanner.hasNext(Regex.mazeCall)) values[0] = parseEvaluateMazeCall(fileScanner);
+    else if (fileScanner.hasNext(Regex.name)) values[0] = parseEvaluateNameCall(fileScanner);
+
 
     //Check for a comma
-    scannerHasNext(fileScanner, Regex.comma, "Equality condition missing ','");
+    scannerHasNext(fileScanner, Regex.comma, "Equality condition missing ',' ");
 
     //Parse the second part of the condition
-    //todo make a method for parseEvaluateMethod call so that the user can do things like toProcess.getSize()
     if (fileScanner.hasNext(Regex.math)) values[1] = parseMath(fileScanner);
     else if (fileScanner.hasNext(Regex.mazeCall)) values[1] = parseEvaluateMazeCall(fileScanner);
+    else if (fileScanner.hasNext(Regex.name)) values[1] = parseEvaluateNameCall(fileScanner);
+
 
     //Check for the closing ')'
     scannerHasNext(fileScanner, Regex.closeParen, "Equality condition missing closing ')'");
@@ -883,7 +899,7 @@ public class Parser {
     String name = fileScanner.next();
     GetVariableNode getVar = new GetVariableNode(name);
 
-    Exec eval = parseMethod(fileScanner);
+    EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(fileScanner, name));
 
     return new EvaluateNode(getVar, eval);
   }

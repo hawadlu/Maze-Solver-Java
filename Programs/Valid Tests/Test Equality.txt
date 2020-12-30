@@ -1,0 +1,36 @@
+***The purpose of this file is to extensively test the less than function with valid inputs***
+
+if (lt(plus(1, 1), 3)) {
+    print("lt(plus(1, 1), 3 was valid.");
+}
+
+if (lt(3, 2)) {
+    print("lt(3, 2) was incorrect");
+} else {
+    print("lt(3, 2) was incorrect and picked up by else");
+}
+
+if (gt(9, 9)) {
+    print("gt(9, 9) was incorrect");
+} else if (lt(9, 9)) {
+    print("lt(9, 9) was incorrect");
+} else if (eq(9, 9)) {
+    print("eq(9, 9) was correct");
+} else {
+    print("Incorrect, should have triggered eq(9, 9)");
+}
+
+Stack toProcess;
+Node parent;
+toProcess.add(parent);
+toProcess.add(parent);
+
+if (lt(plus(5, 5), toProcess.getSize())) {
+    print("Incorrect lt for lt(plus(5, 5), toProcess.getSize())");
+} else if (gt(minus(-67, multiply(3, 2)), toProcess.getSize())) {
+    print("Incorrect gt for gt(minus(-67, multiply(3, 2))), toProcess.getSize()");
+} else if (eq(plus(0, root(2)), toProcess.getSize())) {
+    print("Correct eq for eq(plus(0, root(2)), toProcess.getSize()");
+} else {
+    print("Incorrect, should have triggered eq(plus(0, root(2)), toProcess.getSize()");
+}

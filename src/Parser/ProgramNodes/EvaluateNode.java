@@ -36,7 +36,9 @@ public class EvaluateNode implements Exec, Number {
 
   @Override
   public double calculate(Parser parser) {
-    if (number == null) return ((Number) toEvaluate.execute(parser)).calculate(parser);
+    if (number == null) {
+      return ((Number) toEvaluate.execute(parser)).calculate(parser);
+    }
     return number.calculate(parser);
   }
 

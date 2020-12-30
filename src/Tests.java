@@ -2990,5 +2990,35 @@ public class Tests {
     runner.join();
     System.out.println("Done");
   }
+
+  /**
+   * Run all of the tests in the valid tests folder
+   */
+  @Test
+  public void runValid() {
+    ArrayList<File> files = getAllFiles(new File("Programs/Valid Tests"));
+
+    for (File file: files) {
+      System.out.println("File: " + file);
+
+      Application application = new Application();
+      try {
+        application.parseImageFile(new File("Images/Small Imperfect2.png"));
+      } catch (GenericError genericError) {
+        genericError.printStackTrace();
+      }
+
+      application.scanEntireMaze();
+
+      Parser p = new Parser(file);
+      p.startParser();
+      p.print();
+      p.execute(application);
+
+      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
+      application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
+      System.out.println("Saved image");
+    }
+  }
 }
 

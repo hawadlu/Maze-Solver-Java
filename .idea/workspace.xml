@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Programs/Valid Tests/Test Equality.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/EqualToNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/GreaterThanNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EmptyStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/AStar No Print.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/AStar No Print.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/AStar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/AStar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/BFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/BFS.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/DFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/DFS.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programs/Dijkstra.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/Dijkstra.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/VariableNodes/VariableNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Regex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +77,7 @@
       <recent name="$PROJECT_DIR$/Programs/Working Algorithms" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests.testGame">
+  <component name="RunManager" selected="JUnit.Tests.runValid">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -86,6 +87,16 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.runValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Maze-Solver-Java" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="runValid" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,16 +131,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testDijkstraParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Maze-Solver-Java" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testDijkstraParserSmall" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tests.testGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
@@ -142,11 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Tests.testGame" />
+        <item itemvalue="JUnit.Tests.runValid" />
         <item itemvalue="JUnit.Tests.testAllParsersSmall" />
+        <item itemvalue="JUnit.Tests.testGame" />
         <item itemvalue="JUnit.Tests.testAllParsersTiny" />
         <item itemvalue="JUnit.Tests.testAStarParserSmall" />
-        <item itemvalue="JUnit.Tests.testDijkstraParserSmall" />
       </list>
     </recent_temporary>
   </component>
@@ -165,7 +166,7 @@
       <workItem from="1609107445430" duration="14397000" />
       <workItem from="1609137222035" duration="7605000" />
       <workItem from="1609190183764" duration="28139000" />
-      <workItem from="1609307436993" duration="1240000" />
+      <workItem from="1609307436993" duration="7366000" />
     </task>
     <servers />
   </component>
@@ -184,6 +185,16 @@
           <url>file://$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java</url>
           <line>131</line>
           <option name="timeStamp" value="298" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="328" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -15,7 +15,7 @@ public class Regex {
   public static Pattern openCurly = Pattern.compile("\\{");
   public static Pattern closeCurly = Pattern.compile("\\}");
   public static Pattern plus = Pattern.compile("\\s*\\+");
-  public static Pattern number = Pattern.compile("\\s*[0-9]+");
+  public static Pattern number = Pattern.compile("\\s*-*[0-9]+(.\\d+)*");
   public static Pattern comma = Pattern.compile(",");
 
   public static Pattern name = Pattern.compile("\\s*\\w+"); // \w Matches any letter, digit or underscore. Equivalent to [a-zA-Z0-9_].
@@ -30,7 +30,7 @@ public class Regex {
   public static Pattern comment = Pattern.compile("\\*\\*\\*");
   public static Pattern comparatorAssignment = Pattern.compile("->");
   public static Pattern lessThan = Pattern.compile("\\s*lt");
-  public static Pattern greaterThan = Pattern.compile("\\s*qt");
+  public static Pattern greaterThan = Pattern.compile("\\s*gt");
   public static Pattern equalTo = Pattern.compile("\\s*eq");
 
   //Math action

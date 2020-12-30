@@ -19,7 +19,7 @@ public class BaseNode implements Exec{
       statement.execute(parser);
     }
 
-    if (!parser.handler.done) parser.executionError(parser.handler.getPlayer() + " Base node reached the end without solving");
+//    if (!parser.handler.done) parser.executionError(parser.handler.getPlayer() + " Base node reached the end without solving");
     return false;
   }
 

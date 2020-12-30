@@ -2,6 +2,7 @@ package Parser.ProgramNodes.VariableNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
+import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Utility.Node;
 
@@ -131,8 +132,8 @@ public class VariableNode implements Exec {
   /**
    * @return the size of the collection.
    */
-  private double getSize() {
-    return ((Collection) value).size();
+  private NumberNode getSize() {
+    return new NumberNode(((Collection) value).size());
   }
 
   /**
