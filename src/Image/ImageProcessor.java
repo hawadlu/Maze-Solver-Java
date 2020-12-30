@@ -26,8 +26,9 @@ public class ImageProcessor {
     this.application = application;
 
     if (oldProcessor != null) {
-      this.exits = oldProcessor.getExits();
-      this.nodes = oldProcessor.getNodes();
+      this.exits.addAll(oldProcessor.exits);
+
+      for (Location location: oldProcessor.nodes.keySet()) this.nodes.put(location, oldProcessor.nodes.get(location));
     }
   }
 

@@ -280,7 +280,7 @@ public class GUI {
     control.setPreferredSize(new Dimension(500, 100));
     control.setBackground(backgroundCol);
 
-    JButton solve = new JButton("Solve");
+    JButton solve = new JButton("solve");
     JButton artPts = new JButton("Articulation Points");
     JButton minTree = new JButton("Minimum Tree");
     JButton startOver = new JButton("Choose another image");
@@ -335,7 +335,7 @@ public class GUI {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new FlowLayout());
-      JButton solveButton = new JButton("Solve");
+      JButton solveButton = new JButton("solve");
       JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
 
       //Start the solve process
@@ -415,7 +415,7 @@ public class GUI {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new FlowLayout());
-      JButton solveButton = new JButton("Solve");
+      JButton solveButton = new JButton("solve");
       JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
 
       //Start the solve process
@@ -514,7 +514,7 @@ public class GUI {
 
       JPanel buttonPanel = new JPanel();
       buttonPanel.setLayout(new FlowLayout());
-      JButton solveButton = new JButton("Solve");
+      JButton solveButton = new JButton("solve");
       JButton cancel = new JButton("Cancel"); //Cancel functionality is added to the button in the make popup method
 
       //Start the solve process
@@ -527,8 +527,7 @@ public class GUI {
         Parser parser = null;
         if (algorithm.equals("Custom")) {
           //Setup the parser
-          MazeHandler maze = new MazeHandler(application);
-          parser = new Parser(UIFileChooser(), maze);
+          parser = new Parser(UIFileChooser());
         }
 
         makeAlgoWorkingScreen(algoMainArea, algorithm, params, multiThread, application, parser);
@@ -574,7 +573,7 @@ public class GUI {
         }
       };
     } else {
-      solveThread = application.solve(algorithm, params, multiThread, 0, null);
+      solveThread = application.solve(algorithm, params, multiThread, 0, null, null);
     }
 
     //Create another thread that will only wait for algorithm to finish

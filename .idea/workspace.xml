@@ -2,31 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Programs/AStar No Print.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/BreadthFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/BreadthFirst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/DepthFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/DepthFirst.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/SolveRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/SolveRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/PlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/PlayerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Image/ImageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/MazeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/MazeHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/ElseIfNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/LessThanNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/ConditionNodes/LessThanNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/ForNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/LoopNodes/ForNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/DivideNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/DivideNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MinusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MinusNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MultiplyNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/MultiplyNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/Number.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/NumberNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/NumberNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PlusNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PlusNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PowerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/PowerNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/RootNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MathNodes/RootNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/MethodNodes/MazeActionNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utility/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/Exceptions/SolveFailure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Exceptions/SolveFailure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utility/Thread/AlgorithmDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Thread/AlgorithmDispatcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +41,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="Program Nodes Dir" pattern="file[Maze-Solver-Java]:src/Parser/ProgramNodes//*" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -83,7 +81,7 @@
       <recent name="$PROJECT_DIR$/Programs" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests.testGame">
+  <component name="RunManager" selected="Application.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Application.Application" />
       <module name="Maze-Solver-Java" />
@@ -150,8 +148,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Tests.testGame" />
         <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.Tests.testGame" />
         <item itemvalue="JUnit.Tests.testAllParsersSmall" />
         <item itemvalue="JUnit.Tests.testAllParsersTiny" />
         <item itemvalue="JUnit.Tests.testAStarParserTiny" />
@@ -184,28 +182,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/GUI.java</url>
-          <line>587</line>
+          <line>586</line>
           <option name="timeStamp" value="165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/GUI.java</url>
-          <line>607</line>
+          <line>606</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/EvaluateNode.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="237" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/Parser.java</url>
-          <line>928</line>
-          <option name="timeStamp" value="269" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="272" />
+          <url>file://$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="298" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

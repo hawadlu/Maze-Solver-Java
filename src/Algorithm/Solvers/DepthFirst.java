@@ -9,7 +9,7 @@ import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Solve the maze, depth first
+ * solve the maze, depth first
  */
 public class DepthFirst extends SolveRunner {
 

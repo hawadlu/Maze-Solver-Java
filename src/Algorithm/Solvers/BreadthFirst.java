@@ -10,7 +10,7 @@ import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Solve the maze, breadth first
+ * solve the maze, breadth first
  */
 public class BreadthFirst extends SolveRunner {
 

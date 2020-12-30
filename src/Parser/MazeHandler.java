@@ -24,9 +24,9 @@ public class MazeHandler {
 
   public MazeHandler(Application application) {
     this.application = application;
-    application.scanEntireMaze();
-    this.start = application.getMazeExits().get(0);
-    this.destination = application.getMazeExits().get(1);
+    if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
+    this.start = this.application.getMazeExits().get(0);
+    this.destination = this.application.getMazeExits().get(1);
   }
 
   /**

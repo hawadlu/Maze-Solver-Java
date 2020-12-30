@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Solve the maze, breadth first
+ * solve the maze, breadth first
  */
 public class AStar extends SolveRunner {
 

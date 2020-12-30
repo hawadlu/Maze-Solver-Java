@@ -75,7 +75,7 @@ public class SolveRunner {
     //If the queue is empty at this point, solving failed
     if (toProcess.isEmpty() && !done.get()) {
       try {
-        solve.player.makeDoneDisplay("Solve failure: The stack is empty");
+        solve.player.makeDoneDisplay("solve failure: The stack is empty");
         throw new SolveFailure("The stack is empty on thread " + threadId);
       } catch (SolveFailure e) {
         e.printStackTrace();

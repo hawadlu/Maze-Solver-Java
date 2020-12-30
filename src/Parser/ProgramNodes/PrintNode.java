@@ -28,7 +28,7 @@ public class PrintNode implements Exec{
    * Makes a string, executing any nodes along the way.
    * @return
    */
-  public String makeString(Parser parser) {
+  public Object makeString(Parser parser) {
     StringBuilder toReturn = new StringBuilder();
 
     for (Object obj: printVals) {
@@ -45,7 +45,7 @@ public class PrintNode implements Exec{
   }
 
   @Override
-  public void execute(Parser parser) {
+  public Object execute(Parser parser) {
     StringBuilder toPrint = new StringBuilder();
 
     for (Object obj: printVals) {

@@ -4,9 +4,9 @@ import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import Parser.Parser;
 import Utility.Node;
+import Parser.MazeHandler;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -14,14 +14,13 @@ import Image.ImageFile;
 import Utility.PathMaker;
 
 public class Player {
-  Application application;
+  public Application application;
   Node currentNode;
   PlayerPanel panel;
   String playerName;
   final ImageFile originalImage;
   Game currentGame;
   AtomicBoolean done = new AtomicBoolean(false);
-  PlayerWorker thread;
   Player other;
   Parser customAlgo;
   AtomicBoolean isDone = new AtomicBoolean(false);
@@ -31,10 +30,10 @@ public class Player {
    * @param maxSize the max size that any panels in the game can be displayed at
    */
   public Player(Dimension maxSize, String playerName, Application application, Game game) {
+    this.application = new Application(application);
     this.originalImage = new ImageFile(application.getImageFile());
 
     //Create a new application
-    this.application = new Application(application);
     this.playerName = playerName;
     this.currentGame = game;
 
@@ -42,14 +41,14 @@ public class Player {
   }
 
 
-  public Player(String playerName, Application application, Game game) {
+  public Player(String playerName, Game game, Application application) {
+    this.application = new Application(application);
     this.originalImage = new ImageFile(application.getImageFile());
 
-    //Create a new application
-    this.application = new Application(application);
     this.playerName = playerName;
     this.currentGame = game;
   }
+
   public void setOther(Player other) {
     this.other = other;
   }
@@ -74,9 +73,6 @@ public class Player {
 
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
-
-    newImage.saveImage("Images/Solved/" + this.playerName + " " + System.currentTimeMillis() + ".png");
-
     if (panel != null) updateSolveImage(newImage);
   }
 
@@ -88,7 +84,7 @@ public class Player {
   }
 
   /**
-   * Solve the maze
+   * solve the maze
    *
    * @param delay the requested delay
    */
@@ -106,14 +102,8 @@ public class Player {
     Thread solveThread;
     if (customAlgo == null) customAlgo = panel.getCustomAlgo();
 
-    if (customAlgo != null) {
-      //Start a new thread using the custom algorithm
-      thread = new PlayerWorker(this, customAlgo, delay);
-      solveThread = thread;
-    } else {
-      //Start using one of the prebuilt algorithms
-      solveThread = application.solve(algorithm, "Loading", false, delay, this);
-    }
+    //Start using one of the prebuilt algorithms
+    solveThread = application.solve(algorithm, "Loading", false, delay, this, customAlgo);
     solveThread.start();
   }
 
@@ -156,46 +146,13 @@ public class Player {
   public int hashCode() {
     return Objects.hash(panel, playerName);
   }
-}
 
-/**
- * This class deal with running each custom algorithms for each player.
- * This is done in a separate class because when both players use a
- * custom algorithm in the game mode, one thread seems to override
- * the other.
- */
-class PlayerWorker extends Thread {
-//  String threadId;
-  volatile Player player;
-  volatile Parser customAlgo;
-  volatile int delay;
-
-  PlayerWorker(Player player, Parser customAlgo, int delay) {
-    this.player = player;
-    this.customAlgo = customAlgo;
-    this.delay = delay;
-  }
-
-  @Override
-  public void run() {
-    System.out.println("Started thread for " + player);
-    customAlgo.handler.setPlayer(player);
-    customAlgo.handler.setDelay(delay);
+  /**
+   * Start executing the parser
+   */
+  public void startParserExec() {
+    //Create the new maze handler object if necessary
+    customAlgo.handler.setPlayer(this);
     customAlgo.execute();
-    System.out.println(player + " has completed the thread");
-    player.isDone.set(true);
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    PlayerWorker that = (PlayerWorker) o;
-    return delay == that.delay && player.equals(that.player) && customAlgo.equals(that.customAlgo);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(player, customAlgo, delay);
   }
 }

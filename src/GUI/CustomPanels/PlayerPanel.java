@@ -58,9 +58,7 @@ public class PlayerPanel extends JPanel {
       parser = new JButton("Load Custom Algorithm");
 
       parser.addActionListener(e -> {
-        MazeHandler maze = new MazeHandler(application);
-
-        customAlgo = new Parser(GUI.GUI.UIFileChooser(), maze);
+        customAlgo = new Parser(GUI.GUI.UIFileChooser());
 
         customAlgo.startParser();
       });

@@ -44,7 +44,7 @@ public class SolveAlgorithm {
     this.player = player;
   }
 
-  public void Solve(String algorithm, Boolean multiThreading) {
+  public void solve(String algorithm, Boolean multiThreading) {
     boolean buildNodePath = true;
     long startTime = System.nanoTime();
 

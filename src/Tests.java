@@ -78,12 +78,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -130,7 +130,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -176,7 +176,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -219,7 +219,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -263,7 +263,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -306,7 +306,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -349,7 +349,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -396,7 +396,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -443,12 +443,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -490,12 +490,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -536,12 +536,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -578,12 +578,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -621,12 +621,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -664,12 +664,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -707,12 +707,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -754,12 +754,12 @@ public class Tests {
       File file = new File("Images/" + fileStr);
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -806,12 +806,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -853,12 +853,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -899,12 +899,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -941,12 +941,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -984,12 +984,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1027,12 +1027,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1070,12 +1070,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1122,7 +1122,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1169,12 +1169,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1216,12 +1216,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1262,12 +1262,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1304,12 +1304,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1347,12 +1347,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1390,12 +1390,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1433,12 +1433,12 @@ public class Tests {
     for (File file : files) {
       for (String option : options) {
         for (Boolean multi : threading) {
-          System.out.println("BFS Solve " + file.getName() + " " + option);
+          System.out.println("BFS solve " + file.getName() + " " + option);
 
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1485,7 +1485,7 @@ public class Tests {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+          AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
           thread.start();
           thread.join();
           System.out.println("Thread complete");
@@ -1549,7 +1549,7 @@ public class Tests {
                 Application application = new Application();
                 application.parseImageFile(file);
 
-                AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+                AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
                 thread.start();
                 thread.join();
                 System.out.println("Thread complete");
@@ -1593,12 +1593,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1630,12 +1630,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1667,12 +1667,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1704,12 +1704,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1741,12 +1741,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1778,12 +1778,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1815,12 +1815,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1862,7 +1862,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1899,12 +1899,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1936,12 +1936,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -1973,12 +1973,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2010,12 +2010,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2047,12 +2047,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2084,12 +2084,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2121,12 +2121,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2168,7 +2168,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2208,7 +2208,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2240,12 +2240,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2277,12 +2277,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2314,12 +2314,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2351,12 +2351,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2388,12 +2388,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2425,12 +2425,12 @@ public class Tests {
 
     System.out.println("files: " + files);
     for (File file : files) {
-      System.out.println("Prims Solve " + file.getName());
+      System.out.println("Prims solve " + file.getName());
 
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2472,7 +2472,7 @@ public class Tests {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null);
+      AlgorithmDispatcher thread = application.solve(algorithm, "", false, 0, null, null);
       thread.start();
       thread.join();
       System.out.println("Thread complete");
@@ -2536,7 +2536,7 @@ public class Tests {
                   Application application = new Application();
                   application.parseImageFile(file);
 
-                  AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null);
+                  AlgorithmDispatcher thread = application.solve(algorithm, option, multi, 0, null, null);
                   thread.start();
                   thread.join();
                   System.out.println("Thread complete");
@@ -2556,7 +2556,7 @@ public class Tests {
         Application application = new Application();
         application.parseImageFile(file);
 
-        AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null);
+        AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
         thread.start();
         thread.join();
         System.out.println("Thread complete");
@@ -2683,7 +2683,7 @@ public class Tests {
       FileWriter csv = new FileWriter(newCSV);
 
       //Add the headers
-      csv.append("File, Algorithm, Size, Load, Solve, execTime (ns), Multi Threading, Success\n");
+      csv.append("File, Algorithm, Size, Load, solve, execTime (ns), Multi Threading, Success\n");
 
       //Add each of the results
       for (TestResult test : results) csv.append(test.printCSV());
@@ -2734,16 +2734,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/DFS.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/DFS Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2757,16 +2755,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/DFS.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/DFS Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2780,16 +2776,15 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
 
 
     File dfs = new File("Programs/BFS.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/BFS Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2803,16 +2798,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/BFS.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/BFS Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2826,16 +2819,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/Dijkstra.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2849,16 +2840,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/Dijkstra.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2873,16 +2862,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
 
     File dfs = new File("Programs/AStar.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/AStar Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2896,16 +2883,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    MazeHandler maze = new MazeHandler(application);
-
-
     File dfs = new File("Programs/AStar.txt");
-    Parser p = new Parser(dfs, maze);
+    Parser p = new Parser(dfs);
     p.startParser();
     p.print();
     p.execute();
 
-    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
@@ -2925,15 +2909,12 @@ public class Tests {
         genericError.printStackTrace();
       }
 
-      MazeHandler maze = new MazeHandler(application);
-
-      ;
-      Parser p = new Parser(file, maze);
+      Parser p = new Parser(file);
       p.startParser();
       p.print();
       p.execute();
 
-      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
       application.saveImage("Images/Solved/" + file.getName() + " Tiny Custom Algorithm.png");
       System.out.println("Saved image");
     }
@@ -2954,15 +2935,12 @@ public class Tests {
         genericError.printStackTrace();
       }
 
-      MazeHandler maze = new MazeHandler(application);
-
-      ;
-      Parser p = new Parser(file, maze);
+      Parser p = new Parser(file);
       p.startParser();
       p.print();
       p.execute();
 
-      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(maze.getLastNode()), true);
+      application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
       application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
       System.out.println("Saved image");
     }
@@ -2981,16 +2959,14 @@ public class Tests {
         }
         application.scanEntireMaze();
 
-        MazeHandler mazeOne = new MazeHandler(application);
-        MazeHandler mazeTwo = new MazeHandler(application);
 
-        Parser pOne = new Parser(new File("Programs/AStar No Print.txt"), mazeOne);
-        Parser pTwo = new Parser(new File("Programs/AStar No Print.txt"), mazeTwo);
+        Parser pOne = new Parser(new File("Programs/AStar No Print.txt"));
+        Parser pTwo = new Parser(new File("Programs/AStar No Print.txt"));
 
         pOne.startParser();
         pTwo.startParser();
 
-       Game game = new Game(application, pOne, pTwo);
+        Game game = new Game(pOne, pTwo, application);
 
         game.startPlayers(25);
       }

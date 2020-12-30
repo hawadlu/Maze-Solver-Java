@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Game {
   Player playerOne, playerTwo;
-  Application application;
   JPanel controlPanel;
   GUI gui;
 
@@ -20,18 +19,16 @@ public class Game {
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
-  public Game(Dimension maxSize, Application application, GUI gui, JPanel controlPanel) {
+  public Game(Dimension maxSize,  GUI gui, JPanel controlPanel, Application application) {
     playerOne = new Player(maxSize, "Player One", application, this);
     playerTwo = new Player(maxSize, "Player Two", application, this);
-    this.application = application;
     this.gui = gui;
     this.controlPanel = controlPanel;
   }
 
-  public Game (Application application, Parser algoOne, Parser algoTwo) {
-    this.application = application;
-    playerOne = new Player("Player One", application, this);
-    playerTwo = new Player("Player Two", application, this);
+  public Game (Parser algoOne, Parser algoTwo, Application application) {
+    playerOne = new Player("Player One", this, application);
+    playerTwo = new Player("Player Two", this, application);
 
     playerOne.customAlgo = algoOne;
     playerTwo.customAlgo = algoTwo;
@@ -51,7 +48,7 @@ public class Game {
    * Start a new thread and load all of the nodes
    * @param delayTextArea     the text area that contains the requested delay;
    */
-  public void loadNodes(JTextArea delayTextArea) {
+  public void loadNodes(JTextArea delayTextArea, Application application) {
 
     Thread load = new Thread() {
       @Override
@@ -61,7 +58,7 @@ public class Game {
         application.scanEntireMaze();
 
         //Update the component
-        JButton solve = new JButton("Solve");
+        JButton solve = new JButton("solve");
         solve.addActionListener(e -> {
 
           //Extract the requested time delay
@@ -101,15 +98,6 @@ public class Game {
   public void startPlayers(int delay) {
     playerOne.solve(delay);
     playerTwo.solve(delay);
-
-    //Wait for both threads to finish
-    while (!playerOne.isDone.get() && !playerTwo.isDone.get()) {
-      try {
-        TimeUnit.MILLISECONDS.sleep(100);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
   /**
@@ -159,10 +147,4 @@ public class Game {
     GUI.refresh();
   }
 
-  public Player[] getPlayers() {
-    Player[] players = new Player[2];
-    players[0] = playerOne;
-    players[1] = playerTwo;
-    return players;
-  }
 }

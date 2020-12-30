@@ -33,13 +33,16 @@ public class Parser {
   public HashMap<String, VariableNode> variables = new HashMap<>();
   public MazeHandler handler;
 
-  public Parser(File toRead, MazeHandler handler) {
-    this.handler = handler;
+  public Parser(File toRead) {
     try {
       fileScanner = new Scanner(toRead);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
+  }
+
+  public void setMazeHandler(MazeHandler handler) {
+    this.handler = handler;
   }
 
   /**

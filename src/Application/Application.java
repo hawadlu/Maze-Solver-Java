@@ -4,6 +4,7 @@ package Application;
 
 import GUI.CustomPanels.PlayerPanel;
 import Game.Game;
+import Parser.Parser;
 import Utility.Exceptions.InvalidImage;
 import Utility.Location;
 import Utility.Node;
@@ -107,10 +108,17 @@ public class Application {
    * @param multiThreading should the algorithm run using multiple threads
    * @param delay          the delay between each step of the algorithm.
    * @param player         the player solving (may be null)
+   * @param parser         Object used to solve the maze if the user is using a custom algorithm
    */
-  public AlgorithmDispatcher solve(String algorithm, String params, Boolean multiThreading, int delay, Player player) {
+  public AlgorithmDispatcher solve(String algorithm, String params, Boolean multiThreading, int delay, Player player, Parser parser) {
+    AlgorithmDispatcher worker;
     if (this.imageProcessor == null) this.imageProcessor = new ImageProcessor(this);
-    AlgorithmDispatcher worker = new AlgorithmDispatcher(algorithm, params, this, "solver", multiThreading, delay, player);
+
+    if (parser != null) {
+      worker = new AlgorithmDispatcher(this, "solver", delay, player, parser);
+    } else {
+      worker = new AlgorithmDispatcher(algorithm, params, this, "solver", multiThreading, delay, player);
+    }
     return worker;
   }
 
@@ -177,7 +185,7 @@ public class Application {
    * @param controlPanel the panel that hosts the game controls.
    */
   public void initialiseGame(Dimension maxSize, GUI gui, JPanel controlPanel) {
-    this.game = new Game(maxSize, this, gui, controlPanel);
+    this.game = new Game(maxSize, gui, controlPanel, this);
   }
 
   public Game getGame() {
@@ -197,7 +205,7 @@ public class Application {
    * @param delayTextArea     text area containing the requested delay
    */
   public void loadGameNodes(JTextArea delayTextArea) {
-    game.loadNodes(delayTextArea);
+    game.loadNodes(delayTextArea, this);
   }
 
   public static void main(String[] args) {

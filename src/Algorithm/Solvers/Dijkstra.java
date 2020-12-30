@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Solve the maze, breadth first
+ * solve the maze, breadth first
  */
 public class Dijkstra extends SolveRunner {
 
