@@ -2734,12 +2734,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/DFS.txt");
+
+    File dfs = new File("Programs/Working Algorithms/DFS.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/DFS Custom Algorithm.png");
@@ -2755,12 +2757,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/DFS.txt");
+    File dfs = new File("Programs/Working Algorithms/DFS.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/DFS Small Imperfect Custom Algorithm.png");
@@ -2776,13 +2779,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-
-    File dfs = new File("Programs/BFS.txt");
+    File dfs = new File("Programs/Working Algorithms/BFS.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/BFS Custom Algorithm.png");
@@ -2798,12 +2801,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/BFS.txt");
+    File dfs = new File("Programs/Working Algorithms/BFS.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/BFS Small Imperfect Custom Algorithm.png");
@@ -2819,12 +2823,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/Dijkstra.txt");
+    File dfs = new File("Programs/Working Algorithms/Dijkstra.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Custom Algorithm.png");
@@ -2840,12 +2845,13 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/Dijkstra.txt");
+    File dfs = new File("Programs/Working Algorithms/Dijkstra.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
@@ -2862,12 +2868,14 @@ public class Tests {
       genericError.printStackTrace();
     }
 
+    application.scanEntireMaze();
 
-    File dfs = new File("Programs/AStar.txt");
+
+    File dfs = new File("Programs/Working Algorithms/AStar.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/AStar Custom Algorithm.png");
@@ -2883,21 +2891,23 @@ public class Tests {
       genericError.printStackTrace();
     }
 
-    File dfs = new File("Programs/AStar.txt");
+    application.scanEntireMaze();
+
+    File dfs = new File("Programs/Working Algorithms/AStar.txt");
     Parser p = new Parser(dfs);
     p.startParser();
     p.print();
-    p.execute();
+    p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
-    application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
+    application.saveImage("Images/Solved/AStar Small Imperfect Custom Algorithm.png");
     System.out.println("Saved image");
   }
 
   @Test
   public void testAllParsersTiny() {
     deleteFiles(new File("Images/Solved"));
-    ArrayList<File> files = getAllFiles(new File("Programs"));
+    ArrayList<File> files = getAllFiles(new File("Programs/Working Algorithms"));
 
     for (File file: files) {
       System.out.println("File: " + file);
@@ -2909,10 +2919,12 @@ public class Tests {
         genericError.printStackTrace();
       }
 
+      application.scanEntireMaze();
+
       Parser p = new Parser(file);
       p.startParser();
       p.print();
-      p.execute();
+      p.execute(application);
 
       application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
       application.saveImage("Images/Solved/" + file.getName() + " Tiny Custom Algorithm.png");
@@ -2923,7 +2935,7 @@ public class Tests {
   @Test
   public void testAllParsersSmall() {
     deleteFiles(new File("Images/Solved"));
-    ArrayList<File> files = getAllFiles(new File("Programs"));
+    ArrayList<File> files = getAllFiles(new File("Programs/Working Algorithms"));
 
     for (File file: files) {
       System.out.println("File: " + file);
@@ -2935,10 +2947,12 @@ public class Tests {
         genericError.printStackTrace();
       }
 
+      application.scanEntireMaze();
+
       Parser p = new Parser(file);
       p.startParser();
       p.print();
-      p.execute();
+      p.execute(application);
 
       application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
       application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
@@ -2960,8 +2974,8 @@ public class Tests {
         application.scanEntireMaze();
 
 
-        Parser pOne = new Parser(new File("Programs/AStar No Print.txt"));
-        Parser pTwo = new Parser(new File("Programs/AStar No Print.txt"));
+        Parser pOne = new Parser(new File("Programs/Working Algorithms/AStar No Print.txt"));
+        Parser pTwo = new Parser(new File("Programs/Working Algorithms/AStar No Print.txt"));
 
         pOne.startParser();
         pTwo.startParser();

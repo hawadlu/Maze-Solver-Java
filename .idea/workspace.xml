@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00e7e6f6-9e50-47b5-b34a-ded1696c83f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Programs/Valid Tests/InfinateLoop.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/SolveAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/AStar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/BreadthFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/BreadthFirst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/DepthFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/DepthFirst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/Dijkstra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/Solvers/SolveRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/Solvers/SolveRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/CustomPanels/PlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/CustomPanels/PlayerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/AStar No Print.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/AStar No Print.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/AStar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/AStar.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/BFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/BFS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/DFS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/DFS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Programs/Dijkstra.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Programs/Working Algorithms/Dijkstra.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Image/ImageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Image/ImageProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/MazeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/MazeHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/BaseNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser/ProgramNodes/PrintNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utility/Exceptions/SolveFailure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Exceptions/SolveFailure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utility/Thread/AlgorithmDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility/Thread/AlgorithmDispatcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,37 +71,30 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Programs" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Programs/Valid Tests" />
+      <recent name="$PROJECT_DIR$/Programs/Working Algorithms" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Application.Application" />
-      <module name="Maze-Solver-Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Application.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.Tests.testGame">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testAStarParserTiny" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests.testAStarParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testAStarParserTiny" />
+      <option name="METHOD_NAME" value="testAStarParserSmall" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -136,6 +120,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Tests.testDijkstraParserSmall" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Maze-Solver-Java" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="testDijkstraParserSmall" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tests.testGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Maze-Solver-Java" />
       <option name="PACKAGE_NAME" value="" />
@@ -148,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Application" />
         <item itemvalue="JUnit.Tests.testGame" />
         <item itemvalue="JUnit.Tests.testAllParsersSmall" />
         <item itemvalue="JUnit.Tests.testAllParsersTiny" />
-        <item itemvalue="JUnit.Tests.testAStarParserTiny" />
+        <item itemvalue="JUnit.Tests.testAStarParserSmall" />
+        <item itemvalue="JUnit.Tests.testDijkstraParserSmall" />
       </list>
     </recent_temporary>
   </component>
@@ -171,6 +165,7 @@
       <workItem from="1609107445430" duration="14397000" />
       <workItem from="1609137222035" duration="7605000" />
       <workItem from="1609190183764" duration="28139000" />
+      <workItem from="1609307436993" duration="1240000" />
     </task>
     <servers />
   </component>
@@ -180,11 +175,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/GUI.java</url>
-          <line>586</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/GUI.java</url>
           <line>606</line>

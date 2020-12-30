@@ -65,7 +65,6 @@ public class Player {
    * @param node the node to draw the image from
    */
   public void update(Node node) {
-    System.out.println(this + " is updating");
     this.currentNode = node;
 
     //Create a duplicate image file
@@ -153,6 +152,6 @@ public class Player {
   public void startParserExec() {
     //Create the new maze handler object if necessary
     customAlgo.handler.setPlayer(this);
-    customAlgo.execute();
+    customAlgo.execute(application);
   }
 }

@@ -1,5 +1,6 @@
 package Parser;
 
+import Application.Application;
 import Parser.ProgramNodes.*;
 import Parser.ProgramNodes.ConditionNodes.*;
 import Parser.ProgramNodes.LoopNodes.ForNode;
@@ -927,7 +928,10 @@ public class Parser {
   /**
    * execute the compile code.
    */
-  public Object execute() {
+  public Object execute(Application application) {
+    //Create a new handler object if required
+    if (this.handler == null) this.handler = new MazeHandler(application);
+
     baseNode.execute(this);
     return null;
   }
