@@ -68,7 +68,7 @@
       <recent name="$PROJECT_DIR$/Programs/Working Algorithms" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Tests.testAllParsersSmall">
+  <component name="RunManager" selected="JUnit.Tests.runAnyParser">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -76,6 +76,16 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.runAnyParser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Maze-Solver-Java" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="runAnyParser" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -120,23 +130,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.testGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Maze-Solver-Java" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="testGame" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Tests.runAnyParser" />
         <item itemvalue="JUnit.Tests.testAllParsersSmall" />
         <item itemvalue="JUnit.Tests.testAStarParserSmall" />
         <item itemvalue="JUnit.Tests.testAllParsersTiny" />
         <item itemvalue="JUnit.Tests.runValid" />
-        <item itemvalue="JUnit.Tests.testGame" />
       </list>
     </recent_temporary>
   </component>
