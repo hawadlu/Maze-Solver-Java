@@ -3020,5 +3020,30 @@ public class Tests {
       System.out.println("Saved image");
     }
   }
+
+  /**
+   * Launch a UI file chooser to
+   */
+  @Test
+  public void runAnyParser() throws GenericError {
+    System.out.println("Choose image");
+    File image = GUI.GUI.UIFileChooser();
+    System.out.println("Choose parser");
+    File parser = GUI.GUI.UIFileChooser();
+
+    Application application = new Application();
+    application.parseImageFile(image);
+    application.scanEntireMaze();
+
+    Parser p = new Parser(parser);
+    p.startParser();
+    p.print();
+    p.execute(application);
+
+    application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
+    application.saveImage("Images/Solved/" + image.getName() + " Small Imperfect 2 Custom Algorithm.png");
+    System.out.println("Saved image");
+  }
 }
+
 
