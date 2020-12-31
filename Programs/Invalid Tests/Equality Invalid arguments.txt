@@ -1,0 +1,5 @@
+***Some comment***
+
+if (eq(3, 3, 3)) {
+    print("This should not have run");
+}

@@ -3026,10 +3026,8 @@ public class Tests {
    */
   @Test
   public void runAnyParser() throws GenericError {
-    System.out.println("Choose image");
-    File image = GUI.GUI.UIFileChooser();
-    System.out.println("Choose parser");
-    File parser = GUI.GUI.UIFileChooser();
+    File image = new File("Images/Tiny.png");
+    File parser = new File("Programs/Working Algorithms/AStar.txt");
 
     Application application = new Application();
     application.parseImageFile(image);
@@ -3041,7 +3039,7 @@ public class Tests {
     p.execute(application);
 
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
-    application.saveImage("Images/Solved/" + image.getName() + " Small Imperfect 2 Custom Algorithm.png");
+    application.saveImage("Images/Solved/" + image.getName() + " Small Imperfect 2 Custom Algorithm" + parser.getName() + ".png");
     System.out.println("Saved image");
   }
 }

@@ -15,6 +15,7 @@ import Parser.ProgramNodes.VariableNodes.VariableAssignmentNode;
 import Parser.ProgramNodes.VariableNodes.VariableNode;
 import Utility.Exceptions.ParserFailure;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -931,11 +932,11 @@ public class Parser {
     for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
       msg += " " + fileScanner.next();
     }
-    throw new ParserFailure(msg + "...");
+    throw new ParserFailure(new JFrame(), msg + "...");
   }
 
   public void executionError(String msg) {
-    throw new ParserFailure(msg + "...");
+    throw new ParserFailure(new JFrame(), msg + "...");
   }
 
   /**
