@@ -1,0 +1,3 @@
+***Test a root with too many arguments***
+
+Number aNumber = root(1, 2);

@@ -2,6 +2,7 @@ import Game.Game;
 import Game.Player;
 import Parser.Parser;
 import Parser.MazeHandler;
+import Utility.Exceptions.ParserFailure;
 import Utility.PathMaker;
 import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
@@ -14,13 +15,16 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Tests {
 
@@ -3041,6 +3045,59 @@ public class Tests {
     application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(p.handler.getLastNode()), true);
     application.saveImage("Images/Solved/" + image.getName() + " Small Imperfect 2 Custom Algorithm" + parser.getName() + ".png");
     System.out.println("Saved image");
+  }
+
+  @Test
+  public void testInvalid() throws GenericError {
+    File invalidDir = new File("Programs/Invalid Tests/");
+    File imageFile = new File("Images/Tiny.png");
+    ArrayList<File> directories = new ArrayList<>();
+    directories.add(invalidDir);
+
+    while (!directories.isEmpty()) {
+      File directory = directories.remove(0);
+      for (File file: directory.listFiles()) {
+        if (file.isDirectory()) directories.add(file);
+        else if (file.getName().contains(".solver")) {
+          System.out.println("File: " + file);
+
+          Application application = new Application();
+          application.parseImageFile(imageFile);
+          application.scanEntireMaze();
+
+          Parser p = new Parser(file, false);
+
+          Exception exception = assertThrows(ParserFailure.class, () -> {
+            p.startParser();
+            p.execute(application);
+          });
+
+          String expectedMessage = "FAIL";
+          String actualMessage = exception.getMessage();
+          System.out.println(exception.getMessage());
+          assertTrue(actualMessage.contains(expectedMessage));
+        }
+      }
+    }
+  }
+
+  @Test
+  public void rename() {
+    File dir = new File("Programs");
+    ArrayList<File> directories = new ArrayList<>();
+    directories.add(dir);
+
+    while (!directories.isEmpty()) {
+      File directory = directories.remove(0);
+      for (File file: directory.listFiles()) {
+        if (file.isDirectory()) directories.add(file);
+        else if (!file.getName().contains(".solver")) {
+          String newPath = file.getPath() + ".solver";
+          File newFile = new File(newPath);
+          file.renameTo(newFile);
+        }
+      }
+    }
   }
 }
 

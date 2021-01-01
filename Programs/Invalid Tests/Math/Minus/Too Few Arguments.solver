@@ -1,0 +1,3 @@
+***Test a minus with too few arguments***
+
+Number aNumber = minus(1);

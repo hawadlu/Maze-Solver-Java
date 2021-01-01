@@ -1,0 +1,6 @@
+***Test for unclosed comments***
+
+Node something;
+Node somethingElse;
+
+***This comment is unclosed

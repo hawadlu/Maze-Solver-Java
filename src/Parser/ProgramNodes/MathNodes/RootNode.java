@@ -23,4 +23,11 @@ public class RootNode implements Number {
   public double calculate(Parser parser) {
     return Math.sqrt(values.get(0).calculate(parser));
   }
+
+  /**
+   * @return the number of arguments that have been provided for this condition.
+   */
+  public ArrayList<Number> getArguments() {
+    return values;
+  }
 }

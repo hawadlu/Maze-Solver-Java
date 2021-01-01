@@ -37,4 +37,11 @@ public class DivideNode implements Exec, Number {
 
     return initialValue;
   }
+
+  /**
+   * @return the number of arguments that have been provided for this condition.
+   */
+  public ArrayList<Number> getArguments() {
+    return values;
+  }
 }

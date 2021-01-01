@@ -1,0 +1,5 @@
+***Test an equals with too many arguments
+
+if (eq(3, 3, 3)) {
+    print("FAIL");
+}

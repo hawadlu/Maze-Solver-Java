@@ -33,8 +33,18 @@ public class Parser {
   Exec baseNode;
   public HashMap<String, VariableNode> variables = new HashMap<>();
   public MazeHandler handler;
+  private boolean enablePopup = true; //Set to false if debugging and the error popup becomes annoying
 
   public Parser(File toRead) {
+    try {
+      fileScanner = new Scanner(toRead);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public Parser(File toRead, boolean enablePopup) {
+    this.enablePopup = enablePopup;
     try {
       fileScanner = new Scanner(toRead);
     } catch (FileNotFoundException e) {
@@ -741,12 +751,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Root missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain one argument");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) root.add(parseMath(fileScanner));
       else fail("Invalid math operation in root");
     }
+
+    if (root.getArguments().size() > 1) fail("Root can only contain on argument");
 
     //Discard the closing )
     fileScanner.next();
@@ -768,12 +782,17 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Power missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain at least two arguments");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) power.add(parseMath(fileScanner));
       else fail("Invalid math operation in power");
     }
+
+    if (power.getArguments().size() < 2) fail("Power must contain at least two arguments");
+
 
     //Discard the closing )
     fileScanner.next();
@@ -795,12 +814,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Multiply missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Multiply must contain at least two arguments");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) multiply.add(parseMath(fileScanner));
       else fail("Invalid math operation in multiply");
     }
+
+    if (multiply.getArguments().size() < 2) fail("Multiply must contain at least two arguments");
 
     //Discard the closing )
     fileScanner.next();
@@ -822,12 +845,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Divide missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Divide must contain at least two arguments");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) divide.add(parseMath(fileScanner));
       else fail("Invalid math operation in divide");
     }
+
+    if (divide.getArguments().size() < 2) fail("Divide must contain at least two arguments");
 
     //Discard the closing )
     fileScanner.next();
@@ -849,12 +876,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Minus missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Minus must contain at least two arguments");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) minus.add(parseMath(fileScanner));
       else fail("Invalid math operation in minus");
     }
+
+    if (minus.getArguments().size() < 2) fail("Minus must contain at least two arguments");
 
     //Discard the closing )
     fileScanner.next();
@@ -871,6 +902,8 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Plus missing opening '('");
 
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Plus must contain at least two arguments");
+
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
@@ -879,6 +912,9 @@ public class Parser {
       else if (fileScanner.hasNext(Regex.name)) plus.add(parseEvaluateNameCall(fileScanner));
       else fail("Invalid math operation in plus");
     }
+
+    //Check that the number of arguments is valid
+    if (plus.getArguments().size() < 2) fail("Plus must contain at least two arguments");
 
     //Discard the closing )
     fileScanner.next();
@@ -932,11 +968,11 @@ public class Parser {
     for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
       msg += " " + fileScanner.next();
     }
-    throw new ParserFailure(new JFrame(), msg + "...");
+    throw new ParserFailure(new JFrame(), msg + "...", enablePopup);
   }
 
   public void executionError(String msg) {
-    throw new ParserFailure(new JFrame(), msg + "...");
+    throw new ParserFailure(new JFrame(), msg + "...", enablePopup);
   }
 
   /**

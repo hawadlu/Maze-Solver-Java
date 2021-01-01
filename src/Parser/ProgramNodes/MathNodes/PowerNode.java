@@ -3,6 +3,7 @@ package Parser.ProgramNodes.MathNodes;
 import Parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * This class deals with adding values together
@@ -30,5 +31,12 @@ public class PowerNode implements Number {
     }
 
     return initialValue;
+  }
+
+  /**
+   * @return the number of arguments that have been provided for this condition.
+   */
+  public ArrayList<Number> getArguments() {
+    return values;
   }
 }

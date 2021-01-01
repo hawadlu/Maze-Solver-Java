@@ -1,0 +1,3 @@
+***Test a divide with no arguments***
+
+Number aNumber = divide();

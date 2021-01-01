@@ -1,0 +1,5 @@
+***Test a Less Than with too few arguments
+
+if (lt(1) {
+    print("FAIL");
+}
