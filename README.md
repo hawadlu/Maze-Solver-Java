@@ -30,6 +30,7 @@ Print statements use the keyword print followed by a string, variable reference 
 <br>
 e.g.
 <br>
+
 print(""), print("Hello world"), print(someVar.getSize()) or print(plus(2, 2))
 
 <H2>Declarations</H2>
@@ -315,10 +316,13 @@ have to remove.
 A for loop iterates through every node in a give list.
 
 e.g. <br>
-List someList = Maze.getNeighbours(node); <br>
-for (node: someList) {<br>
-node.xyz();<br>
+```java
+List someList = Maze.getNeighbours(node); 
+for (node: someList) {
+  node.xyz();
 }
+```
+<br>
 
 Each for loop declares a local variable which can be used within the loop.
 
@@ -331,10 +335,13 @@ the condition is false, the loop will exit.
 There can be any number of statements within the loop.
 
 e.g.<br>
-Condition someCondition = gt(4, 4); <br>
-while(someCondition) {<br>
-    statements...<br>
-}<br>
+```java
+Condition someCondition = gt(4, 4);
+while(someCondition) {
+    statements...
+}
+```
+<br>
 
 Note that in the above case the loop is infinite because 4 will never be greater than itself.
 
@@ -344,50 +351,62 @@ An if statement is run if a given condition is true.
 Inside the if statement there may be any number of other statements.
 
 e.g.<br>
-Condition someCondition = eq(4, 4); <br>
-if(someCondition) {<br>
-statements...<br>
-}<br>
+````java
+Condition someCondition = eq(4, 4);
+if(someCondition) {
+  statements...
+}
+````
+
 
 If statements can also be chained together to form an else if statement.
 
 In this case if the first statement is not true, the second statement is checked and then executed if 
 its condition is true. There may be any number of else if braches on the same if statement
 
-Condition someCondition1= lt(3, 2); <br>
-Condition someCondition2 = eq(2, 1); <br>
-Condition someCondition3 = eq(1, 1); <br>
-if(someCondition1) {<br>
-statements...<br>
-} else if (someCondition2) { <br>
-statements...<br>
-} else if (someCondition2) { <br>
-statements...<br>
-}<br>
+```java
+Condition someCondition1= lt(3, 2);
+Condition someCondition2 = eq(2, 1);
+Condition someCondition3 = eq(1, 1); 
+if(someCondition1) {
+  statements...
+} else if (someCondition2) {
+  statements...
+} else if (someCondition2) {
+  statements...
+}
+```
+
 
 If statements may also include an else that is run in none of the conditions are true.
 
-Condition someCondition = eq(4, 4); <br>
-if(someCondition) {<br>
-statements...<br>
-} else {<br>
-statements...<br>
-}<br>
+```java
+Condition someCondition = eq(4, 4); 
+if(someCondition) {
+  statements...
+} else {
+  statements...
+}
+```
+
 
 or
 
-Condition someCondition1= lt(3, 2); <br>
-Condition someCondition2 = eq(2, 1); <br>
-Condition someCondition3 = eq(1, 1); <br>
-if(someCondition1) {<br>
-statements...<br>
-} else if (someCondition2) { <br>
-statements...<br>
-} else if (someCondition2) { <br>
-statements...<br>
-} else {<br>
-statements...<br>
-}<br>
+```java
+Condition someCondition1= lt(3, 2);
+Condition someCondition2 = eq(2, 1); 
+Condition someCondition3 = eq(1, 1); 
+if(someCondition1) {
+  statements...
+} else if (someCondition2) { 
+  statements...<br>
+} else if (someCondition2) { 
+  statements...
+} else {
+  statements...
+}
+```
+
 
 <H2>Conditions</H2>
 A condition is something that can either be true or false.
