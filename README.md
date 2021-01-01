@@ -290,6 +290,7 @@ There are two different comparators available to use, and they are...
 <ul>
     <li>Maze.getCost(node)</li>
     <li>Maze.getNeighbourCount(node)</li>
+    <li>Maze.distanceToDestination(node)</li>
 </ul>
 
 <H2>Nodes</H2>

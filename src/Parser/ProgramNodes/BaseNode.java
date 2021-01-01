@@ -15,6 +15,7 @@ public class BaseNode implements Exec{
 
   @Override
   public Object execute(Parser parser) {
+    System.out.println("Starting execution");
     for (Exec statement: statements){
       statement.execute(parser);
     }

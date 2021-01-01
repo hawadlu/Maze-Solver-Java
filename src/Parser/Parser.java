@@ -228,11 +228,16 @@ public class Parser {
     //Discard the '->'
     fileScanner.next();
 
+    Exec comparator = null;
+
     //Check for a method call
     if (!fileScanner.hasNext(Regex.mazeCall)) fail("Comparator is missing call to maze method.");
-    else return new ComparatorNode(parseMazeCall(fileScanner));
+    else comparator = new ComparatorNode(parseMazeCall(fileScanner));
 
-    return null;
+    //Check to see that the next argument is the ';' because a comparator can only have one argument
+    if (!fileScanner.hasNext(Regex.semiColon)) fail("Comparator can only have one argument");
+
+    return comparator;
   }
 
   /**
@@ -972,7 +977,8 @@ public class Parser {
   }
 
   public void executionError(String msg) {
-    throw new ParserFailure(new JFrame(), msg + "...", enablePopup);
+    String message = "FAIL: Execution error: " + msg + "...";
+    throw new ParserFailure(new JFrame(), message, enablePopup);
   }
 
   /**

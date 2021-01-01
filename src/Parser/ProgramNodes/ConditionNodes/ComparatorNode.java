@@ -7,6 +7,8 @@ import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Utility.Location;
 import Utility.Node;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class ComparatorNode implements Exec {
@@ -19,26 +21,38 @@ public class ComparatorNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
-    comparator = (nodeOne, nodeTwo) -> {
-
+    //Make sure that the method that the user wants to use is valid
+    if (callToInit instanceof MazeActionNode) {
       //Check what the user wants to use as a compare
-      if (callToInit instanceof MazeActionNode) {
-        MazeActionNode action = (MazeActionNode) callToInit;
+      MazeActionNode action = (MazeActionNode) callToInit;
 
-        //Get the method node
-        MethodNode method = action.getMethodNode();
+      //Get the method node
+      MethodNode method = action.getMethodNode();
 
-        //Look at the method
-        String methodName = method.getName();
+      //Look at the method
+      String methodName = method.getName();
+
+      //Check to see if the user is using a correct maze method
+      String[] validMethods = {"getCost", "getNeighbourCount", "distanceToDestination"};
+      if (!Arrays.asList(validMethods).contains(methodName)) parser.executionError(methodName + " is not a valid comparator method.");
+
+      comparator = (nodeOne, nodeTwo) -> {
 
         if (methodName.equals("getCost")) return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
-        else if (methodName.equals("getNeighbourCount")) return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
-      }
+        else if (methodName.equals("getNeighbourCount"))
+          return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
+        else if (methodName.equals("distanceToDestination"))
+          return Double.compare(parser.handler.getDistanceToDestination(nodeOne), parser.handler.getDistanceToDestination(nodeTwo));
+        else parser.executionError(methodName + " is not a valid comparator method");
 
-      return 0;
-    };
+        return 0;
+      };
 
-    return comparator;
+      return comparator;
+    } else {
+      parser.executionError("Failed to create parser");
+      return null;
+    }
   }
 
   @Override

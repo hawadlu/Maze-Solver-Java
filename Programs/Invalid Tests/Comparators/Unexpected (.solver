@@ -1,0 +1,4 @@
+***Try to create a comparator with an unexpected (***
+
+Node node;
+Comparator compare -> (Maze.getCost(node);

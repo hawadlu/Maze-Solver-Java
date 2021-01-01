@@ -3076,6 +3076,7 @@ public class Tests {
           String actualMessage = exception.getMessage();
           System.out.println(exception.getMessage());
           assertTrue(actualMessage.contains(expectedMessage));
+          System.out.print("\n\n\n");
         }
       }
     }
