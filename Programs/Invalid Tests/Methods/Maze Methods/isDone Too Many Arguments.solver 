@@ -1,0 +1,4 @@
+***Try to call the isDone method with too many arguments***
+
+Node node;
+Maze.isDone(node, node);

@@ -1,0 +1,5 @@
+***Try to call the distanceToDestination method an invalid type***
+
+Stack stack;
+
+Maze.distanceToDestination(stack);

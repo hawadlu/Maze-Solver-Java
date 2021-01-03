@@ -1,0 +1,5 @@
+***This tries to call the getCost method with invalid typed***
+
+Node start;
+Number cost;
+Maze.setCost(start, start);

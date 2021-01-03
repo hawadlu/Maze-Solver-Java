@@ -1,0 +1,5 @@
+***This tries to call the getCost method with too many arguments***
+
+Node start;
+Node end;
+Maze.setCost(start, end, 3);

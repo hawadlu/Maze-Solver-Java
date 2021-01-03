@@ -1,0 +1,4 @@
+***Try to call the isVisited method with an invalid type***
+
+Stack toProcess;
+Maze.isVisited(toProcess);

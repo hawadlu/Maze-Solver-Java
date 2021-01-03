@@ -11,9 +11,11 @@ import java.util.ArrayList;
 public class MethodNode implements Exec {
   String name;
   ArrayList<Object> parameters = new ArrayList<>();
+  ParameterValidator validator;
 
   public MethodNode(String name) {
     this.name = name;
+    validator = new ParameterValidator(name);
   }
 
   public MethodNode(String name, ArrayList<Object> parameters) {
@@ -26,6 +28,8 @@ public class MethodNode implements Exec {
       }
       this.parameters.add(obj);
     }
+
+    validator = new ParameterValidator(name, parameters);
   }
 
   public String getName() {
@@ -54,5 +58,12 @@ public class MethodNode implements Exec {
   public String toString() {
     if (parameters == null) return "Method (" + name + "())";
     else return "Method (" + name + "(" + parameters + "))";
+  }
+
+  /**
+   * Check that the supplied parameters are of the correct type
+   */
+  public void checkParameters(Parser parser) {
+    validator.validate(parser);
   }
 }

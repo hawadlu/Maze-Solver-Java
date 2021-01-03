@@ -1,0 +1,3 @@
+***Try to call the getNeighbours method with too few arguments***
+
+Maze.getNeighbours();

@@ -1,0 +1,6 @@
+***Try to call the getParent method with too many Arguments***
+
+Node nodeOne;
+Node nodeTwo;
+
+Maze.getParent(nodeOne, nodeTwo);

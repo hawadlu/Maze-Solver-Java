@@ -1,0 +1,4 @@
+***Try to call the visit method with an invalid type***
+
+Stack toProcess;
+Maze.visit(toProcess);

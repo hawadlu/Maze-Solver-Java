@@ -1,0 +1,4 @@
+***Try to call the getNeighbours method with an invalid type***
+
+Stack toProcess;
+Maze.isDone(toProcess);

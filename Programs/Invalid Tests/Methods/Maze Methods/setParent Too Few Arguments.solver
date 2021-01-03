@@ -1,0 +1,5 @@
+***Try to call the setParent method with too few arguments***
+
+Node nodeOne;
+
+Maze.setParent(nodeOne);

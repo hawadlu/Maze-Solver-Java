@@ -1,0 +1,4 @@
+***Try to call the finish method with too many arguments***
+
+Queue toProcess;
+Maze.finish(toProcess);

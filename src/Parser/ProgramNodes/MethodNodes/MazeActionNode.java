@@ -22,6 +22,9 @@ public class MazeActionNode implements Exec {
 
   @Override
   public Object execute(Parser parser) {
+    //Check the parameters
+    methodNode.checkParameters(parser);
+
     if (methodNode.name.equals("getStart")) {
       return parser.handler.getStart();
     } else if (methodNode.name.equals("visit")) {
