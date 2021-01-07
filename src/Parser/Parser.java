@@ -6,7 +6,6 @@ import Parser.ProgramNodes.ConditionNodes.*;
 import Parser.ProgramNodes.LoopNodes.ForNode;
 import Parser.ProgramNodes.LoopNodes.WhileNode;
 import Parser.ProgramNodes.MathNodes.*;
-import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MethodNodes.MazeActionNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
@@ -14,6 +13,7 @@ import Parser.ProgramNodes.VariableNodes.VariableActionNode;
 import Parser.ProgramNodes.VariableNodes.VariableAssignmentNode;
 import Parser.ProgramNodes.VariableNodes.VariableNode;
 import Utility.Exceptions.ParserFailure;
+import Parser.ProgramNodes.MathNodes.Number;
 
 import javax.swing.*;
 import java.io.File;

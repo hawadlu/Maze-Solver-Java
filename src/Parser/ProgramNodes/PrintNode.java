@@ -1,10 +1,11 @@
 package Parser.ProgramNodes;
 
 import Parser.Parser;
-import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 import Parser.ProgramNodes.VariableNodes.VariableActionNode;
+import Parser.ProgramNodes.MathNodes.Number;
+
 
 import java.util.ArrayList;
 

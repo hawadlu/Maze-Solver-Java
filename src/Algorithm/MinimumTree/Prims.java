@@ -1,7 +1,7 @@
 package Algorithm.MinimumTree;
 
-import Algorithm.Solvers.SolveRunner;
 import Algorithm.SolveAlgorithm;
+import Algorithm.Solvers.SolveRunner;
 import Utility.Segment;
 
 import java.util.ArrayList;

@@ -2,16 +2,14 @@ package Game;
 
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
+import Image.ImageFile;
 import Parser.Parser;
 import Utility.Node;
-import Parser.MazeHandler;
+import Utility.PathMaker;
 
 import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import Image.ImageFile;
-import Utility.PathMaker;
 
 public class Player {
   public Application application;

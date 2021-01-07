@@ -3,7 +3,6 @@ package Parser.ProgramNodes.MathNodes;
 import Parser.Parser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * This class deals with adding values together

@@ -1,21 +1,18 @@
-import Game.Game;
-import Game.Player;
-import Parser.Parser;
-import Parser.MazeHandler;
-import Utility.Exceptions.ParserFailure;
-import Utility.PathMaker;
-import Utility.Thread.AlgorithmDispatcher;
 import Application.Application;
-import Utility.Exceptions.GenericError;
+import Game.Game;
 import Image.ImageProcessor;
+import Parser.Parser;
+import Utility.Exceptions.GenericError;
+import Utility.Exceptions.ParserFailure;
 import Utility.Location;
 import Utility.Node;
+import Utility.PathMaker;
+import Utility.Thread.AlgorithmDispatcher;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -2682,8 +2679,10 @@ public class Tests {
      * Create a CSV file and save the results
      */
     public void saveResult() throws IOException {
-      String time = new Timestamp(new Date().getTime()).toString();
-      File newCSV = new File("Test Results/Test Results (" + time + ").csv");
+      long timeVal = new Date().getTime();
+      Timestamp time = new Timestamp(timeVal);
+      String timeStr = time.toString();
+      File newCSV = new File("Test Results/Test Results (" + timeStr + ").csv");
       FileWriter csv = new FileWriter(newCSV);
 
       //Add the headers

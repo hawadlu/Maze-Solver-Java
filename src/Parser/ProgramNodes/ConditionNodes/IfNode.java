@@ -1,7 +1,6 @@
 package Parser.ProgramNodes.ConditionNodes;
 
 import Parser.Parser;
-import Parser.ProgramNodes.ConditionNodes.Condition;
 import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;

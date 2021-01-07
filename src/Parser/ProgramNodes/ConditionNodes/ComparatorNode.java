@@ -4,11 +4,9 @@ import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MethodNodes.MazeActionNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
-import Utility.Location;
 import Utility.Node;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class ComparatorNode implements Exec {

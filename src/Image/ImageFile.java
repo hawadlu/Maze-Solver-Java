@@ -1,7 +1,7 @@
 package Image;
 
 import Utility.Colours;
-import Utility.Colours.*;
+import Utility.Colours.colEnum;
 import Utility.Exceptions.InvalidImage;
 import Utility.Location;
 import Utility.Node;
@@ -22,22 +22,15 @@ public class ImageFile {
   private final String filePath;
 
   /**
-   * Copy constrcutor used to copy an image
+   * Copy constructor used to copy an image
    *
    * @param oldImage the old image
    */
   public ImageFile(ImageFile oldImage) {
     //Create a new array based on the dimensions of the old one
-    this.imageArray = new colEnum[oldImage.imageArray.length][oldImage.imageArray[0].length];
-
-    //remove any solved reset all the white squares
-    for (int height = 0; height < oldImage.imageArray.length - 1; height++) {
-      for (int width = 0; width < oldImage.imageArray[0].length - 1; width++) {
-        if (oldImage.imageArray[height][width] == colEnum.BLACK) this.imageArray[height][width] = colEnum.BLACK;
-        else this.imageArray[height][width] = colEnum.WHITE;
-      }
-    }
-    this.filePath = oldImage.filePath;
+    imageArray = oldImage.imageArray;
+    reset();
+    filePath = oldImage.filePath;
   }
 
   public ImageFile(File toLoad) throws InvalidImage {

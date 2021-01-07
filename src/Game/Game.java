@@ -7,8 +7,6 @@ import Parser.Parser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
   Player playerOne, playerTwo;
@@ -19,7 +17,7 @@ public class Game {
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
-  public Game(Dimension maxSize,  GUI gui, JPanel controlPanel, Application application) {
+  public Game(Dimension maxSize, GUI gui, JPanel controlPanel, Application application) {
     playerOne = new Player(maxSize, "Player One", application, this);
     playerTwo = new Player(maxSize, "Player Two", application, this);
     this.gui = gui;

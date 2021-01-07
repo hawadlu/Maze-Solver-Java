@@ -1,9 +1,9 @@
 package Parser.ProgramNodes;
 
 import Parser.Parser;
-import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
+import Parser.ProgramNodes.MathNodes.Number;
 
 /**
  * Evaluate and return a number

@@ -2,7 +2,6 @@ package Parser.ProgramNodes.MathNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
-import Parser.ProgramNodes.MathNodes.Number;
 
 public class NumberNode implements Number, Exec {
   double value;

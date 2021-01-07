@@ -3,16 +3,16 @@ package Application;
 //todo tidy code up so that most interfaces through this class
 
 import GUI.CustomPanels.PlayerPanel;
+import GUI.GUI;
 import Game.Game;
+import Game.Player;
+import Image.ImageFile;
+import Image.ImageProcessor;
 import Parser.Parser;
-import Utility.Exceptions.InvalidImage;
+import Utility.Exceptions.GenericError;
 import Utility.Location;
 import Utility.Node;
 import Utility.Thread.AlgorithmDispatcher;
-import GUI.GUI;
-import Utility.Exceptions.GenericError;
-import Image.*;
-import Game.Player;
 
 import javax.swing.*;
 import java.awt.*;

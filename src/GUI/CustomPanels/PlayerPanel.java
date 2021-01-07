@@ -1,15 +1,12 @@
 package GUI.CustomPanels;
 
 import Application.Application;
+import Parser.Parser;
+import Image.ImageFile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Objects;
-
-import Image.ImageFile;
-import Parser.MazeHandler;
-import Parser.Parser;
 
 /**
  * This class holds all of the interactions used when playing the game

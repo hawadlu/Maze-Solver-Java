@@ -2,9 +2,10 @@ package Parser.ProgramNodes.MethodNodes;
 
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
-import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Utility.Node;
+import Parser.ProgramNodes.MathNodes.Number;
+
 
 /**
  * This class deals with calls to maze actions

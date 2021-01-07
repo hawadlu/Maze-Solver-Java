@@ -4,6 +4,7 @@ import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.Number;
 
+
 /**
  * This class is used to check if one var is less than another.
  */

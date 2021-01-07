@@ -1,9 +1,9 @@
 package Image;
 
 import Application.Application;
+import Utility.Colours.colEnum;
 import Utility.Location;
 import Utility.Node;
-import Utility.Colours.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

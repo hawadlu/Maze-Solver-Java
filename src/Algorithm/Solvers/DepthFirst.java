@@ -1,7 +1,6 @@
 package Algorithm.Solvers;
 
 import Algorithm.SolveAlgorithm;
-import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
 import java.util.Objects;
