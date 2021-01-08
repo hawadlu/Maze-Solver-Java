@@ -1,0 +1,5 @@
+***Test the less than operator using valid inputs***
+
+if (lt(3, 4)) {
+    Maze.fail("Maze was deliberately failed");
+}

@@ -58,7 +58,7 @@ public class Parser {
   /**
    * Start the parser.
    */
-  public void startParser() {
+  public void compile() {
     System.out.println("Commenced parsing");
 
     fileScanner.useDelimiter(Regex.delimiter);
@@ -638,6 +638,11 @@ public class Parser {
     //Check if there are any parameters
     if (fileScanner.hasNext(Regex.name)) toReturn = new MethodNode(methodName, parseParams(fileScanner), handler);
     else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName, handler);
+    else if (fileScanner.hasNext(Regex.doubleQuote)) {
+      ArrayList<Object> params = new ArrayList<>();
+      params.add(parsePrint(fileScanner, false));
+      toReturn = new MethodNode(methodName, params, handler);
+    }
 
     //Check for closing brace
     scannerHasNext(fileScanner, Regex.closeParen, "Method missing closing ');");

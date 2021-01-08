@@ -567,7 +567,7 @@ public class GUI {
       solveThread = new Thread() {
         @Override
         public void run() {
-          parser.startParser();
+          parser.compile();
           parser.execute(application);
         }
       };

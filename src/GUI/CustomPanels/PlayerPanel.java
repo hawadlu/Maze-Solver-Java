@@ -57,7 +57,7 @@ public class PlayerPanel extends JPanel {
       parser.addActionListener(e -> {
         customAlgo = new Parser(GUI.GUI.UIFileChooser());
 
-        customAlgo.startParser();
+        customAlgo.compile();
       });
     }
     this.add(parser);

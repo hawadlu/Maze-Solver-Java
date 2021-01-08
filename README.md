@@ -148,6 +148,11 @@ List of all available methods
         <br>
         Sets the parent of a node.
     </li>
+    <li>
+        Maze.fail("Some message")
+        <br>
+        Deliberately fail the program. Probaly not useful in an actual maze solver but it is good for testing.
+    </li>
 </ul>
 
 <H2>Variable Methods</H2>

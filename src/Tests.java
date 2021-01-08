@@ -2683,7 +2683,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2707,7 +2707,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2731,7 +2731,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2755,7 +2755,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2779,7 +2779,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2803,7 +2803,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2829,7 +2829,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2853,7 +2853,7 @@ public class Tests {
         Parser p = new Parser(dfs);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -2882,7 +2882,7 @@ public class Tests {
             Parser p = new Parser(file);
             Handler handler = new Handler(application);
             p.setMazeHandler(handler);
-            p.startParser();
+            p.compile();
             p.print();
             p.execute(application);
 
@@ -2912,7 +2912,7 @@ public class Tests {
             Parser p = new Parser(file);
             Handler handler = new Handler(application);
             p.setMazeHandler(handler);
-            p.startParser();
+            p.compile();
             p.print();
             p.execute(application);
 
@@ -2943,8 +2943,8 @@ public class Tests {
                 pOne.setMazeHandler(new Handler(application));
                 pTwo.setMazeHandler(new Handler(application));
 
-                pOne.startParser();
-                pTwo.startParser();
+                pOne.compile();
+                pTwo.compile();
 
                 Game game = new Game(pOne, pTwo, application);
 
@@ -2961,31 +2961,32 @@ public class Tests {
      * Run all of the tests in the valid tests folder
      */
     @Test
-    public void runValid() {
-        ArrayList<File> files = getAllFiles(new File("Programs/Valid Tests"));
+    public void testValid() throws GenericError {
+        File invalidDir = new File("Programs/Valid Tests/");
+        File imageFile = new File("Images/Tiny.png");
+        ArrayList<File> directories = new ArrayList<>();
+        directories.add(invalidDir);
 
-        for (File file : files) {
-            System.out.println("File: " + file);
+        while (!directories.isEmpty()) {
+            File directory = directories.remove(0);
+            for (File file : directory.listFiles()) {
+                if (file.isDirectory()) directories.add(file);
+                else if (file.getName().contains(".solver")) {
+                    System.out.println("File: " + file);
 
-            Application application = new Application();
-            try {
-                application.parseImageFile(new File("Images/Small Imperfect2.png"));
-            } catch (GenericError genericError) {
-                genericError.printStackTrace();
+                    Application application = new Application();
+                    application.parseImageFile(imageFile);
+                    application.scanEntireMaze();
+
+                    Parser p = new Parser(file, false);
+                    Handler handler = new Handler(application);
+                    p.setMazeHandler(handler);
+                    p.compile();
+                    p.execute(application);
+
+                    System.out.print("\n\n\n");
+                }
             }
-
-            application.scanEntireMaze();
-
-            Parser p = new Parser(file);
-            Handler handler = new Handler(application);
-            p.setMazeHandler(handler);
-            p.startParser();
-            p.print();
-            p.execute(application);
-
-            application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
-            application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
-            System.out.println("Saved image");
         }
     }
 
@@ -3004,7 +3005,7 @@ public class Tests {
         Parser p = new Parser(parser);
         Handler handler = new Handler(application);
         p.setMazeHandler(handler);
-        p.startParser();
+        p.compile();
         p.print();
         p.execute(application);
 
@@ -3036,7 +3037,7 @@ public class Tests {
                     p.setMazeHandler(handler);
 
                     Exception exception = assertThrows(ParserFailure.class, () -> {
-                        p.startParser();
+                        p.compile();
                         p.execute(application);
                     });
 

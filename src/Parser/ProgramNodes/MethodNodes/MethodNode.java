@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * Class that handles the execution of methods
  */
 public class MethodNode implements Exec {
-  String name;
-  ArrayList<Object> parameters = new ArrayList<>();
-  MethodValidator validator;
+  private String name;
+  private ArrayList<Object> parameters = new ArrayList<>();
+  private MethodValidator validator;
   private Handler handler;
 
   public MethodNode(String name, Handler handler) {
@@ -57,6 +57,7 @@ public class MethodNode implements Exec {
     else if (name.equals("distanceToDestination")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
     else if (name.equals("setParent")) validator = new MethodValidator(name, new String[]{"Node", "Node"}, parameters, handler);
     else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
+    else if (name.equals("fail")) validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
     else Parser.fail("Unrecognised method " + name, null);
   }
 
@@ -85,6 +86,8 @@ public class MethodNode implements Exec {
       Object toReturn = parameters.get(0);
       if (toReturn instanceof String) return handler.getFromMap(toReturn);
       else return ((Exec) toReturn).execute();
+    } else if (name.equals("fail")) {
+      return parameters.get(0); //The fail message is supplied at param index 0
     }
     return null;
   }
