@@ -1,4 +1,4 @@
-***This is the same as all the other AStar searches, but uses the number of neighours as the comparator***
+***This is the same as all the other AStar searches, but uses the number of neighbours as the comparator***
 print("AStar is starting the solve");
 
 Node parent;

@@ -40,7 +40,7 @@ public class PrintNode implements Exec{
       if (obj instanceof String) toReturn.append(obj);
       else if (obj instanceof Number) toReturn.append(((Number) obj).calculate());
       else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString());
-      else if (obj instanceof GetVariableNode) toReturn.append(handler.getFromMap(((GetVariableNode) obj).getInfo()));
+      else if (obj instanceof GetVariableNode) toReturn.append(((GetVariableNode) obj).getInfo());
       else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute());
       else if (obj instanceof VariableActionNode) toReturn.append(((VariableActionNode) obj).execute());
       else toReturn.append(obj);

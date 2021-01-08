@@ -202,7 +202,9 @@ public class Handler {
    * @return the variable value.
    */
   public VariableNode getFromMap(Object key) {
-    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", null);
+    if (!variables.containsKey(key)) {
+      Parser.fail("Could not find variable '" + key + "'", null);
+    }
     return variables.get(key);
   }
 
