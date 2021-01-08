@@ -11,9 +11,14 @@ public class NumberNode implements Number, Exec {
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
 
     return null;
+  }
+
+  @Override
+  public void validate() {
+    //todo implement me
   }
 
   @Override
@@ -22,7 +27,7 @@ public class NumberNode implements Number, Exec {
   }
 
   @Override
-  public double calculate(Parser parser) {
+  public double calculate() {
     return value;
   }
 }

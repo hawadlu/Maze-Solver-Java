@@ -1,8 +1,7 @@
 package Parser.ProgramNodes;
 
-import Parser.Parser;
-
 public interface Exec {
-  Object execute(Parser parser);
+  Object execute();
+  void validate();
   String toString();
 }

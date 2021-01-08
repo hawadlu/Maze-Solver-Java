@@ -1,6 +1,6 @@
 package Parser.ProgramNodes.VariableNodes;
 
-import Parser.Parser;
+import Parser.Handler;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
@@ -14,30 +14,16 @@ import java.util.*;
 public class VariableNode implements Exec {
   String type = null, name = null;
   Exec toEvaluate;
-
   Object value = null;
+  private Handler handler;
 
-  public VariableNode(String type, String name) {
-    this.name = name.replaceAll(" ", "");;
-    this.type = type.replaceAll(" ", "");;
+  public VariableNode(String type, String name, Handler handler) {
+    this.name = name.replaceAll(" ", "");
+    this.type = type.replaceAll(" ", "");
+    this.handler = handler;
   }
 
-  /**
-   * This is a sort of copy constructor. It takes the value and type from another variable.
-   * Used primarily for the temp variables in a for each loop.
-   * Because of this it does not error check any of the parameters, it is assumed that
-   * this has already been done.
-   * @param name the var name
-   * @param type the var type
-   * @param value the value to set
-   */
-  public VariableNode(String name, String type, Object value) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
-  }
-
-  public VariableNode(String[] info, Exec toEvaluate) {
+  public VariableNode(String[] info, Exec toEvaluate, Handler handler) {
     ArrayList<String> tmp1 = new ArrayList<>(Arrays.asList(info));
     ArrayList<String> tmp2 = new ArrayList<>(Arrays.asList(info));
 
@@ -51,6 +37,7 @@ public class VariableNode implements Exec {
     this.name = tmp2.get(1).replaceAll(" ", "");
     this.type = tmp2.get(0).replaceAll(" ", "");;
     this.toEvaluate = toEvaluate;
+    this.handler = handler;
   }
 
   public Object getValue() {
@@ -62,21 +49,44 @@ public class VariableNode implements Exec {
   }
 
   @Override
-  public Object execute(Parser parser) {
-    //Put this into the var map if required
-    if (!parser.variables.containsKey(this)) {
-      parser.variables.put(this.name, this);
-    }
+  public void validate() {
+    //Add the variable to the map in the handler.
+    addToVariableMap();
+
+   if (toEvaluate != null) {
+     toEvaluate.validate();
+   }
+   if (value instanceof Exec) {
+     ((Exec) value).validate();
+   }
+  }
+
+  @Override
+  public Object execute() {
+    //Add the variable to the map in the handler.
+    addToVariableMap();
 
     //Evaluate the Exec node that will assign the value
     if (toEvaluate != null) {
-      if (type.equals("Node") || type.equals("List") || type.equals("Comparator") || type.equals("Number")) value = toEvaluate.execute(parser);
+      if (type.equals("Node") || type.equals("List") || type.equals("Comparator") || type.equals("Number")) value = toEvaluate.execute();
     } else {
       if (type.equals("Stack")) value = new Stack<>();
       else if (type.equals("Queue")) value = new ArrayDeque<>();
       else if (type.equals("PriorityQueue")) value = new PriorityQueue<>();
     }
     return null;
+  }
+
+  /**
+   * Add this variable to the variable map.
+   * This will first check if the variable already exits in the map,
+   * if it does not, it is added.
+   */
+  private void addToVariableMap() {
+    //Put this into the var map if required
+    if (!handler.hasVariable(this.name)) {
+      handler.addVariable(this.name, this);
+    }
   }
 
   @Override
@@ -102,13 +112,13 @@ public class VariableNode implements Exec {
    * @param method the method
    * @return the result of the method if required
    */
-  public Object callMethod(MethodNode method, Parser parser) {
+  public Object callMethod(MethodNode method) {
     if (value instanceof Collection) {
-      if (method.getName().equals("add")) add(method, parser);
+      if (method.getName().equals("add")) add(method);
       else if (method.getName().equals("isEmpty")) return isEmpty();
       else if (method.getName().equals("getNext")) return getNext();
       else if (method.getName().equals("getSize")) return getSize();
-      else if (method.getName().equals("assignComparator")) assignComparator(method, parser);
+      else if (method.getName().equals("assignComparator")) assignComparator(method);
     }
 
     return null;
@@ -117,14 +127,13 @@ public class VariableNode implements Exec {
   /**
    * Assign a comparator to the value if required.
    * @param method the method
-   * @param parser the parser
    */
-  private void assignComparator(MethodNode method, Parser parser) {
+  private void assignComparator(MethodNode method) {
     if (!(value instanceof PriorityQueue));
 
     //Get the comparator out of the variable map
     String varName = (String) method.getParameters().get(0);
-    Comparator<Node> comparator = (Comparator<Node>) parser.variables.get(varName).value;
+    Comparator<Node> comparator = (Comparator<Node>) handler.getFromMap(varName).value;
 
     value = new PriorityQueue<>(comparator);
   }
@@ -156,13 +165,12 @@ public class VariableNode implements Exec {
   /**
    * Add a new value to this variable.
    * @param method the method to execute in order to get the value
-   * @param parser the parser object.
    */
-  private void add(MethodNode method, Parser parser) {
+  private void add(MethodNode method) {
     if (type.equals("Stack")) {
       Stack tmp = (Stack) value;
 
-      Object toAdd = method.execute(parser);
+      Object toAdd = method.execute();
 
       //Cast the variable to a node if required
       if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
@@ -176,7 +184,7 @@ public class VariableNode implements Exec {
         tmp = (PriorityQueue) value;
       }
 
-      Object toAdd = method.execute(parser);
+      Object toAdd = method.execute();
 
       //Cast the variable to a node if required
       if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
@@ -189,10 +197,9 @@ public class VariableNode implements Exec {
   /**
    * Update the value in this variable
    * @param newVal the new value
-   * @param parser the parser
    */
-  public void update(Exec newVal, Parser parser) {
-    this.value = newVal.execute(parser);
+  public void update(Exec newVal) {
+    this.value = newVal.execute();
 
     //Check if the newly assigned value is of the correct type
     if (this.value instanceof VariableNode) {

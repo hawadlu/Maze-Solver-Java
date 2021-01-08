@@ -5,20 +5,41 @@ import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MethodNodes.MazeActionNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Utility.Node;
+import Parser.Handler;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class ComparatorNode implements Exec {
   Comparator<Node> comparator;
   Exec callToInit;
+  private Handler handler;
 
-  public ComparatorNode(Exec parseMazeCall) {
+
+  public ComparatorNode(Exec parseMazeCall, Handler handler) {
     this.callToInit = parseMazeCall;
+    this.handler = handler;
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public void validate() {
+    //Check that the supplied exec is of the correct type
+    if (callToInit instanceof MazeActionNode) {
+      MethodNode node = (MethodNode) ((MazeActionNode) callToInit).getMethodNode();
+
+      //Check the method that is being called
+      if (!node.getName().equals("getNeighbourCount") && !node.getName().equals("getCost")) {
+        Parser.fail(node.getName() + " is not a valid method for initialising comparators.\n" +
+                "Use getNeighbourCount(node) or getCost(node)", null);
+      }
+
+    } else Parser.fail("Comparator must be initialised with a maze method.", null);
+
+    //Check that the supplied exec is valid
+    callToInit.validate();
+  }
+
+  @Override
+  public Object execute() {
     //Make sure that the method that the user wants to use is valid
     if (callToInit instanceof MazeActionNode) {
       //Check what the user wants to use as a compare
@@ -32,7 +53,6 @@ public class ComparatorNode implements Exec {
 
       //Check to see if the user is using a correct maze method
       String[] validMethods = {"getCost", "getNeighbourCount", "distanceToDestination"};
-      if (!Arrays.asList(validMethods).contains(methodName)) parser.executionError(methodName + " is not a valid comparator method.");
 
       comparator = (nodeOne, nodeTwo) -> {
 
@@ -40,17 +60,14 @@ public class ComparatorNode implements Exec {
         else if (methodName.equals("getNeighbourCount"))
           return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
         else if (methodName.equals("distanceToDestination"))
-          return Double.compare(parser.handler.getDistanceToDestination(nodeOne), parser.handler.getDistanceToDestination(nodeTwo));
-        else parser.executionError(methodName + " is not a valid comparator method");
+          return Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
 
         return 0;
       };
 
       return comparator;
-    } else {
-      parser.executionError("Failed to create parser");
-      return null;
     }
+    return null;
   }
 
   @Override

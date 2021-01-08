@@ -1,6 +1,6 @@
 package Parser.ProgramNodes.MethodNodes;
 
-import Parser.Parser;
+import Parser.Handler;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Utility.Node;
@@ -12,9 +12,11 @@ import Parser.ProgramNodes.MathNodes.Number;
  */
 public class MazeActionNode implements Exec {
   MethodNode methodNode;
+  private Handler handler;
 
-  public MazeActionNode(MethodNode methodNode) {
+  public MazeActionNode(MethodNode methodNode, Handler handler) {
     this.methodNode = methodNode;
+    this.handler = handler;
   }
 
   public MethodNode getMethodNode() {
@@ -22,66 +24,68 @@ public class MazeActionNode implements Exec {
   }
 
   @Override
-  public Object execute(Parser parser) {
-    //Check the parameters
-    methodNode.checkParameters(parser);
-
+  public Object execute() {
     if (methodNode.name.equals("getStart")) {
-      return parser.handler.getStart();
+      return handler.getStart();
     } else if (methodNode.name.equals("visit")) {
       String varName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(varName).getValue();
-      parser.handler.visit(toUpdate);
+      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      handler.visit(toUpdate);
     } else if (methodNode.name.equals("isDone")) {
       String varName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(varName).getValue();
-      return parser.handler.checkDone(toUpdate);
+      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      return handler.checkDone(toUpdate);
     } else if (methodNode.name.equals("getNeighbours")){
       String varName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(varName).getValue();
-      return parser.handler.getNeighbours(toUpdate);
+      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      return handler.getNeighbours(toUpdate);
     } else if (methodNode.name.equals("isVisited")) {
       String varName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(varName).getValue();
-      return parser.handler.isVisited(toUpdate);
+      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      return handler.isVisited(toUpdate);
     } else if (methodNode.name.equals("setParent")) {
       String child = (String) methodNode.parameters.get(0);
       String parent = (String) methodNode.parameters.get(1);
 
-      Node childNode = (Node) parser.variables.get(child.replaceAll(" ", "")).getValue();
-      Node parentNode = (Node) parser.variables.get(parent.replaceAll(" ", "")).getValue();
-      return parser.handler.setParent(childNode, parentNode);
+      Node childNode = (Node) handler.getFromMap(child.replaceAll(" ", "")).getValue();
+      Node parentNode = (Node) handler.getFromMap(parent.replaceAll(" ", "")).getValue();
+      return handler.setParent(childNode, parentNode);
     } else if (methodNode.name.equals("finish")) {
       String varName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(varName).getValue();
-      parser.handler.reportDone(toUpdate);
+      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      handler.reportDone(toUpdate);
     } else if (methodNode.name.equals("setCost")) {
       String nodeName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(nodeName).getValue();
+      Node toUpdate = (Node) handler.getFromMap(nodeName).getValue();
 
       String varName = (String) methodNode.parameters.get(1);
-      Number num = (Number) parser.variables.get(varName).getValue();
-      double cost = num.calculate(parser);
+      Number num = (Number) handler.getFromMap(varName).getValue();
+      double cost = num.calculate();
 
-      parser.handler.setCost(toUpdate, cost);
+      handler.setCost(toUpdate, cost);
     } else if (methodNode.name.equals("getCost")) {
       String nodeName = (String) methodNode.parameters.get(0);
-      Node toUpdate = (Node) parser.variables.get(nodeName).getValue();
-      return new NumberNode(parser.handler.getCost(toUpdate));
+      Node toUpdate = (Node) handler.getFromMap(nodeName).getValue();
+      return new NumberNode(handler.getCost(toUpdate));
     } else if (methodNode.name.equals("getDistance")) {
       String nodeOneName = (String) methodNode.parameters.get(0);
       String nodeTwoName = (String) methodNode.parameters.get(1);
 
-      Node nodeOne = (Node) parser.variables.get(nodeOneName).getValue();
-      Node nodeTwo = (Node) parser.variables.get(nodeTwoName).getValue();
+      Node nodeOne = (Node) handler.getFromMap(nodeOneName).getValue();
+      Node nodeTwo = (Node) handler.getFromMap(nodeTwoName).getValue();
 
-      return new NumberNode(parser.handler.getDistance(nodeOne, nodeTwo));
+      return new NumberNode(handler.getDistance(nodeOne, nodeTwo));
     } else if (methodNode.name.equals("distanceToDestination")) {
-      Node node = (Node) parser.variables.get((String) methodNode.parameters.get(0)).getValue();
+      Node node = (Node) handler.getFromMap((String) methodNode.parameters.get(0)).getValue();
 
-      return new NumberNode(parser.handler.getDistanceToDestination(node));
-    } else parser.executionError("Unrecognised method " + methodNode.name);
+      return new NumberNode(handler.getDistanceToDestination(node));
+    }
     return null;
+  }
+
+  @Override
+  public void validate() {
+    methodNode.validate();
   }
 
   @Override

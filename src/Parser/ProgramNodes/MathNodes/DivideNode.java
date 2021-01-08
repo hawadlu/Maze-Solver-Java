@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.MathNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
@@ -16,8 +15,13 @@ public class DivideNode implements Exec, Number {
   }
 
   @Override
-  public Object execute(Parser parser) {
-    return calculate(parser);
+  public void validate() {
+    //todo implement me
+  }
+
+  @Override
+  public Object execute() {
+    return calculate();
   }
 
   @Override
@@ -26,13 +30,13 @@ public class DivideNode implements Exec, Number {
   }
 
   @Override
-  public double calculate(Parser parser) {
+  public double calculate() {
     ArrayList<Number> copyValues = new ArrayList<>(values);
-    double initialValue = copyValues.remove(0).calculate(parser);
+    double initialValue = copyValues.remove(0).calculate();
 
     for (Number num : copyValues) {
       if (num instanceof NumberNode) initialValue /= ((NumberNode) num).value;
-      else initialValue /= num.calculate(parser);
+      else initialValue /= num.calculate();
     }
 
     return initialValue;

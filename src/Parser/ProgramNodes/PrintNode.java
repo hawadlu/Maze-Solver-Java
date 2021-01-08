@@ -1,44 +1,48 @@
 package Parser.ProgramNodes;
 
-import Parser.Parser;
+import Parser.Handler;
+import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 import Parser.ProgramNodes.VariableNodes.VariableActionNode;
-import Parser.ProgramNodes.MathNodes.Number;
-
 
 import java.util.ArrayList;
 
 public class PrintNode implements Exec{
-  ArrayList<Object> printVals = new ArrayList<>();
+  ArrayList<Object> printValues = new ArrayList<>();
+  private Handler handler;
+
+  public PrintNode(Handler handler) {
+    this.handler = handler;
+  }
 
   public void append(StringBuilder str) {
-    printVals.add(str);
+    printValues.add(str);
   }
 
   public void append(Exec exec) {
-    printVals.add(exec);
+    printValues.add(exec);
   }
 
   public void append(Number num) {
-    printVals.add(" ");
-    printVals.add(num);
+    printValues.add(" ");
+    printValues.add(num);
   }
 
   /**
    * Makes a string, executing any nodes along the way.
    * @return
    */
-  public Object makeString(Parser parser) {
+  public Object makeString() {
     StringBuilder toReturn = new StringBuilder();
 
-    for (Object obj: printVals) {
+    for (Object obj: printValues) {
       if (obj instanceof String) toReturn.append(obj);
-      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate(parser));
-      else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString(parser));
-      else if (obj instanceof GetVariableNode) toReturn.append(parser.variables.get(((GetVariableNode) obj).getInfo(parser)));
-      else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute(parser));
-      else if (obj instanceof VariableActionNode) toReturn.append(((VariableActionNode) obj).execute(parser));
+      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate());
+      else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString());
+      else if (obj instanceof GetVariableNode) toReturn.append(handler.getFromMap(((GetVariableNode) obj).getInfo()));
+      else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute());
+      else if (obj instanceof VariableActionNode) toReturn.append(((VariableActionNode) obj).execute());
       else toReturn.append(obj);
     }
 
@@ -46,16 +50,21 @@ public class PrintNode implements Exec{
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public void validate() {
+    //todo implement me
+  }
+
+  @Override
+  public Object execute() {
     StringBuilder toPrint = new StringBuilder();
 
-    for (Object obj: printVals) {
+    for (Object obj: printValues) {
       if (obj instanceof String) toPrint.append(obj);
-      else if (obj instanceof Number) toPrint.append(((Number) obj).calculate(parser));
-      else if (obj instanceof PrintNode) toPrint.append(((PrintNode) obj).makeString(parser));
-      else if (obj instanceof GetVariableNode) toPrint.append(((GetVariableNode) obj).getInfo(parser));
-      else if (obj instanceof MethodNode) toPrint.append(((MethodNode) obj).execute(parser));
-      else if (obj instanceof VariableActionNode) toPrint.append(((VariableActionNode) obj).execute(parser));
+      else if (obj instanceof Number) toPrint.append(((Number) obj).calculate());
+      else if (obj instanceof PrintNode) toPrint.append(((PrintNode) obj).makeString());
+      else if (obj instanceof GetVariableNode) toPrint.append(((GetVariableNode) obj).getInfo());
+      else if (obj instanceof MethodNode) toPrint.append(((MethodNode) obj).execute());
+      else if (obj instanceof VariableActionNode) toPrint.append(((VariableActionNode) obj).execute());
       else toPrint.append(obj);
     }
 
@@ -65,6 +74,6 @@ public class PrintNode implements Exec{
 
   @Override
   public String toString() {
-    return printVals.toString();
+    return printValues.toString();
   }
 }

@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 
 public class ConditionNode implements Condition{
@@ -11,8 +10,8 @@ public class ConditionNode implements Condition{
   }
 
   @Override
-  public boolean evaluate(Parser parser) {
-    return (boolean) toEvaluate.execute(parser);
+  public boolean evaluate() {
+    return (boolean) toEvaluate.execute();
   }
 
   @Override

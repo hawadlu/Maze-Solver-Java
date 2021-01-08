@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
@@ -23,23 +22,27 @@ public class ElseIfNode implements Exec {
     this.elseNode = elseNode;
   }
 
+  @Override
+  public void validate() {
+    //todo implement me
+  }
 
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
     //Go through each of the statements until one is true
     Boolean run = false;
 
     for (IfNode statement: ifNodes) {
       //Check to see if the condition will be evaluated
-      if (statement.ifCondition.evaluate(parser)){
-        statement.execute(parser);
+      if (statement.ifCondition.evaluate()){
+        statement.execute();
         run = true;
         break;
       }
     }
 
     //Run the else node if necessary
-    if (!run && elseNode != null) elseNode.execute(parser);
+    if (!run && elseNode != null) elseNode.execute();
 
     return null;
   }

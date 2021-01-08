@@ -1,6 +1,6 @@
 package Parser.ProgramNodes.LoopNodes;
 
-import Parser.Parser;
+import Parser.Handler;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.VariableNodes.VariableNode;
 import Utility.Node;
@@ -12,21 +12,29 @@ public class ForNode implements Exec {
   String varName, collectionName;
   ArrayList<Exec> statements;
   VariableNode varNode;
+  private Handler handler;
 
-  public ForNode(String varName, String collectionName, ArrayList<Exec> statements) {
+
+  public ForNode(String varName, String collectionName, ArrayList<Exec> statements, Handler handler) {
     this.varName = varName;
     this.collectionName = collectionName;
     this.statements = statements;
+    this.handler = handler;
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public void validate() {
+    //todo implement me
+  }
+
+  @Override
+  public Object execute() {
     //make variable node
     String type = "Node";
-    Object value = parser.variables.get(collectionName).getValue();
+    Object value = handler.getFromMap(collectionName).getValue();
 
-    this.varNode = new VariableNode(varName, type);
-    parser.variables.put(varName, varNode);
+    this.varNode = new VariableNode(varName, type, handler);
+    handler.addVariable(varName, varNode);
 
     //Get and iterate through a list of the nodes
     for (Node node: getValueList(value)) {
@@ -34,13 +42,13 @@ public class ForNode implements Exec {
 
       //Go through the statements
       for (Exec statement: statements) {
-        statement.execute(parser);
+        statement.execute();
       }
 
     }
 
     //Remove the variable
-    parser.variables.remove(varName);
+    handler.removeFromMap(varName);
 
     return null;
   }

@@ -1,7 +1,5 @@
 package Parser.ProgramNodes.MathNodes;
 
-import Parser.Parser;
-
 import java.util.ArrayList;
 
 /**
@@ -20,8 +18,8 @@ public class RootNode implements Number {
   }
 
   @Override
-  public double calculate(Parser parser) {
-    return Math.sqrt(values.get(0).calculate(parser));
+  public double calculate() {
+    return Math.sqrt(values.get(0).calculate());
   }
 
   /**

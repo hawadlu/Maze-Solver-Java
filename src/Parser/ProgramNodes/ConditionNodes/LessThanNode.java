@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.Number;
 
@@ -17,8 +16,13 @@ public class LessThanNode implements Exec {
   }
 
   @Override
-  public Object execute(Parser parser) {
-    return valueOne.calculate(parser) < valueTwo.calculate(parser);
+  public void validate() {
+    //todo implement me
+  }
+
+  @Override
+  public Object execute() {
+    return valueOne.calculate() < valueTwo.calculate();
   }
 
   @Override

@@ -1,10 +1,12 @@
 package Parser;
 
 import Application.Application;
+import Game.Player;
 import Parser.ProgramNodes.*;
 import Parser.ProgramNodes.ConditionNodes.*;
 import Parser.ProgramNodes.LoopNodes.ForNode;
 import Parser.ProgramNodes.LoopNodes.WhileNode;
+import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.*;
 import Parser.ProgramNodes.MethodNodes.MazeActionNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
@@ -13,13 +15,11 @@ import Parser.ProgramNodes.VariableNodes.VariableActionNode;
 import Parser.ProgramNodes.VariableNodes.VariableAssignmentNode;
 import Parser.ProgramNodes.VariableNodes.VariableNode;
 import Utility.Exceptions.ParserFailure;
-import Parser.ProgramNodes.MathNodes.Number;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -31,9 +31,8 @@ public class Parser {
   boolean debug = false;
   Scanner fileScanner = null;
   Exec baseNode;
-  public HashMap<String, VariableNode> variables = new HashMap<>();
-  public MazeHandler handler;
-  private boolean enablePopup = true; //Set to false if debugging and the error popup becomes annoying
+  private Handler handler;
+  private static boolean enablePopup = true; //Set to false if debugging and the error popup becomes annoying
 
   public Parser(File toRead) {
     try {
@@ -52,7 +51,7 @@ public class Parser {
     }
   }
 
-  public void setMazeHandler(MazeHandler handler) {
+  public void setMazeHandler(Handler handler) {
     this.handler = handler;
   }
 
@@ -89,6 +88,10 @@ public class Parser {
 
     fileScanner.close();
 
+    //Recursively search each node validate it.
+    baseNode.validate();
+
+
     System.out.println("Parsing complete");
   }
 
@@ -103,7 +106,7 @@ public class Parser {
       } else if (fileScanner.hasNext("\n")){
         fileScanner.next(); //Discard the new line
       } else {
-        fail(fileScanner.next() + " is not a valid statement");
+        fail(fileScanner.next() + " is not a valid statement", fileScanner);
       }
     }
 
@@ -159,7 +162,7 @@ public class Parser {
 
     if (semiRequired && !fileScanner.hasNext(Regex.semiColon)) {
 //      printScanner(fileScanner);
-      fail("Statement missing ';'");
+      fail("Statement missing ';'", fileScanner);
     }
     else if (semiRequired) fileScanner.next(); //Remove the semicolon
 
@@ -231,11 +234,11 @@ public class Parser {
     Exec comparator = null;
 
     //Check for a method call
-    if (!fileScanner.hasNext(Regex.mazeCall)) fail("Comparator is missing call to maze method.");
-    else comparator = new ComparatorNode(parseMazeCall(fileScanner));
+    if (!fileScanner.hasNext(Regex.mazeCall)) fail("Comparator is missing call to maze method.", fileScanner);
+    else comparator = new ComparatorNode(parseMazeCall(fileScanner), handler);
 
     //Check to see that the next argument is the ';' because a comparator can only have one argument
-    if (!fileScanner.hasNext(Regex.semiColon)) fail("Comparator can only have one argument");
+    if (!fileScanner.hasNext(Regex.semiColon)) fail("Comparator can only have one argument", fileScanner);
 
     return comparator;
   }
@@ -247,7 +250,7 @@ public class Parser {
   private void parseComment(Scanner fileScanner) {
     if (debug) System.out.println("Parsing comment");
     while (!fileScanner.hasNext(Regex.comment)) {
-      if (!fileScanner.hasNext()) fail("Comment missing closing '***'"); //Reached the end of the program while parsing the comment
+      if (!fileScanner.hasNext()) fail("Comment missing closing '***'", fileScanner); //Reached the end of the program while parsing the comment
       fileScanner.next(); //Discard all tokens inside the comment
     }
     fileScanner.next(); //Discard the ***
@@ -267,16 +270,16 @@ public class Parser {
 
     //Get the loop variable name
     String varName = null;
-    if (!fileScanner.hasNext(Regex.name)) fail("Must declare variable name in for loop.");
+    if (!fileScanner.hasNext(Regex.name)) fail("Must declare variable name in for loop.", fileScanner);
     else varName = fileScanner.next().replaceAll("\\s", "");
 
     //Check for the ':'
-    if (!fileScanner.hasNext(Regex.colon)) fail("For loop must contain ':' between variable and collection");
+    if (!fileScanner.hasNext(Regex.colon)) fail("For loop must contain ':' between variable and collection", fileScanner);
     else fileScanner.next(); //discard the colon
 
     //Get the name of the collection that the loop will use
     String collectionName = null;
-    if (!fileScanner.hasNext(Regex.name)) fail("For loop must contain a collection variable");
+    if (!fileScanner.hasNext(Regex.name)) fail("For loop must contain a collection variable", fileScanner);
     else collectionName = fileScanner.next().replaceAll("\\s", "");
 
     //Check for the closing ')'
@@ -296,7 +299,7 @@ public class Parser {
     //Check for closing '}'
     scannerHasNext(fileScanner, Regex.closeCurly, "For loop missing closing '}'");
 
-    forLoop = new ForNode(varName, collectionName, statements);
+    forLoop = new ForNode(varName, collectionName, statements, handler);
 
     return forLoop;
   }
@@ -309,7 +312,7 @@ public class Parser {
    * @param failMessage message to print on failure
    */
   private void scannerHasNext(Scanner fileScanner, Pattern regex, String failMessage) {
-    if (!fileScanner.hasNext(regex)) fail(failMessage);
+    if (!fileScanner.hasNext(regex)) fail(failMessage, fileScanner);
     else fileScanner.next();
   }
 
@@ -401,10 +404,10 @@ public class Parser {
     else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck(fileScanner));
     else {
       if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner, fileScanner.next().replaceAll("\\s", ""), false));
-      else fail("Unrecognised value in condition");
+      else fail("Unrecognised value in condition", fileScanner);
     }
 
-    fail("Invalid condition");
+    fail("Invalid condition", fileScanner);
     return null;
   }
 
@@ -493,9 +496,9 @@ public class Parser {
     //If there is a .xyz return an action node
     if (fileScanner.hasNext(Regex.dot)) actionOrAssignment = parseVariableAction(fileScanner, varName);
     else if (fileScanner.hasNext(Regex.equals)) actionOrAssignment = parseVariableAssignment(fileScanner, varName);
-    else if (fileScanner.hasNext(Regex.plus) && !toPrint) actionOrAssignment = variables.get(varName);
+    else if (fileScanner.hasNext(Regex.plus) && !toPrint) actionOrAssignment = handler.getFromMap(varName);
     else if (toPrint) actionOrAssignment = parseGetVar(varName); //Return the variable object
-    else fail("Invalid variable reference");
+    else fail("Invalid variable reference", fileScanner);
 
     return actionOrAssignment;
   }
@@ -506,7 +509,7 @@ public class Parser {
    * @return the get var object
    */
   private Exec parseGetVar(String varName) {
-    return new GetVariableNode(varName);
+    return new GetVariableNode(varName, handler);
   }
 
   private Exec parseVariableAssignment(Scanner fileScanner, String varName) {
@@ -515,9 +518,9 @@ public class Parser {
     //Discard the =
     fileScanner.next();
 
-    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableAssignmentNode(varName, parseMazeCall(fileScanner));
-    else if (fileScanner.hasNext(Regex.name)) return new VariableAssignmentNode(varName, parseVariableReference(fileScanner, fileScanner.next(), false));
-    else fail("Invalid variable assignment");
+    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableAssignmentNode(varName, parseMazeCall(fileScanner), handler);
+    else if (fileScanner.hasNext(Regex.name)) return new VariableAssignmentNode(varName, parseVariableReference(fileScanner, fileScanner.next(), false), handler);
+    else fail("Invalid variable assignment", fileScanner);
 
     return null;
   }
@@ -532,8 +535,8 @@ public class Parser {
     if (debug) System.out.println("parsing variable action");
 
     //Check if it is a call to a maze method
-    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableActionNode(varName, parseMazeCall(fileScanner));
-    else return new VariableActionNode(varName, parseMethod(fileScanner));
+    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableActionNode(varName, parseMazeCall(fileScanner), handler);
+    else return new VariableActionNode(varName, parseMethod(fileScanner), handler);
   }
 
   /**
@@ -556,12 +559,12 @@ public class Parser {
 
     //Check if the variable is being assigned at the same time
     if (fileScanner.hasNext(Regex.semiColon)) {
-      return new VariableNode(varInfo[0], varInfo[1]);
+      return new VariableNode(varInfo[0], varInfo[1], handler);
     } else if (fileScanner.hasNext(Regex.equals) || fileScanner.hasNext(Regex.comparatorAssignment)) {
-      return new VariableNode(varInfo, parseValue(fileScanner));
+      return new VariableNode(varInfo, parseValue(fileScanner), handler);
     }
 
-    fail("Incorrect declaration");
+    fail("Incorrect declaration", fileScanner);
     return null;
   }
 
@@ -605,7 +608,7 @@ public class Parser {
     if (fileScanner.hasNext(Regex.mazeCall)) fileScanner.next();
 
     if (fileScanner.hasNext(Regex.dot)) {
-      return new MazeActionNode(parseMethod(fileScanner));
+      return new MazeActionNode(parseMethod(fileScanner), handler);
     }
 
     return null;
@@ -625,7 +628,7 @@ public class Parser {
 
     //Check for a valid method name
     String methodName = null;
-    if (!fileScanner.hasNext(Regex.name)) fail("Invalid method name");
+    if (!fileScanner.hasNext(Regex.name)) fail("Invalid method name", fileScanner);
     else methodName = fileScanner.next();
 
 
@@ -633,8 +636,8 @@ public class Parser {
     scannerHasNext(fileScanner, Regex.openParen, "Method missing opening '('");
 
     //Check if there are any parameters
-    if (fileScanner.hasNext(Regex.name)) toReturn = new MethodNode(methodName, parseParams(fileScanner));
-    else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName);
+    if (fileScanner.hasNext(Regex.name)) toReturn = new MethodNode(methodName, parseParams(fileScanner), handler);
+    else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName, handler);
 
     //Check for closing brace
     scannerHasNext(fileScanner, Regex.closeParen, "Method missing closing ');");
@@ -669,7 +672,7 @@ public class Parser {
    * @return a new print node
    */
   private Exec parsePrint(Scanner fileScanner, boolean firstParen) {
-    PrintNode printer = new PrintNode();
+    PrintNode printer = new PrintNode(handler);
     StringBuilder toPrint = new StringBuilder();
 
 
@@ -756,16 +759,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Root missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain one argument");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain one argument", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) root.add(parseMath(fileScanner));
-      else fail("Invalid math operation in root");
+      else fail("Invalid math operation in root", fileScanner);
     }
 
-    if (root.getArguments().size() > 1) fail("Root can only contain on argument");
+    if (root.getArguments().size() > 1) fail("Root can only contain on argument", fileScanner);
 
     //Discard the closing )
     fileScanner.next();
@@ -787,16 +790,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Power missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain at least two arguments");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Power must contain at least two arguments", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) power.add(parseMath(fileScanner));
-      else fail("Invalid math operation in power");
+      else fail("Invalid math operation in power", fileScanner);
     }
 
-    if (power.getArguments().size() < 2) fail("Power must contain at least two arguments");
+    if (power.getArguments().size() < 2) fail("Power must contain at least two arguments", fileScanner);
 
 
     //Discard the closing )
@@ -819,16 +822,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Multiply missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Multiply must contain at least two arguments");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Multiply must contain at least two arguments", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) multiply.add(parseMath(fileScanner));
-      else fail("Invalid math operation in multiply");
+      else fail("Invalid math operation in multiply", fileScanner);
     }
 
-    if (multiply.getArguments().size() < 2) fail("Multiply must contain at least two arguments");
+    if (multiply.getArguments().size() < 2) fail("Multiply must contain at least two arguments", fileScanner);
 
     //Discard the closing )
     fileScanner.next();
@@ -850,16 +853,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Divide missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Divide must contain at least two arguments");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Divide must contain at least two arguments", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) divide.add(parseMath(fileScanner));
-      else fail("Invalid math operation in divide");
+      else fail("Invalid math operation in divide", fileScanner);
     }
 
-    if (divide.getArguments().size() < 2) fail("Divide must contain at least two arguments");
+    if (divide.getArguments().size() < 2) fail("Divide must contain at least two arguments", fileScanner);
 
     //Discard the closing )
     fileScanner.next();
@@ -881,16 +884,16 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Minus missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Minus must contain at least two arguments");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Minus must contain at least two arguments", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //discard and continue
       else if (fileScanner.hasNext(Regex.math)) minus.add(parseMath(fileScanner));
-      else fail("Invalid math operation in minus");
+      else fail("Invalid math operation in minus", fileScanner);
     }
 
-    if (minus.getArguments().size() < 2) fail("Minus must contain at least two arguments");
+    if (minus.getArguments().size() < 2) fail("Minus must contain at least two arguments", fileScanner);
 
     //Discard the closing )
     fileScanner.next();
@@ -907,7 +910,7 @@ public class Parser {
 
     scannerHasNext(fileScanner, Regex.openParen, "Plus missing opening '('");
 
-    if (fileScanner.hasNext(Regex.closeParen)) fail("Plus must contain at least two arguments");
+    if (fileScanner.hasNext(Regex.closeParen)) fail("Plus must contain at least two arguments", fileScanner);
 
     //Repeat until the closing brace
     while (!fileScanner.hasNext(Regex.closeParen)) {
@@ -915,11 +918,11 @@ public class Parser {
       else if (fileScanner.hasNext(Regex.math)) plus.add(parseMath(fileScanner));
       else if (fileScanner.hasNext(Regex.mazeCall)) plus.add(parseEvaluateMazeCall(fileScanner));
       else if (fileScanner.hasNext(Regex.name)) plus.add(parseEvaluateNameCall(fileScanner));
-      else fail("Invalid math operation in plus");
+      else fail("Invalid math operation in plus", fileScanner);
     }
 
     //Check that the number of arguments is valid
-    if (plus.getArguments().size() < 2) fail("Plus must contain at least two arguments");
+    if (plus.getArguments().size() < 2) fail("Plus must contain at least two arguments", fileScanner);
 
     //Discard the closing )
     fileScanner.next();
@@ -936,7 +939,7 @@ public class Parser {
     if (debug) System.out.println("Parsing runtime variable evaluation");
 
     String name = fileScanner.next();
-    GetVariableNode getVar = new GetVariableNode(name);
+    GetVariableNode getVar = new GetVariableNode(name, handler);
 
     EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(fileScanner, name));
 
@@ -968,17 +971,18 @@ public class Parser {
     }
   }
 
-  private void fail(String message) {
-    String msg = "FAIL: Parse error: " + message + "\n   @ ...";
-    for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
-      msg += " " + fileScanner.next();
+  public static void fail(String message, Scanner fileScanner) {
+    String msg;
+    if (fileScanner != null) {
+      msg = "FAIL: Parse error: " + message + "\n   @ ...";
+      for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
+        msg += " " + fileScanner.next();
+      }
+    } else {
+      msg = "FAIL: Parse error: " + message;
     }
-    throw new ParserFailure(new JFrame(), msg + "...", enablePopup);
-  }
 
-  public void executionError(String msg) {
-    String message = "FAIL: Execution error: " + msg + "...";
-    throw new ParserFailure(new JFrame(), message, enablePopup);
+    throw new ParserFailure(new JFrame(), msg + "...", enablePopup);
   }
 
   /**
@@ -986,9 +990,9 @@ public class Parser {
    */
   public Object execute(Application application) {
     //Create a new handler object if required
-    if (this.handler == null) this.handler = new MazeHandler(application);
+    if (this.handler == null) this.handler = new Handler(application);
 
-    baseNode.execute(this);
+    baseNode.execute();
     return null;
   }
 
@@ -1004,11 +1008,19 @@ public class Parser {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Parser parser = (Parser) o;
-    return debug == parser.debug && fileScanner.equals(parser.fileScanner) && baseNode.equals(parser.baseNode) && variables.equals(parser.variables) && handler.equals(parser.handler);
+    return debug == parser.debug && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode) && Objects.equals(handler, parser.handler);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(debug, fileScanner, baseNode, variables, handler);
+    return Objects.hash(debug, fileScanner, baseNode, handler);
+  }
+
+  /**
+   * Set the player if required.
+   * @param player the player object.
+   */
+  public void setPlayer(Player player) {
+    handler.setPlayer(player);
   }
 }

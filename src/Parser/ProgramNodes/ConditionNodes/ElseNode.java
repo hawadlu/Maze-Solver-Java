@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 
 import java.util.ArrayList;
@@ -17,11 +16,16 @@ public class ElseNode implements Exec {
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
     for (Exec statement: statements) {
-      statement.execute(parser);
+      statement.execute();
     }
     return null;
+  }
+
+  @Override
+  public void validate() {
+    //todo implement me
   }
 
   @Override

@@ -1,6 +1,5 @@
 package Parser.ProgramNodes.LoopNodes;
 
-import Parser.Parser;
 import Parser.ProgramNodes.ConditionNodes.Condition;
 import Parser.ProgramNodes.Exec;
 
@@ -15,13 +14,17 @@ public class WhileNode implements Exec {
     this.statements = statements;
   }
 
+  @Override
+  public void validate() {
+    //todo implement me
+  }
 
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
 
-    while (loopCondition.evaluate(parser)) {
+    while (loopCondition.evaluate()) {
       for (Exec statement: statements) {
-        statement.execute(parser);
+        statement.execute();
       }
     }
 

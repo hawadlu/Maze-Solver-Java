@@ -4,7 +4,8 @@ import Algorithm.SolveAlgorithm;
 import Application.Application;
 import Game.Player;
 import Parser.Parser;
-import Parser.MazeHandler;
+import Parser.Handler;
+
 
 /**
  * This thread takes is the one that processes the algorithms.
@@ -55,7 +56,7 @@ public class AlgorithmDispatcher extends Thread {
       solve.solve(algorithm, multiThreading);
     } else {
 
-      parser.setMazeHandler(new MazeHandler(currentApplication));
+      parser.setMazeHandler(new Handler(currentApplication));
       player.startParserExec();
     }
   }

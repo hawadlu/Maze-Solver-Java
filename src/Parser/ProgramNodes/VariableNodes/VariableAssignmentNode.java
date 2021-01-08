@@ -1,6 +1,6 @@
 package Parser.ProgramNodes.VariableNodes;
 
-import Parser.Parser;
+import Parser.Handler;
 import Parser.ProgramNodes.Exec;
 
 /**
@@ -9,16 +9,22 @@ import Parser.ProgramNodes.Exec;
 public class VariableAssignmentNode implements Exec {
   String varName;
   Exec newVal;
+  private Handler handler;
 
-  public VariableAssignmentNode(String varName, Exec newVal) {
+  public VariableAssignmentNode(String varName, Exec newVal, Handler handler) {
     this.varName = varName.replaceAll(" ", "");
     this.newVal = newVal;
+    this.handler = handler;
   }
 
   @Override
-  public Object execute(Parser parser) {
-    if (!parser.variables.containsKey(varName)) parser.executionError("Could not find variable " + varName);
-    parser.variables.get(varName).update(newVal, parser);
+  public void validate() {
+    newVal.validate();
+  }
+
+  @Override
+  public Object execute() {
+    handler.getFromMap(varName).update(newVal);
     return null;
   }
 

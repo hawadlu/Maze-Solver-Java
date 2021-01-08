@@ -1,9 +1,8 @@
 package Parser.ProgramNodes;
 
-import Parser.Parser;
+import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
-import Parser.ProgramNodes.MathNodes.Number;
 
 /**
  * Evaluate and return a number
@@ -28,18 +27,23 @@ public class EvaluateNode implements Exec, Number {
 
 
   @Override
-  public Object execute(Parser parser) {
-    if (toEvaluate != null) return toEvaluate.execute(parser);
-    else if (number != null) return new NumberNode(number.calculate(parser));
+  public Object execute() {
+    if (toEvaluate != null) return toEvaluate.execute();
+    else if (number != null) return new NumberNode(number.calculate());
     return null;
   }
 
   @Override
-  public double calculate(Parser parser) {
+  public double calculate() {
     if (number == null) {
-      return ((Number) toEvaluate.execute(parser)).calculate(parser);
+      return ((Number) toEvaluate.execute()).calculate();
     }
-    return number.calculate(parser);
+    return number.calculate();
+  }
+
+  @Override
+  public void validate() {
+    //todo implement me
   }
 
   @Override

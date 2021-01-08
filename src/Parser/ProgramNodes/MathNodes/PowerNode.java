@@ -1,7 +1,5 @@
 package Parser.ProgramNodes.MathNodes;
 
-import Parser.Parser;
-
 import java.util.ArrayList;
 
 /**
@@ -20,13 +18,13 @@ public class PowerNode implements Number {
   }
 
   @Override
-  public double calculate(Parser parser) {
-    ArrayList<Number> copyVals = new ArrayList<>(values);
-    double initialValue = copyVals.remove(0).calculate(parser);
+  public double calculate() {
+    ArrayList<Number> copyValues = new ArrayList<>(values);
+    double initialValue = copyValues.remove(0).calculate();
 
-    for (Number num : copyVals) {
+    for (Number num : copyValues) {
       if (num instanceof NumberNode) initialValue = Math.pow(initialValue, ((NumberNode) num).value);
-      else initialValue = Math.pow(initialValue, num.calculate(parser));
+      else initialValue = Math.pow(initialValue, num.calculate());
     }
 
     return initialValue;

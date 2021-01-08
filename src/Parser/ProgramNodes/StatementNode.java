@@ -4,9 +4,14 @@ import Parser.Parser;
 
 public class StatementNode implements Exec {
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
 
     return null;
+  }
+
+  @Override
+  public void validate() {
+    //todo implement me
   }
 
   @Override

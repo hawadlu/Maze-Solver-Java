@@ -1,8 +1,5 @@
 package Parser.ProgramNodes;
 
-
-import Parser.Parser;
-
 import java.util.ArrayList;
 
 /**
@@ -15,14 +12,21 @@ public class BaseNode implements Exec{
   }
 
   @Override
-  public Object execute(Parser parser) {
+  public Object execute() {
     System.out.println("Starting execution");
     for (Exec statement: statements){
-      statement.execute(parser);
+      statement.execute();
     }
 
 //    if (!parser.handler.done) parser.executionError(parser.handler.getPlayer() + " Base node reached the end without solving");
     return false;
+  }
+
+  @Override
+  public void validate() {
+    for (Exec statement: statements) {
+      statement.validate();
+    }
   }
 
   @Override
