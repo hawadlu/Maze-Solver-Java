@@ -1,0 +1,81 @@
+***Test the greater than operator using valid inputs***
+
+Number seven = 7;
+Number eight = 8;
+
+if (gt(4, 3)) {
+    ***Success don't do anything here***
+} else {
+    Maze.fail("gt(4, 3) FAILED");
+}
+
+if (gt(1, 5)) {
+    Maze.fail("gt(1, 5) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+if (gt(14, 14)) {
+    Maze.fail("gt(14, 14) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+if (gt(eight, seven)) {
+    ***Success don't do anything here***
+} else {
+    Maze.fail("gt(eight, seven) FAILED");
+}
+
+if (gt(seven, eight)) {
+    Maze.fail("gt(seven, eight) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+if (gt(seven, seven)) {
+    Maze.fail("gt(seven, seven) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+
+
+
+
+
+if (!gt(5, 4)) {
+    Maze.fail("!gt(5, 4) FAILED");
+} else {
+    ***Success don't do anything here***
+}
+
+if (!gt(3, 5)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("!gt(3, 5) FAILED");
+}
+
+if (!gt(14, 14)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("!gt(14, 14) FAILED");
+}
+
+if (!gt(eight, seven)) {
+        Maze.fail("!gt(eight, seven) FAILED");
+} else {
+    ***Success don't do anything here***
+}
+
+if (!gt(seven, eight)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("!gt(seven, eight) FAILED");
+}
+
+if (!gt(seven, seven)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("!gt(seven, seven) FAILED");
+}
