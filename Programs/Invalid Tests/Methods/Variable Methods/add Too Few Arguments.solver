@@ -1,0 +1,6 @@
+***Try to call the add method with too few arguments***
+
+Stack toProcess;
+Node node;
+
+toProcess.add();

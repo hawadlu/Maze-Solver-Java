@@ -1,0 +1,6 @@
+***Try to call the add method with an invalid argument***
+
+Stack toProcess;
+Number four = 4;
+
+toProcess.add(four);

@@ -44,7 +44,7 @@ public class MethodNode implements Exec {
     else if (name.equals("isDone")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
     else if (name.equals("getNeighbours")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
     else if (name.equals("getCost")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
-    else if (name.equals("assignComparator")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
+    else if (name.equals("assignComparator")) validator = new MethodValidator(name, new String[]{"Comparator"}, parameters, handler);
     else if (name.equals("getStart")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
     else if (name.equals("add")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
     else if (name.equals("isEmpty")) validator = new MethodValidator(name, new String[]{}, parameters, handler);

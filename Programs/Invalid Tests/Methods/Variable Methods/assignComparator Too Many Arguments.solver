@@ -1,0 +1,7 @@
+***Try to call assignComparator with too many arguments***
+
+Comparator compare -> Maze.getCost(node);
+PriorityQueue toProcess;
+
+Node node;
+toProcess.assignComparator(compare, node);

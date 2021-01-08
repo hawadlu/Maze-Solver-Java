@@ -1,7 +1,7 @@
 package Parser.ProgramNodes.MethodNodes;
 
-import Parser.Parser;
 import Parser.Handler;
+import Parser.Parser;
 
 import java.util.ArrayList;
 
@@ -26,13 +26,10 @@ public class MethodValidator {
      */
     public void validate() {
         //Check that the number of arguments matches what is expected
-        if (parameters.size() != expectedTypes.length) Parser.fail(methodName + " expects " + expectedTypes.length + " arguments. Found " + parameters.size(), null);
+        if (parameters.size() != expectedTypes.length) Parser.fail(methodName + " expects " + expectedTypes.length + " argument(s). Found " + parameters.size(), null);
 
         //Check that the supplied types match the expected types
         for (int i = 0; i < parameters.size(); i++) {
-            if (parameters.get(i).equals("toProcess")) {
-                System.out.println();
-            }
             if (parameters.get(i) instanceof String) {
                 String parameterName = (String) parameters.get(i);
                 String expectedType = expectedTypes[i];
@@ -40,11 +37,30 @@ public class MethodValidator {
                 //If the variable is contained in the map, locate it and check the type
                 if (handler.hasVariable(parameterName)) {
                     if (!handler.getFromMap(parameterName).getType().equals(expectedType)) {
-                        Parser.fail(methodName + " expects type(s) " + printExpectedTypes() + " found " + parameters, null);
+                        Parser.fail(methodName + " expects type(s) " + printExpectedTypes() + " found " + printParameterTypes(), null);
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Format the expected types array for printing;
+     */
+    private String printParameterTypes() {
+        StringBuilder toReturn = new StringBuilder();
+
+        toReturn.append("[");
+
+        for (int i = 0; i < parameters.size(); i++) {
+            toReturn.append(handler.getFromMap(parameters.get(i)).getType());
+            if (i < parameters.size() - 1) toReturn.append(", ");
+            else toReturn.append(" ");
+        }
+
+        toReturn.append("]");
+
+        return toReturn.toString();
     }
 
     /**

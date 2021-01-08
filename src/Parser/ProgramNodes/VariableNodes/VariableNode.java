@@ -12,9 +12,9 @@ import java.util.*;
  * This class holds the variable info including the type, name and value object
  */
 public class VariableNode implements Exec {
-  String type = null, name = null;
-  Exec toEvaluate;
-  Object value = null;
+  private String type = null, name = null;
+  private Exec toEvaluate;
+  private Object value = null;
   private Handler handler;
 
   public VariableNode(String type, String name, Handler handler) {
@@ -218,5 +218,22 @@ public class VariableNode implements Exec {
   public String print() {
     if (value == null) return "Name: " + name + " Type: " + type;
     else return "Name: " + name + " Type: " + type + " value: " + value;
+  }
+
+  /**
+   * Get the name of the variable.
+   * @return the name.
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Check if this variable is of the collection type.
+   * True if type == Stack, Queue or PriorityQueue.
+   * @return a boolean to indicate if this is a collection.
+   */
+  public boolean isCollection() {
+    return this.type.equals("PriorityQueue") || this.type.equals("Queue") || this.type.equals("Stack") || this.type.equals("List");
   }
 }
