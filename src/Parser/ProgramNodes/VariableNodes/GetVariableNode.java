@@ -11,7 +11,7 @@ public class GetVariableNode implements Exec {
   private Handler handler;
 
   public GetVariableNode(String varName, Handler handler) {
-    this.varName = varName;
+    this.varName = varName.replaceAll(" ", "");
     this.handler = handler;
   }
 

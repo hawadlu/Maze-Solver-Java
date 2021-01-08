@@ -941,6 +941,11 @@ public class Parser {
     String name = fileScanner.next();
     GetVariableNode getVar = new GetVariableNode(name, handler);
 
+    //Check if it is just a name with no attached method
+    if (fileScanner.hasNext(Regex.comma) || fileScanner.hasNext(Regex.closeParen)) {
+      return new EvaluateNode(getVar);
+    }
+
     EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(fileScanner, name));
 
     return new EvaluateNode(getVar, eval);

@@ -197,10 +197,12 @@ public class Handler {
 
   /**
    * Get a variable out of the variable map.
+   * Check if the variable exits, if not throw an error.
    * @param key the name of the variable.
    * @return the variable value.
    */
   public VariableNode getFromMap(Object key) {
+    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", null);
     return variables.get(key);
   }
 
@@ -224,9 +226,11 @@ public class Handler {
 
   /**
    * Remove a variable from the variable map.
+   * Check if the key is contained in the map. If not throw an error.
    * @param key the key of the value to remove.
    */
   public void removeFromMap(String key) {
+    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", null);
     variables.remove(key);
   }
 }

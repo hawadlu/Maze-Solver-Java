@@ -3,6 +3,7 @@ package Parser.ProgramNodes;
 import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
+import Parser.ProgramNodes.VariableNodes.VariableNode;
 
 /**
  * Evaluate and return a number
@@ -36,7 +37,12 @@ public class EvaluateNode implements Exec, Number {
   @Override
   public double calculate() {
     if (number == null) {
-      return ((Number) toEvaluate.execute()).calculate();
+      if (toEvaluate instanceof GetVariableNode) {
+        VariableNode var = (VariableNode) toEvaluate.execute();
+        return ((Number) var.getValue()).calculate();
+      } else {
+        return ((Number) toEvaluate.execute()).calculate();
+      }
     }
     return number.calculate();
   }

@@ -34,3 +34,18 @@ if (lt(plus(5, 5), toProcess.getSize())) {
 } else {
     print("Incorrect, should have triggered eq(plus(0, root(4)), toProcess.getSize()");
 }
+
+Number four = 4;
+Number three = 3;
+
+if (!eq(four, three)) {
+    print("!eq(four, three) was correct");
+}
+
+if (!lt(four, three)) {
+    print("!lt(four, three) was correct");
+}
+
+if (gt(four, three)) {
+    print("gt(four, three) was correct");
+}
