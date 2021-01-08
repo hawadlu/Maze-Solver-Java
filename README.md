@@ -71,6 +71,7 @@ maze methods.
 <uL>
     <li>Maze.getNeighbourCount(Node)</li>
     <li>Maze.getCost(Node)</li>
+    <li>Maze.distanceToDestination(node)</li>
 </uL>
 <br>
 e.g.

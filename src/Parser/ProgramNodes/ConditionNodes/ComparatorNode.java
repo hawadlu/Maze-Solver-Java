@@ -27,7 +27,7 @@ public class ComparatorNode implements Exec {
       MethodNode node = (MethodNode) ((MazeActionNode) callToInit).getMethodNode();
 
       //Check the method that is being called
-      if (!node.getName().equals("getNeighbourCount") && !node.getName().equals("getCost")) {
+      if (!node.getName().equals("getNeighbourCount") && !node.getName().equals("getCost") && !node.getName().equals("distanceToDestination")) {
         Parser.fail(node.getName() + " is not a valid method for initialising comparators.\n" +
                 "Use getNeighbourCount(node) or getCost(node)", null);
       }
@@ -56,11 +56,13 @@ public class ComparatorNode implements Exec {
 
       comparator = (nodeOne, nodeTwo) -> {
 
-        if (methodName.equals("getCost")) return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
-        else if (methodName.equals("getNeighbourCount"))
+        if (methodName.equals("getCost")) {
+          return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
+        } else if (methodName.equals("getNeighbourCount")) {
           return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
-        else if (methodName.equals("distanceToDestination"))
+        } else if (methodName.equals("distanceToDestination")) {
           return Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
+        }
 
         return 0;
       };
