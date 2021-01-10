@@ -1,6 +1,7 @@
 import Application.Application;
 import Game.Game;
 import Image.ImageProcessor;
+import Parser.Handler;
 import Parser.Parser;
 import Utility.Exceptions.GenericError;
 import Utility.Exceptions.ParserFailure;
@@ -8,7 +9,6 @@ import Utility.Location;
 import Utility.Node;
 import Utility.PathMaker;
 import Utility.Thread.AlgorithmDispatcher;
-import Parser.Handler;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -2996,7 +2996,7 @@ public class Tests {
     @Test
     public void runAnyParser() throws GenericError {
         File image = new File("Images/Tiny.png");
-        File parser = new File("Programs/Working Algorithms/AStar.txt");
+        File parser = new File("Programs/Invalid Tests/Collections/Too Many Values/List Too Many Values.solver");
 
         Application application = new Application();
         application.parseImageFile(image);
@@ -3127,6 +3127,57 @@ public class Tests {
         public String printCSV() {
             return fileName + ", " + algorithm + ", " + size + ", " + onLoad + ", " + onSolve + ", " + execTime + ", " + multiThreading + " " + success + "\n";
         }
+    }
+
+    /**
+     * This runs a several simple algorithms and then takes all of the
+     * nodes and calculates their average size
+     */
+    @Test
+    public void sizeNode() throws GenericError, InterruptedException {
+        ArrayList<Double> nodeSizes = new ArrayList<>();
+
+        String[] algorithms = new String[]{"Depth First", "Breadth First", "AStar", "Dijkstra"};
+
+        for (String algorithm: algorithms) {
+            ArrayList<File> files = getAllFiles(new File("Images"));
+
+            //Remove anything that is not an image
+            files = removeNonImages(files, false, "TwoK");
+
+            Comparator<File> smallest = (File f1, File f2) -> {
+                if (f1.length() < f2.length()) return -1;
+                if (f1.length() > f2.length()) return 1;
+                return 0;
+            };
+
+            files.sort(smallest);
+
+            System.out.println("files: " + files);
+
+            for (File file : files) {
+                Application application = new Application();
+                application.parseImageFile(file);
+
+                AlgorithmDispatcher thread = application.solve(algorithm, "Loading", false, 0, null, null);
+                thread.start();
+                thread.join();
+                System.out.println("Thread complete");
+
+                for (Node node: thread.getApplication().getNodes().values()) {
+                    nodeSizes.add(node.estimateSize());
+                }
+            }
+        }
+
+        //Calculate the average
+        double total = 0;
+        for (double num: nodeSizes) total += num;
+
+        double average = total / nodeSizes.size();
+        System.out.println("There were " + nodeSizes.size() + ". Average size " + average + " (bytes)");
+
+        //Last average was 59.051165661565356 (bytes)
     }
 }
 

@@ -3,8 +3,8 @@ package Utility.Thread;
 import Algorithm.SolveAlgorithm;
 import Application.Application;
 import Game.Player;
-import Parser.Parser;
 import Parser.Handler;
+import Parser.Parser;
 
 
 /**
@@ -26,7 +26,7 @@ public class AlgorithmDispatcher extends Thread {
     this.algorithm = algorithm;
     this.params = params;
 
-    if (player.application != null) this.currentApplication = player.application;
+    if (player != null && player.application != null) this.currentApplication = player.application;
     else this.currentApplication = new Application(currentApplication);
 
     this.id = id;
@@ -67,5 +67,14 @@ public class AlgorithmDispatcher extends Thread {
 
   public double getMazeSize() {
     return solve.mazeSize;
+  }
+
+  /**
+   * Get the application object.
+   * Used for testing.
+   * @return the application.
+   */
+  public Application getApplication() {
+    return currentApplication;
   }
 }

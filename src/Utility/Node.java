@@ -30,6 +30,43 @@ public class Node {
   }
 
   /**
+   * Estimate the size of this object.
+   * Used primarily for testing.
+   * @return the size estimate (bytes).
+   */
+  public double estimateSize() {
+    double toReturn = 0;
+
+    //8 bytes to a pointer
+    int pointerSize = 8;
+
+    if (nodeLocation != null) toReturn += nodeLocation.estimateSize();
+
+    //The neighbours are stored a pointers (8 bytes per pointer)
+    if (neighbours != null) toReturn += neighbours.size() * pointerSize;
+
+    //The parent is also a pointer
+    if (parent != null) toReturn += pointerSize;
+
+    //The thread is also a pointer
+    if (isVisited != null) toReturn += pointerSize;
+
+    //The cost, a double
+    toReturn += 8;
+
+    //nodeDepth, a double
+    toReturn += 8;
+
+    //reachBack, a double
+    toReturn += 8;
+
+    //The children are stored a pointers (8 bytes per pointer)
+    if (children != null) toReturn += children.size() * pointerSize;
+
+    return toReturn;
+  }
+
+  /**
    * Get the location of the node.
    *
    * @return the location

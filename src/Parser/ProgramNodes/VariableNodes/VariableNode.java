@@ -1,9 +1,11 @@
 package Parser.ProgramNodes.VariableNodes;
 
 import Parser.Handler;
+import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
+import Parser.ProgramNodes.MathNodes.Number;
 import Utility.Node;
 
 import java.util.*;
@@ -167,6 +169,11 @@ public class VariableNode implements Exec {
    * @param method the method to execute in order to get the value
    */
   private void add(MethodNode method) {
+    //Cast to a collection and check the size
+    if (value instanceof Collection && ((Collection) value).size() > 2097152) {
+      Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", null);
+    }
+
     if (type.equals("Stack")) {
       Stack tmp = (Stack) value;
 
@@ -178,19 +185,16 @@ public class VariableNode implements Exec {
       tmp.push(toAdd);
       value = tmp;
     } else if (type.equals("Queue") || type.equals("PriorityQueue")) {
-      Queue tmp = null;
-      if (this.type.equals("Queue")) tmp = (ArrayDeque) value;
-      else if (this.type.equals("PriorityQueue")) {
-        tmp = (PriorityQueue) value;
-      }
-
       Object toAdd = method.execute();
 
       //Cast the variable to a node if required
       if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
 
-      tmp.offer(toAdd);
-      value = tmp;
+      //Verify that the value is not null
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", null);
+
+      if (value instanceof PriorityQueue) ((PriorityQueue<Node>) value).add((Node) toAdd);
+      else if (value instanceof ArrayDeque) ((ArrayDeque<Node>) value).add((Node) toAdd);
     }
   }
 
@@ -198,8 +202,9 @@ public class VariableNode implements Exec {
    * Update the value in this variable
    * @param newVal the new value
    */
-  public void update(Exec newVal) {
-    this.value = newVal.execute();
+  public void update(Object newVal) {
+    if (newVal instanceof Exec) this.value = ((Exec) newVal).execute();
+    else if (newVal instanceof Number) this.value = new NumberNode(((Number) newVal).calculate());
 
     //Check if the newly assigned value is of the correct type
     if (this.value instanceof VariableNode) {

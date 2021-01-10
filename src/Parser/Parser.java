@@ -491,10 +491,14 @@ public class Parser {
   private Exec parseVariableReference(Scanner fileScanner, String varName, boolean toPrint) {
     if (debug) System.out.println("Parsing variable reference");
 
+    //Remove any spaces
+    varName = varName.replaceAll(" ", "");
+
     Exec actionOrAssignment = null;
 
     //If there is a .xyz return an action node
-    if (fileScanner.hasNext(Regex.dot)) actionOrAssignment = parseVariableAction(fileScanner, varName);
+    if (varName.matches(Regex.math.pattern())) actionOrAssignment = new VariableActionNode(varName, parseMath(fileScanner), handler);
+    else if (fileScanner.hasNext(Regex.dot)) actionOrAssignment = parseVariableAction(fileScanner, varName);
     else if (fileScanner.hasNext(Regex.equals)) actionOrAssignment = parseVariableAssignment(fileScanner, varName);
     else if (fileScanner.hasNext(Regex.plus) && !toPrint) actionOrAssignment = handler.getFromMap(varName);
     else if (toPrint) actionOrAssignment = parseGetVar(varName); //Return the variable object
@@ -519,6 +523,7 @@ public class Parser {
     fileScanner.next();
 
     if (fileScanner.hasNext(Regex.mazeCall)) return new VariableAssignmentNode(varName, parseMazeCall(fileScanner), handler);
+    else if (fileScanner.hasNext(Regex.math)) return new VariableAssignmentNode(varName, parseMath(fileScanner), handler);
     else if (fileScanner.hasNext(Regex.name)) return new VariableAssignmentNode(varName, parseVariableReference(fileScanner, fileScanner.next(), false), handler);
     else fail("Invalid variable assignment", fileScanner);
 

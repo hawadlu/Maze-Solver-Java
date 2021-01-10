@@ -31,4 +31,14 @@ public class Location {
   public String toString() {
     return "x: " + this.x + " y: " + this.y;
   }
+
+  /**
+   * Estimate the size of this object.
+   * Used primarily for testing purposes.
+   * @return the estimated size (bytes)
+   */
+  public double estimateSize() {
+    //There are two ints, so return 8;
+    return 8;
+  }
 }

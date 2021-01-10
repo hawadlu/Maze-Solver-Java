@@ -1,0 +1,14 @@
+***Create a PriorityQueue and try to add too many values to it***
+
+Node node = Maze.getStart();
+Comparator compare -> Maze.getCost(node);
+PriorityQueue toProcess;
+toProcess.assignComparator(compare);
+
+Number count = 0;
+
+while(lt(count, 5000000)) {
+    toProcess.add(node);
+    count = plus(count, 1);
+    ***print(count);***
+}

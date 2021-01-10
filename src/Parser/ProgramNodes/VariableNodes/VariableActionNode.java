@@ -3,6 +3,7 @@ package Parser.ProgramNodes.VariableNodes;
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.Handler;
+import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 
 /**
@@ -11,6 +12,7 @@ import Parser.ProgramNodes.MethodNodes.MethodNode;
 public class VariableActionNode implements Exec {
   String name;
   Exec action;
+  Number number;
   private Handler handler;
 
   public VariableActionNode(String varName, Exec action, Handler handler) {
@@ -19,12 +21,19 @@ public class VariableActionNode implements Exec {
     this.handler = handler;
   }
 
+  public VariableActionNode(String varName, Number nunber, Handler handler) {
+    this.name = varName;
+    this.number = nunber;
+    this.handler = handler;
+  }
+
   @Override
   public Object execute() {
     //Get the variable out of the stack
     VariableNode toUpdate = handler.getFromMap(name);
 
-    if (action instanceof MethodNode) return toUpdate.callMethod((MethodNode) action);
+    if (action != null && action instanceof MethodNode) return toUpdate.callMethod((MethodNode) action);
+    else if (number != null) toUpdate.update(number.calculate());
 
     return null;
   }
