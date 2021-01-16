@@ -15,6 +15,17 @@ public class GetVariableNode implements Exec {
     this.handler = handler;
   }
 
+  /**
+   * @return the corresponding variable from the variable map.
+   */
+  public VariableNode extractVariable() {
+    return handler.getFromMap(varName);
+  }
+
+  public String getVarName() {
+    return varName;
+  }
+
   public String getInfo() {
     return handler.getFromMap(varName).print();
   }

@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  * This class is responsible for parsing the files.
  */
 public class Parser {
-  boolean debug = false;
+  boolean debug = true;
   Scanner fileScanner = null;
   Exec baseNode;
   private Handler handler;
@@ -668,7 +668,14 @@ public class Parser {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //Discard the comma
       if (fileScanner.hasNext(Regex.mazeCall)) params.add(parseMazeCall(fileScanner));
       else if (fileScanner.hasNext(Regex.math)) params.add(parseMath(fileScanner));
-      else params.add(fileScanner.next().replaceAll(" ", "")); //Remove any spaces in the parameter
+      else if (fileScanner.hasNext(Regex.name)) {
+        String name = fileScanner.next().replaceAll(" ", "");
+        if (fileScanner.hasNext(Regex.dot)) params.add(parseEvaluateMethodCall(name, fileScanner));
+        else params.add(name);
+      }
+
+
+      //fixme, this is sometimes an endless loop
     }
 
 
@@ -962,12 +969,27 @@ public class Parser {
   }
 
   /**
+   * Parse the evaluation of a method call so that it wil return a number at runtime.
+   * @param name the name of the variable that is being used
+   * @param fileScanner the file scanner.
+   * @return a node that will evaluate a method call at runtime.
+   */
+  private Object parseEvaluateMethodCall(String name, Scanner fileScanner) {
+    if (debug) System.out.println("Parsing runtime method call evaluation");
+
+    MethodNode method = parseMethod(fileScanner);
+    GetVariableNode variableNode = new GetVariableNode(name, handler);
+
+    return new EvaluateNode(variableNode, method);
+  }
+
+  /**
    * Parse the evaluation of a maze call so that it will return a number at runtime.
    * @param fileScanner the file scanner.
-   * @return a node which will evaluate the contents of a variable at runtime
+   * @return a node which will evaluate the contents of a maze call at runtime
    */
   private Number parseEvaluateMazeCall(Scanner fileScanner) {
-    if (debug) System.out.println("Parsing runtime variable evaluation");
+    if (debug) System.out.println("Parsing runtime maze call evaluation");
 
     return new EvaluateNode(parseMazeCall(fileScanner));
   }

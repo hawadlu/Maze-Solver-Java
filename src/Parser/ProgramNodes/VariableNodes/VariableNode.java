@@ -3,9 +3,9 @@ package Parser.ProgramNodes.VariableNodes;
 import Parser.Handler;
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
+import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
-import Parser.ProgramNodes.MathNodes.Number;
 import Utility.Node;
 
 import java.util.*;
@@ -70,11 +70,20 @@ public class VariableNode implements Exec {
 
     //Evaluate the Exec node that will assign the value
     if (toEvaluate != null) {
-      if (type.equals("Node") || type.equals("List") || type.equals("Comparator") || type.equals("Number")) value = toEvaluate.execute();
+      if (type.equals("List")) {
+        Collection tmp = (Collection) toEvaluate.execute();
+        value = new ArrayList<>();
+
+        for (Object obj: tmp) ((ArrayList) value).add(obj);
+
+      } else if (type.equals("Node") || type.equals("Comparator") || type.equals("Number")) {
+        value = toEvaluate.execute();
+      }
     } else {
       if (type.equals("Stack")) value = new Stack<>();
       else if (type.equals("Queue")) value = new ArrayDeque<>();
       else if (type.equals("PriorityQueue")) value = new PriorityQueue<>();
+      else if (type.equals("List")) value = new ArrayList<>();
     }
     return null;
   }
@@ -121,9 +130,38 @@ public class VariableNode implements Exec {
       else if (method.getName().equals("getNext")) return getNext();
       else if (method.getName().equals("getSize")) return getSize();
       else if (method.getName().equals("assignComparator")) assignComparator(method);
+      else if (method.getName().equals("get")) return get(method);
     }
 
     return null;
+  }
+
+  /**
+   * Get a variable at a specified index out of the list.
+   * Get the parameter object. If it is a number use that,
+   * if it is a variable use that to extract the number from
+   * the variable map.
+   * @param method the method object.d
+   * @return the value at the specified index.
+   */
+  private Object get(MethodNode method) {
+    Object parameter = method.getParameters().get(0);
+
+    int index = 0;
+
+    if (parameter instanceof GetVariableNode) {
+      VariableNode var = ((GetVariableNode) parameter).extractVariable();
+      index = (int) ((Number) var.value).calculate();
+    } else if (parameter instanceof Number) {
+      index = (int) ((Number) parameter).calculate();
+    } else if (parameter instanceof VariableNode) {
+      System.out.println();
+    } else if (parameter instanceof String) {
+      VariableNode var = handler.getFromMap(parameter);
+      index = (int) ((Number) var.getValue()).calculate();
+    }
+
+    return ((ArrayList) value).get(index);
   }
 
   /**
@@ -175,15 +213,12 @@ public class VariableNode implements Exec {
     }
 
     if (type.equals("Stack")) {
-      Stack tmp = (Stack) value;
-
       Object toAdd = method.execute();
 
       //Cast the variable to a node if required
       if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
 
-      tmp.push(toAdd);
-      value = tmp;
+      ((Stack) value).add(toAdd);
     } else if (type.equals("Queue") || type.equals("PriorityQueue")) {
       Object toAdd = method.execute();
 
@@ -195,6 +230,16 @@ public class VariableNode implements Exec {
 
       if (value instanceof PriorityQueue) ((PriorityQueue<Node>) value).add((Node) toAdd);
       else if (value instanceof ArrayDeque) ((ArrayDeque<Node>) value).add((Node) toAdd);
+    } else if (type.equals("List")) {
+      Object toAdd = method.execute();
+
+      //Cast the variable to a node if required
+      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
+
+      //Verify that the value is not null
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", null);
+
+      ((ArrayList) value).add(toAdd);
     }
   }
 

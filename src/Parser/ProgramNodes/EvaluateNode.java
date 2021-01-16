@@ -2,6 +2,7 @@ package Parser.ProgramNodes;
 
 import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
+import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 import Parser.ProgramNodes.VariableNodes.VariableNode;
 
@@ -26,10 +27,16 @@ public class EvaluateNode implements Exec, Number {
     this.number = number;
   }
 
+  public EvaluateNode(GetVariableNode variableNode, MethodNode method) {
+    this.variableNode = variableNode;
+    this.toEvaluate = method;
+  }
+
 
   @Override
   public Object execute() {
-    if (toEvaluate != null) return toEvaluate.execute();
+    if (variableNode != null) return variableNode.extractVariable().callMethod((MethodNode) toEvaluate);
+    else if (toEvaluate != null) return toEvaluate.execute();
     else if (number != null) return new NumberNode(number.calculate());
     return null;
   }

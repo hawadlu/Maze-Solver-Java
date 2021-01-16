@@ -2996,7 +2996,8 @@ public class Tests {
     @Test
     public void runAnyParser() throws GenericError {
         File image = new File("Images/Tiny.png");
-        File parser = new File("Programs/Invalid Tests/Collections/Too Many Values/List Too Many Values.solver");
+        File parser = new File("Programs/Valid Tests/Collections/Lists.solver");
+        System.out.println(parser);
 
         Application application = new Application();
         application.parseImageFile(image);

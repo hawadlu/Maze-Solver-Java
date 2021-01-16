@@ -58,6 +58,7 @@ public class MethodNode implements Exec {
     else if (name.equals("setParent")) validator = new MethodValidator(name, new String[]{"Node", "Node"}, parameters, handler);
     else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
     else if (name.equals("fail")) validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
+    else if (name.equals("get")) validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
     else Parser.fail("Unrecognised method " + name, null);
   }
 

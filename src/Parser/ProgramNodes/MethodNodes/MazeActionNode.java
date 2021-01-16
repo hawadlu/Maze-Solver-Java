@@ -4,6 +4,7 @@ import Parser.Handler;
 import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.NumberNode;
+import Parser.ProgramNodes.VariableNodes.GetVariableNode;
 import Utility.Node;
 import Parser.ProgramNodes.MathNodes.Number;
 
@@ -37,7 +38,10 @@ public class MazeActionNode implements Exec {
       Node toUpdate = (Node) handler.getFromMap(varName).getValue();
       return handler.checkDone(toUpdate);
     } else if (methodNode.getName().equals("getNeighbours")){
-      String varName = (String) methodNode.getParameters().get(0);
+      String varName = null;
+      if (methodNode.getParameters().get(0) instanceof String) varName = (String) methodNode.getParameters().get(0);
+      else if (methodNode.getParameters().get(0) instanceof GetVariableNode) varName = ((GetVariableNode) methodNode.getParameters().get(0)).getVarName();
+        
       Node toUpdate = (Node) handler.getFromMap(varName).getValue();
       return handler.getNeighbours(toUpdate);
     } else if (methodNode.getName().equals("isVisited")) {
