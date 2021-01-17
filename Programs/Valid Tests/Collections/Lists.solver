@@ -9,3 +9,7 @@ print("Neighbour: " + someList.get(zero));
 print("Neighbour: " + someList.get(0));
 
 someList.add(someList.get(zero));
+
+Node next = someList.get(0);
+
+someList.add(next);

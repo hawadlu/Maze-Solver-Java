@@ -55,6 +55,16 @@ public class EvaluateNode implements Exec, Number {
     return number.calculate();
   }
 
+  /**
+   * Get the variable attached to this node if applicable.
+   * @return the variable associated with the getVariable node.
+   */
+  public VariableNode getVariable() {
+    if (variableNode != null) return variableNode.extractVariable();
+
+    return null;
+  }
+
   @Override
   public void validate() {
     //todo implement me

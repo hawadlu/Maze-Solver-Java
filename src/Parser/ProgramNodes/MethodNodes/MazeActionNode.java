@@ -2,6 +2,7 @@ package Parser.ProgramNodes.MethodNodes;
 
 import Parser.Handler;
 import Parser.Parser;
+import Parser.ProgramNodes.EvaluateNode;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
@@ -38,11 +39,15 @@ public class MazeActionNode implements Exec {
       Node toUpdate = (Node) handler.getFromMap(varName).getValue();
       return handler.checkDone(toUpdate);
     } else if (methodNode.getName().equals("getNeighbours")){
-      String varName = null;
-      if (methodNode.getParameters().get(0) instanceof String) varName = (String) methodNode.getParameters().get(0);
-      else if (methodNode.getParameters().get(0) instanceof GetVariableNode) varName = ((GetVariableNode) methodNode.getParameters().get(0)).getVarName();
-        
-      Node toUpdate = (Node) handler.getFromMap(varName).getValue();
+      Node toUpdate = null;
+      if (methodNode.getParameters().get(0) instanceof String) {
+        toUpdate = (Node) handler.getFromMap((String) methodNode.getParameters().get(0)).getValue();
+      } else if (methodNode.getParameters().get(0) instanceof GetVariableNode) {
+        toUpdate = (Node) handler.getFromMap((GetVariableNode) methodNode.getParameters().get(0)).getValue();
+      } else if (methodNode.getParameters().get(0) instanceof EvaluateNode) {
+        toUpdate = (Node) ((EvaluateNode) methodNode.getParameters().get(0)).execute();
+      }
+
       return handler.getNeighbours(toUpdate);
     } else if (methodNode.getName().equals("isVisited")) {
       String varName = (String) methodNode.getParameters().get(0);
