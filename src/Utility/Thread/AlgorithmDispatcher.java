@@ -3,8 +3,8 @@ package Utility.Thread;
 import Algorithm.SolveAlgorithm;
 import Application.Application;
 import Game.Player;
-import Parser.Handler;
-import Parser.Parser;
+import parser.Handler;
+import parser.Parser;
 
 
 /**

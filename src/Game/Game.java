@@ -3,7 +3,7 @@ package Game;
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import GUI.GUI;
-import Parser.Parser;
+import parser.Parser;
 
 import javax.swing.*;
 import java.awt.*;

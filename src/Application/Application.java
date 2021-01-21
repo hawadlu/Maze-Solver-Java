@@ -29,7 +29,7 @@ import Game.Game;
 import Game.Player;
 import Image.ImageFile;
 import Image.ImageProcessor;
-import Parser.Parser;
+import parser.Parser;
 import Utility.Exceptions.GenericError;
 import Utility.Location;
 import Utility.Node;

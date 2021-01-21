@@ -4,7 +4,7 @@ import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import GUI.CustomPanels.Scroll;
 import GUI.CustomPanels.SpinnerPanel;
-import Parser.Parser;
+import parser.Parser;
 import Utility.Exceptions.GenericError;
 
 import javax.swing.*;

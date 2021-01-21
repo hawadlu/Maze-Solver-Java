@@ -1,7 +1,7 @@
 package GUI.CustomPanels;
 
 import Application.Application;
-import Parser.Parser;
+import parser.Parser;
 import Image.ImageFile;
 
 import javax.swing.*;

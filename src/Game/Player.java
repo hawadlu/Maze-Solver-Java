@@ -3,7 +3,7 @@ package Game;
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import Image.ImageFile;
-import Parser.Parser;
+import parser.Parser;
 import Utility.Node;
 import Utility.PathMaker;
 

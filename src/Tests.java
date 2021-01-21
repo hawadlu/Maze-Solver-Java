@@ -1,8 +1,8 @@
 import Application.Application;
 import Game.Game;
 import Image.ImageProcessor;
-import Parser.Handler;
-import Parser.Parser;
+import parser.Handler;
+import parser.Parser;
 import Utility.Exceptions.GenericError;
 import Utility.Exceptions.ParserFailure;
 import Utility.Location;
