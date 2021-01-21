@@ -11,10 +11,17 @@ import java.util.ArrayList;
 public class ElseNode implements Exec {
   final ArrayList<Exec> statements;
 
+  /**
+   * Create a new object.
+   * @param statements the list of statements that should be executed.
+   */
   public ElseNode(ArrayList<Exec> statements) {
     this.statements = statements;
   }
 
+  /**
+   * Go through each statement in the list and execute it.
+   */
   @Override
   public Object execute() {
     for (Exec statement: statements) {
@@ -23,11 +30,17 @@ public class ElseNode implements Exec {
     return null;
   }
 
+  /**
+   * Go through each statement in the list and validate it.
+   */
   @Override
   public void validate() {
-    //todo implement me
+    for (Exec statement: statements) statement.validate();
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     StringBuilder internals = new StringBuilder();
@@ -36,9 +49,11 @@ public class ElseNode implements Exec {
     return "else {\n" + internals + "}\n";
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "ElseNode";
   }
 }

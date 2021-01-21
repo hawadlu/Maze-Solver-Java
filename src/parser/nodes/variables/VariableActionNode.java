@@ -15,18 +15,36 @@ public class VariableActionNode implements Exec {
   Number number;
   private final Handler handler;
 
+  /**
+   * Create the object.
+   * @param varName The name of the variable.
+   * @param action The action to perform.
+   * @param handler The maze handler.
+   */
   public VariableActionNode(String varName, Exec action, Handler handler) {
     this.name = varName.replaceAll(" ", "");
     this.action = action;
     this.handler = handler;
   }
 
+  /**
+   * Create the object.
+   * @param varName The name of the variable.
+   * @param number A number which may be used to update the variable contents.
+   * @param handler The maze handler.
+   */
   public VariableActionNode(String varName, Number number, Handler handler) {
     this.name = varName;
     this.number = number;
     this.handler = handler;
   }
 
+  /**
+   * Get the variable out of the map.
+   *
+   * If applicable use the action variable to update the variable object.
+   * Otherwise use the number variable.
+   */
   @Override
   public Object execute() {
     //Get the variable out of the stack
@@ -38,6 +56,11 @@ public class VariableActionNode implements Exec {
     return null;
   }
 
+  /**
+   * Validate the update method.
+   *
+   * Make sure that only certain methods are being used.
+   */
   @Override
   public void validate() {
     //Check to see if the method is compatible with the variable type
@@ -59,14 +82,19 @@ public class VariableActionNode implements Exec {
     action.validate();
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return name + " " + action;
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "VariableActionNode";
   }
 }

@@ -17,11 +17,20 @@ public class MazeActionNode implements Exec {
   final MethodNode methodNode;
   private final Handler handler;
 
+  /**
+   * Create the object.
+   * @param methodNode the method to be executed.
+   * @param handler the maze handler.
+   */
   public MazeActionNode(MethodNode methodNode, Handler handler) {
     this.methodNode = methodNode;
     this.handler = handler;
   }
 
+  /**
+   * Use the method node to check which method should be executed and then perform
+   * the appropriate actions.
+   */
   @Override
   public Object execute() {
     switch (methodNode.getName()) {
@@ -113,18 +122,28 @@ public class MazeActionNode implements Exec {
     return null;
   }
 
+  /**
+   * Call the validate method on the method node.
+   */
   @Override
   public void validate() {
     methodNode.validate();
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return "Maze action " + methodNode;
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
+
     return switch (methodNode.getName()) {
       case "getStart" -> "MazeNode";
       case "getNeighbours" -> "Collection";

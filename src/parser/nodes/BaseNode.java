@@ -9,10 +9,18 @@ import java.util.ArrayList;
  */
 public class BaseNode implements Exec {
   final ArrayList<Exec> statements;
+
+  /**
+   * Create a new base node.
+   * @param statements all of the statements that will be executed by the program.
+   */
   public BaseNode(ArrayList<Exec> statements) {
     this.statements = statements;
   }
 
+  /**
+   * Run through each of the stored statements and execute them.
+   */
   @Override
   public Object execute() {
     System.out.println("Starting execution");
@@ -24,6 +32,10 @@ public class BaseNode implements Exec {
     return false;
   }
 
+  /**
+   * Go through each of the stored statements and call the
+   * appropriate method to validate them.
+   */
   @Override
   public void validate() {
     for (Exec statement: statements) {
@@ -31,6 +43,10 @@ public class BaseNode implements Exec {
     }
   }
 
+  /**
+   * Go through each of the attached statements and call
+   * the appropriate toString method.
+   */
   @Override
   public String toString() {
     StringBuilder string = new StringBuilder();
@@ -38,9 +54,11 @@ public class BaseNode implements Exec {
     return string.toString();
   }
 
+  /**
+   * Get the type of node would be returned if the execute method is called
+   */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "BaseNode";
   }
 }

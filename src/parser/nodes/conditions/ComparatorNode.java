@@ -33,8 +33,7 @@ public class ComparatorNode implements Exec, Value {
    */
   @Override
   public void validate() {
-    //Check that the supplied exec is of the correct type
-    //todo implement me
+    //Nothing to do here
   }
 
   /**
@@ -83,7 +82,6 @@ public class ComparatorNode implements Exec, Value {
    */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "Comparator";
   }
 }

@@ -23,14 +23,29 @@ public class VariableNode implements Exec, Value {
   private final Handler handler;
   private boolean isCollection = false;
 
+  /**
+   * Create the object.
+   * @param type The type of object that is being stored.
+   * @param name The name of the variable.
+   * @param handler The maze handler.
+   */
   public VariableNode(String type, String name, Handler handler) {
     this.name = name.replaceAll(" ", "");
-    this.type = type.replaceAll(" ", "");
+    type = type.replaceAll(" ", "");
     this.handler = handler;
 
     if (type.equals("List") || type.equals("Stack") || type.equals("Queue") || type.equals("PriorityQueue")) isCollection = true;
+
+    if (type.equals("Node")) this.type = "MazeNode";
+    else this.type = type;
   }
 
+  /**
+   * Create the object.
+   * @param info A list of information from which the variable name and type are extracted.
+   * @param toEvaluate The value of this variable.
+   * @param handler The maze handler.
+   */
   public VariableNode(String[] info, Exec toEvaluate, Handler handler) {
     ArrayList<String> tmp1 = new ArrayList<>(Arrays.asList(info));
     ArrayList<String> tmp2 = new ArrayList<>(Arrays.asList(info));
@@ -43,13 +58,19 @@ public class VariableNode implements Exec, Value {
 
 
     this.name = tmp2.get(1).replaceAll(" ", "");
-    this.type = tmp2.get(0).replaceAll(" ", "");
+    String type = tmp2.get(0).replaceAll(" ", "");
     this.toEvaluate = toEvaluate;
     this.handler = handler;
 
     if (type.equals("List") || type.equals("Stack") || type.equals("Queue") || type.equals("PriorityQueue")) isCollection = true;
+
+    if (type.equals("Node")) this.type = "MazeNode";
+    else this.type = type;
   }
 
+  /**
+   * @return the value stored in this variable.
+   */
   public Object getValue() {
     return this.value;
   }
@@ -63,11 +84,21 @@ public class VariableNode implements Exec, Value {
     this.value = newVal;
   }
 
+  /**
+   * @return a string representation of the type at execution.
+   */
   @Override
   public String getType() {
     return this.type;
   }
 
+  /**
+   * Validate the contents of the variable.
+   *
+   * Add the variable to the map.
+   *
+   * If applicable evaluate toEvaluate otherwise evaluate the value.
+   */
   @Override
   public void validate() {
     //Add the variable to the map in the handler.
@@ -112,6 +143,12 @@ public class VariableNode implements Exec, Value {
     }
   }
 
+  /**
+   * Add the variable to the variable map.
+   *
+   * If toEvaluate is not null run it.
+   * Otherwise check the variable type and initialise the value.
+   */
   @Override
   public Object execute() {
     //Add the variable to the map in the handler.
@@ -159,17 +196,29 @@ public class VariableNode implements Exec, Value {
     }
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return print();
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
+
     //Null because executing a variable never does anything.
     return null;
   }
 
+  /**
+   * Check the equality of two variables.
+   * @param o the variable node to compare.
+   * @return a boolean indicating object equality.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -178,6 +227,10 @@ public class VariableNode implements Exec, Value {
     return type.equals(that.type) && name.equals(that.name);
   }
 
+  /**
+   * Get a hashcode of the variable.
+   * @return a hashcode of the object.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(type, name);

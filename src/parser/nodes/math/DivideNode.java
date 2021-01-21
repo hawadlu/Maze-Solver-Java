@@ -10,15 +10,27 @@ import java.util.ArrayList;
 public class DivideNode implements Number {
   final ArrayList<Number> values = new ArrayList<>();
 
+  /**
+   * Create the object.
+   * @param number a number object that will be used later.
+   */
   public void add(Number number) {
     values.add(number);
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return "divide(" + values + ")";
   }
 
+  /**
+   * Run through each of the numbers and divide them.
+   *
+   * Divide the first by the second and then by the third etc.
+   */
   @Override
   public double calculate() {
     ArrayList<Number> copyValues = new ArrayList<>(values);

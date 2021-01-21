@@ -10,15 +10,27 @@ import java.util.ArrayList;
 public class PlusNode implements Number {
   final ArrayList<Number> values = new ArrayList<>();
 
+  /**
+   * Create the object.
+   * @param number a number object that will be used later.
+   */
   public void add(Number number) {
     values.add(number);
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return "plus(" + values + ")";
   }
 
+  /**
+   * Run through each of the numbers and add them.
+   *
+   * add the first to the second and then the third etc.
+   */
   @Override
   public double calculate() {
     ArrayList<Number> copyValues = new ArrayList<>(values);

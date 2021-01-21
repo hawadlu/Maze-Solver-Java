@@ -30,6 +30,11 @@ public class Handler {
   private final HashMap<String, VariableNode> variables = new HashMap<>();
   private boolean popup = false;
 
+  /**
+   * Create the object.
+   * @param application The current application.
+   * @param delay The delay that should be observed between visiting each new node.
+   */
   public Handler(Application application, int delay) {
     this.application = application;
     if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
@@ -38,6 +43,10 @@ public class Handler {
     this.delay = delay;
   }
 
+  /**
+   * Create the object.
+   * @param application The current application.
+   */
   public Handler(Application application) {
     this.application = application;
     if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
@@ -174,6 +183,11 @@ public class Handler {
     return node.calculateDistance(application.getNodes().get(destination));
   }
 
+  /**
+   * Check the equality of the two objects.
+   * @param o another Handler object.
+   * @return a boolean to indicate object equality.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -182,6 +196,10 @@ public class Handler {
     return delay == that.delay && lastNode.equals(that.lastNode) && application.equals(that.application) && currentThread.equals(that.currentThread) && start.equals(that.start) && destination.equals(that.destination) && player.equals(that.player);
   }
 
+  /**
+   * Calculate the hashcode of the object.
+   * @return a hashcode.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(lastNode, application, currentThread, start, destination, player, delay);
@@ -228,10 +246,18 @@ public class Handler {
     variables.remove(key);
   }
 
+  /**
+   * Check if the popup has been enabled.
+   * @return a boolean to indicate if the popup is on or off,
+   */
   public boolean getPopup() {
     return popup;
   }
 
+  /**
+   * Set the popup to on or off.
+   * @param popup a boolean to indicate on or off.
+   */
   public void setPopup(boolean popup) {
     this.popup = popup;
   }

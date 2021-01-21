@@ -4,10 +4,17 @@ import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
+/**
+ * This class contains deals with executing code in the else if branch of an if statement.
+ */
 public class ElseIfNode implements Exec {
   final ArrayList<IfNode> ifNodes;
   ElseNode elseNode;
 
+  /**
+   * Create the object.
+   * @param ifs an arraylist of all of the conditions and their respective code blocks.
+   */
   public ElseIfNode(ArrayList<IfNode> ifs) {
     this.ifNodes = ifs;
 
@@ -18,15 +25,31 @@ public class ElseIfNode implements Exec {
     }
   }
 
+  /**
+   * Add an else statement to the current object.
+   * @param elseNode a node containing a block of code to be executed.
+   */
   public void addElse(ElseNode elseNode) {
     this.elseNode = elseNode;
   }
 
+  /**
+   * Call th validate methods on the IfNodes and ElseNode
+   */
   @Override
   public void validate() {
-    //todo implement me
+    for (IfNode ifNode: ifNodes) ifNode.validate();
+
+    if (elseNode != null) elseNode.validate();
   }
 
+  /**
+   * Run through each of the if statements and check their associated conditions.
+   * When one condition is true, execute the statement and then stop.
+   *
+   * If no conditions are true and their is an else statement, execute that.
+   * @return this never needs to return anything.
+   */
   @Override
   public Object execute() {
     //Go through each of the statements until one is true
@@ -47,6 +70,9 @@ public class ElseIfNode implements Exec {
     return null;
   }
 
+  /**
+   * @return a string representation of the object.
+   */
   @Override
   public String toString() {
 
@@ -62,9 +88,11 @@ public class ElseIfNode implements Exec {
     return toReturn.toString();
   }
 
+  /**
+   * @return the type of node that is being executed.
+   */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "ElseIfNode";
   }
 }

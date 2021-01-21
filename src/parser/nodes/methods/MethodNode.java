@@ -16,6 +16,11 @@ public class MethodNode implements Exec {
   private MethodValidator validator;
   private final Handler handler;
 
+  /**
+   * Create the object.
+   * @param name the name of the method.
+   * @param handler the maze handler.
+   */
   public MethodNode(String name, Handler handler) {
     this.name = name;
     this.handler = handler;
@@ -23,6 +28,12 @@ public class MethodNode implements Exec {
     setupValidator();
   }
 
+  /**
+   * Create the object.
+   * @param name the name of the method.
+   * @param parameters the parameters supplied to the method.
+   * @param handler the maze handler.
+   */
   public MethodNode(String name, ArrayList<Object> parameters, Handler handler) {
     this.name = name.replaceAll(" ", "");
     this.handler = handler;
@@ -46,9 +57,9 @@ public class MethodNode implements Exec {
   private void setupValidator() {
     switch (name) {
       case "setCost" -> validator = new MethodValidator(name, new String[]{"MazeNode", "Number"}, parameters, handler);
-      case "isDone", "getNeighbourCount", "distanceToDestination", "isVisited", "visit", "add", "getCost", "getNeighbours" -> validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+      case "isDone", "getNeighbourCount", "distanceToDestination", "isVisited", "visit", "add", "getCost", "getNeighbours", "finish" -> validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
       case "assignComparator" -> validator = new MethodValidator(name, new String[]{"Comparator"}, parameters, handler);
-      case "getStart", "getSize", "finish", "getNext", "isEmpty" -> validator = new MethodValidator(name, new String[]{}, parameters, handler);
+      case "getStart", "getSize", "getNext", "isEmpty" -> validator = new MethodValidator(name, new String[]{}, parameters, handler);
       case "getDistance", "setParent" -> validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
       case "fail" -> validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
       case "get" -> validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
@@ -56,6 +67,9 @@ public class MethodNode implements Exec {
     }
   }
 
+  /**
+   * @return the name of the method.
+   */
   public String getName() {
     return name;
   }
@@ -69,12 +83,18 @@ public class MethodNode implements Exec {
     return parameters;
   }
 
+  /**
+   * Call the method validator object which will validate the method.
+   */
   @Override
   public void validate() {
     //Check that the supplied method has the correct number of arguments and types
     validator.validate();
   }
 
+  /**
+   * Check the name of the method and then preform the appropriate action.
+   */
   @Override
   public Object execute() {
     if (name.equals("add")) {
@@ -87,14 +107,21 @@ public class MethodNode implements Exec {
     return null;
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     if (parameters.size() == 0) return "Method (" + name + "())";
     else return "Method (" + name + "(" + parameters + "))";
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
+
     if (name.equals("get")) return "MazeNode";
     return null;
   }

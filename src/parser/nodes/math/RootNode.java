@@ -10,15 +10,25 @@ import java.util.ArrayList;
 public class RootNode implements Number {
   final ArrayList<Number> values = new ArrayList<>();
 
+  /**
+   * Create the object.
+   * @param number a number object that will be used later.
+   */
   public void add(Number number) {
     values.add(number);
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     return "root(" + values + ")";
   }
 
+  /**
+   * @return the square root of the supplied value.
+   */
   @Override
   public double calculate() {
     return Math.sqrt(values.get(0).calculate());

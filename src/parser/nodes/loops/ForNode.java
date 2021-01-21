@@ -8,6 +8,9 @@ import Utility.Node;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * The class implements a foreach loop.
+ */
 public class ForNode implements Exec {
   final String varName;
   final String collectionName;
@@ -15,7 +18,13 @@ public class ForNode implements Exec {
   VariableNode varNode;
   private final Handler handler;
 
-
+  /**
+   * Create the object.
+   * @param varName The name of the variable that will be used inside the loop.
+   * @param collectionName The name of the collection to iterate through.
+   * @param statements List of statements to be executed.
+   * @param handler The maze handler.
+   */
   public ForNode(String varName, String collectionName, ArrayList<Exec> statements, Handler handler) {
     this.varName = varName;
     this.collectionName = collectionName;
@@ -23,11 +32,28 @@ public class ForNode implements Exec {
     this.handler = handler;
   }
 
+  /**
+   * Add the temp variable to the map.
+   * Go through each of the statements and call the relevant validate method.
+   * Remove the temp variable from the map.
+   */
   @Override
   public void validate() {
-    //todo implement me
+    //Add the variable to the map
+    handler.addVariable(varName, new VariableNode("Node", varName, handler));
+
+    //Validate the statements
+    for (Exec statement: statements) statement.validate();
+
+    //Remove the variable
+    handler.removeFromMap(varName);
   }
 
+  /**
+   * Create a new variable node using the name provided.
+   *
+   * Go through each item in the provided list and run each of the statements.
+   */
   @Override
   public Object execute() {
     //make variable node
@@ -65,6 +91,9 @@ public class ForNode implements Exec {
     return new ArrayList<>((Collection<Node>) value);
   }
 
+  /**
+   * Return a string representation of the object.
+   */
   @Override
   public String toString() {
     StringBuilder internals = new StringBuilder();
@@ -75,9 +104,11 @@ public class ForNode implements Exec {
     return "For (" + varName + " : " + collectionName + ") {\n" + internals + "\n}\n";
   }
 
+  /**
+   * Get the type that would be returned when the execute method is called.
+   */
   @Override
   public String getExecType() {
-    //todo implement me.
-    return null;
+    return "ForNode";
   }
 }

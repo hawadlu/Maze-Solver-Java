@@ -15,6 +15,13 @@ public class MethodValidator implements Validator {
     final String methodName;
     private final Handler handler;
 
+    /**
+     * Create the object.
+     * @param methodName Name of the method to validate.
+     * @param expectedTypes List of the expected parameter types.
+     * @param parameters List of the parameters that have been supplied.
+     * @param handler The maze handler object.
+     */
     MethodValidator(String methodName, String[] expectedTypes, ArrayList<Object> parameters, Handler handler) {
         this.methodName = methodName;
         this.expectedTypes = expectedTypes;
@@ -27,7 +34,9 @@ public class MethodValidator implements Validator {
      */
     public void validate() {
         //Check that the number of arguments matches what is expected
-        if (parameters.size() != expectedTypes.length) Parser.fail(methodName + " expects " + expectedTypes.length + " argument(s). Found " + parameters.size(), "Execution", null, handler.getPopup());
+        if (parameters.size() != expectedTypes.length) {
+            Parser.fail(methodName + " expects " + expectedTypes.length + " argument(s). Found " + parameters.size(), "Execution", null, handler.getPopup());
+        }
 
         //Check that the supplied types match the expected types
         for (int i = 0; i < parameters.size(); i++) {
