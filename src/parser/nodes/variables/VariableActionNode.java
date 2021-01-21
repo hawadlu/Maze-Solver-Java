@@ -1,19 +1,19 @@
 package parser.nodes.variables;
 
 import parser.Parser;
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 import parser.Handler;
-import parser.nodes.math.Number;
+import parser.interfaces.Number;
 import parser.nodes.methods.MethodNode;
 
 /**
  * Perform a given action on a variable
  */
 public class VariableActionNode implements Exec {
-  String name;
+  final String name;
   Exec action;
   Number number;
-  private Handler handler;
+  private final Handler handler;
 
   public VariableActionNode(String varName, Exec action, Handler handler) {
     this.name = varName.replaceAll(" ", "");

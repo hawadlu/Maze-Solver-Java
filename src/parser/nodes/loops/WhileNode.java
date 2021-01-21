@@ -1,13 +1,13 @@
 package parser.nodes.loops;
 
-import parser.nodes.conditions.Condition;
-import parser.nodes.Exec;
+import parser.interfaces.Condition;
+import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
 public class WhileNode implements Exec {
-  ArrayList<Exec> statements = new ArrayList<>();
-  Condition loopCondition;
+  final ArrayList<Exec> statements;
+  final Condition loopCondition;
 
   public WhileNode(Condition condition, ArrayList<Exec> statements) {
     this.loopCondition = condition;

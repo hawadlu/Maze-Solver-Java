@@ -1,11 +1,11 @@
 package parser.nodes.conditions;
 
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
 public class ElseIfNode implements Exec {
-  ArrayList<IfNode> ifNodes = new ArrayList<>();
+  final ArrayList<IfNode> ifNodes;
   ElseNode elseNode;
 
   public ElseIfNode(ArrayList<IfNode> ifs) {
@@ -30,7 +30,7 @@ public class ElseIfNode implements Exec {
   @Override
   public Object execute() {
     //Go through each of the statements until one is true
-    Boolean run = false;
+    boolean run = false;
 
     for (IfNode statement: ifNodes) {
       //Check to see if the condition will be evaluated

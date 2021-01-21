@@ -2,8 +2,8 @@ package parser.nodes.conditions;
 
 import Utility.Node;
 import parser.Handler;
-import parser.nodes.Exec;
-import parser.nodes.Value;
+import parser.interfaces.Exec;
+import parser.interfaces.Value;
 
 import java.util.Comparator;
 
@@ -13,8 +13,8 @@ import java.util.Comparator;
  */
 public class ComparatorNode implements Exec, Value {
   Comparator<Node> comparator;
-  String methodName;
-  private Handler handler;
+  final String methodName;
+  private final Handler handler;
 
   /**
    * Setup the parameters that will be used later to create the comparator.
@@ -46,18 +46,11 @@ public class ComparatorNode implements Exec, Value {
   public Object execute() {
     //Check to see if the user is using a correct maze method
 
-    comparator = (nodeOne, nodeTwo) -> {
-
-      if (methodName.equals("getCost")) {
-        return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
-      } else if (methodName.equals("getNeighbourCount")) {
-        return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
-      } else if (methodName.equals("distanceToDestination")) {
-        return Double.compare(handler.getDistanceToDestination(nodeOne),
-                handler.getDistanceToDestination(nodeTwo));
-      }
-
-      return 0;
+    comparator = (nodeOne, nodeTwo) -> switch (methodName) {
+      case "getCost" -> Double.compare(nodeOne.getCost(), nodeTwo.getCost());
+      case "getNeighbourCount" -> Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
+      case "distanceToDestination" -> Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
+      default -> 0;
     };
 
     return comparator;

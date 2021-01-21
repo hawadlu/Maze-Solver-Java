@@ -3,7 +3,7 @@ package parser.nodes.methods;
 
 import parser.Handler;
 import parser.Parser;
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * Class that handles the execution of methods
  */
 public class MethodNode implements Exec {
-  private String name;
-  private ArrayList<Object> parameters = new ArrayList<>();
+  private final String name;
+  private final ArrayList<Object> parameters = new ArrayList<>();
   private MethodValidator validator;
-  private Handler handler;
+  private final Handler handler;
 
   public MethodNode(String name, Handler handler) {
     this.name = name;
@@ -44,26 +44,16 @@ public class MethodNode implements Exec {
    * Setup the validator object with the expected argument count and types
    */
   private void setupValidator() {
-    if (name.equals("setCost")) validator = new MethodValidator(name, new String[]{"MazeNode", "Number"}, parameters, handler);
-    else if (name.equals("isDone")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("getNeighbours")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("getCost")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("assignComparator")) validator = new MethodValidator(name, new String[]{"Comparator"}, parameters, handler);
-    else if (name.equals("getStart")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("add")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("isEmpty")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("getNext")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("visit")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("finish")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("getSize")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("isVisited")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("getDistance")) validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
-    else if (name.equals("distanceToDestination")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("setParent")) validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
-    else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
-    else if (name.equals("fail")) validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
-    else if (name.equals("get")) validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
-    else Parser.fail("Unrecognised method " + name, "Execution", null, handler.getPopup());
+    switch (name) {
+      case "setCost" -> validator = new MethodValidator(name, new String[]{"MazeNode", "Number"}, parameters, handler);
+      case "isDone", "getNeighbourCount", "distanceToDestination", "isVisited", "visit", "add", "getCost", "getNeighbours" -> validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+      case "assignComparator" -> validator = new MethodValidator(name, new String[]{"Comparator"}, parameters, handler);
+      case "getStart", "getSize", "finish", "getNext", "isEmpty" -> validator = new MethodValidator(name, new String[]{}, parameters, handler);
+      case "getDistance", "setParent" -> validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
+      case "fail" -> validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
+      case "get" -> validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
+      default -> Parser.fail("Unrecognised method " + name, "Execution", null, handler.getPopup());
+    }
   }
 
   public String getName() {
@@ -89,7 +79,7 @@ public class MethodNode implements Exec {
   public Object execute() {
     if (name.equals("add")) {
       Object toReturn = parameters.get(0);
-      if (toReturn instanceof String) return handler.getFromMap(toReturn);
+      if (toReturn instanceof String) return handler.getFromMap((String) toReturn);
       else return ((Exec) toReturn).execute();
     } else if (name.equals("fail")) {
       return parameters.get(0); //The fail message is supplied at param index 0
@@ -99,7 +89,7 @@ public class MethodNode implements Exec {
 
   @Override
   public String toString() {
-    if (parameters == null) return "Method (" + name + "())";
+    if (parameters.size() == 0) return "Method (" + name + "())";
     else return "Method (" + name + "(" + parameters + "))";
   }
 

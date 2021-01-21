@@ -1,9 +1,10 @@
 package parser.nodes.conditions;
 
-import parser.nodes.Exec;
+import parser.interfaces.Condition;
+import parser.interfaces.Exec;
 
-public class ConditionNode implements Condition{
-  Exec toEvaluate;
+public class ConditionNode implements Condition {
+  final Exec toEvaluate;
 
   public ConditionNode(Exec toEvaluate) {
     this.toEvaluate = toEvaluate;

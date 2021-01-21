@@ -1,4 +1,4 @@
-package parser.nodes;
+package parser.interfaces;
 
 public interface Validator {
   void validate();

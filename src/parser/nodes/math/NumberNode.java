@@ -1,9 +1,10 @@
 package parser.nodes.math;
 
-import parser.nodes.Value;
+import parser.interfaces.Number;
+import parser.interfaces.Value;
 
 public class NumberNode implements Number, Value {
-  double value;
+  final double value;
 
   public NumberNode(double number) {
     this.value = number;

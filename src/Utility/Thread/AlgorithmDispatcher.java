@@ -35,6 +35,12 @@ public class AlgorithmDispatcher extends Thread {
     this.player = player;
   }
 
+  /**
+   * Used by the parser. Empty because the parser only needs a thread to say that
+   * a node has been visited. None of the other fields are required.
+   */
+  public AlgorithmDispatcher(){};
+
   public AlgorithmDispatcher(Application currentApplication, String solver, int delay, Player player, Parser parser) {
     if (player.application != null) this.currentApplication = player.application;
     else this.currentApplication = new Application(currentApplication);
@@ -56,8 +62,8 @@ public class AlgorithmDispatcher extends Thread {
       solve.solve(algorithm, multiThreading);
     } else {
 
-      parser.setMazeHandler(new Handler(currentApplication));
-      player.startParserExec();
+      parser.setMazeHandler(new Handler(currentApplication, delay));
+      player.startParserExec(delay);
     }
   }
 

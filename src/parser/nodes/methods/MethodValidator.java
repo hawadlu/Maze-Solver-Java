@@ -2,7 +2,7 @@ package parser.nodes.methods;
 
 import parser.Handler;
 import parser.Parser;
-import parser.nodes.Validator;
+import parser.interfaces.Validator;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Class used to validate the number of arguments and their types.
  */
 public class MethodValidator implements Validator {
-    String[] expectedTypes;
-    ArrayList<Object> parameters;
-    String methodName;
-    private Handler handler;
+    final String[] expectedTypes;
+    final ArrayList<Object> parameters;
+    final String methodName;
+    private final Handler handler;
 
     MethodValidator(String methodName, String[] expectedTypes, ArrayList<Object> parameters, Handler handler) {
         this.methodName = methodName;
@@ -54,7 +54,7 @@ public class MethodValidator implements Validator {
         toReturn.append("[");
 
         for (int i = 0; i < parameters.size(); i++) {
-            toReturn.append(handler.getFromMap(parameters.get(i)).getType());
+            toReturn.append(handler.getFromMap((String) parameters.get(i)).getType());
             if (i < parameters.size() - 1) toReturn.append(", ");
             else toReturn.append(" ");
         }

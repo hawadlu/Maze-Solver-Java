@@ -1,12 +1,14 @@
 package parser.nodes.math;
 
+import parser.interfaces.Number;
+
 import java.util.ArrayList;
 
 /**
  * This class deals with adding values together
  */
 public class RootNode implements Number {
-  ArrayList<Number> values = new ArrayList<>();
+  final ArrayList<Number> values = new ArrayList<>();
 
   public void add(Number number) {
     values.add(number);

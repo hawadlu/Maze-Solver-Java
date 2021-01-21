@@ -1,4 +1,4 @@
-package parser.nodes;
+package parser.interfaces;
 
 /**
  * Interface containing methods for all classed that contain a value

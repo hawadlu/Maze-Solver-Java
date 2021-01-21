@@ -1,4 +1,4 @@
-package parser.nodes.math;
+package parser.interfaces;
 
 public interface Number {
   double calculate();

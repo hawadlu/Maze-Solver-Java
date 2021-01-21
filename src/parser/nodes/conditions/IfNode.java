@@ -1,13 +1,14 @@
 package parser.nodes.conditions;
 
-import parser.nodes.Exec;
+import parser.interfaces.Condition;
+import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
 public class IfNode implements Exec {
 
-  ArrayList<Exec> statements = new ArrayList<>();
-  Condition ifCondition;
+  final ArrayList<Exec> statements;
+  final Condition ifCondition;
   ElseNode elseNode;
 
   public IfNode(Condition condition, ArrayList<Exec> statements) {
@@ -42,7 +43,7 @@ public class IfNode implements Exec {
     StringBuilder internals = new StringBuilder();
     for (Exec statement: statements) internals.append("\t").append(statement).append("\n");
 
-    toReturn.append("if (" + ifCondition + "){\n" + internals + "}\n");
+    toReturn.append("if (").append(ifCondition).append("){\n").append(internals).append("}\n");
 
     if (elseNode != null) toReturn.append(elseNode);
 

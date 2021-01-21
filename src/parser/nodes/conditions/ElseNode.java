@@ -1,6 +1,6 @@
 package parser.nodes.conditions;
 
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * else branch is triggered.
  */
 public class ElseNode implements Exec {
-  ArrayList<Exec> statements = new ArrayList<>();
+  final ArrayList<Exec> statements;
 
   public ElseNode(ArrayList<Exec> statements) {
     this.statements = statements;

@@ -1,7 +1,8 @@
 package parser.nodes;
 
+import parser.interfaces.Exec;
 import parser.nodes.conditions.ConditionNode;
-import parser.nodes.math.Number;
+import parser.interfaces.Number;
 import parser.nodes.math.NumberNode;
 import parser.nodes.methods.MethodNode;
 import parser.nodes.variables.GetVariableNode;
@@ -59,17 +60,6 @@ public class EvaluateNode implements Exec, Number {
       }
     }
     return number.calculate();
-  }
-
-  /**
-   * Get the variable attached to this node if applicable.
-   *
-   * @return the variable associated with the getVariable node.
-   */
-  public VariableNode getVariable() {
-    if (variableNode != null) return variableNode.extractVariable();
-
-    return null;
   }
 
   @Override

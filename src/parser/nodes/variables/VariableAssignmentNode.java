@@ -2,17 +2,17 @@ package parser.nodes.variables;
 
 import parser.Handler;
 import parser.Parser;
-import parser.nodes.Exec;
-import parser.nodes.math.Number;
+import parser.interfaces.Exec;
+import parser.interfaces.Number;
 
 /**
  * Class used to assign values to variables during execution
  */
 public class VariableAssignmentNode implements Exec {
-  private String varName;
+  private final String varName;
   private Exec execVal;
   private Number number;
-  private Handler handler;
+  private final Handler handler;
 
   public VariableAssignmentNode(String varName, Exec execVal, Handler handler) {
     this.varName = varName.replaceAll(" ", "");

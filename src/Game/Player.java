@@ -147,9 +147,9 @@ public class Player {
   /**
    * Start executing the parser
    */
-  public void startParserExec() {
+  public void startParserExec(int delay) {
     //Create the new maze handler object if necessary
     customAlgo.setPlayer(this);
-    customAlgo.execute(application);
+    customAlgo.execute(application, delay);
   }
 }

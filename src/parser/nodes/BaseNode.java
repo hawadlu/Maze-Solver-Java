@@ -1,12 +1,14 @@
 package parser.nodes;
 
+import parser.interfaces.Exec;
+
 import java.util.ArrayList;
 
 /**
  * This class contains a lost of all the statements in the program and will sequentially execute them.
  */
 public class BaseNode implements Exec {
-  ArrayList<Exec> statements;
+  final ArrayList<Exec> statements;
   public BaseNode(ArrayList<Exec> statements) {
     this.statements = statements;
   }

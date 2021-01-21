@@ -1,14 +1,15 @@
 package parser.nodes;
 
-import parser.nodes.math.Number;
+import parser.interfaces.Exec;
+import parser.interfaces.Number;
 import parser.nodes.methods.MethodNode;
 import parser.nodes.variables.GetVariableNode;
 import parser.nodes.variables.VariableActionNode;
 
 import java.util.ArrayList;
 
-public class PrintNode implements Exec{
-  ArrayList<Object> printValues = new ArrayList<>();
+public class PrintNode implements Exec {
+  final ArrayList<Object> printValues = new ArrayList<>();
 
   public void append(StringBuilder str) {
     printValues.add(str);

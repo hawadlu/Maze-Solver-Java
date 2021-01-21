@@ -3,6 +3,7 @@ package parser;
 
 import Application.Application;
 import Game.Player;
+import Utility.Thread.AlgorithmDispatcher;
 import parser.nodes.variables.VariableNode;
 import Utility.Location;
 import Utility.Node;
@@ -20,13 +21,22 @@ import java.util.concurrent.TimeUnit;
  */
 public class Handler {
   Node lastNode;
-  Application application;
-  Thread currentThread = new Thread();
-  Location start, destination;
+  final Application application;
+  final Thread currentThread = new AlgorithmDispatcher();
+  final Location start;
+  final Location destination;
   Player player;
   int delay;
-  private HashMap<String, VariableNode> variables = new HashMap<>();
+  private final HashMap<String, VariableNode> variables = new HashMap<>();
   private boolean popup = false;
+
+  public Handler(Application application, int delay) {
+    this.application = application;
+    if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
+    this.start = this.application.getMazeExits().get(0);
+    this.destination = this.application.getMazeExits().get(1);
+    this.delay = delay;
+  }
 
   public Handler(Application application) {
     this.application = application;
@@ -103,11 +113,9 @@ public class Handler {
    * Set the parent of the child node to the supplied parent.
    * @param childNode the child.
    * @param parentNode the parent
-   * @return this object does not need to return anything so it returns null.
    */
-  public Object setParent(Node childNode, Node parentNode) {
+  public void setParent(Node childNode, Node parentNode) {
     childNode.setParent(parentNode);
-    return null;
   }
 
   /**
@@ -127,14 +135,6 @@ public class Handler {
    */
   public Node getLastNode() {
     return lastNode;
-  }
-
-  /**
-   * Set the delay between execution steps.
-   * @param delay the delay.
-   */
-  public void setDelay(int delay) {
-    this.delay = delay;
   }
 
   /**
@@ -174,13 +174,6 @@ public class Handler {
     return node.calculateDistance(application.getNodes().get(destination));
   }
 
-  /**
-   * @return Get the player object.
-   */
-  public Player getPlayer() {
-    return this.player;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -200,7 +193,7 @@ public class Handler {
    * @param key the name of the variable.
    * @return the variable value.
    */
-  public VariableNode getFromMap(Object key) {
+  public VariableNode getFromMap(String key) {
     if (!variables.containsKey(key)) {
       Parser.fail("Could not find variable '" + key + "'", "Execution", null, getPopup());
     }

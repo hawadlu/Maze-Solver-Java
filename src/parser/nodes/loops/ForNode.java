@@ -1,7 +1,7 @@
 package parser.nodes.loops;
 
 import parser.Handler;
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 import parser.nodes.variables.VariableNode;
 import Utility.Node;
 
@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ForNode implements Exec {
-  String varName, collectionName;
-  ArrayList<Exec> statements;
+  final String varName;
+  final String collectionName;
+  final ArrayList<Exec> statements;
   VariableNode varNode;
-  private Handler handler;
+  private final Handler handler;
 
 
   public ForNode(String varName, String collectionName, ArrayList<Exec> statements, Handler handler) {
@@ -58,12 +59,10 @@ public class ForNode implements Exec {
    * @param value the object to get from.
    * @return the list.
    */
+  @SuppressWarnings("unchecked")
   private ArrayList<Node> getValueList(Object value) {
-    ArrayList<Node> toReturn = new ArrayList<>();
 
-    for (Object node: (Collection) value) toReturn.add((Node) node);
-
-    return toReturn;
+    return new ArrayList<>((Collection<Node>) value);
   }
 
   @Override

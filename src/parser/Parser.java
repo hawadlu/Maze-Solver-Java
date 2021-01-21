@@ -3,10 +3,12 @@ package parser;
 import Application.Application;
 import Game.Player;
 import Utility.Exceptions.ParserFailure;
+import parser.interfaces.Condition;
+import parser.interfaces.Exec;
 import parser.nodes.*;
 import parser.nodes.loops.ForNode;
 import parser.nodes.loops.WhileNode;
-import parser.nodes.math.Number;
+import parser.interfaces.Number;
 import parser.nodes.math.*;
 import parser.nodes.methods.MazeActionNode;
 import parser.nodes.methods.MethodNode;
@@ -29,7 +31,7 @@ import java.util.regex.Pattern;
  * This class is responsible for parsing the files.
  */
 public class Parser {
-  boolean DEBUG_ON = false;
+  final boolean DEBUG_ON = false;
   Scanner fileScanner = null;
   Exec baseNode;
   private Handler handler;
@@ -83,10 +85,12 @@ public class Parser {
           String[] chars = line.split("");
 
           for (String character: chars) {
-            if (character.equals("(")) openParen++;
-            else if (character.equals(")")) closeParen++;
-            else if (character.equals("{")) openCurly++;
-            else if (character.equals("}")) closeCurly++;
+            switch (character) {
+              case "(" -> openParen++;
+              case ")" -> closeParen++;
+              case "{" -> openCurly++;
+              case "}" -> closeCurly++;
+            }
           }
         }
       }
@@ -150,9 +154,9 @@ public class Parser {
   }
 
   /**
-   *
-   * @param fileScanner
-   * @return
+   * Go through the program and parse each of the statements.
+   * @param fileScanner the file scanner object.
+   * @return an arraylist of statements which will be executed later.
    */
   private ArrayList<Exec> parseProgram(Scanner fileScanner) {
     ArrayList<Exec> statements = new ArrayList<>();
@@ -179,7 +183,7 @@ public class Parser {
    * @return the statement node
    */
   private Exec parseStatement(Scanner fileScanner) {
-    Boolean semiRequired = true; //Indication of the necessity of a semi colon after this statement.
+    boolean semiRequired = true; //Indication of the necessity of a semi colon after this statement.
     Exec toReturn = null;
     if (DEBUG_ON) System.out.println("parsing statement");
 
@@ -328,7 +332,7 @@ public class Parser {
    */
   private Exec parseFor(Scanner fileScanner) {
     if (DEBUG_ON) System.out.println("Parsing for loop");
-    Exec forLoop = null;
+    Exec forLoop;
 
     //Check for opening '('
     scannerHasNext(fileScanner, Regex.openParen, "For loop missing opening '('");
@@ -358,7 +362,7 @@ public class Parser {
     while (fileScanner.hasNext(Regex.statement)) {
       //Only add the statement if it is not null.
       Exec statement = parseStatement(fileScanner);
-      if (statement != null) statements.add(statement);
+      statements.add(statement);
     }
 
     //Check for closing '}'
@@ -411,7 +415,7 @@ public class Parser {
     while (fileScanner.hasNext(Regex.statement)) {
       //Only add the statement if it is not null.
       Exec statement = parseStatement(fileScanner);
-      if (statement != null) statements.add(statement);
+      statements.add(statement);
     }
 
     //Check for the closing }
@@ -452,7 +456,7 @@ public class Parser {
     while (fileScanner.hasNext(Regex.statement)) {
       //Only add the statement if it is not null.
       Exec statement = parseStatement(fileScanner);
-      if (statement != null) statements.add(statement);
+      statements.add(statement);
     }
 
     //Check for the closing }
@@ -721,11 +725,15 @@ public class Parser {
     scannerHasNext(fileScanner, Regex.openParen, "Method missing opening '('");
 
     //Check if there are any parameters
-    if (fileScanner.hasNext(Regex.name)) toReturn = new MethodNode(methodName, parseParams(fileScanner), handler);
+    if (fileScanner.hasNext(Regex.name)) {
+      assert methodName != null;
+      toReturn = new MethodNode(methodName, parseParams(fileScanner), handler);
+    }
     else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName, handler);
     else if (fileScanner.hasNext(Regex.doubleQuote)) {
       ArrayList<Object> params = new ArrayList<>();
       params.add(parsePrint(fileScanner, false));
+      assert methodName != null;
       toReturn = new MethodNode(methodName, params, handler);
     }
 
@@ -1073,9 +1081,9 @@ public class Parser {
   }
 
   /**
-   *
-   * @param fileScanner
-   * @return
+   * Parse a number from the program.
+   * @param fileScanner the file scanner.
+   * @return a number object.
    */
   private Number parseNumber(Scanner fileScanner) {
     if (DEBUG_ON) System.out.println("Parsing number");
@@ -1085,45 +1093,47 @@ public class Parser {
   }
 
   /**
+   * Display a failure message to the user.
+   * Has fields that allow the popup to be created when needed and so
+   * that it can be disabled during debugging.
    *
-   * @param s
-   */
-  private void printScanner(Scanner s) {
-    while (s.hasNext()) {
-      System.out.println(s.next());
-    }
-  }
-
-  /**
-   *
-   * @param message
-   * @param origin
-   * @param fileScanner
-   * @param popup
+   * @param message the error that occurred.
+   * @param origin the origin of the error. Either 'Parser' or 'Execution.'
+   * @param fileScanner the file scanner object.
+   * @param popup should a popup containing the error be created.
    */
   public static void fail(String message, String origin, Scanner fileScanner, boolean popup) {
-    String msg;
+    StringBuilder msg;
     if (fileScanner != null) {
-      msg = "FAIL: " + origin + " error: " + message + "\n   @ ...";
+      msg = new StringBuilder("FAIL: " + origin + " error: " + message + "\n   @ ...");
       for (int i = 0; i < 5 && fileScanner.hasNext(); i++) {
-        msg += " " + fileScanner.next();
+        msg.append(" ").append(fileScanner.next());
       }
     } else {
-      msg = "FAIL: " + origin + " error: " + message;
+      msg = new StringBuilder("FAIL: " + origin + " error: " + message);
     }
 
     throw new ParserFailure(new JFrame(), msg + "...", popup);
   }
 
   /**
-   * execute the compile code.
+   * execute the compiled code.
    */
-  public Object execute(Application application) {
+  public void execute(Application application, int delay) {
+    //Create a new handler object if required
+    if (this.handler == null) this.handler = new Handler(application, delay);
+
+    baseNode.execute();
+  }
+
+  /**
+   * execute the compiled code.
+   */
+  public void execute(Application application) {
     //Create a new handler object if required
     if (this.handler == null) this.handler = new Handler(application);
 
     baseNode.execute();
-    return null;
   }
 
   /**
@@ -1133,11 +1143,6 @@ public class Parser {
     System.out.println(baseNode.toString());
   }
 
-  /**
-   *
-   * @param o
-   * @return
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -1146,18 +1151,11 @@ public class Parser {
     return DEBUG_ON == parser.DEBUG_ON && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode) && Objects.equals(handler, parser.handler);
   }
 
-  /**
-   *
-   * @return
-   */
   @Override
   public int hashCode() {
     return Objects.hash(DEBUG_ON, fileScanner, baseNode, handler);
   }
 
-  /**
-   *
-   */
   /**
    * Set the player if required.
    * @param player the player object.

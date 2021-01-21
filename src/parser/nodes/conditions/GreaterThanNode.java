@@ -1,14 +1,15 @@
 package parser.nodes.conditions;
 
-import parser.nodes.Exec;
-import parser.nodes.math.Number;
+import parser.interfaces.Exec;
+import parser.interfaces.Number;
 
 
 /**
  * This class is used to check if one var is less than another.
  */
 public class GreaterThanNode implements Exec {
-  Number valueOne, valueTwo;
+  final Number valueOne;
+  final Number valueTwo;
 
   public GreaterThanNode(Number[] conditions) {
     this.valueOne = conditions[0];

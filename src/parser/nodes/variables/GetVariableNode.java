@@ -1,14 +1,14 @@
 package parser.nodes.variables;
 
 import parser.Handler;
-import parser.nodes.Exec;
+import parser.interfaces.Exec;
 
 /**
  * Class for getting a referenced variable at runtime
  */
 public class GetVariableNode implements Exec {
-  String varName;
-  private Handler handler;
+  final String varName;
+  private final Handler handler;
 
   public GetVariableNode(String varName, Handler handler) {
     this.varName = varName.replaceAll(" ", "");
@@ -20,10 +20,6 @@ public class GetVariableNode implements Exec {
    */
   public VariableNode extractVariable() {
     return handler.getFromMap(varName);
-  }
-
-  public String getVarName() {
-    return varName;
   }
 
   public String getInfo() {

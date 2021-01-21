@@ -1,7 +1,9 @@
 package parser.nodes.conditions;
 
+import parser.interfaces.Condition;
+
 public class NotNode implements Condition {
-  Condition condition;
+  final Condition condition;
 
   public NotNode(Condition condition) {
     this.condition = condition;

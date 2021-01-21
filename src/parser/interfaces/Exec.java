@@ -1,4 +1,4 @@
-package parser.nodes;
+package parser.interfaces;
 
 public interface Exec extends Validator {
   /**

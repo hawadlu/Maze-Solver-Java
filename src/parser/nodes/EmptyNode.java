@@ -1,5 +1,7 @@
 package parser.nodes;
 
+import parser.interfaces.Exec;
+
 /**
  * Literally an empty statement.
  */
