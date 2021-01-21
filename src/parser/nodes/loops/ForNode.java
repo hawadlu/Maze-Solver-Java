@@ -1,8 +1,8 @@
-package parser.nodes.LoopNodes;
+package parser.nodes.loops;
 
 import parser.Handler;
 import parser.nodes.Exec;
-import parser.nodes.VariableNodes.VariableNode;
+import parser.nodes.variables.VariableNode;
 import Utility.Node;
 
 import java.util.ArrayList;

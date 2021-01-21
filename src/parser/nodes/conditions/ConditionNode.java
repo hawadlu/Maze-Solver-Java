@@ -1,6 +1,6 @@
-package parser.programNodes.conditionNodes;
+package parser.nodes.conditions;
 
-import parser.programNodes.Exec;
+import parser.nodes.Exec;
 
 public class ConditionNode implements Condition{
   Exec toEvaluate;

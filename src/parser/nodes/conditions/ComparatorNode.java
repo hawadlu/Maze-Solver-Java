@@ -1,14 +1,15 @@
-package parser.programNodes.conditionNodes;
+package parser.nodes.conditions;
 
 import Utility.Node;
 import parser.Handler;
-import parser.programNodes.Exec;
-import parser.programNodes.Value;
+import parser.nodes.Exec;
+import parser.nodes.Value;
 
 import java.util.Comparator;
 
 /**
- *
+ * The comparator node is used by priority queues to decide the order
+ * in which each object should be dispensed.
  */
 public class ComparatorNode implements Exec, Value {
   Comparator<Node> comparator;
@@ -16,9 +17,11 @@ public class ComparatorNode implements Exec, Value {
   private Handler handler;
 
   /**
+   * Setup the parameters that will be used later to create the comparator.
    *
-   * @param methodName
-   * @param handler
+   * @param methodName the name of tme method that will be used to create the comparator.
+   *
+   * @param handler the maze handler object.
    */
   public ComparatorNode(String methodName, Handler handler) {
     this.methodName = methodName;
@@ -26,22 +29,22 @@ public class ComparatorNode implements Exec, Value {
   }
 
   /**
-   *
+   * Check that the validator is correct.
    */
   @Override
   public void validate() {
     //Check that the supplied exec is of the correct type
-
+    //todo implement me
   }
 
   /**
+   * Create the comparator object based on the method name provided in the constructor.
    *
-   * @return
+   * @return the newly created comparator.
    */
   @Override
   public Object execute() {
     //Check to see if the user is using a correct maze method
-//    String[] validMethods = {"getCost", "getNeighbourCount", "distanceToDestination"};
 
     comparator = (nodeOne, nodeTwo) -> {
 
@@ -50,7 +53,8 @@ public class ComparatorNode implements Exec, Value {
       } else if (methodName.equals("getNeighbourCount")) {
         return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
       } else if (methodName.equals("distanceToDestination")) {
-        return Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
+        return Double.compare(handler.getDistanceToDestination(nodeOne),
+                handler.getDistanceToDestination(nodeTwo));
       }
 
       return 0;
@@ -60,8 +64,9 @@ public class ComparatorNode implements Exec, Value {
   }
 
   /**
+   * Create a string representation of the object.
    *
-   * @return
+   * @return a string representation of the object.
    */
   @Override
   public String toString() {
@@ -69,8 +74,9 @@ public class ComparatorNode implements Exec, Value {
   }
 
   /**
+   * Get the type of this object.
    *
-   * @return
+   * @return a string containing the object type.
    */
   @Override
   public String getType() {
@@ -78,8 +84,9 @@ public class ComparatorNode implements Exec, Value {
   }
 
   /**
+   * Get the type of the object that will be returned during execution.
    *
-   * @return
+   * @return a string containing the object type.
    */
   @Override
   public String getExecType() {

@@ -1,7 +1,7 @@
-package parser.programNodes.conditionNodes;
+package parser.nodes.conditions;
 
-import parser.programNodes.Exec;
-import parser.programNodes.MathNodes.Number;
+import parser.nodes.Exec;
+import parser.nodes.math.Number;
 
 /**
  * This class is used to check if one var is less than another.

@@ -1,4 +1,4 @@
-package parser.nodes.MethodNodes;
+package parser.nodes.methods;
 
 import parser.Handler;
 import parser.Parser;

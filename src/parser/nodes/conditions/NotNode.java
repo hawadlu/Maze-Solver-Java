@@ -1,4 +1,4 @@
-package parser.programNodes.conditionNodes;
+package parser.nodes.conditions;
 
 public class NotNode implements Condition {
   Condition condition;

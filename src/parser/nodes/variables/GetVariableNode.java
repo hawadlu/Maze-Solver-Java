@@ -1,4 +1,4 @@
-package parser.nodes.VariableNodes;
+package parser.nodes.variables;
 
 import parser.Handler;
 import parser.nodes.Exec;

@@ -1,11 +1,11 @@
-package parser.nodes.VariableNodes;
+package parser.nodes.variables;
 
 import parser.Handler;
 import parser.Parser;
 import parser.nodes.Exec;
-import parser.nodes.MathNodes.Number;
-import parser.nodes.MathNodes.NumberNode;
-import parser.nodes.MethodNodes.MethodNode;
+import parser.nodes.math.Number;
+import parser.nodes.math.NumberNode;
+import parser.nodes.methods.MethodNode;
 import parser.nodes.Value;
 import Utility.Node;
 

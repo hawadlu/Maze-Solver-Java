@@ -1,9 +1,9 @@
-package parser.nodes.VariableNodes;
+package parser.nodes.variables;
 
 import parser.Handler;
 import parser.Parser;
 import parser.nodes.Exec;
-import parser.nodes.MathNodes.Number;
+import parser.nodes.math.Number;
 
 /**
  * Class used to assign values to variables during execution

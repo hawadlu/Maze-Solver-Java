@@ -1,4 +1,4 @@
-package parser.programNodes;
+package parser.nodes;
 
 /**
  * Literally an empty statement.

@@ -1,10 +1,10 @@
-package parser.nodes.VariableNodes;
+package parser.nodes.variables;
 
 import parser.Parser;
 import parser.nodes.Exec;
 import parser.Handler;
-import parser.nodes.MathNodes.Number;
-import parser.nodes.MethodNodes.MethodNode;
+import parser.nodes.math.Number;
+import parser.nodes.methods.MethodNode;
 
 /**
  * Perform a given action on a variable

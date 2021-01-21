@@ -1,4 +1,4 @@
-package parser.programNodes.conditionNodes;
+package parser.nodes.conditions;
 
 public interface Condition {
   public boolean evaluate();

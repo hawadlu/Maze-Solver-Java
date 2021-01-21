@@ -1,4 +1,4 @@
-package parser.nodes.LoopNodes;
+package parser.nodes.loops;
 
 import parser.nodes.conditions.Condition;
 import parser.nodes.Exec;

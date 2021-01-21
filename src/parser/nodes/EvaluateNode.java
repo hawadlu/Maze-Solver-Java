@@ -1,11 +1,11 @@
-package parser.programNodes;
+package parser.nodes;
 
-import parser.programNodes.conditionNodes.ConditionNode;
-import parser.programNodes.MathNodes.Number;
-import parser.programNodes.MathNodes.NumberNode;
-import parser.programNodes.MethodNodes.MethodNode;
-import parser.programNodes.VariableNodes.GetVariableNode;
-import parser.programNodes.VariableNodes.VariableNode;
+import parser.nodes.conditions.ConditionNode;
+import parser.nodes.math.Number;
+import parser.nodes.math.NumberNode;
+import parser.nodes.methods.MethodNode;
+import parser.nodes.variables.GetVariableNode;
+import parser.nodes.variables.VariableNode;
 
 /**
  * Evaluate and return a number

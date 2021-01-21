@@ -1,9 +1,9 @@
-package parser.programNodes;
+package parser.nodes;
 
-import parser.programNodes.MathNodes.Number;
-import parser.programNodes.MethodNodes.MethodNode;
-import parser.programNodes.VariableNodes.GetVariableNode;
-import parser.programNodes.VariableNodes.VariableActionNode;
+import parser.nodes.math.Number;
+import parser.nodes.methods.MethodNode;
+import parser.nodes.variables.GetVariableNode;
+import parser.nodes.variables.VariableActionNode;
 
 import java.util.ArrayList;
 
@@ -28,6 +28,14 @@ public class PrintNode implements Exec{
    * @return a concatenated string of all the object in the printValues array.
    */
   public Object makeString() {
+    return concatenate();
+  }
+
+  /**
+   * Concatenate all of the values in printValues.
+   * @return a concatenated string.
+   */
+  private String concatenate() {
     StringBuilder toReturn = new StringBuilder();
 
     for (Object obj: printValues) {
@@ -50,19 +58,7 @@ public class PrintNode implements Exec{
 
   @Override
   public Object execute() {
-    StringBuilder toPrint = new StringBuilder();
-
-    for (Object obj: printValues) {
-      if (obj instanceof String) toPrint.append(obj);
-      else if (obj instanceof Number) toPrint.append(((Number) obj).calculate());
-      else if (obj instanceof PrintNode) toPrint.append(((PrintNode) obj).makeString());
-      else if (obj instanceof GetVariableNode) toPrint.append(((GetVariableNode) obj).getInfo());
-      else if (obj instanceof MethodNode) toPrint.append(((MethodNode) obj).execute());
-      else if (obj instanceof VariableActionNode) toPrint.append(((VariableActionNode) obj).execute());
-      else toPrint.append(obj);
-    }
-
-    System.out.println(toPrint);
+    System.out.println(concatenate());
     return null;
   }
 
