@@ -2996,7 +2996,7 @@ public class Tests {
     @Test
     public void runAnyParser() throws GenericError {
         File image = new File("Images/Tiny.png");
-        File parser = new File("Programs/Valid Tests/Collections/Lists.solver");
+        File parser = new File("Programs/Invalid Tests/Variables/Invalid Values/Numbers/Number Equality.solver");
         System.out.println(parser);
 
         Application application = new Application();

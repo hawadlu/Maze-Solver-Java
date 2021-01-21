@@ -30,10 +30,10 @@ public class ForNode implements Exec {
   @Override
   public Object execute() {
     //make variable node
-    String type = "Node";
+    String type = "MazeNode";
     Object value = handler.getFromMap(collectionName).getValue();
 
-    this.varNode = new VariableNode(varName, type, handler);
+    this.varNode = new VariableNode(type, varName, handler);
     handler.addVariable(varName, varNode);
 
     //Get and iterate through a list of the nodes
@@ -74,5 +74,11 @@ public class ForNode implements Exec {
     }
 
     return "For (" + varName + " : " + collectionName + ") {\n" + internals + "\n}\n";
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

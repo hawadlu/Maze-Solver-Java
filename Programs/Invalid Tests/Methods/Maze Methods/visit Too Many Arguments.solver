@@ -1,4 +1,4 @@
 ***Try to call the visit method with too many arguments***
 
-Node node;
+MazeNode node;
 Maze.visit(node, node);

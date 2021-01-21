@@ -1,7 +1,7 @@
 ***Try to assign a comparator to a variable that is not of the Comparator type***
 
-Node node;
-Comparator compare -> Maze.getCost(node);
+MazeNode node;
+Comparator compare -> getCost;
 
 Stack toProcess;
 toProcess.assignComparator(compare);

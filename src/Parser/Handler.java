@@ -203,7 +203,7 @@ public class Handler {
    */
   public VariableNode getFromMap(Object key) {
     if (!variables.containsKey(key)) {
-      Parser.fail("Could not find variable '" + key + "'", null);
+      Parser.fail("Could not find variable '" + key + "'", "Execution", null);
     }
     return variables.get(key);
   }
@@ -232,7 +232,7 @@ public class Handler {
    * @param key the key of the value to remove.
    */
   public void removeFromMap(String key) {
-    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", null);
+    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", "Execution", null);
     variables.remove(key);
   }
 }

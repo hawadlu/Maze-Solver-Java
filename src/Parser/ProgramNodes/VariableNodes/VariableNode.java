@@ -6,6 +6,7 @@ import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
+import Parser.ProgramNodes.Value;
 import Utility.Node;
 
 import java.util.*;
@@ -13,23 +14,26 @@ import java.util.*;
 /**
  * This class holds the variable info including the type, name and value object
  */
-public class VariableNode implements Exec {
+public class VariableNode implements Exec, Value {
   private String type = null, name = null;
   private Exec toEvaluate;
   private Object value = null;
   private Handler handler;
+  private boolean isCollection = false;
 
   public VariableNode(String type, String name, Handler handler) {
     this.name = name.replaceAll(" ", "");
     this.type = type.replaceAll(" ", "");
     this.handler = handler;
+
+    if (type.equals("List") || type.equals("Stack") || type.equals("Queue") || type.equals("PriorityQueue")) isCollection = true;
   }
 
   public VariableNode(String[] info, Exec toEvaluate, Handler handler) {
     ArrayList<String> tmp1 = new ArrayList<>(Arrays.asList(info));
     ArrayList<String> tmp2 = new ArrayList<>(Arrays.asList(info));
 
-    for (String str: tmp1) {
+    for (String str : tmp1) {
       if (!str.matches("\\s*\\w+\\s*")) {
         tmp2.remove(str);
       }
@@ -37,15 +41,28 @@ public class VariableNode implements Exec {
 
 
     this.name = tmp2.get(1).replaceAll(" ", "");
-    this.type = tmp2.get(0).replaceAll(" ", "");;
+    this.type = tmp2.get(0).replaceAll(" ", "");
+    ;
     this.toEvaluate = toEvaluate;
     this.handler = handler;
+
+    if (type.equals("List") || type.equals("Stack") || type.equals("Queue") || type.equals("PriorityQueue")) isCollection = true;
   }
 
   public Object getValue() {
     return this.value;
   }
 
+  /**
+   * Set the new value of this node, without execution.
+   *
+   * @param newVal the new value.
+   */
+  public void setValue(Object newVal) {
+    this.value = newVal;
+  }
+
+  @Override
   public String getType() {
     return this.type;
   }
@@ -55,12 +72,49 @@ public class VariableNode implements Exec {
     //Add the variable to the map in the handler.
     addToVariableMap();
 
-   if (toEvaluate != null) {
-     toEvaluate.validate();
-   }
-   if (value instanceof Exec) {
-     ((Exec) value).validate();
-   }
+    if (toEvaluate != null) {
+      toEvaluate.validate();
+
+      String expectedType = getType();
+      String suppliedType;
+
+      //Only run this is it is a value type
+      if (toEvaluate instanceof Value) {
+        suppliedType = ((Value) toEvaluate).getType();
+      } else {
+        suppliedType = toEvaluate.getExecType();
+      }
+
+      if (suppliedType.equals("Collection")) {
+        if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+      } else if (!expectedType.equals(suppliedType)) {
+        Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+      }
+    }
+
+    if (value != null) {
+      if (value instanceof Exec) {
+        ((Exec) value).validate();
+      }
+
+      if (value instanceof Value) {
+        String expectedType = getType();
+        String suppliedType;
+
+        //Only run this is it is a value type
+        if (toEvaluate instanceof Value) {
+          suppliedType = ((Value) toEvaluate).getType();
+        } else {
+          suppliedType = toEvaluate.getExecType();
+        }
+
+        if (suppliedType.equals("Collection")) {
+          if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+        } else if (!expectedType.equals(suppliedType)) {
+          Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+        }
+      }
+    }
   }
 
   @Override
@@ -74,9 +128,9 @@ public class VariableNode implements Exec {
         Collection tmp = (Collection) toEvaluate.execute();
         value = new ArrayList<>();
 
-        for (Object obj: tmp) ((ArrayList) value).add(obj);
+        for (Object obj : tmp) ((ArrayList) value).add(obj);
 
-      } else if (type.equals("Node") || type.equals("Comparator") || type.equals("Number")) {
+      } else if (type.equals("MazeNode") || type.equals("Comparator") || type.equals("Number")) {
         value = toEvaluate.execute();
       }
     } else {
@@ -85,6 +139,10 @@ public class VariableNode implements Exec {
       else if (type.equals("PriorityQueue")) value = new PriorityQueue<>();
       else if (type.equals("List")) value = new ArrayList<>();
     }
+
+    //Revalidate
+    validate();
+
     return null;
   }
 
@@ -106,6 +164,12 @@ public class VariableNode implements Exec {
   }
 
   @Override
+  public String getExecType() {
+    //Null because executing a variable never does anything.
+    return null;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -120,6 +184,7 @@ public class VariableNode implements Exec {
 
   /**
    * Execute a method call on this variable
+   *
    * @param method the method
    * @return the result of the method if required
    */
@@ -141,6 +206,7 @@ public class VariableNode implements Exec {
    * Get the parameter object. If it is a number use that,
    * if it is a variable use that to extract the number from
    * the variable map.
+   *
    * @param method the method object.d
    * @return the value at the specified index.
    */
@@ -166,10 +232,11 @@ public class VariableNode implements Exec {
 
   /**
    * Assign a comparator to the value if required.
+   *
    * @param method the method
    */
   private void assignComparator(MethodNode method) {
-    if (!(value instanceof PriorityQueue));
+    if (!(value instanceof PriorityQueue)) ;
 
     //Get the comparator out of the variable map
     String varName = (String) method.getParameters().get(0);
@@ -199,34 +266,35 @@ public class VariableNode implements Exec {
    * Check if the collection stored in the value object is empty
    */
   private boolean isEmpty() {
-      return ((Collection) value).isEmpty();
+    return ((Collection) value).isEmpty();
   }
 
   /**
    * Add a new value to this variable.
+   *
    * @param method the method to execute in order to get the value
    */
   private void add(MethodNode method) {
     //Cast to a collection and check the size
     if (value instanceof Collection && ((Collection) value).size() > 2097152) {
-      Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", null);
+      Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", "Execution", null);
     }
 
     if (type.equals("Stack")) {
       Object toAdd = method.execute();
 
       //Cast the variable to a node if required
-      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
+      if (toAdd instanceof VariableNode) toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       ((Stack) value).add(toAdd);
     } else if (type.equals("Queue") || type.equals("PriorityQueue")) {
       Object toAdd = method.execute();
 
       //Cast the variable to a node if required
-      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
+      if (toAdd instanceof VariableNode) toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       //Verify that the value is not null
-      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", null);
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null);
 
       if (value instanceof PriorityQueue) ((PriorityQueue<Node>) value).add((Node) toAdd);
       else if (value instanceof ArrayDeque) ((ArrayDeque<Node>) value).add((Node) toAdd);
@@ -234,10 +302,10 @@ public class VariableNode implements Exec {
       Object toAdd = method.execute();
 
       //Cast the variable to a node if required
-      if (toAdd instanceof VariableNode)  toAdd = (Node) ((VariableNode) toAdd).getValue();
+      if (toAdd instanceof VariableNode) toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       //Verify that the value is not null
-      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", null);
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null);
 
       ((ArrayList) value).add(toAdd);
     }
@@ -245,6 +313,7 @@ public class VariableNode implements Exec {
 
   /**
    * Update the value in this variable
+   *
    * @param newVal the new value
    */
   public void update(Object newVal) {
@@ -257,14 +326,6 @@ public class VariableNode implements Exec {
     }
   }
 
-  /**
-   * Set the new value of this node, without execution.
-   * @param newVal the new value.
-   */
-  public void setValue(Object newVal) {
-    this.value = newVal;
-  }
-
   public String print() {
     if (value == null) return "Name: " + name + " Type: " + type;
     else return "Name: " + name + " Type: " + type + " value: " + value;
@@ -272,6 +333,7 @@ public class VariableNode implements Exec {
 
   /**
    * Get the name of the variable.
+   *
    * @return the name.
    */
   public String getName() {
@@ -281,6 +343,7 @@ public class VariableNode implements Exec {
   /**
    * Check if this variable is of the collection type.
    * True if type == Stack, Queue or PriorityQueue.
+   *
    * @return a boolean to indicate if this is a collection.
    */
   public boolean isCollection() {

@@ -1,4 +1,4 @@
 ***Try to call the getStart method with too many arguments***
 
-Node node;
+MazeNode node;
 Maze.getStart(node);

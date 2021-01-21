@@ -7,7 +7,7 @@ import Parser.ProgramNodes.MathNodes.Number;
 /**
  * This class is used to check if one var is less than another.
  */
-public class LessThanNode implements Exec {
+public class LessThanNode implements Exec{
   Number valueOne, valueTwo;
 
   public LessThanNode(Number[] conditions) {
@@ -28,5 +28,11 @@ public class LessThanNode implements Exec {
   @Override
   public String toString() {
     return valueOne + " < " + valueTwo;
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

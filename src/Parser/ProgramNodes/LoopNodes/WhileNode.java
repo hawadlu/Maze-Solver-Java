@@ -23,7 +23,7 @@ public class WhileNode implements Exec {
   public Object execute() {
 
     while (loopCondition.evaluate()) {
-      for (Exec statement: statements) {
+      for (Exec statement : statements) {
         statement.execute();
       }
     }
@@ -34,8 +34,14 @@ public class WhileNode implements Exec {
   @Override
   public String toString() {
     StringBuilder internals = new StringBuilder();
-    for (Exec statement: statements) internals.append("\t").append(statement).append("\n");
+    for (Exec statement : statements) internals.append("\t").append(statement).append("\n");
 
     return "while (" + loopCondition + ") {\n" + internals + "\n}\n";
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

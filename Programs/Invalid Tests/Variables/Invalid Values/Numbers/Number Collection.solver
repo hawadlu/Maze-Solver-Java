@@ -1,0 +1,6 @@
+***Try to assign a collection to a number***
+
+Number one;
+List someList;
+
+one = someList;

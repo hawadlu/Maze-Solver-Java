@@ -1,16 +1,16 @@
 ***This is the same as all the other AStar searches, but uses the distance to the finish as the comparator***
 print("AStar is starting the solve");
 
-Node parent;
-Comparator compare -> Maze.distanceToDestination(node);
+MazeNode parent;
+Comparator compare -> distanceToDestination;
 PriorityQueue toProcess;
 toProcess.assignComparator(compare);
 toProcess.add(Maze.getStart());
 
 while (!toProcess.isEmpty()) {
    ***This is a test comment***
-
   print("");
+
   parent = toProcess.getNext();
   Maze.visit(parent);
   print(parent);
@@ -38,7 +38,7 @@ while (!toProcess.isEmpty()) {
         toProcess.add(node);
     } else if (lt(plus(Maze.getCost(parent), Maze.getDistance(parent, node)), Maze.getCost(parent))) {
         Maze.setParent(node, parent);
-        Maze.setCost(node, plus(parent.getCost(), Maze.getDistance(parent, node));
+        Maze.setCost(node, plus(parent.getCost(), Maze.getDistance(parent, node)));
         toProcess.add(node);
         Maze.visit(node);
     } else {

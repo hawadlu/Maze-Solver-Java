@@ -1,0 +1,5 @@
+***Try to assign a MazeNode to a number***
+
+Node someNode;
+
+Number three = someNode;

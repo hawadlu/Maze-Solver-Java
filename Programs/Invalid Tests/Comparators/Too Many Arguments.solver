@@ -1,4 +1,4 @@
 ***Try to create a comparator that has too many arguments***
 
-Node node;
-Comparator compare -> Maze.getCost(node), Maze.getCost(node);
+MazeNode node;
+Comparator compare -> getCost, Maze.getCost(node);

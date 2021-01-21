@@ -1,6 +1,6 @@
 ***Try to call the distanceToDestination method with too many Arguments***
 
-Node nodeOne;
-Node nodeTwo;
+MazeNode nodeOne;
+MazeNode nodeTwo;
 
 Maze.distanceToDestination(nodeOne, nodeTwo);

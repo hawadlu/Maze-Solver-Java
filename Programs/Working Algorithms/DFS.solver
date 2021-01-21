@@ -1,7 +1,7 @@
-print("BFS is starting the solve");
+print("DFS is starting the solve");
 
-Node parent;
-Queue toProcess;
+MazeNode parent;
+Stack toProcess;
 toProcess.add(Maze.getStart());
 
 while (!toProcess.isEmpty()) {

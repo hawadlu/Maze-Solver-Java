@@ -1,7 +1,7 @@
 ***Try to call the add method using an incompatible variable type***
 
-Node toProcess;
-Node node;
+MazeNode toProcess;
+MazeNode node;
 Number four = 4;
 
 toProcess.add(node);

@@ -1,79 +1,63 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-import Parser.Parser;
-import Parser.ProgramNodes.Exec;
-import Parser.ProgramNodes.MethodNodes.MazeActionNode;
-import Parser.ProgramNodes.MethodNodes.MethodNode;
-import Utility.Node;
 import Parser.Handler;
+import Parser.ProgramNodes.Exec;
+import Parser.ProgramNodes.Value;
+import Utility.Node;
 
 import java.util.Comparator;
 
-public class ComparatorNode implements Exec {
+public class ComparatorNode implements Exec, Value {
   Comparator<Node> comparator;
-  Exec callToInit;
+  String methodName;
   private Handler handler;
 
 
-  public ComparatorNode(Exec parseMazeCall, Handler handler) {
-    this.callToInit = parseMazeCall;
+  public ComparatorNode(String methodName, Handler handler) {
+    this.methodName = methodName;
     this.handler = handler;
   }
 
   @Override
   public void validate() {
     //Check that the supplied exec is of the correct type
-    if (callToInit instanceof MazeActionNode) {
-      MethodNode node = (MethodNode) ((MazeActionNode) callToInit).getMethodNode();
 
-      //Check the method that is being called
-      if (!node.getName().equals("getNeighbourCount") && !node.getName().equals("getCost") && !node.getName().equals("distanceToDestination")) {
-        Parser.fail(node.getName() + " is not a valid method for initialising comparators.\n" +
-                "Use getNeighbourCount(node) or getCost(node)", null);
-      }
-
-    } else Parser.fail("Comparator must be initialised with a maze method.", null);
-
-    //Check that the supplied exec is valid
-    callToInit.validate();
   }
 
   @Override
   public Object execute() {
-    //Make sure that the method that the user wants to use is valid
-    if (callToInit instanceof MazeActionNode) {
-      //Check what the user wants to use as a compare
-      MazeActionNode action = (MazeActionNode) callToInit;
+    //Check to see if the user is using a correct maze method
+//    String[] validMethods = {"getCost", "getNeighbourCount", "distanceToDestination"};
 
-      //Get the method node
-      MethodNode method = action.getMethodNode();
+    comparator = (nodeOne, nodeTwo) -> {
 
-      //Look at the method
-      String methodName = method.getName();
+      if (methodName.equals("getCost")) {
+        return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
+      } else if (methodName.equals("getNeighbourCount")) {
+        return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
+      } else if (methodName.equals("distanceToDestination")) {
+        return Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
+      }
 
-      //Check to see if the user is using a correct maze method
-      String[] validMethods = {"getCost", "getNeighbourCount", "distanceToDestination"};
+      return 0;
+    };
 
-      comparator = (nodeOne, nodeTwo) -> {
-
-        if (methodName.equals("getCost")) {
-          return Double.compare(nodeOne.getCost(), nodeTwo.getCost());
-        } else if (methodName.equals("getNeighbourCount")) {
-          return Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());
-        } else if (methodName.equals("distanceToDestination")) {
-          return Double.compare(handler.getDistanceToDestination(nodeOne), handler.getDistanceToDestination(nodeTwo));
-        }
-
-        return 0;
-      };
-
-      return comparator;
-    }
-    return null;
+    return comparator;
   }
 
   @Override
   public String toString() {
-    return "Comparator: " + callToInit;
+    return "Comparator: " + methodName;
+  }
+
+  @Override
+  public String getType() {
+    return "Comparator";
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

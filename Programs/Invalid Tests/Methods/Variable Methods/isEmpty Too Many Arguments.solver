@@ -1,6 +1,6 @@
 ***Try to call the isEmpty method with too many arguments***
 
-Node node;
+MazeNode node;
 Stack toProcess;
 
 toProcess.isEmpty(node);

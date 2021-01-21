@@ -1,5 +1,5 @@
 ***Test a Greater Than with no arguments
 
-if (gt() {
+if (gt()) {
     print("FAIL");
 }

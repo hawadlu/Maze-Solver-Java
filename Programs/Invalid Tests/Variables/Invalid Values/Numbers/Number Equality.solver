@@ -1,0 +1,3 @@
+***Try to set the value of a number to a equality***
+
+Number one = eq(1, 3);

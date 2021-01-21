@@ -1,7 +1,7 @@
 ***Try to call the setParent method with too many arguments***
 
-Node nodeOne;
-Node nodeTwo,
-Node nodeThree;
+MazeNode nodeOne;
+MazeNode nodeTwo,
+MazeNode nodeThree;
 
 Maze.setParent(nodeOne, nodeTwo, nodeThree);

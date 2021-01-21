@@ -29,4 +29,10 @@ public class GreaterThanNode implements Exec {
   public String toString() {
     return valueOne + " > " + valueTwo;
   }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
+  }
 }

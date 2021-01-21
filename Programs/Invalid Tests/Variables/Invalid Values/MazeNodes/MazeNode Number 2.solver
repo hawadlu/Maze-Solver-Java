@@ -1,0 +1,4 @@
+***Try to set the value of a node to a number***
+
+Number one = 1;
+MazeNode next = one;

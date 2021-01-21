@@ -1,6 +1,6 @@
 ***Try to call the getSize method with too many arguments***
 
-Node node;
+MazeNode node;
 Stack toProcess;
 
 toProcess.getSize(node);

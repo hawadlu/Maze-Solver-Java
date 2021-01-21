@@ -1,4 +1,4 @@
 ***Try to create a comparator that uses an invalid maze method***
 
-Node node;
+MazeNode node;
 Comparator compare -> Maze.isDone(node);

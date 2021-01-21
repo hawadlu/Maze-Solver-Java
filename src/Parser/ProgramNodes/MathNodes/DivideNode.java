@@ -1,27 +1,15 @@
 package Parser.ProgramNodes.MathNodes;
 
-import Parser.ProgramNodes.Exec;
-
 import java.util.ArrayList;
 
 /**
  * This class deals with adding values together
  */
-public class DivideNode implements Exec, Number {
+public class DivideNode implements Number {
   ArrayList<Number> values = new ArrayList<>();
 
   public void add(Number number) {
     values.add(number);
-  }
-
-  @Override
-  public void validate() {
-    //todo implement me
-  }
-
-  @Override
-  public Object execute() {
-    return calculate();
   }
 
   @Override

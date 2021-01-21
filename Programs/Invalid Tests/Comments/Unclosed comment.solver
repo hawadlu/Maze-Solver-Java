@@ -1,6 +1,6 @@
 ***Test for unclosed comments***
 
-Node something;
-Node somethingElse;
+MazeNode something;
+MazeNode somethingElse;
 
 ***This comment is unclosed

@@ -44,4 +44,9 @@ public class GetVariableNode implements Exec {
   public String toString() {
     return "get " + varName;
   }
+
+  @Override
+  public String getExecType() {
+    return handler.getFromMap(varName).getType();
+  }
 }

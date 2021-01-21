@@ -32,6 +32,7 @@ public class Regex {
   public static Pattern lessThan = Pattern.compile("\\s*lt");
   public static Pattern greaterThan = Pattern.compile("\\s*gt");
   public static Pattern equalTo = Pattern.compile("\\s*eq");
+  public static Pattern comparatorMethod = Pattern.compile("distanceToDestination|getNeighbourCount|getCost");
 
   //Math action
   public static Pattern mathPlus = Pattern.compile("\\s*plus");
@@ -45,7 +46,7 @@ public class Regex {
 
 
   //Data types
-  public static Pattern node = Pattern.compile("Node");
+  public static Pattern node = Pattern.compile("MazeNode");
   public static Pattern list = Pattern.compile("List");
   public static Pattern stack = Pattern.compile("Stack");
   public static Pattern queue = Pattern.compile("Queue");

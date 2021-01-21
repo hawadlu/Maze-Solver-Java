@@ -35,4 +35,10 @@ public class ElseNode implements Exec {
 
     return "else {\n" + internals + "}\n";
   }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
+  }
 }

@@ -1,6 +1,6 @@
 ***Try to call the setParent method with invalid types***
 
-Node nodeOne;
+MazeNode nodeOne;
 PriorityQueue nodeTwo;
 
 Maze.setParent(nodeOne, nodeTwo);

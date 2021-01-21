@@ -40,12 +40,14 @@ public class MazeActionNode implements Exec {
       return handler.checkDone(toUpdate);
     } else if (methodNode.getName().equals("getNeighbours")){
       Node toUpdate = null;
-      if (methodNode.getParameters().get(0) instanceof String) {
-        toUpdate = (Node) handler.getFromMap((String) methodNode.getParameters().get(0)).getValue();
-      } else if (methodNode.getParameters().get(0) instanceof GetVariableNode) {
-        toUpdate = (Node) handler.getFromMap((GetVariableNode) methodNode.getParameters().get(0)).getValue();
-      } else if (methodNode.getParameters().get(0) instanceof EvaluateNode) {
-        toUpdate = (Node) ((EvaluateNode) methodNode.getParameters().get(0)).execute();
+      Object parameter = methodNode.getParameters().get(0);
+
+      if (parameter instanceof String) {
+        toUpdate = (Node) handler.getFromMap((String) parameter).getValue();
+      } else if (parameter instanceof GetVariableNode) {
+        toUpdate = (Node) handler.getFromMap((GetVariableNode) parameter).getValue();
+      } else if (parameter instanceof EvaluateNode || parameter instanceof MazeActionNode || parameter instanceof MethodNode) {
+        toUpdate = (Node) ((Exec) parameter).execute();
       }
 
       return handler.getNeighbours(toUpdate);
@@ -90,8 +92,8 @@ public class MazeActionNode implements Exec {
 
       return new NumberNode(handler.getDistanceToDestination(node));
     } else if (methodNode.getName().equals("fail")) {
-      Parser.fail(methodNode.execute().toString(), null);
-    } else Parser.fail("Unrecognised method '" + methodNode.getName() + "'", null);
+      Parser.fail(methodNode.execute().toString(), "Execution", null);
+    } else Parser.fail("Unrecognised method '" + methodNode.getName() + "'", "Execution", null);
     return null;
   }
 
@@ -103,5 +105,21 @@ public class MazeActionNode implements Exec {
   @Override
   public String toString() {
     return "Maze action " + methodNode;
+  }
+
+  @Override
+  public String getExecType() {
+    if (methodNode.getName().equals("getStart")) return "MazeNode";
+    else if (methodNode.getName().equals("visit")) return null;
+    else if (methodNode.getName().equals("isDone")) return null;
+    else if (methodNode.getName().equals("getNeighbours")) return "Collection";
+    else if (methodNode.getName().equals("isVisited")) return null;
+    else if (methodNode.getName().equals("setParent")) return null;
+    else if (methodNode.getName().equals("finish")) return null;
+    else if (methodNode.getName().equals("setCost")) return null;
+    else if (methodNode.getName().equals("getCost")) return "Number";
+    else if (methodNode.getName().equals("getDistance")) return "Number";
+    else if (methodNode.getName().equals("distanceToDestination")) return "Number";
+    else return null;
   }
 }

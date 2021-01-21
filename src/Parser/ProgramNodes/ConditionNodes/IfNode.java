@@ -48,4 +48,10 @@ public class IfNode implements Exec {
 
     return toReturn.toString();
   }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
+  }
 }

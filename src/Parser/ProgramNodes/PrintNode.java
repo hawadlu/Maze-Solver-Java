@@ -76,4 +76,10 @@ public class PrintNode implements Exec{
   public String toString() {
     return printValues.toString();
   }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
+  }
 }

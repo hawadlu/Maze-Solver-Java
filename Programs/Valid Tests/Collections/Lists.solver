@@ -1,6 +1,6 @@
 ***Perform a number of valid operations on a list***
 
-Node node = Maze.getStart();
+MazeNode node = Maze.getStart();
 
 List someList = Maze.getNeighbours(node);
 
@@ -10,6 +10,6 @@ print("Neighbour: " + someList.get(0));
 
 someList.add(someList.get(zero));
 
-Node next = someList.get(0);
+MazeNode next = someList.get(0);
 
 someList.add(next);

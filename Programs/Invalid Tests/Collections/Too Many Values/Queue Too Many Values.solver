@@ -2,7 +2,7 @@
 
 Queue toProcess;
 
-Node node = Maze.getStart();
+MazeNode node = Maze.getStart();
 
 Number count = 0;
 

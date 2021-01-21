@@ -1,7 +1,7 @@
 ***Try to assign a comparator using a variable that is not a comparator***
 
-Node node;
-Comparator compare -> Maze.getCost(node);
+MazeNode node;
+Comparator compare -> getCost;
 
 PriorityQueue toProcess;
 toProcess.assignComparator(node);

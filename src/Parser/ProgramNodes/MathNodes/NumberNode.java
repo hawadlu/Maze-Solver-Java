@@ -1,25 +1,14 @@
 package Parser.ProgramNodes.MathNodes;
 
-import Parser.Parser;
-import Parser.ProgramNodes.Exec;
+import Parser.ProgramNodes.Value;
 
-public class NumberNode implements Number, Exec {
+public class NumberNode implements Number, Value {
   double value;
 
   public NumberNode(double number) {
     this.value = number;
   }
 
-  @Override
-  public Object execute() {
-
-    return null;
-  }
-
-  @Override
-  public void validate() {
-    //todo implement me
-  }
 
   @Override
   public String toString() {
@@ -29,5 +18,10 @@ public class NumberNode implements Number, Exec {
   @Override
   public double calculate() {
     return value;
+  }
+
+  @Override
+  public String getType() {
+    return "Number";
   }
 }

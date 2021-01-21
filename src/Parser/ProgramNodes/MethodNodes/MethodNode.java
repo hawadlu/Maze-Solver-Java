@@ -40,26 +40,26 @@ public class MethodNode implements Exec {
    * Setup the validator object with the expected argument count and types
    */
   private void setupValidator() {
-    if (name.equals("setCost")) validator = new MethodValidator(name, new String[]{"Node", "Number"}, parameters, handler);
-    else if (name.equals("isDone")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
-    else if (name.equals("getNeighbours")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
-    else if (name.equals("getCost")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
+    if (name.equals("setCost")) validator = new MethodValidator(name, new String[]{"MazeNode", "Number"}, parameters, handler);
+    else if (name.equals("isDone")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+    else if (name.equals("getNeighbours")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+    else if (name.equals("getCost")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
     else if (name.equals("assignComparator")) validator = new MethodValidator(name, new String[]{"Comparator"}, parameters, handler);
     else if (name.equals("getStart")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("add")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
+    else if (name.equals("add")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
     else if (name.equals("isEmpty")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
     else if (name.equals("getNext")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("visit")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
+    else if (name.equals("visit")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
     else if (name.equals("finish")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
     else if (name.equals("getSize")) validator = new MethodValidator(name, new String[]{}, parameters, handler);
-    else if (name.equals("isVisited")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
-    else if (name.equals("getDistance")) validator = new MethodValidator(name, new String[]{"Node", "Node"}, parameters, handler);
-    else if (name.equals("distanceToDestination")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
-    else if (name.equals("setParent")) validator = new MethodValidator(name, new String[]{"Node", "Node"}, parameters, handler);
-    else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"Node"}, parameters, handler);
+    else if (name.equals("isVisited")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+    else if (name.equals("getDistance")) validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
+    else if (name.equals("distanceToDestination")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
+    else if (name.equals("setParent")) validator = new MethodValidator(name, new String[]{"MazeNode", "MazeNode"}, parameters, handler);
+    else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
     else if (name.equals("fail")) validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
     else if (name.equals("get")) validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
-    else Parser.fail("Unrecognised method " + name, null);
+    else Parser.fail("Unrecognised method " + name, "Execution", null);
   }
 
   public String getName() {
@@ -97,5 +97,11 @@ public class MethodNode implements Exec {
   public String toString() {
     if (parameters == null) return "Method (" + name + "())";
     else return "Method (" + name + "(" + parameters + "))";
+  }
+
+  @Override
+  public String getExecType() {
+    if (name.equals("get")) return "MazeNode";
+    return null;
   }
 }

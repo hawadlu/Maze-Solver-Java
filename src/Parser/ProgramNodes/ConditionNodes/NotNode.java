@@ -1,9 +1,9 @@
 package Parser.ProgramNodes.ConditionNodes;
 
-public class NotConditionNode implements Condition {
+public class NotNode implements Condition {
   Condition condition;
 
-  public NotConditionNode(Condition condition) {
+  public NotNode(Condition condition) {
     this.condition = condition;
   }
 

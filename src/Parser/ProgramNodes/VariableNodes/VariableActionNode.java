@@ -48,11 +48,11 @@ public class VariableActionNode implements Exec {
 
       //The assign comparator method can only be called on a priority queue
       if (methodName.equals("assignComparator") && !variableType.equals("PriorityQueue")) {
-        Parser.fail("assignComparator cannot be used with type " + variable.getType() + " for variable " + variable.getName(), null);
+        Parser.fail("assignComparator cannot be used with type " + variable.getType() + " for variable " + variable.getName(), "Execution", null);
 
         //The add method can only be called on a queue, priority queue or stack.
       } else if ((methodName.equals("add") || methodName.equals("isEmpty") || methodName.equals("getNext") || methodName.equals("getSize")) && !variable.isCollection()) {
-        Parser.fail("add cannot be used with type " + variable.getType() + " for variable " + variable.getName(), null);
+        Parser.fail("add cannot be used with type " + variable.getType() + " for variable " + variable.getName(), "Execution", null);
       }
     }
 
@@ -62,5 +62,11 @@ public class VariableActionNode implements Exec {
   @Override
   public String toString() {
     return name + " " + action;
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

@@ -1,4 +1,4 @@
 ***Try to call the isEmpty method on a variable that is not a collection***
 
-Node node;
+MazeNode node;
 node.isEmpty();

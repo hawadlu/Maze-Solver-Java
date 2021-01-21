@@ -1,6 +1,7 @@
 package Parser.ProgramNodes.VariableNodes;
 
 import Parser.Handler;
+import Parser.Parser;
 import Parser.ProgramNodes.Exec;
 import Parser.ProgramNodes.MathNodes.Number;
 
@@ -27,11 +28,22 @@ public class VariableAssignmentNode implements Exec {
 
   @Override
   public void validate() {
-    execVal.validate();
+    if (execVal instanceof GetVariableNode) {
+      //Check that the two types are the same.
+      String expectedType = handler.getFromMap(varName).getType();
+      String suppliedType = ((GetVariableNode) execVal).extractVariable().getType();
+
+      if (!expectedType.equals(suppliedType)) Parser.fail(varName + " expected type " + expectedType + " but found " + suppliedType, "Execution", null);
+    } else if (execVal != null) {
+      execVal.validate();
+    }
   }
 
   @Override
   public Object execute() {
+    //revalidate
+    validate();
+
     if (execVal != null) handler.getFromMap(varName).update(execVal);
     else if (number != null) handler.getFromMap(varName).update(number);
 
@@ -41,5 +53,11 @@ public class VariableAssignmentNode implements Exec {
   @Override
   public String toString() {
     return varName + " equals " + execVal;
+  }
+
+  @Override
+  public String getExecType() {
+    //todo implement me.
+    return null;
   }
 }

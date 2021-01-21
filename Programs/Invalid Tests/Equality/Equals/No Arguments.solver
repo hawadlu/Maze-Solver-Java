@@ -1,5 +1,5 @@
 ***Test an equals with no arguments
 
-if (eq() {
+if (eq()) {
     print("FAIL");
 }

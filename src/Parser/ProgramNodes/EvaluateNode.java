@@ -1,5 +1,6 @@
 package Parser.ProgramNodes;
 
+import Parser.ProgramNodes.ConditionNodes.ConditionNode;
 import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MathNodes.NumberNode;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
@@ -13,6 +14,7 @@ public class EvaluateNode implements Exec, Number {
   Exec toEvaluate;
   GetVariableNode variableNode;
   Number number;
+  ConditionNode conditionNode;
 
   public EvaluateNode(Exec toEvaluate) {
     this.toEvaluate = toEvaluate;
@@ -32,12 +34,17 @@ public class EvaluateNode implements Exec, Number {
     this.toEvaluate = method;
   }
 
+  public EvaluateNode(ConditionNode conditionNode) {
+    this.conditionNode = conditionNode;
+  }
+
 
   @Override
   public Object execute() {
     if (variableNode != null) return variableNode.extractVariable().callMethod((MethodNode) toEvaluate);
     else if (toEvaluate != null) return toEvaluate.execute();
     else if (number != null) return new NumberNode(number.calculate());
+    else if (conditionNode != null) conditionNode.evaluate();
     return null;
   }
 
@@ -57,6 +64,7 @@ public class EvaluateNode implements Exec, Number {
 
   /**
    * Get the variable attached to this node if applicable.
+   *
    * @return the variable associated with the getVariable node.
    */
   public VariableNode getVariable() {
@@ -74,5 +82,13 @@ public class EvaluateNode implements Exec, Number {
   public String toString() {
     if (variableNode != null) return "Variable: " + variableNode + " Evaluate: " + toEvaluate;
     else return "Evaluate: " + toEvaluate;
+  }
+
+  @Override
+  public String getExecType() {
+    if (toEvaluate != null) return toEvaluate.getExecType();
+    else if (number != null) return "Number";
+    else if (conditionNode != null) return "Condition";
+    return null;
   }
 }

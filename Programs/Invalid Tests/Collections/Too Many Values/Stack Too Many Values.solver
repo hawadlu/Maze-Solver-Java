@@ -2,7 +2,7 @@
 
 Stack toProcess;
 
-Node node;
+MazeNode node;
 
 Number count = 0;
 

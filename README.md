@@ -39,7 +39,7 @@ Declarations are where a variable is created.
 The first part is the variable type which may be any of the following...
 <ul>
     <li>Comparator</li>
-    <li>Node</li>
+    <li>MazeNode</li>
     <li>Stack</li>
     <li>Queue</li>
     <li>PriorityQueue</li>
@@ -57,7 +57,7 @@ If the type is a number the '=' may be followed by any number of math operator.
 e.g.
 <br>
 <ul>
-    <li>Node parent</li>
+    <li>MazeNode parent</li>
     <li>Number nodeCost = plus(1, 2)</li>
     <li>List neighbours = Maze.getNeighbours(parent)</li>
 </ul>
@@ -65,18 +65,17 @@ e.g.
 
 <br><br>
 <H3>Comparators</H3>
-In the case of comparators the declaration must be followed by '->' and then one of the following
-maze methods.
+In the case of comparators the declaration must be followed by '->' and then one of the following statements.
 
 <uL>
-    <li>Maze.getNeighbourCount(Node)</li>
-    <li>Maze.getCost(Node)</li>
-    <li>Maze.distanceToDestination(node)</li>
+    <li>getNeighbourCount</li>
+    <li>getCost</li>
+    <li>distanceToDestination</li>
 </uL>
 <br>
 e.g.
 <ul>
-    <li>Comparator compare -> Maze.getCost(node)</li>
+    <li>Comparator compare -> getCost</li>
 </ul>
 
 <H2>Maze Methods</H2>
@@ -292,15 +291,21 @@ They may also be the result of a math operator, Maze Method or Variable method.
 <H2>Comparators</H2>
 Comparators are used to sort PriorityQueues.
 
-There are two different comparators available to use, and they are...
+There are three different comparators available to use, and they are...
 <ul>
-    <li>Maze.getCost(node)</li>
-    <li>Maze.getNeighbourCount(node)</li>
-    <li>Maze.distanceToDestination(node)</li>
+    <li>getCost</li>
+    <li>getNeighbourCount</li>
+    <li>distanceToDestination</li>
 </ul>
 
-<H2>Nodes</H2>
-Nodes are the junctions, corners or dead ends in the maze. The underlying program keeps a map of all the nodes which can 
+e.g. <br>
+```java
+Comparator compare -> getCost;
+```
+<br>
+
+<H2>MazeNodes</H2>
+MazeNodes are the junctions, corners or dead ends in the maze. The underlying program keeps a map of all the nodes which can 
 be accessed by certain methods in the parser.
 
 <H2>Queues</H2>

@@ -1,7 +1,7 @@
 ***Create a PriorityQueue and try to add too many values to it***
 
-Node node = Maze.getStart();
-Comparator compare -> Maze.getCost(node);
+MazeNode node = Maze.getStart();
+Comparator compare -> getCost;
 PriorityQueue toProcess;
 toProcess.assignComparator(compare);
 
