@@ -29,8 +29,12 @@ public class MethodNode implements Exec {
 
     //Add the parameters, removing all of the spaces
     for (Object obj : parameters) {
-      if (obj instanceof String) ((String) obj).replaceAll(" ", "");
-      this.parameters.add(obj);
+      if (obj instanceof String) {
+        String value = ((String) obj).replaceAll(" ", "");
+        this.parameters.add(value);
+      } else {
+        this.parameters.add(obj);
+      }
     }
 
     setupValidator();
@@ -59,7 +63,7 @@ public class MethodNode implements Exec {
     else if (name.equals("getNeighbourCount")) validator = new MethodValidator(name, new String[]{"MazeNode"}, parameters, handler);
     else if (name.equals("fail")) validator = new MethodValidator(name, new String[]{"PrintNode"}, parameters, handler);
     else if (name.equals("get")) validator = new MethodValidator(name, new String[]{"Number"}, parameters, handler);
-    else Parser.fail("Unrecognised method " + name, "Execution", null);
+    else Parser.fail("Unrecognised method " + name, "Execution", null, handler.getPopup());
   }
 
   public String getName() {

@@ -50,7 +50,10 @@ public class MazeActionNode implements Exec {
         toUpdate = (Node) ((Exec) parameter).execute();
       }
 
-      return handler.getNeighbours(toUpdate);
+      //Make sure that the above code succeeded
+      if (toUpdate != null) return handler.getNeighbours(toUpdate);
+      else Parser.fail("Failed to invoke method getNeighbours", "Execution", null, handler.getPopup());
+
     } else if (methodNode.getName().equals("isVisited")) {
       String varName = (String) methodNode.getParameters().get(0);
       Node toUpdate = (Node) handler.getFromMap(varName).getValue();
@@ -92,8 +95,8 @@ public class MazeActionNode implements Exec {
 
       return new NumberNode(handler.getDistanceToDestination(node));
     } else if (methodNode.getName().equals("fail")) {
-      Parser.fail(methodNode.execute().toString(), "Execution", null);
-    } else Parser.fail("Unrecognised method '" + methodNode.getName() + "'", "Execution", null);
+      Parser.fail(methodNode.execute().toString(), "Execution", null, handler.getPopup());
+    } else Parser.fail("Unrecognised method '" + methodNode.getName() + "'", "Execution", null, handler.getPopup());
     return null;
   }
 

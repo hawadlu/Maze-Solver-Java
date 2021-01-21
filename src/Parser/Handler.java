@@ -25,8 +25,8 @@ public class Handler {
   Location start, destination;
   Player player;
   int delay;
-  public boolean done = false;
   private HashMap<String, VariableNode> variables = new HashMap<>();
+  private boolean popup = false;
 
   public Handler(Application application) {
     this.application = application;
@@ -116,7 +116,6 @@ public class Handler {
    */
   public void reportDone(Node lastNode) {
     System.out.println(player + " Reported done on node: " + lastNode);
-    this.done = true;
     this.lastNode = lastNode;
     if (player != null) player.markDone();
     else application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
@@ -203,7 +202,7 @@ public class Handler {
    */
   public VariableNode getFromMap(Object key) {
     if (!variables.containsKey(key)) {
-      Parser.fail("Could not find variable '" + key + "'", "Execution", null);
+      Parser.fail("Could not find variable '" + key + "'", "Execution", null, getPopup());
     }
     return variables.get(key);
   }
@@ -232,7 +231,15 @@ public class Handler {
    * @param key the key of the value to remove.
    */
   public void removeFromMap(String key) {
-    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", "Execution", null);
+    if (!variables.containsKey(key)) Parser.fail("Could not find variable '" + key + "'", "Execution", null, getPopup());
     variables.remove(key);
+  }
+
+  public boolean getPopup() {
+    return popup;
+  }
+
+  public void setPopup(boolean popup) {
+    this.popup = popup;
   }
 }

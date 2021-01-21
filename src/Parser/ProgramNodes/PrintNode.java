@@ -1,6 +1,5 @@
 package Parser.ProgramNodes;
 
-import Parser.Handler;
 import Parser.ProgramNodes.MathNodes.Number;
 import Parser.ProgramNodes.MethodNodes.MethodNode;
 import Parser.ProgramNodes.VariableNodes.GetVariableNode;
@@ -10,11 +9,6 @@ import java.util.ArrayList;
 
 public class PrintNode implements Exec{
   ArrayList<Object> printValues = new ArrayList<>();
-  private Handler handler;
-
-  public PrintNode(Handler handler) {
-    this.handler = handler;
-  }
 
   public void append(StringBuilder str) {
     printValues.add(str);

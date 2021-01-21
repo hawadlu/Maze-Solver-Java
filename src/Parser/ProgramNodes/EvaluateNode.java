@@ -53,7 +53,6 @@ public class EvaluateNode implements Exec, Number {
     if (number == null) {
       if (toEvaluate instanceof GetVariableNode) {
         VariableNode var = (VariableNode) toEvaluate.execute();
-        Number num = (Number) var.getValue();
         return ((Number) var.getValue()).calculate();
       } else {
         return ((Number) toEvaluate.execute()).calculate();

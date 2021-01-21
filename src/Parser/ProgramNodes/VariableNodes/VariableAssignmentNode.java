@@ -33,7 +33,7 @@ public class VariableAssignmentNode implements Exec {
       String expectedType = handler.getFromMap(varName).getType();
       String suppliedType = ((GetVariableNode) execVal).extractVariable().getType();
 
-      if (!expectedType.equals(suppliedType)) Parser.fail(varName + " expected type " + expectedType + " but found " + suppliedType, "Execution", null);
+      if (!expectedType.equals(suppliedType)) Parser.fail(varName + " expected type " + expectedType + " but found " + suppliedType, "Execution", null, handler.getPopup());
     } else if (execVal != null) {
       execVal.validate();
     }

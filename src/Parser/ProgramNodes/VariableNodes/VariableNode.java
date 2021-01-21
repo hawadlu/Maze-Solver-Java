@@ -86,9 +86,9 @@ public class VariableNode implements Exec, Value {
       }
 
       if (suppliedType.equals("Collection")) {
-        if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+        if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null, handler.getPopup());
       } else if (!expectedType.equals(suppliedType)) {
-        Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+        Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null, handler.getPopup());
       }
     }
 
@@ -109,9 +109,9 @@ public class VariableNode implements Exec, Value {
         }
 
         if (suppliedType.equals("Collection")) {
-          if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+          if (!isCollection) Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null, handler.getPopup());
         } else if (!expectedType.equals(suppliedType)) {
-          Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null);
+          Parser.fail(name + " expects type " + getType() + " found " + suppliedType, "Execution", null, handler.getPopup());
         }
       }
     }
@@ -277,7 +277,7 @@ public class VariableNode implements Exec, Value {
   private void add(MethodNode method) {
     //Cast to a collection and check the size
     if (value instanceof Collection && ((Collection) value).size() > 2097152) {
-      Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", "Execution", null);
+      Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", "Execution", null, handler.getPopup());
     }
 
     if (type.equals("Stack")) {
@@ -294,7 +294,7 @@ public class VariableNode implements Exec, Value {
       if (toAdd instanceof VariableNode) toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       //Verify that the value is not null
-      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null);
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null, handler.getPopup());
 
       if (value instanceof PriorityQueue) ((PriorityQueue<Node>) value).add((Node) toAdd);
       else if (value instanceof ArrayDeque) ((ArrayDeque<Node>) value).add((Node) toAdd);
@@ -305,7 +305,7 @@ public class VariableNode implements Exec, Value {
       if (toAdd instanceof VariableNode) toAdd = (Node) ((VariableNode) toAdd).getValue();
 
       //Verify that the value is not null
-      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null);
+      if (toAdd == null) Parser.fail("Null Pointer Exception when adding to '" + name + "'", "Execution", null, handler.getPopup());
 
       ((ArrayList) value).add(toAdd);
     }

@@ -27,7 +27,7 @@ public class MethodValidator implements Validator {
      */
     public void validate() {
         //Check that the number of arguments matches what is expected
-        if (parameters.size() != expectedTypes.length) Parser.fail(methodName + " expects " + expectedTypes.length + " argument(s). Found " + parameters.size(), "Execution", null);
+        if (parameters.size() != expectedTypes.length) Parser.fail(methodName + " expects " + expectedTypes.length + " argument(s). Found " + parameters.size(), "Execution", null, handler.getPopup());
 
         //Check that the supplied types match the expected types
         for (int i = 0; i < parameters.size(); i++) {
@@ -38,7 +38,7 @@ public class MethodValidator implements Validator {
                 //If the variable is contained in the map, locate it and check the type
                 if (handler.hasVariable(parameterName)) {
                     if (!handler.getFromMap(parameterName).getType().equals(expectedType)) {
-                        Parser.fail(methodName + " expects type(s) " + printExpectedTypes() + " found " + printParameterTypes(), "Execution", null);
+                        Parser.fail(methodName + " expects type(s) " + printExpectedTypes() + " found " + printParameterTypes(), "Execution", null, handler.getPopup());
                     }
                 }
             }
