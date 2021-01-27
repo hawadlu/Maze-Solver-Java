@@ -38,8 +38,10 @@ public class LessThanNode implements Exec{
    * Call the calculate method on each of the values and check that value one is larger than value two.
    */
   @Override
-  public Object execute() {
-    return valueOne.calculate() < valueTwo.calculate();
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+    return valueOne.calculate(DEBUG) < valueTwo.calculate(DEBUG);
   }
 
   /**

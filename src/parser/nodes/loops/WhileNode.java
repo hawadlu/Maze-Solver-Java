@@ -1,5 +1,6 @@
 package parser.nodes.loops;
 
+import parser.Handler;
 import parser.interfaces.Condition;
 import parser.interfaces.Exec;
 
@@ -11,15 +12,17 @@ import java.util.ArrayList;
 public class WhileNode implements Exec {
   final ArrayList<Exec> statements;
   final Condition loopCondition;
+  Handler handler;
 
   /**
    * Create the object.
    * @param condition The condition that should be checked.
    * @param statements The list of statements to execute.
    */
-  public WhileNode(Condition condition, ArrayList<Exec> statements) {
+  public WhileNode(Condition condition, ArrayList<Exec> statements, Handler handler) {
     this.loopCondition = condition;
     this.statements = statements;
+    this.handler = handler;
   }
 
   /**
@@ -36,11 +39,12 @@ public class WhileNode implements Exec {
    * @return does not need to return anything, so it returns null;
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
 
-    while (loopCondition.evaluate()) {
+    while (loopCondition.evaluate(DEBUG)) {
       for (Exec statement : statements) {
-        statement.execute();
+        statement.execute(DEBUG);
       }
     }
 

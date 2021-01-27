@@ -26,9 +26,19 @@ public class ImageProcessor {
     this.application = application;
 
     if (oldProcessor != null) {
-      this.exits.addAll(oldProcessor.exits);
+      this.nodes = new ConcurrentHashMap<>();
 
-      for (Location location: oldProcessor.nodes.keySet()) this.nodes.put(location, oldProcessor.nodes.get(location));
+      //Add all of the nodes
+      for (Location location: oldProcessor.nodes.keySet()) {
+        Location newLocation = new Location(location);
+        Node newNode = new Node(oldProcessor.nodes.get(location));
+
+        this.nodes.put(newLocation, newNode);
+      }
+
+      //Add the exits
+      this.exits = new ArrayList<>();
+      this.exits.addAll(oldProcessor.exits);
     }
   }
 

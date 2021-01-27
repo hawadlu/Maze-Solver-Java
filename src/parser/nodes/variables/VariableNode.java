@@ -150,14 +150,16 @@ public class VariableNode implements Exec, Value {
    * Otherwise check the variable type and initialise the value.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     //Add the variable to the map in the handler.
     addToVariableMap();
 
     //Evaluate the Exec node that will assign the value
     if (toEvaluate != null) {
       if (type.equals("List")) {
-        Collection<Node> tmp = (Collection<Node>) toEvaluate.execute();
+        Collection<Node> tmp = (Collection<Node>) toEvaluate.execute(DEBUG);
 
         value = new ArrayList<>();
 
@@ -167,7 +169,7 @@ public class VariableNode implements Exec, Value {
         }
 
       } else if (type.equals("MazeNode") || type.equals("Comparator") || type.equals("Number")) {
-        value = toEvaluate.execute();
+        value = toEvaluate.execute(DEBUG);
       }
     } else {
       switch (type) {
@@ -242,11 +244,11 @@ public class VariableNode implements Exec, Value {
    * @param method the method
    * @return the result of the method if required
    */
-  public Object callMethod(MethodNode method) {
+  public Object callMethod(MethodNode method, boolean DEBUG) {
     if (value instanceof Collection) {
       switch (method.getName()) {
         case "add":
-          add(method);
+          add(method, DEBUG);
           break;
         case "isEmpty":
           return isEmpty();
@@ -258,7 +260,7 @@ public class VariableNode implements Exec, Value {
           assignComparator(method);
           break;
         case "get":
-          return get(method);
+          return get(method, DEBUG);
       }
     }
 
@@ -274,21 +276,21 @@ public class VariableNode implements Exec, Value {
    * @param method the method object.d
    * @return the value at the specified index.
    */
-  private Object get(MethodNode method) {
+  private Object get(MethodNode method, boolean DEBUG) {
     Object parameter = method.getParameters().get(0);
 
     int index = 0;
 
     if (parameter instanceof GetVariableNode) {
       VariableNode var = ((GetVariableNode) parameter).extractVariable();
-      index = (int) ((Number) var.value).calculate();
+      index = (int) ((Number) var.value).calculate(DEBUG);
     } else if (parameter instanceof Number) {
-      index = (int) ((Number) parameter).calculate();
+      index = (int) ((Number) parameter).calculate(DEBUG);
     } else if (parameter instanceof VariableNode) {
       System.out.println();
     } else if (parameter instanceof String) {
       VariableNode var = handler.getFromMap((String) parameter);
-      index = (int) ((Number) var.getValue()).calculate();
+      index = (int) ((Number) var.getValue()).calculate(DEBUG);
     }
 
     return ((ArrayList<Node>) value).get(index);
@@ -339,7 +341,7 @@ public class VariableNode implements Exec, Value {
    *
    * @param method the method to execute in order to get the value
    */
-  private void add(MethodNode method) {
+  private void add(MethodNode method, boolean DEBUG) {
     //Cast to a collection and check the size
     if (value instanceof Collection && ((Collection<Node>) value).size() > 2097152) {
       Parser.fail("Collection '" + name + "' exceeded maximum size of 2097152.", "Execution", null, handler.getPopup());
@@ -347,7 +349,7 @@ public class VariableNode implements Exec, Value {
 
     switch (type) {
       case "Stack" -> {
-        Object toAdd = method.execute();
+        Object toAdd = method.execute(DEBUG);
 
         //Cast the variable to a node if required
         if (toAdd instanceof VariableNode) toAdd = ((VariableNode) toAdd).getValue();
@@ -355,7 +357,7 @@ public class VariableNode implements Exec, Value {
         ((Stack<Node>) value).add((Node) toAdd);
       }
       case "Queue", "PriorityQueue" -> {
-        Object toAdd = method.execute();
+        Object toAdd = method.execute(DEBUG);
 
         //Cast the variable to a node if required
         if (toAdd instanceof VariableNode) toAdd = ((VariableNode) toAdd).getValue();
@@ -371,7 +373,7 @@ public class VariableNode implements Exec, Value {
         }
       }
       case "List" -> {
-        Object toAdd = method.execute();
+        Object toAdd = method.execute(DEBUG);
 
         //Cast the variable to a node if required
         if (toAdd instanceof VariableNode) toAdd = ((VariableNode) toAdd).getValue();
@@ -390,9 +392,9 @@ public class VariableNode implements Exec, Value {
    *
    * @param newVal the new value
    */
-  public void update(Object newVal) {
-    if (newVal instanceof Exec) this.value = ((Exec) newVal).execute();
-    else if (newVal instanceof Number) this.value = new NumberNode(((Number) newVal).calculate());
+  public void update(Object newVal, boolean DEBUG) {
+    if (newVal instanceof Exec) this.value = ((Exec) newVal).execute(DEBUG);
+    else if (newVal instanceof Number) this.value = new NumberNode(((Number) newVal).calculate(DEBUG));
 
     //Check if the newly assigned value is of the correct type
     if (this.value instanceof VariableNode) {

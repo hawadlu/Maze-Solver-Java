@@ -46,12 +46,12 @@ public class VariableActionNode implements Exec {
    * Otherwise use the number variable.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
     //Get the variable out of the stack
     VariableNode toUpdate = handler.getFromMap(name);
 
-    if (action != null && action instanceof MethodNode) return toUpdate.callMethod((MethodNode) action);
-    else if (number != null) toUpdate.update(number.calculate());
+    if (action != null && action instanceof MethodNode) return toUpdate.callMethod((MethodNode) action, DEBUG);
+    else if (number != null) toUpdate.update(number.calculate(DEBUG), DEBUG);
 
     return null;
   }

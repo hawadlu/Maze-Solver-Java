@@ -32,13 +32,13 @@ public class PowerNode implements Number {
    * Raise the first to the power of the second and then third etc.
    */
   @Override
-  public double calculate() {
+  public double calculate(boolean DEBUG) {
     ArrayList<Number> copyValues = new ArrayList<>(values);
-    double initialValue = copyValues.remove(0).calculate();
+    double initialValue = copyValues.remove(0).calculate(DEBUG);
 
     for (Number num : copyValues) {
       if (num instanceof NumberNode) initialValue = Math.pow(initialValue, ((NumberNode) num).value);
-      else initialValue = Math.pow(initialValue, num.calculate());
+      else initialValue = Math.pow(initialValue, num.calculate(DEBUG));
     }
 
     return initialValue;

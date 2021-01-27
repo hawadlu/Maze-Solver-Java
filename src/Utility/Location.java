@@ -13,6 +13,15 @@ public class Location {
     this.y = y;
   }
 
+  /**
+   * Copy constructor.
+   * @param location The old location.
+   */
+  public Location(Location location) {
+    this.x = location.x;
+    this.y = location.y;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

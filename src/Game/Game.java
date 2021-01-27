@@ -94,6 +94,9 @@ public class Game {
    * @param delay
    */
   public void startPlayers(int delay) {
+    playerOne.setOther(playerTwo);
+    playerTwo.setOther(playerOne);
+
     playerOne.solve(delay);
     playerTwo.solve(delay);
   }

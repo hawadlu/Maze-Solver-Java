@@ -96,11 +96,13 @@ public class MethodNode implements Exec {
    * Check the name of the method and then preform the appropriate action.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     if (name.equals("add")) {
       Object toReturn = parameters.get(0);
       if (toReturn instanceof String) return handler.getFromMap((String) toReturn);
-      else return ((Exec) toReturn).execute();
+      else return ((Exec) toReturn).execute(DEBUG);
     } else if (name.equals("fail")) {
       return parameters.get(0); //The fail message is supplied at param index 0
     }

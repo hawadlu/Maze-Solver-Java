@@ -1,5 +1,6 @@
 package parser.nodes;
 
+import parser.Handler;
 import parser.interfaces.Exec;
 
 import java.util.ArrayList;
@@ -9,26 +10,30 @@ import java.util.ArrayList;
  */
 public class BaseNode implements Exec {
   final ArrayList<Exec> statements;
+  Handler handler;
 
   /**
    * Create a new base node.
    * @param statements all of the statements that will be executed by the program.
    */
-  public BaseNode(ArrayList<Exec> statements) {
+  public BaseNode(ArrayList<Exec> statements, Handler handler) {
     this.statements = statements;
+    this.handler = handler;
   }
 
   /**
    * Run through each of the stored statements and execute them.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
     System.out.println("Starting execution");
+
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     for (Exec statement: statements){
-      statement.execute();
+      statement.execute(DEBUG);
     }
 
-//    if (!parser.handler.done) parser.executionError(parser.handler.getPlayer() + " Base node reached the end without solving");
     return false;
   }
 

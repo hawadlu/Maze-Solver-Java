@@ -32,13 +32,13 @@ public class PlusNode implements Number {
    * add the first to the second and then the third etc.
    */
   @Override
-  public double calculate() {
+  public double calculate(boolean DEBUG) {
     ArrayList<Number> copyValues = new ArrayList<>(values);
-    double initialValue = copyValues.remove(0).calculate();
+    double initialValue = copyValues.remove(0).calculate(DEBUG);
 
     for (Number num : copyValues) {
       if (num instanceof NumberNode) initialValue += ((NumberNode) num).value;
-      else initialValue += num.calculate();
+      else initialValue += num.calculate(DEBUG);
     }
 
     return initialValue;

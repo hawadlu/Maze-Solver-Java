@@ -63,6 +63,8 @@ public class Player {
    * @param node the node to draw the image from
    */
   public void update(Node node) {
+    System.out.println(playerName + " is updating");
+
     this.currentNode = node;
 
     //Create a duplicate image file
@@ -115,7 +117,7 @@ public class Player {
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
 
-    panel.markDone(message, newImage);
+    if (panel != null) panel.markDone(message, newImage);
   }
 
   /**
@@ -136,7 +138,8 @@ public class Player {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Player player = (Player) o;
-    return panel.equals(player.panel) && playerName.equals(player.playerName);
+    if (panel != null) return panel.equals(player.panel) && playerName.equals(player.playerName);
+    else return playerName.equals(player.playerName);
   }
 
   @Override

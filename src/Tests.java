@@ -2936,8 +2936,8 @@ public class Tests {
                 application.scanEntireMaze();
 
 
-                Parser pOne = new Parser(new File("Programs/Working Algorithms/AStar No Print.txt"));
-                Parser pTwo = new Parser(new File("Programs/Working Algorithms/AStar No Print.txt"));
+                Parser pOne = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
+                Parser pTwo = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
 
 
                 pOne.setMazeHandler(new Handler(application));

@@ -32,7 +32,7 @@ public class MazeActionNode implements Exec {
    * the appropriate actions.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
     switch (methodNode.getName()) {
       case "getStart":
         return handler.getStart();
@@ -56,7 +56,7 @@ public class MazeActionNode implements Exec {
         } else if (parameter instanceof GetVariableNode) {
           toUpdate = (Node) handler.getFromMap((String) parameter).getValue();
         } else if (parameter instanceof EvaluateNode || parameter instanceof MazeActionNode || parameter instanceof MethodNode) {
-          toUpdate = (Node) ((Exec) parameter).execute();
+          toUpdate = (Node) ((Exec) parameter).execute(DEBUG);
         }
 
         //Make sure that the above code succeeded
@@ -90,7 +90,7 @@ public class MazeActionNode implements Exec {
 
         String varName = (String) methodNode.getParameters().get(1);
         Number num = (Number) handler.getFromMap(varName).getValue();
-        double cost = num.calculate();
+        double cost = num.calculate(DEBUG);
 
         handler.setCost(toUpdate, cost);
         break;
@@ -113,7 +113,7 @@ public class MazeActionNode implements Exec {
 
         return new NumberNode(handler.getDistanceToDestination(node));
       case "fail":
-        Parser.fail(methodNode.execute().toString(), "Execution", null, handler.getPopup());
+        Parser.fail(methodNode.execute(DEBUG).toString(), "Execution", null, handler.getPopup());
         break;
       default:
         Parser.fail("Unrecognised method '" + methodNode.getName() + "'", "Execution", null, handler.getPopup());

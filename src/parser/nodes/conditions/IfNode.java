@@ -1,5 +1,6 @@
 package parser.nodes.conditions;
 
+import parser.Handler;
 import parser.interfaces.Condition;
 import parser.interfaces.Exec;
 
@@ -16,15 +17,17 @@ public class IfNode implements Exec {
   final ArrayList<Exec> statements;
   final Condition ifCondition;
   ElseNode elseNode;
+  Handler handler;
 
   /**
    * Create the object.
    * @param condition the condition that must be true for the statements to run.
    * @param statements a list of all the statements.
    */
-  public IfNode(Condition condition, ArrayList<Exec> statements) {
+  public IfNode(Condition condition, ArrayList<Exec> statements, Handler handler) {
     this.ifCondition = condition;
     this.statements = statements;
+    this.handler = handler;
   }
 
   /**
@@ -50,13 +53,15 @@ public class IfNode implements Exec {
    * If the condition is false and the elseNode != null run the statements in the else block.
    */
   @Override
-  public Object execute() {
-    if (ifCondition.evaluate()) {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+    if (ifCondition.evaluate(DEBUG)) {
       for (Exec statement: statements) {
-        statement.execute();
+        statement.execute(DEBUG);
       }
     } else if (this.elseNode != null) {
-      elseNode.execute();
+      elseNode.execute(DEBUG);
     }
     return null;
   }

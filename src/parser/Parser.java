@@ -31,7 +31,8 @@ import java.util.regex.Pattern;
  * This class is responsible for parsing the files.
  */
 public class Parser {
-  private final boolean DEBUG_ON = false;
+  private final boolean PARSER_DEBUG = false;
+  boolean EXEC_DEBUG = true;
   private Scanner fileScanner = null;
   private Exec baseNode;
   private Handler handler;
@@ -43,6 +44,9 @@ public class Parser {
    */
   public Parser(File toRead) {
     try {
+      //Check that the file is of the correct type
+      if (!toRead.getName().contains(".solver")) fail("File must be of type '.solver'. " + toRead, "Parser", null, enablePopup);
+
       //Scan the incoming file to make sure that all parenthesis are balanced.
       scanFile(toRead);
 
@@ -59,6 +63,10 @@ public class Parser {
    */
   public Parser(File toRead, boolean enablePopup) {
     this.enablePopup = enablePopup;
+
+    //Check that the file is of the correct type
+    if (!toRead.getName().contains(".solver")) fail("File must be of type '.solver'. " + toRead, "Parser", null, enablePopup);
+
     try {
       //Scan the incoming file to make sure that all parenthesis are balanced.
       scanFile(toRead);
@@ -130,28 +138,28 @@ public class Parser {
 
     fileScanner.useDelimiter(Regex.delimiter);
 
-    if (DEBUG_ON) System.out.println("Delimiter: " + Regex.delimiter);
-    if (DEBUG_ON) System.out.println("Statement: " + Regex.statement);
-    if (DEBUG_ON) System.out.println("Method call: " + Regex.methodCall);
-    if (DEBUG_ON) System.out.println("Maze: " + Regex.mazeCall);
-    if (DEBUG_ON) System.out.println("Name: " + Regex.name);
-    if (DEBUG_ON) System.out.println("Sentence: " + Regex.sentence);
-    if (DEBUG_ON) System.out.println("Print: " + Regex.print);
-    if (DEBUG_ON) System.out.println("Print concat: " + Regex.printConcatenate);
-    if (DEBUG_ON) System.out.println("Declare var: " + Regex.declareVar);
-    if (DEBUG_ON) System.out.println("Use var: " + Regex.useVar);
-    if (DEBUG_ON) System.out.println("Reassign var: " + Regex.reassignVar);
-    if (DEBUG_ON) System.out.println("While: " + Regex.whileLoop);
-    if (DEBUG_ON) System.out.println("For: " + Regex.forLoop);
-    if (DEBUG_ON) System.out.println("If: " + Regex.ifStmt);
-    if (DEBUG_ON) System.out.println("Declaration: " + Regex.declaration);
-    if (DEBUG_ON) System.out.println("Math: " + Regex.math);
+    if (PARSER_DEBUG) System.out.println("Delimiter: " + Regex.delimiter);
+    if (PARSER_DEBUG) System.out.println("Statement: " + Regex.statement);
+    if (PARSER_DEBUG) System.out.println("Method call: " + Regex.methodCall);
+    if (PARSER_DEBUG) System.out.println("Maze: " + Regex.mazeCall);
+    if (PARSER_DEBUG) System.out.println("Name: " + Regex.name);
+    if (PARSER_DEBUG) System.out.println("Sentence: " + Regex.sentence);
+    if (PARSER_DEBUG) System.out.println("Print: " + Regex.print);
+    if (PARSER_DEBUG) System.out.println("Print concat: " + Regex.printConcatenate);
+    if (PARSER_DEBUG) System.out.println("Declare var: " + Regex.declareVar);
+    if (PARSER_DEBUG) System.out.println("Use var: " + Regex.useVar);
+    if (PARSER_DEBUG) System.out.println("Reassign var: " + Regex.reassignVar);
+    if (PARSER_DEBUG) System.out.println("While: " + Regex.whileLoop);
+    if (PARSER_DEBUG) System.out.println("For: " + Regex.forLoop);
+    if (PARSER_DEBUG) System.out.println("If: " + Regex.ifStmt);
+    if (PARSER_DEBUG) System.out.println("Declaration: " + Regex.declaration);
+    if (PARSER_DEBUG) System.out.println("Math: " + Regex.math);
 
 
-    if (DEBUG_ON) System.out.println();
+    if (PARSER_DEBUG) System.out.println();
 
     //Start the scanner
-    baseNode = new BaseNode(parseProgram());
+    baseNode = new BaseNode(parseProgram(), handler);
 
     fileScanner.close();
 
@@ -191,12 +199,12 @@ public class Parser {
   private Exec parseStatement() {
     boolean semiRequired = true; //Indication of the necessity of a semi colon after this statement.
     Exec toReturn = null;
-    if (DEBUG_ON) System.out.println("parsing statement");
+    if (PARSER_DEBUG) System.out.println("parsing statement");
 
     //Remove any newline characters
     String next = fileScanner.next().replaceAll("\\n", "");
 
-    if (DEBUG_ON) System.out.println("Next: " + next);
+    if (PARSER_DEBUG) System.out.println("Next: " + next);
 
     if (next.matches(Regex.comment.pattern())) {
       parseComment();
@@ -245,7 +253,7 @@ public class Parser {
    * @return an else node
    */
   private Exec parseElse(Exec toReturn) {
-    if (DEBUG_ON) System.out.println("Parsing else");
+    if (PARSER_DEBUG) System.out.println("Parsing else");
 
     //Discard the 'else'
     fileScanner.next();
@@ -261,7 +269,7 @@ public class Parser {
 
     scannerHasNext(Regex.closeCurly, "Else missing closing '}'");
 
-    ElseNode elseNode = new ElseNode(statements);
+    ElseNode elseNode = new ElseNode(statements, handler);
 
     //Add the else clause to the if statement
     if (toReturn instanceof IfNode) ((IfNode) toReturn).addElse(elseNode);
@@ -283,7 +291,7 @@ public class Parser {
         ifs.add((IfNode) parseIf());
       }
 
-      return new ElseIfNode(ifs);
+      return new ElseIfNode(ifs, handler);
   }
 
   /**
@@ -292,7 +300,7 @@ public class Parser {
    * @return a comparator object.
    */
   private Exec parseComparator(String methodName) {
-    if (DEBUG_ON) System.out.println("Parsing comparator");
+    if (PARSER_DEBUG) System.out.println("Parsing comparator");
 
     Exec comparator = null;
 
@@ -318,7 +326,7 @@ public class Parser {
    * Parse any comments in the file.
    */
   private void parseComment() {
-    if (DEBUG_ON) System.out.println("Parsing comment");
+    if (PARSER_DEBUG) System.out.println("Parsing comment");
     while (!fileScanner.hasNext(Regex.comment)) {
       if (!fileScanner.hasNext()) fail("Comment missing closing '***'", "parser", fileScanner, getPopup()); //Reached the end of the program while parsing the comment
       fileScanner.next(); //Discard all tokens inside the comment
@@ -331,7 +339,7 @@ public class Parser {
    * @return a for loop object
    */
   private Exec parseFor() {
-    if (DEBUG_ON) System.out.println("Parsing for loop");
+    if (PARSER_DEBUG) System.out.println("Parsing for loop");
     Exec forLoop;
 
     //Check for opening '('
@@ -389,7 +397,7 @@ public class Parser {
    * @return an if statement node
    */
   private Exec parseIf() {
-    if (DEBUG_ON) System.out.println("Parsing if");
+    if (PARSER_DEBUG) System.out.println("Parsing if");
 
     //Discard the 'else if' if required
     if (fileScanner.hasNext(Regex.elseIf)) fileScanner.next();
@@ -419,7 +427,7 @@ public class Parser {
     //Check for the closing }
     scannerHasNext(Regex.closeCurly, "If statement missing closing '}'");
 
-    IfNode ifNode = new IfNode(condition, statements);
+    IfNode ifNode = new IfNode(condition, statements, handler);
 
     //If there is an else add it to the if node
     if (fileScanner.hasNext(Regex.ifElse)) parseElse(ifNode);
@@ -432,7 +440,7 @@ public class Parser {
    * @return a while loop object
    */
   private Exec parseWhile() {
-    if (DEBUG_ON) System.out.println("Parsing while");
+    if (PARSER_DEBUG) System.out.println("Parsing while");
 
     //Check for an opening brace
     scannerHasNext(Regex.openParen, "While loop missing opening '('");
@@ -459,17 +467,17 @@ public class Parser {
     //Check for the closing }
     scannerHasNext(Regex.closeCurly, "While loop missing closing '}'");
 
-    return new WhileNode(condition, statements);
+    return new WhileNode(condition, statements, handler);
   }
 
   private Condition parseCondition() {
-    if (DEBUG_ON) System.out.println("Parsing condition");
+    if (PARSER_DEBUG) System.out.println("Parsing condition");
 
     //Parse the method that will evaluate the condition
-    if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall());
-    else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck());
+    if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall(), handler);
+    else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck(), handler);
     else {
-      if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner.next().replaceAll("\\s", ""), false));
+      if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner.next().replaceAll("\\s", ""), false), handler);
       else fail("Unrecognised value in condition", "parser", fileScanner, getPopup());
     }
 
@@ -482,7 +490,7 @@ public class Parser {
    * @return an equality node.
    */
   private Exec parseEqualityCheck() {
-    if (DEBUG_ON) System.out.println("Parsing equality check");
+    if (PARSER_DEBUG) System.out.println("Parsing equality check");
 
     //check for less than
     if (fileScanner.hasNext(Regex.lessThan)) {
@@ -502,7 +510,7 @@ public class Parser {
    * @return an array containing the two conditions to be checked.
    */
   private Number[] parseEqualityConditions() {
-    if (DEBUG_ON) System.out.println("Parsing equality conditions");
+    if (PARSER_DEBUG) System.out.println("Parsing equality conditions");
 
     Number[] values = new Number[2];
 
@@ -538,7 +546,7 @@ public class Parser {
    * @return a new not node.
    */
   private NotNode parseNotCondition() {
-    if (DEBUG_ON) System.out.println("parsing not condition");
+    if (PARSER_DEBUG) System.out.println("parsing not condition");
 
     fileScanner.next(); //Remove the !
 
@@ -552,7 +560,7 @@ public class Parser {
    * @return an update node
    */
   private Exec parseVariableReference(String varName, boolean toPrint) {
-    if (DEBUG_ON) System.out.println("Parsing variable reference");
+    if (PARSER_DEBUG) System.out.println("Parsing variable reference");
 
     //Remove any spaces
     varName = varName.replaceAll(" ", "");
@@ -586,7 +594,7 @@ public class Parser {
    * @return A variable assignment node.
    */
   private Exec parseVariableAssignment(String varName) {
-    if (DEBUG_ON) System.out.println("parsing variable assignment");
+    if (PARSER_DEBUG) System.out.println("parsing variable assignment");
 
     //Discard the = or ->
     fileScanner.next();
@@ -606,7 +614,7 @@ public class Parser {
    * @return a variable action object.
    */
   private Exec parseVariableAction(String varName) {
-    if (DEBUG_ON) System.out.println("parsing variable action");
+    if (PARSER_DEBUG) System.out.println("parsing variable action");
 
     //Check if it is a call to a maze method
     if (fileScanner.hasNext(Regex.mazeCall)) return new VariableActionNode(varName, parseMazeCall(), handler);
@@ -619,7 +627,7 @@ public class Parser {
    * @return the declaration node.
    */
   private VariableNode parseDeclaration( String declarationInfo) {
-    if (DEBUG_ON) System.out.println("parsing declaration");
+    if (PARSER_DEBUG) System.out.println("parsing declaration");
 
     //Split the variable into type and name
     String[] varInfo = declarationInfo.split(" ");
@@ -646,7 +654,7 @@ public class Parser {
    * @return a value node
    */
   private Exec parseValue() {
-    if (DEBUG_ON) System.out.println("parsing value");
+    if (PARSER_DEBUG) System.out.println("parsing value");
 
     //Discard the =
     if (fileScanner.hasNext(Regex.equals)) {
@@ -656,7 +664,7 @@ public class Parser {
       } else if (fileScanner.hasNext(Regex.math)) {
         return parseEvaluateMathCall();
       } else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) {
-        return new EvaluateNode(new ConditionNode(parseEqualityCheck()));
+        return new EvaluateNode(new ConditionNode(parseEqualityCheck(), handler), handler);
       } else if (fileScanner.hasNext(Regex.name)) {
         String name = fileScanner.next().replaceAll(" ", "");
 
@@ -678,7 +686,7 @@ public class Parser {
    * @return an evaluate object.
    */
   private Exec parseEvaluateMathCall() {
-    return new EvaluateNode(parseMath());
+    return new EvaluateNode(parseMath(), handler);
   }
 
   /**
@@ -686,7 +694,7 @@ public class Parser {
    * @return a MazeAction node
    */
   private Exec parseMazeCall() {
-    if (DEBUG_ON) System.out.println("Parsing maze action");
+    if (PARSER_DEBUG) System.out.println("Parsing maze action");
 
     if (fileScanner.hasNext(Regex.mazeCall)) fileScanner.next();
 
@@ -703,7 +711,7 @@ public class Parser {
   private MethodNode parseMethod() {
     MethodNode toReturn = null;
 
-    if (DEBUG_ON) System.out.println("parsing method");
+    if (PARSER_DEBUG) System.out.println("parsing method");
 
     //Check for the '.'
     scannerHasNext(Regex.dot, "Method call missing '.'");
@@ -743,7 +751,7 @@ public class Parser {
   private ArrayList<Object> parseParams() {
     ArrayList<Object> params = new ArrayList<>();
 
-    if (DEBUG_ON) System.out.println("parsing parameters");
+    if (PARSER_DEBUG) System.out.println("parsing parameters");
 
     while (!fileScanner.hasNext(Regex.closeParen)) {
       if (fileScanner.hasNext(Regex.comma)) fileScanner.next(); //Discard the comma
@@ -756,7 +764,7 @@ public class Parser {
       }
     }
 
-    if (DEBUG_ON) System.out.println("Parameters: " + params);
+    if (PARSER_DEBUG) System.out.println("Parameters: " + params);
 
     return params;
   }
@@ -767,7 +775,7 @@ public class Parser {
    * @return a new print node
    */
   private Exec parsePrint(boolean firstParen) {
-    PrintNode printer = new PrintNode();
+    PrintNode printer = new PrintNode(handler);
     StringBuilder toPrint = new StringBuilder();
 
 
@@ -824,7 +832,7 @@ public class Parser {
    * @return a math node
    */
   private Number parseMath() {
-    if (DEBUG_ON) System.out.println("Parsing math");
+    if (PARSER_DEBUG) System.out.println("Parsing math");
 
     Number mathNode = null;
 
@@ -844,7 +852,7 @@ public class Parser {
    * @return a multiply node
    */
   private Number parseRoot() {
-    if (DEBUG_ON) System.out.println("Parsing root");
+    if (PARSER_DEBUG) System.out.println("Parsing root");
 
     RootNode root = new RootNode();
 
@@ -874,7 +882,7 @@ public class Parser {
    * @return a multiply node
    */
   private Number parsePower() {
-    if (DEBUG_ON) System.out.println("Parsing power");
+    if (PARSER_DEBUG) System.out.println("Parsing power");
 
     PowerNode power = new PowerNode();
 
@@ -905,7 +913,7 @@ public class Parser {
    * @return a multiply node
    */
   private Number parseMultiply() {
-    if (DEBUG_ON) System.out.println("Parsing multiply");
+    if (PARSER_DEBUG) System.out.println("Parsing multiply");
 
     MultiplyNode multiply = new MultiplyNode();
 
@@ -935,7 +943,7 @@ public class Parser {
    * @return a divide node
    */
   private Number parseDivide() {
-    if (DEBUG_ON) System.out.println("Parsing divide");
+    if (PARSER_DEBUG) System.out.println("Parsing divide");
 
     DivideNode divide = new DivideNode();
 
@@ -965,7 +973,7 @@ public class Parser {
    * @return a minus node
    */
   private Number parseMinus() {
-    if (DEBUG_ON) System.out.println("Parsing minus");
+    if (PARSER_DEBUG) System.out.println("Parsing minus");
 
     MinusNode minus = new MinusNode();
 
@@ -995,7 +1003,7 @@ public class Parser {
    * @return a plus node.
    */
   private Number parsePlus() {
-    if (DEBUG_ON) System.out.println("Parsing plus");
+    if (PARSER_DEBUG) System.out.println("Parsing plus");
 
     PlusNode plus = new PlusNode();
 
@@ -1028,19 +1036,19 @@ public class Parser {
    * @return an object that can be evaluated at runtime
    */
   private Number parseEvaluateNameCall() {
-    if (DEBUG_ON) System.out.println("Parsing runtime variable evaluation");
+    if (PARSER_DEBUG) System.out.println("Parsing runtime variable evaluation");
 
     String name = fileScanner.next();
     GetVariableNode getVar = new GetVariableNode(name, handler);
 
     //Check if it is just a name with no attached method
     if (fileScanner.hasNext(Regex.comma) || fileScanner.hasNext(Regex.closeParen)) {
-      return new EvaluateNode(getVar);
+      return new EvaluateNode(getVar, handler);
     }
 
-    EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(name));
+    EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(name), handler);
 
-    return new EvaluateNode(getVar, eval);
+    return new EvaluateNode(getVar, eval, handler);
   }
 
   /**
@@ -1049,12 +1057,12 @@ public class Parser {
    * @return a node that will evaluate a method call at runtime.
    */
   private Exec parseEvaluateMethodCall(String name) {
-    if (DEBUG_ON) System.out.println("Parsing runtime method call evaluation");
+    if (PARSER_DEBUG) System.out.println("Parsing runtime method call evaluation");
 
     MethodNode method = parseMethod();
     GetVariableNode variableNode = new GetVariableNode(name, handler);
 
-    return new EvaluateNode(variableNode, method);
+    return new EvaluateNode(variableNode, method, handler);
   }
 
   /**
@@ -1062,9 +1070,9 @@ public class Parser {
    * @return a node which will evaluate the contents of a maze call at runtime
    */
   private Number parseEvaluateMazeCall() {
-    if (DEBUG_ON) System.out.println("Parsing runtime maze call evaluation");
+    if (PARSER_DEBUG) System.out.println("Parsing runtime maze call evaluation");
 
-    return new EvaluateNode(parseMazeCall());
+    return new EvaluateNode(parseMazeCall(), handler);
   }
 
   /**
@@ -1072,9 +1080,9 @@ public class Parser {
    * @return a number object.
    */
   private Number parseNumber() {
-    if (DEBUG_ON) System.out.println("Parsing number");
+    if (PARSER_DEBUG) System.out.println("Parsing number");
     String number = fileScanner.next();
-    if (DEBUG_ON) System.out.println(number);
+    if (PARSER_DEBUG) System.out.println(number);
     return new NumberNode(Double.parseDouble(number));
   }
 
@@ -1109,7 +1117,7 @@ public class Parser {
     //Create a new handler object if required
     if (this.handler == null) this.handler = new Handler(application, delay);
 
-    baseNode.execute();
+    baseNode.execute(EXEC_DEBUG);
   }
 
   /**
@@ -1119,7 +1127,7 @@ public class Parser {
     //Create a new handler object if required
     if (this.handler == null) this.handler = new Handler(application);
 
-    baseNode.execute();
+    baseNode.execute(EXEC_DEBUG);
   }
 
   /**
@@ -1139,7 +1147,7 @@ public class Parser {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Parser parser = (Parser) o;
-    return DEBUG_ON == parser.DEBUG_ON && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode) && Objects.equals(handler, parser.handler);
+    return PARSER_DEBUG == parser.PARSER_DEBUG && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode) && Objects.equals(handler, parser.handler);
   }
 
   /**
@@ -1148,7 +1156,7 @@ public class Parser {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(DEBUG_ON, fileScanner, baseNode, handler);
+    return Objects.hash(PARSER_DEBUG, fileScanner, baseNode, handler);
   }
 
   /**

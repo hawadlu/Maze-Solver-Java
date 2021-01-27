@@ -20,8 +20,8 @@ public class NotNode implements Condition {
    * Evaluate the condition and check that it is not true.
    */
   @Override
-  public boolean evaluate() {
-    return !condition.evaluate();
+  public boolean evaluate(boolean DEBUG) {
+    return !condition.evaluate(DEBUG);
   }
 
   /**
@@ -30,5 +30,10 @@ public class NotNode implements Condition {
   @Override
   public String toString() {
     return "not(" + condition + ")";
+  }
+
+  @Override
+  public String getExecType() {
+    return "NotNode";
   }
 }

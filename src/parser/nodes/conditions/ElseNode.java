@@ -1,5 +1,6 @@
 package parser.nodes.conditions;
 
+import parser.Handler;
 import parser.interfaces.Exec;
 
 import java.util.ArrayList;
@@ -10,22 +11,26 @@ import java.util.ArrayList;
  */
 public class ElseNode implements Exec {
   final ArrayList<Exec> statements;
+  Handler handler;
 
   /**
    * Create a new object.
    * @param statements the list of statements that should be executed.
    */
-  public ElseNode(ArrayList<Exec> statements) {
+  public ElseNode(ArrayList<Exec> statements, Handler handler) {
     this.statements = statements;
+    this.handler = handler;
   }
 
   /**
    * Go through each statement in the list and execute it.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG_ON) {
+    if (DEBUG_ON) System.out.println(handler.getPlayer() + " " + getExecType());
+
     for (Exec statement: statements) {
-      statement.execute();
+      statement.execute(DEBUG_ON);
     }
     return null;
   }

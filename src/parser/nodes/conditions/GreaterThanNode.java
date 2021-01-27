@@ -37,8 +37,8 @@ public class GreaterThanNode implements Exec {
    * Call the calculate method on each of the values and check that value one is larger than value two.
    */
   @Override
-  public Object execute() {
-    return valueOne.calculate() > valueTwo.calculate();
+  public Object execute(boolean DEBUG) {
+    return valueOne.calculate(DEBUG) > valueTwo.calculate(DEBUG);
   }
 
   /**

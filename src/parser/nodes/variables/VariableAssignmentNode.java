@@ -64,12 +64,14 @@ public class VariableAssignmentNode implements Exec {
    * Otherwise get the variable from the map and assign the number to it.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     //revalidate
     validate();
 
-    if (execVal != null) handler.getFromMap(varName).update(execVal);
-    else if (number != null) handler.getFromMap(varName).update(number);
+    if (execVal != null) handler.getFromMap(varName).update(execVal, DEBUG);
+    else if (number != null) handler.getFromMap(varName).update(number, DEBUG);
 
     return null;
   }

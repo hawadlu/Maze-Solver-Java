@@ -29,7 +29,7 @@ public class NumberNode implements Number, Value {
    * @return the number that is being stored.
    */
   @Override
-  public double calculate() {
+  public double calculate(boolean DEBUG) {
     return value;
   }
 

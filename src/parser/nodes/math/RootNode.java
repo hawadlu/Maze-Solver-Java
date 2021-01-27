@@ -30,8 +30,8 @@ public class RootNode implements Number {
    * @return the square root of the supplied value.
    */
   @Override
-  public double calculate() {
-    return Math.sqrt(values.get(0).calculate());
+  public double calculate(boolean DEBUG) {
+    return Math.sqrt(values.get(0).calculate(DEBUG));
   }
 
   /**

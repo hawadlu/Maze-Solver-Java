@@ -37,8 +37,10 @@ public class EqualToNode implements Exec {
    * Call the calculate method on each of the values and check that value one is equal to value two.
    */
   @Override
-  public Object execute() {
-    return valueOne.calculate() == valueTwo.calculate();
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+    return valueOne.calculate(DEBUG) == valueTwo.calculate(DEBUG);
   }
 
   /**

@@ -42,9 +42,10 @@ public class ComparatorNode implements Exec, Value {
    * @return the newly created comparator.
    */
   @Override
-  public Object execute() {
-    //Check to see if the user is using a correct maze method
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
 
+    //Check to see if the user is using a correct maze method
     comparator = (nodeOne, nodeTwo) -> switch (methodName) {
       case "getCost" -> Double.compare(nodeOne.getCost(), nodeTwo.getCost());
       case "getNeighbourCount" -> Double.compare(nodeOne.getNeighbours().size(), nodeTwo.getNeighbours().size());

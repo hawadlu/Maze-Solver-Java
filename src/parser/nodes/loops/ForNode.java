@@ -55,7 +55,9 @@ public class ForNode implements Exec {
    * Go through each item in the provided list and run each of the statements.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     //make variable node
     String type = "MazeNode";
     Object value = handler.getFromMap(collectionName).getValue();
@@ -69,7 +71,7 @@ public class ForNode implements Exec {
 
       //Go through the statements
       for (Exec statement: statements) {
-        statement.execute();
+        statement.execute(DEBUG);
       }
 
     }

@@ -3,9 +3,10 @@ package parser.interfaces;
 public interface Exec extends Validator {
   /**
    * Execute the code block and return any object.
+   * @param DEBUG_ON indicate if the program is currently in debug mode
    * @return the object to return , if any.
    */
-  Object execute();
+  Object execute(boolean DEBUG_ON);
 
   /**
    * @return a string representation of the object.

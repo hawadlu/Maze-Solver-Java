@@ -1,5 +1,6 @@
 package parser.nodes;
 
+import parser.Handler;
 import parser.interfaces.Exec;
 import parser.nodes.conditions.ConditionNode;
 import parser.interfaces.Number;
@@ -16,13 +17,15 @@ public class EvaluateNode implements Exec, Number {
   GetVariableNode variableNode;
   Number number;
   ConditionNode conditionNode;
+  Handler handler;
 
   /**
    * Create the object.
    * @param toEvaluate the Exec that should be evaluated.
    */
-  public EvaluateNode(Exec toEvaluate) {
+  public EvaluateNode(Exec toEvaluate, Handler handler) {
     this.toEvaluate = toEvaluate;
+    this.handler = handler;
   }
 
   /**
@@ -30,17 +33,19 @@ public class EvaluateNode implements Exec, Number {
    * @param varNode The variable to use.
    * @param toEvaluate the Exec that should be evaluated.
    */
-  public EvaluateNode(GetVariableNode varNode, Exec toEvaluate) {
+  public EvaluateNode(GetVariableNode varNode, Exec toEvaluate, Handler handler) {
     this.variableNode = varNode;
     this.toEvaluate = toEvaluate;
+    this.handler = handler;
   }
 
   /**
    * Create the object.
    * @param number The number to evaluate.
    */
-  public EvaluateNode(Number number) {
+  public EvaluateNode(Number number, Handler handler) {
     this.number = number;
+    this.handler = handler;
   }
 
   /**
@@ -48,17 +53,19 @@ public class EvaluateNode implements Exec, Number {
    * @param variableNode The variable to use.
    * @param method The method that should be executed.
    */
-  public EvaluateNode(GetVariableNode variableNode, MethodNode method) {
+  public EvaluateNode(GetVariableNode variableNode, MethodNode method, Handler handler) {
     this.variableNode = variableNode;
     this.toEvaluate = method;
+    this.handler = handler;
   }
 
   /**
    * Create the object.
    * @param conditionNode The condition that should be checked.
    */
-  public EvaluateNode(ConditionNode conditionNode) {
+  public EvaluateNode(ConditionNode conditionNode, Handler handler) {
     this.conditionNode = conditionNode;
+    this.handler = handler;
   }
 
   /**
@@ -70,11 +77,13 @@ public class EvaluateNode implements Exec, Number {
    * @return a Variable node or a Number.
    */
   @Override
-  public Object execute() {
-    if (variableNode != null) return variableNode.extractVariable().callMethod((MethodNode) toEvaluate);
-    else if (toEvaluate != null) return toEvaluate.execute();
-    else if (number != null) return new NumberNode(number.calculate());
-    else if (conditionNode != null) conditionNode.evaluate();
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+    if (variableNode != null) return variableNode.extractVariable().callMethod((MethodNode) toEvaluate, DEBUG);
+    else if (toEvaluate != null) return toEvaluate.execute(DEBUG);
+    else if (number != null) return new NumberNode(number.calculate(DEBUG));
+    else if (conditionNode != null) conditionNode.evaluate(DEBUG);
     return null;
   }
 
@@ -83,16 +92,16 @@ public class EvaluateNode implements Exec, Number {
    * @return the result of the calculation.
    */
   @Override
-  public double calculate() {
+  public double calculate(boolean DEBUG) {
     if (number == null) {
       if (toEvaluate instanceof GetVariableNode) {
-        VariableNode var = (VariableNode) toEvaluate.execute();
-        return ((Number) var.getValue()).calculate();
+        VariableNode var = (VariableNode) toEvaluate.execute(DEBUG);
+        return ((Number) var.getValue()).calculate(DEBUG);
       } else {
-        return ((Number) toEvaluate.execute()).calculate();
+        return ((Number) toEvaluate.execute(DEBUG)).calculate(DEBUG);
       }
     }
-    return number.calculate();
+    return number.calculate(DEBUG);
   }
 
   /**

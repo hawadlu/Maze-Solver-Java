@@ -50,7 +50,9 @@ public class GetVariableNode implements Exec {
    * @return the retrieved variable object.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
     return handler.getFromMap(varName);
   }
 

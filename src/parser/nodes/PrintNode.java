@@ -1,5 +1,6 @@
 package parser.nodes;
 
+import parser.Handler;
 import parser.interfaces.Exec;
 import parser.interfaces.Number;
 import parser.nodes.methods.MethodNode;
@@ -14,6 +15,11 @@ import java.util.ArrayList;
  */
 public class PrintNode implements Exec {
   final ArrayList<Object> printValues = new ArrayList<>();
+  Handler handler = null;
+
+  public PrintNode(Handler handler) {
+    this.handler = handler;
+  }
 
   /**
    * Add a string to the current string.
@@ -44,24 +50,24 @@ public class PrintNode implements Exec {
    * Makes a string, executing any nodes along the way.
    * @return a concatenated string of all the object in the printValues array.
    */
-  public Object makeString() {
-    return concatenate();
+  public Object makeString(boolean DEBUG) {
+    return concatenate(DEBUG);
   }
 
   /**
    * Concatenate all of the values in printValues.
    * @return a concatenated string.
    */
-  private String concatenate() {
+  private String concatenate(boolean DEBUG) {
     StringBuilder toReturn = new StringBuilder();
 
     for (Object obj: printValues) {
       if (obj instanceof String) toReturn.append(obj);
-      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate());
-      else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString());
+      else if (obj instanceof Number) toReturn.append(((Number) obj).calculate(DEBUG));
+      else if (obj instanceof PrintNode) toReturn.append(((PrintNode) obj).makeString(DEBUG));
       else if (obj instanceof GetVariableNode) toReturn.append(((GetVariableNode) obj).getInfo());
-      else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute());
-      else if (obj instanceof VariableActionNode) toReturn.append(((VariableActionNode) obj).execute());
+      else if (obj instanceof MethodNode) toReturn.append(((MethodNode) obj).execute(DEBUG));
+      else if (obj instanceof VariableActionNode) toReturn.append(((VariableActionNode) obj).execute(DEBUG));
       else toReturn.append(obj);
     }
 
@@ -83,8 +89,10 @@ public class PrintNode implements Exec {
    * @return does not return anything, null.
    */
   @Override
-  public Object execute() {
-    System.out.println(concatenate());
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+    System.out.println(concatenate(DEBUG));
     return null;
   }
 

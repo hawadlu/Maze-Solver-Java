@@ -1,5 +1,6 @@
 package parser.nodes.conditions;
 
+import parser.Handler;
 import parser.interfaces.Exec;
 
 import java.util.ArrayList;
@@ -10,17 +11,20 @@ import java.util.ArrayList;
 public class ElseIfNode implements Exec {
   final ArrayList<IfNode> ifNodes;
   ElseNode elseNode;
+  Handler handler;
 
   /**
    * Create the object.
    * @param ifs an arraylist of all of the conditions and their respective code blocks.
    */
-  public ElseIfNode(ArrayList<IfNode> ifs) {
+  public ElseIfNode(ArrayList<IfNode> ifs, Handler handler) {
+    this.handler = handler;
+
     this.ifNodes = ifs;
 
     //If the last statement has an else condition add it to the else here
     if (ifNodes.get(ifNodes.size() - 1).elseNode != null) {
-      this.elseNode = new ElseNode(ifNodes.get(ifNodes.size() - 1).elseNode.statements);
+      this.elseNode = new ElseNode(ifNodes.get(ifNodes.size() - 1).elseNode.statements, handler);
       ifNodes.get(ifNodes.size() - 1).elseNode = null;
     }
   }
@@ -51,21 +55,24 @@ public class ElseIfNode implements Exec {
    * @return this never needs to return anything.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
+    if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
+
+
     //Go through each of the statements until one is true
     boolean run = false;
 
     for (IfNode statement: ifNodes) {
       //Check to see if the condition will be evaluated
-      if (statement.ifCondition.evaluate()){
-        statement.execute();
+      if (statement.ifCondition.evaluate(DEBUG)){
+        statement.execute(DEBUG);
         run = true;
         break;
       }
     }
 
     //Run the else node if necessary
-    if (!run && elseNode != null) elseNode.execute();
+    if (!run && elseNode != null) elseNode.execute(DEBUG);
 
     return null;
   }

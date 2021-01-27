@@ -261,4 +261,12 @@ public class Handler {
   public void setPopup(boolean popup) {
     this.popup = popup;
   }
+
+  /**
+   * Get the player object.
+   * @return the player.
+   */
+  public Player getPlayer() {
+    return player;
+  }
 }

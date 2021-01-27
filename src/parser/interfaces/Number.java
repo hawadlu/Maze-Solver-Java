@@ -1,5 +1,5 @@
 package parser.interfaces;
 
 public interface Number {
-  double calculate();
+  double calculate(boolean DEBUG);
 }

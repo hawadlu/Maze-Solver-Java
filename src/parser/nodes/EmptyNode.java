@@ -11,7 +11,7 @@ public class EmptyNode implements Exec {
    * @return empty statement, return null.
    */
   @Override
-  public Object execute() {
+  public Object execute(boolean DEBUG) {
     return null;
   }
 

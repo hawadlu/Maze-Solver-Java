@@ -1,6 +1,7 @@
 package GUI.CustomPanels;
 
 import Application.Application;
+import parser.Handler;
 import parser.Parser;
 import Image.ImageFile;
 
@@ -56,7 +57,7 @@ public class PlayerPanel extends JPanel {
 
       parser.addActionListener(e -> {
         customAlgo = new Parser(GUI.GUI.UIFileChooser());
-
+        customAlgo.setMazeHandler(new Handler(application));
         customAlgo.compile();
       });
     }

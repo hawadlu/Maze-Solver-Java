@@ -55,8 +55,6 @@ public class Application {
   public Application() {
   }
 
-  ;
-
   /**
    * Copy constructor used to deep copy fields
    *
