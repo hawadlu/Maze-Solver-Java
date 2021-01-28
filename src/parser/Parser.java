@@ -43,6 +43,7 @@ public class Parser {
    * @param toRead the file to use.
    */
   public Parser(File toRead) {
+
     try {
       //Check that the file is of the correct type
       if (!toRead.getName().contains(".solver")) fail("File must be of type '.solver'. " + toRead, "Parser", null, enablePopup);
@@ -60,6 +61,7 @@ public class Parser {
    * Create the parser object.
    * @param toRead the file to use.
    * @param enablePopup a boolean indicating whether or not popups should be enabled.
+   * @param handler
    */
   public Parser(File toRead, boolean enablePopup) {
     this.enablePopup = enablePopup;
@@ -1113,20 +1115,14 @@ public class Parser {
   /**
    * execute the compiled code.
    */
-  public void execute(Application application, int delay) {
-    //Create a new handler object if required
-    if (this.handler == null) this.handler = new Handler(application, delay);
-
+  public void execute(int delay) {
     baseNode.execute(EXEC_DEBUG);
   }
 
   /**
    * execute the compiled code.
    */
-  public void execute(Application application) {
-    //Create a new handler object if required
-    if (this.handler == null) this.handler = new Handler(application);
-
+  public void execute() {
     baseNode.execute(EXEC_DEBUG);
   }
 
@@ -1157,13 +1153,5 @@ public class Parser {
   @Override
   public int hashCode() {
     return Objects.hash(PARSER_DEBUG, fileScanner, baseNode, handler);
-  }
-
-  /**
-   * Set the player if required.
-   * @param player the player object.
-   */
-  public void setPlayer(Player player) {
-    handler.setPlayer(player);
   }
 }

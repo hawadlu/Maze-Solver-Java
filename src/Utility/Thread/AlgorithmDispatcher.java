@@ -3,6 +3,8 @@ package Utility.Thread;
 import Algorithm.SolveAlgorithm;
 import Application.Application;
 import Game.Player;
+import Image.ImageFile;
+import Image.ImageProcessor;
 import parser.Handler;
 import parser.Parser;
 
@@ -14,20 +16,18 @@ import parser.Parser;
 public class AlgorithmDispatcher extends Thread {
   private String algorithm;
   private String params;
-  private Application currentApplication;
   private String id;
   private boolean multiThreading;
   private Parser parser;
   private SolveAlgorithm solve;
   private Player player; //may be null
   private int delay;
+  private ImageProcessor imageProcessor;
+  private ImageFile imageFile;
 
-  public AlgorithmDispatcher(String algorithm, String params, Application currentApplication, String id, Boolean multiThreading, int delay, Player player) {
+  public AlgorithmDispatcher(String algorithm, String params, String id, Boolean multiThreading, int delay, Player player) {
     this.algorithm = algorithm;
     this.params = params;
-
-    if (player != null && player.application != null) this.currentApplication = player.application;
-    else this.currentApplication = new Application(currentApplication);
 
     this.id = id;
     this.multiThreading = multiThreading;
@@ -35,10 +35,7 @@ public class AlgorithmDispatcher extends Thread {
     this.player = player;
   }
 
-  public AlgorithmDispatcher(Application currentApplication, String solver, int delay, Player player, Parser parser) {
-    if (player.application != null) this.currentApplication = player.application;
-    else this.currentApplication = new Application(currentApplication);
-
+  public AlgorithmDispatcher(String solver, int delay, Player player, Parser parser) {
     this.id = solver;
     this.delay = delay;
     this.player = player;
@@ -55,17 +52,19 @@ public class AlgorithmDispatcher extends Thread {
   public synchronized void run() {
     if (parser == null) {
       System.out.println("Worker id: " + id);
-      solve = new SolveAlgorithm(currentApplication, delay, player);
+      solve = new SolveAlgorithm(delay, player, imageFile, imageProcessor);
 
       //Check if the nodes have already been scanned
-      if (currentApplication.getNodes().isEmpty()) solve.scan(params);
+      if (imageProcessor.getNodes().isEmpty()) solve.scan(params);
       solve.solve(algorithm, multiThreading);
     } else {
       System.out.println("Running parsed program");
-      parser.setPlayer(player);
-      parser.setMazeHandler(new Handler(currentApplication, delay));
+      parser.setMazeHandler(new Handler(delay, player));
       player.startParserExec(delay);
     }
+
+    System.out.println("THREAD STOPPED");
+    if (player != null) System.out.println(player);
   }
 
   public long getExecTime() {
@@ -74,14 +73,5 @@ public class AlgorithmDispatcher extends Thread {
 
   public double getMazeSize() {
     return solve.mazeSize;
-  }
-
-  /**
-   * Get the application object.
-   * Used for testing.
-   * @return the application.
-   */
-  public Application getApplication() {
-    return currentApplication;
   }
 }

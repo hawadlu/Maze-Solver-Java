@@ -1,6 +1,7 @@
 package GUI.CustomPanels;
 
 import Application.Application;
+import Game.Player;
 import parser.Handler;
 import parser.Parser;
 import Image.ImageFile;
@@ -13,16 +14,15 @@ import java.util.Objects;
  * This class holds all of the interactions used when playing the game
  */
 public class PlayerPanel extends JPanel {
-  Application application;
   String playerLabel;
   JComboBox<String> algorithm = null;
   JButton parser = null;
   ImagePanel imagePanel;
   Dimension imageSize;
   Parser customAlgo = null;
+  Player player;
 
-  public PlayerPanel(Application application, String playerLabel, Dimension maxSize) {
-    this.application = application;
+  public PlayerPanel(String playerLabel, Dimension maxSize) {
     this.playerLabel = playerLabel;
     this.setBackground(Color.CYAN);
     this.setBorder(BorderFactory.createLineBorder(Color.GREEN));
@@ -57,7 +57,7 @@ public class PlayerPanel extends JPanel {
 
       parser.addActionListener(e -> {
         customAlgo = new Parser(GUI.GUI.UIFileChooser());
-        customAlgo.setMazeHandler(new Handler(application));
+        customAlgo.setMazeHandler(new Handler(player));
         customAlgo.compile();
       });
     }
@@ -69,7 +69,7 @@ public class PlayerPanel extends JPanel {
    */
   public void initSolvePanel() {
     this.removeAll();
-    this.imagePanel = new ImagePanel(application.getImage(), imageSize);
+    this.imagePanel = new ImagePanel(player.getImageFile().makeImage(), imageSize);
     this.add(imagePanel);
 
     //refresh the gui

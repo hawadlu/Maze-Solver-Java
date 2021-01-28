@@ -2590,7 +2590,7 @@ public class Tests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false, 0, null);
+        AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", "test", false, 0, null);
         thread.start();
 
         thread.join(); //Wait for the other thread to finish
@@ -2613,7 +2613,7 @@ public class Tests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", application, "test", false, 0, null);
+        AlgorithmDispatcher thread = new AlgorithmDispatcher(algorithm, "Loading", "test", false, 0, null);
         thread.start();
 
         thread.join(); //Wait for the other thread to finish
@@ -2681,11 +2681,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/DFS.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/DFS Custom Algorithm.png");
@@ -2705,11 +2705,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/DFS.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/DFS Small Imperfect Custom Algorithm.png");
@@ -2729,11 +2729,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/BFS.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/BFS Custom Algorithm.png");
@@ -2753,11 +2753,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/BFS.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/BFS Small Imperfect Custom Algorithm.png");
@@ -2777,11 +2777,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/Dijkstra.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/Dijkstra Custom Algorithm.png");
@@ -2801,11 +2801,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/Dijkstra.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/Dijkstra Small Imperfect Custom Algorithm.png");
@@ -2827,11 +2827,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/AStar.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/AStar Custom Algorithm.png");
@@ -2851,11 +2851,11 @@ public class Tests {
 
         File dfs = new File("Programs/Working Algorithms/AStar.txt");
         Parser p = new Parser(dfs);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/AStar Small Imperfect Custom Algorithm.png");
@@ -2880,11 +2880,11 @@ public class Tests {
             application.scanEntireMaze();
 
             Parser p = new Parser(file);
-            Handler handler = new Handler(application);
+            Handler handler = new Handler(null);
             p.setMazeHandler(handler);
             p.compile();
             p.print();
-            p.execute(application);
+            p.execute();
 
             application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
             application.saveImage("Images/Solved/" + file.getName() + " Tiny Custom Algorithm.png");
@@ -2910,11 +2910,11 @@ public class Tests {
             application.scanEntireMaze();
 
             Parser p = new Parser(file);
-            Handler handler = new Handler(application);
+            Handler handler = new Handler(null);
             p.setMazeHandler(handler);
             p.compile();
             p.print();
-            p.execute(application);
+            p.execute();
 
             application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
             application.saveImage("Images/Solved/" + file.getName() + " Small Imperfect 2 Custom Algorithm.png");
@@ -2924,6 +2924,9 @@ public class Tests {
 
     @Test
     public void testGame() throws InterruptedException {
+        final Parser[] pOne = new Parser[1];
+        final Parser[] pTwo = new Parser[1];
+
         Thread runner = new Thread() {
             @Override
             public void run() {
@@ -2936,17 +2939,17 @@ public class Tests {
                 application.scanEntireMaze();
 
 
-                Parser pOne = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
-                Parser pTwo = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
+                pOne[0] = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
+                pTwo[0] = new Parser(new File("Programs/Working Algorithms/AStar No Print.solver"));
 
 
-                pOne.setMazeHandler(new Handler(application));
-                pTwo.setMazeHandler(new Handler(application));
+                pOne[0].setMazeHandler(new Handler(null));
+                pTwo[0].setMazeHandler(new Handler(null));
 
-                pOne.compile();
-                pTwo.compile();
+                pOne[0].compile();
+                pTwo[0].compile();
 
-                Game game = new Game(pOne, pTwo, application);
+                Game game = new Game(pOne[0], pTwo[0]);
 
                 game.startPlayers(25);
             }
@@ -2979,10 +2982,10 @@ public class Tests {
                     application.scanEntireMaze();
 
                     Parser p = new Parser(file, false);
-                    Handler handler = new Handler(application);
+                    Handler handler = new Handler(null);
                     p.setMazeHandler(handler);
                     p.compile();
-                    p.execute(application);
+                    p.execute();
 
                     System.out.print("\n\n\n");
                 }
@@ -3004,11 +3007,11 @@ public class Tests {
         application.scanEntireMaze();
 
         Parser p = new Parser(parser);
-        Handler handler = new Handler(application);
+        Handler handler = new Handler(null);
         p.setMazeHandler(handler);
         p.compile();
         p.print();
-        p.execute(application);
+        p.execute();
 
         application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
         application.saveImage("Images/Solved/" + image.getName() + " Small Imperfect 2 Custom Algorithm" + parser.getName() + ".png");
@@ -3034,12 +3037,12 @@ public class Tests {
                     application.scanEntireMaze();
 
                     Parser p = new Parser(file, false);
-                    Handler handler = new Handler(application);
+                    Handler handler = new Handler(null);
                     p.setMazeHandler(handler);
 
                     Exception exception = assertThrows(ParserFailure.class, () -> {
                         p.compile();
-                        p.execute(application);
+                        p.execute();
                     });
 
                     String expectedMessage = "FAIL";
@@ -3165,9 +3168,9 @@ public class Tests {
                 thread.join();
                 System.out.println("Thread complete");
 
-                for (Node node: thread.getApplication().getNodes().values()) {
-                    nodeSizes.add(node.estimateSize());
-                }
+//                for (Node node: thread.getApplication().getNodes().values()) {
+//                    nodeSizes.add(node.estimateSize());
+//                }
             }
         }
 

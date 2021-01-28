@@ -3,6 +3,7 @@ package parser;
 
 import Application.Application;
 import Game.Player;
+import Image.ImageFile;
 import Utility.Thread.AlgorithmDispatcher;
 import parser.nodes.variables.VariableNode;
 import Utility.Location;
@@ -21,7 +22,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Handler {
   Node lastNode;
-  final Application application;
   final Thread currentThread = new AlgorithmDispatcher();
   final Location start;
   final Location destination;
@@ -30,36 +30,25 @@ public class Handler {
   private final HashMap<String, VariableNode> variables = new HashMap<>();
   private boolean popup = false;
 
+
   /**
    * Create the object.
-   * @param application The current application.
    * @param delay The delay that should be observed between visiting each new node.
    */
-  public Handler(Application application, int delay) {
-    this.application = application;
-    if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
-    this.start = this.application.getMazeExits().get(0);
-    this.destination = this.application.getMazeExits().get(1);
+  public Handler(int delay, Player player) {
+    this.start = this.player.getMazeExits().get(0);
+    this.destination = this.player.getMazeExits().get(1);
     this.delay = delay;
+    this.player = player;
   }
 
   /**
    * Create the object.
-   * @param application The current application.
+   * @param player
    */
-  public Handler(Application application) {
-    this.application = application;
-    if (this.application.getNodes().size() == 0) this.application.scanEntireMaze();
-    this.start = this.application.getMazeExits().get(0);
-    this.destination = this.application.getMazeExits().get(1);
-  }
-
-  /**
-   * Set the player that is using this handler.
-   * Used in the game mode.
-   * @param player the player that is using this handler.
-   */
-  public void setPlayer(Player player) {
+  public Handler(Player player) {
+    this.start = this.player.getMazeExits().get(0);
+    this.destination = this.player.getMazeExits().get(1);
     this.player = player;
   }
 
@@ -67,7 +56,7 @@ public class Handler {
    * @return the start node
    */
   public Node getStart() {
-    return application.getNodes().get(start);
+    return player.getNodes().get(start);
   }
 
   /**
@@ -75,7 +64,8 @@ public class Handler {
    * @param toVisit the node to visit
    */
   public void visit(Node toVisit) {
-    toVisit.visit(currentThread);
+    //Get the appropriate node and visit it.
+    player.getNodes().get(toVisit.getLocation()).visit(currentThread);
 
     //Update the image if necessary
     if (player != null) {
@@ -135,7 +125,7 @@ public class Handler {
     System.out.println(player + " Reported done on node: " + lastNode);
     this.lastNode = lastNode;
     if (player != null) player.markDone();
-    else application.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
+    else player.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
   }
 
   /**
@@ -180,20 +170,7 @@ public class Handler {
    * @return the distance.
    */
   public double getDistanceToDestination(Node node) {
-    return node.calculateDistance(application.getNodes().get(destination));
-  }
-
-  /**
-   * Check the equality of the two objects.
-   * @param o another Handler object.
-   * @return a boolean to indicate object equality.
-   */
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Handler that = (Handler) o;
-    return delay == that.delay && lastNode.equals(that.lastNode) && application.equals(that.application) && currentThread.equals(that.currentThread) && start.equals(that.start) && destination.equals(that.destination) && player.equals(that.player);
+    return node.calculateDistance(player.getNodes().get(destination));
   }
 
   /**
@@ -202,7 +179,7 @@ public class Handler {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(lastNode, application, currentThread, start, destination, player, delay);
+    return Objects.hash(lastNode, currentThread, start, destination, player, delay);
   }
 
   /**

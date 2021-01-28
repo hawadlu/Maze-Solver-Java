@@ -4,6 +4,7 @@ import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import GUI.GUI;
 import parser.Parser;
+import Image.ImageFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,21 +13,22 @@ public class Game {
   Player playerOne, playerTwo;
   JPanel controlPanel;
   GUI gui;
+  ImageFile currentImage;
 
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
-  public Game(Dimension maxSize, GUI gui, JPanel controlPanel, Application application) {
-    playerOne = new Player(maxSize, "Player One", application, this);
-    playerTwo = new Player(maxSize, "Player Two", application, this);
+  public Game(Dimension maxSize, GUI gui, JPanel controlPanel) {
+    playerOne = new Player(maxSize, "Player One", this);
+    playerTwo = new Player(maxSize, "Player Two", this);
     this.gui = gui;
     this.controlPanel = controlPanel;
   }
 
-  public Game (Parser algoOne, Parser algoTwo, Application application) {
-    playerOne = new Player("Player One", this, application);
-    playerTwo = new Player("Player Two", this, application);
+  public Game (Parser algoOne, Parser algoTwo) {
+    playerOne = new Player("Player One", this);
+    playerTwo = new Player("Player Two", this);
 
     playerOne.customAlgo = algoOne;
     playerTwo.customAlgo = algoTwo;
@@ -148,4 +150,7 @@ public class Game {
     GUI.refresh();
   }
 
+  public ImageFile getImage() {
+    return currentImage;
+  }
 }

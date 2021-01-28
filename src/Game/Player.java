@@ -3,46 +3,46 @@ package Game;
 import Application.Application;
 import GUI.CustomPanels.PlayerPanel;
 import Image.ImageFile;
+import Utility.Location;
+import Utility.Thread.AlgorithmDispatcher;
 import parser.Parser;
 import Utility.Node;
 import Utility.PathMaker;
+import Image.ImageProcessor;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player {
-  public Application application;
   Node currentNode;
   PlayerPanel panel;
   String playerName;
-  final ImageFile originalImage;
   Game currentGame;
   AtomicBoolean done = new AtomicBoolean(false);
   Player other;
   Parser customAlgo;
   AtomicBoolean isDone = new AtomicBoolean(false);
+  Game game;
+  ImageProcessor imageProcessor;
 
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
    */
-  public Player(Dimension maxSize, String playerName, Application application, Game game) {
-    this.application = new Application(application);
-    this.originalImage = new ImageFile(application.getImageFile());
+  public Player(Dimension maxSize, String playerName, Game game) {
 
     //Create a new application
     this.playerName = playerName;
     this.currentGame = game;
 
-    this.panel = new PlayerPanel(application, playerName, maxSize);
+    this.panel = new PlayerPanel(playerName, maxSize);
   }
 
 
-  public Player(String playerName, Game game, Application application) {
-    this.application = new Application(application);
-    this.originalImage = new ImageFile(application.getImageFile());
-
+  public Player(String playerName, Game game) {
     this.playerName = playerName;
     this.currentGame = game;
   }
@@ -68,7 +68,7 @@ public class Player {
     this.currentNode = node;
 
     //Create a duplicate image file
-    ImageFile newImage = new ImageFile(originalImage);
+    ImageFile newImage = new ImageFile(game.getImage());
 
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
@@ -102,7 +102,7 @@ public class Player {
     if (customAlgo == null) customAlgo = panel.getCustomAlgo();
 
     //Start using one of the prebuilt algorithms
-    solveThread = application.solve(algorithm, "Loading", false, delay, this, customAlgo);
+    solveThread = new AlgorithmDispatcher(algorithm, "Loading", false, delay, this, customAlgo);
     solveThread.start();
   }
 
@@ -112,7 +112,7 @@ public class Player {
    */
   public void makeDoneDisplay(String message) {
     //Make the completed image
-    ImageFile newImage = new ImageFile(originalImage);
+    ImageFile newImage = new ImageFile(game.getImage());
 
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
@@ -152,7 +152,18 @@ public class Player {
    */
   public void startParserExec(int delay) {
     //Create the new maze handler object if necessary
-    customAlgo.setPlayer(this);
-    customAlgo.execute(application, delay);
+    customAlgo.execute(delay);
+  }
+
+  public ArrayList<Location> getMazeExits() {
+    return imageProcessor.getExits();
+  }
+
+  public Map<Location, Node> getNodes() {
+    return imageProcessor.getNodes();
+  }
+
+  public ImageFile getImageFile() {
+    return game.getImage();
   }
 }

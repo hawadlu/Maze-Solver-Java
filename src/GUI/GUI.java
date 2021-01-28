@@ -568,7 +568,7 @@ public class GUI {
         @Override
         public void run() {
           parser.compile();
-          parser.execute(application);
+          parser.execute();
         }
       };
     } else {

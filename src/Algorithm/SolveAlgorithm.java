@@ -5,6 +5,8 @@ import Algorithm.MinimumTree.Kruskals;
 import Algorithm.MinimumTree.Prims;
 import Algorithm.Solvers.*;
 import Application.Application;
+import Image.ImageFile;
+import Image.ImageProcessor;
 import Utility.Exceptions.InvalidMaze;
 import Utility.Location;
 import Utility.Node;
@@ -23,7 +25,6 @@ public class SolveAlgorithm {
   public boolean scanAll = false;
   public Node entry;
   public Node exit;
-  final Application application;
   public final double mazeSize;
   Node[] join = null;
   public long execTime;
@@ -31,15 +32,18 @@ public class SolveAlgorithm {
   public ArrayList<Node> artPts = new ArrayList<>();
   public int delay;
   public Player player; //may be null
+  ImageFile currentImage;
+  ImageProcessor imageProcessor;
 
   /**
    * Start the solve process.
-   *
-   * @param currentApplication the current application.
+   * @param delay
+   * @param player
    */
-  public SolveAlgorithm(Application currentApplication, int delay, Player player) {
-    this.application = currentApplication;
-    this.mazeSize = application.getMazeDimensions().width * application.getMazeDimensions().height;
+  public SolveAlgorithm(int delay, Player player, ImageFile currentImage, ImageProcessor imageProcessor) {
+    this.imageProcessor = imageProcessor;
+    this.currentImage = currentImage;
+    this.mazeSize = currentImage.getDimensions().width * currentImage.getDimensions().height;
     this.delay = delay;
     this.player = player;
   }
@@ -76,7 +80,7 @@ public class SolveAlgorithm {
       segments = kruskals.getSegments();
     } else if (algorithm.equals("Articulation")) {
       buildNodePath = false;
-      ArticulationPoints articulation = new ArticulationPoints(application.getNodes());
+      ArticulationPoints articulation = new ArticulationPoints(imageProcessor.getNodes());
       articulation.solve();
       artPts = articulation.getArticulationPoints();
     }
@@ -86,13 +90,13 @@ public class SolveAlgorithm {
     System.out.println("Execution time: " + execTime + "ns");
 
     //Build the path if the path can be traced from node to node
-    if (buildNodePath) PathMaker.makePath(join, entry, exit, application);
-    else if (!segments.isEmpty()) PathMaker.makePath(segments, application);
-    else if (!artPts.isEmpty()) PathMaker.makeNodePath(artPts, application);
+    if (buildNodePath) PathMaker.makePath(join, entry, exit, currentImage);
+    else if (!segments.isEmpty()) PathMaker.makePath(segments, currentImage);
+    else if (!artPts.isEmpty()) PathMaker.makeNodePath(artPts, currentImage);
   }
 
   private void getExits() {
-    ArrayList<Location> exits = application.getMazeExits();
+    ArrayList<Location> exits = imageProcessor.getExits();
 
     //make sure there is at least one entry and exit
     if (exits.size() < 2) try {
@@ -101,8 +105,8 @@ public class SolveAlgorithm {
       invalidMaze.printStackTrace();
     }
 
-    entry = application.getNodes().get(exits.get(0));
-    exit = application.getNodes().get(exits.get(1));
+    entry = imageProcessor.getNodes().get(exits.get(0));
+    exit = imageProcessor.getNodes().get(exits.get(1));
   }
 
 
@@ -135,10 +139,10 @@ public class SolveAlgorithm {
     }
 
     if (param.equals("Loading")) {
-      application.scanEntireMaze();
+      imageProcessor.scanAll();
       scanAll = true;
     } else {
-      application.findMazeExits();
+      imageProcessor.findExits();
     }
   }
 
@@ -160,7 +164,7 @@ public class SolveAlgorithm {
    * Populate the set array of segments using the nodes
    */
   public void makeSegments() {
-    for (Node node : application.getNodes().values()) {
+    for (Node node : imageProcessor.getNodes().values()) {
       for (Node neighbour : node.getNeighbours()) {
         Segment newSegment = new Segment(node, neighbour);
         if (!segments.contains(newSegment)) segments.add(newSegment);
@@ -175,14 +179,14 @@ public class SolveAlgorithm {
    * @param multiThreading boolean to indicate if the program is currently multithreading.
    */
   public void findNeighbours(Node parent, Boolean multiThreading) {
-    application.scanPart(parent, multiThreading);
+    imageProcessor.scanPart(parent, multiThreading);
   }
 
   /**
    * Set the cost of all known nodes to zero
    */
   public void resetCost() {
-    for (Node node : application.getNodes().values()) node.setCost(0);
+    for (Node node : imageProcessor.getNodes().values()) node.setCost(0);
   }
 
   /**
@@ -191,14 +195,14 @@ public class SolveAlgorithm {
    * @return a collection of nodes
    */
   public Collection<Node> getNodes() {
-    return application.getNodes().values();
+    return imageProcessor.getNodes().values();
   }
 
   /**
    * @return the map of nodes
    */
   public Map<Location, Node> getNodeMap() {
-    return application.getNodes();
+    return imageProcessor.getNodes();
   }
 
   /**
