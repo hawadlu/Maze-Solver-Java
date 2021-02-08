@@ -1,8 +1,12 @@
 package Utility;
 
+import Application.Application;
 import GUI.GUI;
 import Game.Player;
 import Image.*;
+import Server.ClientHandler;
+import Server.LocalClient;
+import Server.Requests;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +24,7 @@ public class AlgorithmDispatcher {
   private boolean live = false; //used to indicate if this should run in live solve mode.
   private GUI gui;
   private JPanel screen = new JPanel();
+  private LocalClient client;
 
 
   /**
@@ -32,6 +37,20 @@ public class AlgorithmDispatcher {
    */
   public AlgorithmDispatcher(ImageFile imageFile, int playersToCreate) {
     this.imageFile = new ImageFile(imageFile);
+
+    for (int i = 0; i < playersToCreate; i++) {
+      Player newPlayer = new Player("Player " + i, "Algorithm", this);
+      this.players.add(newPlayer);
+    }
+  }
+
+  /**
+   * Create a new dispatcher that is used for online multiplayer.
+   * @param client the object that connects to the server.
+   * @param playersToCreate the number of players to create
+   */
+  public AlgorithmDispatcher(LocalClient client, int playersToCreate) {
+    this.client = client;
 
     for (int i = 0; i < playersToCreate; i++) {
       Player newPlayer = new Player("Player " + i, "Algorithm", this);
@@ -283,5 +302,22 @@ public class AlgorithmDispatcher {
 
   public void setScreen(JPanel screen) {
     this.screen = screen;
+  }
+
+  /**
+   * Make the screen that is used to join/create an online game.
+   */
+  public void makeOnlineStartScreen() {
+    this.screen.removeAll();
+
+    JButton createRoom = new JButton("Create New Game");
+
+    createRoom.addActionListener(e -> {
+      //Send the request to create the room.
+      client.sendRequest(Requests.createRoom);
+      String response = client.getResponse();
+    });
+
+    screen.add(createRoom);
   }
 }

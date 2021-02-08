@@ -91,7 +91,7 @@ public class Player {
     this.panel = new PlayerPanel(new Dimension(500,500), this);
 
     //make the algorithm solve screen
-    if (this.type.equals("Algorithm")) {
+    if (this.type.equals("Algorithm") && dispatcher.getImageFile() != null) {
       panel.setAlgoSolveScreen();
     }
   }
