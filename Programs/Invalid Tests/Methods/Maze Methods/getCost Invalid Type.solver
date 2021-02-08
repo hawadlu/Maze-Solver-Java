@@ -1,0 +1,4 @@
+***Try to call the getCost method with an argument of the wrong type***
+
+Number one = 34;
+Maze.getCost(one);

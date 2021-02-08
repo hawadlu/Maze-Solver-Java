@@ -1,0 +1,81 @@
+***Test the less than operator using valid inputs***
+
+Number seven = 7;
+Number eight = 8;
+
+if (eq(3, 4)) {
+    Maze.fail("eq(3, 4) FAILED");
+} else {
+    ***Success don't do anything here***
+}
+
+if (eq(14, 5)) {
+    Maze.fail("eq(14, 5) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+if (eq(14, 14)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("eq(14, 14) FAILED");
+}
+
+if (eq(seven, eight)) {
+    Maze.fail("eq(seven, eight) FAILED");
+} else {
+    ***Success don't do anything here***
+}
+
+if (eq(eight, seven)) {
+    Maze.fail("eq(eight, seven) FAILED");
+} else {
+   ***Success don't do anything***
+}
+
+if (eq(seven, seven)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("eq(seven, seven) FAILED");
+}
+
+
+
+
+
+
+if (!eq(3, 4)) {
+    ***Success don't do anything here***
+} else {
+    Maze.fail("!eq(3, 4) FAILED");
+}
+
+if (!eq(14, 5)) {
+    ***Success don't do anything***
+} else {
+    Maze.fail("!eq(14, 5) FAILED");
+}
+
+if (!eq(14, 14)) {
+    Maze.fail("!eq(14, 14) FAILED");
+} else {
+    ***Success don't do anything***
+}
+
+if (!eq(seven, eight)) {
+    ***Success don't do anything here***
+} else {
+    Maze.fail("!eq(seven, eight) FAILED");
+}
+
+if (!eq(eight, seven)) {
+    ***Success don't do anything***
+} else {
+   Maze.fail("!eq(eight, seven) FAILED");
+}
+
+if (!eq(seven, seven)) {
+    Maze.fail("!eq(seven, seven) FAILED");
+} else {
+    ***Success don't do anything***
+}

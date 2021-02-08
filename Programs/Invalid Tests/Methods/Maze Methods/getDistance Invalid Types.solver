@@ -1,0 +1,6 @@
+***Try to call the getDistance method with invalid types***
+
+MazeNode nodeOne;
+PriorityQueue nodeTwo;
+
+Maze.getDistance(nodeOne, nodeTwo);

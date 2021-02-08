@@ -1,0 +1,5 @@
+***Test an equals with no arguments
+
+if (eq()) {
+    print("FAIL");
+}

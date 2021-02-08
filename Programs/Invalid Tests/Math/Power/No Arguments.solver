@@ -1,0 +1,3 @@
+***Test a power with no arguments***
+
+Number aNumber = power();

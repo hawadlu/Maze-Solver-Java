@@ -1,0 +1,4 @@
+***Try to call the getNeighbours method with too many arguments***
+
+MazeNode node;
+Maze.getNeighbours(node, node);

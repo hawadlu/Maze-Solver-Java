@@ -1,0 +1,7 @@
+***Try to assign a comparator using a variable that is not a comparator***
+
+MazeNode node;
+Comparator compare -> getCost;
+
+PriorityQueue toProcess;
+toProcess.assignComparator(node);

@@ -1,0 +1,5 @@
+***Try to call the getParent method with an invalid type***
+
+Stack stack;
+
+Maze.getParent(stack);

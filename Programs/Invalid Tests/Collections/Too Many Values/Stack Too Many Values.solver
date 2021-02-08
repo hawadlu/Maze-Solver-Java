@@ -1,0 +1,13 @@
+***Create a stack and try to add too many values to it***
+
+Stack toProcess;
+
+MazeNode node;
+
+Number count = 0;
+
+while(lt(count, 5000000)) {
+    toProcess.add(node);
+    count = plus(count, 1);
+    ***print(count);***
+}

@@ -1,0 +1,4 @@
+***Try to call the getNext method on a variable that is not a collection***
+
+MazeNode node;
+node.getNext();

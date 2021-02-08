@@ -1,0 +1,7 @@
+***Try to call the getDistance method with too many arguments***
+
+MazeNode nodeOne;
+MazeNode nodeTwo,
+MazeNode nodeThree;
+
+Maze.getDistance(nodeOne, nodeTwo, nodeThree);

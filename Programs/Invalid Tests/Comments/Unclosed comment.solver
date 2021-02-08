@@ -1,0 +1,6 @@
+***Test for unclosed comments***
+
+MazeNode something;
+MazeNode somethingElse;
+
+***This comment is unclosed

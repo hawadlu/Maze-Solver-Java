@@ -1,0 +1,6 @@
+***Try to call the add method with too many arguments***
+
+Stack toProcess;
+MazeNode node;
+
+toProcess.add(node, node);

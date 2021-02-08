@@ -1,0 +1,3 @@
+***Try to call the getParent method with too few Arguments***
+
+Maze.getParent();

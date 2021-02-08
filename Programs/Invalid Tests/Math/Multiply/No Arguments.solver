@@ -1,0 +1,3 @@
+***Test a multiply with no arguments***
+
+Number aNumber = multiply();

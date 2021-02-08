@@ -1,0 +1,4 @@
+***Try to call getCost with too few arguments***
+
+MazeNode node;
+Maze.getCost();

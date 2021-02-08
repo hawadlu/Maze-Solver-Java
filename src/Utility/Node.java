@@ -30,6 +30,43 @@ public class Node {
   }
 
   /**
+   * Estimate the size of this object.
+   * Used primarily for testing.
+   * @return the size estimate (bytes).
+   */
+  public double estimateSize() {
+    double toReturn = 0;
+
+    //8 bytes to a pointer
+    int pointerSize = 8;
+
+    if (nodeLocation != null) toReturn += nodeLocation.estimateSize();
+
+    //The neighbours are stored a pointers (8 bytes per pointer)
+    if (neighbours != null) toReturn += neighbours.size() * pointerSize;
+
+    //The parent is also a pointer
+    if (parent != null) toReturn += pointerSize;
+
+    //The thread is also a pointer
+    if (isVisited != null) toReturn += pointerSize;
+
+    //The cost, a double
+    toReturn += 8;
+
+    //nodeDepth, a double
+    toReturn += 8;
+
+    //reachBack, a double
+    toReturn += 8;
+
+    //The children are stored a pointers (8 bytes per pointer)
+    if (children != null) toReturn += children.size() * pointerSize;
+
+    return toReturn;
+  }
+
+  /**
    * Get the location of the node.
    *
    * @return the location
@@ -88,7 +125,7 @@ public class Node {
    * @param nextNode the node to calculate distance to
    * @return the distance from another node to this one.
    */
-  public double calculateCost(Node nextNode) {
+  public double calculateDistance(Node nextNode) {
     double toReturn = 0;
     //Return the distance on the x plane
     if (nodeLocation.x == nextNode.getLocation().x) {
@@ -119,28 +156,6 @@ public class Node {
    */
   private double calculateYDistance(Node nextNode) {
     return nextNode.getLocation().y - nodeLocation.y;
-  }
-
-  /**
-   * Calculate the cost of moving between two nodes.
-   * Factoring both the distance from this node to the next
-   * and the next node to the final destination.
-   *
-   * @param nextNode         the node to move to.
-   * @param finalDestination the final node.
-   * @return the calculated cost
-   */
-  public double calculateCost(Node nextNode, Node finalDestination) {
-    double toReturn = 0;
-    //Return the distance on the x plane
-    if (nodeLocation.x == nextNode.getLocation().x) {
-      toReturn = calculateXDistance(nextNode) + calculateEuclideanDistance(nextNode, finalDestination);
-    } else {
-      //return the distance on the y plane
-      toReturn = calculateYDistance(nextNode);
-    }
-    if (toReturn < 0) toReturn *= -1;
-    return toReturn;
   }
 
   /**
@@ -243,7 +258,7 @@ public class Node {
 
   @Override
   public String toString() {
-    return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited;
+    return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited + " Cost: " + cost;
   }
 
   @Override

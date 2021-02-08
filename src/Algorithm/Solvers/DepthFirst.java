@@ -1,7 +1,6 @@
 package Algorithm.Solvers;
 
 import Algorithm.SolveAlgorithm;
-import Utility.Exceptions.SolveFailure;
 import Utility.Node;
 
 import java.util.Objects;
@@ -9,7 +8,7 @@ import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Solve the maze, depth first
+ * solve the maze, depth first
  */
 public class DepthFirst extends SolveRunner {
 
@@ -19,11 +18,11 @@ public class DepthFirst extends SolveRunner {
    *
    * @param solve the solve object
    */
-  public void solve(SolveAlgorithm solve, Boolean multiThreading) {
+  public void solve(SolveAlgorithm solve, Boolean multiThreading, String threadId) {
     System.out.println("Solving depth first");
 
-    SolveWorker workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, "t1");
-    SolveWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, "t2");
+    SolveWorker workerOne = new DFSWorker(solve, solve.entry, solve.exit, this, threadId + "t1");
+    SolveWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, threadId + "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
   }
@@ -53,7 +52,7 @@ class DFSWorker extends SolveWorker {
       parent.visit(this);
 
       if (parent.equals(destination)) {
-        System.out.println("Thread " + threadId + " is attempting to exit the loop");
+        System.out.println("Thread " + threadId + " for player " + solve.player.getName() + " is attempting to exit the loop");
         break;
       }
 
@@ -65,21 +64,20 @@ class DFSWorker extends SolveWorker {
         if (node.isVisited() == null) {
           node.setParent(parent);
           toProcess.push(node);
-          node.visit(this);
         } else if (node.isVisited().equals(other)) {
           solve.addJoinerNodes(parent, node);
           runner.done.set(true);
         }
       }
 
-      runner.checkCollection(toProcess, solve, threadId);
+      ;
 
       if (solve.player != null) {
         solve.updatePlayer(parent);
 
         //Pause this thead
         try {
-          TimeUnit.MILLISECONDS.sleep(solve.delay);
+          TimeUnit.MILLISECONDS.sleep(solve.getDelay());
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -87,7 +85,7 @@ class DFSWorker extends SolveWorker {
     }
     //Mark the player as done
     if (solve.player != null) solve.player.markDone();
-    System.out.println("Thread " + threadId + " has exited the loop");
+    System.out.println("Thread " + threadId + " for player " + solve.player.getName() + " has exited the loop");
   }
 
   @Override

@@ -1,0 +1,4 @@
+***Try to call the isVisited method with too many arguments***
+
+MazeNode node;
+Maze.isVisited(node, node);

@@ -1,0 +1,5 @@
+***Test a Greater Than with too many arguments
+
+if (gt(1, 2, 3)) {
+    print("FAIL");
+}

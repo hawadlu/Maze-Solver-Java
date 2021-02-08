@@ -1,0 +1,13 @@
+***Create a queue and try to add too many values to it***
+
+Queue toProcess;
+
+MazeNode node = Maze.getStart();
+
+Number count = 0;
+
+while(lt(count, 5000000)) {
+    toProcess.add(node);
+    count = plus(count, 1);
+    ***print(count);***
+}

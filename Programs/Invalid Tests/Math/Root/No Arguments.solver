@@ -1,0 +1,3 @@
+***Test a root with no arguments***
+
+Number aNumber = root();

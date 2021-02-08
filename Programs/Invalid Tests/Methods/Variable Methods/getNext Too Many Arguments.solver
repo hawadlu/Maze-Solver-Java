@@ -1,0 +1,6 @@
+***Try to call the getNext method with too many arguments***
+
+MazeNode node;
+Stack toProcess;
+
+toProcess.getNext(node);

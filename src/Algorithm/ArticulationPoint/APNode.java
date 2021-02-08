@@ -1,5 +1,6 @@
 package Algorithm.ArticulationPoint;
 
+
 import Utility.Node;
 
 public class APNode {

@@ -30,21 +30,15 @@
  */
 
 package GUI.CustomPanels;
-
 import GUI.GUI;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
 
-/*
- * ScrollDemo.java requires these files:
- *   Rule.java
- *   Corner.java
- *   ScrollablePicture.java
- *   images/flyingBee.jpg
- */
+//Code modified from oracle scrollable picture demo.
 public class Scroll extends JPanel implements ItemListener {
   private Rule columnView;
   private Rule rowView;
@@ -115,11 +109,13 @@ public class Scroll extends JPanel implements ItemListener {
   }
 
   /**
-   * Update the image that is being diplsayed
+   * Update the image that is being displayed
    *
    * @param displayImage the new images
    */
   public void updateImage(BufferedImage displayImage) {
     this.imageToDisplay = new ImageIcon(displayImage);
+    this.revalidate();
+    this.repaint();
   }
 }

@@ -1,0 +1,4 @@
+***Try to call the getSize method on a variable that is not a collection***
+
+MazeNode node;
+node.getSize();

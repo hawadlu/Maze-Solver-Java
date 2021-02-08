@@ -13,6 +13,15 @@ public class Location {
     this.y = y;
   }
 
+  /**
+   * Copy constructor.
+   * @param location The old location.
+   */
+  public Location(Location location) {
+    this.x = location.x;
+    this.y = location.y;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -30,5 +39,15 @@ public class Location {
   @Override
   public String toString() {
     return "x: " + this.x + " y: " + this.y;
+  }
+
+  /**
+   * Estimate the size of this object.
+   * Used primarily for testing purposes.
+   * @return the estimated size (bytes)
+   */
+  public double estimateSize() {
+    //There are two ints, so return 8;
+    return 8;
   }
 }

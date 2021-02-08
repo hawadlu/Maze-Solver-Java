@@ -46,40 +46,30 @@ public class SolveRunner {
       node.setParent(parent);
       node.setCost(parent.getCost() + costToNode);
       toProcess.add(node);
-      node.visit(currentThread);
+
+      solve.logger.add(solve.player.getName() + " executed node.isVisited == null. Process size: " + toProcess.size());
+      return;
 
       //node has been visited by the other thread
     } else if (node.isVisited().equals(other)) {
       solve.addJoinerNodes(parent, node);
       done.set(true);
 
-      //node has been visited by this thread
-    } else {
-      //Check if the cost is lower
-      if (parent.getCost() + costToNode < node.getCost()) {
-        //A lower cost route has been found, re add the node to the queue
-        node.setParent(parent);
-        node.setCost(parent.getCost() + costToNode);
-        toProcess.add(node);
-        node.visit(currentThread);
-      }
-    }
-  }
+      solve.logger.add(solve.player.getName() + " executed node.isVisited.equals(other). Process size: " + toProcess.size());
+      return;
 
-  /**
-   * Check if the collection is empty.
-   * @param toProcess the collection
-   * @param threadId
-   */
-  public void checkCollection(Collection<Node> toProcess, SolveAlgorithm solve, String threadId) {
-    //If the queue is empty at this point, solving failed
-    if (toProcess.isEmpty() && !done.get()) {
-      try {
-        solve.player.makeDoneDisplay("Solve failure: The stack is empty");
-        throw new SolveFailure("The stack is empty on thread " + threadId);
-      } catch (SolveFailure e) {
-        e.printStackTrace();
-      }
+      //node has been visited by this thread
+    } else if (parent.getCost() + costToNode < node.getCost()) {
+      //A lower cost route has been found, re add the node to the queue
+      node.setParent(parent);
+      node.setCost(parent.getCost() + costToNode);
+      toProcess.add(node);
+
+      solve.logger.add(solve.player.getName() + " parent.getCost() + costToNode < node.getCost(). Process size: " + toProcess.size());
+      return;
     }
+
+    solve.logger.add(solve.player.getName() + " did not execute anything in processNode. Process size: " + toProcess.size());
+
   }
 }

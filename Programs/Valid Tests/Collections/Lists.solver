@@ -1,0 +1,15 @@
+***Perform a number of valid operations on a list***
+
+MazeNode node = Maze.getStart();
+
+List someList = Maze.getNeighbours(node);
+
+Number zero = 0;
+print("Neighbour: " + someList.get(zero));
+print("Neighbour: " + someList.get(0));
+
+someList.add(someList.get(zero));
+
+MazeNode next = someList.get(0);
+
+someList.add(next);

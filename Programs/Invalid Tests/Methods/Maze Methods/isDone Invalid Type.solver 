@@ -1,0 +1,4 @@
+***Try to call the isDone method with an invalid type***
+
+Stack toProcess;
+Maze.isDone(toProcess);

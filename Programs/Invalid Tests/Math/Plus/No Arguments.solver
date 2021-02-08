@@ -1,0 +1,3 @@
+***Test a plus with no arguments***
+
+Number aNumber = plus();

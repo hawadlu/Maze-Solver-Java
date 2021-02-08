@@ -1,0 +1,49 @@
+print("AStar is starting the solve");
+
+MazeNode parent;
+Comparator compare;
+compare -> getCost;
+PriorityQueue toProcess;
+toProcess.assignComparator(compare);
+toProcess.add(Maze.getStart());
+
+while (!toProcess.isEmpty()) {
+   ***This is a test comment***
+
+  print("");
+  parent = toProcess.getNext();
+  Maze.visit(parent);
+  print(parent);
+
+  if (Maze.isDone(parent)) {
+    print("Maze complete");
+    Maze.finish(parent);
+  }
+
+  print("This, maze " + plus(1, 4, minus(6, 2, divide(9, 1, multiply(8, 6, power(2, root(45)))))) + " " + parent + " " + 1 + " is not done.");
+  print(toProcess.getSize());
+
+  List neighbours = Maze.getNeighbours(parent);
+
+  ***Loop through the all of the neighbour nodes***
+  for (node: neighbours) {
+    print(node + " At the top");
+
+    if (!Maze.isVisited(node)) {
+		Number nodeCost = plus(Maze.getDistance(parent, node), Maze.distanceToDestination(node));
+
+        Maze.setParent(node, parent);
+        Maze.visit(node);
+        Maze.setCost(node, nodeCost);
+        toProcess.add(node);
+    } else if (lt(plus(Maze.getCost(parent), Maze.getDistance(parent, node)), Maze.getCost(parent))) {
+        Maze.setParent(node, parent);
+        Maze.setCost(node, plus(parent.getCost(), Maze.getDistance(parent, node)));
+        toProcess.add(node);
+        Maze.visit(node);
+    } else {
+		print("Running in the else part of the if");
+    }
+    print(node + " At the bottom");
+  }
+}
