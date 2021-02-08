@@ -65,7 +65,7 @@ public class ElseIfNode implements Exec {
     for (IfNode statement: ifNodes) {
       //Check to see if the condition will be evaluated
       if (statement.ifCondition.evaluate(DEBUG)){
-        statement.execute(DEBUG);
+        if (!handler.getPlayer().isDone()) statement.execute(DEBUG);
         run = true;
         break;
       }

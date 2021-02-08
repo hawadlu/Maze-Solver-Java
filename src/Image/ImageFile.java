@@ -22,13 +22,27 @@ public class ImageFile {
   private final String filePath;
 
   /**
-   * Copy constructor used to copy an image
+   * Copy constructor used to copy an image.
+   * Do a deep copy of the old array.
    *
    * @param oldImage the old image
    */
   public ImageFile(ImageFile oldImage) {
     //Create a new array based on the dimensions of the old one
-    imageArray = oldImage.imageArray;
+    imageArray = new colEnum[oldImage.imageArray.length][oldImage.imageArray[0].length];
+
+    for (int height = 0; height < imageArray.length; height++) {
+      for (int width = 0; width < imageArray[0].length; width++) {
+        colEnum colour = oldImage.imageArray[height][width];
+
+        if (colour.equals(colEnum.BLUE)) imageArray[height][width] = colEnum.BLUE;
+        else if (colour.equals(colEnum.GREEN)) imageArray[height][width] = colEnum.GREEN;
+        else if (colour.equals(colEnum.BLACK)) imageArray[height][width] = colEnum.BLACK;
+        else if (colour.equals(colEnum.WHITE)) imageArray[height][width] = colEnum.WHITE;
+        else if (colour.equals(colEnum.RED)) imageArray[height][width] = colEnum.RED;
+      }
+    }
+
     reset();
     filePath = oldImage.filePath;
   }

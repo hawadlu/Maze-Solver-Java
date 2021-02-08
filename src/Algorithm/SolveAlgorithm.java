@@ -7,11 +7,8 @@ import Algorithm.Solvers.*;
 import Application.Application;
 import Image.ImageFile;
 import Image.ImageProcessor;
+import Utility.*;
 import Utility.Exceptions.InvalidMaze;
-import Utility.Location;
-import Utility.Node;
-import Utility.PathMaker;
-import Utility.Segment;
 import Game.Player;
 
 import java.util.ArrayList;
@@ -30,25 +27,23 @@ public class SolveAlgorithm {
   public long execTime;
   public ArrayList<Segment> segments = new ArrayList<>();
   public ArrayList<Node> artPts = new ArrayList<>();
-  public int delay;
-  public Player player; //may be null
-  ImageFile currentImage;
-  ImageProcessor imageProcessor;
+  public Player player;
+  public Logger logger;
 
   /**
    * Start the solve process.
-   * @param delay
    * @param player
+   * @param logger
    */
-  public SolveAlgorithm(int delay, Player player, ImageFile currentImage, ImageProcessor imageProcessor) {
-    this.imageProcessor = imageProcessor;
-    this.currentImage = currentImage;
-    this.mazeSize = currentImage.getDimensions().width * currentImage.getDimensions().height;
-    this.delay = delay;
+  public SolveAlgorithm(Player player, Logger logger) {
+    this.mazeSize = player.getImageFile().getDimensions().width * player.getImageFile().getDimensions().height;
     this.player = player;
+    this.logger = logger;
   }
 
   public void solve(String algorithm, Boolean multiThreading) {
+    logger.add(player.getName() + "entered solve method");
+
     boolean buildNodePath = true;
     long startTime = System.nanoTime();
 
@@ -64,10 +59,10 @@ public class SolveAlgorithm {
       algorithm = "AStar";
     }
 
-    if (algorithm.equals("Depth First")) new DepthFirst().solve(this, multiThreading);
-    else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading);
-    else if (algorithm.equals("Dijkstra")) new Dijkstra().solve(this, multiThreading);
-    else if (algorithm.equals("AStar")) new AStar().solve(this, multiThreading);
+    if (algorithm.equals("Depth First")) new DepthFirst().solve(this, multiThreading, player.getName());
+    else if (algorithm.equals("Breadth First")) new BreadthFirst().solve(this, multiThreading, player.getName());
+    else if (algorithm.equals("Dijkstra")) new Dijkstra().solve(this, multiThreading, player.getName());
+    else if (algorithm.equals("AStar")) new AStar().solve(this, multiThreading, player.getName());
     else if (algorithm.equals("Prims")) {
       buildNodePath = false;
       Prims prims = new Prims();
@@ -80,7 +75,7 @@ public class SolveAlgorithm {
       segments = kruskals.getSegments();
     } else if (algorithm.equals("Articulation")) {
       buildNodePath = false;
-      ArticulationPoints articulation = new ArticulationPoints(imageProcessor.getNodes());
+      ArticulationPoints articulation = new ArticulationPoints(player);
       articulation.solve();
       artPts = articulation.getArticulationPoints();
     }
@@ -89,14 +84,20 @@ public class SolveAlgorithm {
     execTime = stopTime - startTime;
     System.out.println("Execution time: " + execTime + "ns");
 
+    logger.add(player.getName() + "completed solving");
+
     //Build the path if the path can be traced from node to node
-    if (buildNodePath) PathMaker.makePath(join, entry, exit, currentImage);
-    else if (!segments.isEmpty()) PathMaker.makePath(segments, currentImage);
-    else if (!artPts.isEmpty()) PathMaker.makeNodePath(artPts, currentImage);
+    if (buildNodePath) {
+      PathMaker.makePath(join, entry, exit, getImageFile());
+    } else if (!segments.isEmpty()) {
+      PathMaker.makePath(segments, getImageFile());
+    } else if (!artPts.isEmpty()) {
+      PathMaker.makeNodePath(artPts, getImageFile());
+    }
   }
 
   private void getExits() {
-    ArrayList<Location> exits = imageProcessor.getExits();
+    ArrayList<Location> exits = player.getExits();
 
     //make sure there is at least one entry and exit
     if (exits.size() < 2) try {
@@ -105,8 +106,8 @@ public class SolveAlgorithm {
       invalidMaze.printStackTrace();
     }
 
-    entry = imageProcessor.getNodes().get(exits.get(0));
-    exit = imageProcessor.getNodes().get(exits.get(1));
+    entry = player.getNodes().get(exits.get(0));
+    exit = player.getNodes().get(exits.get(1));
   }
 
 
@@ -139,10 +140,10 @@ public class SolveAlgorithm {
     }
 
     if (param.equals("Loading")) {
-      imageProcessor.scanAll();
+      player.scanAll();
       scanAll = true;
     } else {
-      imageProcessor.findExits();
+      player.findExits();
     }
   }
 
@@ -164,7 +165,7 @@ public class SolveAlgorithm {
    * Populate the set array of segments using the nodes
    */
   public void makeSegments() {
-    for (Node node : imageProcessor.getNodes().values()) {
+    for (Node node : player.getNodes().values()) {
       for (Node neighbour : node.getNeighbours()) {
         Segment newSegment = new Segment(node, neighbour);
         if (!segments.contains(newSegment)) segments.add(newSegment);
@@ -174,19 +175,18 @@ public class SolveAlgorithm {
 
   /**
    * Find the return the neighbours of a specific node
-   *
    * @param parent         the node to find neighbours of.
    * @param multiThreading boolean to indicate if the program is currently multithreading.
    */
   public void findNeighbours(Node parent, Boolean multiThreading) {
-    imageProcessor.scanPart(parent, multiThreading);
+    player.scanPart(parent, multiThreading);
   }
 
   /**
    * Set the cost of all known nodes to zero
    */
   public void resetCost() {
-    for (Node node : imageProcessor.getNodes().values()) node.setCost(0);
+    for (Node node : player.getNodes().values()) node.setCost(0);
   }
 
   /**
@@ -195,14 +195,14 @@ public class SolveAlgorithm {
    * @return a collection of nodes
    */
   public Collection<Node> getNodes() {
-    return imageProcessor.getNodes().values();
+    return player.getNodes().values();
   }
 
   /**
    * @return the map of nodes
    */
   public Map<Location, Node> getNodeMap() {
-    return imageProcessor.getNodes();
+    return player.getNodes();
   }
 
   /**
@@ -212,5 +212,29 @@ public class SolveAlgorithm {
    */
   public void updatePlayer(Node parent) {
     player.update(parent);
+  }
+
+  /**
+   * Get the current image file from the player.
+   * @return the imageFile.
+   */
+  public ImageFile getImageFile() {
+    return player.getImageFile();
+  }
+
+  /**
+   * Check if this is running in live mode.
+   * @return a boolean to indicate if live or not.
+   */
+  public boolean isLive() {
+    return player.isLive();
+  }
+
+  /**
+   * Get the delay from the player,
+   * @return an int representing the delay
+   */
+  public int getDelay() {
+    return player.getDelay();
   }
 }

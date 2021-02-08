@@ -31,7 +31,7 @@ public class BaseNode implements Exec {
     if (DEBUG) System.out.println(handler.getPlayer() + " " + getExecType());
 
     for (Exec statement: statements){
-      statement.execute(DEBUG);
+      if (!handler.getPlayer().isDone()) statement.execute(DEBUG);
     }
 
     return false;

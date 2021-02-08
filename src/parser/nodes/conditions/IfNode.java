@@ -58,7 +58,7 @@ public class IfNode implements Exec {
 
     if (ifCondition.evaluate(DEBUG)) {
       for (Exec statement: statements) {
-        statement.execute(DEBUG);
+        if (!handler.getPlayer().isDone()) statement.execute(DEBUG);
       }
     } else if (this.elseNode != null) {
       elseNode.execute(DEBUG);

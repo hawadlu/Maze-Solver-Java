@@ -1,14 +1,11 @@
 package parser;
 
 
-import Application.Application;
 import Game.Player;
-import Image.ImageFile;
-import Utility.Thread.AlgorithmDispatcher;
+import Utility.AlgorithmDispatcher;
 import parser.nodes.variables.VariableNode;
 import Utility.Location;
 import Utility.Node;
-import Utility.PathMaker;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,9 +19,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Handler {
   Node lastNode;
-  final Thread currentThread = new AlgorithmDispatcher();
-  final Location start;
-  final Location destination;
+  final Thread currentThread = new Thread();
+  Location start;
+  Location destination;
   Player player;
   int delay;
   private final HashMap<String, VariableNode> variables = new HashMap<>();
@@ -36,10 +33,10 @@ public class Handler {
    * @param delay The delay that should be observed between visiting each new node.
    */
   public Handler(int delay, Player player) {
+    this.player = player;
     this.start = this.player.getMazeExits().get(0);
     this.destination = this.player.getMazeExits().get(1);
     this.delay = delay;
-    this.player = player;
   }
 
   /**
@@ -47,15 +44,19 @@ public class Handler {
    * @param player
    */
   public Handler(Player player) {
+    this.player = player;
     this.start = this.player.getMazeExits().get(0);
     this.destination = this.player.getMazeExits().get(1);
-    this.player = player;
   }
+
 
   /**
    * @return the start node
    */
   public Node getStart() {
+    //Get the start if required
+    if (start == null) start = player.getMazeExits().get(0);
+
     return player.getNodes().get(start);
   }
 
@@ -65,7 +66,7 @@ public class Handler {
    */
   public void visit(Node toVisit) {
     //Get the appropriate node and visit it.
-    player.getNodes().get(toVisit.getLocation()).visit(currentThread);
+    if (player != null) player.getNodes().get(toVisit.getLocation()).visit(currentThread);
 
     //Update the image if necessary
     if (player != null) {
@@ -87,6 +88,9 @@ public class Handler {
    * @return boolean indicating if this is done.
    */
   public boolean checkDone(Node toUpdate) {
+    //If the destination is null, update it
+    if (destination == null) destination = player.getMazeExits().get(1);
+
     return toUpdate.getLocation().equals(destination);
   }
 
@@ -114,6 +118,9 @@ public class Handler {
    * @param parentNode the parent
    */
   public void setParent(Node childNode, Node parentNode) {
+    if (childNode.equals(start)) {
+      System.out.println();
+    }
     childNode.setParent(parentNode);
   }
 
@@ -125,7 +132,7 @@ public class Handler {
     System.out.println(player + " Reported done on node: " + lastNode);
     this.lastNode = lastNode;
     if (player != null) player.markDone();
-    else player.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
+//    else player.getImageFile().fillNodePath(PathMaker.generatePathArraylist(lastNode), true);
   }
 
   /**

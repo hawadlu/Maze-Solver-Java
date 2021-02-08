@@ -109,11 +109,13 @@ public class Scroll extends JPanel implements ItemListener {
   }
 
   /**
-   * Update the image that is being diplsayed
+   * Update the image that is being displayed
    *
    * @param displayImage the new images
    */
   public void updateImage(BufferedImage displayImage) {
     this.imageToDisplay = new ImageIcon(displayImage);
+    this.revalidate();
+    this.repaint();
   }
 }

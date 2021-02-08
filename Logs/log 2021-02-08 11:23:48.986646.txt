@@ -1,0 +1,1775 @@
+Player 0entered solve method
+Player 0 Entered AStar solve
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 1 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 1 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 1 Neighbours: 3 visited: null Cost: 41.43669871020132. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 0 Neighbours: 1 visited: Player 0t1 Cost: 0.0. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 0 Neighbours: 1 visited: Player 0t1 Cost: 0.0. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 15 y: 0 Neighbours: 1 visited: Player 0t1 Cost: 0.0. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 3 Neighbours: 2 visited: null Cost: 80.99677959990629. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 11 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 11 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 11 y: 1 Neighbours: 2 visited: null Cost: 84.39016190003038. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 19 y: 3 Neighbours: 3 visited: null Cost: 119.32431539337989. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 19 y: 3 Neighbours: 3 visited: null Cost: 119.32431539337989. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 19 y: 3 Neighbours: 3 visited: null Cost: 119.32431539337989. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 41.43669871020132. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 11 y: 3 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 11 y: 3 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 11 y: 3 Neighbours: 3 visited: null Cost: 125.53624312291234. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 19 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 19 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 19 y: 5 Neighbours: 2 visited: null Cost: 155.72486483978247. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 15 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 80.99677959990629. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 15 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 80.99677959990629. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 15 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 80.99677959990629. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 3 Neighbours: 2 visited: null Cost: 156.80764502136253. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 84.39016190003038. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 84.39016190003038. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 11 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 84.39016190003038. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 13 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 13 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 13 y: 3 Neighbours: 2 visited: null Cost: 165.84753186440508. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 11 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 11 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 11 y: 7 Neighbours: 2 visited: null Cost: 163.12613538133735. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 5 Neighbours: 1 visited: null Cost: 191.23542664891187. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 5 Neighbours: 1 visited: null Cost: 191.23542664891187. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 23 y: 5 Neighbours: 1 visited: null Cost: 191.23542664891187. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 119.32431539337989. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 1 Neighbours: 3 visited: null Cost: 196.26648433526026. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 1 Neighbours: 3 visited: null Cost: 196.26648433526026. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 23 y: 1 Neighbours: 3 visited: null Cost: 196.26648433526026. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 15 y: 7 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 15 y: 7 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 15 y: 7 Neighbours: 1 visited: null Cost: 198.9730320392072. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 3 Neighbours: 3 visited: Player 1t1 Cost: 125.53624312291234. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 13 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 13 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 13 y: 5 Neighbours: 2 visited: null Cost: 204.3312946741928. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 19 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 155.72486483978247. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 19 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 155.72486483978247. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 155.72486483978247. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 17 y: 1 Neighbours: 1 visited: null Cost: 237.0708958614666. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 27 y: 1 Neighbours: 2 visited: null Cost: 235.31773271479352. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 23 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 156.80764502136253. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 23 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 156.80764502136253. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 23 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 156.80764502136253. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 11 y: 7 Neighbours: 2 visited: Player 1t1 Cost: 163.12613538133735. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 11 y: 7 Neighbours: 2 visited: Player 1t1 Cost: 163.12613538133735. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 7 Neighbours: 2 visited: Player 1t1 Cost: 163.12613538133735. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 17 y: 5 Neighbours: 2 visited: null Cost: 241.3312946741928. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 13 y: 3 Neighbours: 2 visited: Player 1t1 Cost: 165.84753186440508. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 13 y: 3 Neighbours: 2 visited: Player 1t1 Cost: 165.84753186440508. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 13 y: 3 Neighbours: 2 visited: Player 1t1 Cost: 165.84753186440508. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 3 Neighbours: 2 visited: null Cost: 272.37174734209134. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 1 Neighbours: 3 visited: Player 1t1 Cost: 196.26648433526026. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 13 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 204.3312946741928. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 13 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 204.3312946741928. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 13 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 204.3312946741928. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 17 y: 9 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 17 y: 9 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 9 Neighbours: 3 visited: null Cost: 274.5728349513821. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 27 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 235.31773271479352. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 27 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 235.31773271479352. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 27 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 235.31773271479352. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 29 y: 3 Neighbours: 2 visited: null Cost: 309.37174734209134. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 29 y: 3 Neighbours: 2 visited: null Cost: 309.37174734209134. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 29 y: 3 Neighbours: 2 visited: null Cost: 309.37174734209134. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 9 Neighbours: 2 visited: null Cost: 311.46456844277554. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 9 Neighbours: 2 visited: null Cost: 311.46456844277554. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 9 y: 9 Neighbours: 2 visited: null Cost: 311.46456844277554. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 241.3312946741928. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 241.3312946741928. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 5 Neighbours: 2 visited: Player 1t1 Cost: 241.3312946741928. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 11 Neighbours: 2 visited: Player 1t1 Cost: 305.95754460433255. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 11 Neighbours: 2 visited: Player 1t1 Cost: 305.95754460433255. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 11 Neighbours: 2 visited: Player 1t1 Cost: 305.95754460433255. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 29 y: 1 Neighbours: 2 visited: null Cost: 348.37174734209134. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 29 y: 1 Neighbours: 2 visited: null Cost: 348.37174734209134. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 29 y: 1 Neighbours: 2 visited: null Cost: 348.37174734209134. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 272.37174734209134. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 272.37174734209134. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 27 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 272.37174734209134. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 17 y: 9 Neighbours: 3 visited: Player 0t1 Cost: 274.5728349513821. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 17 y: 9 Neighbours: 3 visited: Player 0t1 Cost: 274.5728349513821. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 17 y: 9 Neighbours: 3 visited: Player 0t1 Cost: 274.5728349513821. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 3 Neighbours: 2 visited: null Cost: 353.5240501324017. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 3 Neighbours: 2 visited: null Cost: 353.5240501324017. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 9 y: 3 Neighbours: 2 visited: null Cost: 353.5240501324017. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 33 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 33 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 33 y: 1 Neighbours: 2 visited: null Cost: 387.5763389099167. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 29 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 309.37174734209134. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 29 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 309.37174734209134. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 29 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 309.37174734209134. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 311.46456844277554. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 311.46456844277554. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 9 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 311.46456844277554. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 3 Neighbours: 2 visited: null Cost: 396.5705366324635. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 3 Neighbours: 2 visited: null Cost: 396.5705366324635. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 7 y: 3 Neighbours: 2 visited: null Cost: 396.5705366324635. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 33 y: 3 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 33 y: 3 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 33 y: 3 Neighbours: 3 visited: null Cost: 424.7919270417735. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 29 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 348.37174734209134. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 29 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 348.37174734209134. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 29 y: 1 Neighbours: 2 visited: Player 1t1 Cost: 348.37174734209134. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 353.5240501324017. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 353.5240501324017. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 9 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 353.5240501324017. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 7 y: 5 Neighbours: 2 visited: null Cost: 437.91058984965224. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 33 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 387.5763389099167. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 33 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 387.5763389099167. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 33 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 387.5763389099167. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 31 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 31 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 31 y: 3 Neighbours: 2 visited: null Cost: 461.8459416690713. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 33 y: 7 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 33 y: 7 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 33 y: 7 Neighbours: 3 visited: null Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 5 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 5 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 5 y: 5 Neighbours: 2 visited: null Cost: 480.3487801974981. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 7 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 396.5705366324635. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 7 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 396.5705366324635. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 7 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 396.5705366324635. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 35 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 35 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 35 y: 7 Neighbours: 2 visited: null Cost: 491.57448698145964. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 33 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 33 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 33 y: 11 Neighbours: 2 visited: null Cost: 487.30802965557166. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 33 y: 3 Neighbours: 3 visited: Player 0t1 Cost: 424.7919270417735. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 31 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 31 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 31 y: 5 Neighbours: 2 visited: null Cost: 496.9030379549875. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 5 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 5 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 5 y: 1 Neighbours: 2 visited: null Cost: 526.1417927649194. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 7 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 437.91058984965224. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 7 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 437.91058984965224. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 7 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 437.91058984965224. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 35 y: 11 Neighbours: 2 visited: null Cost: 516.9222154454934. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 33 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 458.0334673189628. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 9 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 9 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 35 y: 9 Neighbours: 1 visited: null Cost: 523.1497937891535. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 31 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 461.8459416690713. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 31 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 461.8459416690713. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 31 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 461.8459416690713. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 5 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 5 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 29 y: 5 Neighbours: 3 visited: null Cost: 531.9030379549874. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 33 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 487.30802965557166. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 33 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 487.30802965557166. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 33 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 487.30802965557166. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 35 y: 13 Neighbours: 2 visited: null Cost: 544.580848817372. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 491.57448698145964. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 491.57448698145964. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 35 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 491.57448698145964. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 5 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 480.3487801974981. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 5 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 480.3487801974981. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 480.3487801974981. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 9 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 9 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 9 y: 1 Neighbours: 1 visited: null Cost: 569.9710067665417. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 31 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 496.9030379549875. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 31 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 496.9030379549875. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 31 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 496.9030379549875. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 29 y: 7 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 29 y: 7 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 29 y: 7 Neighbours: 3 visited: null Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 25 y: 5 Neighbours: 2 visited: null Cost: 567.1308678626045. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 516.9222154454934. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 516.9222154454934. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 35 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 516.9222154454934. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 37 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 37 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 37 y: 13 Neighbours: 2 visited: null Cost: 572.7411044980295. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 31 y: 7 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 31 y: 7 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 31 y: 7 Neighbours: 1 visited: null Cost: 597.9635884646206. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 27 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 27 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 5
+Player 0 completed processing node Location: x: 27 y: 7 Neighbours: 2 visited: null Cost: 597.9635884646206. Process size: 5 Runner done: false
+Player 0 updating player screen. Process size: 5 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 5 Runner done: false
+Player 0 reached the top of the while loop. Process size: 5 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 4 Runner done: false
+Player 0 checked if the destination was reached. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 29 y: 5 Neighbours: 3 visited: Player 0t1 Cost: 531.9030379549874. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 25 y: 3 Neighbours: 1 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 25 y: 3 Neighbours: 1 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 5
+Player 0 completed processing node Location: x: 25 y: 3 Neighbours: 1 visited: null Cost: 604.3464559944613. Process size: 5 Runner done: false
+Player 0 updating player screen. Process size: 5 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 5 Runner done: false
+Player 0 reached the top of the while loop. Process size: 5 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 4 Runner done: false
+Player 0 checked if the destination was reached. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 5 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 526.1417927649194. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 5 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 526.1417927649194. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 5 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 526.1417927649194. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 37 y: 11 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 37 y: 11 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 37 y: 11 Neighbours: 3 visited: null Cost: 602.8243224110121. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 35 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 544.580848817372. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 35 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 544.580848817372. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 35 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 544.580848817372. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 17 Neighbours: 2 visited: null Cost: 621.050381225851. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 29 y: 7 Neighbours: 3 visited: Player 0t1 Cost: 564.9030379549874. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 37 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 37 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 37 y: 5 Neighbours: 2 visited: null Cost: 638.7269685530446. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 39 y: 11 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 39 y: 11 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 39 y: 11 Neighbours: 3 visited: null Cost: 633.500045711368. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 37 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 572.7411044980295. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 37 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 572.7411044980295. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 37 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 572.7411044980295. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 567.1308678626045. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 567.1308678626045. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 25 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 567.1308678626045. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 29 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 29 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 29 y: 17 Neighbours: 2 visited: null Cost: 644.050381225851. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 597.9635884646206. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 597.9635884646206. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 597.9635884646206. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 39 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 39 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 39 y: 13 Neighbours: 1 visited: null Cost: 662.2924058091439. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 39 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 39 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 39 y: 1 Neighbours: 1 visited: null Cost: 673.7616899897628. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 35 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 35 y: 5 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 35 y: 5 Neighbours: 2 visited: null Cost: 674.237530362174. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 37 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 602.8243224110121. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 621.050381225851. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 621.050381225851. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 621.050381225851. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 29 y: 19 Neighbours: 2 visited: null Cost: 665.050381225851. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 29 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 644.050381225851. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 29 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 644.050381225851. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 29 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 644.050381225851. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 19 Neighbours: 2 visited: null Cost: 686.14540433558. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 39 y: 11 Neighbours: 3 visited: Player 0t1 Cost: 633.500045711368. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 35 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 35 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 35 y: 3 Neighbours: 2 visited: null Cost: 711.7208599901566. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 37 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 638.7269685530446. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 37 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 638.7269685530446. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 37 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 638.7269685530446. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 29 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 665.050381225851. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 29 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 665.050381225851. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 29 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 665.050381225851. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 27 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 27 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 27 y: 23 Neighbours: 2 visited: null Cost: 703.2626471042037. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 23 Neighbours: 2 visited: null Cost: 721.2904034815236. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 686.14540433558. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 686.14540433558. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 27 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 686.14540433558. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 35 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 674.237530362174. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 35 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 674.237530362174. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 35 y: 5 Neighbours: 2 visited: Player 0t1 Cost: 674.237530362174. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 37 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 37 y: 3 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 37 y: 3 Neighbours: 2 visited: null Cost: 749.575846451652. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 27 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 703.2626471042037. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 27 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 703.2626471042037. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 27 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 703.2626471042037. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 21 Neighbours: 2 visited: null Cost: 741.2152623266949. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 721.2904034815236. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 721.2904034815236. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 721.2904034815236. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 25 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 25 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 25 y: 21 Neighbours: 2 visited: null Cost: 760.6317501656424. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 35 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 711.7208599901566. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 35 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 711.7208599901566. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 35 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 711.7208599901566. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 37 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 37 y: 1 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 37 y: 1 Neighbours: 2 visited: null Cost: 789.3879049264407. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 25 y: 17 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 25 y: 17 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 25 y: 17 Neighbours: 3 visited: null Cost: 783.9769852254999. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 741.2152623266949. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 741.2152623266949. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 741.2152623266949. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 25 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 25 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 25 y: 11 Neighbours: 2 visited: null Cost: 813.2515475621088. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 17 Neighbours: 2 visited: null Cost: 807.7467138735093. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 760.6317501656424. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 760.6317501656424. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 25 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 760.6317501656424. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 35 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 35 y: 1 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 35 y: 1 Neighbours: 1 visited: null Cost: 828.8467442403384. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 37 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 749.575846451652. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 37 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 749.575846451652. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 37 y: 3 Neighbours: 2 visited: Player 0t1 Cost: 749.575846451652. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 19 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 19 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 19 Neighbours: 1 visited: null Cost: 829.5870435413508. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 11 Neighbours: 2 visited: null Cost: 842.8657333520306. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 25 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 783.9769852254999. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 37 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 789.3879049264407. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 37 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 789.3879049264407. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 37 y: 1 Neighbours: 2 visited: Player 0t1 Cost: 789.3879049264407. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 807.7467138735093. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 807.7467138735093. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 807.7467138735093. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 23 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 23 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 9 Neighbours: 2 visited: null Cost: 874.4410401597245. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 25 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 813.2515475621088. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 25 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 813.2515475621088. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 25 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 813.2515475621088. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 25 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 25 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 25 y: 9 Neighbours: 2 visited: null Cost: 905.6980393759001. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 842.8657333520306. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 842.8657333520306. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 842.8657333520306. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 23 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 874.4410401597245. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 23 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 874.4410401597245. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 23 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 874.4410401597245. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 25 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 25 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 25 y: 7 Neighbours: 2 visited: null Cost: 938.9395796530894. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 25 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 905.6980393759001. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 25 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 905.6980393759001. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 25 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 905.6980393759001. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 7 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 19 y: 7 Neighbours: 2 visited: null Cost: 973.4214589522227. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 19 y: 9 Neighbours: 2 visited: null Cost: 1005.9944539020273. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 25 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 938.9395796530894. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 25 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 938.9395796530894. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 25 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 938.9395796530894. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 973.4214589522227. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 973.4214589522227. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 19 y: 7 Neighbours: 2 visited: Player 0t1 Cost: 973.4214589522227. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 9 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 21 y: 9 Neighbours: 2 visited: null Cost: 1038.0100750891916. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1005.9944539020273. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1005.9944539020273. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 19 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1005.9944539020273. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 21 y: 11 Neighbours: 2 visited: null Cost: 1068.0932930021743. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1038.0100750891916. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1038.0100750891916. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 21 y: 9 Neighbours: 2 visited: Player 0t1 Cost: 1038.0100750891916. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 11 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 19 y: 11 Neighbours: 2 visited: null Cost: 1098.7690163025302. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1068.0932930021743. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1068.0932930021743. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 21 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1068.0932930021743. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 19 y: 13 Neighbours: 2 visited: null Cost: 1127.561376400306. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1098.7690163025302. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1098.7690163025302. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 19 y: 11 Neighbours: 2 visited: Player 0t1 Cost: 1098.7690163025302. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 17 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 17 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 17 y: 13 Neighbours: 2 visited: null Cost: 1157.1079498056943. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1127.561376400306. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1127.561376400306. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 19 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1127.561376400306. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 17 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 17 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 17 y: 15 Neighbours: 2 visited: null Cost: 1184.8387990534184. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 15 Neighbours: 2 visited: null Cost: 1213.4918966172072. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 17 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1157.1079498056943. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 17 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1157.1079498056943. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 17 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1157.1079498056943. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 13 Neighbours: 2 visited: null Cost: 1243.9057092686983. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 17 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1184.8387990534184. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 17 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1184.8387990534184. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 17 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1184.8387990534184. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 15 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1213.4918966172072. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 15 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1213.4918966172072. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 15 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1213.4918966172072. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 9 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 9 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 9 y: 13 Neighbours: 2 visited: null Cost: 1277.506304501521. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 9 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 9 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 9 y: 15 Neighbours: 2 visited: null Cost: 1309.5219256886853. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 15 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1243.9057092686983. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 15 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1243.9057092686983. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 15 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1243.9057092686983. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 9 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1277.506304501521. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 9 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1277.506304501521. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 9 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1277.506304501521. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 7 y: 15 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 7 y: 15 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 7 y: 15 Neighbours: 3 visited: null Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 9 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1309.5219256886853. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 9 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1309.5219256886853. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 9 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1309.5219256886853. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 5 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 5 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 5 y: 15 Neighbours: 2 visited: null Cost: 1377.4790242017057. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 7 y: 17 Neighbours: 2 visited: null Cost: 1374.6512382250578. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 9 y: 17 Neighbours: 2 visited: null Cost: 1405.1307395333142. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 7 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1342.8235772993787. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 5 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 5 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 17 Neighbours: 2 visited: null Cost: 1410.720564478895. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 7 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1374.6512382250578. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 7 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1374.6512382250578. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 7 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1374.6512382250578. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 9 y: 19 Neighbours: 2 visited: null Cost: 1434.1307395333142. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 5 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1377.4790242017057. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 5 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1377.4790242017057. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 5 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1377.4790242017057. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 3 y: 17 Neighbours: 1 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 3 y: 17 Neighbours: 1 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 3 y: 17 Neighbours: 1 visited: null Cost: 1445.4336743943147. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 9 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1405.1307395333142. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 9 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1405.1307395333142. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 9 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1405.1307395333142. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 5 y: 19 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 5 y: 19 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 19 Neighbours: 3 visited: null Cost: 1466.0211769715181. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 5 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1410.720564478895. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 5 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1410.720564478895. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 5 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1410.720564478895. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 3 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 3 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 3 y: 19 Neighbours: 2 visited: null Cost: 1499.442726905655. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 5 y: 21 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 5 y: 21 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 21 Neighbours: 3 visited: null Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 9 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1434.1307395333142. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 9 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1434.1307395333142. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 9 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1434.1307395333142. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 17 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 17 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 21 Neighbours: 2 visited: null Cost: 1519.1038377557904. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 5 y: 25 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 5 y: 25 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 5 y: 25 Neighbours: 2 visited: null Cost: 1524.933576097716. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 3 y: 23 Neighbours: 2 visited: null Cost: 1530.5071760396731. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 5 y: 19 Neighbours: 3 visited: Player 0t1 Cost: 1466.0211769715181. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 17 y: 19 Neighbours: 2 visited: null Cost: 1543.290611000686. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 5 y: 21 Neighbours: 3 visited: Player 0t1 Cost: 1496.631632701546. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 7 y: 25 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 7 y: 25 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 7 y: 25 Neighbours: 2 visited: null Cost: 1551.5606300091047. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1499.442726905655. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1499.442726905655. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 3 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1499.442726905655. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 1 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 1 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 1 y: 23 Neighbours: 2 visited: null Cost: 1563.2638547479914. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1519.1038377557904. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1519.1038377557904. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1519.1038377557904. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 19 Neighbours: 2 visited: null Cost: 1570.9492443725649. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 7 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 7 y: 23 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 7 y: 23 Neighbours: 2 visited: null Cost: 1579.3635075580203. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 5 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1524.933576097716. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 5 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1524.933576097716. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 5 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1524.933576097716. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1530.5071760396731. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1530.5071760396731. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 3 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1530.5071760396731. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 1 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 1 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 1 y: 15 Neighbours: 2 visited: null Cost: 1600.8005035062383. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1543.290611000686. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1543.290611000686. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 17 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1543.290611000686. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 17 Neighbours: 2 visited: null Cost: 1600.1554081055854. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 7 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1551.5606300091047. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 7 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1551.5606300091047. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 7 y: 25 Neighbours: 2 visited: Player 0t1 Cost: 1551.5606300091047. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 23 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 23 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 23 Neighbours: 1 visited: null Cost: 1604.1223443643003. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 13 y: 17 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 13 y: 17 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 13 y: 17 Neighbours: 3 visited: null Cost: 1628.1732595578292. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 11 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1570.9492443725649. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 11 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1570.9492443725649. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1570.9492443725649. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 1 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1563.2638547479914. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 1 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1563.2638547479914. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 1 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1563.2638547479914. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 3 y: 15 Neighbours: 2 visited: null Cost: 1636.8698810999813. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 7 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1579.3635075580203. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 7 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1579.3635075580203. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 7 y: 23 Neighbours: 2 visited: Player 0t1 Cost: 1579.3635075580203. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 13 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 13 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 13 y: 15 Neighbours: 2 visited: null Cost: 1657.8549037171408. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1600.1554081055854. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1600.1554081055854. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 11 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1600.1554081055854. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 19 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 19 y: 17 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 17 Neighbours: 2 visited: null Cost: 1653.253131965798. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 3 y: 13 Neighbours: 2 visited: null Cost: 1674.3532107279639. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 1 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1600.8005035062383. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 1 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1600.8005035062383. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 1 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1600.8005035062383. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 19 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 19 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 15 Neighbours: 2 visited: null Cost: 1680.1789560014706. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 11 y: 15 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 11 y: 15 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 11 y: 15 Neighbours: 1 visited: null Cost: 1688.6607473186396. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 13 y: 17 Neighbours: 3 visited: Player 0t1 Cost: 1628.1732595578292. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 7 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 7 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 7 y: 13 Neighbours: 1 visited: null Cost: 1709.1813602624998. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 3 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1636.8698810999813. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 3 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1636.8698810999813. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 3 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1636.8698810999813. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 15 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 15 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 15 Neighbours: 3 visited: null Cost: 1706.427765498284. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 19 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1653.253131965798. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 19 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1653.253131965798. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 17 Neighbours: 2 visited: Player 0t1 Cost: 1653.253131965798. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 13 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1657.8549037171408. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 13 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1657.8549037171408. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 13 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1657.8549037171408. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 15 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 15 Neighbours: 2 visited: null Cost: 1732.137685762649. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 19 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1680.1789560014706. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 19 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1680.1789560014706. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 19 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1680.1789560014706. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 19 Neighbours: 2 visited: null Cost: 1728.8999705525284. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 3 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1674.3532107279639. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 3 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1674.3532107279639. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 3 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1674.3532107279639. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 19 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 19 y: 19 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 19 y: 19 Neighbours: 2 visited: null Cost: 1752.1593772517544. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 13 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 13 Neighbours: 2 visited: null Cost: 1759.7963191345277. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 15 Neighbours: 3 visited: Player 0t1 Cost: 1706.427765498284. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 19 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 19 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 19 y: 21 Neighbours: 2 visited: null Cost: 1773.6302878053384. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1728.8999705525284. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1728.8999705525284. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1728.8999705525284. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 21 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 21 y: 13 Neighbours: 1 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 13 Neighbours: 1 visited: null Cost: 1787.9565748151851. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1732.137685762649. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1732.137685762649. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 23 y: 15 Neighbours: 2 visited: Player 0t1 Cost: 1732.137685762649. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 19 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1752.1593772517544. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 19 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1752.1593772517544. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 19 y: 19 Neighbours: 2 visited: Player 0t1 Cost: 1752.1593772517544. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 21 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 21 y: 21 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 21 Neighbours: 2 visited: null Cost: 1794.2458159334267. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 23 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1759.7963191345277. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 23 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1759.7963191345277. Process size: 1 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 13 Neighbours: 2 visited: Player 0t1 Cost: 1759.7963191345277. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 19 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1773.6302878053384. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 19 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1773.6302878053384. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 19 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1773.6302878053384. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 31 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 31 Neighbours: 3 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 21 y: 31 Neighbours: 3 visited: null Cost: 1806.287410512219. Process size: 1 Runner done: false
+Player 0 updating player screen. Process size: 1 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 1 Runner done: false
+Player 0 reached the top of the while loop. Process size: 1 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 0 Runner done: false
+Player 0 checked if the destination was reached. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 21 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1794.2458159334267. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 21 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1794.2458159334267. Process size: 0 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 0
+Player 0 completed processing node Location: x: 21 y: 21 Neighbours: 2 visited: Player 0t1 Cost: 1794.2458159334267. Process size: 0 Runner done: false
+Player 0 checking node Location: x: 23 y: 31 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 about to process node Location: x: 23 y: 31 Neighbours: 2 visited: null Cost: Infinity. Process size: 0 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 1
+Player 0 completed processing node Location: x: 23 y: 31 Neighbours: 2 visited: null Cost: 1817.104064338611. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 21 y: 33 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 21 y: 33 Neighbours: 3 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 33 Neighbours: 3 visited: null Cost: 1816.9175563249535. Process size: 2 Runner done: false
+Player 0 updating player screen. Process size: 2 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 2 Runner done: false
+Player 0 reached the top of the while loop. Process size: 2 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 1 Runner done: false
+Player 0 checked if the destination was reached. Process size: 1 Runner done: false
+Player 0 checking node Location: x: 21 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 about to process node Location: x: 21 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 1 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 37 Neighbours: 2 visited: null Cost: 1825.461560070271. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 2 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 2
+Player 0 completed processing node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 33 Neighbours: 2 visited: null Cost: 1826.1371007822463. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 27 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 27 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 27 Neighbours: 2 visited: null Cost: 1831.4218854018873. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 31 Neighbours: 3 visited: Player 0t1 Cost: 1806.287410512219. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 17 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 17 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 17 y: 37 Neighbours: 2 visited: null Cost: 1837.830876947124. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 23 y: 39 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 23 y: 39 Neighbours: 3 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 39 Neighbours: 3 visited: null Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 33 Neighbours: 3 visited: Player 0t1 Cost: 1816.9175563249535. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 25 y: 27 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 25 y: 27 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 25 y: 27 Neighbours: 2 visited: null Cost: 1845.0233559106227. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 31 Neighbours: 2 visited: Player 0t1 Cost: 1817.104064338611. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 31 Neighbours: 2 visited: Player 0t1 Cost: 1817.104064338611. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 31 Neighbours: 2 visited: Player 0t1 Cost: 1817.104064338611. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 19 y: 39 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 19 y: 39 Neighbours: 1 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 19 y: 39 Neighbours: 1 visited: null Cost: 1842.2697389336654. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 33 Neighbours: 2 visited: Player 0t1 Cost: 1826.1371007822463. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 33 Neighbours: 2 visited: Player 0t1 Cost: 1826.1371007822463. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 33 Neighbours: 2 visited: Player 0t1 Cost: 1826.1371007822463. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 25 y: 39 Neighbours: 2 visited: null Cost: 1836.3429689381621. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 37 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 25 y: 37 Neighbours: 2 visited: null Cost: 1841.3429689381621. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 21 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1825.461560070271. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 21 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1825.461560070271. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 21 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1825.461560070271. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 17 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 17 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 17 y: 39 Neighbours: 2 visited: null Cost: 1849.8724715259161. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 37 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 37 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 27 y: 37 Neighbours: 3 visited: null Cost: 1844.9485202136261. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 25 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1836.3429689381621. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 25 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1836.3429689381621. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 25 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1836.3429689381621. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 23 y: 39 Neighbours: 3 visited: Player 0t1 Cost: 1832.2198633125445. Process size: 3 Runner done: false
+Player 0 updating player screen. Process size: 3 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 3 Runner done: false
+Player 0 reached the top of the while loop. Process size: 3 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 2 Runner done: false
+Player 0 checked if the destination was reached. Process size: 2 Runner done: false
+Player 0 checking node Location: x: 27 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 about to process node Location: x: 27 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 2 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 33 Neighbours: 2 visited: null Cost: 1852.2286301029067. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1841.3429689381621. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1841.3429689381621. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 25 y: 37 Neighbours: 2 visited: Player 0t1 Cost: 1841.3429689381621. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 39 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 27 y: 39 Neighbours: 2 visited: null Cost: 1847.1845881911258. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 25 y: 25 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 25 y: 25 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 25 y: 25 Neighbours: 3 visited: null Cost: 1860.5475306068827. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 23 y: 27 Neighbours: 2 visited: Player 0t1 Cost: 1831.4218854018873. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 23 y: 27 Neighbours: 2 visited: Player 0t1 Cost: 1831.4218854018873. Process size: 4 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 4
+Player 0 completed processing node Location: x: 23 y: 27 Neighbours: 2 visited: Player 0t1 Cost: 1831.4218854018873. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 27 y: 37 Neighbours: 3 visited: Player 0t1 Cost: 1844.9485202136261. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 27 y: 37 Neighbours: 3 visited: Player 0t1 Cost: 1844.9485202136261. Process size: 3 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 3
+Player 0 completed processing node Location: x: 27 y: 37 Neighbours: 3 visited: Player 0t1 Cost: 1844.9485202136261. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 39 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 39 Neighbours: 3 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 29 y: 39 Neighbours: 3 visited: null Cost: 1848.1845881911258. Process size: 4 Runner done: false
+Player 0 updating player screen. Process size: 4 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 4 Runner done: false
+Player 0 reached the top of the while loop. Process size: 4 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 3 Runner done: false
+Player 0 checked if the destination was reached. Process size: 3 Runner done: false
+Player 0 checking node Location: x: 29 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 about to process node Location: x: 29 y: 33 Neighbours: 2 visited: null Cost: Infinity. Process size: 3 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 4
+Player 0 completed processing node Location: x: 29 y: 33 Neighbours: 2 visited: null Cost: 1855.1845881911258. Process size: 4 Runner done: false
+Player 0 checking node Location: x: 29 y: 40 Neighbours: 1 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 about to process node Location: x: 29 y: 40 Neighbours: 1 visited: null Cost: Infinity. Process size: 4 Runner done: false
+Player 0 executed node.isVisited == null. Process size: 5
+Player 0 completed processing node Location: x: 29 y: 40 Neighbours: 1 visited: null Cost: 1848.1845881911258. Process size: 5 Runner done: false
+Player 0 checking node Location: x: 27 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1847.1845881911258. Process size: 5 Runner done: false
+Player 0 about to process node Location: x: 27 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1847.1845881911258. Process size: 5 Runner done: false
+Player 0 did not execute anything in processNode. Process size: 5
+Player 0 completed processing node Location: x: 27 y: 39 Neighbours: 2 visited: Player 0t1 Cost: 1847.1845881911258. Process size: 5 Runner done: false
+Player 0 updating player screen. Process size: 5 Runner done: false
+Player 0 reached the bottom of the while loop. Process size: 5 Runner done: false
+Player 0 reached the top of the while loop. Process size: 5 Runner done: false
+Player 0 polled the queue and visited the parent. Process size: 4 Runner done: false

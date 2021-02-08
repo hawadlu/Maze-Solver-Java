@@ -16,6 +16,7 @@ package Application;
  * todo features to finish
  * parser
  * Local pvp mode using arrow keys and wasd
+ * Single player mode with high scores
  * Server algorithm vs algorithm
  * Server pvp using arrow keys and pvp
  */
@@ -34,14 +35,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-import Game.Game;
 import Image.*;
 import Utility.Exceptions.GenericError;
 import Utility.Location;
 import Utility.Node;
-import Utility.Thread.AlgorithmDispatcher;
-import parser.Parser;
-import Game.*;
 
 /**
  * This class is the base of the program.
@@ -51,8 +48,6 @@ public class Application {
   GUI gui;
   ImageFile currentImage;
   ImageProcessor imageProcessor;
-  Game game;
-
   public Application() {
   }
 
@@ -63,12 +58,14 @@ public class Application {
    * @param imageToParse
    */
   public void parseImageFile(File imageToParse) throws GenericError {
+    currentImage = new ImageFile(imageToParse);
+
     //If there are already nodes in the node scanner, remove them
     if (imageProcessor != null && !imageProcessor.getNodes().isEmpty()) {
       imageProcessor.clear();
+    } else {
+      imageProcessor = new ImageProcessor();
     }
-
-    currentImage = new ImageFile(imageToParse);
   }
 
   /**
@@ -126,6 +123,7 @@ public class Application {
     currentImage.saveImage(path);
   }
 
+
   /**
    * @return the nodes from the image processor
    */
@@ -138,15 +136,15 @@ public class Application {
    */
   public void scanEntireMaze() {
     //If the image processor is null or already contains nodes, make a new one.
-    if (imageProcessor == null || !imageProcessor.getNodes().isEmpty()) imageProcessor = new ImageProcessor(this);
-    imageProcessor.scanAll();
+    if (imageProcessor == null || !imageProcessor.getNodes().isEmpty()) imageProcessor = new ImageProcessor(this.imageProcessor);
+    imageProcessor.scanAll(currentImage);
   }
 
   /**
    * Find the exits in the maze
    */
   public void findMazeExits() {
-    imageProcessor.findExits();
+    imageProcessor.findExits(currentImage);
   }
 
   /**
@@ -163,40 +161,16 @@ public class Application {
    * @param multiThreading is the program currently multi threading?
    */
   public void scanPart(Node parent, Boolean multiThreading) {
-    imageProcessor.scanPart(parent, multiThreading);
+    imageProcessor.scanPart(parent, multiThreading, currentImage);
   }
 
-  /**
-   * @param maxSize the max size that any panels in the game can be displayed at
-   * @param gui the main gui;
-   * @param controlPanel the panel that hosts the game controls.
-   */
-  public void initialiseGame(Dimension maxSize, GUI gui, JPanel controlPanel) {
-    this.game = new Game(maxSize, gui, controlPanel);
-  }
-
-  public Game getGame() {
-    return game;
-  }
-
-  /**
-   * @param playerNum the player number
-   * @return the panel displaying this player
-   */
-  public PlayerPanel getGamePanel(int playerNum) {
-    return game.getPlayerPanel(playerNum);
-  }
-
-  /**
-   * Tell the game object to load the nodes
-   * @param delayTextArea     text area containing the requested delay
-   */
-  public void loadGameNodes(JTextArea delayTextArea) {
-    game.loadNodes(delayTextArea, this);
-  }
 
   public static void main(String[] args) {
     //Create the GUI
     new Application().setUpGui();
+  }
+
+  public ImageProcessor getImageProcessor() {
+    return imageProcessor;
   }
 }

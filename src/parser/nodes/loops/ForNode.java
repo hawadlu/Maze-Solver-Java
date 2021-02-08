@@ -71,7 +71,7 @@ public class ForNode implements Exec {
 
       //Go through the statements
       for (Exec statement: statements) {
-        statement.execute(DEBUG);
+        if (!handler.getPlayer().isDone()) statement.execute(DEBUG);
       }
 
     }

@@ -1,5 +1,6 @@
 package Algorithm.ArticulationPoint;
 
+import Game.Player;
 import Utility.Location;
 import Utility.Node;
 
@@ -11,17 +12,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ArticulationPoints {
-  final ConcurrentHashMap<Location, Node> allNodes;
+  final Player player;
   final HashSet<Node> articulationPoints = new HashSet<>();
   final HashSet<Node> unvisited = new HashSet<>();
 
   /**
    * The Articulation points constructor
-   *
-   * @param allNodes a map containing all of the nodes in the graph
+   * @param player the player object using this.
    */
-  public ArticulationPoints(ConcurrentHashMap<Location, Node> allNodes) {
-    this.allNodes = allNodes;
+  public ArticulationPoints(Player player) {
+    this.player = player;
   }
 
   /**
@@ -41,7 +41,7 @@ public class ArticulationPoints {
   public boolean solve() {
     System.out.println("Looking for aps");
 
-    unvisited.addAll(allNodes.values());
+    unvisited.addAll(player.getNodes().values());
     while (!unvisited.isEmpty()) {
 
       //Cast the map of nodes to an arraylist then pick a random node

@@ -3,6 +3,7 @@ package parser;
 import Application.Application;
 import Game.Player;
 import Utility.Exceptions.ParserFailure;
+import Utility.Node;
 import parser.interfaces.Condition;
 import parser.interfaces.Exec;
 import parser.nodes.*;
@@ -32,17 +33,19 @@ import java.util.regex.Pattern;
  */
 public class Parser {
   private final boolean PARSER_DEBUG = false;
-  boolean EXEC_DEBUG = true;
+  boolean EXEC_DEBUG = false;
   private Scanner fileScanner = null;
   private Exec baseNode;
-  private Handler handler;
   private boolean enablePopup = true; //Set to false if debugging and the error popup becomes annoying
+  private Player player;
 
   /**
    * Create the scanner that will be used to parse to file.
    * @param toRead the file to use.
+   * @param player the current player.
    */
-  public Parser(File toRead) {
+  public Parser(File toRead, Player player) {
+    this.player = player;
 
     try {
       //Check that the file is of the correct type
@@ -61,10 +64,11 @@ public class Parser {
    * Create the parser object.
    * @param toRead the file to use.
    * @param enablePopup a boolean indicating whether or not popups should be enabled.
-   * @param handler
+   * @param player the current player.
    */
-  public Parser(File toRead, boolean enablePopup) {
+  public Parser(File toRead, boolean enablePopup, Player player) {
     this.enablePopup = enablePopup;
+    this.player = player;
 
     //Check that the file is of the correct type
     if (!toRead.getName().contains(".solver")) fail("File must be of type '.solver'. " + toRead, "Parser", null, enablePopup);
@@ -124,15 +128,6 @@ public class Parser {
   }
 
   /**
-   * Set the maze handler and whether or not popups should be displayed.
-   * @param handler the maze handler.
-   */
-  public void setMazeHandler(Handler handler) {
-    this.handler = handler;
-    this.handler.setPopup(enablePopup);
-  }
-
-  /**
    * Start the parser.
    */
   public void compile() {
@@ -161,7 +156,7 @@ public class Parser {
     if (PARSER_DEBUG) System.out.println();
 
     //Start the scanner
-    baseNode = new BaseNode(parseProgram(), handler);
+    baseNode = new BaseNode(parseProgram(), this.player.getHandler());
 
     fileScanner.close();
 
@@ -271,7 +266,7 @@ public class Parser {
 
     scannerHasNext(Regex.closeCurly, "Else missing closing '}'");
 
-    ElseNode elseNode = new ElseNode(statements, handler);
+    ElseNode elseNode = new ElseNode(statements, this.player.getHandler());
 
     //Add the else clause to the if statement
     if (toReturn instanceof IfNode) ((IfNode) toReturn).addElse(elseNode);
@@ -293,7 +288,7 @@ public class Parser {
         ifs.add((IfNode) parseIf());
       }
 
-      return new ElseIfNode(ifs, handler);
+      return new ElseIfNode(ifs, this.player.getHandler());
   }
 
   /**
@@ -313,9 +308,9 @@ public class Parser {
 
       //Check for a method call
       if (!fileScanner.hasNext(Regex.name)) Parser.fail("Comparator missing comparator method", "parser", null, getPopup());
-      else comparator = new ComparatorNode(fileScanner.next().replaceAll(" ", ""), handler);
+      else comparator = new ComparatorNode(fileScanner.next().replaceAll(" ", ""), this.player.getHandler());
     } else {
-      comparator = new ComparatorNode(methodName, handler);
+      comparator = new ComparatorNode(methodName, this.player.getHandler());
     }
 
     //Check to see that the next argument is the ';' because a comparator can only have one argument
@@ -378,7 +373,7 @@ public class Parser {
     //Check for closing '}'
     scannerHasNext(Regex.closeCurly, "For loop missing closing '}'");
 
-    forLoop = new ForNode(varName, collectionName, statements, handler);
+    forLoop = new ForNode(varName, collectionName, statements, this.player.getHandler());
 
     return forLoop;
   }
@@ -429,7 +424,7 @@ public class Parser {
     //Check for the closing }
     scannerHasNext(Regex.closeCurly, "If statement missing closing '}'");
 
-    IfNode ifNode = new IfNode(condition, statements, handler);
+    IfNode ifNode = new IfNode(condition, statements, this.player.getHandler());
 
     //If there is an else add it to the if node
     if (fileScanner.hasNext(Regex.ifElse)) parseElse(ifNode);
@@ -469,17 +464,17 @@ public class Parser {
     //Check for the closing }
     scannerHasNext(Regex.closeCurly, "While loop missing closing '}'");
 
-    return new WhileNode(condition, statements, handler);
+    return new WhileNode(condition, statements, this.player.getHandler());
   }
 
   private Condition parseCondition() {
     if (PARSER_DEBUG) System.out.println("Parsing condition");
 
     //Parse the method that will evaluate the condition
-    if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall(), handler);
-    else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck(), handler);
+    if (fileScanner.hasNext(Regex.mazeCall)) return new ConditionNode(parseMazeCall(), this.player.getHandler());
+    else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) return new ConditionNode(parseEqualityCheck(), this.player.getHandler());
     else {
-      if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner.next().replaceAll("\\s", ""), false), handler);
+      if (fileScanner.hasNext(Regex.name)) return new ConditionNode(parseVariableReference(fileScanner.next().replaceAll("\\s", ""), false), this.player.getHandler());
       else fail("Unrecognised value in condition", "parser", fileScanner, getPopup());
     }
 
@@ -496,11 +491,11 @@ public class Parser {
 
     //check for less than
     if (fileScanner.hasNext(Regex.lessThan)) {
-      return new LessThanNode(parseEqualityConditions(), handler);
+      return new LessThanNode(parseEqualityConditions(), this.player.getHandler());
     } else if (fileScanner.hasNext(Regex.equalTo)) {
-      return new EqualToNode(parseEqualityConditions(), handler);
+      return new EqualToNode(parseEqualityConditions(), this.player.getHandler());
     } else if (fileScanner.hasNext(Regex.greaterThan)) {
-      return new GreaterThanNode(parseEqualityConditions(), handler);
+      return new GreaterThanNode(parseEqualityConditions(), this.player.getHandler());
     }
 
 
@@ -570,10 +565,10 @@ public class Parser {
     Exec actionOrAssignment = null;
 
     //If there is a .xyz return an action node
-    if (varName.matches(Regex.math.pattern())) actionOrAssignment = new VariableActionNode(varName, parseMath(), handler);
+    if (varName.matches(Regex.math.pattern())) actionOrAssignment = new VariableActionNode(varName, parseMath(), this.player.getHandler());
     else if (fileScanner.hasNext(Regex.dot)) actionOrAssignment = parseVariableAction(varName);
     else if (fileScanner.hasNext(Regex.equals) || fileScanner.hasNext(Regex.comparatorAssignment)) actionOrAssignment = parseVariableAssignment(varName);
-    else if (fileScanner.hasNext(Regex.plus) && !toPrint) actionOrAssignment = handler.getFromMap(varName);
+    else if (fileScanner.hasNext(Regex.plus) && !toPrint) actionOrAssignment = this.player.getHandler().getFromMap(varName);
     else if (varName.matches(Regex.comparatorMethod.pattern())) actionOrAssignment = parseComparator(varName);
     else if (toPrint || varName.matches(Regex.name.pattern())) actionOrAssignment = parseGetVar(varName); //Return the variable object
     else fail("Invalid variable reference", "parser", fileScanner, getPopup());
@@ -587,7 +582,7 @@ public class Parser {
    * @return the get var object
    */
   private Exec parseGetVar(String varName) {
-    return new GetVariableNode(varName, handler);
+    return new GetVariableNode(varName, this.player.getHandler());
   }
 
   /**
@@ -601,10 +596,10 @@ public class Parser {
     //Discard the = or ->
     fileScanner.next();
 
-    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableAssignmentNode(varName, parseMazeCall(), handler);
-    else if (fileScanner.hasNext(Regex.math)) return new VariableAssignmentNode(varName, parseMath(), handler);
-    else if (fileScanner.hasNext(Regex.comparatorMethod)) return new VariableAssignmentNode(varName, parseComparator(null), handler);
-    else if (fileScanner.hasNext(Regex.name)) return new VariableAssignmentNode(varName, parseVariableReference(fileScanner.next(), false), handler);
+    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableAssignmentNode(varName, parseMazeCall(), this.player.getHandler());
+    else if (fileScanner.hasNext(Regex.math)) return new VariableAssignmentNode(varName, parseMath(), this.player.getHandler());
+    else if (fileScanner.hasNext(Regex.comparatorMethod)) return new VariableAssignmentNode(varName, parseComparator(null), this.player.getHandler());
+    else if (fileScanner.hasNext(Regex.name)) return new VariableAssignmentNode(varName, parseVariableReference(fileScanner.next(), false), this.player.getHandler());
     else fail("Invalid variable assignment", "parser", fileScanner, getPopup());
 
     return null;
@@ -619,8 +614,8 @@ public class Parser {
     if (PARSER_DEBUG) System.out.println("parsing variable action");
 
     //Check if it is a call to a maze method
-    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableActionNode(varName, parseMazeCall(), handler);
-    else return new VariableActionNode(varName, parseMethod(), handler);
+    if (fileScanner.hasNext(Regex.mazeCall)) return new VariableActionNode(varName, parseMazeCall(), this.player.getHandler());
+    else return new VariableActionNode(varName, parseMethod(), this.player.getHandler());
   }
 
   /**
@@ -642,9 +637,9 @@ public class Parser {
 
     //Check if the variable is being assigned at the same time
     if (fileScanner.hasNext(Regex.semiColon)) {
-      return new VariableNode(varInfo[0], varInfo[1], handler);
+      return new VariableNode(varInfo[0], varInfo[1], this.player.getHandler());
     } else if (fileScanner.hasNext(Regex.equals) || fileScanner.hasNext(Regex.comparatorAssignment)) {
-      return new VariableNode(varInfo, parseValue(), handler);
+      return new VariableNode(varInfo, parseValue(), this.player.getHandler());
     }
 
     fail("Incorrect declaration", "parser", fileScanner, getPopup());
@@ -666,14 +661,14 @@ public class Parser {
       } else if (fileScanner.hasNext(Regex.math)) {
         return parseEvaluateMathCall();
       } else if (fileScanner.hasNext(Regex.lessThan) || fileScanner.hasNext(Regex.greaterThan) || fileScanner.hasNext(Regex.equalTo)) {
-        return new EvaluateNode(new ConditionNode(parseEqualityCheck(), handler), handler);
+        return new EvaluateNode(new ConditionNode(parseEqualityCheck(), this.player.getHandler()), this.player.getHandler());
       } else if (fileScanner.hasNext(Regex.name)) {
         String name = fileScanner.next().replaceAll(" ", "");
 
         //Check if this is just a name, or a method
         if (fileScanner.hasNext(Regex.dot)) return parseEvaluateMethodCall(name);
         else {
-          return new GetVariableNode(name, handler);
+          return new GetVariableNode(name, this.player.getHandler());
         }
       }
     } else if (fileScanner.hasNext(Regex.comparatorAssignment)) {
@@ -688,7 +683,7 @@ public class Parser {
    * @return an evaluate object.
    */
   private Exec parseEvaluateMathCall() {
-    return new EvaluateNode(parseMath(), handler);
+    return new EvaluateNode(parseMath(), this.player.getHandler());
   }
 
   /**
@@ -701,7 +696,7 @@ public class Parser {
     if (fileScanner.hasNext(Regex.mazeCall)) fileScanner.next();
 
     if (fileScanner.hasNext(Regex.dot)) {
-      return new MazeActionNode(parseMethod(), handler);
+      return new MazeActionNode(parseMethod(), this.player.getHandler());
     }
 
     return null;
@@ -730,14 +725,14 @@ public class Parser {
     //Check if there are any parameters
     if (fileScanner.hasNext(Regex.name)) {
       assert methodName != null;
-      toReturn = new MethodNode(methodName, parseParams(), handler);
+      toReturn = new MethodNode(methodName, parseParams(), this.player.getHandler());
     }
-    else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName, handler);
+    else if (fileScanner.hasNext(Regex.closeParen)) toReturn = new MethodNode(methodName, this.player.getHandler());
     else if (fileScanner.hasNext(Regex.doubleQuote)) {
       ArrayList<Object> params = new ArrayList<>();
       params.add(parsePrint(false));
       assert methodName != null;
-      toReturn = new MethodNode(methodName, params, handler);
+      toReturn = new MethodNode(methodName, params, this.player.getHandler());
     }
 
     //Check for closing brace
@@ -777,7 +772,7 @@ public class Parser {
    * @return a new print node
    */
   private Exec parsePrint(boolean firstParen) {
-    PrintNode printer = new PrintNode(handler);
+    PrintNode printer = new PrintNode(this.player.getHandler());
     StringBuilder toPrint = new StringBuilder();
 
 
@@ -1041,16 +1036,16 @@ public class Parser {
     if (PARSER_DEBUG) System.out.println("Parsing runtime variable evaluation");
 
     String name = fileScanner.next();
-    GetVariableNode getVar = new GetVariableNode(name, handler);
+    GetVariableNode getVar = new GetVariableNode(name, this.player.getHandler());
 
     //Check if it is just a name with no attached method
     if (fileScanner.hasNext(Regex.comma) || fileScanner.hasNext(Regex.closeParen)) {
-      return new EvaluateNode(getVar, handler);
+      return new EvaluateNode(getVar, this.player.getHandler());
     }
 
-    EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(name), handler);
+    EvaluateNode eval = new EvaluateNode(getVar, parseVariableAction(name), this.player.getHandler());
 
-    return new EvaluateNode(getVar, eval, handler);
+    return new EvaluateNode(getVar, eval, this.player.getHandler());
   }
 
   /**
@@ -1062,9 +1057,9 @@ public class Parser {
     if (PARSER_DEBUG) System.out.println("Parsing runtime method call evaluation");
 
     MethodNode method = parseMethod();
-    GetVariableNode variableNode = new GetVariableNode(name, handler);
+    GetVariableNode variableNode = new GetVariableNode(name, this.player.getHandler());
 
-    return new EvaluateNode(variableNode, method, handler);
+    return new EvaluateNode(variableNode, method, this.player.getHandler());
   }
 
   /**
@@ -1074,7 +1069,7 @@ public class Parser {
   private Number parseEvaluateMazeCall() {
     if (PARSER_DEBUG) System.out.println("Parsing runtime maze call evaluation");
 
-    return new EvaluateNode(parseMazeCall(), handler);
+    return new EvaluateNode(parseMazeCall(), this.player.getHandler());
   }
 
   /**
@@ -1143,7 +1138,7 @@ public class Parser {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Parser parser = (Parser) o;
-    return PARSER_DEBUG == parser.PARSER_DEBUG && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode) && Objects.equals(handler, parser.handler);
+    return PARSER_DEBUG == parser.PARSER_DEBUG && Objects.equals(fileScanner, parser.fileScanner) && Objects.equals(baseNode, parser.baseNode);
   }
 
   /**
@@ -1152,6 +1147,6 @@ public class Parser {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(PARSER_DEBUG, fileScanner, baseNode, handler);
+    return Objects.hash(PARSER_DEBUG, fileScanner, baseNode);
   }
 }

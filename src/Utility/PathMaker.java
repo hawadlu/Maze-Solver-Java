@@ -1,6 +1,6 @@
 package Utility;
 
-import Application.Application;
+import Algorithm.SolveAlgorithm;
 import Image.ImageFile;
 
 import java.util.ArrayList;
@@ -13,38 +13,40 @@ public class PathMaker {
    * Fill the image with the necessary segments
    *
    * @param segments the arraylist of segments
+   * @param image
    */
-  public static void makePath(ArrayList<Segment> segments, ImageFile imageFile) {
-    imageFile.fillSegmentPath(segments);
+  public static void makePath(ArrayList<Segment> segments, ImageFile image) {
+    image.fillSegmentPath(segments);
   }
 
   /**
    * Fill in the articulation points on the image
    *
    * @param artPts
+   * @param image
    */
-  public static void makeNodePath(ArrayList<Node> artPts, ImageFile imageFile) {
-    imageFile.fillNodePath(artPts, false);
+  public static void makeNodePath(ArrayList<Node> artPts, ImageFile image) {
+    image.fillNodePath(artPts, false);
   }
 
   /**
    * Create the path from the start to the finish
    */
-  public static void makePath(Node[] join, Node entry, Node exit, ImageFile imageFile) {
+  public static void makePath(Node[] join, Node entry, Node exit, ImageFile image) {
     Node currentNode;
 
     if (join == null) {
       if (exit.getParent() != null) currentNode = exit;
       else currentNode = entry;
 
-      imageFile.fillNodePath(generatePathArraylist(currentNode), true);
+      image.fillNodePath(generatePathArraylist(currentNode), true);
     } else {
-      imageFile.fillNodePath(generatePathArraylist(join[0]), true);
-      imageFile.fillNodePath(generatePathArraylist(join[1]), true);
+      image.fillNodePath(generatePathArraylist(join[0]), true);
+      image.fillNodePath(generatePathArraylist(join[1]), true);
       ArrayList<Node> tmp = new ArrayList<>();
       tmp.add(join[0]);
       tmp.add(join[1]);
-      imageFile.fillNodePath(tmp, true);
+      image.fillNodePath(tmp, true);
     }
   }
 
@@ -52,7 +54,11 @@ public class PathMaker {
     ArrayList<Node> path = new ArrayList<>();
 
     while (currentNode != null) {
-      path.add(currentNode);
+      try {
+        path.add(currentNode);
+      } catch (OutOfMemoryError e) {
+        System.out.println(e);
+      }
       currentNode = currentNode.getParent();
     }
     return path;
