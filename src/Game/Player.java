@@ -3,12 +3,9 @@ package Game;
 import Algorithm.SolveAlgorithm;
 import GUI.CustomPanels.PlayerPanel;
 import Image.ImageFile;
-import Utility.Location;
-import Utility.AlgorithmDispatcher;
+import Utility.*;
 import parser.Handler;
 import parser.Parser;
-import Utility.Node;
-import Utility.PathMaker;
 import Image.ImageProcessor;
 
 import javax.swing.*;
@@ -31,6 +28,10 @@ public class Player {
   AlgorithmDispatcher dispatcher;
   SolveAlgorithm solve;
   String type;
+  Logger logger = new Logger();
+
+
+  int delay;
 
   /**
    * Create a player with a custom algorithm.
@@ -99,9 +100,6 @@ public class Player {
     panel.initSolvePanel();
   }
 
-  private void updateSolveImage(ImageFile displayImage) {
-    panel.updateImage(displayImage);
-  }
 
   /**
    * @param node the node to draw the image from
@@ -113,7 +111,9 @@ public class Player {
 
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(node), true);
-    if (panel != null) updateSolveImage(newImage);
+    if (panel != null) {
+      panel.updateImage(newImage);
+    }
   }
 
   /**
@@ -225,11 +225,16 @@ public class Player {
   }
 
   /**
-   * Set the custom algorithm.
+   * Set and compile the custom algorithm.
    * @param customAlgo the new Parser object.
    */
   public void setCustomAlgo(Parser customAlgo) {
     this.customAlgo = customAlgo;
+
+    //set the handler if required
+    if (this.handler == null) handler = new Handler(this);
+
+    this.customAlgo.compile();
   }
 
   /**
@@ -255,7 +260,7 @@ public class Player {
    */
   public void solve(String algorithm, String params, Boolean multiThread) {
     System.out.println("Player " + playerName + " starting solve");
-    solve = new SolveAlgorithm(0, this);
+    solve = new SolveAlgorithm(this, logger);
 
     //update the display of this panel
     if (!dispatcher.isLive()) panel.makeAlgoWorkingScreen();
@@ -265,6 +270,8 @@ public class Player {
 
     //If the param is set to loading set the scanAll field in the SolveAlgorithm to true
     if (params.equals("Loading")) solve.scanAll = true;
+
+    logger.add(this.playerName + "started solve");
 
     //Start the solve
     solve.solve(algorithm, multiThread);
@@ -283,7 +290,7 @@ public class Player {
    */
   public void solve(String algorithm) {
     System.out.println("Player " + playerName + " starting solve");
-    solve = new SolveAlgorithm(0, this);
+    solve = new SolveAlgorithm(this, logger);
 
     if (this.imageProcessor.getNodes().size() == 0) solve.scan("Loading");
 
@@ -301,7 +308,6 @@ public class Player {
    */
   public void solve() {
     if (customAlgo != null) {
-      customAlgo.compile();
       customAlgo.execute();
     } else {
       solve(panel.getAlgorithm());
@@ -383,7 +389,36 @@ public class Player {
   /**
    * Tell the panel to turn itself into a game screen.
    */
-  public void setGameScreen() {
+  public void makeGameScreen() {
     panel.makeGameScreen();
+  }
+
+  /**
+   * Make the screen that shows the algorithm being solved live.
+   */
+  public void makeSolvingScreen() { panel.makeSolvingScreen(); }
+
+  /**
+   *
+   * @return
+   */
+  public int getDelay() {
+    return delay;
+  }
+
+  /**
+   *
+   * @param delay
+   */
+  public void setDelay(int delay) {
+    this.delay = delay;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean isDone() {
+    return this.done.get();
   }
 }

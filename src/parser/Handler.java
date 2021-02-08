@@ -23,21 +23,8 @@ public class Handler {
   Location start;
   Location destination;
   Player player;
-  int delay;
   private final HashMap<String, VariableNode> variables = new HashMap<>();
   private boolean popup = false;
-
-
-  /**
-   * Create the object.
-   * @param delay The delay that should be observed between visiting each new node.
-   */
-  public Handler(int delay, Player player) {
-    this.player = player;
-    this.start = this.player.getMazeExits().get(0);
-    this.destination = this.player.getMazeExits().get(1);
-    this.delay = delay;
-  }
 
   /**
    * Create the object.
@@ -75,7 +62,7 @@ public class Handler {
 
       //Pause execution
       try {
-        TimeUnit.MILLISECONDS.sleep(delay);
+        TimeUnit.MILLISECONDS.sleep(player.getDelay());
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -186,7 +173,7 @@ public class Handler {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(lastNode, currentThread, start, destination, player, delay);
+    return Objects.hash(lastNode, currentThread, start, destination, player);
   }
 
   /**
