@@ -37,6 +37,12 @@ public class ClientHandler extends Thread {
 
         //Deal with the request
         if (message.equals(Requests.createRoom)) createRoom();
+        else if (message.contains(Requests.joinRoom)) {
+          String[] tmp = message.split(":");
+
+          int id = Integer.parseInt(tmp[1]);
+          server.joinRoom(this, id);
+        }
       } catch (IOException e) {
         try {
           connectedSocket.close();

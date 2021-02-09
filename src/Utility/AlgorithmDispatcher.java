@@ -311,13 +311,25 @@ public class AlgorithmDispatcher {
     this.screen.removeAll();
 
     JButton createRoom = new JButton("Create New Game");
-
     createRoom.addActionListener(e -> {
       //Send the request to create the room.
       client.sendRequest(Requests.createRoom);
       String response = client.getResponse();
     });
 
+    JButton joinRoom = new JButton("Join Game");
+
+    //Send the request to  join the room
+    joinRoom.addActionListener(e -> {
+      //Ask the user to enter the room id
+      String roomId = JOptionPane.showInputDialog("Enter Room Id");
+
+      client.sendRequest(Requests.joinRoom + ":" + roomId);
+      String response = client.getResponse();
+    });
+
+
     screen.add(createRoom);
+    screen.add(joinRoom);
   }
 }

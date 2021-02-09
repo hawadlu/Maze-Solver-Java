@@ -79,4 +79,8 @@ public class Server {
 
     return roomKey;
   }
+
+  public void joinRoom(ClientHandler clientHandler, int roomId) {
+    rooms.get(roomId).join(clientHandler);
+  }
 }
