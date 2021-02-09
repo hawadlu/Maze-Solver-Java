@@ -352,5 +352,41 @@ public class ImageFile {
   private String getFilePath() {
     return filePath;
   }
+
+  /**
+   * @return a json representation of the image
+   */
+  public String makeJson() {
+    StringBuilder json = new StringBuilder();
+
+    json.append("{\n");
+
+    //Add the width and height
+    json.append("\"width\": " + (imageArray[0].length - 1) + ",\n");
+    json.append("\"height\": " + (imageArray.length - 1) + ",\n");
+
+    //Add the image values
+    json.append("\"values\": {\n");
+
+      for (int height = 0; height < imageArray.length; height++) {
+        json.append("\"" + height + "\": {\n");
+
+        for (int width = 0; width < imageArray[0].length; width++) {
+          //Only add a comma if it is not the last one
+          if (width < imageArray[0].length - 1) json.append("\"" + width + "\": \"" + imageArray[height][width] + "\",\n");
+          else json.append("\"" + width + "\": \"" + imageArray[height][width] + "\"\n");
+
+        }
+
+        //Only add a comma if it is not the last one
+        if (height < imageArray.length - 1) json.append("},\n");
+        else json.append("}\n");
+      }
+
+    json.append("}\n");
+    json.append("}");
+
+    return json.toString();
+  }
 }
 

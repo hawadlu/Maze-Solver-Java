@@ -1,20 +1,19 @@
 package Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler extends Thread {
-  DataInputStream dataIn;
-  DataOutputStream dataOut;
+  ObjectInputStream dataIn;
+  ObjectOutputStream dataOut;
   Socket connectedSocket;
   Server server;
+  int currentRoom;
 
   public ClientHandler(Server server, Socket connection) {
     try {
-      this.dataIn = new DataInputStream(connection.getInputStream());
-      this.dataOut = new DataOutputStream(connection.getOutputStream());
+      this.dataIn = new ObjectInputStream(connection.getInputStream());
+      this.dataOut = new ObjectOutputStream(connection.getOutputStream());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -36,12 +35,18 @@ public class ClientHandler extends Thread {
         System.out.println("Client says: " + message);
 
         //Deal with the request
-        if (message.equals(Requests.createRoom)) createRoom();
+        if (message.equals(Requests.createRoom)) {
+          this.currentRoom = createRoom();
+        }
         else if (message.contains(Requests.joinRoom)) {
           String[] tmp = message.split(":");
 
           int id = Integer.parseInt(tmp[1]);
+          this.currentRoom = id;
           server.joinRoom(this, id);
+        } else if (message.contains(Requests.setImage)) {
+          message.replaceAll(Requests.setImage + ": ", "");
+          server.rooms.get(currentRoom).setImageFile(message);
         }
       } catch (IOException e) {
         try {
@@ -58,11 +63,13 @@ public class ClientHandler extends Thread {
 
   /**
    * Create a new room and send a unique invite code back to the client
+   * @return the room id
    */
-  private void createRoom() {
+  private int createRoom() {
     int invite = server.createRoom(this);
 
     sendMessage("" + invite);
+    return invite;
   }
 
   /**
@@ -73,6 +80,7 @@ public class ClientHandler extends Thread {
 
     try {
       dataOut.writeUTF(message);
+      dataOut.flush();
     } catch (IOException e) {
       e.printStackTrace();
     }

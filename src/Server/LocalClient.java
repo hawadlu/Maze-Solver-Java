@@ -1,16 +1,14 @@
 package Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 /**
  * This class handles interaction from the users computer to the server
  */
 public class LocalClient {
-  DataOutputStream dataOut;
-  DataInputStream dataIn;
+  ObjectOutputStream dataOut;
+  ObjectInputStream dataIn;
 
   /**
    * Initiate a connection to the server
@@ -21,8 +19,8 @@ public class LocalClient {
     try {
       Socket connection = new Socket(host, port);
 
-      dataOut = new DataOutputStream(connection.getOutputStream());
-      dataIn = new DataInputStream(connection.getInputStream());
+      dataOut = new ObjectOutputStream(connection.getOutputStream());
+      dataIn = new ObjectInputStream(connection.getInputStream());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -48,6 +46,7 @@ public class LocalClient {
    */
   public String getResponse() {
     String message = null;
+    System.out.println("Waiting for server response");
     try {
       message = dataIn.readUTF();
     } catch (IOException e) {

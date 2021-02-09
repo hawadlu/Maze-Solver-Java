@@ -7,6 +7,7 @@ import Image.*;
 import Server.ClientHandler;
 import Server.LocalClient;
 import Server.Requests;
+import Utility.Exceptions.InvalidImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -312,9 +313,20 @@ public class AlgorithmDispatcher {
 
     JButton createRoom = new JButton("Create New Game");
     createRoom.addActionListener(e -> {
+      try {
+        this.imageFile = new ImageFile(GUI.UIFileChooser());
+      } catch (InvalidImage invalidImage) {
+        invalidImage.printStackTrace();
+      }
+
       //Send the request to create the room.
+      System.out.println("Sending create room request");
       client.sendRequest(Requests.createRoom);
       String response = client.getResponse();
+
+      //Send the image file
+      System.out.println("Sending set image request");
+      client.sendRequest(Requests.setImage + ":" + imageFile.makeJson());
     });
 
     JButton joinRoom = new JButton("Join Game");
