@@ -173,7 +173,7 @@ public class GUI {
 
     //Make the online multiplayer screen
     if (application.getClient() != null) {
-      dispatcher.makeOnlineStartScreen();
+      dispatcher.makeOnlineStartScreen(width, height);
     } else {
       //Local multiplayer screen
       dispatcher.makeGameScreen(width, height);

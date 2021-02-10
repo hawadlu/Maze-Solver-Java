@@ -12,12 +12,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
  */
-public class ImageFile {
+public class ImageFile implements Serializable {
   private colEnum[][] imageArray = null;
   private final String filePath;
 

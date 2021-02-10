@@ -530,6 +530,7 @@ public class PlayerPanel extends JPanel {
   public void makeSolvingScreen() {
     this.removeAll();
 
+    if (this.scrollPanel == null) scrollPanel = new Scroll(player.getImageFile().makeImage());
     this.add(scrollPanel);
 
     this.revalidate();

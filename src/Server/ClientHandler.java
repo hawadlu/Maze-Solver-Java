@@ -1,9 +1,12 @@
 package Server;
 
+import Image.ImageFile;
+
 import java.io.*;
 import java.net.Socket;
 
-public class ClientHandler extends Thread {
+public class
+ClientHandler extends Thread {
   ObjectInputStream dataIn;
   ObjectOutputStream dataOut;
   Socket connectedSocket;
@@ -29,24 +32,29 @@ public class ClientHandler extends Thread {
     System.out.println("Client is running");
 
     while (true) {
-      String message = null;
+      Object message = null;
       try {
-        message = (String) dataIn.readUTF();
-        System.out.println("Client says: " + message);
+        message = dataIn.readObject();
 
-        //Deal with the request
-        if (message.equals(Requests.createRoom)) {
-          this.currentRoom = createRoom();
-        }
-        else if (message.contains(Requests.joinRoom)) {
-          String[] tmp = message.split(":");
+        if (message instanceof String) {
 
-          int id = Integer.parseInt(tmp[1]);
-          this.currentRoom = id;
-          server.joinRoom(this, id);
-        } else if (message.contains(Requests.setImage)) {
-          message.replaceAll(Requests.setImage + ": ", "");
-          server.rooms.get(currentRoom).setImageFile(message);
+          System.out.println("Client says: " + message);
+
+          //Deal with the request
+          if (message.equals(Requests.createRoom)) {
+            this.currentRoom = createRoom();
+          } else if (((String) message).contains(Requests.joinRoom)) {
+            String[] tmp = ((String) message).split(":");
+
+            int id = Integer.parseInt(tmp[1]);
+            this.currentRoom = id;
+            server.joinRoom(this, id);
+
+            //Return the image file
+            sendMessage(server.rooms.get(currentRoom).getImage());
+          }
+        } else if (message instanceof ImageFile) {
+          server.rooms.get(currentRoom).setImageFile((ImageFile) message);
         }
       } catch (IOException e) {
         try {
@@ -57,6 +65,8 @@ public class ClientHandler extends Thread {
         System.out.println("Error, socket has been automatically closed: ");
         e.printStackTrace();
         return;
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
       }
     }
   }
@@ -75,11 +85,11 @@ public class ClientHandler extends Thread {
   /**
    * Send a message back to the client.
    */
-  private void sendMessage(String message) {
+  private void sendMessage(Object message) {
     System.out.println("Sending message to client: " + message);
 
     try {
-      dataOut.writeUTF(message);
+      dataOut.writeObject(message);
       dataOut.flush();
     } catch (IOException e) {
       e.printStackTrace();

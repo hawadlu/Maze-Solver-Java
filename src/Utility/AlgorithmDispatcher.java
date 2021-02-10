@@ -1,10 +1,8 @@
 package Utility;
 
-import Application.Application;
 import GUI.GUI;
 import Game.Player;
 import Image.*;
-import Server.ClientHandler;
 import Server.LocalClient;
 import Server.Requests;
 import Utility.Exceptions.InvalidImage;
@@ -307,8 +305,12 @@ public class AlgorithmDispatcher {
 
   /**
    * Make the screen that is used to join/create an online game.
+   * @param width
+   * @param height
    */
-  public void makeOnlineStartScreen() {
+  public void makeOnlineStartScreen(int width, int height) {
+    Dimension playerDimensions = new Dimension(width / 2, (int) (height * 0.75));
+
     this.screen.removeAll();
 
     JButton createRoom = new JButton("Create New Game");
@@ -321,12 +323,16 @@ public class AlgorithmDispatcher {
 
       //Send the request to create the room.
       System.out.println("Sending create room request");
-      client.sendRequest(Requests.createRoom);
-      String response = client.getResponse();
+      client.send(Requests.createRoom);
+      Object response = client.getResponse();
 
       //Send the image file
       System.out.println("Sending set image request");
-      client.sendRequest(Requests.setImage + ":" + imageFile.makeJson());
+      client.send(imageFile);
+//      client.send(Requests.setImage + ":" + imageFile.makeJson());
+
+      //Set the player screens
+      makeSolvingScreen(playerDimensions);
     });
 
     JButton joinRoom = new JButton("Join Game");
@@ -336,8 +342,11 @@ public class AlgorithmDispatcher {
       //Ask the user to enter the room id
       String roomId = JOptionPane.showInputDialog("Enter Room Id");
 
-      client.sendRequest(Requests.joinRoom + ":" + roomId);
-      String response = client.getResponse();
+      client.send(Requests.joinRoom + ":" + roomId);
+
+      this.imageFile = (ImageFile) client.getResponse();
+
+      makeSolvingScreen(playerDimensions);
     });
 
 

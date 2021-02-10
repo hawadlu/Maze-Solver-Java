@@ -6,8 +6,8 @@ import Image.ImageFile;
  * Deals with the individual games hosted on the server.
  */
 public class Room {
-  ClientHandler playerOne, playTwo;
-  String imageJson;
+  private ClientHandler playerOne, playTwo;
+  private ImageFile imageFile;
 
   public Room(ClientHandler clientHandler) {
     this.playerOne = clientHandler;
@@ -21,9 +21,14 @@ public class Room {
     this.playTwo = clientHandler;
   }
 
-  public void setImageFile(String imageJson) {
-    this.imageJson = imageJson;
+  public void setImageFile(ImageFile imageFile) {
+    this.imageFile = imageFile;
   }
 
-
+  /**
+   * @return the image being used in this room.
+   */
+  public ImageFile getImage() {
+    return imageFile;
+  }
 }

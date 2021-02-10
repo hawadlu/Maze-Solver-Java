@@ -28,12 +28,12 @@ public class LocalClient {
   }
 
   /**
-   * Send a request to the server.
-   * @param request the request to send.
+   * Send an object via the socket
+   * @param toSend the object to send
    */
-  public void sendRequest(String request) {
+  public void send(Object toSend) {
     try {
-      dataOut.writeUTF(request);
+      dataOut.writeObject(toSend);
       dataOut.flush();
     } catch (IOException e) {
       e.printStackTrace();
@@ -44,12 +44,12 @@ public class LocalClient {
    * Empty the dataIn buffer to get any response from the server
    * @return anything in the dataIn buffer.
    */
-  public String getResponse() {
-    String message = null;
+  public Object getResponse() {
+    Object message = null;
     System.out.println("Waiting for server response");
     try {
-      message = dataIn.readUTF();
-    } catch (IOException e) {
+      message = dataIn.readObject();
+    } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
 
