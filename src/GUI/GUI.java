@@ -17,8 +17,8 @@ public class GUI {
   Application application;
   AlgorithmDispatcher dispatcher;
 
-  public final int width = 1280;
-  public final int height = 800;
+  public static final int width = 1280;
+  public static final int height = 800;
   public static final Color activeCol = new Color(0, 131, 233);
   public static final Color inactiveCol = new Color(66, 66, 66);
   public static final Color backgroundCol = new Color(211, 211, 211);
@@ -173,7 +173,7 @@ public class GUI {
 
     //Make the online multiplayer screen
     if (application.getClient() != null) {
-      dispatcher.makeOnlineStartScreen(width, height);
+      dispatcher.makeOnlineStartScreen();
     } else {
       //Local multiplayer screen
       dispatcher.makeGameScreen(width, height);

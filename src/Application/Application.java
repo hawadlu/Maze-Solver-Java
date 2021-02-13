@@ -183,6 +183,7 @@ public class Application {
   public void connectToServer() {
     client = new LocalClient();
     client.connect();
+    client.start();
   }
 
   /**

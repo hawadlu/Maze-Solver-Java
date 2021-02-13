@@ -2,6 +2,7 @@ package GUI.CustomPanels;
 
 import Application.Application;
 import Game.Player;
+import Server.Requests;
 import Utility.AlgorithmDispatcher;
 import parser.Handler;
 import parser.Parser;
@@ -532,6 +533,42 @@ public class PlayerPanel extends JPanel {
 
     if (this.scrollPanel == null) scrollPanel = new Scroll(player.getImageFile().makeImage());
     this.add(scrollPanel);
+
+    this.revalidate();
+    this.repaint();
+  }
+
+  /**
+   * Make the screen that is displayed when waiting for an online game to start
+   */
+  public void makeOnlineWaitingScreen() {
+    this.removeAll();
+
+    if (this.scrollPanel == null) {
+      scrollPanel = new Scroll(player.getImageFile().makeImage());
+    }
+    this.add(scrollPanel);
+
+    //Only add if all players are ready
+    if (player.isAllReady()) {
+      //Only add this button if the player is not online
+      if (!player.isOnline()) {
+        JButton readyButton = new JButton("Press When Ready");
+
+        readyButton.addActionListener(e -> {
+          System.out.println(player.getName() + " is ready.");
+
+          player.sendMessage(Requests.ready);
+
+          this.add(readyButton);
+        });
+      }
+    } else {
+      //todo find a better way to do this
+      if (player.getName().contains("1")) {
+        this.add(new JLabel("Waiting for others to join"));
+      }
+    }
 
     this.revalidate();
     this.repaint();

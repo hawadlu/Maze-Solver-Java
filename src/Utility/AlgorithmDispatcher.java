@@ -24,6 +24,7 @@ public class AlgorithmDispatcher {
   private GUI gui;
   private JPanel screen = new JPanel();
   private LocalClient client;
+  Dimension playerDimensions = new Dimension(GUI.width / 2, (int) (GUI.height * 0.75));
 
 
   /**
@@ -45,15 +46,20 @@ public class AlgorithmDispatcher {
 
   /**
    * Create a new dispatcher that is used for online multiplayer.
+   * Make one player local and the rest passive (updated by the server).
+   *
    * @param client the object that connects to the server.
    * @param playersToCreate the number of players to create
    */
   public AlgorithmDispatcher(LocalClient client, int playersToCreate) {
     this.client = client;
 
-    for (int i = 0; i < playersToCreate; i++) {
-      Player newPlayer = new Player("Player " + i, "Algorithm", this);
-      this.players.add(newPlayer);
+    //The local player
+    this.players.add(new Player("Player " + 0, "Algorithm", this));
+
+
+    for (int i = 1; i < playersToCreate; i++) {
+      this.players.add(new Player("Player" + i, "Algorithm", this, true));
     }
   }
 
@@ -80,14 +86,26 @@ public class AlgorithmDispatcher {
     else this.players.set(0, newPlayer);
   }
 
+  /**
+   *
+   * @return
+   */
   public long getExecTime() {
     return players.get(0).getExecTime();
   }
 
+  /**
+   *
+   * @return
+   */
   public double getMazeSize() {
     return imageFile.getDimensions().height * imageFile.getDimensions().width;
   }
 
+  /**
+   *
+   * @return
+   */
   public ImageFile getImageFile() {
     return this.imageFile;
   }
@@ -281,6 +299,27 @@ public class AlgorithmDispatcher {
   }
 
   /**
+   *
+   */
+  public void makeOnlineWaitingScreen() {
+    this.screen.removeAll();
+
+    players.get(0).makeOnlineWaitingScreen();
+    players.get(1).makeOnlineWaitingScreen();
+
+    players.get(0).getScreen().setPreferredSize(playerDimensions);
+    players.get(1).getScreen().setPreferredSize(playerDimensions);
+
+    this.screen.add(players.get(0).getScreen());
+    this.screen.add(players.get(1).getScreen());
+
+    this.screen.revalidate();
+    this.screen.repaint();
+
+
+  }
+
+  /**
    * @return the arraylist of players
    */
   public ArrayList<Player> getPlayers() {
@@ -295,21 +334,27 @@ public class AlgorithmDispatcher {
     this.live = live;
   }
 
+  /**
+   *
+   * @return
+   */
   public JPanel getScreen() {
     return screen;
   }
 
+  /**
+   *
+   * @param screen
+   */
   public void setScreen(JPanel screen) {
     this.screen = screen;
   }
 
   /**
    * Make the screen that is used to join/create an online game.
-   * @param width
-   * @param height
    */
-  public void makeOnlineStartScreen(int width, int height) {
-    Dimension playerDimensions = new Dimension(width / 2, (int) (height * 0.75));
+  public void makeOnlineStartScreen() {
+    client.setDispatcher(this);
 
     this.screen.removeAll();
 
@@ -324,15 +369,12 @@ public class AlgorithmDispatcher {
       //Send the request to create the room.
       System.out.println("Sending create room request");
       client.send(Requests.createRoom);
-      Object response = client.getResponse();
+      //Object response = client.getResponse();
 
       //Send the image file
       System.out.println("Sending set image request");
       client.send(imageFile);
 //      client.send(Requests.setImage + ":" + imageFile.makeJson());
-
-      //Set the player screens
-      makeSolvingScreen(playerDimensions);
     });
 
     JButton joinRoom = new JButton("Join Game");
@@ -344,13 +386,27 @@ public class AlgorithmDispatcher {
 
       client.send(Requests.joinRoom + ":" + roomId);
 
-      this.imageFile = (ImageFile) client.getResponse();
-
-      makeSolvingScreen(playerDimensions);
+      makeOnlineWaitingScreen();
     });
 
 
     screen.add(createRoom);
     screen.add(joinRoom);
+  }
+
+  /**
+   * Send a message to the server.
+   * @param message the message to send
+   */
+  public void sendMessage(Object message) {
+    client.send(message);
+  }
+
+  /**
+   * Set the image file.
+   * @param imageFile the new imageFile.
+   */
+  public void setImageFile(ImageFile imageFile) {
+    this.imageFile = imageFile;
   }
 }

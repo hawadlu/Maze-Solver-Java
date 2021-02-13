@@ -1,14 +1,27 @@
 package Server;
 
+import Image.ImageFile;
+import Utility.AlgorithmDispatcher;
+
 import java.io.*;
 import java.net.Socket;
 
 /**
- * This class handles interaction from the users computer to the server
+ * This class handles interaction from the users computer to the server.
+ *
+ * It contains methods to connect to, send messages to and constantly listen to messages from the server.
  */
-public class LocalClient {
+public class LocalClient extends Thread{
   ObjectOutputStream dataOut;
   ObjectInputStream dataIn;
+  AlgorithmDispatcher dispatcher;
+
+  /**
+   * Set the dispatcher
+   */
+  public void setDispatcher(AlgorithmDispatcher dispatcher) {
+    this.dispatcher = dispatcher;
+  }
 
   /**
    * Initiate a connection to the server
@@ -40,20 +53,25 @@ public class LocalClient {
     }
   }
 
-  /**
-   * Empty the dataIn buffer to get any response from the server
-   * @return anything in the dataIn buffer.
-   */
-  public Object getResponse() {
-    Object message = null;
-    System.out.println("Waiting for server response");
-    try {
-      message = dataIn.readObject();
-    } catch (IOException | ClassNotFoundException e) {
-      e.printStackTrace();
-    }
+  @Override
+  public void run() {
+    System.out.println("Local client listening for messages");
+    //Constantly listen for messages
+    while (true) {
+      try {
+        Object message = dataIn.readObject();
+        System.out.println("Message from server: " + message);
 
-    System.out.println("Server response: " + message);
-    return message;
+        if (message instanceof ImageFile) {
+          dispatcher.setImageFile((ImageFile) message);
+        } else if (message instanceof String) {
+          if (message.equals(Requests.wait)) {
+            dispatcher.makeOnlineWaitingScreen();
+          }
+        }
+      } catch (IOException | ClassNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

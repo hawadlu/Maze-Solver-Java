@@ -29,6 +29,9 @@ public class Player {
   SolveAlgorithm solve;
   String type;
   Logger logger = new Logger();
+  boolean online = false;
+
+  boolean allReady = false;
 
 
   int delay;
@@ -65,11 +68,39 @@ public class Player {
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
+   * @param dispatcher
+   * @param playerName
    */
   public Player(Dimension maxSize, String playerName, AlgorithmDispatcher dispatcher) {
     this.playerName = playerName;
     this.panel = new PlayerPanel(maxSize, this);
     this.dispatcher = dispatcher;
+  }
+
+  /**
+   * Create a player that is updated by the server.
+   * @param dispatcher
+   * @param playerName
+   * @param online
+   * @param type
+   */
+  public Player(String playerName, String type, AlgorithmDispatcher dispatcher, boolean online) {
+    this.playerName = playerName;
+    this.type = type;
+    this.dispatcher = dispatcher;
+
+    //Create the image processor
+    this.imageProcessor = new ImageProcessor();
+
+    //todo make the dimension non fixed
+    this.panel = new PlayerPanel(new Dimension(500,500), this);
+
+    //make the algorithm solve screen
+    if (this.type.equals("Algorithm") && dispatcher.getImageFile() != null) {
+      panel.setAlgoSolveScreen();
+    }
+
+    this.online = online;
   }
 
 
@@ -399,6 +430,14 @@ public class Player {
   public void makeSolvingScreen() { panel.makeSolvingScreen(); }
 
   /**
+   * Make the screen this is displayed when waiting for an online game to start.
+   */
+  public void makeOnlineWaitingScreen() {
+    System.out.println("Making wait screen");
+    panel.makeOnlineWaitingScreen();
+  }
+
+  /**
    *
    * @return
    */
@@ -420,5 +459,45 @@ public class Player {
    */
   public boolean isDone() {
     return this.done.get();
+  }
+
+  /**
+   * Send a message to the sever.
+   * @param message the message to send.
+   */
+  public void sendMessage(Object message) {
+    dispatcher.sendMessage(message);
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean isOnline() {
+    return online;
+  }
+
+  /**
+   *
+   * @param online
+   */
+  public void setOnline(boolean online) {
+    this.online = online;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean isAllReady() {
+    return allReady;
+  }
+
+  /**
+   *
+   * @param allReady
+   */
+  public void setAllReady(boolean allReady) {
+    this.allReady = allReady;
   }
 }

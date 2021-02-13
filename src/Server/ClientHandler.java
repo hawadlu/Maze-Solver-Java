@@ -1,5 +1,6 @@
 package Server;
 
+import Game.Player;
 import Image.ImageFile;
 
 import java.io.*;
@@ -12,6 +13,7 @@ ClientHandler extends Thread {
   Socket connectedSocket;
   Server server;
   int currentRoom;
+  boolean ready = false;
 
   public ClientHandler(Server server, Socket connection) {
     try {
@@ -43,6 +45,8 @@ ClientHandler extends Thread {
           //Deal with the request
           if (message.equals(Requests.createRoom)) {
             this.currentRoom = createRoom();
+            sendMessage(Requests.wait);
+
           } else if (((String) message).contains(Requests.joinRoom)) {
             String[] tmp = ((String) message).split(":");
 
@@ -52,6 +56,12 @@ ClientHandler extends Thread {
 
             //Return the image file
             sendMessage(server.rooms.get(currentRoom).getImage());
+          } else if (((String) message).contains(Requests.ready)) {
+            //Mark this client as ready
+            this.ready = true;
+
+            //Check if the other clients are ready
+            server.rooms.get(currentRoom).checkReadiness();
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);
@@ -85,7 +95,7 @@ ClientHandler extends Thread {
   /**
    * Send a message back to the client.
    */
-  private void sendMessage(Object message) {
+  public void sendMessage(Object message) {
     System.out.println("Sending message to client: " + message);
 
     try {

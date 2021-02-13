@@ -6,7 +6,7 @@ import Image.ImageFile;
  * Deals with the individual games hosted on the server.
  */
 public class Room {
-  private ClientHandler playerOne, playTwo;
+  private ClientHandler playerOne, playerTwo;
   private ImageFile imageFile;
 
   public Room(ClientHandler clientHandler) {
@@ -18,7 +18,7 @@ public class Room {
    * @param clientHandler the clientHandler for the new player
    */
   public void join(ClientHandler clientHandler) {
-    this.playTwo = clientHandler;
+    this.playerTwo = clientHandler;
   }
 
   public void setImageFile(ImageFile imageFile) {
@@ -30,5 +30,14 @@ public class Room {
    */
   public ImageFile getImage() {
     return imageFile;
+  }
+
+  /**
+   * Check the readiness of each of the clients
+   */
+  public void checkReadiness() {
+    if (playerOne.ready) playerTwo.sendMessage(Requests.otherReady);
+    if (playerTwo.ready) playerOne.sendMessage(Requests.otherReady);
+    if (playerOne.ready && playerTwo.ready) System.out.println("Start");//start
   }
 }
