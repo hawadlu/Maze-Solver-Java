@@ -40,4 +40,12 @@ public class Room {
     if (playerTwo.ready) playerOne.sendMessage(Requests.otherReady);
     if (playerOne.ready && playerTwo.ready) System.out.println("Start");//start
   }
+
+  /**
+   * Tell both of the players to make the setup screen
+   */
+  public void setup() {
+    playerOne.sendMessage(Requests.makeSetup);
+    playerTwo.sendMessage(Requests.makeSetup);
+  }
 }

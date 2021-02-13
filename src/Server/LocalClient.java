@@ -67,6 +67,9 @@ public class LocalClient extends Thread{
         } else if (message instanceof String) {
           if (message.equals(Requests.wait)) {
             dispatcher.makeOnlineWaitingScreen();
+          } else if (message.equals(Requests.makeSetup)) {
+            dispatcher.setOpponents();
+            dispatcher.makeOnlineWaitingScreen();
           }
         }
       } catch (IOException | ClassNotFoundException e) {

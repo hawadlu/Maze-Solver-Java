@@ -10,10 +10,8 @@ import Image.ImageProcessor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -31,7 +29,7 @@ public class Player {
   Logger logger = new Logger();
   boolean online = false;
 
-  boolean allReady = false;
+  boolean hasOpponent = false;
 
 
   int delay;
@@ -489,15 +487,14 @@ public class Player {
    *
    * @return
    */
-  public boolean isAllReady() {
-    return allReady;
+  public boolean hasOpponent() {
+    return hasOpponent;
   }
 
   /**
-   *
-   * @param allReady
+   * @param hasOpponent boolean indicating if there is an opponent.
    */
-  public void setAllReady(boolean allReady) {
-    this.allReady = allReady;
+  public void setOpponent(boolean hasOpponent) {
+    this.hasOpponent = hasOpponent;
   }
 }

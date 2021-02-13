@@ -1,10 +1,7 @@
 package GUI.CustomPanels;
 
-import Application.Application;
 import Game.Player;
 import Server.Requests;
-import Utility.AlgorithmDispatcher;
-import parser.Handler;
 import parser.Parser;
 import Image.ImageFile;
 
@@ -550,7 +547,7 @@ public class PlayerPanel extends JPanel {
     this.add(scrollPanel);
 
     //Only add if all players are ready
-    if (player.isAllReady()) {
+    if (player.hasOpponent()) {
       //Only add this button if the player is not online
       if (!player.isOnline()) {
         JButton readyButton = new JButton("Press When Ready");

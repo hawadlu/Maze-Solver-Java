@@ -56,6 +56,9 @@ ClientHandler extends Thread {
 
             //Return the image file
             sendMessage(server.rooms.get(currentRoom).getImage());
+
+            //Tell the room to make the setup screen for both players
+            server.rooms.get(currentRoom).setup();
           } else if (((String) message).contains(Requests.ready)) {
             //Mark this client as ready
             this.ready = true;

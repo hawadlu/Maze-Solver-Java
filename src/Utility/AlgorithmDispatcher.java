@@ -409,4 +409,12 @@ public class AlgorithmDispatcher {
   public void setImageFile(ImageFile imageFile) {
     this.imageFile = imageFile;
   }
+
+  /**
+   * Set the opponents in both players to true
+   */
+  public void setOpponents() {
+    players.get(0).setOpponent(true);
+    players.get(1).setOpponent(true);
+  }
 }
