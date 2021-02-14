@@ -2,6 +2,7 @@ package Server;
 
 import Image.ImageFile;
 import Utility.AlgorithmDispatcher;
+import Utility.LocationList;
 
 import java.io.*;
 import java.net.Socket;
@@ -55,26 +56,33 @@ public class LocalClient extends Thread{
 
   @Override
   public void run() {
+    super.run();
+
     System.out.println("Local client listening for messages");
     //Constantly listen for messages
     while (true) {
+      System.out.println("Listening");
       try {
         Object message = dataIn.readObject();
         System.out.println("Message from server: " + message);
 
         if (message instanceof ImageFile) {
           dispatcher.setImageFile((ImageFile) message);
+        } else if (message instanceof LocationList) {
+          dispatcher.updateOnlinePlayer((LocationList) message);
         } else if (message instanceof String) {
           if (message.equals(Requests.wait)) {
             dispatcher.makeOnlineWaitingScreen();
           } else if (message.equals(Requests.makeSetup)) {
-            dispatcher.setOpponents();
+            dispatcher.setOpponentsReady();
             dispatcher.makeOnlineWaitingScreen();
+          } else if (message.equals(Requests.start)) {
+            dispatcher.startOnline();
           }
         }
       } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();
       }
     }
-  }
+        }
 }

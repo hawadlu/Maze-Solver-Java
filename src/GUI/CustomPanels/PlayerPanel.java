@@ -20,8 +20,9 @@ public class PlayerPanel extends JPanel {
   JButton parser = null;
   Dimension imageSize;
   Player player;
-  JComboBox<String> inbuiltAlgorithms = null;
   Scroll scrollPanel;
+  String[] algorithms = {"AStar", "Dijkstra", "Depth First", "Breadth First"};
+  JComboBox<String> inbuiltAlgorithms = new JComboBox<>(algorithms);
 
 
   public PlayerPanel(Dimension maxSize, Player player) {
@@ -45,12 +46,6 @@ public class PlayerPanel extends JPanel {
     title.setAlignmentX(CENTER_ALIGNMENT);
     this.add(title);
 
-    //The buttons to choose an algorithm
-    if (inbuiltAlgorithms == null) {
-      //Create a button for loading the algorithm
-      String[] algorithms = {"AStar", "Dijkstra", "Depth First", "Breadth First"};
-      inbuiltAlgorithms = new JComboBox<>(algorithms);
-    }
     this.add(inbuiltAlgorithms);
 
     //The button to parse an algorithm
@@ -546,19 +541,38 @@ public class PlayerPanel extends JPanel {
     }
     this.add(scrollPanel);
 
-    //Only add if all players are ready
+    //Only add if all players are ready and this is the local player
     if (player.hasOpponent()) {
-      //Only add this button if the player is not online
-      if (!player.isOnline()) {
-        JButton readyButton = new JButton("Press When Ready");
+      //If this is the local player add setup controls
+      //todo find a better way of identifying the local player
 
+      if (this.player.getName().contains("0")) {
+        //Create the setup panel
+        JPanel setup = new JPanel();
+        setup.add(inbuiltAlgorithms);
+
+        //Add button for custom algorithms
+        JButton custom = new JButton("Custom Algorithm");
+        custom.addActionListener(e -> {
+          //load and compile the algorithm
+          player.setCustomAlgo(new Parser(GUI.GUI.UIFileChooser(), true, player));
+        });
+        this.add(custom);
+
+        setup.add(custom);
+
+        JButton readyButton = new JButton("Press When Ready");
         readyButton.addActionListener(e -> {
           System.out.println(player.getName() + " is ready.");
 
           player.sendMessage(Requests.ready);
-
-          this.add(readyButton);
         });
+        setup.add(readyButton);
+        this.add(setup);
+      } else {
+        //This is the online player, just add the image
+        this.removeAll();
+        this.add(new Scroll(player.getImageFile().makeImage()));
       }
     } else {
       //todo find a better way to do this

@@ -1,11 +1,8 @@
 package Image;
 
-import Utility.Colours;
+import Utility.*;
 import Utility.Colours.colEnum;
 import Utility.Exceptions.InvalidImage;
-import Utility.Location;
-import Utility.Node;
-import Utility.Segment;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -252,6 +249,30 @@ public class ImageFile implements Serializable {
         drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
       } else {
         drawNode(currentNode.getLocation(), colEnum.BLUE);
+      }
+    }
+  }
+
+  /**
+   * Fills a specified path in the maze
+   *
+   * @param path the path to fill
+   * @param fill fill in the spaces between the nodes
+   */
+  public void fillLocationPath(ArrayList<Location> path, boolean fill) {
+    while (path.size() > 1) {
+      Location currentLocation = path.remove(0);
+
+      if (fill) {
+        Location nextLocation = path.get(0);
+        int startX = currentLocation.x;
+        int startY = currentLocation.y;
+        int endX = nextLocation.x;
+        int endY = nextLocation.y;
+
+        drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
+      } else {
+        drawNode(currentLocation, colEnum.BLUE);
       }
     }
   }

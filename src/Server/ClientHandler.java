@@ -2,9 +2,14 @@ package Server;
 
 import Game.Player;
 import Image.ImageFile;
+import Utility.LocationList;
+import Utility.Node;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class
 ClientHandler extends Thread {
@@ -14,6 +19,9 @@ ClientHandler extends Thread {
   Server server;
   int currentRoom;
   boolean ready = false;
+
+  //The chance of a collision within a room is very small, but for large scale deployment a better solution may be needed.
+  int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 
   public ClientHandler(Server server, Socket connection) {
     try {
@@ -39,7 +47,6 @@ ClientHandler extends Thread {
         message = dataIn.readObject();
 
         if (message instanceof String) {
-
           System.out.println("Client says: " + message);
 
           //Deal with the request
@@ -68,6 +75,9 @@ ClientHandler extends Thread {
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);
+        } else if (message instanceof LocationList) {
+          //Tell the room to send the list to the other player
+          server.rooms.get(currentRoom).sendLocationList(this, (LocationList) message);
         }
       } catch (IOException e) {
         try {
@@ -99,7 +109,7 @@ ClientHandler extends Thread {
    * Send a message back to the client.
    */
   public void sendMessage(Object message) {
-    System.out.println("Sending message to client: " + message);
+    System.out.println("Sending message to client: " + message.toString());
 
     try {
       dataOut.writeObject(message);
@@ -107,5 +117,18 @@ ClientHandler extends Thread {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ClientHandler that = (ClientHandler) o;
+    return id == that.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
   }
 }

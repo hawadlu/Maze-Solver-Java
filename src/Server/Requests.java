@@ -14,4 +14,5 @@ public class Requests {
   public static String otherReady = "Other Ready";
   public static String wait = "Wait";
   public static String makeSetup = "Make Setup";
+  public static String start = "Start";
 }

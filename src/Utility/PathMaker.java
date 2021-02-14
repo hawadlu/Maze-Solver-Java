@@ -50,6 +50,13 @@ public class PathMaker {
     }
   }
 
+  /**
+   * Generate a list of nodes.
+   *
+   * Go from parent to parent until parent is null.
+   * @param currentNode the node to start with.
+   * @return an arraylist of nodes.
+   */
   public static ArrayList<Node> generatePathArraylist(Node currentNode) {
     ArrayList<Node> path = new ArrayList<>();
 
@@ -62,5 +69,26 @@ public class PathMaker {
       currentNode = currentNode.getParent();
     }
     return path;
+  }
+
+  /**
+   * Generate a list of node locations.
+   *
+   * Go from parent to parent until parent is null.
+   * @param currentNode the node to start with.
+   * @return an arraylist of node locations.
+   */
+  public static LocationList generatePathLocationArraylist(Node currentNode) {
+    LocationList locations = new LocationList();
+
+    while (currentNode != null) {
+      try {
+        locations.add(currentNode.getLocation());
+      } catch (OutOfMemoryError e) {
+        System.out.println(e);
+      }
+      currentNode = currentNode.getParent();
+    }
+    return locations;
   }
 }

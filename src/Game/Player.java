@@ -143,6 +143,27 @@ public class Player {
     if (panel != null) {
       panel.updateImage(newImage);
     }
+
+    //send the image to the server if necessary
+    //todo find a better way of doing this
+    if (playerName.contains("0") && online) {
+      dispatcher.sendMessage(PathMaker.generatePathLocationArraylist(node));
+    }
+  }
+
+  /**
+   * Update the player image using a list of locations
+   * @param locationList the list of locations to draw.
+   */
+  public void update(LocationList locationList) {
+    //Create a duplicate image file
+    ImageFile newImage = new ImageFile(dispatcher.getImageFile());
+
+    //Fill in the path
+    newImage.fillLocationPath(locationList.getUnderlyingList(), true);
+    if (panel != null) {
+      panel.updateImage(newImage);
+    }
   }
 
   /**

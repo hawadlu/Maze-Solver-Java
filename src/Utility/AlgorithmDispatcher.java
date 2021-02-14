@@ -389,6 +389,9 @@ public class AlgorithmDispatcher {
       makeOnlineWaitingScreen();
     });
 
+    //Mark both players as online
+    players.get(0).setOnline(true);
+    players.get(1).setOnline(true);
 
     screen.add(createRoom);
     screen.add(joinRoom);
@@ -413,8 +416,37 @@ public class AlgorithmDispatcher {
   /**
    * Set the opponents in both players to true
    */
-  public void setOpponents() {
+  public void setOpponentsReady() {
     players.get(0).setOpponent(true);
     players.get(1).setOpponent(true);
+  }
+
+  /**
+   * Start the online players.
+   *
+   * Note: only player 0 is started because the other player
+   * is being updated by the server.
+   */
+  public void startOnline() {
+    this.live = true;
+
+    //Create a new thread and start this.
+    //Note: Continuing on the same thread causes the LocalClient to stop listening for incoming messages
+    Thread solver = new Thread() {
+      @Override
+      public void run() {
+        super.run();
+        players.get(0).solve();
+      }
+    };
+    solver.start();
+  }
+
+  /**
+   * Update the online player.
+   * @param locationList the list of locations to draw
+   */
+  public void updateOnlinePlayer(LocationList locationList) {
+    players.get(1).update(locationList);
   }
 }

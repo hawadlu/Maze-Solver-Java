@@ -1,6 +1,7 @@
 package Server;
 
 import Image.ImageFile;
+import Utility.LocationList;
 
 /**
  * Deals with the individual games hosted on the server.
@@ -33,12 +34,17 @@ public class Room {
   }
 
   /**
-   * Check the readiness of each of the clients
+   * Check the readiness of each of the clients.
+   * Start each of them if they are both ready
    */
   public void checkReadiness() {
     if (playerOne.ready) playerTwo.sendMessage(Requests.otherReady);
     if (playerTwo.ready) playerOne.sendMessage(Requests.otherReady);
-    if (playerOne.ready && playerTwo.ready) System.out.println("Start");//start
+    if (playerOne.ready && playerTwo.ready) {
+      System.out.println("Start");//start
+      playerOne.sendMessage(Requests.start);
+      playerTwo.sendMessage(Requests.start);
+    }
   }
 
   /**
@@ -47,5 +53,16 @@ public class Room {
   public void setup() {
     playerOne.sendMessage(Requests.makeSetup);
     playerTwo.sendMessage(Requests.makeSetup);
+  }
+
+  /**
+   * Pass the list of locations to the appropriate player.
+   *
+   * @param currentPlayer the player that is sending the list.
+   * @param locationList the list of locations
+   */
+  public void sendLocationList(ClientHandler currentPlayer, LocationList locationList) {
+    if (playerOne.equals(currentPlayer)) playerTwo.sendMessage(locationList);
+    else playerOne.sendMessage(locationList);
   }
 }
