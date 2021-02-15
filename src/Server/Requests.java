@@ -1,6 +1,7 @@
 package Server;
 
 import java.awt.*;
+import java.util.regex.Pattern;
 
 /**
  * Class containing common requests sent to and from the server
@@ -15,4 +16,5 @@ public class Requests {
   public static String wait = "Wait";
   public static String makeSetup = "Make Setup";
   public static String start = "Start";
+  public static Pattern sendRoom = Pattern.compile("Room: [0-9]{10}");
 }

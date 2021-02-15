@@ -25,6 +25,7 @@ public class AlgorithmDispatcher {
     private GUI gui;
     private JPanel screen = new JPanel();
     private LocalClient client;
+    private String roomId;
 
 
     /**
@@ -325,20 +326,50 @@ public class AlgorithmDispatcher {
      */
     public void makeOnlineWaitingScreen() {
         this.screen.removeAll();
+        this.screen.setLayout(new GridBagLayout());
 
+        //Define the required dimensions
+        Dimension controlDimensions = new Dimension(GUI.width, GUI.height / 4);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        //Set the player screens
         players.get(0).makeOnlineWaitingScreen();
         players.get(1).makeOnlineWaitingScreen();
 
-        players.get(0).getScreen().setPreferredSize(playerDimensions);
-        players.get(1).getScreen().setPreferredSize(playerDimensions);
+        JPanel playerOne = players.get(0).getScreen();
+        JPanel playerTwo = players.get(1).getScreen();
+        JPanel control = new JPanel();
 
-        this.screen.add(players.get(0).getScreen());
-        this.screen.add(players.get(1).getScreen());
+        playerOne.setPreferredSize(playerDimensions);
+        playerTwo.setPreferredSize(playerDimensions);
+        control.setPreferredSize(controlDimensions);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.gridheight = 3;
+
+        this.screen.add(playerOne, constraints);
+
+        constraints.gridx = 1;
+
+        this.screen.add(playerTwo, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+
+        //setup the control panel
+        control.setLayout(new FlowLayout(FlowLayout.LEADING));
+        control.add(new JLabel("Some label"));
+
+        this.screen.add(control, constraints);
 
         this.screen.revalidate();
         this.screen.repaint();
-
-
     }
 
     /**

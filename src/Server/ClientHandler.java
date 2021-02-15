@@ -102,7 +102,7 @@ ClientHandler extends Thread {
   private int createRoom() {
     int invite = server.createRoom(this);
 
-    sendMessage("" + invite);
+    sendMessage("room:" + invite);
     return invite;
   }
 
