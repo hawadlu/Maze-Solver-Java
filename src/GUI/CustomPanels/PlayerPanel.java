@@ -544,9 +544,8 @@ public class PlayerPanel extends JPanel {
     //Only add if all players are ready and this is the local player
     if (player.hasOpponent()) {
       //If this is the local player add setup controls
-      //todo find a better way of identifying the local player
 
-      if (this.player.getName().contains("0")) {
+      if (this.player.isLocal()) {
         //Create the setup panel
         JPanel setup = new JPanel();
         setup.add(inbuiltAlgorithms);
@@ -575,8 +574,7 @@ public class PlayerPanel extends JPanel {
         this.add(new Scroll(player.getImageFile().makeImage()));
       }
     } else {
-      //todo find a better way to do this
-      if (player.getName().contains("1")) {
+      if (!player.isLocal()) {
         this.add(new JLabel("Waiting for others to join"));
       }
     }

@@ -28,10 +28,8 @@ public class Player {
   String type;
   Logger logger = new Logger();
   boolean online = false;
-
+  boolean local = false;
   boolean hasOpponent = false;
-
-
   int delay;
 
   /**
@@ -145,8 +143,7 @@ public class Player {
     }
 
     //send the image to the server if necessary
-    //todo find a better way of doing this
-    if (playerName.contains("0") && online) {
+    if (local && online) {
       dispatcher.sendMessage(PathMaker.generatePathLocationArraylist(node));
     }
   }
@@ -517,5 +514,20 @@ public class Player {
    */
   public void setOpponent(boolean hasOpponent) {
     this.hasOpponent = hasOpponent;
+  }
+
+  /**
+   * @return boolean indicating if thus player is local
+   */
+  public boolean isLocal() {
+    return local;
+  }
+
+  /**
+   * Set if this player is the local player.
+   * @param local a boolean to indicate if local.
+   */
+  public void setLocal(boolean local) {
+    this.local = local;
   }
 }

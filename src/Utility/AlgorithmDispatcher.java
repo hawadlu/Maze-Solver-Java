@@ -362,6 +362,9 @@ public class AlgorithmDispatcher {
 
     /**
      * Make the screen that is used to join/create an online game.
+     *
+     * This contains button for creating and joining a game along
+     * with their associated functionality.
      */
     public void makeOnlineStartScreen() {
         client.setDispatcher(this);
@@ -370,6 +373,9 @@ public class AlgorithmDispatcher {
 
         JButton createRoom = new JButton("Create New Game");
         createRoom.addActionListener(e -> {
+            //Set the local player
+            players.get(0).setLocal(true);
+
             try {
                 this.imageFile = new ImageFile(GUI.UIFileChooser());
             } catch (InvalidImage invalidImage) {
@@ -397,6 +403,9 @@ public class AlgorithmDispatcher {
             String roomId = JOptionPane.showInputDialog("Enter Room Id");
 
             client.send(Requests.joinRoom + ":" + roomId);
+
+            //Set the local player
+            players.get(0).setLocal(true);
 
             makeOnlineWaitingScreen();
         });
