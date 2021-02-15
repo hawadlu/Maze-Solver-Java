@@ -2,6 +2,7 @@ package Server;
 
 import Game.Player;
 import Image.ImageFile;
+import Image.ImageProcessor;
 import Utility.LocationList;
 import Utility.Node;
 

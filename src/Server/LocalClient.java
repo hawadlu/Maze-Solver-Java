@@ -1,6 +1,7 @@
 package Server;
 
 import Image.ImageFile;
+import Image.ImageProcessor;
 import Utility.AlgorithmDispatcher;
 import Utility.LocationList;
 

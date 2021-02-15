@@ -1,6 +1,7 @@
 package Server;
 
 import Image.ImageFile;
+import Image.ImageProcessor;
 import Utility.LocationList;
 
 /**
@@ -64,5 +65,15 @@ public class Room {
   public void sendLocationList(ClientHandler currentPlayer, LocationList locationList) {
     if (playerOne.equals(currentPlayer)) playerTwo.sendMessage(locationList);
     else playerOne.sendMessage(locationList);
+  }
+
+  /**
+   * Send the image processor from one client to the other
+   * @param currentPlayer the client that is sending the processor.
+   * @param imageProcessor the image processor to send.
+   */
+  public void sendImageProcessor(ClientHandler currentPlayer, ImageProcessor imageProcessor) {
+    if (playerOne.equals(currentPlayer)) playerTwo.sendMessage(imageProcessor);
+    else playerOne.sendMessage(imageProcessor);
   }
 }
