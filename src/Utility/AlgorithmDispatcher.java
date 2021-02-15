@@ -109,13 +109,15 @@ public class AlgorithmDispatcher {
     }
 
     /**
-     * Set the image file and initiate a scan.
+     * Set the image file, initiate a scan and set the waiting screen.
      *
      * @param imageFile the new imageFile.
      */
     public void setImageFile(ImageFile imageFile) {
         this.imageFile = imageFile;
         new Thread(() -> players.get(0).scanAll()).start();
+
+        makeOnlineWaitingScreen();
     }
 
     /**
@@ -406,8 +408,6 @@ public class AlgorithmDispatcher {
 
             //Set the local player
             players.get(0).setLocal(true);
-
-            makeOnlineWaitingScreen();
         });
 
         //Mark both players as online
