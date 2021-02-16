@@ -299,6 +299,7 @@ public class GUI {
    *
    * @return the file
    */
+  //todo deal with cancel clicked.
   public static File UIFileChooser() {
     System.out.println("Load image");
     //Get the file

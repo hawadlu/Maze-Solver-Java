@@ -11,11 +11,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 /**
- * This thread takes is the one that processes the algorithms.
- * Using multiple threads allows multiple algorithms to run simultaneously.
+* todo describe this class
  */
 public class AlgorithmDispatcher {
   Dimension playerDimensions = new Dimension(GUI.width / 2, (int) (GUI.height * 0.75));
@@ -25,7 +25,6 @@ public class AlgorithmDispatcher {
   private GUI gui;
   private JPanel screen = new JPanel();
   private LocalClient client;
-  private int roomId;
 
 
   /**
@@ -322,7 +321,7 @@ public class AlgorithmDispatcher {
   }
 
   /**
-   *
+   * make the online waiting screen
    */
   public void makeOnlineWaitingScreen() {
     this.screen.removeAll();
@@ -364,7 +363,7 @@ public class AlgorithmDispatcher {
 
     //setup the control panel
     control.setLayout(new FlowLayout(FlowLayout.LEADING));
-    control.add(new JLabel("Room ID:" + roomId));
+    control.add(new JLabel("Room ID:" + client.getRoom()));
 
     this.screen.add(control, constraints);
 
@@ -402,6 +401,24 @@ public class AlgorithmDispatcher {
   public void makeOnlineStartScreen() {
     client.setDispatcher(this);
 
+    //Ask for a username
+    boolean validUser = false;
+    String user = null;
+
+    while (!validUser) {
+      user = JOptionPane.showInputDialog("Enter a username");
+
+      if (!user.matches(Pattern.compile("(\\s|[A-z0-9])*").pattern())) {
+        JOptionPane.showMessageDialog(null, "Username: '" + user + "' does not match pattern " + Requests.username);
+      } else {
+        validUser = true;
+      }
+    }
+    client.setLocalUserName(user);
+
+    //Send the username to the server
+    client.send("user: " + user);
+
     this.screen.removeAll();
 
     JButton createRoom = new JButton("Create New Game");
@@ -418,7 +435,6 @@ public class AlgorithmDispatcher {
       //Send the request to create the room.
       System.out.println("Sending create room request");
       client.send(Requests.createRoom);
-      //Object response = client.getResponse();
 
       //Send the image file
       System.out.println("Sending set image request");
@@ -433,6 +449,7 @@ public class AlgorithmDispatcher {
     //Send the request to  join the room
     joinRoom.addActionListener(e -> {
       //Ask the user to enter the room id
+      //todo deal with cancel clicked.
       String roomId = JOptionPane.showInputDialog("Enter Room Id");
 
       client.send(Requests.joinRoom + ":" + roomId);
@@ -506,11 +523,13 @@ public class AlgorithmDispatcher {
   }
 
   /**
-   * Set the room id
-   *
-   * @param room the room id to use.
+   * Get the username from the client.
+   * @param dimension is this player online or local
+   * @return the username
    */
-  public void setRoom(int room) {
-    this.roomId = room;
+  public String getUserName(String dimension) {
+    if (dimension.equals("local")) return client.getLocalUserName();
+    else if (dimension.equals("online")) return client.getOnlineUserName();
+    return null;
   }
 }

@@ -1,14 +1,10 @@
 package Server;
 
-import Game.Player;
 import Image.ImageFile;
-import Image.ImageProcessor;
 import Utility.LocationList;
-import Utility.Node;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -20,6 +16,7 @@ ClientHandler extends Thread {
   Server server;
   int currentRoom;
   boolean ready = false;
+  String username;
 
   //The chance of a collision within a room is very small, but for large scale deployment a better solution may be needed.
   int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
@@ -66,6 +63,12 @@ ClientHandler extends Thread {
             this.currentRoom = id;
             server.joinRoom(this, id);
 
+            //send the user names to both users.
+            server.rooms.get(currentRoom).sendUserNames();
+
+            //Send the room id to the current player
+            sendMessage("room: " + currentRoom);
+
             //Return the image file
             sendMessage(server.rooms.get(currentRoom).getImage());
 
@@ -77,6 +80,9 @@ ClientHandler extends Thread {
 
             //Check if the other clients are ready
             server.rooms.get(currentRoom).checkReadiness();
+          } else if (((String) message).matches(Requests.username.pattern())) {
+            //set the clients username
+            username = ((String) message).replace("user: ", "");
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);

@@ -76,4 +76,14 @@ public class Room {
     if (playerOne.equals(currentPlayer)) playerTwo.sendMessage(imageProcessor);
     else playerOne.sendMessage(imageProcessor);
   }
+
+  /**
+   * Send the user names to each player.
+   *
+   * Player one will receive player twos username and vice versa.
+   */
+  public void sendUserNames() {
+    playerOne.sendMessage("user: " + playerTwo.username);
+    playerTwo.sendMessage("user: " + playerOne.username);
+  }
 }

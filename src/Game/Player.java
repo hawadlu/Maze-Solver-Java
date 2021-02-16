@@ -530,4 +530,13 @@ public class Player {
   public void setLocal(boolean local) {
     this.local = local;
   }
+
+  /**
+   * Get the username from the dispatcher.
+   * @param dimension is this player online or local
+   * @return the username
+   */
+  public String getUserName(String dimension) {
+    return dispatcher.getUserName(dimension);
+  }
 }

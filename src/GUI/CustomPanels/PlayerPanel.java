@@ -536,6 +536,13 @@ public class PlayerPanel extends JPanel {
   public void makeOnlineWaitingScreen() {
     this.removeAll();
 
+    //Add the username
+    if (this.player.isLocal()) {
+      this.add(new JLabel(player.getUserName("local")));
+    } else {
+      this.add( new JLabel(player.getUserName("online")));
+    }
+
     if (this.scrollPanel == null) {
       scrollPanel = new Scroll(player.getImageFile().makeImage());
     }
@@ -568,15 +575,9 @@ public class PlayerPanel extends JPanel {
         });
         setup.add(readyButton);
         this.add(setup);
-      } else {
-        //This is the online player, just add the image
-        this.removeAll();
-        this.add(new Scroll(player.getImageFile().makeImage()));
       }
-    } else {
-      if (!player.isLocal()) {
+    } else if (!player.isLocal()) {
         this.add(new JLabel("Waiting for others to join"));
-      }
     }
 
     this.revalidate();

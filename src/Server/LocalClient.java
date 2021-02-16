@@ -13,9 +13,12 @@ import java.net.Socket;
  * It contains methods to connect to, send messages to and constantly listen to messages from the server.
  */
 public class LocalClient extends Thread {
-  ObjectOutputStream dataOut;
-  ObjectInputStream dataIn;
-  AlgorithmDispatcher dispatcher;
+  private ObjectOutputStream dataOut;
+  private ObjectInputStream dataIn;
+  private AlgorithmDispatcher dispatcher;
+  private String localUserName;
+  private String onlineUserName;
+  private int roomId;
 
   /**
    * Set the dispatcher
@@ -81,12 +84,51 @@ public class LocalClient extends Thread {
             dispatcher.startOnline();
           } else if (((String) message).matches(Requests.room.pattern())) {
             //Remove the actual room id from the string and set it
-            dispatcher.setRoom(Integer.parseInt(((String) message).replace("room: ", "")));
+            this.roomId = Integer.parseInt(((String) message).replace("room: ", ""));
+          } else if (((String) message).matches(Requests.username.pattern())) {
+            this.onlineUserName = ((String) message).replace("user: ", "");
           }
         }
       } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();
       }
     }
+  }
+
+  /**
+   * @return the username.
+   */
+  public String getLocalUserName() {
+    return localUserName;
+  }
+
+  /**
+   * Set the username.
+   * @param localUserName the username to use.
+   */
+  public void setLocalUserName(String localUserName) {
+    this.localUserName = localUserName;
+  }
+
+  /**
+   * @return the current room id
+   */
+  public int getRoom() {
+    return roomId;
+  }
+
+  /**
+   * @return the username for the online player
+   */
+  public String getOnlineUserName() {
+    return onlineUserName;
+  }
+
+  /**
+   * Set the username for the online user.
+   * @param onlineUserName the user name
+   */
+  public void setOnlineUserName(String onlineUserName) {
+    this.onlineUserName = onlineUserName;
   }
 }
