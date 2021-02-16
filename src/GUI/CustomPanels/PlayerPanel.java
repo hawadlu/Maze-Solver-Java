@@ -23,6 +23,7 @@ public class PlayerPanel extends JPanel {
   Scroll scrollPanel;
   String[] algorithms = {"AStar", "Dijkstra", "Depth First", "Breadth First"};
   JComboBox<String> inbuiltAlgorithms = new JComboBox<>(algorithms);
+  ImageFile lastImage;
 
 
   public PlayerPanel(Dimension maxSize, Player player) {
@@ -78,6 +79,8 @@ public class PlayerPanel extends JPanel {
     if (scrollPanel != null) {
       scrollPanel = new Scroll(displayImage.makeImage());
 
+      this.lastImage = displayImage;
+
       this.removeAll();
       this.add(scrollPanel);
       this.revalidate();
@@ -105,12 +108,12 @@ public class PlayerPanel extends JPanel {
    * Mark this panel as done.
    * @param message the place in which this player finished
    */
-  public void markDone(String message, ImageFile completeImage) {
+  public void markDone(String message) {
     this.removeAll();
-    this.displayMessage(message);
-    this.scrollPanel.updateImage(completeImage.makeImage());
+    this.add(new JLabel(message));
+    this.scrollPanel.updateImage(lastImage.makeImage());
+    this.add(scrollPanel);
 
-    //todo may have to change this
     refresh();
   }
 

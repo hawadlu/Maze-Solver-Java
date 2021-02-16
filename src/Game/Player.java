@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Player {
   PlayerPanel panel;
   String playerName;
-  AtomicBoolean done = new AtomicBoolean(false);
+  boolean done = false;
   Handler handler;
   private Parser customAlgo;
   ImageProcessor imageProcessor;
@@ -123,10 +123,12 @@ public class Player {
     }
   }
 
+  /**
+   * Create the panel that shows the solved image
+   */
   public void createSolveImagePanel() {
     panel.initSolvePanel();
   }
-
 
   /**
    * @param node the node to draw the image from
@@ -192,20 +194,14 @@ public class Player {
    * @param message, the message to display
    */
   public void makeDoneDisplay(String message) {
-    //Make the completed image
-    ImageFile newImage = new ImageFile(dispatcher.getImageFile());
-
-    //Create a path from the current node
-    //newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
-
-    if (panel != null) panel.markDone(message, newImage);
+    if (panel != null) panel.markDone(message);
   }
 
   /**
    * Mark this player as done
    */
   public void markDone() {
-    done.set(true);
+    done = true;
   }
 
   @Override
@@ -359,6 +355,9 @@ public class Player {
     } else {
       solve(panel.getAlgorithm());
     }
+
+    this.done = true;
+    dispatcher.checkStatus(this);
   }
 
   /**
@@ -474,7 +473,7 @@ public class Player {
    * @return
    */
   public boolean isDone() {
-    return this.done.get();
+    return this.done;
   }
 
   /**

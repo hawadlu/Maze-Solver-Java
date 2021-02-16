@@ -532,4 +532,18 @@ public class AlgorithmDispatcher {
     else if (dimension.equals("online")) return client.getOnlineUserName();
     return null;
   }
+
+  /**
+   * Check the status of each of the players to see if they are done.
+   * @param player the player that has reported done
+   */
+  public void checkStatus(Player player) {
+    if (player.equals(players.get(0))) {
+      if (!players.get(1).isDone()) player.makeDoneDisplay("1st");
+      else player.makeDoneDisplay("2nd");
+    } else if (player.equals(players.get(1))) {
+      if (!players.get(0).isDone()) player.makeDoneDisplay("1st");
+      else player.makeDoneDisplay("2nd");
+    }
+  }
 }
