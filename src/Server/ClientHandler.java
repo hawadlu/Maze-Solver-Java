@@ -53,8 +53,12 @@ ClientHandler extends Thread {
           //Deal with the request
           if (message.equals(Requests.createRoom)) {
             this.currentRoom = createRoom();
-            sendMessage(Requests.wait);
 
+            //Send the room id
+            sendMessage("room: " + currentRoom);
+
+            //Tell the user to create the wait screen
+            sendMessage(Requests.wait);
           } else if (((String) message).contains(Requests.joinRoom)) {
             String[] tmp = ((String) message).split(":");
 

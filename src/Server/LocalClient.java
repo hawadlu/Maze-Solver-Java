@@ -1,7 +1,6 @@
 package Server;
 
 import Image.ImageFile;
-import Image.ImageProcessor;
 import Utility.AlgorithmDispatcher;
 import Utility.LocationList;
 
@@ -10,10 +9,10 @@ import java.net.Socket;
 
 /**
  * This class handles interaction from the users computer to the server.
- *
+ * <p>
  * It contains methods to connect to, send messages to and constantly listen to messages from the server.
  */
-public class LocalClient extends Thread{
+public class LocalClient extends Thread {
   ObjectOutputStream dataOut;
   ObjectInputStream dataIn;
   AlgorithmDispatcher dispatcher;
@@ -44,6 +43,7 @@ public class LocalClient extends Thread{
 
   /**
    * Send an object via the socket
+   *
    * @param toSend the object to send
    */
   public void send(Object toSend) {
@@ -79,11 +79,14 @@ public class LocalClient extends Thread{
             dispatcher.makeOnlineWaitingScreen();
           } else if (message.equals(Requests.start)) {
             dispatcher.startOnline();
+          } else if (((String) message).matches(Requests.room.pattern())) {
+            //Remove the actual room id from the string and set it
+            dispatcher.setRoom(Integer.parseInt(((String) message).replace("room: ", "")));
           }
         }
       } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();
       }
     }
-        }
+  }
 }
