@@ -17,6 +17,7 @@ ClientHandler extends Thread {
   int currentRoom;
   boolean ready = false;
   String username;
+  boolean done = false;
 
   //The chance of a collision within a room is very small, but for large scale deployment a better solution may be needed.
   int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
@@ -83,6 +84,9 @@ ClientHandler extends Thread {
           } else if (((String) message).matches(Requests.username.pattern())) {
             //set the clients username
             username = ((String) message).replace("user: ", "");
+          } else if (message.equals(Requests.done)) {
+            this.done = true;
+            server.rooms.get(currentRoom).markDone(this);
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);

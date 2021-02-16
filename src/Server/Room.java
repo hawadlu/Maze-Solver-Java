@@ -86,4 +86,13 @@ public class Room {
     playerOne.sendMessage("user: " + playerTwo.username);
     playerTwo.sendMessage("user: " + playerOne.username);
   }
+
+  /**
+   * Tell the other client that the other has finished.
+   * @param client the client that has finished.
+   */
+  public void markDone(ClientHandler client) {
+    if (client.equals(playerOne)) playerTwo.sendMessage(Requests.otherDone);
+    else playerOne.sendMessage(Requests.otherDone);
+  }
 }

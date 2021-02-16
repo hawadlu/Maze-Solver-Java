@@ -546,4 +546,14 @@ public class AlgorithmDispatcher {
       else player.makeDoneDisplay("2nd");
     }
   }
+
+  /**
+   * Used by the server to indicate that the other player has finished.
+   *
+   * In this case it will update player 2 (players.get(1))
+   */
+  public void otherDone() {
+    players.get(1).markDone();
+    checkStatus(players.get(1));
+  }
 }

@@ -16,6 +16,8 @@ public class Requests {
   public static String wait = "Wait";
   public static String makeSetup = "Make Setup";
   public static String start = "Start";
+  public static String done = "Done";
+  public static String otherDone = "Other Done";
   public static Pattern room = Pattern.compile("room: [0-9]*");
   public static Pattern username = Pattern.compile("user: [A-z0-9]*");
 }

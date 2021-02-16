@@ -3,6 +3,7 @@ package Game;
 import Algorithm.SolveAlgorithm;
 import GUI.CustomPanels.PlayerPanel;
 import Image.ImageFile;
+import Server.Requests;
 import Utility.*;
 import parser.Handler;
 import parser.Parser;
@@ -357,6 +358,9 @@ public class Player {
     }
 
     this.done = true;
+
+    //if this is online send the message to the server
+    if (online) sendMessage(Requests.done);
     dispatcher.checkStatus(this);
   }
 

@@ -87,6 +87,8 @@ public class LocalClient extends Thread {
             this.roomId = Integer.parseInt(((String) message).replace("room: ", ""));
           } else if (((String) message).matches(Requests.username.pattern())) {
             this.onlineUserName = ((String) message).replace("user: ", "");
+          } else if (message.equals(Requests.otherDone)) {
+            dispatcher.otherDone();
           }
         }
       } catch (IOException | ClassNotFoundException e) {
