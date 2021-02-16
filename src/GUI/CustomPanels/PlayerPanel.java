@@ -572,6 +572,11 @@ public class PlayerPanel extends JPanel {
           System.out.println(player.getName() + " is ready.");
 
           player.sendMessage(Requests.ready);
+
+          //disable the all of the selection elements
+          inbuiltAlgorithms.setEnabled(false);
+          custom.setEnabled(false);
+          readyButton.setEnabled(false);
         });
         setup.add(readyButton);
         this.add(setup);
