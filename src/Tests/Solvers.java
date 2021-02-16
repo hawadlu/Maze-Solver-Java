@@ -1547,7 +1547,7 @@ public class Solvers {
 
     AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(application.getImageFile(), 2);
 
-    dispatcher.makeGameScreen(200, 200);
+    dispatcher.makeGameScreen();
 
     //fixme both player exit lists have the same objects
 

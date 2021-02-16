@@ -79,7 +79,7 @@ public class PlayerPanel extends JPanel {
     if (scrollPanel != null) {
       scrollPanel = new Scroll(displayImage.makeImage());
 
-      this.lastImage = displayImage;
+      this.lastImage = new ImageFile(displayImage);
 
       this.removeAll();
       this.add(scrollPanel);
@@ -113,6 +113,17 @@ public class PlayerPanel extends JPanel {
     this.add(new JLabel(message));
     this.scrollPanel.updateImage(lastImage.makeImage());
     this.add(scrollPanel);
+
+    if (!player.isOnline() || (player.isOnline() && player.isLocal())) {
+      //Add a button to request a restart
+      JButton requestRestart = new JButton("Request Restart");
+
+      requestRestart.addActionListener(e -> {
+        player.requestRestart();
+      });
+
+      this.add(requestRestart);
+    }
 
     refresh();
   }
@@ -498,10 +509,9 @@ public class PlayerPanel extends JPanel {
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
     //Add the image that is being used
-    if (scrollPanel == null) scrollPanel = new Scroll(player.getImageFile().makeImage());
+    scrollPanel = new Scroll(player.getImageFile().makeImage());
 
     this.add(scrollPanel);
-    scrollPanel.updateImage(player.getImageFile().makeImage());
 
     JPanel controls = new JPanel();
     controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));

@@ -197,17 +197,17 @@ public class AlgorithmDispatcher {
 
   /**
    * Create a component that renders two players in one screen.
-   *
-   * @param width  the width of the screen.
-   * @param height the height of the screen.
    */
-  public void makeGameScreen(int width, int height) {
+  public void makeGameScreen() {
+    //reset the image
+    imageFile.reset();
+
     this.screen.removeAll();
     this.screen.setLayout(new GridBagLayout());
 
     //Define the required dimensions
-    Dimension playerDimensions = new Dimension(width / 2, (int) (height * 0.75));
-    Dimension controlDimensions = new Dimension(width, height / 4);
+    Dimension playerDimensions = new Dimension(GUI.width / 2, (int) (GUI.height * 0.75));
+    Dimension controlDimensions = new Dimension(GUI.width, GUI.height / 4);
 
     GridBagConstraints constraints = new GridBagConstraints();
     constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -555,5 +555,18 @@ public class AlgorithmDispatcher {
   public void otherDone() {
     players.get(1).markDone();
     checkStatus(players.get(1));
+  }
+
+  /**
+   * Process a requested restart from a player.
+   * @param player the player that requested the restart.
+   */
+  public void requestRestart(Player player) {
+    if (player.isOnline()) {
+      //todo process the online restart request
+    } else {
+      if (player.equals(players.get(0))) players.get(1).showRestartRequest();
+      else if (player.equals(players.get(1))) players.get(0).showRestartRequest();
+    }
   }
 }

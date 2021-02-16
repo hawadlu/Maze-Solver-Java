@@ -176,7 +176,7 @@ public class GUI {
       dispatcher.makeOnlineStartScreen();
     } else {
       //Local multiplayer screen
-      dispatcher.makeGameScreen(width, height);
+      dispatcher.makeGameScreen();
     }
 
     gameMainArea.add(dispatcher.getScreen());

@@ -2,6 +2,7 @@ package Game;
 
 import Algorithm.SolveAlgorithm;
 import GUI.CustomPanels.PlayerPanel;
+import GUI.GUI;
 import Image.ImageFile;
 import Server.Requests;
 import Utility.*;
@@ -376,7 +377,10 @@ public class Player {
    * Call the scanAll() method in the image processor.
    */
   public void scanAll() {
-    imageProcessor.scanAll(dispatcher.getImageFile());
+    //Only scan if the processor is empty
+    if (imageProcessor.getExits().size() == 0 && imageProcessor.getNodes().size() == 0) {
+      imageProcessor.scanAll(dispatcher.getImageFile());
+    }
   }
 
   /**
@@ -541,5 +545,32 @@ public class Player {
    */
   public String getUserName(String dimension) {
     return dispatcher.getUserName(dimension);
+  }
+
+  /**
+   * Pass a restart request to the dispatcher.
+   */
+  public void requestRestart() {
+    dispatcher.requestRestart(this);
+  }
+
+  /**
+   * Show a message saying that a restart has been requested.
+   *
+   * Process the response.
+   */
+  public void showRestartRequest() {
+    int result = JOptionPane.showConfirmDialog(new JFrame(),"Do you want to restart?", "Restart",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+
+    if (result == JOptionPane.YES_OPTION) {
+      dispatcher.makeGameScreen();
+    } else if (result == JOptionPane.NO_OPTION) {
+      //todo go to a home screen
+    } else {
+      //continue until a valid option selected
+      showRestartRequest();
+    }
   }
 }
