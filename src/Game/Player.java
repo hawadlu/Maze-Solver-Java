@@ -485,6 +485,14 @@ public class Player {
   }
 
   /**
+   * Set if the player is done.
+   * @param done boolean to indicate if the player is done
+   */
+  public void setDone(boolean done) {
+    this.done = done;
+  }
+
+  /**
    * Send a message to the sever.
    * @param message the message to send.
    */
@@ -572,5 +580,13 @@ public class Player {
       //continue until a valid option selected
       showRestartRequest();
     }
+  }
+
+  /**
+   * Reset the variables required for multiplayer
+   */
+  public void reset() {
+    this.imageProcessor = new ImageProcessor();
+    this.done = false;
   }
 }

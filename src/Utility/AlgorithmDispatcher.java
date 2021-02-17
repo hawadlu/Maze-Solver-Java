@@ -202,6 +202,10 @@ public class AlgorithmDispatcher {
     //reset the image
     imageFile.reset();
 
+    //reset the players
+    players.get(0).reset();
+    players.get(1).reset();
+
     this.screen.removeAll();
     this.screen.setLayout(new GridBagLayout());
 
@@ -563,7 +567,7 @@ public class AlgorithmDispatcher {
    */
   public void requestRestart(Player player) {
     if (player.isOnline()) {
-      //todo process the online restart request
+//      client.send();
     } else {
       if (player.equals(players.get(0))) players.get(1).showRestartRequest();
       else if (player.equals(players.get(1))) players.get(0).showRestartRequest();
