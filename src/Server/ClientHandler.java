@@ -87,6 +87,10 @@ ClientHandler extends Thread {
           } else if (message.equals(Requests.done)) {
             this.done = true;
             server.rooms.get(currentRoom).markDone(this);
+          } else if (message.equals(Requests.requestRestart)) {
+            server.rooms.get(currentRoom).processRestartRequest(this);
+          } else if (message.equals(Requests.restart)) {
+            server.rooms.get(currentRoom).restart(this);
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);

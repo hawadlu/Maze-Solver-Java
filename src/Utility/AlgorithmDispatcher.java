@@ -328,6 +328,11 @@ public class AlgorithmDispatcher {
    * make the online waiting screen
    */
   public void makeOnlineWaitingScreen() {
+    //reset the image and players
+    this.imageFile.reset();
+    players.get(0).reset();
+    players.get(1).reset();
+
     this.screen.removeAll();
     this.screen.setLayout(new GridBagLayout());
 
@@ -567,10 +572,42 @@ public class AlgorithmDispatcher {
    */
   public void requestRestart(Player player) {
     if (player.isOnline()) {
-//      client.send();
+      client.send(Requests.requestRestart);
     } else {
-      if (player.equals(players.get(0))) players.get(1).showRestartRequest();
-      else if (player.equals(players.get(1))) players.get(0).showRestartRequest();
+      showRestartRequest();
+    }
+  }
+
+  /**
+   * Show a message saying that a restart has been requested.
+   *
+   * Process the response.
+   */
+  public void showRestartRequest() {
+    int result;
+
+    if (players.get(0).isOnline()) {
+      result = JOptionPane.showConfirmDialog(new JFrame(), client.getOnlineUserName() + " wants a rematch", "Restart",
+              JOptionPane.YES_NO_OPTION,
+              JOptionPane.QUESTION_MESSAGE);
+    } else {
+      result = JOptionPane.showConfirmDialog(new JFrame(), "Do you want to restart?", "Restart",
+              JOptionPane.YES_NO_OPTION,
+              JOptionPane.QUESTION_MESSAGE);
+    }
+
+    if (result == JOptionPane.YES_OPTION) {
+      if (players.get(0).isOnline()) {
+        client.send(Requests.restart);
+        makeOnlineWaitingScreen();
+      } else {
+        makeGameScreen();
+      }
+    } else if (result == JOptionPane.NO_OPTION) {
+      //todo go to a home screen
+    } else {
+      //continue until a valid option selected
+      showRestartRequest();
     }
   }
 }

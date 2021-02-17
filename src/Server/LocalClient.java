@@ -89,6 +89,8 @@ public class LocalClient extends Thread {
             this.onlineUserName = ((String) message).replace("user: ", "");
           } else if (message.equals(Requests.otherDone)) {
             dispatcher.otherDone();
+          } else if (message.equals(Requests.requestRestart)) {
+            dispatcher.showRestartRequest();
           }
         }
       } catch (IOException | ClassNotFoundException e) {

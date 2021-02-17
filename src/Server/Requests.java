@@ -19,6 +19,7 @@ public class Requests {
   public static String done = "Done";
   public static String otherDone = "Other Done";
   public static String requestRestart = "Request Restart";
+  public static String restart = "Restart";
   public static Pattern room = Pattern.compile("room: [0-9]*");
   public static Pattern username = Pattern.compile("user: [A-z0-9]*");
 }

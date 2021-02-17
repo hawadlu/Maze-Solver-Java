@@ -563,26 +563,6 @@ public class Player {
   }
 
   /**
-   * Show a message saying that a restart has been requested.
-   *
-   * Process the response.
-   */
-  public void showRestartRequest() {
-    int result = JOptionPane.showConfirmDialog(new JFrame(),"Do you want to restart?", "Restart",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
-
-    if (result == JOptionPane.YES_OPTION) {
-      dispatcher.makeGameScreen();
-    } else if (result == JOptionPane.NO_OPTION) {
-      //todo go to a home screen
-    } else {
-      //continue until a valid option selected
-      showRestartRequest();
-    }
-  }
-
-  /**
    * Reset the variables required for multiplayer
    */
   public void reset() {

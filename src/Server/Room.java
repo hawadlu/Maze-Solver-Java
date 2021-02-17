@@ -95,4 +95,29 @@ public class Room {
     if (client.equals(playerOne)) playerTwo.sendMessage(Requests.otherDone);
     else playerOne.sendMessage(Requests.otherDone);
   }
+
+  /**
+   * Process a restart request from one player.
+   * @param client the player that sent the restart request.
+   */
+  public void processRestartRequest(ClientHandler client) {
+    if (client.equals(playerOne)) playerTwo.sendMessage(Requests.requestRestart);
+    else playerOne.sendMessage(Requests.requestRestart);
+  }
+
+  /**
+   * Reset the room and tell the player that requested the restart to
+   * make the restart screen.
+   * @param client the client that accepted the restart request.
+   */
+  public void restart(ClientHandler client) {
+    if (client.equals(playerOne)) playerTwo.sendMessage(Requests.wait);
+    else playerOne.sendMessage(Requests.wait);
+
+    playerOne.done = false;
+    playerTwo.done = false;
+
+    playerOne.ready = false;
+    playerTwo.ready = false;
+  }
 }

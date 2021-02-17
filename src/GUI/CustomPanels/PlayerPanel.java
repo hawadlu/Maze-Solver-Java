@@ -549,6 +549,8 @@ public class PlayerPanel extends JPanel {
   public void makeOnlineWaitingScreen() {
     this.removeAll();
 
+    this.inbuiltAlgorithms.setEnabled(true);
+
     //Add the username
     if (this.player.isLocal()) {
       this.add(new JLabel(player.getUserName("local")));
@@ -556,9 +558,7 @@ public class PlayerPanel extends JPanel {
       this.add( new JLabel(player.getUserName("online")));
     }
 
-    if (this.scrollPanel == null) {
-      scrollPanel = new Scroll(player.getImageFile().makeImage());
-    }
+    scrollPanel = new Scroll(player.getImageFile().makeImage());
     this.add(scrollPanel);
 
     //Only add if all players are ready and this is the local player
