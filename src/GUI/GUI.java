@@ -17,8 +17,8 @@ public class GUI {
   Application application;
   AlgorithmDispatcher dispatcher;
 
-  public final int width = 1280;
-  public final int height = 800;
+  public static final int width = 1280;
+  public static final int height = 800;
   public static final Color activeCol = new Color(0, 131, 233);
   public static final Color inactiveCol = new Color(66, 66, 66);
   public static final Color backgroundCol = new Color(211, 211, 211);
@@ -162,10 +162,23 @@ public class GUI {
   public void makeGameStartScreen() {
     gameMainArea.removeAll();
 
-    dispatcher = new AlgorithmDispatcher(application.getImageFile(), 2);
+    //Make a dispatcher for local pvp
+    if (application.getImageFile() != null) {
+      dispatcher = new AlgorithmDispatcher(application.getImageFile(), 2);
+    } else {
+      //Make a dispatcher for online pvp
+      dispatcher = new AlgorithmDispatcher(application.getClient(), 2);
+    }
     dispatcher.initialiseGUI(this);
 
-    dispatcher.makeGameScreen(width, height);
+    //Make the online multiplayer screen
+    if (application.getClient() != null) {
+      dispatcher.makeOnlineStartScreen();
+    } else {
+      //Local multiplayer screen
+      dispatcher.makeGameScreen();
+    }
+
     gameMainArea.add(dispatcher.getScreen());
 
 
@@ -176,43 +189,73 @@ public class GUI {
    * Make the panel that will be used to create the algorithms.
    * It creates a simple panel that houses a button for loading images
    *
-   * @param param parameter to indicate which screen sould come after this
+   * @param param parameter to indicate which screen should come after this
    */
   public void makeLoadScreen(String param) {
+    JPanel loadPanel = new JPanel();
+
     if (param.equals("Algorithm")) {
       if (algoMainArea != null) algoMainArea.removeAll();
       else algoMainArea = new JPanel();
       algoMainArea.setBackground(backgroundCol);
+
+      loadPanel.setBackground(backgroundCol);
+      loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
+      JButton loadImage = new JButton("Load Image");
+
+      //Bind functionality to the load image button
+      loadImage.addActionListener(e -> {
+        try {
+          application.parseImageFile(UIFileChooser());
+        } catch (GenericError genericError) {
+          genericError.printStackTrace();
+        }
+
+        //Load the image to the main screen
+        makeAlgoSolveScreen();
+
+        refresh();
+      });
+
+      loadPanel.add(loadImage);
+      algoMainArea.add(loadPanel);
+      refresh();
+
     } else if (param.equals("Game")) {
       if (gameMainArea != null) gameMainArea.removeAll();
       else gameMainArea = new JPanel();
       gameMainArea.setBackground(backgroundCol);
+
+      JButton connect = new JButton("Connect To Server");
+
+      connect.addActionListener(e -> {
+        application.connectToServer();
+        makeGameStartScreen();
+      });
+
+      JButton loadImage = new JButton("Local Multiplayer");
+
+      //Bind functionality to the load image button
+      loadImage.addActionListener(e -> {
+        try {
+          application.parseImageFile(UIFileChooser());
+        } catch (GenericError genericError) {
+          genericError.printStackTrace();
+        }
+
+        //Load the image to the main screen
+        makeGameStartScreen();
+
+        refresh();
+      });
+
+
+
+      loadPanel.add(connect);
+      loadPanel.add(loadImage);
+      gameMainArea.add(loadPanel);
     }
 
-    JPanel loadPanel = new JPanel();
-    loadPanel.setBackground(backgroundCol);
-    loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
-    JButton loadImage = new JButton("Load Image");
-
-    //Bind functionality to the load image button
-    loadImage.addActionListener(e -> {
-      try {
-        application.parseImageFile(UIFileChooser());
-      } catch (GenericError genericError) {
-        genericError.printStackTrace();
-      }
-
-      //Load the image to the main screen
-      if (param.equals("Algorithm")) makeAlgoSolveScreen();
-      else if (param.equals("Game")) makeGameStartScreen();
-
-      refresh();
-    });
-
-    loadPanel.add(loadImage);
-
-    if (param.equals("Algorithm")) algoMainArea.add(loadPanel);
-    else if (param.equals("Game")) gameMainArea.add(loadPanel);
 
     refresh();
   }
@@ -256,6 +299,7 @@ public class GUI {
    *
    * @return the file
    */
+  //todo deal with cancel clicked.
   public static File UIFileChooser() {
     System.out.println("Load image");
     //Get the file

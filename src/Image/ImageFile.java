@@ -1,23 +1,21 @@
 package Image;
 
-import Utility.Colours;
+import Utility.*;
 import Utility.Colours.colEnum;
 import Utility.Exceptions.InvalidImage;
-import Utility.Location;
-import Utility.Node;
-import Utility.Segment;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Class used to hold the image in memory
  */
-public class ImageFile {
+public class ImageFile implements Serializable {
   private colEnum[][] imageArray = null;
   private final String filePath;
 
@@ -255,6 +253,30 @@ public class ImageFile {
     }
   }
 
+  /**
+   * Fills a specified path in the maze
+   *
+   * @param path the path to fill
+   * @param fill fill in the spaces between the nodes
+   */
+  public void fillLocationPath(ArrayList<Location> path, boolean fill) {
+    while (path.size() > 1) {
+      Location currentLocation = path.remove(0);
+
+      if (fill) {
+        Location nextLocation = path.get(0);
+        int startX = currentLocation.x;
+        int startY = currentLocation.y;
+        int endX = nextLocation.x;
+        int endY = nextLocation.y;
+
+        drawBetweenNodes(startX, startY, endX, endY, colEnum.RED);
+      } else {
+        drawNode(currentLocation, colEnum.BLUE);
+      }
+    }
+  }
+
   public void drawNode(Location drawLocation, colEnum colour) {
     imageArray[drawLocation.y][drawLocation.x] = colour;
   }
@@ -351,6 +373,42 @@ public class ImageFile {
    */
   private String getFilePath() {
     return filePath;
+  }
+
+  /**
+   * @return a json representation of the image
+   */
+  public String makeJson() {
+    StringBuilder json = new StringBuilder();
+
+    json.append("{\n");
+
+    //Add the width and height
+    json.append("\"width\": " + (imageArray[0].length - 1) + ",\n");
+    json.append("\"height\": " + (imageArray.length - 1) + ",\n");
+
+    //Add the image values
+    json.append("\"values\": {\n");
+
+      for (int height = 0; height < imageArray.length; height++) {
+        json.append("\"" + height + "\": {\n");
+
+        for (int width = 0; width < imageArray[0].length; width++) {
+          //Only add a comma if it is not the last one
+          if (width < imageArray[0].length - 1) json.append("\"" + width + "\": \"" + imageArray[height][width] + "\",\n");
+          else json.append("\"" + width + "\": \"" + imageArray[height][width] + "\"\n");
+
+        }
+
+        //Only add a comma if it is not the last one
+        if (height < imageArray.length - 1) json.append("},\n");
+        else json.append("}\n");
+      }
+
+    json.append("}\n");
+    json.append("}");
+
+    return json.toString();
   }
 }
 

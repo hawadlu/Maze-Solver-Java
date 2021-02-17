@@ -1,11 +1,12 @@
 package Utility;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Simple class used to represent coordinates.
  */
-public class Location {
+public class Location implements Serializable {
   public final int x, y;
 
   public Location(int x, int y) {

@@ -2,7 +2,9 @@ package Game;
 
 import Algorithm.SolveAlgorithm;
 import GUI.CustomPanels.PlayerPanel;
+import GUI.GUI;
 import Image.ImageFile;
+import Server.Requests;
 import Utility.*;
 import parser.Handler;
 import parser.Parser;
@@ -10,10 +12,8 @@ import Image.ImageProcessor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Player {
   PlayerPanel panel;
   String playerName;
-  AtomicBoolean done = new AtomicBoolean(false);
+  boolean done = false;
   Handler handler;
   private Parser customAlgo;
   ImageProcessor imageProcessor;
@@ -29,8 +29,9 @@ public class Player {
   SolveAlgorithm solve;
   String type;
   Logger logger = new Logger();
-
-
+  boolean online = false;
+  boolean local = false;
+  boolean hasOpponent = false;
   int delay;
 
   /**
@@ -65,11 +66,39 @@ public class Player {
 
   /**
    * @param maxSize the max size that any panels in the game can be displayed at
+   * @param dispatcher
+   * @param playerName
    */
   public Player(Dimension maxSize, String playerName, AlgorithmDispatcher dispatcher) {
     this.playerName = playerName;
     this.panel = new PlayerPanel(maxSize, this);
     this.dispatcher = dispatcher;
+  }
+
+  /**
+   * Create a player that is updated by the server.
+   * @param dispatcher
+   * @param playerName
+   * @param online
+   * @param type
+   */
+  public Player(String playerName, String type, AlgorithmDispatcher dispatcher, boolean online) {
+    this.playerName = playerName;
+    this.type = type;
+    this.dispatcher = dispatcher;
+
+    //Create the image processor
+    this.imageProcessor = new ImageProcessor();
+
+    //todo make the dimension non fixed
+    this.panel = new PlayerPanel(new Dimension(500,500), this);
+
+    //make the algorithm solve screen
+    if (this.type.equals("Algorithm") && dispatcher.getImageFile() != null) {
+      panel.setAlgoSolveScreen();
+    }
+
+    this.online = online;
   }
 
 
@@ -91,15 +120,17 @@ public class Player {
     this.panel = new PlayerPanel(new Dimension(500,500), this);
 
     //make the algorithm solve screen
-    if (this.type.equals("Algorithm")) {
+    if (this.type.equals("Algorithm") && dispatcher.getImageFile() != null) {
       panel.setAlgoSolveScreen();
     }
   }
 
+  /**
+   * Create the panel that shows the solved image
+   */
   public void createSolveImagePanel() {
     panel.initSolvePanel();
   }
-
 
   /**
    * @param node the node to draw the image from
@@ -111,6 +142,26 @@ public class Player {
 
     //Create a path from the current node
     newImage.fillNodePath(PathMaker.generatePathArraylist(node), true);
+    if (panel != null) {
+      panel.updateImage(newImage);
+    }
+
+    //send the image to the server if necessary
+    if (local && online) {
+      dispatcher.sendMessage(PathMaker.generatePathLocationArraylist(node));
+    }
+  }
+
+  /**
+   * Update the player image using a list of locations
+   * @param locationList the list of locations to draw.
+   */
+  public void update(LocationList locationList) {
+    //Create a duplicate image file
+    ImageFile newImage = new ImageFile(dispatcher.getImageFile());
+
+    //Fill in the path
+    newImage.fillLocationPath(locationList.getUnderlyingList(), true);
     if (panel != null) {
       panel.updateImage(newImage);
     }
@@ -145,20 +196,14 @@ public class Player {
    * @param message, the message to display
    */
   public void makeDoneDisplay(String message) {
-    //Make the completed image
-    ImageFile newImage = new ImageFile(dispatcher.getImageFile());
-
-    //Create a path from the current node
-    //newImage.fillNodePath(PathMaker.generatePathArraylist(currentNode), true);
-
-    if (panel != null) panel.markDone(message, newImage);
+    if (panel != null) panel.markDone(message);
   }
 
   /**
    * Mark this player as done
    */
   public void markDone() {
-    done.set(true);
+    done = true;
   }
 
   @Override
@@ -312,6 +357,12 @@ public class Player {
     } else {
       solve(panel.getAlgorithm());
     }
+
+    this.done = true;
+
+    //if this is online send the message to the server
+    if (online) sendMessage(Requests.done);
+    dispatcher.checkStatus(this);
   }
 
   /**
@@ -326,7 +377,10 @@ public class Player {
    * Call the scanAll() method in the image processor.
    */
   public void scanAll() {
-    imageProcessor.scanAll(dispatcher.getImageFile());
+    //Only scan if the processor is empty
+    if (imageProcessor.getExits().size() == 0 && imageProcessor.getNodes().size() == 0) {
+      imageProcessor.scanAll(dispatcher.getImageFile());
+    }
   }
 
   /**
@@ -399,6 +453,14 @@ public class Player {
   public void makeSolvingScreen() { panel.makeSolvingScreen(); }
 
   /**
+   * Make the screen this is displayed when waiting for an online game to start.
+   */
+  public void makeOnlineWaitingScreen() {
+    System.out.println("Making wait screen");
+    panel.makeOnlineWaitingScreen();
+  }
+
+  /**
    *
    * @return
    */
@@ -419,6 +481,92 @@ public class Player {
    * @return
    */
   public boolean isDone() {
-    return this.done.get();
+    return this.done;
+  }
+
+  /**
+   * Set if the player is done.
+   * @param done boolean to indicate if the player is done
+   */
+  public void setDone(boolean done) {
+    this.done = done;
+  }
+
+  /**
+   * Send a message to the sever.
+   * @param message the message to send.
+   */
+  public void sendMessage(Object message) {
+    dispatcher.sendMessage(message);
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean isOnline() {
+    return online;
+  }
+
+  /**
+   *
+   * @param online
+   */
+  public void setOnline(boolean online) {
+    this.online = online;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public boolean hasOpponent() {
+    return hasOpponent;
+  }
+
+  /**
+   * @param hasOpponent boolean indicating if there is an opponent.
+   */
+  public void setOpponent(boolean hasOpponent) {
+    this.hasOpponent = hasOpponent;
+  }
+
+  /**
+   * @return boolean indicating if thus player is local
+   */
+  public boolean isLocal() {
+    return local;
+  }
+
+  /**
+   * Set if this player is the local player.
+   * @param local a boolean to indicate if local.
+   */
+  public void setLocal(boolean local) {
+    this.local = local;
+  }
+
+  /**
+   * Get the username from the dispatcher.
+   * @param dimension is this player online or local
+   * @return the username
+   */
+  public String getUserName(String dimension) {
+    return dispatcher.getUserName(dimension);
+  }
+
+  /**
+   * Pass a restart request to the dispatcher.
+   */
+  public void requestRestart() {
+    dispatcher.requestRestart(this);
+  }
+
+  /**
+   * Reset the variables required for multiplayer
+   */
+  public void reset() {
+    this.imageProcessor = new ImageProcessor();
+    this.done = false;
   }
 }

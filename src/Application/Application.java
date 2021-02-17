@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import Image.*;
+import Server.LocalClient;
 import Utility.Exceptions.GenericError;
 import Utility.Location;
 import Utility.Node;
@@ -48,6 +49,8 @@ public class Application {
   GUI gui;
   ImageFile currentImage;
   ImageProcessor imageProcessor;
+  LocalClient client;
+
   public Application() {
   }
 
@@ -172,5 +175,21 @@ public class Application {
 
   public ImageProcessor getImageProcessor() {
     return imageProcessor;
+  }
+
+  /**
+   * Initiate a connect to a game server
+   */
+  public void connectToServer() {
+    client = new LocalClient();
+    client.connect();
+    client.start();
+  }
+
+  /**
+   * @return the client object.
+   */
+  public LocalClient getClient() {
+    return client;
   }
 }

@@ -1,9 +1,7 @@
 package GUI.CustomPanels;
 
-import Application.Application;
 import Game.Player;
-import Utility.AlgorithmDispatcher;
-import parser.Handler;
+import Server.Requests;
 import parser.Parser;
 import Image.ImageFile;
 
@@ -22,8 +20,10 @@ public class PlayerPanel extends JPanel {
   JButton parser = null;
   Dimension imageSize;
   Player player;
-  JComboBox<String> inbuiltAlgorithms = null;
   Scroll scrollPanel;
+  String[] algorithms = {"AStar", "Dijkstra", "Depth First", "Breadth First"};
+  JComboBox<String> inbuiltAlgorithms = new JComboBox<>(algorithms);
+  ImageFile lastImage;
 
 
   public PlayerPanel(Dimension maxSize, Player player) {
@@ -47,12 +47,6 @@ public class PlayerPanel extends JPanel {
     title.setAlignmentX(CENTER_ALIGNMENT);
     this.add(title);
 
-    //The buttons to choose an algorithm
-    if (inbuiltAlgorithms == null) {
-      //Create a button for loading the algorithm
-      String[] algorithms = {"AStar", "Dijkstra", "Depth First", "Breadth First"};
-      inbuiltAlgorithms = new JComboBox<>(algorithms);
-    }
     this.add(inbuiltAlgorithms);
 
     //The button to parse an algorithm
@@ -85,6 +79,8 @@ public class PlayerPanel extends JPanel {
     if (scrollPanel != null) {
       scrollPanel = new Scroll(displayImage.makeImage());
 
+      this.lastImage = new ImageFile(displayImage);
+
       this.removeAll();
       this.add(scrollPanel);
       this.revalidate();
@@ -112,12 +108,23 @@ public class PlayerPanel extends JPanel {
    * Mark this panel as done.
    * @param message the place in which this player finished
    */
-  public void markDone(String message, ImageFile completeImage) {
+  public void markDone(String message) {
     this.removeAll();
-    this.displayMessage(message);
-    this.scrollPanel.updateImage(completeImage.makeImage());
+    this.add(new JLabel(message));
+    this.scrollPanel.updateImage(lastImage.makeImage());
+    this.add(scrollPanel);
 
-    //todo may have to change this
+    if (!player.isOnline() || (player.isOnline() && player.isLocal())) {
+      //Add a button to request a restart
+      JButton requestRestart = new JButton("Request Restart");
+
+      requestRestart.addActionListener(e -> {
+        player.requestRestart();
+      });
+
+      this.add(requestRestart);
+    }
+
     refresh();
   }
 
@@ -502,10 +509,9 @@ public class PlayerPanel extends JPanel {
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
     //Add the image that is being used
-    if (scrollPanel == null) scrollPanel = new Scroll(player.getImageFile().makeImage());
+    scrollPanel = new Scroll(player.getImageFile().makeImage());
 
     this.add(scrollPanel);
-    scrollPanel.updateImage(player.getImageFile().makeImage());
 
     JPanel controls = new JPanel();
     controls.setLayout(new BoxLayout(controls, BoxLayout.X_AXIS));
@@ -530,7 +536,67 @@ public class PlayerPanel extends JPanel {
   public void makeSolvingScreen() {
     this.removeAll();
 
+    if (this.scrollPanel == null) scrollPanel = new Scroll(player.getImageFile().makeImage());
     this.add(scrollPanel);
+
+    this.revalidate();
+    this.repaint();
+  }
+
+  /**
+   * Make the screen that is displayed when waiting for an online game to start
+   */
+  public void makeOnlineWaitingScreen() {
+    this.removeAll();
+
+    this.inbuiltAlgorithms.setEnabled(true);
+
+    //Add the username
+    if (this.player.isLocal()) {
+      this.add(new JLabel(player.getUserName("local")));
+    } else {
+      this.add( new JLabel(player.getUserName("online")));
+    }
+
+    scrollPanel = new Scroll(player.getImageFile().makeImage());
+    this.add(scrollPanel);
+
+    //Only add if all players are ready and this is the local player
+    if (player.hasOpponent()) {
+      //If this is the local player add setup controls
+
+      if (this.player.isLocal()) {
+        //Create the setup panel
+        JPanel setup = new JPanel();
+        setup.add(inbuiltAlgorithms);
+
+        //Add button for custom algorithms
+        JButton custom = new JButton("Custom Algorithm");
+        custom.addActionListener(e -> {
+          //load and compile the algorithm
+          player.setCustomAlgo(new Parser(GUI.GUI.UIFileChooser(), true, player));
+        });
+        this.add(custom);
+
+        setup.add(custom);
+
+        JButton readyButton = new JButton("Press When Ready");
+        readyButton.addActionListener(e -> {
+          System.out.println(player.getName() + " is ready.");
+
+          player.sendMessage(Requests.ready);
+
+          //disable the all of the selection elements
+          inbuiltAlgorithms.setEnabled(false);
+          custom.setEnabled(false);
+          readyButton.setEnabled(false);
+        });
+        setup.add(readyButton);
+        this.add(setup);
+      }
+    } else if (!player.isLocal()) {
+        this.add(new JLabel("Waiting for others to join"));
+    }
 
     this.revalidate();
     this.repaint();
