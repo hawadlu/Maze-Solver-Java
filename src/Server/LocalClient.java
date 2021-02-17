@@ -1,7 +1,7 @@
 package Server;
 
 import Image.ImageFile;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 import Utility.LocationList;
 
 import java.io.*;
@@ -15,7 +15,7 @@ import java.net.Socket;
 public class LocalClient extends Thread {
   private ObjectOutputStream dataOut;
   private ObjectInputStream dataIn;
-  private AlgorithmDispatcher dispatcher;
+  private Dispatcher dispatcher;
   private String localUserName;
   private String onlineUserName;
   private int roomId;
@@ -23,7 +23,7 @@ public class LocalClient extends Thread {
   /**
    * Set the dispatcher
    */
-  public void setDispatcher(AlgorithmDispatcher dispatcher) {
+  public void setDispatcher(Dispatcher dispatcher) {
     this.dispatcher = dispatcher;
   }
 

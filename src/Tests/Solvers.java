@@ -3,10 +3,9 @@ package Tests;
 import Application.Application;
 import Game.Player;
 import Utility.Exceptions.GenericError;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 import org.junit.jupiter.api.Test;
 
-import java.awt.desktop.AppForegroundListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,12 +52,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -100,12 +99,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -146,12 +145,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -189,12 +188,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -233,12 +232,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -276,12 +275,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -319,12 +318,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -366,8 +365,8 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
@@ -375,7 +374,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -418,12 +417,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -465,12 +464,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -511,12 +510,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -553,12 +552,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -596,12 +595,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -639,12 +638,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -682,12 +681,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -729,8 +728,8 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
@@ -738,7 +737,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -781,12 +780,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -828,12 +827,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -874,12 +873,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -916,12 +915,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -959,12 +958,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1002,12 +1001,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1045,12 +1044,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1092,8 +1091,8 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
@@ -1101,7 +1100,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1144,12 +1143,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1191,12 +1190,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1237,12 +1236,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1279,12 +1278,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1322,12 +1321,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1365,12 +1364,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1408,12 +1407,12 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
-          algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
+          dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + option + " multi threading " + multi + " " + file.getName());
           System.out.println("Complete");
         }
       }
@@ -1455,8 +1454,8 @@ public class Solvers {
           Application application = new Application();
           application.parseImageFile(file);
 
-          AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-          algorithmDispatcher.solve(algorithm, option, multi);
+          Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+          dispatcher.solve(algorithm, option, multi);
 
           System.out.println("Thread complete");
 
@@ -1464,7 +1463,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1519,8 +1518,8 @@ public class Solvers {
                 Application application = new Application();
                 application.parseImageFile(file);
 
-                AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-                algorithmDispatcher.solve(algorithm, option, multi);
+                Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+                dispatcher.solve(algorithm, option, multi);
 
                 System.out.println("Thread complete");
 
@@ -1528,7 +1527,7 @@ public class Solvers {
                 String loading = null, solving = null;
                 if (option.equals("Loading")) loading = "Loading";
                 else if (option.equals("Solving")) solving = "Solving";
-                tracker.addResult(algorithm, file.getName(), algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), multi, "Success");
+                tracker.addResult(algorithm, file.getName(), dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
               }
             }
           }
@@ -1545,7 +1544,7 @@ public class Solvers {
     Application application = new Application();
     application.parseImageFile(image);
 
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(application.getImageFile(), 2);
+    Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 2);
 
     dispatcher.makeGameScreen();
 

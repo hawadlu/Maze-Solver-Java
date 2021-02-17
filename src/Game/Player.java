@@ -1,8 +1,8 @@
 package Game;
 
 import Algorithm.SolveAlgorithm;
+import Dispatcher.Dispatcher;
 import GUI.CustomPanels.PlayerPanel;
-import GUI.GUI;
 import Image.ImageFile;
 import Server.Requests;
 import Utility.*;
@@ -16,7 +16,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player {
   PlayerPanel panel;
@@ -25,7 +24,7 @@ public class Player {
   Handler handler;
   private Parser customAlgo;
   ImageProcessor imageProcessor;
-  AlgorithmDispatcher dispatcher;
+  Dispatcher dispatcher;
   SolveAlgorithm solve;
   String type;
   Logger logger = new Logger();
@@ -43,7 +42,7 @@ public class Player {
    * @param customAlgo the file containing the algorithm to be parsed.
    * @param dispatcher the Algorithm dispatcher.
    */
-  public Player(String playerName, File customAlgo, AlgorithmDispatcher dispatcher) {
+  public Player(String playerName, File customAlgo, Dispatcher dispatcher) {
     this.playerName = playerName;
     this.customAlgo = new Parser(customAlgo, this);
     this.dispatcher = dispatcher;
@@ -69,7 +68,7 @@ public class Player {
    * @param dispatcher
    * @param playerName
    */
-  public Player(Dimension maxSize, String playerName, AlgorithmDispatcher dispatcher) {
+  public Player(Dimension maxSize, String playerName, Dispatcher dispatcher) {
     this.playerName = playerName;
     this.panel = new PlayerPanel(maxSize, this);
     this.dispatcher = dispatcher;
@@ -82,7 +81,7 @@ public class Player {
    * @param online
    * @param type
    */
-  public Player(String playerName, String type, AlgorithmDispatcher dispatcher, boolean online) {
+  public Player(String playerName, String type, Dispatcher dispatcher, boolean online) {
     this.playerName = playerName;
     this.type = type;
     this.dispatcher = dispatcher;
@@ -108,7 +107,7 @@ public class Player {
    * @param type is this running an algorithm or a game.
    * @param dispatcher the dispatcher object.
    */
-  public Player(String playerName, String type, AlgorithmDispatcher dispatcher) {
+  public Player(String playerName, String type, Dispatcher dispatcher) {
     this.playerName = playerName;
     this.type = type;
     this.dispatcher = dispatcher;

@@ -1,7 +1,7 @@
 package GUI;
 
 import Application.Application;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 
 import Utility.Exceptions.GenericError;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class GUI {
   Application application;
-  AlgorithmDispatcher dispatcher;
+  Dispatcher dispatcher;
 
   public static final int width = 1280;
   public static final int height = 800;
@@ -164,10 +164,10 @@ public class GUI {
 
     //Make a dispatcher for local pvp
     if (application.getImageFile() != null) {
-      dispatcher = new AlgorithmDispatcher(application.getImageFile(), 2);
+      dispatcher = new Dispatcher(application.getImageFile(), 2);
     } else {
       //Make a dispatcher for online pvp
-      dispatcher = new AlgorithmDispatcher(application.getClient(), 2);
+      dispatcher = new Dispatcher(application.getClient(), 2);
     }
     dispatcher.initialiseGUI(this);
 
@@ -269,7 +269,7 @@ public class GUI {
     System.out.println("Making algorithm solve screen");
 
     //Make the dispatcher object
-    dispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
+    dispatcher = new Dispatcher(application.getImageFile(), 1);
     dispatcher.initialiseGUI(this);
 
     algoMainArea.add(dispatcher.getPlayerScreen(0));

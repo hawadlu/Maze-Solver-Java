@@ -1,4 +1,4 @@
-package Utility;
+package Dispatcher;
 
 import GUI.GUI;
 import Game.Player;
@@ -6,6 +6,7 @@ import Image.*;
 import Server.LocalClient;
 import Server.Requests;
 import Utility.Exceptions.InvalidImage;
+import Utility.LocationList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 /**
 * todo describe this class
  */
-public class AlgorithmDispatcher {
+public class Dispatcher {
   Dimension playerDimensions = new Dimension(GUI.width / 2, (int) (GUI.height * 0.75));
   private ImageFile imageFile;
   private ArrayList<Player> players = new ArrayList<>();
@@ -34,7 +35,7 @@ public class AlgorithmDispatcher {
    * @param imageFile
    * @param playersToCreate the number of players that should be created.
    */
-  public AlgorithmDispatcher(ImageFile imageFile, int playersToCreate) {
+  public Dispatcher(ImageFile imageFile, int playersToCreate) {
     this.imageFile = new ImageFile(imageFile);
 
     for (int i = 0; i < playersToCreate; i++) {
@@ -50,7 +51,7 @@ public class AlgorithmDispatcher {
    * @param client          the object that connects to the server.
    * @param playersToCreate the number of players to create
    */
-  public AlgorithmDispatcher(LocalClient client, int playersToCreate) {
+  public Dispatcher(LocalClient client, int playersToCreate) {
     this.client = client;
 
     //The local player
@@ -68,7 +69,7 @@ public class AlgorithmDispatcher {
    * @param customAlgo the file containing the custom algorithm.
    * @param imageFile  the imageFile to be used.
    */
-  public AlgorithmDispatcher(File customAlgo, ImageFile imageFile) {
+  public Dispatcher(File customAlgo, ImageFile imageFile) {
     this.imageFile = new ImageFile(imageFile);
 
     Player newPlayer = new Player("Player One", customAlgo, this);

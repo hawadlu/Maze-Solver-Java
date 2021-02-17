@@ -2,7 +2,7 @@ package Tests;
 
 import Application.Application;
 import Utility.Exceptions.GenericError;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -41,12 +41,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -78,12 +78,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -115,12 +115,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -152,12 +152,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -189,12 +189,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -226,12 +226,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -263,12 +263,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
 
@@ -305,14 +305,14 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
       //Add these to the tracker
       String loading = null, solving = null;
-      tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), false, "Success");
+      tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), false, "Success");
     }
 
     tracker.saveResult();
@@ -347,12 +347,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -384,12 +384,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -421,12 +421,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -458,12 +458,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -495,12 +495,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -532,12 +532,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
   }
@@ -569,12 +569,12 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
-      algorithmDispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
+      dispatcher.getImageFile().saveImage("Images/Solved/Test " + algorithm + " " + file.getName());
       System.out.println("Complete");
     }
 
@@ -611,14 +611,14 @@ public class MinimumTrees {
       Application application = new Application();
       application.parseImageFile(file);
 
-      AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-      algorithmDispatcher.solve(algorithm);
+      Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+      dispatcher.solve(algorithm);
 
       System.out.println("Thread complete");
 
       //Add these to the tracker
       String loading = null, solving = null;
-      tracker.addResult(algorithm, fileStr, algorithmDispatcher.getMazeSize(), loading, solving, algorithmDispatcher.getExecTime(), false, "Success");
+      tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), false, "Success");
     }
 
     tracker.saveResult();

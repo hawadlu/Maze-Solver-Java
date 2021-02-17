@@ -2,18 +2,13 @@ package Tests;
 
 import Application.Application;
 import Image.ImageFile;
-import Image.ImageProcessor;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 import Utility.Exceptions.GenericError;
 import Utility.Exceptions.ParserFailure;
-import Utility.PathMaker;
 import org.junit.jupiter.api.Test;
-import parser.Handler;
-import parser.Parser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import static Tests.TestUtilities.deleteFiles;
 import static Tests.TestUtilities.getAllFiles;
@@ -37,7 +32,7 @@ public class ParserTests {
 
     File dfs = new File("Programs/Working Algorithms/DFS.solver");
 
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -56,7 +51,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/DFS.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -75,7 +70,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/BFS.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -94,7 +89,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/BFS.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -113,7 +108,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/Dijkstra.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -132,7 +127,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/Dijkstra.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -153,7 +148,7 @@ public class ParserTests {
 
 
     File dfs = new File("Programs/Working Algorithms/AStar.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -172,7 +167,7 @@ public class ParserTests {
     }
 
     File dfs = new File("Programs/Working Algorithms/AStar.solver");
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(dfs, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(dfs, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -196,7 +191,7 @@ public class ParserTests {
         genericError.printStackTrace();
       }
 
-      AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(file, application.getImageFile());
+      Dispatcher dispatcher = new Dispatcher(file, application.getImageFile());
       dispatcher.solve();
 
       ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -221,7 +216,7 @@ public class ParserTests {
         genericError.printStackTrace();
       }
 
-      AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(file, application.getImageFile());
+      Dispatcher dispatcher = new Dispatcher(file, application.getImageFile());
       dispatcher.solve();
 
       ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -319,7 +314,7 @@ public class ParserTests {
           Application application = new Application();
           application.parseImageFile(imageFile);
 
-          AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(file, application.getImageFile());
+          Dispatcher dispatcher = new Dispatcher(file, application.getImageFile());
           dispatcher.solve();
 
           System.out.print("\n\n\n");
@@ -340,7 +335,7 @@ public class ParserTests {
     Application application = new Application();
     application.parseImageFile(image);
 
-    AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(parser, application.getImageFile());
+    Dispatcher dispatcher = new Dispatcher(parser, application.getImageFile());
     dispatcher.solve();
 
     ImageFile imageFile = dispatcher.fillPlayerPath();
@@ -366,7 +361,7 @@ public class ParserTests {
           Application application = new Application();
           application.parseImageFile(imageFile);
 
-          AlgorithmDispatcher dispatcher = new AlgorithmDispatcher(file, application.getImageFile());
+          Dispatcher dispatcher = new Dispatcher(file, application.getImageFile());
 
           Exception exception = assertThrows(ParserFailure.class, dispatcher::solve);
 

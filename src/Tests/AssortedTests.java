@@ -5,7 +5,7 @@ import Image.ImageProcessor;
 import Utility.Exceptions.GenericError;
 import Utility.Location;
 import Utility.Node;
-import Utility.AlgorithmDispatcher;
+import Dispatcher.Dispatcher;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -59,8 +59,8 @@ public class AssortedTests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-        algorithmDispatcher.solve(algorithm);
+        Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+        dispatcher.solve(algorithm);
 
         System.out.println("Thread finished");
     }
@@ -79,8 +79,8 @@ public class AssortedTests {
             System.out.println("Failed to parse image");
         }
 
-        AlgorithmDispatcher algorithmDispatcher = new AlgorithmDispatcher(application.getImageFile(), 1);
-        algorithmDispatcher.solve(algorithm);
+        Dispatcher dispatcher = new Dispatcher(application.getImageFile(), 1);
+        dispatcher.solve(algorithm);
 
         System.out.println("Thread finished");
 
