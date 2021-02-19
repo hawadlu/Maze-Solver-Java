@@ -36,12 +36,20 @@ public class BreadthFirst extends SolveRunner {
  */
 class BFSWorker extends SolveWorker {
 
+  /**
+   *
+   * @param solve
+   * @param start
+   * @param destination
+   * @param runner
+   * @param threadId
+   */
   public BFSWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 
   /**
-   * todo comment me
+   * Run the Breadth First algorithm on a new thread.
    */
   @Override
   public void run() {

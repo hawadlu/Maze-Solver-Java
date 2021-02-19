@@ -1,13 +1,14 @@
 package parser.interfaces;
 
 /**
- * todo comment me
+ * This class is used to represent any number
+ * that the user wants to store in the parser.
  */
 public interface Number {
   /**
-   * todo comment me
-   * @param DEBUG
-   * @return
+   * Create a new number object.
+   * @param DEBUG print debugging information while running.
+   * @return a number that is the result of the calculation.
    */
   double calculate(boolean DEBUG);
 }

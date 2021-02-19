@@ -1,7 +1,11 @@
 package parser.interfaces;
 
 /**
- * todo comment me
+ * This is used to delineate any classes that are executed
+ * instead of evaluated in teh parser.
+ *
+ * It contains a basic execute method and a method to
+ * get the type returned at execution.
  */
 public interface Exec extends Validator {
   /**

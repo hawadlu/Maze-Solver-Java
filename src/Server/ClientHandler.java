@@ -9,7 +9,10 @@ import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * todo comment me
+ * This class is used to directly communicate with the local client.
+ *
+ * It runs a thread that constantly listens for incoming messages
+ * and provides a method to send messages back.
  */
 public class
 ClientHandler extends Thread {
@@ -43,7 +46,7 @@ ClientHandler extends Thread {
   }
 
   /**
-   * todo comment me
+   * Run a thread that is constantly listening for new messages.
    */
   @Override
   public void run() {

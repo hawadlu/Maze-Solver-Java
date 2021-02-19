@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * todo comment me
+ * The image processor class contains methods for
+ * extracting nodes from an image file.
  */
 public class ImageProcessor {
   ArrayList<Location> exits = new ArrayList<>();
@@ -43,7 +44,7 @@ public class ImageProcessor {
   }
 
   /**
-   * todo comment me
+   * Empty constructor used to reset the object
    */
   public ImageProcessor() {}
 

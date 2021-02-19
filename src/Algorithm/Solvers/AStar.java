@@ -47,7 +47,7 @@ class AStarWorker extends SolveWorker {
   }
 
   /**
-   * todo comment me
+   * Run the AStar algorithm on a new thread.
    */
   @Override
   public void run() {
@@ -130,14 +130,5 @@ class AStarWorker extends SolveWorker {
   @Override
   public int hashCode() {
     return Objects.hash(destination, start, threadId);
-  }
-
-  /**
-   * todo comment me
-   * @return
-   */
-  @Override
-  public String toString() {
-    return threadId;
   }
 }

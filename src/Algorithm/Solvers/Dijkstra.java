@@ -38,7 +38,7 @@ class DijkstraWorker extends SolveWorker {
   }
 
   /**
-   *
+   * Run the Dijkstra algorithm on a new thread.
    */
   @Override
   public void run() {

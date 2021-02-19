@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
- * todo comment me
+ * This class implements prims algorithm to
+ * find a minimum spanning tree.
  */
 public class Prims extends SolveRunner {
   ArrayList<Segment> mstEdges = new ArrayList<>();

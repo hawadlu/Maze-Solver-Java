@@ -1,12 +1,13 @@
 package parser.interfaces;
 
 /**
- * todo comment me
+ * This interface is used to delineate any classes
+ * (in the parser) that can be validated.
  */
 public interface Validator {
 
   /**
-   * todo comment me
+   * Validate to make sure that all elements are correct.
    */
   void validate();
 }

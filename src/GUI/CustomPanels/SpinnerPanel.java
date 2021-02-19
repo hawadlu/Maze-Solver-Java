@@ -13,7 +13,9 @@ import java.net.URL;
 public class SpinnerPanel extends JPanel {
 
   /**
-   * todo comment me
+   * This class creates a spinning arrows gif that
+   * is used to show that the program is currently
+   * working on the problem.
    */
   public SpinnerPanel() {
     ImageIcon spinner = new ImageIcon("Animations/Spinning Arrows.gif");

@@ -1,7 +1,8 @@
 package Utility.Exceptions;
 
 /**
- * todo comment me
+ * This class represents any exception thrown as the result of
+ * an invalid maze.
  */
 public class InvalidMaze extends GenericError {
 

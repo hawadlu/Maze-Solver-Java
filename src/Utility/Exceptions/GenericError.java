@@ -1,11 +1,11 @@
 package Utility.Exceptions;
 
 /**
- * todo comment me
+ * This class is used to represent any error thrown in the program.
  */
 public class GenericError extends Throwable {
   /**
-   * todo comment me
+   * Create a new GenericError and print a warning message.
    */
   public GenericError() {
     System.out.println("The program encountered a problem");

@@ -11,7 +11,7 @@ import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * todo comment me
+ * This class implements the articulation points algorithm
  */
 public class ArticulationPoints {
   final Player player;

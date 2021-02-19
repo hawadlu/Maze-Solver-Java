@@ -1,29 +1,4 @@
 package Application;
-/**
- * todo
- * The last things are the following...
- * Update my website to support video playback.
- * Update my website to support full size images.
- * Create a selection of screenshots to show off the project.
- * Create a video to show off the project.
- * Update the project year and description.
- * Add the new images and video.
- * Update my CV
- */
-
-
-/**
- * todo features to finish
- * parser
- * Local pvp mode using arrow keys and wasd
- * Single player mode with high scores
- * Server algorithm vs algorithm
- * Server pvp using arrow keys and pvp
- */
-
-
-//todo tidy code up so that most interfaces through this class
-
 
 import GUI.CustomPanels.PlayerPanel;
 import GUI.GUI;
@@ -43,17 +18,14 @@ import Utility.Node;
 
 /**
  * This class is the base of the program.
- * Most inter package communication happens through here.
+ * It creates the gui and facilitates the initial connection to
+ * an outside server.
  */
 public class Application {
   GUI gui;
   ImageFile currentImage;
   ImageProcessor imageProcessor;
   LocalClient client;
-
-  public Application() {
-  }
-
 
   /**
    * Take the image file and parse it into the appropriate format

@@ -1,7 +1,9 @@
 package Utility.Exceptions;
 
 /**
- * todo comment me
+ * This class is used to represent an error thrown
+ * by the user trying to use an image that is not
+ * a valid maze.
  */
 public class InvalidImage extends GenericError {
   /**

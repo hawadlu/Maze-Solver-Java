@@ -15,7 +15,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * todo comment me
+ * This class deals with setting up and maintaining
+ * the appearance of the program. It contains methods to make
+ * the various screens required as well as publicly accessible
+ * panels which can be used by other classes.
  */
 public class GUI {
   Application application;

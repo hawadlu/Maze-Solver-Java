@@ -3,7 +3,8 @@ package Algorithm.ArticulationPoint;
 import Utility.Node;
 
 /**
- * todo comment me
+ * This class is used to store nodes that are used in
+ * the articulation points algorithm.
  */
 public class APNode {
   public final Node firstNode;
@@ -11,10 +12,10 @@ public class APNode {
   public final Node parent;
 
   /**
-   * todo comment me
-   * @param firstNode
-   * @param depth
-   * @param parent
+   * Create a new AP node.
+   * @param firstNode the first node.
+   * @param depth how far down the tree this node is.
+   * @param parent the node that cam before this one
    */
   public APNode(Node firstNode, double depth, Node parent) {
     this.firstNode = firstNode;

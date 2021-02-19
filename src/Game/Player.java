@@ -18,7 +18,12 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * todo comment me
+ * This class represents a single player.
+ * It contains methods to start solving and update
+ * the gui.
+ *
+ * It also contains methods to send and receive updates
+ * from a server while solving in race mode.
  */
 public class Player {
   PlayerPanel panel;

@@ -1,7 +1,8 @@
 package Utility.Exceptions;
 
 /**
- * todo comment me
+ * Class that is used to represent an exception
+ * in the event of a solve failure.
  */
 public class SolveFailure extends GenericError {
   /**
