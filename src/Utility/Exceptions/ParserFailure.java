@@ -2,6 +2,9 @@ package Utility.Exceptions;
 
 import javax.swing.*;
 
+/**
+ * todo comment me
+ */
 public class ParserFailure extends RuntimeException {
 
   /**

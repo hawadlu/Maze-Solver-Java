@@ -9,6 +9,11 @@ import java.util.Objects;
 public class Location implements Serializable {
   public final int x, y;
 
+  /**
+   *
+   * @param x
+   * @param y
+   */
   public Location(int x, int y) {
     this.x = x;
     this.y = y;
@@ -23,6 +28,11 @@ public class Location implements Serializable {
     this.y = location.y;
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -32,11 +42,19 @@ public class Location implements Serializable {
             y == location.y;
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(x, y);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString() {
     return "x: " + this.x + " y: " + this.y;

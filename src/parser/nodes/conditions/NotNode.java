@@ -32,6 +32,10 @@ public class NotNode implements Condition {
     return "not(" + condition + ")";
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String getExecType() {
     return "NotNode";

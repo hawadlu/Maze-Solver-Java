@@ -46,7 +46,7 @@ public class Scroll extends JPanel implements ItemListener {
   private ImageIcon imageToDisplay;
 
   public Scroll(BufferedImage toDisplay) {
-    this.setBackground(GUI.backgroundCol);
+    this.setOpaque(true);
 
     setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 

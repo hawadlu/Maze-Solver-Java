@@ -13,10 +13,17 @@ import java.util.Date;
 public class Logger {
   ArrayList<String> actions = new ArrayList<>();
 
+  /**
+   *
+   * @param action
+   */
   public void add(String action) {
     actions.add(action);
   }
 
+  /**
+   *
+   */
   public void save() {
     LocalDate date = LocalDate.now();
     LocalTime time = LocalTime.now();

@@ -92,7 +92,7 @@ public class Rule extends JComponent {
     Rectangle drawHere = g.getClipBounds();
 
     // Fill clipping area with the background colour
-    g.setColor(GUI.backgroundCol);
+    g.setColor(GUI.transparent);
     g.fillRect(drawHere.x, drawHere.y, drawHere.width, drawHere.height);
 
     // Do the ruler labels in a small font that's black.

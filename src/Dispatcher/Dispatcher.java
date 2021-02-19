@@ -34,6 +34,8 @@ public class Dispatcher {
    *
    * @param imageFile
    * @param playersToCreate the number of players that should be created.
+   *
+   * fixme solved algorithm does not display after solving
    */
   public Dispatcher(ImageFile imageFile, int playersToCreate) {
     this.imageFile = new ImageFile(imageFile);
@@ -42,6 +44,8 @@ public class Dispatcher {
       Player newPlayer = new Player("Player " + i, "Algorithm", this);
       this.players.add(newPlayer);
     }
+
+    setupScreen();
   }
 
   /**
@@ -61,6 +65,8 @@ public class Dispatcher {
     for (int i = 1; i < playersToCreate; i++) {
       this.players.add(new Player("Player" + i, "Algorithm", this, true));
     }
+
+    setupScreen();
   }
 
   /**
@@ -77,6 +83,16 @@ public class Dispatcher {
 
     if (this.players.size() == 0) this.players.add(newPlayer);
     else this.players.set(0, newPlayer);
+
+    setupScreen();
+  }
+
+  /**
+   * Setup the default parameters for the screen
+   */
+  private void setupScreen() {
+    this.screen.setOpaque(false);
+    this.screen.setBackground(GUI.transparent);
   }
 
   /**
@@ -545,15 +561,19 @@ public class Dispatcher {
 
   /**
    * Check the status of each of the players to see if they are done.
+   *
+   * We only need to check if there is more than one player.
    * @param player the player that has reported done
    */
   public void checkStatus(Player player) {
-    if (player.equals(players.get(0))) {
-      if (!players.get(1).isDone()) player.makeDoneDisplay("1st");
-      else player.makeDoneDisplay("2nd");
-    } else if (player.equals(players.get(1))) {
-      if (!players.get(0).isDone()) player.makeDoneDisplay("1st");
-      else player.makeDoneDisplay("2nd");
+    if (players.size() > 1) {
+      if (player.equals(players.get(0))) {
+        if (!players.get(1).isDone()) player.makeDoneDisplay("1st");
+        else player.makeDoneDisplay("2nd");
+      } else if (player.equals(players.get(1))) {
+        if (!players.get(0).isDone()) player.makeDoneDisplay("1st");
+        else player.makeDoneDisplay("2nd");
+      }
     }
   }
 
@@ -610,5 +630,12 @@ public class Dispatcher {
       //continue until a valid option selected
       showRestartRequest();
     }
+  }
+
+  /**
+   * Add a single player to the screen
+   */
+  public void setupSinglePlayer() {
+    this.screen.add(players.get(0).getScreen());
   }
 }

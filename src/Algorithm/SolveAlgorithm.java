@@ -41,6 +41,11 @@ public class SolveAlgorithm {
     this.logger = logger;
   }
 
+  /**
+   *
+   * @param algorithm
+   * @param multiThreading
+   */
   public void solve(String algorithm, Boolean multiThreading) {
     logger.add(player.getName() + "entered solve method");
 
@@ -96,6 +101,9 @@ public class SolveAlgorithm {
     }
   }
 
+  /**
+   *
+   */
   private void getExits() {
     ArrayList<Location> exits = player.getExits();
 
@@ -109,7 +117,6 @@ public class SolveAlgorithm {
     entry = player.getNodes().get(exits.get(0));
     exit = player.getNodes().get(exits.get(1));
   }
-
 
   /**
    * Takes the worker threads from the algorithm and begins execution.
@@ -133,6 +140,10 @@ public class SolveAlgorithm {
     }
   }
 
+  /**
+   *
+   * @param param
+   */
   public void scan(String param) {
     if (param.equals("Loading") && mazeSize > Math.pow(6001, 2)) {
       System.out.println("Maze is too large to scan for all nodes. Scanning on solve.");

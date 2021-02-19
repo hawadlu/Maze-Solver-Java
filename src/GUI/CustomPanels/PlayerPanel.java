@@ -25,10 +25,13 @@ public class PlayerPanel extends JPanel {
   JComboBox<String> inbuiltAlgorithms = new JComboBox<>(algorithms);
   ImageFile lastImage;
 
-
+  /**
+   *
+   * @param maxSize
+   * @param player
+   */
   public PlayerPanel(Dimension maxSize, Player player) {
-    this.setBackground(Color.CYAN);
-    this.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+    this.setBackground(backgroundCol);
     this.setPreferredSize(maxSize);
     this.imageSize = new Dimension(500, 500);
     this.player = player;
@@ -150,6 +153,7 @@ public class PlayerPanel extends JPanel {
   public void setAlgoSolveScreen() {
     this.removeAll();
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    this.setOpaque(false);
 
     this.add(new Scroll(player.getImageFile().makeImage()));
 
@@ -158,12 +162,22 @@ public class PlayerPanel extends JPanel {
     control.setLayout(new FlowLayout());
 
     control.setPreferredSize(new Dimension(500, 100));
-    control.setBackground(backgroundCol);
+    control.setBackground(transparent);
 
     JButton solve = new JButton("solve");
     JButton artPts = new JButton("Articulation Points");
     JButton minTree = new JButton("Minimum Tree");
     JButton startOver = new JButton("Choose another image");
+
+    solve.setOpaque(true);
+    artPts.setOpaque(true);
+    minTree.setOpaque(true);
+    startOver.setOpaque(true);
+
+    solve.setBackground(backgroundCol);
+    artPts.setBackground(backgroundCol);
+    minTree.setBackground(backgroundCol);
+    startOver.setBackground(backgroundCol);
 
     control.add(solve);
     control.add(artPts);
@@ -202,7 +216,7 @@ public class PlayerPanel extends JPanel {
         JTextArea helpTextPanel = new JTextArea();
         helpTextPanel.setEditable(false);
         helpTextPanel.setText(helpText);
-        helpTextPanel.setBackground(backgroundCol);
+        helpTextPanel.setBackground(transparent);
         helpPanel.add(helpTextPanel);
 
         JButton exit = new JButton("exit");
@@ -282,7 +296,7 @@ public class PlayerPanel extends JPanel {
         JTextArea helpTextPanel = new JTextArea();
         helpTextPanel.setEditable(false);
         helpTextPanel.setText(helpText);
-        helpTextPanel.setBackground(backgroundCol);
+        helpTextPanel.setBackground(transparent);
         helpPanel.add(helpTextPanel);
 
         JButton exit = new JButton("exit");
@@ -383,7 +397,7 @@ public class PlayerPanel extends JPanel {
         JTextArea helpTextPanel = new JTextArea();
         helpTextPanel.setEditable(false);
         helpTextPanel.setText(helpText);
-        helpTextPanel.setBackground(backgroundCol);
+        helpTextPanel.setBackground(transparent);
         helpPanel.add(helpTextPanel);
 
         JButton exit = new JButton("exit");
@@ -405,19 +419,20 @@ public class PlayerPanel extends JPanel {
         String params = (String) neighbourOptions.getSelectedItem();
         Boolean multiThread = threadBox.isSelected();
 
-        //Load the users own algorithm if requested
-        Parser parser = null;
-        if (algorithm.equals("Custom")) {
-          //Setup the parser
-          parser = new Parser(UIFileChooser(), player);
-        }
-
-
         //make this into a working screen and then kick off the solver
         makeAlgoWorkingScreen();
-
         System.out.println("Solving");
-        player.solve(algorithm, params, multiThread);
+
+        //Load the users own algorithm if requested
+        if (algorithm.equals("Custom")) {
+          //Setup the parser
+          Parser parser = new Parser(UIFileChooser(), player);
+          player.setCustomAlgo(parser);
+          player.solve();
+        } else {
+          //Run the preselected algorithm
+          player.solve(algorithm, params, multiThread);
+        }
       });
 
       cancelButtons.clear();
@@ -429,7 +444,7 @@ public class PlayerPanel extends JPanel {
 
       optionPanel.add(buttonPanel);
 
-      makePopup(optionPanel, cancelButtons, new Dimension(350, 200));
+      makePopup(optionPanel, cancelButtons, new Dimension(350, 250));
     });
 
     this.add(control);
@@ -462,11 +477,15 @@ public class PlayerPanel extends JPanel {
     control.setLayout(new FlowLayout());
 
     control.setPreferredSize(new Dimension(500, 100));
-    control.setBackground(backgroundCol);
+    control.setBackground(transparent);
 
     JButton loadOther = new JButton("Load Another Image");
     JButton reset = new JButton("Reset This Image");
     JButton save = new JButton("Save");
+
+    loadOther.setOpaque(true);
+    reset.setOpaque(true);
+    save.setOpaque(true);
 
     control.add(loadOther);
     control.add(reset);
@@ -533,6 +552,9 @@ public class PlayerPanel extends JPanel {
     this.add(controls);
   }
 
+  /**
+   *
+   */
   public void makeSolvingScreen() {
     this.removeAll();
 

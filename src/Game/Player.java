@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * todo comment me
+ */
 public class Player {
   PlayerPanel panel;
   String playerName;
@@ -52,6 +55,10 @@ public class Player {
     imageProcessor.scanAll(dispatcher.getImageFile());
   }
 
+  /**
+   *
+   * @return
+   */
   public Handler getHandler() {
     return handler;
   }
@@ -205,11 +212,20 @@ public class Player {
     done = true;
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString() {
     return playerName + " Done: " + done;
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -219,6 +235,10 @@ public class Player {
     else return playerName.equals(player.playerName);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(panel, playerName);
@@ -232,14 +252,26 @@ public class Player {
     customAlgo.execute(delay);
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Location> getMazeExits() {
     return imageProcessor.getExits();
   }
 
+  /**
+   *
+   * @return
+   */
   public ConcurrentHashMap<Location, Node> getNodes() {
     return imageProcessor.getNodes();
   }
 
+  /**
+   *
+   * @return
+   */
   public ImageFile getImageFile() {
     return dispatcher.getImageFile();
   }
@@ -274,6 +306,9 @@ public class Player {
    */
   public void setCustomAlgo(Parser customAlgo) {
     this.customAlgo = customAlgo;
+
+    //Perform a scan if required
+    if (imageProcessor.getExits().size() == 0) imageProcessor.scanAll(dispatcher.getImageFile());
 
     //set the handler if required
     if (this.handler == null) handler = new Handler(this);
@@ -321,7 +356,9 @@ public class Player {
     solve.solve(algorithm, multiThread);
 
     //Update the display
-    panel.makeAlgoSolvedScreen(dispatcher.getImageFile());
+    ImageFile solved = new ImageFile(dispatcher.getImageFile());
+    solved.fillNodePath(PathMaker.generatePathArraylist(solve.exit), true);
+    panel.makeAlgoSolvedScreen(solved);
   }
 
   /**
@@ -359,9 +396,15 @@ public class Player {
 
     this.done = true;
 
-    //if this is online send the message to the server
-    if (online) sendMessage(Requests.done);
-    dispatcher.checkStatus(this);
+    if (online || hasOpponent) {
+      //if this is online send the message to the server
+      if (online) sendMessage(Requests.done);
+      dispatcher.checkStatus(this);
+    } else {
+      ImageFile solved = new ImageFile(dispatcher.getImageFile());
+      solved.fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
+      panel.makeAlgoSolvedScreen(solved);
+    }
   }
 
   /**

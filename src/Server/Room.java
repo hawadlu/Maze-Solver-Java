@@ -11,6 +11,10 @@ public class Room {
   private ClientHandler playerOne, playerTwo;
   private ImageFile imageFile;
 
+  /**
+   *
+   * @param clientHandler
+   */
   public Room(ClientHandler clientHandler) {
     this.playerOne = clientHandler;
   }
@@ -23,6 +27,10 @@ public class Room {
     this.playerTwo = clientHandler;
   }
 
+  /**
+   *
+   * @param imageFile
+   */
   public void setImageFile(ImageFile imageFile) {
     this.imageFile = imageFile;
   }

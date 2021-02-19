@@ -3,6 +3,7 @@ package GUI;
 import Application.Application;
 import Dispatcher.Dispatcher;
 
+import GUI.CustomPanels.ImagePanel;
 import Utility.Exceptions.GenericError;
 
 import javax.swing.*;
@@ -13,22 +14,26 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * todo comment me
+ */
 public class GUI {
   Application application;
   Dispatcher dispatcher;
 
   public static final int width = 1280;
   public static final int height = 800;
-  public static final Color activeCol = new Color(0, 131, 233);
-  public static final Color inactiveCol = new Color(66, 66, 66);
+  public static final Color activeCol = new Color(0, 131, 233, 200);
+  public static final Color inactiveCol = new Color(66, 66, 66, 200);
+  public static final Color transparent = new Color(255, 255, 255, 0);
   public static final Color backgroundCol = new Color(211, 211, 211);
 
   //Panels
   static JFrame window;
-  JPanel container; //This panel holds all other panels
-  JPanel activityArea; //This is the panel hosts the two panels below as required
-  JPanel algoMainArea = null;
-  JPanel gameMainArea = null;
+  static JPanel container; //This panel holds all other panels
+  static JPanel activityArea; //This is the panel hosts the two panels below as required
+  static JPanel algoMainArea = null;
+  static JPanel gameMainArea = null;
 
   /**
    * Constructor, creates and displays the gui
@@ -47,7 +52,8 @@ public class GUI {
     //Setup the container
     container = new JPanel();
     container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-    container.setBackground(backgroundCol);
+    container.setBackground(transparent);
+    container.setOpaque(false);
 
     //Setup the top tabs
     JPanel topTabs = new JPanel();
@@ -56,9 +62,10 @@ public class GUI {
     container.add(topTabs);
 
     activityArea = new JPanel();
-    activityArea.setBackground(backgroundCol);
+    activityArea.setBackground(transparent);
     activityArea.setSize(new Dimension(width, height));
     activityArea.setLayout(new BoxLayout(activityArea, BoxLayout.Y_AXIS));
+    activityArea.setOpaque(false);
 
     //Add the algorithms panel by default
     makeLoadScreen("Algorithm");
@@ -197,9 +204,9 @@ public class GUI {
     if (param.equals("Algorithm")) {
       if (algoMainArea != null) algoMainArea.removeAll();
       else algoMainArea = new JPanel();
-      algoMainArea.setBackground(backgroundCol);
 
-      loadPanel.setBackground(backgroundCol);
+      loadPanel.setOpaque(false);
+      loadPanel.setBackground(transparent);
       loadPanel.setMinimumSize(new Dimension(activityArea.getWidth(), activityArea.getHeight()));
       JButton loadImage = new JButton("Load Image");
 
@@ -224,7 +231,7 @@ public class GUI {
     } else if (param.equals("Game")) {
       if (gameMainArea != null) gameMainArea.removeAll();
       else gameMainArea = new JPanel();
-      gameMainArea.setBackground(backgroundCol);
+      gameMainArea.setBackground(transparent);
 
       JButton connect = new JButton("Connect To Server");
 
@@ -266,13 +273,23 @@ public class GUI {
   private void makeAlgoSolveScreen() {
     algoMainArea.removeAll();
 
+    algoMainArea.setOpaque(false);
+
     System.out.println("Making algorithm solve screen");
 
     //Make the dispatcher object
     dispatcher = new Dispatcher(application.getImageFile(), 1);
     dispatcher.initialiseGUI(this);
+    dispatcher.setupSinglePlayer();
 
-    algoMainArea.add(dispatcher.getPlayerScreen(0));
+    System.out.println("Algo area: " + algoMainArea.getBackground());
+    System.out.println("Algo area: " + algoMainArea.isOpaque());
+    System.out.println("Activity area: " + activityArea.getBackground());
+    System.out.println("Activity area: " + activityArea.isOpaque());
+    System.out.println("Container area: " + container.getBackground());
+    System.out.println("Container area: " + container.isOpaque());
+
+    algoMainArea.add(dispatcher.getScreen());
     refresh();
   }
 
@@ -320,6 +337,11 @@ public class GUI {
    */
   public static void refresh() {
 //    System.out.println("Refreshing gui");
+
+    if (gameMainArea != null) gameMainArea.revalidate();
+    if (algoMainArea != null) algoMainArea.revalidate();
+    if (container != null) container.revalidate();
+    if (activityArea != null) activityArea.revalidate();
     if (window != null) {
       window.revalidate();
       window.repaint();
@@ -353,15 +375,17 @@ public class GUI {
    *
    * @return dimensions
    */
-  public Dimension getMazeDimensions() {
-    return application.getMazeDimensions();
-  }
 
+  /**
+   *
+   * @param panelToDisplay
+   * @param exitButtons
+   * @param panelDimensions
+   */
   public static void makePopup(JPanel panelToDisplay, ArrayList<JButton> exitButtons, Dimension panelDimensions) {
     System.out.println("Making popup");
     JFrame frame = new JFrame();
-    frame.setSize(panelDimensions);
-    frame.setBackground(backgroundCol);
+    frame.setMinimumSize(panelDimensions);
     frame.add(panelToDisplay);
     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 

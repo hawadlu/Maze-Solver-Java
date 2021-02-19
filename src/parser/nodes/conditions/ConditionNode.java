@@ -38,6 +38,10 @@ public class ConditionNode implements Condition {
     return toEvaluate.toString();
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String getExecType() {
     return "ConditionNode";

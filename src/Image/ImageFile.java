@@ -45,6 +45,11 @@ public class ImageFile implements Serializable {
     filePath = oldImage.filePath;
   }
 
+  /**
+   *
+   * @param toLoad
+   * @throws InvalidImage
+   */
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
     BufferedImage tmp;
@@ -225,6 +230,10 @@ public class ImageFile implements Serializable {
     return tmp[tmp.length - 1];
   }
 
+  /**
+   *
+   * @return
+   */
   public colEnum[][] getArray() {
     return imageArray;
   }
@@ -277,6 +286,11 @@ public class ImageFile implements Serializable {
     }
   }
 
+  /**
+   *
+   * @param drawLocation
+   * @param colour
+   */
   public void drawNode(Location drawLocation, colEnum colour) {
     imageArray[drawLocation.y][drawLocation.x] = colour;
   }
@@ -299,6 +313,14 @@ public class ImageFile implements Serializable {
     }
   }
 
+  /**
+   *
+   * @param startX
+   * @param startY
+   * @param endX
+   * @param endY
+   * @param colour
+   */
   private void drawBetweenNodes(int startX, int startY, int endX, int endY, colEnum colour) {
     int x, y;
     //Set the colours at the start and end

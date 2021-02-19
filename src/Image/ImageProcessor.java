@@ -8,6 +8,9 @@ import Utility.Node;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * todo comment me
+ */
 public class ImageProcessor {
   ArrayList<Location> exits = new ArrayList<>();
   ConcurrentHashMap<Location, Node> nodes = new ConcurrentHashMap<>();
@@ -39,6 +42,9 @@ public class ImageProcessor {
     }
   }
 
+  /**
+   * todo comment me
+   */
   public ImageProcessor() {}
 
 
@@ -102,6 +108,14 @@ public class ImageProcessor {
     }
   }
 
+  /**
+   *
+   * @param currentNode
+   * @param currentLocation
+   * @param multiThread
+   * @param currentImage
+   * @return
+   */
   private boolean checkNodeExistsOnSolve(Node currentNode, Location currentLocation, Boolean multiThread, ImageFile currentImage) {
     //If this is an exit add it
     if (exits.contains(currentLocation)) {

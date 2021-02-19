@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 
+/**
+ *
+ */
 public class Kruskals {
   ArrayList<Segment> mstEdges = new ArrayList<>();
   HashSet<Node> unvisited = new HashSet<>();
   HashSet<Node> forest = new HashSet<>();
 
+  /**
+   *
+   * @param solve
+   */
   public void solve(SolveAlgorithm solve) {
     System.out.println("Solving Kruskals");
 
@@ -96,6 +103,10 @@ public class Kruskals {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Segment> getSegments() {
     return mstEdges;
   }

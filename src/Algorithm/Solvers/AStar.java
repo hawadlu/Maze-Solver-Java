@@ -34,10 +34,21 @@ public class AStar extends SolveRunner {
  * Allows DFS to be multi threaded
  */
 class AStarWorker extends SolveWorker {
+  /**
+   *
+   * @param solve
+   * @param start
+   * @param destination
+   * @param runner
+   * @param threadId
+   */
   public AStarWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
   }
 
+  /**
+   * todo comment me
+   */
   @Override
   public void run() {
     System.out.println("Thread: " + threadId + "\nstart: " + start + "\ndestination: " + destination + "\n");
@@ -97,6 +108,11 @@ class AStarWorker extends SolveWorker {
     //solve.logger.save();
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -107,11 +123,19 @@ class AStarWorker extends SolveWorker {
             threadId.equals(worker.threadId);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(destination, start, threadId);
   }
 
+  /**
+   * todo comment me
+   * @return
+   */
   @Override
   public String toString() {
     return threadId;

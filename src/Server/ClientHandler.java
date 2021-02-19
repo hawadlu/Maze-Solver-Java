@@ -8,6 +8,9 @@ import java.net.Socket;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * todo comment me
+ */
 public class
 ClientHandler extends Thread {
   ObjectInputStream dataIn;
@@ -22,6 +25,11 @@ ClientHandler extends Thread {
   //The chance of a collision within a room is very small, but for large scale deployment a better solution may be needed.
   int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 
+  /**
+   *
+   * @param server
+   * @param connection
+   */
   public ClientHandler(Server server, Socket connection) {
     try {
       this.dataIn = new ObjectInputStream(connection.getInputStream());
@@ -34,6 +42,9 @@ ClientHandler extends Thread {
     this.connectedSocket = connection;
   }
 
+  /**
+   * todo comment me
+   */
   @Override
   public void run() {
     super.run();
@@ -138,6 +149,11 @@ ClientHandler extends Thread {
     }
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -146,6 +162,10 @@ ClientHandler extends Thread {
     return id == that.id;
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(id);

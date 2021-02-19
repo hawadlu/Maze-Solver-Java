@@ -87,6 +87,10 @@ public class Application {
     return currentImage.makeImage();
   }
 
+  /**
+   *
+   * @return
+   */
   public ImageFile getImageFile() {
     return currentImage;
   }
@@ -126,55 +130,11 @@ public class Application {
     currentImage.saveImage(path);
   }
 
-
   /**
    * @return the nodes from the image processor
    */
   public ConcurrentHashMap<Location, Node> getNodes() {
     return imageProcessor.getNodes();
-  }
-
-  /**
-   * Scan the entire maze
-   */
-  public void scanEntireMaze() {
-    //If the image processor is null or already contains nodes, make a new one.
-    if (imageProcessor == null || !imageProcessor.getNodes().isEmpty()) imageProcessor = new ImageProcessor(this.imageProcessor);
-    imageProcessor.scanAll(currentImage);
-  }
-
-  /**
-   * Find the exits in the maze
-   */
-  public void findMazeExits() {
-    imageProcessor.findExits(currentImage);
-  }
-
-  /**
-   * @return the maze exits
-   */
-  public ArrayList<Location> getMazeExits() {
-    return imageProcessor.getExits();
-  }
-
-  /**
-   * Scan only a part of the maze
-   *
-   * @param parent         the node to start at
-   * @param multiThreading is the program currently multi threading?
-   */
-  public void scanPart(Node parent, Boolean multiThreading) {
-    imageProcessor.scanPart(parent, multiThreading, currentImage);
-  }
-
-
-  public static void main(String[] args) {
-    //Create the GUI
-    new Application().setUpGui();
-  }
-
-  public ImageProcessor getImageProcessor() {
-    return imageProcessor;
   }
 
   /**
@@ -191,5 +151,14 @@ public class Application {
    */
   public LocalClient getClient() {
     return client;
+  }
+
+  /**
+   *
+   * @param args
+   */
+  public static void main(String[] args) {
+    //Create the GUI
+    new Application().setUpGui();
   }
 }

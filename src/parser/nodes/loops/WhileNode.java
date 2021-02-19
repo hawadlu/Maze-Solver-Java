@@ -45,7 +45,9 @@ public class WhileNode implements Exec {
     while (loopCondition.evaluate(DEBUG)) {
       for (Exec statement : statements) {
         if (!handler.getPlayer().isDone()) statement.execute(DEBUG);
+        else break;
       }
+      if (handler.getPlayer().isDone()) break;
     }
 
     return null;

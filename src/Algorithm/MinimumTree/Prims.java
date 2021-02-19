@@ -7,9 +7,16 @@ import Utility.Segment;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+/**
+ * todo comment me
+ */
 public class Prims extends SolveRunner {
   ArrayList<Segment> mstEdges = new ArrayList<>();
 
+  /**
+   *
+   * @param solve
+   */
   public void solve(SolveAlgorithm solve) {
     Thread visitor = new Thread(); //This thread is never run but used to track the visit status.
 
@@ -40,6 +47,10 @@ public class Prims extends SolveRunner {
     System.out.println("Completed prims algorithm");
   }
 
+  /**
+   *
+   * @return
+   */
   public ArrayList<Segment> getSegments() {
     return mstEdges;
   }

@@ -1,5 +1,8 @@
 package parser.interfaces;
 
+/**
+ * todo comment me
+ */
 public interface Exec extends Validator {
   /**
    * Execute the code block and return any object.

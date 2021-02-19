@@ -14,26 +14,49 @@ import java.util.Collection;
 public class LocationList extends ArrayList implements Serializable {
   ArrayList<Location> locations = new ArrayList<>();
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int size() {
     return locations.size();
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean add(Object o) {
     return locations.add((Location) o);
   }
 
+  /**
+   *
+   * @param index
+   * @return
+   */
   @Override
   public Location get(int index) {
     return locations.get(index);
   }
 
+  /**
+   *
+   * @param index
+   * @return
+   */
   @Override
   public Location remove(int index) {
     return locations.remove(index);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString() {
     return "Location list of size: " + size();

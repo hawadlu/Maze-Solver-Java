@@ -18,10 +18,18 @@ public class Node {
   private double reachBack = 0;
   private ArrayList<Node> children = new ArrayList<>();
 
+  /**
+   *
+   * @param nodeLocation
+   */
   public Node(Location nodeLocation) {
     this.nodeLocation = nodeLocation;
   }
 
+  /**
+   *
+   * @param node
+   */
   public Node(Node node) {
     this.nodeLocation = node.getLocation();
     this.neighbours = (HashSet<Node>) node.getNeighbours();
@@ -257,11 +265,20 @@ public class Node {
     this.children = children;
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString() {
     return "Location: " + getLocation() + " Neighbours: " + getNeighbours().size() + " visited: " + isVisited + " Cost: " + cost;
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -270,6 +287,10 @@ public class Node {
     return Objects.equals(nodeLocation, node.nodeLocation);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(nodeLocation);

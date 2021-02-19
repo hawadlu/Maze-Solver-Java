@@ -10,7 +10,9 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * todo comment me
+ */
 public class ArticulationPoints {
   final Player player;
   final HashSet<Node> articulationPoints = new HashSet<>();

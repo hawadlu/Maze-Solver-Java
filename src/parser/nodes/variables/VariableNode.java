@@ -402,6 +402,10 @@ public class VariableNode implements Exec, Value {
     }
   }
 
+  /**
+   *
+   * @return
+   */
   public String print() {
     if (value == null) return "Name: " + name + " Type: " + type;
     else return "Name: " + name + " Type: " + type + " value: " + value;

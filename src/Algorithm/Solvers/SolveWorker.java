@@ -14,6 +14,14 @@ public class SolveWorker extends Thread {
   public final SolveRunner runner;
   public SolveWorker other;
 
+  /**
+   *
+   * @param solve
+   * @param start
+   * @param destination
+   * @param runner
+   * @param threadId
+   */
   public SolveWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     this.solve = solve;
     this.start = start;

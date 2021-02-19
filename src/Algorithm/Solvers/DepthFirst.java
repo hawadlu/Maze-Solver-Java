@@ -36,6 +36,9 @@ class DFSWorker extends SolveWorker {
     super(solve, start, destination, runner, threadId);
   }
 
+  /**
+   * todo comment me
+   */
   @Override
   public void run() {
     System.out.println("Thread: " + threadId + "\nstart: " + start + "\ndestination: " + destination + "\n");
@@ -88,6 +91,11 @@ class DFSWorker extends SolveWorker {
     System.out.println("Thread " + threadId + " for player " + solve.player.getName() + " has exited the loop");
   }
 
+  /**
+   *
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -98,11 +106,19 @@ class DFSWorker extends SolveWorker {
             threadId.equals(worker.threadId);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public int hashCode() {
     return Objects.hash(destination, start, threadId);
   }
 
+  /**
+   *
+   * @return
+   */
   @Override
   public String toString() {
     return threadId;

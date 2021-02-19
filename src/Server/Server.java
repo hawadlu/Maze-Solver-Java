@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * todo write me
+ * todo close the room when a client leaves.
+ */
 public class Server {
   int socketNum;
   ServerSocket socket;
@@ -59,13 +63,21 @@ public class Server {
     }
   }
 
-
+  /**
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     Server server = new Server(5000);
     server.bind();
     server.listen();
   }
 
+  /**
+   *
+   * @param clientHandler
+   * @return
+   */
   public int createRoom(ClientHandler clientHandler) {
     //Generate keys until a free one is found
     int roomKey;
@@ -80,6 +92,11 @@ public class Server {
     return roomKey;
   }
 
+  /**
+   *
+   * @param clientHandler
+   * @param roomId
+   */
   public void joinRoom(ClientHandler clientHandler, int roomId) {
     rooms.get(roomId).join(clientHandler);
   }

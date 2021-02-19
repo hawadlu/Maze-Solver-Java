@@ -36,7 +36,6 @@ import GUI.GUI;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 /* ScrollablePicture.java is used by ScrollDemo.java. */
 
@@ -52,7 +51,7 @@ public class ScrollablePicture extends JLabel implements Scrollable, MouseMotion
       setText("No picture found.");
       setHorizontalAlignment(CENTER);
       setOpaque(true);
-      setBackground(GUI.backgroundCol);
+      setBackground(GUI.transparent);
 
       this.setPreferredSize(new Dimension(500, 500));
       this.setMinimumSize(new Dimension(500, 500));

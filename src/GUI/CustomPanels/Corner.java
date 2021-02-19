@@ -36,12 +36,12 @@ import GUI.GUI;
 import java.awt.*;
 import javax.swing.*;
 
-/* Corner.java is used by ScrollDemo.java. */
+/* Corner.java is used by Scroll */
 
 public class Corner extends JComponent {
   protected void paintComponent(Graphics g) {
     // Fill me with the background colour
-    g.setColor(GUI.backgroundCol);
+    g.setColor(GUI.transparent);
     g.fillRect(0, 0, getWidth(), getHeight());
   }
 }
