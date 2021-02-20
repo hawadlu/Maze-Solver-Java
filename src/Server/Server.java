@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * todo write me
+ * This class deals with the initial connection of new clients
+ * and contains a map of rooms into which the clients are devided.
  * todo close the room when a client leaves.
  */
 public class Server {

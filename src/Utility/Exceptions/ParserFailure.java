@@ -3,7 +3,7 @@ package Utility.Exceptions;
 import javax.swing.*;
 
 /**
- * todo comment me
+ * Class used to represent a failure in the parser
  */
 public class ParserFailure extends RuntimeException {
 

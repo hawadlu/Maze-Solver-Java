@@ -16,8 +16,13 @@ import java.util.regex.Pattern;
 
 
 /**
-* todo describe this class
- */
+* This class is responsible for creating and running the players.
+ * It contains methods to update, create and solve.
+ *
+ * It also acts an an intermediate (player to player and player to server).
+ *
+ * There is a screen Panel which is used to hosts the displays of each player.
+*/
 public class Dispatcher {
   Dimension playerDimensions = new Dimension(GUI.width / 2, (int) (GUI.height * 0.75));
   private ImageFile imageFile;
@@ -625,7 +630,8 @@ public class Dispatcher {
         makeGameScreen();
       }
     } else if (result == JOptionPane.NO_OPTION) {
-      //todo go to a home screen
+      //todo if online send disconnect
+      gui.makeLoadScreen("Game");
     } else {
       //continue until a valid option selected
       showRestartRequest();

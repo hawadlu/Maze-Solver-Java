@@ -1548,7 +1548,6 @@ public class Solvers {
 
     dispatcher.makeGameScreen();
 
-    //fixme both player exit lists have the same objects
 
     Player playerOne = dispatcher.getPlayers().get(0);
     Player playerTwo = dispatcher.getPlayers().get(1);

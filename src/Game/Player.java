@@ -101,7 +101,6 @@ public class Player {
     //Create the image processor
     this.imageProcessor = new ImageProcessor();
 
-    //todo make the dimension non fixed
     this.panel = new PlayerPanel(new Dimension(500,500), this);
 
     //make the algorithm solve screen
@@ -127,7 +126,6 @@ public class Player {
     //Create the image processor
     this.imageProcessor = new ImageProcessor();
 
-    //todo make the dimension non fixed
     this.panel = new PlayerPanel(new Dimension(500,500), this);
 
     //make the algorithm solve screen
@@ -466,8 +464,6 @@ public class Player {
       image.fillNodePath(PathMaker.generatePathArraylist(handler.getLastNode()), true);
       return image;
     }
-
-    //todo implement for inbuilt algorithms
     return null;
   }
 

@@ -37,7 +37,7 @@ class DFSWorker extends SolveWorker {
   }
 
   /**
-   * todo comment me
+   * Run the Depth First algorithm on a new thread.
    */
   @Override
   public void run() {
