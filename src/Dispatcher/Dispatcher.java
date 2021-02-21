@@ -28,7 +28,7 @@ public class Dispatcher {
   private ImageFile imageFile;
   private ArrayList<Player> players = new ArrayList<>();
   private boolean live = false; //used to indicate if this should run in live solve mode.
-  private GUI gui;
+  public GUI gui;
   private JPanel screen = new JPanel();
   private LocalClient client;
 
@@ -40,7 +40,6 @@ public class Dispatcher {
    * @param imageFile
    * @param playersToCreate the number of players that should be created.
    *
-   * fixme solved algorithm does not display after solving
    */
   public Dispatcher(ImageFile imageFile, int playersToCreate) {
     this.imageFile = new ImageFile(imageFile);
@@ -139,7 +138,7 @@ public class Dispatcher {
     this.imageFile = imageFile;
     new Thread(() -> players.get(0).scanAll()).start();
 
-    makeOnlineWaitingScreen();
+    makeOnlineWaitingScreen(true);
   }
 
   /**
@@ -348,8 +347,14 @@ public class Dispatcher {
 
   /**
    * make the online waiting screen
+   * @param resetPlayerTwo should player two be reset
    */
-  public void makeOnlineWaitingScreen() {
+  public void makeOnlineWaitingScreen(boolean resetPlayerTwo) {
+    if (resetPlayerTwo) {
+      players.set(1, new Player("Player " + 1, "Algorithm", this));
+      players.get(1).setOpponent(false);
+    }
+
     //reset the image and players
     this.imageFile.reset();
     players.get(0).reset();
@@ -625,12 +630,13 @@ public class Dispatcher {
     if (result == JOptionPane.YES_OPTION) {
       if (players.get(0).isOnline()) {
         client.send(Requests.restart);
-        makeOnlineWaitingScreen();
+        makeOnlineWaitingScreen(true);
       } else {
         makeGameScreen();
       }
     } else if (result == JOptionPane.NO_OPTION) {
       //todo if online send disconnect
+      sendMessage(Requests.disconnect);
       gui.makeLoadScreen("Game");
     } else {
       //continue until a valid option selected

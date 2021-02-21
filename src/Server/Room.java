@@ -128,4 +128,14 @@ public class Room {
     playerOne.ready = false;
     playerTwo.ready = false;
   }
+
+  /**
+   * If one player disconnects, send the discxonnect notification to the other player.
+   * Then close the room
+   * @param client the client that is disconnecting
+   */
+  public void disconnect(ClientHandler client) {
+    if (client.equals(playerOne)) playerTwo.sendMessage(Requests.opponentDisconnect);
+    else if (client.equals(playerTwo)) playerOne.sendMessage(Requests.opponentDisconnect);
+  }
 }

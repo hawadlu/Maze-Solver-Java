@@ -101,4 +101,12 @@ public class Server {
   public void joinRoom(ClientHandler clientHandler, int roomId) {
     rooms.get(roomId).join(clientHandler);
   }
+
+  /**
+   * Close the specified room.
+   * @param currentRoom the id of the room to close
+   */
+    public void closeRoom(int currentRoom) {
+      rooms.remove(currentRoom);
+    }
 }

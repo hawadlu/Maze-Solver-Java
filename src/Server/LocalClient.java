@@ -19,6 +19,7 @@ public class LocalClient extends Thread {
   private String localUserName;
   private String onlineUserName;
   private int roomId;
+  Socket connection;
 
   /**
    * Set the dispatcher
@@ -34,7 +35,7 @@ public class LocalClient extends Thread {
     int port = 5000;
     String host = "localhost";
     try {
-      Socket connection = new Socket(host, port);
+      connection = new Socket(host, port);
 
       dataOut = new ObjectOutputStream(connection.getOutputStream());
       dataIn = new ObjectInputStream(connection.getInputStream());
@@ -53,6 +54,9 @@ public class LocalClient extends Thread {
     try {
       dataOut.writeObject(toSend);
       dataOut.flush();
+
+      //If the object contains the disconnect message close the connection
+      if (toSend.equals(Requests.disconnect)) connection.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -79,10 +83,10 @@ public class LocalClient extends Thread {
           dispatcher.updateOnlinePlayer((LocationList) message);
         } else if (message instanceof String) {
           if (message.equals(Requests.wait)) {
-            dispatcher.makeOnlineWaitingScreen();
+            dispatcher.makeOnlineWaitingScreen(true);
           } else if (message.equals(Requests.makeSetup)) {
             dispatcher.setOpponentsReady();
-            dispatcher.makeOnlineWaitingScreen();
+            dispatcher.makeOnlineWaitingScreen(true);
           } else if (message.equals(Requests.start)) {
             dispatcher.startOnline();
           } else if (((String) message).matches(Requests.room.pattern())) {
@@ -94,6 +98,8 @@ public class LocalClient extends Thread {
             dispatcher.otherDone();
           } else if (message.equals(Requests.requestRestart)) {
             dispatcher.showRestartRequest();
+          } else if (message.equals(Requests.opponentDisconnect)) {
+            dispatcher.gui.makeLoadScreen("Game");
           }
         }
       } catch (IOException | ClassNotFoundException e) {

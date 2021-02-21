@@ -105,6 +105,12 @@ ClientHandler extends Thread {
             server.rooms.get(currentRoom).processRestartRequest(this);
           } else if (message.equals(Requests.restart)) {
             server.rooms.get(currentRoom).restart(this);
+          } else if (message.equals(Requests.disconnect)) {
+            //Send the disconnect request to the room, then close the room and this players socket
+            server.rooms.get(currentRoom).disconnect(this);
+            server.closeRoom(currentRoom);
+            connectedSocket.close();
+            this.stop();
           }
         } else if (message instanceof ImageFile) {
           server.rooms.get(currentRoom).setImageFile((ImageFile) message);
