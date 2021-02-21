@@ -27,6 +27,8 @@ public class BreadthFirst extends SolveRunner {
     SolveWorker workerTwo = new BFSWorker(solve, solve.exit, solve.entry, this, threadId + "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
+
+    waitComplete(workerOne, workerTwo);
   }
 }
 

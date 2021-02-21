@@ -26,6 +26,8 @@ public class AStar extends SolveRunner {
     SolveWorker workerTwo = new AStarWorker(solve, solve.exit, solve.entry, this, threadId + "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
+
+    waitComplete(workerOne, workerTwo);
   }
 }
 

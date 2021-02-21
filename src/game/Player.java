@@ -352,11 +352,9 @@ public class Player {
     logger.add(this.playerName + "started solve");
 
     //Start the solve
-    solve.solve(algorithm, multiThread);
+    ImageFile solved = solve.solve(algorithm, multiThread);
 
     //Update the display
-    ImageFile solved = new ImageFile(dispatcher.getImageFile());
-    solved.fillNodePath(PathMaker.generatePathArraylist(solve.exit), true);
     panel.makeAlgoSolvedScreen(solved);
   }
 

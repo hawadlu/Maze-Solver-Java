@@ -68,6 +68,20 @@ public class SolveRunner {
     }
 
     solve.logger.add(solve.player.getName() + " did not execute anything in processNode. Process size: " + toProcess.size());
+  }
 
+  /**
+   * Wait until the threads have completed.
+   *
+   * @param one the first thread.
+   * @param two the second threads
+   */
+  public void waitComplete(Thread one, Thread two) {
+    try {
+      one.join();
+      if (two != null) two.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }

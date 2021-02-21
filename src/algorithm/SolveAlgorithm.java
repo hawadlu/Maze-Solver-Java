@@ -42,11 +42,11 @@ public class SolveAlgorithm {
 
   /**
    * Process the parameters supplied by the player and start the appropriate algorithm.
-   *
-   * @param algorithm the algorithm that the player wants to use.
+   *  @param algorithm the algorithm that the player wants to use.
    * @param multiThreading boolean to indicate if the player wants to use multiple threads.
+   * @return an imagefile containing the solved maze.
    */
-  public void solve(String algorithm, boolean multiThreading) {
+  public ImageFile solve(String algorithm, boolean multiThreading) {
     logger.add(player.getName() + "entered solve method");
 
     boolean buildNodePath = true;
@@ -99,6 +99,12 @@ public class SolveAlgorithm {
     } else if (!artPts.isEmpty()) {
       PathMaker.makeNodePath(artPts, getImageFile());
     }
+
+    //Create the image file
+    ImageFile solved = new ImageFile(player.getImageFile());
+    solved.fillNodePath(PathMaker.generatePathArraylist(exit), true);
+
+    return solved;
   }
 
   /**

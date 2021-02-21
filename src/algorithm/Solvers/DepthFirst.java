@@ -25,6 +25,9 @@ public class DepthFirst extends SolveRunner {
     SolveWorker workerTwo = new DFSWorker(solve, solve.exit, solve.entry, this, threadId + "t2");
 
     solve.startThreads(workerOne, workerTwo, multiThreading);
+
+    waitComplete(workerOne, workerTwo);
+
   }
 }
 
