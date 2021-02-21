@@ -3,7 +3,7 @@ package parser.nodes.loops;
 import parser.Handler;
 import parser.interfaces.Exec;
 import parser.nodes.variables.VariableNode;
-import Utility.Node;
+import utility.Node;
 
 import java.util.ArrayList;
 import java.util.Collection;

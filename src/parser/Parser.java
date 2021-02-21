@@ -1,9 +1,7 @@
 package parser;
 
-import Application.Application;
-import Game.Player;
-import Utility.Exceptions.ParserFailure;
-import Utility.Node;
+import game.Player;
+import utility.Exceptions.ParserFailure;
 import parser.interfaces.Condition;
 import parser.interfaces.Exec;
 import parser.nodes.*;

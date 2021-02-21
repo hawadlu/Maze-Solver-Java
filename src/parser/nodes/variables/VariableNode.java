@@ -7,7 +7,7 @@ import parser.interfaces.Number;
 import parser.nodes.math.NumberNode;
 import parser.nodes.methods.MethodNode;
 import parser.interfaces.Value;
-import Utility.Node;
+import utility.Node;
 
 import java.util.*;
 

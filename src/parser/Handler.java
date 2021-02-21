@@ -1,10 +1,10 @@
 package parser;
 
 
-import Game.Player;
+import game.Player;
 import parser.nodes.variables.VariableNode;
-import Utility.Location;
-import Utility.Node;
+import utility.Location;
+import utility.Node;
 
 import java.util.HashMap;
 import java.util.HashSet;
