@@ -87,9 +87,9 @@ class DijkstraWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o another Breadth First object.
+   * @return a boolean to indicate the equality of the two Breadth First objects.
    */
   @Override
   public boolean equals(Object o) {
@@ -102,8 +102,7 @@ class DijkstraWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode representation of the object.
    */
   @Override
   public int hashCode() {
@@ -111,8 +110,7 @@ class DijkstraWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return a string representation of the object.
    */
   @Override
   public String toString() {

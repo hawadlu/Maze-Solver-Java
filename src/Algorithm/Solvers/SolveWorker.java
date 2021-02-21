@@ -15,12 +15,13 @@ public class SolveWorker extends Thread {
   public SolveWorker other;
 
   /**
+   * Create a new SolveWorker.
    *
-   * @param solve
-   * @param start
-   * @param destination
-   * @param runner
-   * @param threadId
+   * @param solve the SolveAlgorithm object
+   * @param start Node representing the start
+   * @param destination Node representing the destination.
+   * @param runner the runner object
+   * @param threadId unique identifier for this thread.
    */
   public SolveWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     this.solve = solve;

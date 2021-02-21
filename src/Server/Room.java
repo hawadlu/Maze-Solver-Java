@@ -12,8 +12,9 @@ public class Room {
   private ImageFile imageFile;
 
   /**
+   * Create a new room.
    *
-   * @param clientHandler
+   * @param clientHandler the client that requested that the room be created.
    */
   public Room(ClientHandler clientHandler) {
     this.playerOne = clientHandler;
@@ -28,8 +29,8 @@ public class Room {
   }
 
   /**
-   *
-   * @param imageFile
+   * Set the imageFile being used in the room.
+   * @param imageFile the imageFile to be used.
    */
   public void setImageFile(ImageFile imageFile) {
     this.imageFile = imageFile;
@@ -130,7 +131,7 @@ public class Room {
   }
 
   /**
-   * If one player disconnects, send the discxonnect notification to the other player.
+   * If one player disconnects, send the disconnect notification to the other player.
    * Then close the room
    * @param client the client that is disconnecting
    */

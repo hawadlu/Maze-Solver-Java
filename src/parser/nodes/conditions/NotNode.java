@@ -33,8 +33,7 @@ public class NotNode implements Condition {
   }
 
   /**
-   *
-   * @return
+   * @return as string containing the type returned when executed.
    */
   @Override
   public String getExecType() {

@@ -46,9 +46,9 @@ public class ImageFile implements Serializable {
   }
 
   /**
-   *
-   * @param toLoad
-   * @throws InvalidImage
+   * Create a new image file
+   * @param toLoad the file containing the image to be loaded.
+   * @throws InvalidImage error thrown if the image is invalid.
    */
   public ImageFile(File toLoad) throws InvalidImage {
     System.out.println("Loading image: " + toLoad);
@@ -231,8 +231,7 @@ public class ImageFile implements Serializable {
   }
 
   /**
-   *
-   * @return
+   * @return the array being used to represent the image.
    */
   public colEnum[][] getArray() {
     return imageArray;
@@ -287,9 +286,9 @@ public class ImageFile implements Serializable {
   }
 
   /**
-   *
-   * @param drawLocation
-   * @param colour
+   * Colour a node in the image.
+   * @param drawLocation the location to colour.
+   * @param colour the colour that should be used.
    */
   public void drawNode(Location drawLocation, colEnum colour) {
     imageArray[drawLocation.y][drawLocation.x] = colour;
@@ -314,12 +313,12 @@ public class ImageFile implements Serializable {
   }
 
   /**
-   *
-   * @param startX
-   * @param startY
-   * @param endX
-   * @param endY
-   * @param colour
+   * Draw between two nodes in the image.
+   * @param startX x position of the first node.
+   * @param startY y position of the first node.
+   * @param endX x position of the second node.
+   * @param endY y position of the second node.
+   * @param colour the colour to use.
    */
   private void drawBetweenNodes(int startX, int startY, int endX, int endY, colEnum colour) {
     int x, y;

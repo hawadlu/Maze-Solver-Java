@@ -8,7 +8,7 @@ public class InvalidMaze extends GenericError {
 
   /**
    *
-   * @param specifics
+   * @param specifics a string containing specific information about the maze.
    */
   public InvalidMaze(String specifics) {
     System.out.println("Invalid maze: " + specifics);

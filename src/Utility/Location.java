@@ -10,9 +10,9 @@ public class Location implements Serializable {
   public final int x, y;
 
   /**
-   *
-   * @param x
-   * @param y
+   * Create a new location object.
+   * @param x the x position.
+   * @param y the y position.
    */
   public Location(int x, int y) {
     this.x = x;
@@ -29,9 +29,9 @@ public class Location implements Serializable {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o another Location object to compare.
+   * @return a boolean to indicate object equality.
    */
   @Override
   public boolean equals(Object o) {
@@ -43,8 +43,7 @@ public class Location implements Serializable {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode representing the Location object.
    */
   @Override
   public int hashCode() {
@@ -52,8 +51,7 @@ public class Location implements Serializable {
   }
 
   /**
-   *
-   * @return
+   * @return a string representation of the location object.
    */
   @Override
   public String toString() {

@@ -7,8 +7,7 @@ package Utility.Exceptions;
  */
 public class InvalidImage extends GenericError {
   /**
-   *
-   * @param specifics
+   * @param specifics a string containing specific information about the maze.
    */
   public InvalidImage(String specifics) {
     System.out.println("Invalid image: " + specifics);

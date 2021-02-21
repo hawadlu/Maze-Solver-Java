@@ -367,23 +367,17 @@ public class GUI {
   /**
    * Get the current maze image from the application
    *
-   * @return
+   * @return the imageFile.
    */
   public BufferedImage getImage() {
     return application.getImage();
   }
 
   /**
-   * Get the dimensions of the maze
-   *
-   * @return dimensions
-   */
-
-  /**
-   *
-   * @param panelToDisplay
-   * @param exitButtons
-   * @param panelDimensions
+   * Make a popup.
+   * @param panelToDisplay JPanel to display inside the popup window.
+   * @param exitButtons the buttons that are used to exit the window.
+   * @param panelDimensions the size that this window should be.
    */
   public static void makePopup(JPanel panelToDisplay, ArrayList<JButton> exitButtons, Dimension panelDimensions) {
     System.out.println("Making popup");

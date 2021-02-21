@@ -374,7 +374,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -737,7 +737,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1100,7 +1100,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1463,7 +1463,7 @@ public class Solvers {
           String loading = null, solving = null;
           if (option.equals("Loading")) loading = "Loading";
           else if (option.equals("Solving")) solving = "Solving";
-          tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
+          tracker.addResult(algorithm, fileStr, dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), multi, "Success");
         }
       }
     }
@@ -1527,7 +1527,7 @@ public class Solvers {
                 String loading = null, solving = null;
                 if (option.equals("Loading")) loading = "Loading";
                 else if (option.equals("Solving")) solving = "Solving";
-                tracker.addResult(algorithm, file.getName(), dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), multi, "Success");
+                tracker.addResult(algorithm, file.getName(), dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), multi, "Success");
               }
             }
           }

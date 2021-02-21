@@ -13,7 +13,7 @@ public class PathMaker {
    * Fill the image with the necessary segments
    *
    * @param segments the arraylist of segments
-   * @param image
+   * @param image the imageFile to fill.
    */
   public static void makePath(ArrayList<Segment> segments, ImageFile image) {
     image.fillSegmentPath(segments);
@@ -22,8 +22,8 @@ public class PathMaker {
   /**
    * Fill in the articulation points on the image
    *
-   * @param artPts
-   * @param image
+   * @param artPts an arraylist containing all of the articulation points.
+   * @param image the imageFile to use
    */
   public static void makeNodePath(ArrayList<Node> artPts, ImageFile image) {
     image.fillNodePath(artPts, false);

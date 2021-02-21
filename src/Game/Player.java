@@ -34,7 +34,7 @@ public class Player {
   ImageProcessor imageProcessor;
   Dispatcher dispatcher;
   SolveAlgorithm solve;
-  String type;
+  String type; //Algorithm or Game
   Logger logger = new Logger();
   boolean online = false;
   boolean local = false;
@@ -61,24 +61,11 @@ public class Player {
   }
 
   /**
+   * Create a new player object.
    *
-   * @return
-   */
-  public Handler getHandler() {
-    return handler;
-  }
-
-  /**
-   * Initialise the handler object.
-   */
-  public void initialiseHandler() {
-    this.handler = new Handler(this);
-  }
-
-  /**
    * @param maxSize the max size that any panels in the game can be displayed at
-   * @param dispatcher
-   * @param playerName
+   * @param dispatcher the dispatcher object being used.
+   * @param playerName the name of the player.
    */
   public Player(Dimension maxSize, String playerName, Dispatcher dispatcher) {
     this.playerName = playerName;
@@ -88,10 +75,11 @@ public class Player {
 
   /**
    * Create a player that is updated by the server.
-   * @param dispatcher
-   * @param playerName
-   * @param online
-   * @param type
+   *
+   * @param dispatcher the dispatcher that is being used.
+   * @param playerName the name of the player.
+   * @param online boolean to indicate if the game is online.
+   * @param type is this a Game or Algorithm
    */
   public Player(String playerName, String type, Dispatcher dispatcher, boolean online) {
     this.playerName = playerName;
@@ -110,7 +98,6 @@ public class Player {
 
     this.online = online;
   }
-
 
   /**
    * Create a player object
@@ -132,6 +119,20 @@ public class Player {
     if (this.type.equals("Algorithm") && dispatcher.getImageFile() != null) {
       panel.setAlgoSolveScreen();
     }
+  }
+
+  /**
+   * @return the handler object being used by this player.
+   */
+  public Handler getHandler() {
+    return handler;
+  }
+
+  /**
+   * Initialise the handler object.
+   */
+  public void initialiseHandler() {
+    this.handler = new Handler(this);
   }
 
   /**
@@ -216,8 +217,7 @@ public class Player {
   }
 
   /**
-   *
-   * @return
+   * @return a string representation of the player.
    */
   @Override
   public String toString() {
@@ -225,9 +225,9 @@ public class Player {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o the object to check.
+   * @return a boolean indicating object equality.
    */
   @Override
   public boolean equals(Object o) {
@@ -239,8 +239,7 @@ public class Player {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode version of the object.
    */
   @Override
   public int hashCode() {
@@ -256,24 +255,21 @@ public class Player {
   }
 
   /**
-   *
-   * @return
+   * @return an arraylist of all the exits in the maze.
    */
   public ArrayList<Location> getMazeExits() {
     return imageProcessor.getExits();
   }
 
   /**
-   *
-   * @return
+   * @return a Map containing all of teh nodes in the maze, indexed by location.
    */
   public ConcurrentHashMap<Location, Node> getNodes() {
     return imageProcessor.getNodes();
   }
 
   /**
-   *
-   * @return
+   * @return the imageFile being used.
    */
   public ImageFile getImageFile() {
     return dispatcher.getImageFile();
@@ -504,24 +500,14 @@ public class Player {
   }
 
   /**
-   *
-   * @return
+   * @return an int representing the specified delay in Game mode.
    */
   public int getDelay() {
     return delay;
   }
 
   /**
-   *
-   * @param delay
-   */
-  public void setDelay(int delay) {
-    this.delay = delay;
-  }
-
-  /**
-   *
-   * @return
+   * @return a boolean indicating if this player has completed execution.
    */
   public boolean isDone() {
     return this.done;
@@ -544,24 +530,22 @@ public class Player {
   }
 
   /**
-   *
-   * @return
+   * @return a boolean indicating iof this player is online.
    */
   public boolean isOnline() {
     return online;
   }
 
   /**
-   *
-   * @param online
+   * Set the online status of the player.
+   * @param online boolean to indicate online/offline.
    */
   public void setOnline(boolean online) {
     this.online = online;
   }
 
   /**
-   *
-   * @return
+   * @return a boolean indicating whether or not this player has an opponent.
    */
   public boolean hasOpponent() {
     return hasOpponent;

@@ -37,12 +37,12 @@ public class BreadthFirst extends SolveRunner {
 class BFSWorker extends SolveWorker {
 
   /**
-   *
-   * @param solve
-   * @param start
-   * @param destination
-   * @param runner
-   * @param threadId
+   * Create a new Breadth First object.
+   * @param solve the solve object.
+   * @param start Node that represents the start of the maze.
+   * @param destination Node that represents the end of the maze.
+   * @param runner the runner object.
+   * @param threadId unique identifier for this thread
    */
   public BFSWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
@@ -105,9 +105,9 @@ class BFSWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o another Breadth First object.
+   * @return a boolean to indicate the equality of the two Breadth First objects.
    */
   @Override
   public boolean equals(Object o) {
@@ -120,8 +120,7 @@ class BFSWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return A hashcode representing a Breadth First object.
    */
   @Override
   public int hashCode() {
@@ -130,7 +129,7 @@ class BFSWorker extends SolveWorker {
 
   /**
    *
-   * @return
+   * @return a string representation of the object.
    */
   @Override
   public String toString() {

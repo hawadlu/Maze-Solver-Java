@@ -92,9 +92,9 @@ class DFSWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality
+   * @param o another Depth First object.
+   * @return a boolean to indicate the equality of the two Depth First objects.
    */
   @Override
   public boolean equals(Object o) {
@@ -107,8 +107,7 @@ class DFSWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return A hashcode representing a Depth First object.
    */
   @Override
   public int hashCode() {
@@ -116,8 +115,7 @@ class DFSWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return a string containing the thread id
    */
   @Override
   public String toString() {

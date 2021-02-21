@@ -310,7 +310,7 @@ public class ArticulationPoints {
 
       //Add these to the tracker
       String loading = null, solving = null;
-      tracker.addResult(algorithm, fileStr, dispatcher.getMazeSize(), loading, solving, dispatcher.getExecTime(), false, "Success");
+      tracker.addResult(algorithm, fileStr, dispatcher.getMazeArea(), loading, solving, dispatcher.getExecTime(), false, "Success");
     }
 
     tracker.saveResult();

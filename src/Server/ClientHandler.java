@@ -29,9 +29,9 @@ ClientHandler extends Thread {
   int id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 
   /**
-   *
-   * @param server
-   * @param connection
+   * Create a new client handler object.
+   * @param server the server object.
+   * @param connection the socket that this client is connected to.
    */
   public ClientHandler(Server server, Socket connection) {
     try {
@@ -159,9 +159,9 @@ ClientHandler extends Thread {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality
+   * @param o another ClientHandler object.
+   * @return a boolean to indicate the equality of the two Astar objects.
    */
   @Override
   public boolean equals(Object o) {
@@ -172,8 +172,7 @@ ClientHandler extends Thread {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode representation of the object.
    */
   @Override
   public int hashCode() {

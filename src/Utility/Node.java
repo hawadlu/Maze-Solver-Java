@@ -19,16 +19,16 @@ public class Node {
   private ArrayList<Node> children = new ArrayList<>();
 
   /**
-   *
-   * @param nodeLocation
+   * Create a new node object.
+   * @param nodeLocation the location of the node.
    */
   public Node(Location nodeLocation) {
     this.nodeLocation = nodeLocation;
   }
 
   /**
-   *
-   * @param node
+   * Copy constructor.
+   * @param node the node to copy.
    */
   public Node(Node node) {
     this.nodeLocation = node.getLocation();
@@ -236,7 +236,6 @@ public class Node {
     return this.nodeDepth;
   }
 
-
   /**
    * @return the reachBack
    */
@@ -266,8 +265,7 @@ public class Node {
   }
 
   /**
-   *
-   * @return
+   * @return a string representation of the node.
    */
   @Override
   public String toString() {
@@ -275,9 +273,9 @@ public class Node {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o the object to check.
+   * @return a boolean indicating object equality.
    */
   @Override
   public boolean equals(Object o) {
@@ -288,8 +286,7 @@ public class Node {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode representation of the object.
    */
   @Override
   public int hashCode() {

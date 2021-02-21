@@ -1,4 +1,4 @@
-<H1>How to write your own parser</H1>
+<H1>Writing Your Own Algorithm</H1>
 
 <H2>Statements</H2>
 All single line statements must be terminated with a ';'
@@ -49,10 +49,10 @@ The first part is the variable type which may be any of the following...
 <br>
 The next part is the variable name. This can be any word that you like.
 
-Declarations have an optional assignment operator '=' which may be followed by a maze method if the varaible
+Declarations have an optional assignment operator '=' which may be followed by a maze method if the variable
 type is a List, Stack, Queue or PriorityQueue.
 
-If the type is a number the '=' may be followed by any number of math operator.
+Whenever, the type is a number the '=' may be followed by any number of math operator.
 <br><br>
 e.g.
 <br>
@@ -150,7 +150,7 @@ List of all available methods
     <li>
         Maze.fail("Some message")
         <br>
-        Deliberately fail the program. Probaly not useful in an actual maze solver but it is good for testing.
+        Deliberately fail the program. Probably not useful in an actual maze solver but it is good for testing.
     </li>
 </ul>
 
@@ -374,7 +374,7 @@ if(someCondition) {
 If statements can also be chained together to form an else if statement.
 
 In this case if the first statement is not true, the second statement is checked and then executed if 
-its condition is true. There may be any number of else if braches on the same if statement
+its condition is true. There may be any number of else if branches on the same if statement
 
 ```java
 Condition someCondition1= lt(3, 2);

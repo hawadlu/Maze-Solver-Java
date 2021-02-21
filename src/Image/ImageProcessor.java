@@ -110,12 +110,12 @@ public class ImageProcessor {
   }
 
   /**
-   *
-   * @param currentNode
-   * @param currentLocation
-   * @param multiThread
-   * @param currentImage
-   * @return
+   * Check to see if a node exists in the maze while solving.
+   * @param currentNode the current node.
+   * @param currentLocation the current location.
+   * @param multiThread boolean to indicate if the program is currently using multiple threads.
+   * @param currentImage the imageFile currently in use.
+   * @return a boolean to indicate if the node currently exists.
    */
   private boolean checkNodeExistsOnSolve(Node currentNode, Location currentLocation, Boolean multiThread, ImageFile currentImage) {
     //If this is an exit add it
@@ -215,8 +215,8 @@ public class ImageProcessor {
   /**
    * @param location The location of the current node.
    * @param scanAll  scanning all the nodes on load.
-   * @return boolean indicating node
-   * @param currentImage
+   * @param currentImage the current image file.
+   * @return boolean indicating node.
    */
   private boolean isNode(Location location, Boolean scanAll, Boolean multiThread, ImageFile currentImage) {
     colEnum[][] imgArray = currentImage.getArray();
@@ -251,8 +251,8 @@ public class ImageProcessor {
    * Check if the location has black squares that are opposite
    *
    * @param location the current location
-   * @param currentImage
-   * @return
+   * @param currentImage the current image file.
+   * @return a boolean indicating if the square has two black opposites.
    */
   private boolean oppositeBlack(Location location, ImageFile currentImage) {
     colEnum[][] imgArray = currentImage.getArray();
@@ -267,7 +267,7 @@ public class ImageProcessor {
    * Count the number of white tiles surrounding this one
    *
    * @param location the current location
-   * @param currentImage
+   * @param currentImage the current image file
    * @return the count of neighbours
    */
   private int numWhiteNeighbours(Location location, ImageFile currentImage) {

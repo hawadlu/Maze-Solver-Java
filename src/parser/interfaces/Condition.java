@@ -6,15 +6,15 @@ package parser.interfaces;
  */
 public interface Condition {
   /**
-   *
-   * @param DEBUG
-   * @return
+   * Evaluate the condition.
+   * @param DEBUG should the program print debug statements as it goes.
+   * @return a boolean indicating the result of the evaluation.
    */
   boolean evaluate(boolean DEBUG);
 
   /**
-   *
-   * @return
+   * Get the object type returned when run.
+   * @return a string indicating the exec type
    */
   String getExecType();
 }

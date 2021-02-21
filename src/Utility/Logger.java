@@ -14,15 +14,15 @@ public class Logger {
   ArrayList<String> actions = new ArrayList<>();
 
   /**
-   *
-   * @param action
+   * Add an action to the log.
+   * @param action the action that was performed.
    */
   public void add(String action) {
     actions.add(action);
   }
 
   /**
-   *
+   * Save the log.
    */
   public void save() {
     LocalDate date = LocalDate.now();

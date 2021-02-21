@@ -39,8 +39,8 @@ public class ConditionNode implements Condition {
   }
 
   /**
-   *
-   * @return
+   * Get the object type returned when run.
+   * @return a string indicating the exec type
    */
   @Override
   public String getExecType() {

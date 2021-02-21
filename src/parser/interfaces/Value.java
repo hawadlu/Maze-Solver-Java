@@ -6,8 +6,7 @@ package parser.interfaces;
 public interface Value {
 
   /**
-   *
-   * @return
+   * @return a String containing the type of this value
    */
   String getType();
 }

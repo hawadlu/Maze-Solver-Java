@@ -26,9 +26,10 @@ public class PlayerPanel extends JPanel {
   ImageFile lastImage;
 
   /**
+   * Create a new player panel
    *
-   * @param maxSize
-   * @param player
+   * @param maxSize maximum size of the panel.
+   * @param player the player that is using this panel.
    */
   public PlayerPanel(Dimension maxSize, Player player) {
     this.setBackground(backgroundCol);

@@ -3,16 +3,17 @@ package Utility;
 import java.util.Objects;
 
 /**
- *
+ * This class is used to represent the space between two nodes in the maze.
  */
 public class Segment implements Comparable {
   public Node entry, exit;
   public int segmentLen;
 
   /**
+   * Create a new segment.
    *
-   * @param entry
-   * @param exit
+   * @param entry Node at the entry.
+   * @param exit Node at the exit.
    */
   public Segment(Node entry, Node exit) {
     this.entry = entry;
@@ -22,9 +23,9 @@ public class Segment implements Comparable {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality.
+   * @param o the object to check.
+   * @return a boolean indicating object equality.
    */
   @Override
   public boolean equals(Object o) {
@@ -35,8 +36,7 @@ public class Segment implements Comparable {
   }
 
   /**
-   *
-   * @return
+   * @return a hashcode representation of the object
    */
   @Override
   public int hashCode() {
@@ -44,9 +44,9 @@ public class Segment implements Comparable {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Compare two objects to see which should come first.
+   * @param o the object to compare to.
+   * @return an int indicating how the objects compared
    */
   @Override
   public int compareTo(Object o) {

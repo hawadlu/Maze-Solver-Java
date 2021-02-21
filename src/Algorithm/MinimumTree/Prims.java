@@ -15,8 +15,8 @@ public class Prims extends SolveRunner {
   ArrayList<Segment> mstEdges = new ArrayList<>();
 
   /**
-   *
-   * @param solve
+   * Execute prims algorithm.
+   * @param solve the solve object being used.
    */
   public void solve(SolveAlgorithm solve) {
     Thread visitor = new Thread(); //This thread is never run but used to track the visit status.
@@ -49,8 +49,7 @@ public class Prims extends SolveRunner {
   }
 
   /**
-   *
-   * @return
+   * @return an arraylist containing the segments found by the algorithm.
    */
   public ArrayList<Segment> getSegments() {
     return mstEdges;

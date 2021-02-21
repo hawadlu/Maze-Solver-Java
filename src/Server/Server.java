@@ -9,8 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This class deals with the initial connection of new clients
- * and contains a map of rooms into which the clients are devided.
- * todo close the room when a client leaves.
+ * and contains a map of rooms into which the clients are divided.
  */
 public class Server {
   int socketNum;
@@ -20,8 +19,9 @@ public class Server {
 
 
   /**
+   * Create a new server.
    *
-   * @param socketNum
+   * @param socketNum the socket to communicate through.
    */
   public Server(int socketNum) {
     this.socketNum = socketNum;
@@ -65,19 +65,10 @@ public class Server {
   }
 
   /**
+   * Create a new room.
    *
-   * @param args
-   */
-  public static void main(String[] args) {
-    Server server = new Server(5000);
-    server.bind();
-    server.listen();
-  }
-
-  /**
-   *
-   * @param clientHandler
-   * @return
+   * @param clientHandler the client that requested that the room be created.
+   * @return an int containing the room id.
    */
   public int createRoom(ClientHandler clientHandler) {
     //Generate keys until a free one is found
@@ -94,9 +85,10 @@ public class Server {
   }
 
   /**
+   * Join a room
    *
-   * @param clientHandler
-   * @param roomId
+   * @param clientHandler the client that wants to join the room.
+   * @param roomId the id of the room that the client wants to join.
    */
   public void joinRoom(ClientHandler clientHandler, int roomId) {
     rooms.get(roomId).join(clientHandler);
@@ -109,4 +101,13 @@ public class Server {
     public void closeRoom(int currentRoom) {
       rooms.remove(currentRoom);
     }
+
+  /**
+   * Start the server
+   */
+  public static void main(String[] args) {
+    Server server = new Server(5000);
+    server.bind();
+    server.listen();
+  }
 }

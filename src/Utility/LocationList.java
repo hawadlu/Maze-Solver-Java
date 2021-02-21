@@ -15,8 +15,7 @@ public class LocationList extends ArrayList implements Serializable {
   ArrayList<Location> locations = new ArrayList<>();
 
   /**
-   *
-   * @return
+   * @return an int representing the length of the list.
    */
   @Override
   public int size() {
@@ -24,9 +23,9 @@ public class LocationList extends ArrayList implements Serializable {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Add an object to the list.
+   * @param o the object to add to the list.
+   * @return a boolean to indicate a successful operation.
    */
   @Override
   public boolean add(Object o) {
@@ -34,9 +33,9 @@ public class LocationList extends ArrayList implements Serializable {
   }
 
   /**
-   *
-   * @param index
-   * @return
+   * Get an object from the list at a specified index.
+   * @param index the index of the object to get
+   * @return the object at the specified index.
    */
   @Override
   public Location get(int index) {
@@ -44,9 +43,9 @@ public class LocationList extends ArrayList implements Serializable {
   }
 
   /**
-   *
-   * @param index
-   * @return
+   * Remove an object from the list at the specified index.
+   * @param index the index of the object to remove.
+   * @return the object at the specified index.
    */
   @Override
   public Location remove(int index) {
@@ -54,8 +53,7 @@ public class LocationList extends ArrayList implements Serializable {
   }
 
   /**
-   *
-   * @return
+   * @return a string representation of the list.
    */
   @Override
   public String toString() {

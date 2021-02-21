@@ -27,7 +27,7 @@ public class Handler {
 
   /**
    * Create the object.
-   * @param player
+   * @param player the player that is using this handler.
    */
   public Handler(Player player) {
     this.player = player;

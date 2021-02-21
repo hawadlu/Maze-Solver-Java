@@ -17,8 +17,7 @@ public class Kruskals {
   HashSet<Node> forest = new HashSet<>();
 
   /**
-   *
-   * @param solve
+   * @param solve the solve object.
    */
   public void solve(SolveAlgorithm solve) {
     System.out.println("Solving Kruskals");
@@ -104,8 +103,7 @@ public class Kruskals {
   }
 
   /**
-   *
-   * @return
+   * @return An arraylist containing all of the segments found by the algorithm.
    */
   public ArrayList<Segment> getSegments() {
     return mstEdges;

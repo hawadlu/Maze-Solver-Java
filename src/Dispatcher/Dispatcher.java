@@ -37,7 +37,7 @@ public class Dispatcher {
    * Create a single player dispatcher for running an algorithm.
    * This is primarily used by the tests
    *
-   * @param imageFile
+   * @param imageFile the image file to be used.
    * @param playersToCreate the number of players that should be created.
    *
    */
@@ -109,21 +109,21 @@ public class Dispatcher {
   }
 
   /**
-   * @return
+   * @return a long representing the time taken to execute.
    */
   public long getExecTime() {
     return players.get(0).getExecTime();
   }
 
   /**
-   * @return
+   * @return a double representing the area of the maze.
    */
-  public double getMazeSize() {
+  public double getMazeArea() {
     return imageFile.getDimensions().height * imageFile.getDimensions().width;
   }
 
   /**
-   * @return
+   * @return the image file being used.
    */
   public ImageFile getImageFile() {
     return this.imageFile;
@@ -201,7 +201,7 @@ public class Dispatcher {
   }
 
   /**
-   * @param live
+   * @param live boolean to indicate if the players should update their displays in real time.
    */
   public void setLive(boolean live) {
     this.live = live;
@@ -415,14 +415,15 @@ public class Dispatcher {
   }
 
   /**
-   * @return
+   * @return the screen JPanel
    */
   public JPanel getScreen() {
     return screen;
   }
 
   /**
-   * @param screen
+   * Set the screen variable.
+   * @param screen new JPanel to be used.
    */
   public void setScreen(JPanel screen) {
     this.screen = screen;

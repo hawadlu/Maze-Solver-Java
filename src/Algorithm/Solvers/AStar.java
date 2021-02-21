@@ -34,13 +34,14 @@ public class AStar extends SolveRunner {
  * Allows DFS to be multi threaded
  */
 class AStarWorker extends SolveWorker {
+
   /**
-   *
-   * @param solve
-   * @param start
-   * @param destination
-   * @param runner
-   * @param threadId
+   * Create a new Astar object.
+   * @param solve the solve object.
+   * @param start Node that represents the start of the maze.
+   * @param destination Node that represents the end of the maze.
+   * @param runner the runner object.
+   * @param threadId unique identifier for this thread
    */
   public AStarWorker(SolveAlgorithm solve, Node start, Node destination, SolveRunner runner, String threadId) {
     super(solve, start, destination, runner, threadId);
@@ -109,9 +110,9 @@ class AStarWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @param o
-   * @return
+   * Check object equality
+   * @param o another Astar object.
+   * @return a boolean to indicate the equality of the two Astar objects.
    */
   @Override
   public boolean equals(Object o) {
@@ -124,8 +125,7 @@ class AStarWorker extends SolveWorker {
   }
 
   /**
-   *
-   * @return
+   * @return A hashcode representing an Astar object.
    */
   @Override
   public int hashCode() {

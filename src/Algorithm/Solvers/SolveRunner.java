@@ -34,7 +34,7 @@ public class SolveRunner {
    * Process the nodes for AStar and Dijkstra
    *
    * @param toProcess     the current queue of nodes
-   * @param parent        the parentnode
+   * @param parent        the parent node
    * @param node          the current node
    * @param costToNode    the cost of getting to the current node
    * @param currentThread the thread that is currently running

@@ -30,7 +30,7 @@ public class Application {
   /**
    * Take the image file and parse it into the appropriate format
    *
-   * @param imageToParse
+   * @param imageToParse the file containing the image to be parsed.
    */
   public void parseImageFile(File imageToParse) throws GenericError {
     currentImage = new ImageFile(imageToParse);
@@ -60,8 +60,7 @@ public class Application {
   }
 
   /**
-   *
-   * @return
+   * @return the imageFile
    */
   public ImageFile getImageFile() {
     return currentImage;
@@ -126,8 +125,7 @@ public class Application {
   }
 
   /**
-   *
-   * @param args
+   * Start the application
    */
   public static void main(String[] args) {
     //Create the GUI

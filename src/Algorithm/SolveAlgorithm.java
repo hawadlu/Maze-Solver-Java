@@ -31,9 +31,10 @@ public class SolveAlgorithm {
   public Logger logger;
 
   /**
-   * Start the solve process.
-   * @param player
-   * @param logger
+   * Create a new SolveAlgorithm object.
+   *
+   * @param player the player that wants to do the solving.
+   * @param logger the logger object (for debugging)
    */
   public SolveAlgorithm(Player player, Logger logger) {
     this.mazeSize = player.getImageFile().getDimensions().width * player.getImageFile().getDimensions().height;
@@ -42,11 +43,12 @@ public class SolveAlgorithm {
   }
 
   /**
+   * Process the parameters supplied by the player and start the appropriate algorithm.
    *
-   * @param algorithm
-   * @param multiThreading
+   * @param algorithm the algorithm that the player wants to use.
+   * @param multiThreading boolean to indicate if the player wants to use multiple threads.
    */
-  public void solve(String algorithm, Boolean multiThreading) {
+  public void solve(String algorithm, boolean multiThreading) {
     logger.add(player.getName() + "entered solve method");
 
     boolean buildNodePath = true;
@@ -141,8 +143,10 @@ public class SolveAlgorithm {
   }
 
   /**
+   * Scan the maze.
    *
-   * @param param
+   * If param is "loading" scan everything, otherwise only find the exits.
+   * @param param String specifying how the user wants to find nodes.
    */
   public void scan(String param) {
     if (param.equals("Loading") && mazeSize > Math.pow(6001, 2)) {
