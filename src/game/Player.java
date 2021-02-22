@@ -375,7 +375,8 @@ public class Player {
     solve.scanAll = true;
 
     //Start the solve
-    solve.solve(algorithm, false);
+    ImageFile solved = solve.solve(algorithm, false);
+    panel.makeAlgoSolvedScreen(solved);
   }
 
   /**

@@ -235,9 +235,8 @@ public class PlayerPanel extends JPanel {
 
       //Start the solve process
       solveButton.addActionListener(e12 -> {
-
-        //This algorithm only works on a single thread and while searching for neighbours on load
         makeAlgoWorkingScreen();
+        player.solve("Articulation");
       });
 
       cancelButtons.clear();

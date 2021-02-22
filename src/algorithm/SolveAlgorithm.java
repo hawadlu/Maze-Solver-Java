@@ -91,18 +91,18 @@ public class SolveAlgorithm {
 
     logger.add(player.getName() + "completed solving");
 
+    //Create the image file
+    ImageFile solved = new ImageFile(player.getImageFile());
+
     //Build the path if the path can be traced from node to node
     if (buildNodePath) {
       PathMaker.makePath(join, entry, exit, getImageFile());
+      solved.fillNodePath(PathMaker.generatePathArraylist(exit), true);
     } else if (!segments.isEmpty()) {
-      PathMaker.makePath(segments, getImageFile());
+      solved.fillSegmentPath(segments);
     } else if (!artPts.isEmpty()) {
-      PathMaker.makeNodePath(artPts, getImageFile());
+      solved.fillNodePath(artPts, false);
     }
-
-    //Create the image file
-    ImageFile solved = new ImageFile(player.getImageFile());
-    solved.fillNodePath(PathMaker.generatePathArraylist(exit), true);
 
     return solved;
   }
