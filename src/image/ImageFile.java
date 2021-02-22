@@ -120,7 +120,7 @@ public class ImageFile implements Serializable {
         if (toUse[height][width] == colEnum.WHITE) toReturn.setRGB(width, height, Colours.white);
         else if (toUse[height][width] == colEnum.RED) toReturn.setRGB(width, height, Colours.red);
         else if (toUse[height][width] == colEnum.BLUE) toReturn.setRGB(width, height, Colours.blue);
-        else if (toUse[height][width] == colEnum.GREEN) toReturn.setRGB(width, height, Colours.green);
+        else if (toUse[height][width] == colEnum.GREEN) toReturn.setRGB(width, height, Colours.orange);
         else toReturn.setRGB(width, height, Colours.black);
       }
     }

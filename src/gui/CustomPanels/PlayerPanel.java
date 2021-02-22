@@ -318,8 +318,7 @@ public class PlayerPanel extends JPanel {
 
         //All of these algorithms search for neighbours on load and do not multi thread
         makeAlgoWorkingScreen();
-
-//        player.solve(algorithm, );
+        player.solve(algorithm);
       });
 
       cancelButtons.clear();

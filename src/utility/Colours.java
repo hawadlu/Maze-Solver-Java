@@ -17,6 +17,6 @@ public class Colours {
   public static int white = Color.WHITE.getRGB();
   public static int black = Color.BLACK.getRGB();
   public static int red = Color.RED.getRGB();
-  public static int green = Color.GREEN.getRGB();
+  public static int orange = new Color(231, 102, 43).getRGB();
   public static int blue = Color.BLUE.getRGB();
 }
