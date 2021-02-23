@@ -106,7 +106,8 @@ public class Server {
    * Start the server
    */
   public static void main(String[] args) {
-    Server server = new Server(5000);
+    int socket = Integer.parseInt(args[0]);
+    Server server = new Server(socket);
     server.bind();
     server.listen();
   }
