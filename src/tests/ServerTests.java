@@ -1,7 +1,15 @@
 package tests;
 
+import application.Application;
 import org.junit.jupiter.api.Test;
+import server.LocalClient;
 import server.Server;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * This class is used to test elements of the server
@@ -46,5 +54,34 @@ public class ServerTests {
         arguments[0] = "5000";
         arguments[1] = "true";
         Server.main(arguments);
+    }
+
+    //Test valid type of immediateReturn
+    @Test
+    public void testValidImmediateReturn() {
+        String[] arguments = new String[2];
+        arguments[0] = "5000";
+        arguments[1] = "true";
+        Server.main(arguments);
+    }
+
+    //Connect a single client to the server
+    @Test
+    public void connectClient() throws InterruptedException {
+        //Create a server
+        Server server = new Server(5000);
+        server.start();
+
+        //Wait for the server to start
+        TimeUnit.MILLISECONDS.sleep(10);
+
+        System.out.println("Client joining server");
+        //Connect a client to the server
+        Application application = new Application();
+        application.connectToServer(5000);
+
+        //Wait for the server to add the player
+        TimeUnit.MILLISECONDS.sleep(10);
+        assertEquals(1, server.getClientCount());
     }
 }

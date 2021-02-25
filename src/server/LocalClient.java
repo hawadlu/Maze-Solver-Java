@@ -20,8 +20,17 @@ public class LocalClient extends Thread {
   private String onlineUserName;
   private int roomId;
   Socket connection;
+  int socket;
 
-  /**
+    /**
+     * Create a new LocalClient.
+     * @param socket the socket to connect to.
+     */
+    public LocalClient(int socket) {
+        this.socket = socket;
+    }
+
+    /**
    * Set the dispatcher
    */
   public void setDispatcher(Dispatcher dispatcher) {
@@ -32,10 +41,9 @@ public class LocalClient extends Thread {
    * Initiate a connection to the server
    */
   public void connect() {
-    int port = 5000;
     String host = "localhost";
     try {
-      connection = new Socket(host, port);
+      connection = new Socket(host, socket);
 
       dataOut = new ObjectOutputStream(connection.getOutputStream());
       dataIn = new ObjectInputStream(connection.getInputStream());

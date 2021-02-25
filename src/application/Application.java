@@ -107,9 +107,10 @@ public class Application {
 
   /**
    * Initiate a connect to a game server
+   * @param socket the socket to connect to
    */
-  public void connectToServer() {
-    client = new LocalClient();
+  public void connectToServer(int socket) {
+    client = new LocalClient(socket);
     client.connect();
     client.start();
   }

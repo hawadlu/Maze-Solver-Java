@@ -21,17 +21,39 @@ public class Server {
   /**
    * Create a new server.
    *
-   * @param socketNum the socket to communicate through.
+   * @param args String array containing the arguments required to start the server
+   *             the first element is the port and the second is a boolean to indicate
+   *             if we should stop after binding (for testing purposes)
    */
-  public Server(int socketNum) {
-    this.socketNum = socketNum;
+  public Server(String[] args) {
+    this.socketNum = Integer.parseInt(args[0]);
   }
 
   /**
+   * Create a new server
+   * @param socket the port to connect to.
+   */
+  public Server(int socket) {
+    this.socketNum = socket;
+
+    this.bind();
+
+    this.listen();
+  }
+
+    /**
+     * Bind and listen for incoming connections
+     */
+    public void start() {
+        this.bind();
+        this.listen();
+    }
+
+
+    /**
    * Bind to the requested port.
    */
   public void bind() {
-
     try {
       socket = new ServerSocket(socketNum);
     } catch (IOException e) {
@@ -43,23 +65,31 @@ public class Server {
    * Listen for incoming connections.
    */
   public void listen() {
-    System.out.println("Server listening");
+      //Create a new thread that will listen for connections
+      Server server = this;
+      new Thread() {
+          @Override
+          public void run() {
+              super.run();
+              System.out.println("Server listening");
 
-    while (true) {
-      try {
-        Socket accept = socket.accept();
+              while (true) {
+                  try {
+                      Socket accept = socket.accept();
 
-        System.out.println("Client connected");
+                      System.out.println("Client connected");
 
-        //Create a new thread to handle the connection to this client
-        ClientHandler client = new ClientHandler(this, accept);
+                      //Create a new thread to handle the connection to this client
+                      ClientHandler client = new ClientHandler(server, accept);
 
-        clients.add(client);
-        client.start();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+                      clients.add(client);
+                      client.start();
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              }
+          }
+      }.start();
   }
 
   /**
@@ -100,23 +130,18 @@ public class Server {
       rooms.remove(currentRoom);
     }
 
-  /**
+    /**
+     * @return The number of clients that are currently connected to the database
+     */
+    public int getClientCount() {
+      return clients.size();
+    }
+
+
+    /**
    * Start the server
-   *
-   * Expected arguments are the port number and a boolean to indicate immediate return.
-   * Immediate return is used to test port binding and does not start the listener.
    */
   public static void main(String[] args) {
-    int socket = Integer.parseInt(args[0]);
-
-    //Should the program break without starting to listen.
-    boolean immediateReturn = Boolean.parseBoolean(args[1]);
-
-    Server server = new Server(socket);
-    server.bind();
-
-    if (immediateReturn) return;
-
-    server.listen();
+    new Server(args).start();
   }
 }
