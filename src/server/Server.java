@@ -1,5 +1,7 @@
 package server;
 
+import utility.Exceptions.InvalidArguments;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,34 +14,43 @@ import java.util.concurrent.ThreadLocalRandom;
  * and contains a map of rooms into which the clients are divided.
  */
 public class Server {
-  int socketNum;
-  ServerSocket socket;
-  ArrayList<ClientHandler> clients = new ArrayList<>();
-  HashMap<Integer, Room> rooms = new HashMap();
+    int socketNum;
+    ServerSocket socket;
+    ArrayList<ClientHandler> clients = new ArrayList<>();
+    HashMap<Integer, Room> rooms = new HashMap();
 
 
-  /**
-   * Create a new server.
-   *
-   * @param args String array containing the arguments required to start the server
-   *             the first element is the port and the second is a boolean to indicate
-   *             if we should stop after binding (for testing purposes)
-   */
-  public Server(String[] args) {
-    this.socketNum = Integer.parseInt(args[0]);
-  }
+    /**
+     * Create a new server.
+     *
+     * @param args String array containing the arguments required to start the server
+     *             the first and only element is an int (the port to connect to)
+     */
+    public Server(String[] args) throws InvalidArguments {
+        if (args.length != 1) throw new InvalidArguments("Expected 1 argument, found " + args.length);
 
-  /**
-   * Create a new server
-   * @param socket the port to connect to.
-   */
-  public Server(int socket) {
-    this.socketNum = socket;
+        try {
+            this.socketNum = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            throw new InvalidArguments(args[0] + "is not a  valid port number.");
+        }
+    }
 
-    this.bind();
+    /**
+     * Create a new server
+     *
+     * @param socket the port to connect to.
+     */
+    public Server(int socket) {
+        this.socketNum = socket;
+    }
 
-    this.listen();
-  }
+    /**
+     * Start the server
+     */
+    public static void main(String[] args) throws InvalidArguments {
+        new Server(args).start();
+    }
 
     /**
      * Bind and listen for incoming connections
@@ -49,99 +60,91 @@ public class Server {
         this.listen();
     }
 
+    /**
+     * Bind to the requested port.
+     */
+    public void bind() {
+        try {
+            socket = new ServerSocket(socketNum);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
-   * Bind to the requested port.
-   */
-  public void bind() {
-    try {
-      socket = new ServerSocket(socketNum);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
+     * Listen for incoming connections.
+     */
+    public void listen() {
+        //Create a new thread that will listen for connections
+        Server server = this;
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                System.out.println("Server listening");
 
-  /**
-   * Listen for incoming connections.
-   */
-  public void listen() {
-      //Create a new thread that will listen for connections
-      Server server = this;
-      new Thread() {
-          @Override
-          public void run() {
-              super.run();
-              System.out.println("Server listening");
+                while (true) {
+                    try {
+                        Socket accept = socket.accept();
 
-              while (true) {
-                  try {
-                      Socket accept = socket.accept();
+                        System.out.println("Client connected");
 
-                      System.out.println("Client connected");
+                        //Create a new thread to handle the connection to this client
+                        ClientHandler client = new ClientHandler(server, accept);
 
-                      //Create a new thread to handle the connection to this client
-                      ClientHandler client = new ClientHandler(server, accept);
-
-                      clients.add(client);
-                      client.start();
-                  } catch (IOException e) {
-                      e.printStackTrace();
-                  }
-              }
-          }
-      }.start();
-  }
-
-  /**
-   * Create a new room.
-   *
-   * @param clientHandler the client that requested that the room be created.
-   * @return an int containing the room id.
-   */
-  public int createRoom(ClientHandler clientHandler) {
-    //Generate keys until a free one is found
-    int roomKey;
-    while (true) {
-      roomKey = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-
-      if (!rooms.containsKey(roomKey)) break;
+                        clients.add(client);
+                        client.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 
-    rooms.put(roomKey, new Room(clientHandler));
+    /**
+     * Create a new room.
+     *
+     * @param clientHandler the client that requested that the room be created.
+     * @return an int containing the room id.
+     */
+    public int createRoom(ClientHandler clientHandler) {
+        //Generate keys until a free one is found
+        int roomKey;
+        while (true) {
+            roomKey = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
 
-    return roomKey;
-  }
+            if (!rooms.containsKey(roomKey)) break;
+        }
 
-  /**
-   * Join a room
-   *
-   * @param clientHandler the client that wants to join the room.
-   * @param roomId the id of the room that the client wants to join.
-   */
-  public void joinRoom(ClientHandler clientHandler, int roomId) {
-    rooms.get(roomId).join(clientHandler);
-  }
+        rooms.put(roomKey, new Room(clientHandler));
 
-  /**
-   * Close the specified room.
-   * @param currentRoom the id of the room to close
-   */
+        return roomKey;
+    }
+
+    /**
+     * Join a room
+     *
+     * @param clientHandler the client that wants to join the room.
+     * @param roomId        the id of the room that the client wants to join.
+     */
+    public void joinRoom(ClientHandler clientHandler, int roomId) {
+        rooms.get(roomId).join(clientHandler);
+    }
+
+    /**
+     * Close the specified room.
+     *
+     * @param currentRoom the id of the room to close
+     */
     public void closeRoom(int currentRoom) {
-      rooms.remove(currentRoom);
+        rooms.remove(currentRoom);
     }
 
     /**
      * @return The number of clients that are currently connected to the database
      */
     public int getClientCount() {
-      return clients.size();
+        return clients.size();
     }
-
-
-    /**
-   * Start the server
-   */
-  public static void main(String[] args) {
-    new Server(args).start();
-  }
 }
