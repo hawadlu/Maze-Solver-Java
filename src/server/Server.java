@@ -31,11 +31,9 @@ public class Server {
    * Bind to the requested port.
    */
   public void bind() {
-    System.out.println("Attempting to bind to socket " + socketNum);
 
     try {
       socket = new ServerSocket(socketNum);
-      System.out.println("Successfully bound to socket " + socketNum);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -104,11 +102,21 @@ public class Server {
 
   /**
    * Start the server
+   *
+   * Expected arguments are the port number and a boolean to indicate immediate return.
+   * Immediate return is used to test port binding and does not start the listener.
    */
   public static void main(String[] args) {
     int socket = Integer.parseInt(args[0]);
+
+    //Should the program break without starting to listen.
+    boolean immediateReturn = Boolean.parseBoolean(args[1]);
+
     Server server = new Server(socket);
     server.bind();
+
+    if (immediateReturn) return;
+
     server.listen();
   }
 }
