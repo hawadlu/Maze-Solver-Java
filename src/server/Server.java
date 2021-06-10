@@ -1,5 +1,7 @@
 package server;
 
+import utility.Exceptions.InvalidArguments;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,111 +14,137 @@ import java.util.concurrent.ThreadLocalRandom;
  * and contains a map of rooms into which the clients are divided.
  */
 public class Server {
-  int socketNum;
-  ServerSocket socket;
-  ArrayList<ClientHandler> clients = new ArrayList<>();
-  HashMap<Integer, Room> rooms = new HashMap();
+    int socketNum;
+    ServerSocket socket;
+    ArrayList<ClientHandler> clients = new ArrayList<>();
+    HashMap<Integer, Room> rooms = new HashMap();
 
 
-  /**
-   * Create a new server.
-   *
-   * @param socketNum the socket to communicate through.
-   */
-  public Server(int socketNum) {
-    this.socketNum = socketNum;
-  }
+    /**
+     * Create a new server.
+     *
+     * @param args String array containing the arguments required to start the server
+     *             the first and only element is an int (the port to connect to)
+     */
+    public Server(String[] args) throws InvalidArguments {
+        if (args.length != 1) throw new InvalidArguments("Expected 1 argument, found " + args.length);
 
-  /**
-   * Bind to the requested port.
-   */
-  public void bind() {
-
-    try {
-      socket = new ServerSocket(socketNum);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
-   * Listen for incoming connections.
-   */
-  public void listen() {
-    System.out.println("Server listening");
-
-    while (true) {
-      try {
-        Socket accept = socket.accept();
-
-        System.out.println("Client connected");
-
-        //Create a new thread to handle the connection to this client
-        ClientHandler client = new ClientHandler(this, accept);
-
-        clients.add(client);
-        client.start();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-  }
-
-  /**
-   * Create a new room.
-   *
-   * @param clientHandler the client that requested that the room be created.
-   * @return an int containing the room id.
-   */
-  public int createRoom(ClientHandler clientHandler) {
-    //Generate keys until a free one is found
-    int roomKey;
-    while (true) {
-      roomKey = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-
-      if (!rooms.containsKey(roomKey)) break;
+        try {
+            this.socketNum = Integer.parseInt(args[0]);
+        } catch (NumberFormatException e) {
+            throw new InvalidArguments(args[0] + "is not a  valid port number.");
+        }
     }
 
-    rooms.put(roomKey, new Room(clientHandler));
+    /**
+     * Create a new server
+     *
+     * @param socket the port to connect to.
+     */
+    public Server(int socket) {
+        this.socketNum = socket;
+    }
 
-    return roomKey;
-  }
+    /**
+     * Start the server
+     */
+    public static void main(String[] args) throws InvalidArguments {
+        new Server(args).start();
+    }
 
-  /**
-   * Join a room
-   *
-   * @param clientHandler the client that wants to join the room.
-   * @param roomId the id of the room that the client wants to join.
-   */
-  public void joinRoom(ClientHandler clientHandler, int roomId) {
-    rooms.get(roomId).join(clientHandler);
-  }
+    /**
+     * Bind and listen for incoming connections
+     */
+    public void start() {
+        this.bind();
+        this.listen();
+    }
 
-  /**
-   * Close the specified room.
-   * @param currentRoom the id of the room to close
-   */
+    /**
+     * Bind to the requested port.
+     */
+    public void bind() {
+        try {
+            socket = new ServerSocket(socketNum);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Listen for incoming connections.
+     */
+    public void listen() {
+        //Create a new thread that will listen for connections
+        Server server = this;
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                System.out.println("Server listening");
+
+                while (true) {
+                    try {
+                        Socket accept = socket.accept();
+
+                        System.out.println("Client connected");
+
+                        //Create a new thread to handle the connection to this client
+                        ClientHandler client = new ClientHandler(server, accept);
+
+                        clients.add(client);
+                        client.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
+    }
+
+    /**
+     * Create a new room.
+     *
+     * @param clientHandler the client that requested that the room be created.
+     * @return an int containing the room id.
+     */
+    public int createRoom(ClientHandler clientHandler) {
+        //Generate keys until a free one is found
+        int roomKey;
+        while (true) {
+            roomKey = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+
+            if (!rooms.containsKey(roomKey)) break;
+        }
+
+        rooms.put(roomKey, new Room(clientHandler));
+
+        return roomKey;
+    }
+
+    /**
+     * Join a room
+     *
+     * @param clientHandler the client that wants to join the room.
+     * @param roomId        the id of the room that the client wants to join.
+     */
+    public void joinRoom(ClientHandler clientHandler, int roomId) {
+        rooms.get(roomId).join(clientHandler);
+    }
+
+    /**
+     * Close the specified room.
+     *
+     * @param currentRoom the id of the room to close
+     */
     public void closeRoom(int currentRoom) {
-      rooms.remove(currentRoom);
+        rooms.remove(currentRoom);
     }
 
-  /**
-   * Start the server
-   *
-   * Expected arguments are the port number and a boolean to indicate immediate return.
-   * Immediate return is used to test port binding and does not start the listener.
-   */
-  public static void main(String[] args) {
-    int socket = Integer.parseInt(args[0]);
-
-    //Should the program break without starting to listen.
-    boolean immediateReturn = Boolean.parseBoolean(args[1]);
-
-    Server server = new Server(socket);
-    server.bind();
-
-    if (immediateReturn) return;
-
-    server.listen();
-  }
+    /**
+     * @return The number of clients that are currently connected to the database
+     */
+    public int getClientCount() {
+        return clients.size();
+    }
 }

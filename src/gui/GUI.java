@@ -238,7 +238,7 @@ public class GUI {
       JButton connect = new JButton("Connect To Server");
 
       connect.addActionListener(e -> {
-        application.connectToServer();
+        application.connectToServer(5000);
         makeGameStartScreen();
       });
 
