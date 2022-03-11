@@ -1,8 +1,8 @@
 package image;
 
-import utility.Colours.colEnum;
-import utility.Location;
-import utility.Node;
+import Utility.Colours.colEnum;
+import Utility.Location;
+import Utility.Node;
 
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;

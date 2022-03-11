@@ -3,8 +3,8 @@ package tests;
 import application.Application;
 import image.ImageFile;
 import dispatcher.Dispatcher;
-import utility.Exceptions.GenericError;
-import utility.Exceptions.ParserFailure;
+import Utility.Exceptions.GenericError;
+import Utility.Exceptions.ParserFailure;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

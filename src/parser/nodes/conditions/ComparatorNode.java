@@ -1,6 +1,6 @@
 package parser.nodes.conditions;
 
-import utility.Node;
+import Utility.Node;
 import parser.Handler;
 import parser.interfaces.Exec;
 import parser.interfaces.Value;

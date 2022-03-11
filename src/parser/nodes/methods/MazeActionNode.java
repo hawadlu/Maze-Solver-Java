@@ -6,7 +6,7 @@ import parser.nodes.EvaluateNode;
 import parser.interfaces.Exec;
 import parser.nodes.math.NumberNode;
 import parser.nodes.variables.GetVariableNode;
-import utility.Node;
+import Utility.Node;
 import parser.interfaces.Number;
 
 

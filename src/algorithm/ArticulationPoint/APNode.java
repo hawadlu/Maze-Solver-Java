@@ -1,6 +1,6 @@
 package algorithm.ArticulationPoint;
 
-import utility.Node;
+import Utility.Node;
 
 /**
  * This class is used to store nodes that are used in

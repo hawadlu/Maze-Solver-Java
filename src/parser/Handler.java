@@ -3,8 +3,8 @@ package parser;
 
 import game.Player;
 import parser.nodes.variables.VariableNode;
-import utility.Location;
-import utility.Node;
+import Utility.Location;
+import Utility.Node;
 
 import java.util.HashMap;
 import java.util.HashSet;

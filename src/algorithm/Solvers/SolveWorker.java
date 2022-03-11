@@ -1,7 +1,7 @@
 package algorithm.Solvers;
 
 import algorithm.SolveAlgorithm;
-import utility.Node;
+import Utility.Node;
 
 /**
  * This class contains variables and methods used by the various solve algorithms

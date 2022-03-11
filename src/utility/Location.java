@@ -1,4 +1,4 @@
-package utility;
+package Utility;
 
 import java.io.Serializable;
 import java.util.Objects;

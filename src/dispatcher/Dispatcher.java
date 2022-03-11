@@ -5,8 +5,8 @@ import game.Player;
 import image.*;
 import server.LocalClient;
 import server.Requests;
-import utility.Exceptions.InvalidImage;
-import utility.LocationList;
+import Utility.Exceptions.InvalidImage;
+import Utility.LocationList;
 
 import javax.swing.*;
 import java.awt.*;

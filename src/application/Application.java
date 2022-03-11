@@ -9,9 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import image.*;
 import server.LocalClient;
-import utility.Exceptions.GenericError;
-import utility.Location;
-import utility.Node;
+import Utility.Exceptions.GenericError;
+import Utility.Location;
+import Utility.Node;
 
 /**
  * This class is the base of the program.

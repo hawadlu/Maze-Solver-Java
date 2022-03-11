@@ -1,4 +1,4 @@
-package utility.Exceptions;
+package Utility.Exceptions;
 
 import javax.swing.*;
 

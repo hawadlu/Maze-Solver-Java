@@ -2,9 +2,9 @@ package tests;
 
 import application.Application;
 import image.ImageProcessor;
-import utility.Exceptions.GenericError;
-import utility.Location;
-import utility.Node;
+import Utility.Exceptions.GenericError;
+import Utility.Location;
+import Utility.Node;
 import dispatcher.Dispatcher;
 import org.junit.jupiter.api.Test;
 

@@ -5,8 +5,8 @@ import algorithm.MinimumTree.Kruskals;
 import algorithm.MinimumTree.Prims;
 import algorithm.Solvers.*;
 import image.ImageFile;
-import utility.*;
-import utility.Exceptions.InvalidMaze;
+import Utility.*;
+import Utility.Exceptions.InvalidMaze;
 import game.Player;
 
 import java.util.ArrayList;

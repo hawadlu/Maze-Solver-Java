@@ -1,7 +1,7 @@
 package server;
 
 import image.ImageFile;
-import utility.LocationList;
+import Utility.LocationList;
 
 import java.io.*;
 import java.net.Socket;

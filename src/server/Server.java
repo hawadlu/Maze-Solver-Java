@@ -1,6 +1,6 @@
 package server;
 
-import utility.Exceptions.InvalidArguments;
+import Utility.Exceptions.InvalidArguments;
 
 import java.io.IOException;
 import java.net.ServerSocket;

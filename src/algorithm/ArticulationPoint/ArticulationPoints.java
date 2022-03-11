@@ -1,7 +1,7 @@
 package algorithm.ArticulationPoint;
 
 import game.Player;
-import utility.Node;
+import Utility.Node;
 
 import java.util.ArrayList;
 import java.util.HashSet;

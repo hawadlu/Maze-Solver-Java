@@ -1,8 +1,8 @@
 package algorithm.MinimumTree;
 
 import algorithm.SolveAlgorithm;
-import utility.Node;
-import utility.Segment;
+import Utility.Node;
+import Utility.Segment;
 
 import java.util.ArrayList;
 import java.util.Comparator;

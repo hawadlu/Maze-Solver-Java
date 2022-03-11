@@ -4,7 +4,7 @@ import application.Application;
 import org.junit.jupiter.api.Test;
 import server.LocalClient;
 import server.Server;
-import utility.Exceptions.InvalidArguments;
+import Utility.Exceptions.InvalidArguments;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

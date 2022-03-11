@@ -1,8 +1,8 @@
 package image;
 
-import utility.*;
-import utility.Colours.colEnum;
-import utility.Exceptions.InvalidImage;
+import Utility.*;
+import Utility.Colours.colEnum;
+import Utility.Exceptions.InvalidImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

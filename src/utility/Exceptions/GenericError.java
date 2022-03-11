@@ -1,4 +1,4 @@
-package utility.Exceptions;
+package Utility.Exceptions;
 
 /**
  * This class is used to represent any error thrown in the program.

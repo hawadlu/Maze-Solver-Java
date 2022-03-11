@@ -2,7 +2,7 @@ package tests;
 
 import application.Application;
 import game.Player;
-import utility.Exceptions.GenericError;
+import Utility.Exceptions.GenericError;
 import dispatcher.Dispatcher;
 import org.junit.jupiter.api.Test;
 

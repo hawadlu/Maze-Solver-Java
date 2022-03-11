@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Class containing utility methods used by the tests.
+ * Class containing Utility methods used by the tests.
  */
 public class TestUtilities {
   /**

@@ -5,7 +5,7 @@ import dispatcher.Dispatcher;
 import gui.CustomPanels.PlayerPanel;
 import image.ImageFile;
 import server.Requests;
-import utility.*;
+import Utility.*;
 import parser.Handler;
 import parser.Parser;
 import image.ImageProcessor;

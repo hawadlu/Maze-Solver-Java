@@ -1,7 +1,7 @@
 package algorithm.Solvers;
 
 import algorithm.SolveAlgorithm;
-import utility.Node;
+import Utility.Node;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicBoolean;

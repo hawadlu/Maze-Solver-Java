@@ -2,7 +2,7 @@ package algorithm.MinimumTree;
 
 import algorithm.SolveAlgorithm;
 import algorithm.Solvers.SolveRunner;
-import utility.Segment;
+import Utility.Segment;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

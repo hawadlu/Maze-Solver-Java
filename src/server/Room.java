@@ -2,7 +2,7 @@ package server;
 
 import image.ImageFile;
 import image.ImageProcessor;
-import utility.LocationList;
+import Utility.LocationList;
 
 /**
  * Deals with the individual games hosted on the server.

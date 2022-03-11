@@ -3,7 +3,7 @@ package gui;
 import application.Application;
 import dispatcher.Dispatcher;
 
-import utility.Exceptions.GenericError;
+import Utility.Exceptions.GenericError;
 
 import javax.swing.*;
 import java.awt.*;

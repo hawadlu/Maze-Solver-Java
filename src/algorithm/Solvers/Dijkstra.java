@@ -2,7 +2,7 @@ package algorithm.Solvers;
 
 
 import algorithm.SolveAlgorithm;
-import utility.Node;
+import Utility.Node;
 
 import java.util.Objects;
 import java.util.PriorityQueue;
