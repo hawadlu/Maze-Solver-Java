@@ -29,13 +29,13 @@ public class ImageManipulation {
                 if (imgObj.isWhite(width, height)) {
                     imgObj.setRGB(width, height, new DrawColour(Color.red));
                 } else {
-                    imgObj.setRGB(width, height, (new DrawColour(Color.BLACK));
+                    imgObj.setRGB(width, height, new DrawColour(Color.BLACK));
                 }
             }
         }
 
         //Colour the entry
-        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), (new DrawColour(Color.BLUE));
+        if (entry != null) imgObj.setRGB(entry.getX(), entry.getY(), new DrawColour(Color.BLUE));
 
         //Draw the msp
         if (segments != null) {
@@ -45,7 +45,7 @@ public class ImageManipulation {
                 draw(imgObj, start.getX(), start.getY(), end.getX(), end.getY(), new DrawColour(Color.green));
             }
         }
-        
+
         //Draw the path
         if (nodes != null) {
             while (nodes.size() > 1) {
