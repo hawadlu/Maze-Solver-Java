@@ -61,7 +61,7 @@ public class ServerTests {
     @Test
     public void testValidPort() throws InvalidArguments {
         String[] arguments = new String[1];
-        arguments[0] = "5000";
+        arguments[0] = "8081";
         Server.main(arguments);
     }
 
@@ -69,7 +69,7 @@ public class ServerTests {
     @Test
     public void connectClient() throws InterruptedException {
         //Create a server
-        Server server = new Server(5000);
+        Server server = new Server(8081);
         server.start();
 
         //Wait for the server to start
@@ -78,7 +78,7 @@ public class ServerTests {
         System.out.println("Client joining server");
         //Connect a client to the server
         Application application = new Application();
-        application.connectToServer(5000);
+        application.connectToServer(8081);
 
         //Wait for the server to add the player
         TimeUnit.MILLISECONDS.sleep(10);
